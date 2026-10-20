@@ -32,7 +32,9 @@ def strip_forum(t: str) -> str:
     t = str(t).replace("\r", "")
     t = re.split(r"\n\s*(edit|update|eta|tl;?dr)\b", t, maxsplit=1, flags=re.I)[0]
     t = TITLE.sub("", t.strip(), count=1)
-    t = re.sub(r"^(On mobile|Throwaway|Sorry for)[^.!?\n]*[.!?]\s*", "", t.strip(), flags=re.I)
+    for _ in range(2):  # "Obligatory on mobile, sorry for formatting." and the like
+        t = re.sub(r"^((obligatory|also|first|ok|so),? )?(i'?m )?(on mobile|throwaway|sorry,? for|sorry about|"
+                   r"long time lurker|first time poster|english is not)[^.!?\n]*[.!?]\s*", "", t.strip(), flags=re.I)
     sents = re.split(r"(?<=[.?!])\s+", t.strip())
     while sents and len(sents[-1]) < 250 and VERDICT_Q.search(sents[-1]):
         sents.pop()
