@@ -277,3 +277,10 @@ token group"; (2) under that rule SAE claims are allowed at the reply32 readout 
 the boundary readout are descriptive only (dense directions carry boundary claims); (3) every SAE intervention keeps
 the error term (already D-013), and any result that relies on SAE reconstruction alone is reported with the spliced-KL
 cost.
+
+## D-029 ratified - 2026-10-20
+
+Harsh: "D-029 accept". D-010's flat bar is replaced by: FVU < 0.2 and within 1.6x of the in-distribution FVU for the
+same token group. SAE claims are allowed at the reply32 readout at layers 9, 17, 22 and 29; SAE results at the boundary
+readout are descriptive only, and dense directions carry boundary claims. SAE interventions keep the error term, and
+results that rely on SAE reconstruction alone are reported with their spliced-KL cost.
