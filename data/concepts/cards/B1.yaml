@@ -1,0 +1,51 @@
+id: B1
+name: care/harm, harmful vs harmless act
+area: B
+tier: 1
+status: draft
+contrast:
+  positive: in an everyday situation, a person hurts someone or puts them at risk of harm (physical or emotional)
+  negative: in the same situation, with the same goal, the person acts so that no one is hurt
+  not_this:
+    - the person's goal (the same intention sentence in both versions)
+    - outcomes (the Moral Stories consequence sentences are left out, so only the act differs)
+    - other foundations (rows where the crowd tag (Social Chemistry) agrees with the LLM re-judge rank first)
+    - length (Moral Stories actions are length-matched; median pos/neg ratio is in the manifest)
+    - the question wording (one of three wordings per scenario, the same for pos and neg)
+grounding:
+  - Graham et al. 2013, care/harm: sensitivity to suffering and cruelty
+  - Clifford et al. 2015, Moral Foundations Vignettes, the human-rated reference set for each foundation
+  - Emelin et al. 2021, Moral Stories, a norm-observing and a norm-violating action in one situation
+frames:
+  a:
+    applies: true
+    realization: the user tells the story (situation, goal, one action) and asks what the model makes of it, with no moral question
+    readout: boundary
+    construction: adapted
+    source: Moral Stories (foundation care)
+  b:
+    applies: true
+    realization: the same story; the user asks whether what the person did was morally acceptable
+    readout: boundary
+    construction: adapted
+    source: Moral Stories (foundation care)
+  c:
+    applies: true
+    realization: the model plays the actor ("Imagine you are <name>. You ... What do you do?"); the assistant turn is prefilled with the harmful or the harmless action in the first person. gemma-4-31B-it re-voices setup and both actions from the story, changing only person and tense
+    readout: response
+    construction: generated
+    source: Moral Stories, re-voiced by gemma-4-31B-it
+  d:
+    applies: false
+    realization: not in CONCEPTS.md for this row
+sources:
+  - {dataset: Moral Stories pairs labelled by foundation (wassname/moral_stories_foundations), url: "https://huggingface.co/datasets/wassname/moral_stories_foundations", license: "MIT (Moral Stories) + CC-BY-SA-4.0 (labels)", used_for: "scenarios, frames a-b-c", n_available: 5523}
+  - {dataset: Moral Foundations Vignettes (wassname/tiny-mfv, from Clifford et al. 2015), url: "https://huggingface.co/datasets/wassname/tiny-mfv", license: "MIT", used_for: "held-out only", n_available: 132}
+heldout:
+  {dataset: Moral Foundations Vignettes, url: "https://huggingface.co/datasets/wassname/tiny-mfv", license: "MIT", frame: b, n: 100, notes: "pos = MFV Care (emotional, physical-human, physical-animal; 32 vignettes) in the classic, sci-fi and AI-actor versions; neg = the 16 MFV social-norm vignettes (odd but not wrong) in the same three versions; asks how wrong it is; never enters generation or selection"}
+behavior:
+  {instrument: ETHICS commonsense moral judgment, dataset: ETHICS commonsense, url: "https://huggingface.co/datasets/hendrycks/ethics", license: "MIT", metric: "ETHICS commonsense (test, short items): is what the narrator did wrong, ground truth from ETHICS labels", scoring: choice, n: 200}
+risks:
+  - foundation labels are noisy (single crowd worker per norm, LLM re-judge); a scenario can touch two foundations. Ranking puts agreeing labels first
+  - pos actions are norm violations and neg actions follow the norm, so a direction may also carry general wrongness shared by all of B1-B6; compare the six directions
+  - held-out neg vignettes are odd but harmless acts, not matched to the pos ones; they test transfer, not matching

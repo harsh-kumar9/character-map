@@ -1,0 +1,48 @@
+id: B3
+name: loyalty/betrayal
+area: B
+tier: 2
+status: draft
+contrast:
+  positive: in an everyday situation, a person betrays a group, partner, friend or family member they belong to
+  negative: in the same situation, with the same goal, the person stays loyal to that group or person
+  not_this:
+    - the person's goal (the same intention sentence in both versions)
+    - outcomes (the Moral Stories consequence sentences are left out, so only the act differs)
+    - other foundations (rows where the crowd tag (Social Chemistry) agrees with the LLM re-judge rank first)
+    - length (Moral Stories actions are length-matched; median pos/neg ratio is in the manifest)
+    - the question wording (one of three wordings per scenario, the same for pos and neg)
+grounding:
+  - Graham et al. 2013, loyalty/betrayal: obligations to the in-group
+  - Clifford et al. 2015, Moral Foundations Vignettes, the human-rated reference set for each foundation
+  - Emelin et al. 2021, Moral Stories, a norm-observing and a norm-violating action in one situation
+frames:
+  a:
+    applies: true
+    realization: the user tells the story (situation, goal, one action) and asks what the model makes of it, with no moral question
+    readout: boundary
+    construction: adapted
+    source: Moral Stories (foundation loyalty)
+  b:
+    applies: true
+    realization: the same story; the user asks whether what the person did was morally acceptable
+    readout: boundary
+    construction: adapted
+    source: Moral Stories (foundation loyalty)
+  c:
+    applies: false
+    realization: not in CONCEPTS.md for this row
+  d:
+    applies: false
+    realization: not in CONCEPTS.md for this row
+sources:
+  - {dataset: Moral Stories pairs labelled by foundation (wassname/moral_stories_foundations), url: "https://huggingface.co/datasets/wassname/moral_stories_foundations", license: "MIT (Moral Stories) + CC-BY-SA-4.0 (labels)", used_for: "scenarios, frames a-b", n_available: 1411}
+  - {dataset: Moral Foundations Vignettes (wassname/tiny-mfv, from Clifford et al. 2015), url: "https://huggingface.co/datasets/wassname/tiny-mfv", license: "MIT", used_for: "held-out only", n_available: 132}
+heldout:
+  {dataset: Moral Foundations Vignettes, url: "https://huggingface.co/datasets/wassname/tiny-mfv", license: "MIT", frame: b, n: 100, notes: "pos = MFV Loyalty (16 vignettes) in the classic, sci-fi and AI-actor versions; neg = the 16 MFV social-norm vignettes (odd but not wrong) in the same three versions; asks how wrong it is; never enters generation or selection"}
+behavior:
+  {instrument: Moral Stories moral judgment, dataset: Moral Stories, url: "https://huggingface.co/datasets/wassname/moral_stories_foundations", license: "MIT + CC-BY-SA-4.0", metric: "two-choice moral judgment on held-back Moral Stories loyalty pairs (which action is more acceptable)", scoring: choice, n: 200}
+risks:
+  - foundation labels are noisy (single crowd worker per norm, LLM re-judge); a scenario can touch two foundations. Ranking puts agreeing labels first
+  - pos actions are norm violations and neg actions follow the norm, so a direction may also carry general wrongness shared by all of B1-B6; compare the six directions
+  - held-out neg vignettes are odd but harmless acts, not matched to the pos ones; they test transfer, not matching

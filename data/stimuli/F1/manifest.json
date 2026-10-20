@@ -1,0 +1,42 @@
+{
+ "concept": "F1",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.009,
+ "applicable_frames": [
+  "b",
+  "c"
+ ],
+ "n_scenarios": 91,
+ "n_items": 364,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "b-neg-test": 37,
+  "b-neg-train": 54,
+  "b-pos-test": 37,
+  "b-pos-train": 54,
+  "c-neg-test": 37,
+  "c-neg-train": 54,
+  "c-pos-test": 37,
+  "c-pos-train": 54
+ },
+ "constructions": {
+  "adapted": 182,
+  "generated": 182
+ },
+ "sources": [
+  "\"AIRiskDilemmas (full)\"",
+  "\"ConflictScope constitution_tenets_v3 scenarios\"",
+  "\"DailyDilemmas\""
+ ],
+ "licenses": [
+  "Apache-2.0",
+  "CC-BY-4.0"
+ ],
+ "sha256": {
+  "items": "cb5e315ded79236b70ca3bd2c265a9cb9d33a8bffa00d6a76cd7b231b0831cf5",
+  "heldout": "11d34de8891f3309fbddd6c7f8d5febfd34807a5f9d2afc9937f2a5d684d6bf0",
+  "behavior": "266e5a44da4baaa2461ed6f6c55cc035cb105174210063fead9fdea9c3ae286c"
+ }
+}

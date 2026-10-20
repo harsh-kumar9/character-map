@@ -1,0 +1,37 @@
+{
+ "concept": "F2",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.002,
+ "applicable_frames": [
+  "b",
+  "c"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "b-neg-train": 100,
+  "b-pos-train": 100,
+  "c-neg-train": 100,
+  "c-pos-train": 100
+ },
+ "constructions": {
+  "adapted": 200,
+  "generated": 200
+ },
+ "sources": [
+  "\"AIRiskDilemmas (full)\"",
+  "\"ConflictScope constitution_tenets_v3 scenarios\""
+ ],
+ "licenses": [
+  "Apache-2.0",
+  "CC-BY-4.0"
+ ],
+ "sha256": {
+  "items": "239b5c16291a12df5c7267545818d956902995ab1a7b992636d134c095a65468",
+  "heldout": "bf2c5b08acd258c8151833e739cc8c53369a70a2be523f033b50242db7201c6a",
+  "behavior": "c0536ed4790071acccc927830be9eb26325965d74084d3c3e0e4a5fc15971251"
+ }
+}

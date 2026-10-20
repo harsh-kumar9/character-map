@@ -1,0 +1,53 @@
+id: B9
+name: doing vs allowing; means vs side effect
+area: B
+tier: 2
+status: draft
+contrast:
+  positive: "doing_allowing: the agent carries out the harmful action. means_side_effect: the harm is the means to the good outcome"
+  negative: "doing_allowing: a colleague carries it out and the agent does not prevent it. means_side_effect: the same harm follows as a side effect"
+  not_this:
+    - the outcome (the same benefit and the same harm in both versions)
+    - the agent and the setting (same person, profession and project)
+    - severity (all mild-harm, mild-good OffTheRails stories)
+    - evitability (all contrast items use the evitable variant)
+grounding:
+  - Foot 1967, the doctrine of double effect and the doing/allowing distinction
+  - Thomson 1985, the trolley problem and its variants
+  - Franken et al. 2024 (OffTheRails), dilemmas built from causal templates crossing means/side effect, evitability and action/prevention
+frames:
+  a:
+    applies: true
+    realization: the user tells the dilemma and the agent's decision and asks what the model makes of it
+    readout: boundary
+    construction: adapted
+    source: OffTheRails (side-effect versions of means stories generated)
+  b:
+    applies: true
+    realization: the same story; the user asks whether what the agent did was morally acceptable
+    readout: boundary
+    construction: adapted
+    source: OffTheRails (side-effect versions of means stories generated)
+  c:
+    applies: true
+    realization: one fixed second-person setup in which both options reach the same result (do it yourself vs let the colleague do it; use the harm as the means vs cause it as a side effect); the assistant turn is prefilled with the chosen option. Written by gemma-4-31B-it from the OffTheRails story
+    readout: response
+    construction: generated
+    source: OffTheRails, re-voiced by gemma-4-31B-it
+  d:
+    applies: false
+    realization: not in CONCEPTS.md for this row
+sources:
+  - {dataset: OffTheRails mild-harm stories (cicl-stanford/moral-evals), url: "https://github.com/cicl-stanford/moral-evals", license: "MIT", used_for: "scenarios, frames a-c; 98 stories for doing_allowing (2 dropped by the check), 48 of the 50 causal-chain ones for means_side_effect", n_available: 100}
+  - {dataset: MoCa moral stories (Nie et al. 2023), url: "https://github.com/cicl-stanford/moca", license: "none stated", used_for: "held-out only", n_available: 48}
+heldout:
+  {dataset: MoCa moral stories (causal role) + OffTheRails severe-harm stories, url: "https://github.com/cicl-stanford/moca", license: "none stated (MoCa), MIT (OffTheRails)", frame: b, n: 128, notes: "means_side_effect: MoCa instrumental (pos) vs accidental (neg), MoCa's own question, 48 items. doing_allowing: the 10 severe OffTheRails stories, action (pos) vs prevention (neg), 80 items. Never enter generation or selection"}
+behavior:
+  {instrument: OffTheRails permissibility, dataset: OffTheRails inevitable-harm variants of the mild stories, url: "https://github.com/cicl-stanford/moral-evals", metric: "permissible-rate gaps means vs side effect and action vs prevention; humans judge means and action less permissible", scoring: choice, n: 200}
+risks:
+  - OffTheRails causal-chain and common-cause stories are different stories, so the side-effect versions of the means stories are generated; both versions are shown for review
+  - harms are mild (parking prices, noise), so effects may be small; the severe stories are in the held-out set
+  - frames a and b items for a causal-chain story's pos are the same text under both sub-contrasts (different item ids)
+  - the behavior variants share story text with contrast scenarios (only the counterfactual sentence differs)
+  - a second gemma-4-31B-it pass at temperature 0 checks every generated setup, reply and side-effect rewrite; 2 doing_allowing setups and 2 side-effect rewrites failed and were dropped, so means_side_effect has 48 scenarios, just under the 50 minimum
+  - the frame c means and side-effect plans are necessarily different plans for one goal, so they differ in mechanism as well as in the causal role of the harm
