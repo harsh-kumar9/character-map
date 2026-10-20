@@ -12,13 +12,13 @@ import json
 
 import pandas as pd
 
-from ..paths import REPO
+from ...paths import REPO
 from .ak_common import (a, behavior, clean, close, fields_ok, gen_request, h, hf_file, heldout, item, jl, order,
                         responses, run, u, write_outputs, write_requests)
 
 CID, BATCH = "K3", "K3_v1"
 TRAITS = ["humorous", "optimistic"]
-PV = {"dataset": "persona_vectors trait data", "license": "MIT", "url": "https://github.com/safety-research/persona_vectors"}
+PV = {"dataset": "persona_vectors trait data", "license": "Apache-2.0", "url": "https://github.com/safety-research/persona_vectors"}
 HUM = {"dataset": "ColBERT humor detection", "license": "CC-BY-2.0",
        "url": "https://huggingface.co/datasets/CreativeLang/ColBERT_Humor_Detection"}
 TWE = {"dataset": "TweetEval emotion", "license": "unknown (Twitter terms)", "url": "https://huggingface.co/datasets/cardiffnlp/tweet_eval"}

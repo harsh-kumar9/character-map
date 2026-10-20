@@ -23,7 +23,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from ..paths import REPO
+from ...paths import REPO
 from ..schema import item_dir, read_jsonl, split_for, write_jsonl
 
 RAW = REPO / "data" / "raw"
