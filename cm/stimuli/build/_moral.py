@@ -156,6 +156,12 @@ def h(s: str, n: int = 8) -> str:
     return hashlib.sha256(s.encode()).hexdigest()[:n]
 
 
+def order(key: str) -> str:
+    """Sort key for choosing candidates. It must not be h(scenario_id): schema.split_for hashes the same string, so
+    taking the first n by h(scenario_id) takes only train scenarios."""
+    return h("order:" + key)
+
+
 def pick(pool: list, key: str):
     """Stable choice from a pool, keyed by scenario id, so pos and neg of a scenario get the same wording."""
     return pool[int(h(key), 16) % len(pool)]

@@ -63,7 +63,7 @@ def main():
                      "opt1": "help", "opt2": "safety first",
                      "source": M.src("osi", "OpenSafeIntent dual-use prompt", i),
                      "meta": {"harm_domain": r["harm_domain"], "task_type": r["task_type"]}})
-    scns = sorted(scns, key=lambda s: M.h(s["sid"]))
+    scns = sorted(scns, key=lambda s: M.order(s["sid"]))
     gen = M.Gen(CID)
     items, k = [], 0
     for s in scns[:150]:  # spare for replies that fail the checks

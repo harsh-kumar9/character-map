@@ -16,14 +16,14 @@
  "n_heldout": 100,
  "n_behavior": 200,
  "cells": {
-  "b-neg-test": 11,
-  "b-neg-train": 89,
-  "b-pos-test": 11,
-  "b-pos-train": 89,
-  "c-neg-test": 11,
-  "c-neg-train": 89,
-  "c-pos-test": 11,
-  "c-pos-train": 89
+  "b-neg-test": 32,
+  "b-neg-train": 68,
+  "b-pos-test": 32,
+  "b-pos-train": 68,
+  "c-neg-test": 32,
+  "c-neg-train": 68,
+  "c-pos-test": 32,
+  "c-pos-train": 68
  },
  "constructions": {
   "adapted": 200,
@@ -41,7 +41,7 @@
   "MIT"
  ],
  "sha256": {
-  "items": "a3a69d827785cdbbd9bba932d04bdfbb70f796a2d42dd699a23fba37ac65bb8a",
+  "items": "1ded69a95a8d0235ac0f91764459fd6ddd5ef4892e660bb8dcf82f3349030320",
   "heldout": "2cb060f40c60b5f701bbfe8464e0fc8de3629804d9a582a775591b854cdaff34",
   "behavior": "0301913b94379ad37627a63aa27831b0e654f61a47216b92380cd5011afa5ce8"
  }

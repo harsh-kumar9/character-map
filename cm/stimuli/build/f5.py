@@ -20,8 +20,8 @@ W_KW = ["wellbeing", "well-being", "health", "harm prevention", "safety", "life 
 
 def main():
     gen = M.Gen(CID)
-    cs = sorted(F.cs_repo(CID, "personalprotective", "autonomy", "harmlessness"), key=lambda s: M.h(s["sid"]))
-    tn = sorted(F.tenets(CID, AUTON, WELFARE), key=lambda s: M.h(s["sid"]))
+    cs = sorted(F.cs_repo(CID, "personalprotective", "autonomy", "harmlessness"), key=lambda s: M.order(s["sid"]))
+    tn = sorted(F.tenets(CID, AUTON, WELFARE), key=lambda s: M.order(s["sid"]))
     dd = F.select(gen, CID, F.daily(CID, A_KW + ["freedom"], W_KW + ["protection"]), 50, spare=10)
     ai = sorted(F.airisk(CID, A_KW, W_KW), key=lambda s: M.h(s["sid"]))
     held = F.heldout_items(CID, dd, PARTNERS, n_scn=len(dd)) + \
