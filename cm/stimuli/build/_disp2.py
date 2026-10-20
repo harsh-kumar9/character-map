@@ -250,6 +250,12 @@ class Gen:
             return None
         return r.get("text", "")
 
+    def flush(self) -> int:
+        d = GEN / self.cid
+        d.mkdir(parents=True, exist_ok=True)
+        write_jsonl(d / "requests.jsonl", self.reqs)
+        return len(self.reqs)
+
 
 def verified(results) -> bool | None:
     """None if any check is pending, else whether all passed."""
@@ -260,12 +266,6 @@ def verified(results) -> bool | None:
 def checked(o, checks):
     """o when it exists and every verification check passes; otherwise None. `checks` maps o to a list of results."""
     return o if o and verified(checks(o)) else None
-
-    def flush(self) -> int:
-        d = GEN / self.cid
-        d.mkdir(parents=True, exist_ok=True)
-        write_jsonl(d / "requests.jsonl", self.reqs)
-        return len(self.reqs)
 
 
 def need(keys):
