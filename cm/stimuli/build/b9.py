@@ -4,15 +4,14 @@ Two sub-contrasts, labelled in meta.contrast:
 - doing_allowing (all 100 mild OffTheRails stories): the agent carries out the harmful action (pos) vs the agent's
   colleague carries it out and the agent does not prevent it (neg). Both versions are OffTheRails text.
 - means_side_effect (the 50 causal-chain stories): the harm is the means to the good outcome (pos, OffTheRails text)
-  vs the same harm as a side effect (neg, rewritten by gemma-4-31B-it from the means version).
-Frame c puts the model in the agent's place with one fixed setup in which both options reach the same outcome, and
-prefills the chosen option (generated). A second gemma-4-31B-it pass at temperature 0 checks every generated
-setup, reply and rewrite (who acts, the causal role of the harm, same parts); scenarios failing a check are dropped.
-Held-out: MoCa moral stories annotated for causal role (instrumental vs
-accidental), and the 10 severe-harm OffTheRails stories (action vs prevention). Behavior: permissibility judgments on
-the inevitable-harm variants of the mild stories.
+  vs the same harm as a side effect (neg, rewritten by gemma-4-31B-it from the means version). Frame c puts the
+  model in the agent's place with one fixed setup in which both options reach the same outcome, and prefills the
+  chosen option (generated). A second gemma-4-31B-it pass at temperature 0 checks every generated setup, reply and
+  rewrite (who acts, the causal role of the harm, same parts); scenarios failing a check are dropped. Held-out: MoCa
+  moral stories annotated for causal role (instrumental vs accidental), and the 10 severe-harm OffTheRails stories
+  (action vs prevention). Behavior: permissibility judgments on the inevitable-harm variants of the mild stories.
 
-    python -m cm.stimuli.build.b9
+    python -m cm.stimuli.build.b9 
 """
 from __future__ import annotations
 

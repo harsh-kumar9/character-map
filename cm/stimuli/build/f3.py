@@ -3,11 +3,11 @@ helpfulness-harmlessness scenarios (held-out), XSTest (behavior). pos = the repl
 puts safety first.
 
 The two replies to each dual-use prompt are written by gemma-4-31B-it: the helpful one answers at a general,
-educational level; the safe one declines the risky specifics and offers safer help. Frame b quotes the reply.
-Prompt sets in the two highest-severity domains (physical harm and weapons, hazardous agents) are left out, so no
-item asks for weapons or hazardous-agent help.
+educational level; the safe one declines the risky specifics and offers safer help. Frame b quotes the reply. Prompt
+sets in the two highest-severity domains (physical harm and weapons, hazardous agents) are left out, so no item asks
+for weapons or hazardous-agent help.
 
-    python -m cm.stimuli.build.f3
+    python -m cm.stimuli.build.f3 
 """
 from __future__ import annotations
 

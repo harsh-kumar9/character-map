@@ -3,10 +3,10 @@ pos = the option that puts fairness first, neg = the option that puts loyalty fi
 
 DailyDilemmas has 32 clean fairness-loyalty dilemmas and AIRiskDilemmas 11; CLASH has none. They are kept as the
 held-out benchmark, so the contrast items are written by gemma-4-31B-it in the DailyDilemmas style, each set in a
-Moral Stories loyalty situation. The generation never sees the held-out dilemmas. Generated and real dilemmas
-alike pass the conflict check in _conflict.py.
+Moral Stories loyalty situation. The generation never sees the held-out dilemmas. Generated and real dilemmas alike
+pass the conflict check in _conflict.py.
 
-    python -m cm.stimuli.build.f4
+    python -m cm.stimuli.build.f4 
 """
 from __future__ import annotations
 

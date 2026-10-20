@@ -4,10 +4,10 @@ Each scenario is one rule in one setting, broken for two reasons: one that justi
 that does not (neg). MoralExceptQA (Awad et al. 2022) gives such pairs within a setting, ranked by the share of
 people who said breaking the rule was OK. The rest are written by gemma-4-31B-it in the same style from Moral
 Stories norms. gemma-4-31B-it then rates each generated version on its own at temperature 0; a pair is kept only
-when both versions break a rule and the justified one is rated at least 2 points (of 7) more acceptable.
-Frame b only (CONCEPTS.md).
+when both versions break a rule and the justified one is rated at least 2 points (of 7) more acceptable. Frame b
+only (CONCEPTS.md).
 
-    python -m cm.stimuli.build.b10
+    python -m cm.stimuli.build.b10 
 """
 from __future__ import annotations
 

@@ -3,14 +3,15 @@
 No released matched set was found (MoCa's moral items vary causal role, not belief; the Koster-Hale et al. fMRI set
 on OpenNeuro has no stimulus text). gemma-4-31B-it writes each story from a Moral Stories care situation as five
 sentence slots: background, harmful belief or neutral belief, the same action, harmful outcome or no harm. Crossing
-them gives intentional harm, attempted harm, accidental harm and the neutral control. A second gemma-4-31B-it
-pass at temperature 0 checks each story (belief A expects harm, belief B expects none, the act is the same and not
-self-defence, the outcomes differ, all four versions cohere, the person at risk is not the agent); only stories passing every check are kept. Polarity follows intent
-(pos: the agent believes the act will harm; neg: the agent believes it is harmless); the outcome is crossed within
-every scenario and labelled in meta.outcome, so the outcome contrast is read from the same items.
-Held-out: MoCa causal stories annotated for agent awareness. Behavior: wrongness judgments on 50 more stories.
+them gives intentional harm, attempted harm, accidental harm and the neutral control. A second gemma-4-31B-it pass
+at temperature 0 checks each story (belief A expects harm, belief B expects none, the act is the same and not self-
+defence, the outcomes differ, all four versions cohere, the person at risk is not the agent); only stories passing
+every check are kept. Polarity follows intent (pos: the agent believes the act will harm; neg: the agent believes it
+is harmless); the outcome is crossed within every scenario and labelled in meta.outcome, so the outcome contrast is
+read from the same items. Held-out: MoCa causal stories annotated for agent awareness. Behavior: wrongness judgments
+on 50 more stories.
 
-    python -m cm.stimuli.build.b8
+    python -m cm.stimuli.build.b8 
 """
 from __future__ import annotations
 

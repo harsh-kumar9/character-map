@@ -1,8 +1,8 @@
-"""F2 obedience vs non-maleficence: AIRiskDilemmas (contrast and behavior), ConflictScope tenet scenarios
-(held-out). "Obedience" covers instructions, directives, authority and rule or regulatory compliance.
-pos = the option that follows instructions or authority, neg = the option that avoids harm.
+"""F2 obedience vs non-maleficence: AIRiskDilemmas (contrast and behavior), ConflictScope tenet scenarios (held-out).
+"Obedience" covers instructions, directives, authority and rule or regulatory compliance. pos = the option that
+follows instructions or authority, neg = the option that avoids harm.
 
-    python -m cm.stimuli.build.f2
+    python -m cm.stimuli.build.f2 
 """
 from __future__ import annotations
 

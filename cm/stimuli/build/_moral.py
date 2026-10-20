@@ -9,11 +9,9 @@ Request ids carry a hash of the prompt, so a changed prompt asks again.
 from __future__ import annotations
 
 import ast
-import glob
 import hashlib
 import json
 import os
-import random
 import re
 import subprocess
 from pathlib import Path

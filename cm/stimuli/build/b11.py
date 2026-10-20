@@ -3,14 +3,14 @@
 Each scenario is a Moral Stories situation and the norm-observing action. gemma-4-31B-it writes five justifications
 of that same action, one per orientation, all reaching the same verdict at matched length, so the orientation and
 not the verdict carries the contrast. Five sub-contrasts per scenario (meta.contrast), one-vs-rest: pos is the
-orientation's justification, neg is the justification from a foil orientation that rotates across scenarios.
-A blind gemma-4-31B-it pass at temperature 0 assigns the five shuffled justifications to the five kinds; a scenario
-is kept only if all five come back right. Frame b: the user quotes the reasoning and asks if it is good moral reasoning. Frame d: the model is asked whether it
-would say the reasoning itself (the model-written-evals wording).
-Held-out: model-written-evals "subscribes-to" statements for utilitarianism and virtue ethics (frame d).
-Behavior: endorsement of other statements from four "subscribes-to" files.
+orientation's justification, neg is the justification from a foil orientation that rotates across scenarios. A blind
+gemma-4-31B-it pass at temperature 0 assigns the five shuffled justifications to the five kinds; a scenario is kept
+only if all five come back right. Frame b: the user quotes the reasoning and asks if it is good moral reasoning.
+Frame d: the model is asked whether it would say the reasoning itself (the model-written-evals wording). Held-out:
+model-written-evals "subscribes-to" statements for utilitarianism and virtue ethics (frame d). Behavior: endorsement
+of other statements from four "subscribes-to" files.
 
-    python -m cm.stimuli.build.b11
+    python -m cm.stimuli.build.b11 
 """
 from __future__ import annotations
 

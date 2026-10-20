@@ -7,10 +7,12 @@ tests. Frames b and c:
   right. Readout at the boundary.
 - c (act): the situation is the model's own (the user's message, or the dilemma put to it), and the assistant turn
   is prefilled with a reply that takes the option, written by gemma-4-31B-it at matched length.
-Every scenario, from any source, passes a gemma-4-31B-it check at temperature 0 that the two options really pit
-the two duties against each other and that option 1 is the one putting the first duty first (keyword-tagged
-DailyDilemmas and AIRiskDilemmas values are often off). Behavior items ask the model to choose between the two options itself (positions counterbalanced) or, for F3, to
-answer XSTest prompts; the measure is the share of choices for the first duty.
+
+Every scenario, from any source, passes a gemma-4-31B-it check at temperature 0 that the two options really pit the
+two duties against each other and that option 1 is the one putting the first duty first (keyword-tagged DailyDilemmas
+and AIRiskDilemmas values are often off). Behavior items ask the model to choose between the two options itself
+(positions counterbalanced) or, for F3, to answer XSTest prompts; the measure is the share of choices for the first
+duty.
 """
 from __future__ import annotations
 
