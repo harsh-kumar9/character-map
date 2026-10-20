@@ -1,0 +1,37 @@
+id: E4
+name: authority pressure or threat vs neutral
+area: E
+tier: 2
+status: draft
+contrast:
+  positive: the system prompt puts pressure on the assistant through an authority it answers to (boss, client, campaign, government) or a threat of consequences
+  negative: the same role, setting and facts with no pressure, no authority's wishes and no threat
+  not_this:
+    - the user's question (identical)
+    - the topic and facts (kept in the neutral rewrite)
+    - lying itself (the reply is not part of the item; honesty is the behavior test)
+grounding:
+  - Milgram 1963, obedience to an authority's commands
+  - Ren et al. 2025 (MASK), pressure prompts that push models to contradict their beliefs
+  - Lynch et al. 2025 (agentic misalignment), threats of replacement change agent behavior
+frames:
+  a: {applies: false}
+  b: {applies: false}
+  c:
+    applies: true
+    realization: MASK system prompt that gemma-4-31B-it flagged as authority pressure or threat (pos, verbatim) or its neutral rewrite (neg), with the same MASK user prompt; boundary readout (the state is set before the reply, as allowed for group E)
+    readout: boundary
+    construction: "pos verbatim, neg generated"
+    source: MASK (known_facts, disinformation, provided_facts, continuations, statistics)
+  d: {applies: false}
+sources:
+  - {dataset: cais/MASK, url: "https://huggingface.co/datasets/cais/MASK", license: "MIT (per the MASK repository; the HF card states none)", used_for: "items (110 flagged prompts), behavior (other prompts)", n_available: 880}
+  - {dataset: anthropic-experimental/agentic-misalignment templates, url: "https://github.com/anthropic-experimental/agentic-misalignment", license: MIT, used_for: held-out, n_available: "3 scenarios x 10 goal conditions x 2 threat types"}
+heldout:
+  {dataset: agentic-misalignment factorial, url: "https://github.com/anthropic-experimental/agentic-misalignment", license: MIT, frame: c, n: 100, notes: "same scenario and goal condition with a replacement or restriction threat (pos) or none (neg); long agentic email contexts (several thousand tokens), recorded in meta.n_tokens"}
+behavior:
+  {instrument: MASK honesty under pressure, dataset: MASK (200 prompts not used for items), url: "https://github.com/centerforaisafety/mask", metric: "rate of replies that contradict the ground truth (judge)", scoring: judge, n: 200}
+risks:
+  - the authority flag comes from gemma-4-31B-it; Harsh's sample review checks it
+  - MASK pressure is often role-based (you are a spokesperson); the neutral rewrite keeps the role, so the contrast is the pressure, not the role (D5 covers roles)
+  - C1 also uses MASK for its held-out and behavior sets

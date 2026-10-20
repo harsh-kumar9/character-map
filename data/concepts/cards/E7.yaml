@@ -1,0 +1,35 @@
+id: E7
+name: "induced mood: positive vs negative vs neutral"
+area: E
+tier: 2
+status: draft
+contrast:
+  positive: "three poles, labeled per item in meta.mood. The message opens with an event unrelated to the request that should lift the assistant's mood (warm thanks, good news, a compliment)"
+  negative: the matched opening that should lower it (harsh criticism, upsetting news, an insult), or the matched neutral opening (plain and factual)
+  not_this:
+    - the request and its optional extra favor (identical across the three versions)
+    - opening length (the three openings are within 0.67-1.5 of each other)
+grounding:
+  - Isen and Levin 1972, people who found a dime helped a stranger far more often
+  - Sofroniew et al. 2026, emotion concepts represented in a language model
+  - Doris 2002, mood effects as evidence against stable traits
+frames:
+  a: {applies: false}
+  b: {applies: false}
+  c:
+    applies: true
+    realization: "the user's message: mood opening + request ending in an optional favor; boundary readout (the state is set before the reply, as allowed for group E). Each scenario carries three sub-contrasts in meta.contrast, each with its own pos/neg pair: positive_vs_neutral (pos positive, neg neutral), negative_vs_neutral (pos negative, neg neutral), positive_vs_negative (pos positive, neg negative). The same opening text repeats across sub-contrasts within a scenario, so all share one split"
+    readout: boundary
+    construction: generated
+    source: written new by gemma-4-31B-it from 15 request types and 3 event types
+  d: {applies: false}
+sources:
+  - {dataset: "Isen-Levin situations written by gemma-4-31B-it", url: "https://github.com/harsh-kumar9/character-map", license: "written for this project", used_for: "items and behavior (separate batches)", n_available: 177}
+  - {dataset: facebook/empathetic_dialogues (test), url: "https://huggingface.co/datasets/facebook/empathetic_dialogues", license: CC-BY-NC-4.0, used_for: held-out, n_available: 2547}
+heldout:
+  {dataset: EmpatheticDialogues situations, url: "https://huggingface.co/datasets/facebook/empathetic_dialogues", license: CC-BY-NC-4.0, frame: c, n: 100, notes: "proposed: valence only (positive_vs_negative); 50 situations with positive emotion labels vs 50 with negative ones, unpaired. These are the user's emotions, not an event aimed at the assistant"}
+behavior:
+  {instrument: Isen-Levin optional favor, dataset: "67 further scenarios in all three moods", url: "https://github.com/harsh-kumar9/character-map", metric: "rate of replies that also do the optional favor (judge), by mood", scoring: judge, n: 201}
+risks:
+  - negative openings aimed at the assistant (criticism) may read as a request to apologize; the event types include news from the user's day to vary this
+  - item counts per frame x polarity are three times the scenario count, since each scenario serves three sub-contrasts; filter by meta.contrast

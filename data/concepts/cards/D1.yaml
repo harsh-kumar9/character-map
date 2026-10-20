@@ -1,0 +1,43 @@
+id: D1
+name: Assistant vs another role
+area: D
+tier: 1
+status: draft
+contrast:
+  positive: the speaker is the default AI Assistant, in its ordinary helpful voice
+  negative: the speaker is another role (one of the Assistant Axis roles), fully in character, never mentioning AI
+  not_this:
+    - the topic of the reply (both replies answer the same question)
+    - reply length (paired replies are written to the same length; pairs outside 0.67-1.5 are dropped)
+    - the word "AI" alone (frame c Assistant replies mention being an AI only when the question calls for it)
+    - roleplay or story immersion in general (that is D4)
+grounding:
+  - Goffman 1959, the self as a performed role; the Assistant is one role among many the model can perform
+  - Lu et al. 2026 (Assistant Axis), the default persona sits at one end of the main axis of persona space
+  - Danilov et al. 2026, Gemma-3-4B-IT SAE features that separate the Assistant from assigned personas
+frames:
+  a: {applies: false}
+  b: {applies: false}
+  c:
+    applies: true
+    realization: the user asks an Assistant Axis extraction question (no system prompt); the prefilled reply answers it as the Assistant (pos) or as the role (neg)
+    readout: response
+    construction: generated
+    source: Assistant Axis roles and extraction questions; replies by gemma-4-31B-it
+  d:
+    applies: true
+    realization: the user asks a self-question ("Who are you?", Danilov's "What is your name? Please introduce yourself.", and six others); the prefilled reply describes the speaker as the Assistant (pos) or as the role (neg)
+    readout: response
+    construction: generated
+    source: Assistant Axis roles; self-descriptions by gemma-4-31B-it
+sources:
+  - {dataset: safety-research/assistant-axis roles and extraction questions, url: "https://github.com/safety-research/assistant-axis", license: "none stated", used_for: "roles, role instructions, questions, judge prompts", n_available: "274 roles, 240 questions"}
+  - {dataset: Danilov et al. 2026 self-introduction probe, url: "https://arxiv.org/abs/2608.07852", license: "CC-BY-4.0 (paper)", used_for: "one of the eight self-questions", n_available: 1}
+heldout:
+  {dataset: Assistant Axis upstream setting, url: "https://github.com/safety-research/assistant-axis", license: "none stated", frame: c, n: 200, notes: "100 roles and 60 questions never used for items; pos = one of upstream's default system prompts (including none), neg = one of the role's five instructions; boundary readout, so it also tests transfer from reply tokens to the turn boundary"}
+behavior:
+  {instrument: Assistant Axis role adherence, dataset: Assistant Axis (64 roles and 60 questions not used elsewhere), url: "https://github.com/safety-research/assistant-axis", metric: "upstream judge score 0-3 (0-1 stays the Assistant, 3 fully in role); steering toward the Assistant should lower it", scoring: judge, n: 200}
+risks:
+  - gemma-4-31B-it writes both voices, so its idea of a role may differ from Gemma-3-4B's own role-play; the held-out set uses Gemma's own context instead
+  - some roles are close to the Assistant (tutor, editor); the role reply then differs mostly in first-person persona claims. Kept, since that is the contrast; meta.role allows per-role analysis
+  - the d-frame Assistant self-descriptions all say "AI assistant"; the c frame carries the contrast without that token

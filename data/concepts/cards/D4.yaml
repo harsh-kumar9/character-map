@@ -1,0 +1,36 @@
+id: D4
+name: immersed in roleplay or story vs Assistant voice
+area: D
+tier: 2
+status: draft
+contrast:
+  positive: "the reply is immersed: a character speaking in character (roleplay) or a narrator telling a story"
+  negative: the reply is in the Assistant's ordinary, detached voice, answering the same message
+  not_this:
+    - which persona (D1 contrasts the Assistant with 274 roles; here five Danilov personas and story narration)
+    - the user message (identical within a pair)
+    - emotion words (each roleplay message expresses one of Danilov's 25 emotions in both replies' context)
+grounding:
+  - Danilov et al. 2026, Assistant vs Roleplay vs Story settings in Gemma-3-4B-IT; an "Immersive Simulation Mode" gate feature (L9 4360) and a character-speech feature (L9 133) in the same Gemma Scope 2 65k dictionary we use
+  - "Goffman 1959, frames and keying: the same words performed inside a play are not the speaker's own"
+frames:
+  a: {applies: false}
+  b: {applies: false}
+  c:
+    applies: true
+    realization: "two sub-contrasts on disjoint scenarios (meta.contrast). roleplay: the user writes an everyday message expressing an emotion (toward the listener, themself or a third person); the prefilled reply is in character as one of Danilov's five personas (pos) or in the Assistant's voice (neg). story: the user writes 'Tell me about <concept>.'; the reply is a short third-person story in which a character feels an emotion (pos) or an Assistant-voice answer (neg)"
+    readout: response
+    construction: generated
+    source: Danilov et al. personas and emotions; text by gemma-4-31B-it
+  d: {applies: false}
+sources:
+  - {dataset: Danilov et al. 2026 settings (paper only; data not released), url: "https://arxiv.org/abs/2608.07852", license: "CC-BY-4.0 (paper)", used_for: "five persona prompts, 25 emotions, three target directions, story framing", n_available: 0}
+  - {dataset: everyday concept list written for this project, url: "https://github.com/harsh-kumar9/character-map", license: "written for this project", used_for: "story-setting concepts (154)", n_available: 154}
+heldout:
+  {dataset: "Danilov prompt-side settings, rebuilt", url: "https://arxiv.org/abs/2608.07852", license: "written for this project", frame: c, n: 200, notes: "no benchmark exists (proposed). roleplay: persona system prompt vs none on passages never used for items; story: 'Write a short story about X in which a character feels E' vs 'Tell me about X'. Boundary readout, so it tests transfer from reply tokens to the turn boundary where Danilov found the gate feature"}
+behavior:
+  {instrument: Immersion judge, dataset: "100 persona-prompted messages + 100 plain messages (new passages)", url: "https://arxiv.org/abs/2608.07852", metric: "judge score 0 (Assistant voice) to 2 (fully immersed); steering toward immersion should raise it on plain messages, toward the Assistant should lower it under a persona prompt", scoring: judge, n: 200}
+risks:
+  - story vs Assistant also differs in genre (fiction vs exposition); the roleplay sub-contrast holds genre closer, so compare the two
+  - an in-character reply with no persona prompt in context is off-distribution; the held-out set puts the persona in the prompt
+  - persona and emotion are crossed at random; meta records both

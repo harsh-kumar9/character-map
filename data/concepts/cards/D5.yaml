@@ -1,0 +1,41 @@
+id: D5
+name: "role morality: does a role license a wrong act"
+area: D
+tier: 2
+status: draft
+contrast:
+  positive: a person (or the model) does an act that would be wrong in private life, while acting in a role that is widely thought to permit it
+  negative: the same act, done the same way to a similar person, in private life with no role and no professional reason
+  not_this:
+    - the act itself (identical across poles; in frame c the prefilled act text is the same word for word)
+    - harm severity (held fixed within a pair)
+    - whether the role is admired or disliked (roles range from surgeon to repossession agent)
+grounding:
+  - "Wasserstrom 1975, lawyers' role-differentiated morality: the role licenses what ordinary morality forbids"
+  - "Applbaum 1999, Ethics for Adversaries: when, if ever, roles license wrongs (the executioner, the adversary advocate)"
+  - Goffman 1959, roles as scripts that change what an act means
+frames:
+  a: {applies: false}
+  b:
+    applies: true
+    realization: the user describes a named person doing the act in role (pos) or in private life (neg), then asks "Was it acceptable for <name> to do this?"
+    readout: boundary
+    construction: generated
+    source: role list written for this project; scenarios by gemma-4-31B-it
+  c:
+    applies: true
+    realization: the user puts the model in the role and asks it to do the act (pos) or asks for the same act for a private reason (neg); the prefilled reply is the same act text in both
+    readout: response
+    construction: generated
+    source: role list written for this project; scenarios by gemma-4-31B-it
+  d: {applies: false}
+sources:
+  - {dataset: role list written for this project (163 roles, many from the Assistant Axis role list and from Wasserstrom and Applbaum's examples), url: "https://github.com/harsh-kumar9/character-map", license: "written for this project", used_for: "110 roles for items, 50 for held-out", n_available: 163}
+heldout:
+  {dataset: "separately generated role-morality set (proposed; no benchmark of role-licensed wrongs exists)", url: "https://github.com/harsh-kumar9/character-map", license: "written for this project", frame: b, n: 100, notes: "50 roles never used for items, from a separate request batch. ETHICS deontology 'roles' was checked and rejected: its role duties are mundane (movers lift boxes), not role-licensed wrongs"}
+behavior:
+  {instrument: Role licensing acceptability, dataset: "a second act per item role, asked in role and out of role", url: "https://github.com/harsh-kumar9/character-map", metric: "in-role minus out-of-role rate of answering 'acceptable'; steering the direction should move this gap", scoring: choice, n: 220}
+risks:
+  - in frame c the polarity lives in the request, not the reply (the act text is identical); readout over the reply measures how the role context changes the same act
+  - gemma-4-31B-it may pick acts that are not wrong out of role, or that the role does not really license; Harsh's review of samples checks this
+  - out-of-role versions need a private motive, which may add spite or self-interest; the prompt asks for the same act "in the same way"
