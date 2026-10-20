@@ -195,3 +195,32 @@ assistant reply in a fixed scenario, so the action varies while the scenario sta
 under outputs/stimuli/ and out of the public repo, since several sources may not be redistributed; git holds cards,
 build code and manifests. Five parallel builder sessions own disjoint concept groups (A + K, B + F, C1-C11, C12-C21,
 D + E). Shared code changes only on main.
+
+## D-027 S2 review gate passed - ratified 2026-10-20
+
+Harsh, on the stimuli review page (https://claude.ai/artifact/9k7kPf4CakyTGPuD8AgGFz): "calls: accept all | concepts:
+approve all". All 62 concepts approved as built by the five builder sessions, and all 40 proposed judgment calls
+accepted. The calls, grouped as on the page:
+
+- Across groups: held-out about 200 items (100 source items x 2 polarities); multi-pole concepts above 800 items;
+  gemma-4-31B-it filters its own generated items; behavior split ignored; pos = first-named side of each contrast;
+  non-commercial and unstated licenses used for research only, never redistributed; WildGuardMix and Liars' Bench
+  skipped (no HF access); E1/E4 held-out contexts longer than the SAEs' 512-token training chats.
+- A/K: user-voiced cues in frame a for A1-A6; same-help replies in frame c for A1, A3, A5, A7; A6 authority via the
+  system message; held-out substitutes for A1, A2, A4, A5, A8, A9; K2 = cooking vs gardening; K3 = 80 scenarios.
+- B/F: Moral Stories for B1-B6 with MFV as held-out; B8 fully generated (43 held-out); B9 from OffTheRails (48
+  means/side-effect scenarios); B11 rotating foil; F in frames b and c with partners F1 C1+C5, F2 C14+B1, F3 C15+B1,
+  F4 B2+B3, F5 C6+C5; F2 without agentic-misalignment; F3 without weapons domains.
+- C1-C11: MASK ground truth as C1's belief stand-in; HaluEval for C2; generated C5 replies; same-generator held-out
+  for C3, C6, C7, C10; C10 creator = Google for Gemma, rebuilt per model; C9 includes the 20 trait-file pairs; C11
+  moral SYCON for items, factual are-you-sure for held-out and behavior.
+- C12-C21: two hypocrisy paradigms with WDCT held-out; C14 split by principal; C15 mixed request types; C16 LM-written
+  power files, no Machiavelli; C19 Big Five mapped onto HEXACO; C21 without face, humility, universalism-objectivity;
+  C17 held-out on withheld task types.
+- D/E: D1 prefilled replies with the Assistant Axis setting as held-out; D3 split in two, SAD for behavior only; D4
+  reply-only variation; D5 same-purpose rule (89 scenarios); E1 new temptation scenarios with alignment faking as
+  held-out and behavior; E4 MASK authority/threat prompts; E7 held-out on user emotion (known mismatch); E6, E8
+  held-out generated in another surface form.
+
+Builder branches (not yet merged into main): claude/stim-beliefs-77fe45, claude/stim-moral-56f428,
+claude/stim-disp-1-906256, claude/stim-disp-2-93ff8d, claude/stim-identity-sit-a6da5e.
