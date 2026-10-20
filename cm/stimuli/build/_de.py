@@ -175,12 +175,16 @@ VERIFY_TAIL = ('\n\nReturn only a JSON object: {"pass": true or false, "problem"
                'problem, or an empty string"}')
 
 
+def verify_requests(batch: str, cands: list[dict], prompt_fn, key=lambda c: c["sid"]) -> list[dict]:
+    return [req(f"{key(c)}-v", prompt_fn(c) + VERIFY_TAIL, max_tokens=300, temperature=0.0) for c in cands]
+
+
 def verify(batch: str, cands: list[dict], prompt_fn, key=lambda c: c["sid"], failed: list | None = None
            ) -> tuple[list[dict], collections.Counter]:
     """Second gemma-4-31B-it pass that checks each generated candidate against the contrast (greedy decoding).
     Returns the candidates that pass (request id in c["verify_id"]) and a count of failures; failing candidates go to
     `failed` with the verifier's reason in c["verify_problem"]."""
-    reqs = [req(f"{key(c)}-v", prompt_fn(c) + VERIFY_TAIL, max_tokens=300, temperature=0.0) for c in cands]
+    reqs = verify_requests(batch, cands, prompt_fn, key)
     missing = need_generation([batch], {batch: reqs})
     if missing:
         stop_for_generation(missing)

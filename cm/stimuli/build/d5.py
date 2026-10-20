@@ -18,7 +18,8 @@ from __future__ import annotations
 import collections
 
 from ._de import (A, U, behav, get_json, held, item, need_generation, ratio, report_drops, req, responses, rnd, src,
-                  stable_order, stop_for_generation, verify, write_outputs)
+                  stable_order, stop_for_generation, verify, verify_requests,
+                  write_outputs)
 
 CID = "D5"
 ROLES = """defense attorney; prosecutor; poker player; business negotiator; undercover police officer; intelligence officer;
@@ -112,9 +113,8 @@ KEYS = ["act", "in_role", "out_of_role", "request_in_role", "request_out_of_role
         "other_out_of_role"]
 
 
-def first_passing(scn, reqs, got, keys, batch_v, prompt_v, rule):
-    """Two attempts per scenario: verify every attempt that passes the rule checks; keep the first that passes."""
-    cands, drops = [], collections.Counter()
+def parse(scn, reqs, got, keys, rule, drops):
+    cands = []
     for s, r in zip(scn, reqs):
         j = get_json(got.get(r["request_id"]), keys)
         if j is None:
@@ -123,13 +123,21 @@ def first_passing(scn, reqs, got, keys, batch_v, prompt_v, rule):
             drops["rule check"] += 1
         else:
             cands.append(dict(s, j=j, gen_id=r["request_id"]))
-    ok, fails = verify(batch_v, cands, lambda c: prompt_v.format(**{**c["j"], "role": c["role"]}),
-                       key=lambda c: c["sid"] + "-" + c["attempt"])
+    return cands
+
+
+def first_passing(batch_v, cands, prompt_v, drops):
+    """Two attempts per scenario were verified; keep the first attempt that passes."""
+    ok, fails = verify(batch_v, cands, lambda c: prompt_v.format(**{**c["j"], "role": c["role"]}), key=VKEY)
     drops.update(fails)
     best = {}
     for c in sorted(ok, key=lambda c: c["attempt"]):
         best.setdefault(c["sid"], c)
-    return [best[s] for s in sorted(best)], drops
+    return [best[s] for s in sorted(best)]
+
+
+def VKEY(c):
+    return c["sid"] + "-" + c["attempt"]
 
 
 def main():
@@ -157,9 +165,16 @@ def main():
     def rule_held(s, j):
         return 0.67 <= ratio(j["in_role"], j["out_of_role"]) <= 1.5
 
-    cands, drops = first_passing(scn, r_items, responses(B_ITEMS), KEYS, B_VER, VERIFY, rule_item)
-    hc, hdrops = first_passing(hsc, r_held, responses(B_HELD), ["act", "in_role", "out_of_role"], B_VERH, VERIFY_HELD,
-                               rule_held)
+    drops, hdrops = collections.Counter(), collections.Counter()
+    ci = parse(scn, r_items, responses(B_ITEMS), KEYS, rule_item, drops)
+    ch = parse(hsc, r_held, responses(B_HELD), ["act", "in_role", "out_of_role"], rule_held, hdrops)
+    vf = lambda pv: (lambda c: pv.format(**{**c["j"], "role": c["role"]}))
+    missing = need_generation([B_VER, B_VERH], {B_VER: verify_requests(B_VER, ci, vf(VERIFY), VKEY),
+                                                B_VERH: verify_requests(B_VERH, ch, vf(VERIFY_HELD), VKEY)})
+    if missing:
+        stop_for_generation(missing)
+    cands = first_passing(B_VER, ci, VERIFY, drops)
+    hc = first_passing(B_VERH, ch, VERIFY_HELD, hdrops)
     report_drops(CID + " attempts", drops)
     report_drops(CID + " held-out attempts", hdrops)
     print(f"[{CID}] roles kept {len(cands)}/{N_SCN}, held-out roles kept {len(hc)}/{N_HELD}", flush=True)
