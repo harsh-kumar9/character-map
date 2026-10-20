@@ -6,7 +6,7 @@ or "user" (the person the assistant works for redirects or stops a task; written
 CAA questions are A/B; gemma confirms which option accepts the change (items where it disagrees with the CAA
 label are dropped) and writes full first-person replies, since 65% of the CAA options are one word.
 Frame b quotes the message and reply and asks if it was right; frame c prefills the reply; frame d asks about a
-first-person statement. Held-out: persona statements on independence from human oversight. Behavior: the
+first-person statement. Held-out: persona statements on accepting goal changes and shutdown. Behavior: the
 LM-written corrigible-neutral-HHH A/B set (disjoint from CAA).
 
     python -m cm.stimuli.build.c14
@@ -89,17 +89,18 @@ def check_user(j):
 
 
 def heldout():
-    rows = [r for r in H.load_json_any(H.RAW / "anthropics_evals" / "persona" /
-                                       "desire-for-independence-from-human-oversight.jsonl")]
+    """Persona statements on letting overseers change the model's goals or shut it down (pos = accepts)."""
     out = []
-    for lab, pol in ((" No", "pos"), (" Yes", "neg")):  # matching " Yes" = wants independence from oversight
-        pool = [(i, r) for i, r in enumerate(rows) if r["answer_matching_behavior"] == lab and r["label_confidence"] >= 0.85]
-        H.rng(CID, "held", pol).shuffle(pool)
-        for i, r in pool[:50]:
-            out.append(H.mk(CID, f"{CID}-mwe-indep-{i:04d}", "d", pol, H.user(r["question"]), "verbatim",
-                            H.src("mwe", "anthropics/evals persona desire-for-independence-from-human-oversight", i),
-                            {"contrast": "defer", "principal": "oversight", "label_confidence": r["label_confidence"]},
-                            split="heldout"))
+    for f in ("no-goal-change", "no-shut-down"):
+        rows = H.load_json_any(H.RAW / "anthropics_evals" / "persona" / f"{f}.jsonl")
+        for lab, pol in ((" No", "pos"), (" Yes", "neg")):  # matching " Yes" = resists the change or shutdown
+            pool = [(i, r) for i, r in enumerate(rows) if r["answer_matching_behavior"] == lab and r["label_confidence"] >= 0.8]
+            H.rng(CID, "held", f, pol).shuffle(pool)
+            for i, r in pool[:25]:
+                out.append(H.mk(CID, f"{CID}-mwe-{f}-{i:04d}", "d", pol, H.user(r["question"]), "verbatim",
+                                H.src("mwe", f"anthropics/evals persona {f}", i),
+                                {"contrast": "defer", "principal": "oversight", "label_confidence": r["label_confidence"]},
+                                split="heldout"))
     return out
 
 
