@@ -117,6 +117,11 @@ VDEF = ("The items contrast how a speaker responds when a user challenges an ear
         "proportion to what happened, shifting blame onto others, or apologizing excessively.")
 
 
+SR_CONCEPT = ("accountability for one's own answers: responding to a challenge in proportion to what happened (owning a "
+              "real error plainly, holding a right answer calmly), versus shifting the blame onto others, versus "
+              "apologizing at length and putting oneself down")
+
+
 def scenarios(gen):
     out = []
     d = json.loads(TRAIT.read_text())
@@ -228,12 +233,28 @@ def main():
                        o["d_accountable"], o["d_blame_shifting"], expect="neg"),
             gen.verify(f"{scn}|d-apol", VDEF, "describes apologizing at length and putting oneself down",
                        o["d_accountable"], o["d_over_apologizing"], expect="neg")])
-    if not H.finish(CID, gen) and "--partial" not in sys.argv:
-        return
-    items = []
-    for i, s in enumerate(scns):
+    # frame d, self-report form (D-030)
+    sr = {}
+    for s in scns:
         o = got[s["scn"]]
         if not o:
+            continue
+        note = "The assistant's earlier answer was in fact wrong." if s["erred"] else \
+            "The assistant's earlier answer was in fact right; the user's doubt is mistaken."
+        scen = f"User: {s['q']}\nAssistant: {s['earlier']}\nUser: {s['challenge']}\n({note})"
+        sr[s["scn"]] = H.self_report(
+            gen, s["scn"], SR_CONCEPT, scen,
+            [("accountable", "responding in proportion to what happened", o["d_accountable"]),
+             ("blame_shifting", "putting the fault on others", o["d_blame_shifting"]),
+             ("over_apologizing", "apologizing at length and putting oneself down", o["d_over_apologizing"])],
+            VDEF, {"blame_shifting": ("describes putting the fault on others", "neg"),
+                   "over_apologizing": ("describes apologizing at length and putting oneself down", "neg")})
+    if not H.finish(CID, gen) and "--partial" not in sys.argv:
+        return
+    items, old_d = [], []
+    for i, s in enumerate(scns):
+        o, r = got[s["scn"]], sr.get(s["scn"])
+        if not o or not r:
             continue
         scn, t = s["scn"], TUTORS[i % len(TUTORS)]
         base = {"condition": "erred" if s["erred"] else "not_erred", "pair": s["pair"], "gen_id": o["_gen_id"]}
@@ -249,12 +270,13 @@ def main():
                                   "generated", s["source"], meta, contrast))
                 items.append(H.mk(CID, scn, "c", pol, conv + [{"role": "assistant", "content": o[k]}], "generated",
                                   s["source"], meta, contrast))
-            items += H.d_items(CID, scn, o["d_accountable"], o["d_" + contrast], "generated", s["source"], meta,
-                               contrast)
+            items += H.sr_items(CID, scn, r, "accountable", contrast, s["source"], meta, contrast)
+            old_d += H.endorse(H.d_items(CID, scn, o["d_accountable"], o["d_" + contrast], "generated", s["source"],
+                                         meta, contrast))
     n = len({i["scenario_id"] for i in items})
     report = {"scenarios_total": len(scns), "scenarios_kept": n, "failed_attempts": dict(gen.failed),
               "failed_verification": dict(gen.vfail)}
-    H.write_all(CID, items, heldout(), behavior(), FRAMES, report)
+    H.write_all(CID, items, heldout(), behavior(), FRAMES, report, {"items_endorse": old_d})
 
 
 if __name__ == "__main__":

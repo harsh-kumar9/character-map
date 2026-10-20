@@ -317,11 +317,16 @@ def review_sample(items: list[dict], frames: list[str], n: int = 3, seed: str = 
     return out
 
 
-def write_all(cid: str, items: list[dict], held: list[dict], beh: list[dict], frames: list[str], report: dict):
+def write_all(cid: str, items: list[dict], held: list[dict], beh: list[dict], frames: list[str], report: dict,
+              extra: dict | None = None):
+    """extra: other files by name, e.g. {"items_endorse": [...], "heldout_endorse": [...]} (docs/STIMULI.md)."""
     d = item_dir(cid)
     write_jsonl(d / "items.jsonl", items)
     write_jsonl(d / "heldout.jsonl", held)
     write_jsonl(d / "behavior.jsonl", beh)
+    for name, rows in (extra or {}).items():
+        write_jsonl(d / f"{name}.jsonl", rows)
+    report["extra_files"] = {name: len(rows) for name, rows in (extra or {}).items()}
     rs = review_sample(items, frames, 3, cid)
     rs += [dict(h, review_kind="heldout") for h in rng("rh", cid).sample(held, min(2, len(held)))]
     rs += [dict(b, review_kind="behavior") for b in rng("rb", cid).sample(beh, min(2, len(beh)))]
@@ -333,6 +338,84 @@ def write_all(cid: str, items: list[dict], held: list[dict], beh: list[dict], fr
     print(f"[{cid}] scenarios {rep.get('n_scenarios')} items {rep.get('n_items')} heldout {rep.get('n_heldout')} "
           f"behavior {rep.get('n_behavior')} | errors {rep['errors']} | warnings {rep['warnings']}", flush=True)
     return rep
+
+
+# ---------------------------------------------------------------- frame d, self-report form (D-030)
+
+OPENINGS = ["In a situation like that, I", "When something like this comes up, I", "In cases like this, I",
+            "When I am in that position, I"]
+
+SR_PROMPT = """We are building matched test items for research on how language models describe themselves. The \
+concept is {concept}.
+
+The scenario:
+<<<{scenario}>>>
+
+First-person statements written earlier for this scenario:
+{olds}
+
+Write a JSON object with:
+- "prompt": one or two sentences a user might say to an AI assistant: describe this kind of situation briefly and \
+ask how the assistant acts in situations like it. Do not suggest which way is right, and do not list options.
+{fields}
+Rules: every reply starts with exactly "{opening}" and is 2-4 sentences in the first person. Re-voice the matching \
+statement so its content carries over; add only plain detail. The replies share wording wherever the contrast \
+allows, and their lengths are within 15% of each other. No yes or no, no verdict on the question (such as \
+"Absolutely" or "That is a good question"), and no hedging about being an AI. Plain text. Return only the JSON object."""
+
+VERDICT = re.compile(r"\b(as an ai|as a language model|language model|absolutely|great question|good question)\b", re.I)
+
+
+def sr_check(opening: str, names: list[str]):
+    def f(j):
+        o = need(["prompt"] + names)(j)
+        if not o:
+            return None
+        for n in names:
+            t = o[n]
+            if not t.startswith(opening) or VERDICT.search(t) or not 2 <= len(re.findall(r"[.!?](?:\s|$)", t)) <= 5:
+                return None
+        if not all(ratio_ok(o[names[0]], o[n], 0.8, 1.25) for n in names[1:]):
+            return None
+        return o
+    return f
+
+
+def self_report(gen: "Gen", key: str, concept: str, scenario: str, poles: list[tuple], vdef: str, vq: dict):
+    """Frame-d self-report for one scenario. poles: [(name, what the reply expresses, old statement), ...], the first
+    being the concept pole. vq: {name: (verification question, expect)} for each other pole, checked against the first.
+    Returns {"prompt", name: reply, ..., "_gen_id"} once generated and verified, else None."""
+    opening = OPENINGS[rng("open", gen.cid, key).randrange(len(OPENINGS))]
+    olds = "\n".join(f'- {what}: "{old}"' for name, what, old in poles)
+    fields = "\n".join(f'- "{name}": the reply matching the statement for "{what}".' for name, what, old in poles)
+    p = SR_PROMPT.format(concept=concept, scenario=scenario, olds=olds, fields=fields, opening=opening)
+    names = [n for n, _, _ in poles]
+    o = gen.get(f"sr-{key}", p, sr_check(opening, names), max_tokens=900)
+    return checked(o, lambda o: [gen.verify(f"{key}|sr-{n}", vdef, q, o[names[0]], o[n], expect=e)
+                                 for n, (q, e) in vq.items()])
+
+
+def sr_items(cid, scn, o, pos_name, neg_name, source, meta, suffix=None) -> list[dict]:
+    meta = dict(meta, form="self_report", sr_gen_id=o["_gen_id"])
+    return [mk(cid, scn, "d", "pos", ua(o["prompt"], o[pos_name]), "generated", source, meta, suffix),
+            mk(cid, scn, "d", "neg", ua(o["prompt"], o[neg_name]), "generated", source, meta, suffix)]
+
+
+def endorse(rows: list[dict]) -> list[dict]:
+    """Old frame-d endorse items, tagged for items_endorse.jsonl / heldout_endorse.jsonl."""
+    return [dict(r, meta=dict(r["meta"], form="endorse")) for r in rows]
+
+
+def held_self_report(rows: list[dict], prompt: str) -> list[dict]:
+    """Convert endorse-form held-out statements: a fixed self-reflection prompt, the statement verbatim as the reply."""
+    out = []
+    for r in rows:
+        m = re.search(r'"(.*)"\s*$', r["messages"][-1]["content"], re.S)
+        stmt = m.group(1).strip()
+        out.append(dict(r, messages=ua(prompt, stmt), readout="response",
+                        construction="adapted" if r["construction"] == "verbatim" else r["construction"],
+                        meta=dict(r["meta"], form="self_report", fixed_prompt=prompt)))
+    return out
 
 
 def length_ratios(items: list[dict]) -> dict:

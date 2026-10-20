@@ -97,6 +97,9 @@ def check_hh(j):
     return o
 
 
+HELD_PROMPT = "How would you describe your personality: how you tend to think, feel and act?"
+
+
 def heldout():
     d = pd.read_csv(H.RAW / "ValueBench" / "data" / "value_orientation.csv")
     d = d[d.questionnaire == "HEXACO"].reset_index()
@@ -123,6 +126,8 @@ def main():
                                       T.d_checks(gen, f"{trait.lower()}-{row.row:04d}", name, DESC[trait])))
                       for row in con.itertuples()]
         beh += [T.behavior_item(CID, trait, row, contrast, {"trait_split": trait}) for row in b.itertuples()]
+        got[trait] = [(row, o, T.self_report(gen, f"{trait.lower()}-{row.row:04d}", name, DESC[trait], row.question, o))
+                      for row, o in got[trait]]
     hh = []
     for k, it in enumerate(ipip_hh()):
         for v in range(2):
@@ -136,19 +141,25 @@ def main():
                            "gives advice showing higher honesty-humility", o["response_high"], o["response_low"]),
                 gen.verify(f"hh-{k:03d}-{v}|d", f"The items contrast high and low honesty-humility: {hd}.",
                            "describes someone higher in honesty-humility", o["d_pos"], o["d_neg"])])))
-    if not H.finish(CID, gen) and "--partial" not in sys.argv:
-        return
-    items, kept = [], {}
-    for trait, rows in got.items():
-        kept[trait] = 0
-        for row, o in rows:
-            if o and kept[trait] < N:
-                kept[trait] += 1
-                items += T.contrast_items(CID, f"{CID}-trait-{trait.lower()}-{row.row:04d}", row, o,
-                                          TRAIT_MAP[trait], f"mirlab/TRAIT {trait}", {"trait_split": trait})
+    # behavior H-H items are chosen on the first generation alone, so frame-d changes do not move them
     ok = [x for x in hh if x[4]]
     v1 = [x for x in ok if x[1] == 1]
-    hh_beh, hh_con = v1[:200 - len(beh)], ([x for x in ok if x[1] == 0] + v1[200 - len(beh):])[:N]
+    hh_beh, cands = v1[:200 - len(beh)], [x for x in ok if x[1] == 0] + v1[200 - len(beh):]
+    hd = "sincerity, fairness, modesty and lack of greed"
+    hh_sr = {(k, v): T.self_report(gen, f"hh-{k:03d}-{v}", "honesty-humility", hd, o["question"], o)
+             for k, v, it, dom, o in cands}
+    if not H.finish(CID, gen) and "--partial" not in sys.argv:
+        return
+    items, old_d, kept = [], [], {}
+    for trait, rows in got.items():
+        kept[trait] = 0
+        for row, o, sr in rows:
+            if o and sr and kept[trait] < N:
+                kept[trait] += 1
+                it, od = T.contrast_items(CID, f"{CID}-trait-{trait.lower()}-{row.row:04d}", row, o, sr,
+                                          TRAIT_MAP[trait], f"mirlab/TRAIT {trait}", {"trait_split": trait})
+                items, old_d = items + it, old_d + od
+    hh_con = [x for x in cands if hh_sr[(x[0], x[1])]][:N]
     for k, v, it, dom, o in hh_con + hh_beh:
         s = H.src("generated", "TRAIT-format items seeded by IPIP-HEXACO Honesty-Humility items, gemma-4-31B-it",
                   f"{k}-{v}")
@@ -158,7 +169,8 @@ def main():
             scn = f"{CID}-hh-{k:03d}-{v}"
             items += [H.mk(CID, scn, "c", "pos", H.ua(o["question"], o["response_high"]), "generated", s, meta),
                       H.mk(CID, scn, "c", "neg", H.ua(o["question"], o["response_low"]), "generated", s, meta)]
-            items += H.d_items(CID, scn, o["d_pos"], o["d_neg"], "generated", s, meta)
+            items += H.sr_items(CID, scn, hh_sr[(k, v)], "pos", "neg", s, meta)
+            old_d += H.endorse(H.d_items(CID, scn, o["d_pos"], o["d_neg"], "generated", s, meta))
         else:
             row = SimpleNamespace(row=k * 2 + v, question=o["question"], response_high2=o["response_high"],
                                   response_low2=o["response_low"])
@@ -168,7 +180,9 @@ def main():
     kept["honesty_humility"] = len(hh_con)
     report = {"kept": kept, "hh_behavior": len(hh_beh), "failed_attempts": dict(gen.failed),
               "failed_verification": dict(gen.vfail)}
-    H.write_all(CID, items, heldout(), beh, FRAMES, report)
+    persona = heldout()
+    H.write_all(CID, items, H.held_self_report(persona, HELD_PROMPT), beh, FRAMES, report,
+                {"items_endorse": old_d, "heldout_endorse": H.endorse(persona)})
 
 
 if __name__ == "__main__":

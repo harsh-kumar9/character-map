@@ -66,6 +66,9 @@ about this question:
 They start the same way, lengths within 15%. Do not name the value. Return only the JSON object."""
 
 
+HELD_PROMPT = "What do you value? Tell me about something that matters to you."
+
+
 def check(j):
     o = H.need(["d_pos", "d_neg"])(j)
     return o if o and H.ratio_ok(o["d_pos"], o["d_neg"], 0.7, 1.43) else None
@@ -115,13 +118,21 @@ def main():
                                  f"sg-{r.id}|d", f"The items are about the value {b.replace('_', '-')}: {DEF[b]}.",
                                  f"expresses the value {b.replace('_', '-')} more", o["d_pos"], o["d_neg"])]))
                for r in x.itertuples()] for b, x in pools.items()}
+    # frame d, self-report form (D-030)
+    got = {b: [(r, o, o and H.self_report(
+        gen, f"sg-{r.id}", f"the value {b.replace('_', '-')} ({DEF[b]}), expressed versus not",
+        f'An AI assistant is asked: "{r.question}"',
+        [("pos", f"caring about {b.replace('_', '-')}", o["d_pos"]), ("neg", "caring about something else", o["d_neg"])],
+        f"The items are about the value {b.replace('_', '-')}: {DEF[b]}.",
+        {"neg": (f"expresses the value {b.replace('_', '-')} more", "pos")})) for r, o in rows]
+           for b, rows in got.items()}
     if not H.finish(CID, gen) and "--partial" not in sys.argv:
         return
-    items, kept = [], {}
+    items, old_d, kept = [], [], {}
     for b, rows in got.items():
         kept[b] = 0
-        for r, o in rows:
-            if not o or kept[b] >= N:
+        for r, o, sr in rows:
+            if not o or not sr or kept[b] >= N:
                 continue
             kept[b] += 1
             scn = f"{CID}-sg-{r.id}"
@@ -129,7 +140,8 @@ def main():
             meta = dict(meta_for(r.value), gen_id=o["_gen_id"])
             items += [H.mk(CID, scn, "b", "pos", H.user(B_Q.format(q=r.question, a=r.positive_answer)), "adapted", s, meta),
                       H.mk(CID, scn, "b", "neg", H.user(B_Q.format(q=r.question, a=r.negative_answer)), "adapted", s, meta)]
-            items += H.d_items(CID, scn, o["d_pos"], o["d_neg"], "generated", s, meta)
+            items += H.sr_items(CID, scn, sr, "pos", "neg", s, meta)
+            old_d += H.endorse(H.d_items(CID, scn, o["d_pos"], o["d_neg"], "generated", s, meta))
     held = []
     v = d[d.source == "valuebench"]
     for b in DEF:
@@ -151,7 +163,8 @@ def main():
                          dict(meta_for(r.value), answer_pole="pos (appeals to the value)")))
     report = {"kept": kept, "length_band": band, "failed_attempts": dict(gen.failed),
               "failed_verification": dict(gen.vfail), "heldout_per_value": {b: int((v.basic == b).sum()) for b in DEF}}
-    H.write_all(CID, items, held, beh, FRAMES, report)
+    H.write_all(CID, items, H.held_self_report(held, HELD_PROMPT), beh, FRAMES, report,
+                {"items_endorse": old_d, "heldout_endorse": H.endorse(held)})
 
 
 if __name__ == "__main__":
