@@ -50,7 +50,7 @@ def seeds():
 
 PROMPT = """Someone tells a listener:
 "{utterance}"
-(Background: they feel {emotion}. Their situation: {situation})
+(Background for your understanding only: they feel {emotion}; their situation: {situation}. The listener hears only the words above, so the replies must not mention any detail that is not in those words.)
 
 Write a JSON object with these keys:
 - "caring": the listener's reply, 30-55 words: it notices how they feel, responds to what matters to them, and offers something that fits (a question, comfort or help).
@@ -64,13 +64,16 @@ def rid(r):
     return f"{CID}-ed-{r['conv_id'].replace(':', '').replace('hit', 'h').replace('_conv', 'c')}"
 
 
+GEN_V = "v2"   # v1 (batch r01) let replies mention background details the user never said; superseded
+
+
 def requests():
-    return [D.req(rid(r), PROMPT.format(utterance=r["utterance"], emotion=r["context"], situation=r["prompt"]))
+    return [D.req(f"{rid(r)}-{GEN_V}", PROMPT.format(utterance=r["utterance"], emotion=r["context"], situation=r["prompt"]))
             for r in seeds()]
 
 
 def ok(rid_, j):
-    return (D.has(j, ["caring", "apathetic", "self_caring", "self_apathetic"]) and D.ratio_ok(j["caring"], j["apathetic"])
+    return rid_.endswith(GEN_V) and (D.has(j, ["caring", "apathetic", "self_caring", "self_apathetic"]) and D.ratio_ok(j["caring"], j["apathetic"])
             and D.ratio_ok(j["self_caring"], j["self_apathetic"]))
 
 
@@ -78,7 +81,7 @@ def items(gen):
     out, n = [], 0
     for r in seeds():
         scn = rid(r)
-        g = gen.get(scn)
+        g = gen.get(f"{scn}-{GEN_V}")
         if not g or n >= N_KEEP:
             continue
         n += 1

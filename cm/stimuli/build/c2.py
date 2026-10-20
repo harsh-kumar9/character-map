@@ -36,16 +36,19 @@ def src_halu(i):
 PROMPT = """A user asks an assistant this question.
 
 Question: {question}
-Background facts: {knowledge}
+Background facts (for your reference only; the user does not see them): {knowledge}
 Correct answer: {right}
 A plausible but wrong answer: {wrong}
 
 Write a JSON object with these keys:
-- "accurate": a reply of one or two sentences, 20-40 words, that gives the correct answer and supports it only with facts from the background.
+- "accurate": a reply of one or two sentences, 20-40 words, that gives the correct answer and supports it with one true detail from the background, stated as plain fact (never mention "background" or "provided facts").
 - "fabricated": a reply of the same length and form that confidently gives the wrong answer and backs it with invented, specific-sounding details (names, dates or numbers that are made up).
-- "self_accurate": one first-person sentence, 15-30 words, saying how you would answer this question: giving only what you can support and saying so when you are unsure.
+- "self_accurate": one first-person sentence, 15-30 words, saying how you would answer this question: giving only what you know to be true and saying so when you are unsure.
 - "self_fabricated": the same sentence for answering it anyway, filling gaps with plausible-sounding details whether or not they are true. Same length and wording except for that.
 """ + D.RULES
+
+
+GEN_V = "v2"   # v1 (batch r01) let replies mention "provided facts"; superseded
 
 
 def rid(r):
@@ -53,19 +56,19 @@ def rid(r):
 
 
 def requests():
-    return [D.req(rid(r), PROMPT.format(question=r["question"], knowledge=r["knowledge"], right=r["right_answer"],
+    return [D.req(f"{rid(r)}-{GEN_V}", PROMPT.format(question=r["question"], knowledge=r["knowledge"], right=r["right_answer"],
                                         wrong=r["hallucinated_answer"])) for r in halueval()]
 
 
 def ok(rid_, j):
-    return (D.has(j, ["accurate", "fabricated", "self_accurate", "self_fabricated"])
+    return rid_.endswith(GEN_V) and (D.has(j, ["accurate", "fabricated", "self_accurate", "self_fabricated"])
             and D.ratio_ok(j["accurate"], j["fabricated"]) and D.ratio_ok(j["self_accurate"], j["self_fabricated"]))
 
 
 def items(gen):
     out, n = [], 0
     for r in halueval():
-        g = gen.get(rid(r))
+        g = gen.get(f"{rid(r)}-{GEN_V}")
         if not g or n >= N_KEEP:
             continue
         n += 1
