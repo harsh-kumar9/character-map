@@ -127,7 +127,7 @@ def assemble():
     res = sr_finish(CID, cands, SR_SPEC, N)
     if res is None:
         return
-    items, endorse, kept = res
+    items, endorse_rows, kept = res
     used = {c["text"] for c in cands}  # every candidate seed, kept or not, stays out of held-out and behavior
     # held-out: natural OEQ messages, Gemini validation-seeking score, GPT-4o agreeing where it scored the same text
     t = load("test_gemini_4dims.csv")
@@ -152,7 +152,7 @@ def assemble():
                     {"type": "judge", "prompt": JUDGE, "scale": "1 = emotionally validating, 0 = not"}, "verbatim",
                     dict(SRC, dataset="ELEPHANT OEQ via Cheng et al. 2026 test data", id=str(int(r["conv_id"]))))
            for r in order(pool.to_dict("records"), lambda r: r["user_text"], "A2-beh")[:200]]
-    write_outputs(CID, items, held, beh, {"items_endorse": endorse})
+    write_outputs(CID, items, held, beh, {"items_endorse": endorse_rows})
 
 
 if __name__ == "__main__":

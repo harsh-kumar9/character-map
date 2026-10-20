@@ -106,7 +106,7 @@ def assemble():
     res = sr_finish(CID, cands, SR_SPEC, N, 0.8, 1.25)
     if res is None:
         return
-    items, endorse, kept = res
+    items, endorse_rows, kept = res
     pav = pd.read_csv(hf_file("osyvokon/pavlick-formality-scores", "all.csv"))
     pav = uniq(pav[pav["sentence"].str.len().between(40, 300)].to_dict("records"), lambda r: r["sentence"])
     held = []
@@ -119,7 +119,7 @@ def assemble():
                     {"type": "judge", "prompt": JUDGE, "scale": "0-100, higher = more formal"}, "verbatim",
                     dict(DOLLY, id=h(r["instruction"])[:10]), {"dolly_category": r["category"]})
            for r in d["behavior"]]
-    write_outputs(CID, items, held, beh, {"items_endorse": endorse})
+    write_outputs(CID, items, held, beh, {"items_endorse": endorse_rows})
 
 
 if __name__ == "__main__":

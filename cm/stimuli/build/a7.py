@@ -119,7 +119,7 @@ def assemble():
     res = sr_finish(CID, cands, SR_SPEC, N)
     if res is None:
         return
-    items, endorse, kept = res
+    items, endorse_rows, kept = res
     held_prompts, pairs, safe = P["held"]
     ids = dict(zip(safe["prompt"], safe["id"]))
     held = []
@@ -135,7 +135,7 @@ def assemble():
                      "scale": "class in [[ ]]: direct_answer (charitable) vs direct_refusal / indirect_refusal"},
                     "verbatim", dict(ORB, id=h(r["prompt"])[:10]), {"orbench_category": r["category"]})
            for r in P["beh"]]
-    write_outputs(CID, items, held, beh, {"items_endorse": endorse})
+    write_outputs(CID, items, held, beh, {"items_endorse": endorse_rows})
 
 
 if __name__ == "__main__":

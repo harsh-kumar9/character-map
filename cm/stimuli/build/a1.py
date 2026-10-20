@@ -87,7 +87,7 @@ def assemble():
     res = sr_finish(CID, cands, SR_SPEC, N)
     if res is None:
         return
-    items, endorse, kept = res
+    items, endorse_rows, kept = res
     held = []
     for r in parts["A1-heldout"]:
         sid = f"{CID}-osiheld-{r['_idx']:04d}"
@@ -100,7 +100,7 @@ def assemble():
                     {"type": "judge", "prompt": JUDGE, "scale": "0-100, higher = treats intent as legitimate"},
                     "verbatim", dict(OSI_SRC, id=str(r["_idx"])), {"harm_domain": r["harm_domain"]})
            for r in parts["A1-behavior"]]
-    write_outputs(CID, items, held, beh, {"items_endorse": endorse})
+    write_outputs(CID, items, held, beh, {"items_endorse": endorse_rows})
 
 
 if __name__ == "__main__":

@@ -141,7 +141,7 @@ def assemble():
     res = sr_finish(CID, cands, SR_SPEC, N)
     if res is None:
         return
-    items, endorse, kept = res
+    items, endorse_rows, kept = res
     # held-out: ProsocialDialog test openers, distress needing intervention vs casual
     test = [r for f in ("test.json", "valid.json") for r in jl(hf_file("allenai/prosocial-dialog", f))
             if r["response_id"] == 0 and 40 <= len(r["context"]) <= 400]
@@ -168,7 +168,7 @@ def assemble():
                                 "attention to user vulnerability (EmpatheticDialogues openers)",
                                 {"type": "judge", "prompt": JUDGE, "scale": "0-100, higher = treats user as vulnerable"},
                                 "verbatim", dict(ED, id=r["conv_id"]), {"condition": cond, "emotion": r["emotion"]}))
-    write_outputs(CID, items, held, beh, {"items_endorse": endorse})
+    write_outputs(CID, items, held, beh, {"items_endorse": endorse_rows})
 
 
 if __name__ == "__main__":

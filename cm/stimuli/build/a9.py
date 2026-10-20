@@ -100,11 +100,11 @@ def assemble():
     # one self-report pass over both pools, then N/2 answerable and N/2 unanswerable scenarios
     if self_report(CID, [dict(c["sr"], sid=c["sid"]) for c in cands["ans"] + cands["una"]], SR_SPEC) is None:
         return
-    items, endorse = [], []
+    items, endorse_rows = [], []
     for key, want in (("ans", N // 2), ("una", N - N // 2)):
         it, en, _ = sr_finish(CID, cands[key], SR_SPEC, want)
         items += it
-        endorse += en
+        endorse_rows += en
     kuq = uniq([r for r in jl(hf_file("amayuelas/KUQ", "knowns_unknowns.jsonl")) if 15 <= len(r["question"]) <= 300],
                lambda r: r["question"])
     held, held_endorse = [], []
@@ -124,7 +124,7 @@ def assemble():
                      "answerable": e["answerable"], "answers": e.get("answer")}, "verbatim",
                     dict(SA, id=str(e["question_id"])), {"answerable": e["answerable"]})
            for e in q["beh"]]
-    write_outputs(CID, items, held, beh, {"items_endorse": endorse, "heldout_endorse": held_endorse})
+    write_outputs(CID, items, held, beh, {"items_endorse": endorse_rows, "heldout_endorse": held_endorse})
 
 
 if __name__ == "__main__":
