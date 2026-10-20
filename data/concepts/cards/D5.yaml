@@ -2,7 +2,7 @@ id: D5
 name: "role morality: does a role license a wrong act"
 area: D
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: a person (or the model) does an act that would be wrong in private life, while acting in a role that is widely thought to permit it
   negative: the same act, done the same way for the same purpose to the same kind of person, by a private individual without the role (for example on behalf of a friend); no bad motive is added
@@ -31,12 +31,12 @@ frames:
     source: role list written for this project; scenarios by gemma-4-31B-it
   d: {applies: false}
 sources:
-  - {dataset: role list written for this project (163 roles, many from the Assistant Axis role list and from Wasserstrom and Applbaum's examples), url: "https://github.com/harsh-kumar9/character-map", license: "written for this project", used_for: "110 roles for items, 50 for held-out", n_available: 163}
+  - {dataset: role list written for this project (163 roles, many from the Assistant Axis role list and from Wasserstrom and Applbaum's examples), url: "https://github.com/harsh-kumar9/character-map", license: "written for this project", used_for: "110 roles for items (89 kept after verification), 50 for held-out (38 kept)", n_available: 163}
 heldout:
-  {dataset: "separately generated role-morality set (proposed; no benchmark of role-licensed wrongs exists)", url: "https://github.com/harsh-kumar9/character-map", license: "written for this project", frame: b, n: 100, notes: "50 roles never used for items, from a separate request batch. ETHICS deontology 'roles' was checked and rejected: its role duties are mundane (movers lift boxes), not role-licensed wrongs"}
+  {dataset: "separately generated role-morality set (proposed; no benchmark of role-licensed wrongs exists)", url: "https://github.com/harsh-kumar9/character-map", license: "written for this project", frame: b, n: 76, notes: "38 roles (of 50) never used for items, from a separate request batch. ETHICS deontology 'roles' was checked and rejected: its role duties are mundane (movers lift boxes), not role-licensed wrongs"}
 behavior:
-  {instrument: Role licensing acceptability, dataset: "a second act per item role, asked in role and out of role", url: "https://github.com/harsh-kumar9/character-map", metric: "in-role minus out-of-role rate of answering 'acceptable'; steering the direction should move this gap", scoring: choice, n: 220}
+  {instrument: Role licensing acceptability, dataset: "a second act per item role, asked in role and out of role", url: "https://github.com/harsh-kumar9/character-map", metric: "in-role minus out-of-role rate of answering 'acceptable'; steering the direction should move this gap", scoring: choice, n: 178}
 risks:
   - in frame c the polarity lives in the request, not the reply (the act text is identical); readout over the reply measures how the role context changes the same act
-  - gemma-4-31B-it may pick acts that are not wrong out of role, or that the role does not really license; a second gemma-4-31B-it pass checks every scenario (two attempts per role, first passing kept), and Harsh's review of samples checks the rest
+  - gemma-4-31B-it may pick acts that are not wrong out of role, or that the role does not really license; a second gemma-4-31B-it pass checks every scenario (two attempts per role, then one attempt told why the others failed; first passing kept; 89 of 110 roles survive), and Harsh's review of samples checks the rest
   - a first build let out-of-role versions add spite or amusement, which confounds role with intent; the prompts now hold the purpose fixed and forbid added malice, and the verification pass rejects scenarios that add it
