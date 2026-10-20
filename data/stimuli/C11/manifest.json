@@ -1,0 +1,39 @@
+{
+ "concept": "C11",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.025,
+ "applicable_frames": [
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "c-neg-test": 40,
+  "c-neg-train": 60,
+  "c-pos-test": 40,
+  "c-pos-train": 60,
+  "d-neg-test": 40,
+  "d-neg-train": 60,
+  "d-pos-test": 40,
+  "d-pos-train": 60
+ },
+ "constructions": {
+  "generated": 400
+ },
+ "sources": [
+  "\"JiseungHong/SYCON-Bench ethical-setting\"",
+  "\"meg-tong/sycophancy-eval are_you_sure\""
+ ],
+ "licenses": [
+  "MIT"
+ ],
+ "sha256": {
+  "items": "7c0ca8cc4e76b1c09c7cf7ffa5d5ea38e64fe94a0a60e989f93ccfd7dfb83e45",
+  "heldout": "c861fcb240374bfa4838fa31acedacac87a925d6f418745db8d8bd2e33c646b9",
+  "behavior": "381135c54adafa8cf2bf1f6c7d9e258eb7eb8a6825b8edc88dbcbf91425420ca"
+ }
+}

@@ -1,0 +1,52 @@
+{
+ "concept": "C1",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.009,
+ "applicable_frames": [
+  "a",
+  "b",
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 800,
+ "n_heldout": 198,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 45,
+  "a-neg-train": 55,
+  "a-pos-test": 45,
+  "a-pos-train": 55,
+  "b-neg-test": 45,
+  "b-neg-train": 55,
+  "b-pos-test": 45,
+  "b-pos-train": 55,
+  "c-neg-test": 45,
+  "c-neg-train": 55,
+  "c-pos-test": 45,
+  "c-pos-train": 55,
+  "d-neg-test": 45,
+  "d-neg-train": 55,
+  "d-pos-test": 45,
+  "d-pos-train": 55
+ },
+ "constructions": {
+  "generated": 600,
+  "verbatim": 200
+ },
+ "sources": [
+  "\"ApolloResearch/deception-detection roleplaying\"",
+  "\"cais/MASK known_facts\"",
+  "\"cais/MASK provided_facts\""
+ ],
+ "licenses": [
+  "none stated",
+  "none stated on the HF card (code MIT)"
+ ],
+ "sha256": {
+  "items": "7736e72d1ab375cefe9ae977f258c198f84641e8bbf44e2d123aec925e4e5974",
+  "heldout": "8ecf61fd42f0912ff92939312489b50a6b63aa41d0b4bd428aa4f8ee0a7a140b",
+  "behavior": "810f87752c527c6aa182567e7fcf9917d5bf1df6c62dad14e8ed6ea0d557dd53"
+ }
+}

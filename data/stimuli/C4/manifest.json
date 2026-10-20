@@ -1,0 +1,45 @@
+{
+ "concept": "C4",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.019,
+ "applicable_frames": [
+  "a",
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 1200,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 76,
+  "a-neg-train": 124,
+  "a-pos-test": 76,
+  "a-pos-train": 124,
+  "c-neg-test": 76,
+  "c-neg-train": 124,
+  "c-pos-test": 76,
+  "c-pos-train": 124,
+  "d-neg-test": 76,
+  "d-neg-train": 124,
+  "d-pos-test": 76,
+  "d-pos-train": 124
+ },
+ "constructions": {
+  "generated": 1200
+ },
+ "sources": [
+  "\"Anthropic/model-written-evals self-awareness-text-model (human-written)\"",
+  "\"generated capability self-reports (gemma-4-31B-it)\""
+ ],
+ "licenses": [
+  "CC-BY-4.0",
+  "generated for this project"
+ ],
+ "sha256": {
+  "items": "a4807fe0672f89fe1250a36c724281f04f3e82a1643eaef363714675685d7d1b",
+  "heldout": "7834ad6e99828c5969abca97ef7e264fa057d92f734eb36838547accb8b10361",
+  "behavior": "b8e3bbf5d8ae05264e7c1baf893caae89126f00d4eff2d782df5b810bc8d7d43"
+ }
+}

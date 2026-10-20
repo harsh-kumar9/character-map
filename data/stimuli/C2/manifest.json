@@ -1,0 +1,41 @@
+{
+ "concept": "C2",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.98,
+ "applicable_frames": [
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "c-neg-test": 41,
+  "c-neg-train": 59,
+  "c-pos-test": 41,
+  "c-pos-train": 59,
+  "d-neg-test": 41,
+  "d-neg-train": 59,
+  "d-pos-test": 41,
+  "d-pos-train": 59
+ },
+ "constructions": {
+  "generated": 400
+ },
+ "sources": [
+  "\"RUCAIBox/HaluEval qa\"",
+  "\"SelfAware\"",
+  "\"truthfulqa/truthful_qa generation\""
+ ],
+ "licenses": [
+  "Apache-2.0",
+  "MIT"
+ ],
+ "sha256": {
+  "items": "8959980b49862a73bd0fae537fbd93a1459df3e0b8b6bec093343ea16443b445",
+  "heldout": "3e515992064d4e3b1fa45608558ea24e1c7d5dddb1ad77a757a62c4be403b357",
+  "behavior": "d13abb80c607f9cdff6fc26201115f44297b769fa31754d2956f275a8c1e0295"
+ }
+}

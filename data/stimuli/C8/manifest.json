@@ -1,0 +1,45 @@
+{
+ "concept": "C8",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.997,
+ "applicable_frames": [
+  "a",
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 1800,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 123,
+  "a-neg-train": 177,
+  "a-pos-test": 123,
+  "a-pos-train": 177,
+  "c-neg-test": 123,
+  "c-neg-train": 177,
+  "c-pos-test": 123,
+  "c-pos-train": 177,
+  "d-neg-test": 123,
+  "d-neg-train": 177,
+  "d-pos-test": 123,
+  "d-pos-train": 177
+ },
+ "constructions": {
+  "adapted": 1800
+ },
+ "sources": [
+  "\"cincynlp/disentangle-sycophancy claims_factorial\"",
+  "\"meg-tong/sycophancy-eval answer\""
+ ],
+ "licenses": [
+  "MIT",
+  "none stated"
+ ],
+ "sha256": {
+  "items": "66f54a69e2ba6b0c6550df42de3b8b2325570fd55b5d263027f1db538879640c",
+  "heldout": "ae82b6d69b1250c2abc73a36d41a2e9ed37f2c4be2a1ae5170a2edb0123f7b3a",
+  "behavior": "095423375259ea067ae3262a1ffa8296e021bdce42ad6e490cf500c667c747e4"
+ }
+}

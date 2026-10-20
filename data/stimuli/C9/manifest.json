@@ -1,0 +1,52 @@
+{
+ "concept": "C9",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.983,
+ "applicable_frames": [
+  "a",
+  "b",
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 1600,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 78,
+  "a-neg-train": 122,
+  "a-pos-test": 78,
+  "a-pos-train": 122,
+  "b-neg-test": 78,
+  "b-neg-train": 122,
+  "b-pos-test": 78,
+  "b-pos-train": 122,
+  "c-neg-test": 78,
+  "c-neg-train": 122,
+  "c-pos-test": 78,
+  "c-pos-train": 122,
+  "d-neg-test": 78,
+  "d-neg-train": 122,
+  "d-pos-test": 78,
+  "d-pos-train": 122
+ },
+ "constructions": {
+  "generated": 1600
+ },
+ "sources": [
+  "\"cincynlp/disentangle-sycophancy math_factorial_small\"",
+  "\"data/traits/full/warranted_challenge.json (Claude Sonnet 5.5, D-020)\"",
+  "\"generated flawed/sound pairs (gemma-4-31B-it)\""
+ ],
+ "licenses": [
+  "generated for this project",
+  "none stated",
+  "project data"
+ ],
+ "sha256": {
+  "items": "7d78fdd767c77e841634a41a385bb66273592214366c6cf3cb8e6174ac95bcc4",
+  "heldout": "fac244c45789b9786beba599eb47b548f18cf46b1a76c6d989e32c3e9e1c7ae9",
+  "behavior": "5e1dc0b30c8e24b6f7851e3cb779a0a521bf21a6f0dc28473579eb15d2c7d139"
+ }
+}
