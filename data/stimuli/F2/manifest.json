@@ -2,10 +2,10 @@
  "concept": "F2",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.002,
+ "length_ratio_pos_over_neg_median": 1.003,
  "length_ratio_by_frame": {
-  "b": 0.997,
-  "c": 1.014
+  "b": 0.998,
+  "c": 1.012
  },
  "applicable_frames": [
   "b",
@@ -16,10 +16,14 @@
  "n_heldout": 100,
  "n_behavior": 200,
  "cells": {
-  "b-neg-train": 100,
-  "b-pos-train": 100,
-  "c-neg-train": 100,
-  "c-pos-train": 100
+  "b-neg-test": 41,
+  "b-neg-train": 59,
+  "b-pos-test": 41,
+  "b-pos-train": 59,
+  "c-neg-test": 41,
+  "c-neg-train": 59,
+  "c-pos-test": 41,
+  "c-pos-train": 59
  },
  "constructions": {
   "adapted": 200,
@@ -34,8 +38,8 @@
   "CC-BY-4.0"
  ],
  "sha256": {
-  "items": "239b5c16291a12df5c7267545818d956902995ab1a7b992636d134c095a65468",
+  "items": "d8618665363327cfb617c569ab979ee54f8d1304e71e664383cfa6f1fce706f7",
   "heldout": "bf2c5b08acd258c8151833e739cc8c53369a70a2be523f033b50242db7201c6a",
-  "behavior": "c0536ed4790071acccc927830be9eb26325965d74084d3c3e0e4a5fc15971251"
+  "behavior": "8d7cd3f49715a0b78ac8f5109875fc72825afff2a5efbbf102565578804acb04"
  }
 }

@@ -2,10 +2,10 @@
  "concept": "F3",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.013,
+ "length_ratio_pos_over_neg_median": 1.012,
  "length_ratio_by_frame": {
-  "b": 1.013,
-  "c": 1.015
+  "b": 1.011,
+  "c": 1.013
  },
  "applicable_frames": [
   "b",
@@ -16,10 +16,14 @@
  "n_heldout": 100,
  "n_behavior": 200,
  "cells": {
-  "b-neg-train": 100,
-  "b-pos-train": 100,
-  "c-neg-train": 100,
-  "c-pos-train": 100
+  "b-neg-test": 46,
+  "b-neg-train": 54,
+  "b-pos-test": 46,
+  "b-pos-train": 54,
+  "c-neg-test": 46,
+  "c-neg-train": 54,
+  "c-pos-test": 46,
+  "c-pos-train": 54
  },
  "constructions": {
   "generated": 400
@@ -35,7 +39,7 @@
   "MIT"
  ],
  "sha256": {
-  "items": "0d88d667b78625757c5f2bac3ba41fade8f3f3ac160257b93acfe1666fbdfc0d",
+  "items": "853bed60cb0c958ecf8f24c1cefa91d76668663bfb7d8bd15420cb8f4db9a36c",
   "heldout": "4d9869a9b41d6a0e7c08f4714c18973e5e2d2c02ab4ea7d778e30f5da02aa003",
   "behavior": "cfa8dc7b7d61bf06f50fbc4b92f1b74d00823fbd98a7154a96cf14bce35e4a3b"
  }
