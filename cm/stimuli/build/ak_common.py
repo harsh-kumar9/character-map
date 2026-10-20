@@ -74,6 +74,17 @@ def order(rows: list, key, salt: str) -> list:
     return sorted(rows, key=lambda r: h(f"{salt}|{key(r)}"))
 
 
+def uniq(rows: list, key) -> list:
+    """Drop rows whose key was seen before (sources repeat texts; ids are text hashes)."""
+    seen, out = set(), []
+    for r in rows:
+        k = key(r)
+        if k not in seen:
+            seen.add(k)
+            out.append(r)
+    return out
+
+
 def ratio(a: str, b: str) -> float:
     return len(a) / max(1, len(b))
 

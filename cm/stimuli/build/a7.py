@@ -13,7 +13,7 @@ import re
 
 import pandas as pd
 
-from .ak_common import (scenario_ok, a, behavior, clean, close, endorse, fields_ok, gen_request, git_src, h, hf_file, heldout,
+from .ak_common import (uniq, scenario_ok, a, behavior, clean, close, endorse, fields_ok, gen_request, git_src, h, hf_file, heldout,
                         item, order, responses, run, u, write_outputs, write_requests)
 
 CID, BATCH, N = "A7", "A7_v1", 100
@@ -62,7 +62,8 @@ def parts():
                 "meta": {"xstest_type": r["type"]}}
                for _, r in safe.iterrows() if r["prompt"] not in held_prompts]
     orb = pd.read_csv(hf_file("bench-llm/or-bench", "or-bench-hard-1k.csv")).to_dict("records")
-    orb = order([r for r in orb if 20 <= len(r["prompt"]) <= 400], lambda r: r["prompt"], "A7-orb")
+    orb = uniq(order([r for r in orb if 20 <= len(r["prompt"]) <= 400], lambda r: r["prompt"], "A7-orb"),
+               lambda r: r["prompt"])
     or_seed = [{"rid": f"orb-{h(r['prompt'])[:10]}", "req": r["prompt"], "src": dict(ORB, id=h(r["prompt"])[:10]),
                 "meta": {"orbench_category": r["category"]}} for r in orb[:90]]
     seeds = or_seed + order(xs_seed, lambda r: r["rid"], "A7-xs")[:35]

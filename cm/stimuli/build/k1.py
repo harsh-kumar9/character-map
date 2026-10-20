@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from .ak_common import (scenario_ok, a, behavior, clean, close, endorse, fields_ok, gen_request, h, hf_file, heldout, item, jl,
+from .ak_common import (uniq, scenario_ok, a, behavior, clean, close, endorse, fields_ok, gen_request, h, hf_file, heldout, item, jl,
                         order, responses, run, u, write_outputs, write_requests)
 
 CID, BATCH, N = "K1", "K1_v1", 100
@@ -98,7 +98,7 @@ def assemble():
         if n == N:
             break
     pav = pd.read_csv(hf_file("osyvokon/pavlick-formality-scores", "all.csv"))
-    pav = pav[pav["sentence"].str.len().between(40, 300)].to_dict("records")
+    pav = uniq(pav[pav["sentence"].str.len().between(40, 300)].to_dict("records"), lambda r: r["sentence"])
     held = []
     for pol, cond in (("pos", lambda x: x >= 2.0), ("neg", lambda x: x <= -2.0)):
         for r in order([r for r in pav if cond(r["avg_score"])], lambda r: r["sentence"], "K1-held")[:50]:

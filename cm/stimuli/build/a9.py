@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import json
 
-from .ak_common import (scenario_ok, a, behavior, clean, close, endorse, fields_ok, gen_request, git_src, h, hf_file, heldout,
+from .ak_common import (uniq, scenario_ok, a, behavior, clean, close, endorse, fields_ok, gen_request, git_src, h, hf_file, heldout,
                         item, jl, order, responses, run, u, write_outputs, write_requests)
 
 CID, BATCH, N = "A9", "A9_v1", 100
@@ -94,7 +94,8 @@ def assemble():
             n += 1
             if n == want:
                 break
-    kuq = [r for r in jl(hf_file("amayuelas/KUQ", "knowns_unknowns.jsonl")) if 15 <= len(r["question"]) <= 300]
+    kuq = uniq([r for r in jl(hf_file("amayuelas/KUQ", "knowns_unknowns.jsonl")) if 15 <= len(r["question"]) <= 300],
+               lambda r: r["question"])
     held = []
     for pol, unk in (("pos", False), ("neg", True)):
         for r in order([r for r in kuq if bool(r["unknown"]) is unk], lambda r: r["question"], "A9-held")[:50]:

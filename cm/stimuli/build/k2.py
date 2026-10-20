@@ -8,7 +8,7 @@ open-ended Dolly prompts, judged 0-100 (cooking high, gardening low).
 """
 from __future__ import annotations
 
-from .ak_common import (scenario_ok, a, behavior, clean, close, fields_ok, gen_request, h, hf_file, heldout, item, jl, order,
+from .ak_common import (uniq, scenario_ok, a, behavior, clean, close, fields_ok, gen_request, h, hf_file, heldout, item, jl, order,
                         responses, run, u, write_outputs, write_requests)
 
 CID, BATCH, N = "K2", "K2_v1", 100
@@ -85,7 +85,7 @@ def assemble():
     beh = [behavior(CID, f"{CID}-dollybeh-{h(r['instruction'])[:10]}", [u(r["instruction"])], "topic of the answer",
                     {"type": "judge", "prompt": JUDGE, "scale": "0-100, 100 = cooking, 0 = gardening, 50 = neither"},
                     "verbatim", dict(DOLLY, id=h(r["instruction"])[:10]), {"dolly_category": r["category"]})
-           for r in order(dol, lambda r: r["instruction"], "K2-beh")[:200]]
+           for r in uniq(order(dol, lambda r: r["instruction"], "K2-beh"), lambda r: r["instruction"])[:200]]
     write_outputs(CID, items, held, beh)
 
 

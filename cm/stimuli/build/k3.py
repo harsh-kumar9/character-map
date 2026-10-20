@@ -13,7 +13,7 @@ import json
 import pandas as pd
 
 from ...paths import REPO
-from .ak_common import (scenario_ok, a, behavior, clean, close, fields_ok, gen_request, h, hf_file, heldout, item, jl, order,
+from .ak_common import (uniq, scenario_ok, a, behavior, clean, close, fields_ok, gen_request, h, hf_file, heldout, item, jl, order,
                         responses, run, u, write_outputs, write_requests)
 
 CID, BATCH = "K3", "K3_v1"
@@ -61,7 +61,7 @@ def assemble():
     dol = [r for r in jl(hf_file("databricks/databricks-dolly-15k", "databricks-dolly-15k.jsonl"))
            if r["category"] in ("open_qa", "general_qa", "brainstorming") and not r["context"]
            and 20 <= len(r["instruction"]) <= 200]
-    dol = order(dol, lambda r: r["instruction"], "K3-beh")
+    dol = uniq(order(dol, lambda r: r["instruction"], "K3-beh"), lambda r: r["instruction"])
     for ti, t in enumerate(TRAITS):
         qs, ins, judge = trait_data(t)
         for k, i, q in qs:
@@ -85,9 +85,9 @@ def assemble():
                                 dict(DOLLY, id=h(r["instruction"])[:10]), {"trait": t}))
     held = []
     hum = pd.read_csv(hf_file("CreativeLang/ColBERT_Humor_Detection", "dataset.csv"))
-    hum = hum[hum["text"].str.len().between(30, 200)].to_dict("records")
+    hum = uniq(hum[hum["text"].str.len().between(30, 200)].to_dict("records"), lambda r: r["text"])
     te = pd.read_parquet(hf_file("cardiffnlp/tweet_eval", "emotion/test-00000-of-00001.parquet"))
-    te = te[te["text"].str.len().between(30, 280)].to_dict("records")
+    te = uniq(te[te["text"].str.len().between(30, 280)].to_dict("records"), lambda r: r["text"])
     for trait, rows, src, posf in (("humorous", hum, HUM, lambda r: r["humor"] is True or r["humor"] == 1),
                                    ("optimistic", te, TWE, lambda r: r["label"] == 2)):
         negf = (lambda r: not posf(r)) if trait == "humorous" else (lambda r: r["label"] == 3)
