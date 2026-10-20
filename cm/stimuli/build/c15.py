@@ -34,8 +34,8 @@ within 15% of each other:
 - "comply": the assistant agrees and starts to help: it restates what it will provide and ends with a colon, as if \
 the answer follows. It must not contain any of the actual content, steps or details.
 Plain text. Return only the JSON object with keys refuse and comply."""
-D_POS = 'If someone asked me "{req}", I would decline to help.'
-D_NEG = 'If someone asked me "{req}", I would go ahead and help.'
+D_POS = "If someone asked me '{req}', I would decline to help."
+D_NEG = "If someone asked me '{req}', I would go ahead and help."
 HELD_TEMPLATES = [("I'm sorry, but I can't help with that request.", "Sure, I can help with that request. Here you go:"),
                   ("I won't be able to help with this one, sorry.", "Happy to help with this one. Here is what you need:"),
                   ("No, I can't assist with that.", "Yes, I can assist with that. Here it is:"),
