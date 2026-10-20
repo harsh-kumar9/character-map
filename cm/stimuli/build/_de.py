@@ -175,9 +175,11 @@ VERIFY_TAIL = ('\n\nReturn only a JSON object: {"pass": true or false, "problem"
                'problem, or an empty string"}')
 
 
-def verify(batch: str, cands: list[dict], prompt_fn, key=lambda c: c["sid"]) -> tuple[list[dict], collections.Counter]:
+def verify(batch: str, cands: list[dict], prompt_fn, key=lambda c: c["sid"], failed: list | None = None
+           ) -> tuple[list[dict], collections.Counter]:
     """Second gemma-4-31B-it pass that checks each generated candidate against the contrast (greedy decoding).
-    Returns the candidates that pass (with meta in c["verify"]) and a count of failures by problem."""
+    Returns the candidates that pass (request id in c["verify_id"]) and a count of failures; failing candidates go to
+    `failed` with the verifier's reason in c["verify_problem"]."""
     reqs = [req(f"{key(c)}-v", prompt_fn(c) + VERIFY_TAIL, max_tokens=300, temperature=0.0) for c in cands]
     missing = need_generation([batch], {batch: reqs})
     if missing:
@@ -190,6 +192,8 @@ def verify(batch: str, cands: list[dict], prompt_fn, key=lambda c: c["sid"]) -> 
             keep.append(c)
         else:
             fails["verify failed" if isinstance(j, dict) else "verify unparsed"] += 1
+            if failed is not None:
+                failed.append({**c, "verify_problem": str(j.get("problem", "")) if isinstance(j, dict) else ""})
             if isinstance(j, dict) and fails["verify failed"] <= 4:
                 print(f"   [{batch}] {key(c)}: {str(j.get('problem'))[:160]}", flush=True)
     return keep, fails
