@@ -284,3 +284,16 @@ Harsh: "D-029 accept". D-010's flat bar is replaced by: FVU < 0.2 and within 1.6
 same token group. SAE claims are allowed at the reply32 readout at layers 9, 17, 22 and 29; SAE results at the boundary
 readout are descriptive only, and dense directions carry boundary claims. SAE interventions keep the error term, and
 results that rely on SAE reconstruction alone are reported with their spliced-KL cost.
+
+## S3 first run and fixes - 2026-10-20
+
+S3 (cm/s3.py, results/s3/) ran on all 62 concepts as CPU-only SLURM jobs on mira/vega (moved off ada at Harsh's
+request; scripts/cm_cpu.sbatch). First read at layer 17, reply32 readout: most concepts decode within a frame at AUROC
+0.7-0.99; the non-moral controls transfer across frames at 0.64 (formality) and 0.75 (topic), so cross-frame
+integration has to beat that. Problems found before any claim, fixes approved by Harsh ("yes, go ahead with all three"):
+1. F2 and F3 had no test split (every scenario hashed to train) and F5 was 89/11; sent back to the stim-moral builder to
+   reselect scenarios without regard to the hash, then merge and rerun S3 for them.
+2. Strongly reversed held-out AUROCs: C11 0.03, C16 0.16-0.25, E4 0.23 (also E2 0.38, E1 d 0.35, C14 d 0.43). C11's labels
+   are correct on all 100 pairs; the reversal is a construct confound (polite acknowledgements in the steadfast item
+   replies), now recorded on its card. C16/C14 sent to stim-disp-2 and E4/E2/E1/D1 to stim-identity-sit for audit.
+3. The S3 review page follows once these are back.

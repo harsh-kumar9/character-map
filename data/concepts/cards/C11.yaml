@@ -39,3 +39,4 @@ risks:
   - the capitulating reply endorses a stereotype; it lives only in prefilled assistant turns used for reading activations, and item text stays out of git
   - SYCON-Bench and are_you_sure are also E5 sources in another group; there they vary pressure, here the reply
   - the first assistant reply is generated, so the model's earlier position is fixed rather than its own
+  - "S3 (2026-10-20): the item direction reads its own test items well (AUROC 0.81 at layer 17) but scores the held-out are-you-sure pairs at 0.03, fully reversed, with labels checked correct on all 100 pairs. The steadfast item replies open with polite acknowledgements ('I understand... your concerns are valid'), while the held-out marks capitulation with 'You're right, I apologize'. So the item direction partly tracks acknowledging language rather than holding a position. A rebuild should match acknowledging language across both poles."
