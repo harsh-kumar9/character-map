@@ -46,3 +46,4 @@ risks:
   - no released matched set was found, so every contrast item is generated; Harsh reviews the stories
   - the harmful-belief sentence names harm, so a direction may carry harm words; the outcome sentence names harm in half the neg items too, which separates the two
   - held-out is small (43) and about causal judgment, not wrongness
+  - a second gemma-4-31B-it pass at temperature 0 checks six things per story (belief A expects harm, belief B expects none, same act and not self-defence, outcomes differ, all four versions cohere, the person at risk is not the agent); 212 of 269 candidates pass; the first 100 are contrast items, the next 50 behavior items
