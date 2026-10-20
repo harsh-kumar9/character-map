@@ -111,9 +111,12 @@ def cmd_acts(cids):
         items, rep = load_items(c), load_replies(c)
         rows = [(it,) + tokenize(tok, *prompt_and_reply(tok, it, rep)) for it in items]
         n, L1, d = len(rows), 35, 2560
-        bnd = np.zeros((n, L1, d), np.float16)
-        r32 = np.zeros((n, L1, d), np.float16)
-        rall = np.zeros((n, L1, d), np.float16)
+        # float32: Gemma's residual dim 443 exceeds the fp16 range at layers 27-32
+        bnd = np.zeros((n, L1, d), np.float32)
+        r32 = np.zeros((n, L1, d), np.float32)
+        resp_rows = [k for k, (it, _, _) in enumerate(rows) if it["readout"] == "response"]
+        resp_pos = {k: j for j, k in enumerate(resp_rows)}
+        rall = np.zeros((len(resp_rows), L1, d), np.float32)
         nrep = np.zeros(n, np.int32)
         for k, (H, (it, ids, p)) in enumerate(zip(forward_hidden(m, [r[1] for r in rows]), rows)):
             h = H.float()
@@ -121,12 +124,13 @@ def cmd_acts(cids):
             if len(ids) > p:
                 r32[k] = h[:, p:p + REPLY_N].mean(1).cpu().numpy()
                 if it["readout"] == "response":
-                    rall[k] = h[:, p:].mean(1).cpu().numpy()
+                    rall[resp_pos[k]] = h[:, p:].mean(1).cpu().numpy()
             nrep[k] = len(ids) - p
         meta = [{"item_id": it["item_id"], "scenario_id": it["scenario_id"], "frame": it["frame"],
                  "polarity": it["polarity"], "split": it["split"], "readout": it["readout"],
                  "contrast": (it.get("meta") or {}).get("contrast")} for it, _, _ in rows]
-        np.savez(out, boundary=bnd, reply32=r32, response_all=rall, n_reply_tokens=nrep,
+        np.savez(out, boundary=bnd, reply32=r32, response_all=rall, response_rows=np.array(resp_rows, np.int32),
+                 n_reply_tokens=nrep,
                  meta=np.array(json.dumps(meta)))
         print(f"[acts] {c}: {n} items", flush=True)
 
@@ -152,7 +156,7 @@ def fidelity_sample(cid, per_cell, rng):
 
 
 @torch.no_grad()
-def cmd_fidelity(cids, per_cell, traits_per_side, tag):
+def cmd_fidelity(cids, per_cell, traits_per_side, tag, indist=0):
     import pandas as pd
     from .pv import traits as T
     from .pv.gen import gen_path
@@ -176,6 +180,27 @@ def cmd_fidelity(cids, per_cell, traits_per_side, tag):
                 for pr, an in zip(df.prompt, df.answer):
                     ids, p = tokenize(tok, pr, an)
                     rows.append((f"trait:{t}", "trait", ids, p))
+    if indist:  # Gemma Scope 2's own chat data: the same groups and KL, as the in-distribution reference
+        from safetensors import safe_open
+        with safe_open(str(sae_dir(MODEL, 17) / "examples.safetensors"), "pt") as f:
+            toks = f.get_tensor("tokens")
+        marker = tok("<start_of_turn>model\n", add_special_tokens=False)["input_ids"]
+        order = list(range(len(toks)))
+        rng.shuffle(order)
+        got = 0
+        for r_ in order:
+            ids = [int(x) for x in toks[r_] if int(x) != PAD]
+            p = None
+            for j in range(len(ids) - len(marker), 0, -1):
+                if ids[j:j + len(marker)] == marker:
+                    p = j + len(marker)
+                    break
+            if p is None or len(ids) - p < 8:
+                continue
+            rows.append(("indist", "indist", ids, p))
+            got += 1
+            if got >= indist:
+                break
     acc = {}  # (layer, frame, group) -> sums
 
     def add(key, x, xh, f):
@@ -208,7 +233,8 @@ def cmd_fidelity(cids, per_cell, traits_per_side, tag):
                 if idx:
                     sel = torch.tensor(idx, device=h.device)
                     add((L, frame, gname), h[sel], hh[sel], f[sel])
-                    add((L, "ALL", gname), h[sel], hh[sel], f[sel])
+                    if frame != "indist":
+                        add((L, "ALL", gname), h[sel], hh[sel], f[sel])
             if len(ids) > p:  # spliced KL over reply-predicting positions
                 def splice(_m, _i, out, L=L):
                     o = out[0] if isinstance(out, tuple) else out
@@ -221,7 +247,7 @@ def cmd_fidelity(cids, per_cell, traits_per_side, tag):
                     hd.remove()
                 lp, lq = torch.log_softmax(clean, -1), torch.log_softmax(spl, -1)
                 kv = float((lp.exp() * (lp - lq)).sum(-1).mean())
-                for fr in (frame, "ALL"):
+                for fr in ((frame, "ALL") if frame != "indist" else (frame,)):
                     s = kl.setdefault((L, fr), [0.0, 0])
                     s[0] += kv
                     s[1] += 1
@@ -238,7 +264,7 @@ def cmd_fidelity(cids, per_cell, traits_per_side, tag):
     dest.mkdir(parents=True, exist_ok=True)
     (dest / f"fidelity{tag}.json").write_text(json.dumps({"model": MODEL, "sae": "resid_post 65k l0_medium",
                                                          "concepts": cids, "per_cell": per_cell,
-                                                         "traits_per_side": traits_per_side, "n_rows": len(rows),
+                                                         "traits_per_side": traits_per_side, "indist": indist, "n_rows": len(rows),
                                                          "results": res}, indent=1))
     print(f"[fidelity] wrote {dest / f'fidelity{tag}.json'} ({len(rows)} rows)", flush=True)
 
@@ -250,6 +276,7 @@ def main():
     ap.add_argument("--per_cell", type=int, default=8)
     ap.add_argument("--traits_per_side", type=int, default=0)
     ap.add_argument("--tag", default="")
+    ap.add_argument("--indist", type=int, default=0, help="also score N chats from Gemma Scope 2's own data")
     args = ap.parse_args()
     cids = all_concepts() if args.concepts == "all" else args.concepts.split(",")
     if args.stage == "replies":
@@ -257,7 +284,7 @@ def main():
     elif args.stage == "acts":
         cmd_acts(cids)
     else:
-        cmd_fidelity(cids, args.per_cell, args.traits_per_side, args.tag)
+        cmd_fidelity(cids, args.per_cell, args.traits_per_side, args.tag, args.indist)
 
 
 if __name__ == "__main__":

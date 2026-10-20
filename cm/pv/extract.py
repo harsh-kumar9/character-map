@@ -11,7 +11,7 @@ multimodal config keeps under text_config, so we run the text decoder directly; 
 keep each side's rows on their own score (virtue, excess or deficiency >= 50, coherence >= 50; neutral: coherence
 only) and save side means per condition. We also save per-row activations at the SAE layers (9, 17, 22, 29) for
 every row, judged or not, for the fidelity check (S1) and later analyses: prompt_last, response_avg, and the mean
-over the first 32 answer tokens (D-008).
+over the first 32 answer tokens (D-008). Saved as float32: Gemma's dim 443 exceeds the fp16 range in late layers.
 
     python -m cm.pv.extract --traits evil,deceptive
 """
@@ -124,7 +124,7 @@ def main():
             keep = keep_mask(tr, s, df, other)
             rows = hidden(m, tok, df.prompt.tolist(), df.answer.tolist())
             np.savez(ad / f"{t}_{s}.npz", keep=keep,
-                     **{k: torch.stack([r[k] for r in rows]).numpy().astype(np.float16)
+                     **{k: torch.stack([r[k] for r in rows]).numpy().astype(np.float32)  # fp16 overflows on dim 443
                         for k in ("sae_prompt_last", "sae_response_avg", "sae_response_first32")})
             meta["n_rows"][s], meta["n_kept"][s] = int(len(df)), int(keep.sum())
             cond = df["condition"].astype(str).to_numpy() if tr.kind == "conditional" else None
