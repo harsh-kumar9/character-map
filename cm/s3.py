@@ -52,9 +52,12 @@ def perm_p(score, y, a, rng, n=N_PERM):
 
 
 def load(cid):
-    z = np.load(ACTS / f"{cid}.npz")
-    meta = json.loads(str(z["meta"]))
-    resp = {int(k): j for j, k in enumerate(z["response_rows"])}
+    """Load each readout array once. Indexing an NpzFile re-reads and decompresses the whole array on every access,
+    which made the first S3 run take hours."""
+    f = np.load(ACTS / f"{cid}.npz")
+    z = {k: f[k] for k in ("boundary", "reply32", "response_all")}
+    meta = json.loads(str(f["meta"]))
+    resp = {int(k): j for j, k in enumerate(f["response_rows"])}
     return z, meta, resp
 
 
