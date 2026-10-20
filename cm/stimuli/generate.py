@@ -29,13 +29,33 @@ def batch_dir(batch: str):
 
 
 def parse_json(text: str):
-    t = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip())
-    try:
-        start = min(i for i in (t.find("{"), t.find("[")) if i >= 0)
-        end = max(t.rfind("}"), t.rfind("]"))
-        return json.loads(t[start:end + 1])
-    except (ValueError, json.JSONDecodeError):
-        return None
+    """Parse the model's JSON. Gemma sometimes writes a block, then a corrected one, or leaves trailing commas:
+    try each top-level block, last first, with trailing commas removed (fix requested by all five builders)."""
+    t = re.sub(r"```(?:json)?", "", text)
+    blocks, depth, start, quote, esc = [], 0, None, False, False
+    for i, ch in enumerate(t):
+        if quote:
+            esc = (ch == "\\") and not esc
+            if ch == '"' and not esc:
+                quote = False
+            continue
+        if ch == '"':
+            quote = True
+        elif ch in "{[":
+            if depth == 0:
+                start = i
+            depth += 1
+        elif ch in "}]" and depth:
+            depth -= 1
+            if depth == 0:
+                blocks.append(t[start:i + 1])
+    for b in reversed(blocks):
+        for cand in (b, re.sub(r",\s*([}\]])", r"\1", b)):
+            try:
+                return json.loads(cand)
+            except json.JSONDecodeError:
+                pass
+    return None
 
 
 def main():

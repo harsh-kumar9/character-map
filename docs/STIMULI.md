@@ -65,7 +65,8 @@ One JSON object per line. Required fields:
   message only when the source has one.
 - `meta` holds anything else: condition labels, original labels, conflict partners for group F.
 
-Held-out items use the same format with `split: "heldout"`. Behavior items add `instrument` and `scoring`
+Held-out items use the same format with `split: "heldout"`. Behavior items carry a `split` for the schema, but it is
+ignored: every behavior item is an evaluation item. Behavior items add `instrument` and `scoring`
 (`{"type": "choice", "answer": "B"}`, `{"type": "judge", "prompt": "...{question}...{answer}..."}`, or
 `{"type": "exact", ...}`) and need no polarity.
 

@@ -16,8 +16,12 @@ import yaml
 from .schema import CARDS, MANIFESTS, check_item, item_dir, read_jsonl, sha256, split_for
 
 
-def text_len(it: dict) -> int:
-    return sum(len(m["content"]) for m in it["messages"] if m["role"] != "system")
+def text_len(it: dict, system: bool = False) -> int:
+    return sum(len(m["content"]) for m in it["messages"] if (m["role"] == "system") == system)
+
+
+def pair_key(it: dict):
+    return (it["scenario_id"], it["frame"], (it.get("meta") or {}).get("contrast"))
 
 
 def validate(cid: str) -> dict:
@@ -48,16 +52,29 @@ def validate(cid: str) -> dict:
     incomplete = [s for s, fp in by_scn.items() if any((f, p) not in fp for f in applicable for p in ("pos", "neg"))]
     if incomplete:
         rep["warnings"].append(f"{len(incomplete)}/{len(by_scn)} scenarios miss some applicable frame x polarity")
-    ratios = []
-    pair = {(r["scenario_id"], r["frame"], r["polarity"]): text_len(r) for r in items}
-    for (s, f, p), n in pair.items():
-        if p == "pos" and (s, f, "neg") in pair and pair[(s, f, "neg")]:
-            ratios.append(n / pair[(s, f, "neg")])
+    # length matching per (scenario, frame, sub-contrast); when pos and neg share all non-system text, the contrast
+    # lives in the system message, so compare that instead
+    ratios, per_frame = [], collections.defaultdict(list)
+    by_key = collections.defaultdict(dict)
+    for r in items:
+        by_key[pair_key(r)].setdefault(r["polarity"], r)
+    for (s_, f, c), pp in by_key.items():
+        if "pos" in pp and "neg" in pp:
+            a, b = pp["pos"], pp["neg"]
+            sys_side = text_len(a) == text_len(b) and [m["content"] for m in a["messages"] if m["role"] != "system"] == \
+                [m["content"] for m in b["messages"] if m["role"] != "system"]
+            na, nb = (text_len(a, True), text_len(b, True)) if sys_side else (text_len(a), text_len(b))
+            if nb:
+                ratios.append(na / nb)
+                per_frame[f].append(na / nb)
     if ratios:
         med = statistics.median(ratios)
         rep["length_ratio_pos_over_neg_median"] = round(med, 3)
-        if not 0.8 <= med <= 1.25:
-            rep["warnings"].append(f"length ratio pos/neg median {med:.2f} outside 0.8-1.25")
+        rep["length_ratio_by_frame"] = {f: round(statistics.median(v), 3) for f, v in sorted(per_frame.items())}
+        for f, v in sorted(per_frame.items()):
+            m_ = statistics.median(v)
+            if not 0.8 <= m_ <= 1.25:
+                rep["warnings"].append(f"frame {f}: length ratio pos/neg median {m_:.2f} outside 0.8-1.25")
     n_scn = len(by_scn)
     if n_scn < 50:
         rep["warnings"].append(f"only {n_scn} scenarios (target 100, minimum 50)")
@@ -80,7 +97,10 @@ def validate(cid: str) -> dict:
 
 def main():
     arg = sys.argv[1] if len(sys.argv) > 1 else "all"
-    cids = sorted(p.stem for p in CARDS.glob("*.yaml") if not p.stem.startswith("_")) if arg == "all" else arg.split(",")
+    if arg == "all":  # only concepts whose items exist in this clone, so one clone never writes another's manifests
+        cids = sorted(p.stem for p in CARDS.glob("*.yaml") if not p.stem.startswith("_") and item_dir(p.stem).exists())
+    else:
+        cids = arg.split(",")
     fail = False
     for c in cids:
         r = validate(c)
