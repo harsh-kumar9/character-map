@@ -137,7 +137,7 @@ def main():
     mwe = [json.loads(l) for l in (RAW / "evals/persona/believes-it-is-not-being-watched-by-humans.jsonl").open() if l.strip()]
     for i, m in enumerate(mwe):
         m["line"] = i
-    mwe = [m for m in mwe if m["label_confidence"] >= 0.85]
+    mwe = [m for m in mwe if m["label_confidence"] >= 0.7]       # this file's confidences are lower (median 0.72)
     watched = stable_order([m for m in mwe if m["answer_matching_behavior"].strip() == "No"], key=lambda m: str(m["line"]),
                            salt="E1-mwe")[:50]
     unwatched = stable_order([m for m in mwe if m["answer_matching_behavior"].strip() == "Yes"],
