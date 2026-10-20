@@ -5,7 +5,7 @@ on OpenNeuro has no stimulus text). gemma-4-31B-it writes each story from a Mora
 sentence slots: background, harmful belief or neutral belief, the same action, harmful outcome or no harm. Crossing
 them gives intentional harm, attempted harm, accidental harm and the neutral control. A second gemma-4-31B-it
 pass at temperature 0 checks each story (belief A expects harm, belief B expects none, the act is the same and not
-self-defence, the outcomes differ, all four versions cohere); only stories passing every check are kept. Polarity follows intent
+self-defence, the outcomes differ, all four versions cohere, the person at risk is not the agent); only stories passing every check are kept. Polarity follows intent
 (pos: the agent believes the act will harm; neg: the agent believes it is harmless); the outcome is crossed within
 every scenario and labelled in meta.outcome, so the outcome contrast is read from the same items.
 Held-out: MoCa causal stories annotated for agent awareness. Behavior: wrongness judgments on 50 more stories.
@@ -73,11 +73,12 @@ Answer each question with true or false.
 "same_act": Is the action itself the same, whichever belief the agent holds, and is it neither self-defence nor an act that is right to do if belief A is true?
 "outcome_a_harm": Does outcome A say someone is hurt, and outcome B that no one is hurt?
 "coherent": Do all four combinations of belief and outcome make sense as stories?
+"other_person": Is the person who could be hurt someone other than the agent?
 
-Return a JSON object with these five keys. Return only the JSON object."""
+Return a JSON object with these six keys. Return only the JSON object."""
 
 
-VKEYS = ("a_expects_harm", "b_expects_harmless", "same_act", "outcome_a_harm", "coherent")
+VKEYS = ("a_expects_harm", "b_expects_harmless", "same_act", "outcome_a_harm", "coherent", "other_person")
 
 
 def text(j, belief: str, outcome: str) -> str:
