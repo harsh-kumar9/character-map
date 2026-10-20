@@ -83,8 +83,12 @@ def probe_auc(Xtr, ytr, Xte, yte):
 
 
 def directions(cid):
-    rng = np.random.default_rng(0)
     z, meta, resp = load(cid)
+    return directions_from(cid, z, meta, resp, OUT)
+
+
+def directions_from(cid, z, meta, resp, out):
+    rng = np.random.default_rng(0)
     subs = sorted({m["contrast"] for m in meta if m["contrast"]}) or [None]
     res = {"concept": cid, "subcontrasts": [s or "all" for s in subs], "cells": [], "transfer": [], "cosine": []}
     dirs = {}
@@ -141,10 +145,10 @@ def directions(cid):
                     if ua is not None and ub is not None:
                         res["cosine"].append({"sub": sub or "all", "a": frames[a_], "b": frames[b_], "layer": L,
                                               "cos": float(ua @ ub)})
-    np.savez(OUT / "directions" / f"{cid}.npz",
+    np.savez(out / "directions" / f"{cid}.npz",
              **{f"{s or 'all'}|{f}|{ro}": np.stack([dirs.get((s, f, ro, L), np.zeros(2560)) for L in LAYERS])
                 for (s, f, ro) in sorted({k[:3] for k in dirs}, key=str)})
-    (OUT / "concepts" / f"{cid}.json").write_text(json.dumps(res, default=float))
+    (out / "concepts" / f"{cid}.json").write_text(json.dumps(res, default=float))
     return cid
 
 
