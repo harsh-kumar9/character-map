@@ -1,0 +1,52 @@
+id: C19
+name: HEXACO factors
+area: C
+tier: 2
+status: draft
+contrast:
+  positive: the reply or self-statement is high on the factor.
+  negative: the matched reply or statement is low on it.
+  not_this:
+    - virtue. High is not better (high emotionality, low extraversion are not faults); the poles are high and low.
+    - the dark triad (C20). Honesty-humility is its closest HEXACO neighbor; C20 is built from other sources and compared after.
+  sub_contrasts:
+    honesty_humility: sincerity, fairness, greed avoidance, modesty
+    emotionality: fearfulness, anxiety, dependence, sentimentality (TRAIT Neuroticism, approximate)
+    extraversion: social self-esteem, boldness, sociability, liveliness
+    agreeableness: forgiveness, gentleness, flexibility, patience (TRAIT Big Five Agreeableness, approximate)
+    conscientiousness: organization, diligence, perfectionism, prudence
+    openness: aesthetic appreciation, inquisitiveness, creativity, unconventionality
+grounding:
+  - Ashton and Lee 2007. Six factors from lexical studies across languages; honesty-humility is the factor the Big Five lacks.
+  - Lee et al. 2024 (TRAIT). Situational questions derived from validated questionnaires, with replies that show a trait high or low, for testing LLM personality.
+frames:
+  a:
+    applies: false
+    realization: not in CONCEPTS.md for C19
+  b:
+    applies: false
+    realization: not in CONCEPTS.md for C19
+  c:
+    applies: true
+    realization: a user describes a situation and asks for advice (TRAIT question); the prefilled reply shows the trait high or low (TRAIT response_high1 vs response_low1)
+    readout: response
+    construction: verbatim
+    source: mirlab/TRAIT for five factors; honesty-humility items written by gemma-4-31B-it in TRAIT format, one per IPIP-HEXACO honesty-humility item
+  d:
+    applies: true
+    realization: the user asks whether the model would say a first-person sentence about how it acts in situations like the user's, high or low on the factor
+    readout: boundary
+    construction: generated
+    source: written by gemma-4-31B-it from each TRAIT item
+sources:
+  - {dataset: "mirlab/TRAIT (Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism)", url: "https://huggingface.co/datasets/mirlab/TRAIT", license: CC-BY-4.0, used_for: "c scenarios for five factors; behavior", n_available: 5000}
+  - {dataset: "IPIP-HEXACO honesty-humility items (Ashton, Lee and Goldberg 2007)", url: "https://ipip.ori.org/newHEXACO_PI_key.htm", license: "public domain", used_for: "seeds for 80 generated honesty-humility items (2 per IPIP item)", n_available: 40}
+  - {dataset: "HEXACO-PI-R 100 items in Value4AI/ValueBench", url: "https://github.com/Value4AI/ValueBench", license: "MIT (ValueBench); HEXACO-PI-R free for non-commercial research", used_for: "held-out", n_available: 100}
+heldout:
+  {dataset: "HEXACO-PI-R (100 items, 4 per facet, keyed)", url: "https://github.com/Value4AI/ValueBench", license: "MIT (ValueBench); HEXACO-PI-R free for non-commercial research", frame: d, n: 100, notes: "each item in the MWE wording; pos = keyed toward the high pole, neg = reverse-keyed. 16 items per factor plus 4 altruism (interstitial). Tests transfer from our scenario statements to the standard inventory. Never enters generation or selection."}
+behavior:
+  {instrument: "TRAIT two-option choice", dataset: "35 TRAIT items per Big Five factor not used as scenarios (response_high2 vs response_low2), 25 generated honesty-humility items", url: "https://huggingface.co/datasets/mirlab/TRAIT", metric: "rate of choosing the high-trait reply, per factor", scoring: choice, n: 200}
+risks:
+  - TRAIT is Big Five, not HEXACO. Neuroticism stands in for emotionality and Big Five agreeableness for HEXACO agreeableness; HEXACO moves anger to low agreeableness and sentimentality to emotionality. The held-out HEXACO-PI-R items measure how far this holds.
+  - TRAIT replies are advice to the user; the trait shows through what the assistant recommends. Frame d re-voices it as the assistant's own conduct.
+  - honesty-humility items are generated, the other five verbatim; compare them separately.

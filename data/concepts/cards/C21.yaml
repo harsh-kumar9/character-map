@@ -1,0 +1,48 @@
+id: C21
+name: Schwartz's ten basic values
+area: C
+tier: 2
+status: draft
+contrast:
+  positive: the answer or self-statement appeals to the value.
+  negative: a matched contrasting answer or statement on the same question that does not.
+  not_this:
+    - stance on the question. Steering Geometry's two answers often take different sides; the contrast is which value the answer serves, and stance varies across items.
+    - the value's name. Generation forbids naming it.
+  sub_contrasts:
+    values: self_direction, stimulation, hedonism, achievement, power, security, conformity, tradition, benevolence, universalism
+    higher_order: every item carries meta.value and meta.higher_order (openness, self-enhancement, conservation, self-transcendence); hedonism also carries meta.higher_order_shared self-enhancement
+    mapping: Steering Geometry's 20 refined values fold into the ten (two each for self-direction, power, security, conformity, benevolence; three for universalism). Face, humility and universalism-objectivity are left out because they sit on borders or are not among the ten.
+grounding:
+  - Schwartz 1992; Schwartz et al. 2012. Ten values on a circumplex; adjacent values are compatible, opposite ones conflict, and four higher-order groups organize them.
+  - Abootorabi et al. 2026 (Steering Geometry). Contrastive value data for testing whether steering directions keep the circumplex.
+frames:
+  a:
+    applies: false
+    realization: not in CONCEPTS.md for C21
+  b:
+    applies: true
+    realization: the user quotes a question (a Touché debate topic) and one person's answer, and asks what the model thinks of the answer
+    readout: boundary
+    construction: adapted
+    source: DeepRCL/SteeringGeometry schwartz_full, Touché rows
+  c:
+    applies: false
+    realization: not in CONCEPTS.md for C21
+  d:
+    applies: true
+    realization: the user asks whether the model would say a first-person sentence about what matters to it on this question, expressing the value or not
+    readout: boundary
+    construction: generated
+    source: written by gemma-4-31B-it from each Steering Geometry row
+sources:
+  - {dataset: "DeepRCL/SteeringGeometry schwartz_full (Touché23-ValueEval rows)", url: "https://huggingface.co/datasets/DeepRCL/SteeringGeometry", license: "other (card); Touché23-ValueEval is CC-BY-4.0", used_for: "30 scenarios per value; behavior", n_available: 23137}
+  - {dataset: "DeepRCL/SteeringGeometry schwartz_full (ValueBench rows: PVQ-40 and other inventories)", url: "https://huggingface.co/datasets/DeepRCL/SteeringGeometry", license: "other (card); ValueBench MIT", used_for: "held-out", n_available: 830}
+heldout:
+  {dataset: "Steering Geometry ValueBench rows (questionnaire items with a negated version)", url: "https://huggingface.co/datasets/DeepRCL/SteeringGeometry", license: "other (card); ValueBench MIT", frame: d, n: 200, notes: "10 items per value. pos = the questionnaire statement; neg = the first sentence of its contrasting answer (the negation). Tests transfer from argument-based items to inventory items. Never enters generation or selection."}
+behavior:
+  {instrument: "Steering Geometry two-option choice", dataset: "Touché rows not used as scenarios, 20 per value", url: "https://huggingface.co/datasets/DeepRCL/SteeringGeometry", metric: "rate of choosing the value-aligned answer, per value; the 10 x 10 steering transfer matrix", scoring: choice, n: 200}
+risks:
+  - Steering Geometry's value-aligned answers are usually shorter than the contrasting ones (median ratio 0.61). We keep rows within 0.8-1.25, widened to 0.67-1.5 for hedonism, stimulation and tradition, which have few rows in the narrow band.
+  - contrasting answers often appeal to some other value; the direction for a value is value vs a mix of others, as in Steering Geometry.
+  - hedonism has only 285 Touché rows; its pool may fall short of 30.
