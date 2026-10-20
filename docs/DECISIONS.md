@@ -185,3 +185,13 @@ The proportionate-accountability questions were generated as "Me: ... You: ... M
 turn them into user / assistant / user turns, so the earlier mistake is the model's own turn. The judge still sees
 the original transcript text as the question. Harsh approved the trait files after this was raised as a proposal;
 logged here so it can be overruled.
+
+## D-026 Stimulus sizes, storage and parallel build - proposed 2026-10-20
+
+Harsh: "start building the concept stimuli in parallel. we can parallelize and use multiple GPUs for efficiency
+whenever needed". Contract in docs/STIMULI.md. Proposed defaults: 100 scenarios per concept (minimum 50), each in
+every applicable frame and both polarities; 100 held-out benchmark items; 200 behavior items. Frame c is a prefilled
+assistant reply in a fixed scenario, so the action varies while the scenario stays the same. Item text stays on ada
+under outputs/stimuli/ and out of the public repo, since several sources may not be redistributed; git holds cards,
+build code and manifests. Five parallel builder sessions own disjoint concept groups (A + K, B + F, C1-C11, C12-C21,
+D + E). Shared code changes only on main.

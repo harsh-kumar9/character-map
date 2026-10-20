@@ -1,0 +1,31 @@
+# Concept card template (docs/STIMULI.md). Copy to <ID>.yaml. Keep text plain and short.
+id: X0
+name: short name
+area: A|B|C|D|E|F|K           # CONCEPTS.md group
+tier: 1                        # run order only (D-018)
+status: draft                  # draft -> ready (validates) -> reviewed (Harsh)
+contrast:
+  positive: what is present in pos items, in one or two sentences
+  negative: the matched opposite in neg items
+  not_this:                    # nearby things the contrast must not turn into (confounds to hold fixed)
+    - e.g. topic words, politeness, length
+grounding:
+  - author year, what it says that shapes this contrast
+frames:                        # one entry per frame; applies: false for frames that do not fit
+  a:
+    applies: true
+    realization: how the frame is built (who acts, what the user says)
+    readout: boundary
+    construction: verbatim|adapted|generated
+    source: dataset name
+  b: {applies: true, realization: "...", readout: boundary, construction: adapted, source: "..."}
+  c: {applies: true, realization: "...", readout: response, construction: adapted, source: "..."}
+  d: {applies: true, realization: "...", readout: boundary, construction: adapted, source: "..."}
+sources:
+  - {dataset: name, url: "...", license: "...", used_for: "frames a-c scenarios", n_available: 0}
+heldout:
+  {dataset: name, url: "...", license: "...", frame: b, n: 100, notes: "never enters generation or selection"}
+behavior:
+  {instrument: name, dataset: name, url: "...", metric: "...", scoring: choice|judge|exact, n: 200}
+risks:
+  - what could make the contrast mean something else, and how the build guards against it
