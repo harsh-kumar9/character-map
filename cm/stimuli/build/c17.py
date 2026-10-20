@@ -82,8 +82,13 @@ def main():
                 order.append(by[t][k])
         k += 1
     order = order[:POOL]
-    got = [(r, gen.get(f"sorh-{r.row:04d}", D_PROMPT.format(task=r.user, metric=r.evaluation_metric,
-                                                             cheat=r.cheat_method), check, max_tokens=300))
+    vdef = ("The items contrast serving a task's real purpose with gaming the way the task is scored. Task: "
+            "<<<{task}>>> Scored by: {metric}.")
+    got = [(r, H.checked(gen.get(f"sorh-{r.row:04d}", D_PROMPT.format(task=r.user, metric=r.evaluation_metric,
+                                                                       cheat=r.cheat_method), check, max_tokens=300),
+                         lambda o, r=r: [gen.verify(f"sorh-{r.row:04d}|d", vdef.format(task=r.user, metric=r.evaluation_metric),
+                                                    "describes doing what serves the request rather than what raises the score",
+                                                    o["d_pos"], o["d_neg"])]))
            for r in order]
     if not H.finish(CID, gen) and "--partial" not in sys.argv:
         return
@@ -121,7 +126,7 @@ def main():
                          sc, "verbatim", H.src("sorh", "longtermrisk/school-of-reward-hacks", r.row),
                          {"kind": kind, "task": r.task, "metric": r.evaluation_metric, "cheat": r.cheat_method}))
     report = {"held_task_types": sorted(held_types), "contrast_pool": len(con), "kept": len(used),
-              "failed_attempts": dict(gen.failed)}
+              "failed_attempts": dict(gen.failed), "failed_verification": dict(gen.vfail)}
     H.write_all(CID, items, held, beh, FRAMES, report)
 
 

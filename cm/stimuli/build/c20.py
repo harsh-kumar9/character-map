@@ -44,10 +44,12 @@ def main():
     got, beh = {}, []
     for trait in DESC:
         con, b = T.pick(trait, POOL, N_BEH[trait], CID)
-        got[trait] = [(row, gen.get(f"{trait.lower()}-{row.row:04d}",
-                                    T.D_PROMPT.format(trait=trait, desc=DESC[trait], question=row.question,
-                                                      high=row.response_high1, low=row.response_low1), T.check_d,
-                                    max_tokens=300)) for row in con.itertuples()]
+        got[trait] = [(row, H.checked(gen.get(f"{trait.lower()}-{row.row:04d}",
+                                              T.D_PROMPT.format(trait=trait, desc=DESC[trait], question=row.question,
+                                                                high=row.response_high1, low=row.response_low1),
+                                              T.check_d, max_tokens=300),
+                                      T.d_checks(gen, f"{trait.lower()}-{row.row:04d}", trait, DESC[trait])))
+                      for row in con.itertuples()]
         beh += [T.behavior_item(CID, trait, row, trait.lower()) for row in b.itertuples()]
     if not H.finish(CID, gen) and "--partial" not in sys.argv:
         return
@@ -59,7 +61,8 @@ def main():
                 kept[trait] += 1
                 items += T.contrast_items(CID, f"{CID}-trait-{trait.lower()}-{row.row:04d}", row, o, trait.lower(),
                                           f"mirlab/TRAIT {trait}", {"trait": trait})
-    H.write_all(CID, items, heldout(), beh, FRAMES, {"kept": kept, "failed_attempts": dict(gen.failed)})
+    H.write_all(CID, items, heldout(), beh, FRAMES, {"kept": kept, "failed_attempts": dict(gen.failed),
+                                                      "failed_verification": dict(gen.vfail)})
 
 
 if __name__ == "__main__":

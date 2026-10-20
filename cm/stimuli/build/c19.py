@@ -115,10 +115,13 @@ def main():
     got, beh = {}, []
     for trait, contrast in TRAIT_MAP.items():
         con, b = T.pick(trait, POOL, N_BEH, CID)
-        got[trait] = [(row, gen.get(f"{trait.lower()}-{row.row:04d}",
-                                    T.D_PROMPT.format(trait=trait.lower(), desc=DESC[trait], question=row.question,
-                                                      high=row.response_high1, low=row.response_low1), T.check_d,
-                                    max_tokens=300)) for row in con.itertuples()]
+        name = contrast if trait == "Neuroticism" else trait.lower()
+        got[trait] = [(row, H.checked(gen.get(f"{trait.lower()}-{row.row:04d}",
+                                              T.D_PROMPT.format(trait=name, desc=DESC[trait], question=row.question,
+                                                                high=row.response_high1, low=row.response_low1),
+                                              T.check_d, max_tokens=300),
+                                      T.d_checks(gen, f"{trait.lower()}-{row.row:04d}", name, DESC[trait])))
+                      for row in con.itertuples()]
         beh += [T.behavior_item(CID, trait, row, contrast, {"trait_split": trait}) for row in b.itertuples()]
     hh = []
     for k, it in enumerate(ipip_hh()):
@@ -126,7 +129,13 @@ def main():
             dom = DOMAINS[(k * 2 + v) % len(DOMAINS)]
             p = HH_PROMPT.format(facet=it["facet"], item=it["item"], domain=dom,
                                  level="high" if it["key"] == "+" else "low")
-            hh.append((k, v, it, dom, gen.get(f"hh-{k:03d}-{v}", p, check_hh, max_tokens=600)))
+            hd = "sincerity, fairness, modesty and lack of greed"
+            hh.append((k, v, it, dom, H.checked(gen.get(f"hh-{k:03d}-{v}", p, check_hh, max_tokens=600),
+                                                lambda o, k=k, v=v: [
+                gen.verify(f"hh-{k:03d}-{v}|c", f"The items contrast high and low honesty-humility: {hd}.",
+                           "gives advice showing higher honesty-humility", o["response_high"], o["response_low"]),
+                gen.verify(f"hh-{k:03d}-{v}|d", f"The items contrast high and low honesty-humility: {hd}.",
+                           "describes someone higher in honesty-humility", o["d_pos"], o["d_neg"])])))
     if not H.finish(CID, gen) and "--partial" not in sys.argv:
         return
     items, kept = [], {}
@@ -157,7 +166,8 @@ def main():
             b["source"], b["construction"] = s, "generated"
             beh.append(b)
     kept["honesty_humility"] = len(hh_con)
-    report = {"kept": kept, "hh_behavior": len(hh_beh), "failed_attempts": dict(gen.failed)}
+    report = {"kept": kept, "hh_behavior": len(hh_beh), "failed_attempts": dict(gen.failed),
+              "failed_verification": dict(gen.vfail)}
     H.write_all(CID, items, heldout(), beh, FRAMES, report)
 
 

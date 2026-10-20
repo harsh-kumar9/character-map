@@ -108,9 +108,13 @@ def main():
         pools[b] = x.head(POOL)
         beh_rows.append(d[(d.source == "touche") & (d.basic == b) & ~d.id.isin(x.head(POOL).id)]
                         .sample(n=N_BEH, random_state=22))
-    got = {b: [(r, gen.get(f"sg-{r.id}", D_PROMPT.format(name=b.replace("_", "-"), definition=DEF[b],
-                                                         q=r.question, pos=r.positive_answer, neg=r.negative_answer),
-                           check, max_tokens=300)) for r in x.itertuples()] for b, x in pools.items()}
+    got = {b: [(r, H.checked(gen.get(f"sg-{r.id}", D_PROMPT.format(name=b.replace("_", "-"), definition=DEF[b],
+                                                                   q=r.question, pos=r.positive_answer,
+                                                                   neg=r.negative_answer), check, max_tokens=300),
+                             lambda o, r=r, b=b: [gen.verify(
+                                 f"sg-{r.id}|d", f"The items are about the value {b.replace('_', '-')}: {DEF[b]}.",
+                                 f"expresses the value {b.replace('_', '-')} more", o["d_pos"], o["d_neg"])]))
+               for r in x.itertuples()] for b, x in pools.items()}
     if not H.finish(CID, gen) and "--partial" not in sys.argv:
         return
     items, kept = [], {}
@@ -146,7 +150,7 @@ def main():
                          "adapted", H.src("steering_geometry", "DeepRCL/SteeringGeometry schwartz_full (Touche23-ValueEval)", r.id),
                          dict(meta_for(r.value), answer_pole="pos (appeals to the value)")))
     report = {"kept": kept, "length_band": band, "failed_attempts": dict(gen.failed),
-              "heldout_per_value": {b: int((v.basic == b).sum()) for b in DEF}}
+              "failed_verification": dict(gen.vfail), "heldout_per_value": {b: int((v.basic == b).sum()) for b in DEF}}
     H.write_all(CID, items, held, beh, FRAMES, report)
 
 

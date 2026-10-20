@@ -145,6 +145,46 @@ def clean(s) -> str:
 
 # ---------------------------------------------------------------- generation
 
+def json_blocks(text: str) -> list:
+    """Every top-level {...} block in text that parses, in order. gemma sometimes writes a block, says it made an
+    error, and writes a corrected one; generate.parse_json (first brace to last brace) cannot read that."""
+    out, depth, start, instr, esc = [], 0, None, False, False
+    for i, ch in enumerate(text):
+        if instr:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                instr = False
+            continue
+        if ch == '"':
+            instr, esc = True, False
+        elif ch == "{":
+            if depth == 0:
+                start = i
+            depth += 1
+        elif ch == "}" and depth:
+            depth -= 1
+            if depth == 0:
+                try:
+                    out.append(json.loads(text[start:i + 1]))
+                except json.JSONDecodeError:
+                    pass
+    return out
+
+
+VERIFY = """You are checking items for a research dataset. {definition}
+
+Text 1:
+<<<{t1}>>>
+
+Text 2:
+<<<{t2}>>>
+
+Which text {question}? Answer with only the number 1 or 2."""
+
+
 class Gen:
     """Collects requests for one concept and serves back checked responses."""
 
@@ -157,6 +197,7 @@ class Gen:
                 if r["request_id"].startswith(cid + "|"):
                     self.resp[r["request_id"]] = r
         self.failed = collections.Counter()
+        self.vfail = collections.Counter()
 
     @staticmethod
     def rid(cid, key, prompt, attempt):
@@ -172,12 +213,53 @@ class Gen:
                 self.reqs.append({"request_id": rid, "messages": user(prompt), "max_tokens": max_tokens,
                                   "temperature": temperature if attempt == 1 else 0.9, "expect_json": True})
                 return None
-            out = check(r.get("json")) if r.get("parse_ok") and r.get("finish_reason") != "length" else None
-            if out is not None:
-                out["_gen_id"] = rid
-                return out
-            self.failed[key.split("|")[0]] += 1
+            if r.get("finish_reason") != "length":
+                for j in [r.get("json")] + json_blocks(r.get("text", ""))[::-1]:
+                    out = check(j)
+                    if out is not None:
+                        out["_gen_id"] = rid
+                        return out
+            self.failed[re.sub(r"\d+", "#", key)] += 1
         return None
+
+    def verify(self, key: str, definition: str, question: str, pos: str, neg: str, expect: str = "pos"):
+        """Greedy gemma check that a generated pair carries the contrast: shown both texts in a random order, it must
+        pick the `expect` text for `question`. Returns True, False, or None while the request is pending."""
+        first_pos = rng("verify", self.cid, key).random() < 0.5
+        t1, t2 = (pos, neg) if first_pos else (neg, pos)
+        prompt = VERIFY.format(definition=definition, t1=t1, t2=t2, question=question)
+        rid = self.rid(self.cid, "verify|" + key, prompt, 1)
+        r = self.resp.get(rid)
+        if r is None:
+            self.reqs.append({"request_id": rid, "messages": user(prompt), "max_tokens": 8, "temperature": 0.0,
+                              "expect_json": False})
+            return None
+        m = re.search(r"[12]", r.get("text", ""))
+        ok = bool(m) and (((m.group() == "1") == first_pos) == (expect == "pos"))
+        if not ok:
+            self.vfail[re.sub(r"\d+", "#", key)] += 1
+        return ok
+
+    def ask(self, key: str, prompt: str, max_tokens: int = 8):
+        """Greedy short answer (text) or None while pending."""
+        rid = self.rid(self.cid, "ask|" + key, prompt, 1)
+        r = self.resp.get(rid)
+        if r is None:
+            self.reqs.append({"request_id": rid, "messages": user(prompt), "max_tokens": max_tokens,
+                              "temperature": 0.0, "expect_json": False})
+            return None
+        return r.get("text", "")
+
+
+def verified(results) -> bool | None:
+    """None if any check is pending, else whether all passed."""
+    results = list(results)
+    return None if any(r is None for r in results) else all(results)
+
+
+def checked(o, checks):
+    """o when it exists and every verification check passes; otherwise None. `checks` maps o to a list of results."""
+    return o if o and verified(checks(o)) else None
 
     def flush(self) -> int:
         d = GEN / self.cid

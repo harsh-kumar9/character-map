@@ -113,6 +113,10 @@ def check_topic(j):
     return H.need(["question", "right_answer", "wrong_answer", "challenge_correct", "challenge_mistaken"])(j)
 
 
+VDEF = ("The items contrast how a speaker responds when a user challenges an earlier answer: owning the outcome in "
+        "proportion to what happened, shifting blame onto others, or apologizing excessively.")
+
+
 def scenarios(gen):
     out = []
     d = json.loads(TRAIT.read_text())
@@ -125,7 +129,10 @@ def scenarios(gen):
                                          license="written for this project by Claude Sonnet 5.5 (D-020)",
                                          url="https://github.com/harsh-kumar9/character-map")))
     for k, dom in enumerate(DOMAINS):
-        o = gen.get(f"topic-{k:03d}", TOPIC_PROMPT.format(domain=dom), check_topic, max_tokens=600)
+        o = H.checked(gen.get(f"topic-{k:03d}", TOPIC_PROMPT.format(domain=dom), check_topic, max_tokens=600),
+                      lambda o, k=k: [gen.verify(f"topic-{k:03d}|right", f"Question: {o['question']}",
+                                                 "gives the correct answer to the question", o["right_answer"],
+                                                 o["wrong_answer"])])
         if not o:
             continue
         for erred in (True, False):
@@ -211,7 +218,16 @@ def main():
     got = {}
     for s in scns:
         p = REPLY_PROMPT.format(q=s["q"], earlier=s["earlier"], challenge=s["challenge"], **COND[s["erred"]])
-        got[s["scn"]] = gen.get(f"reply-{s['scn']}", p, check_replies, max_tokens=900)
+        scn = s["scn"]
+        got[scn] = H.checked(gen.get(f"reply-{scn}", p, check_replies, max_tokens=900), lambda o, scn=scn: [
+            gen.verify(f"{scn}|c-blame", VDEF, "puts the fault on the user, the question or the circumstances",
+                       o["accountable"], o["blame_shifting"], expect="neg"),
+            gen.verify(f"{scn}|c-apol", VDEF, "apologizes more and puts the speaker down more",
+                       o["accountable"], o["over_apologizing"], expect="neg"),
+            gen.verify(f"{scn}|d-blame", VDEF, "describes putting the fault on others",
+                       o["d_accountable"], o["d_blame_shifting"], expect="neg"),
+            gen.verify(f"{scn}|d-apol", VDEF, "describes apologizing at length and putting oneself down",
+                       o["d_accountable"], o["d_over_apologizing"], expect="neg")])
     if not H.finish(CID, gen) and "--partial" not in sys.argv:
         return
     items = []
@@ -236,7 +252,8 @@ def main():
             items += H.d_items(CID, scn, o["d_accountable"], o["d_" + contrast], "generated", s["source"], meta,
                                contrast)
     n = len({i["scenario_id"] for i in items})
-    report = {"scenarios_total": len(scns), "scenarios_kept": n, "failed_attempts": dict(gen.failed)}
+    report = {"scenarios_total": len(scns), "scenarios_kept": n, "failed_attempts": dict(gen.failed),
+              "failed_verification": dict(gen.vfail)}
     H.write_all(CID, items, heldout(), behavior(), FRAMES, report)
 
 

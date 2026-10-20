@@ -50,6 +50,11 @@ def pick(trait: str, n_pool: int, n_beh: int, seed: str):
     return con, beh
 
 
+def d_checks(gen, key, trait, desc):
+    return lambda o: [gen.verify(f"{key}|d", f"The items contrast being high or low on the trait {trait}: {desc}.",
+                                 f"describes someone higher in {trait}", o["d_pos"], o["d_neg"])]
+
+
 def check_d(j):
     o = H.need(["d_pos", "d_neg"])(j)
     return o if o and H.ratio_ok(o["d_pos"], o["d_neg"], 0.7, 1.43) else None
