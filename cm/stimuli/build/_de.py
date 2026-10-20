@@ -126,11 +126,43 @@ def stop_for_generation(missing: list[str]):
     sys.exit(2)
 
 
+def last_json(text: str):
+    """The last parseable top-level {...} block in text (gemma sometimes writes a block, then a corrected one)."""
+    starts = [m.start() for m in re.finditer(r"\{", text)]
+    for s in reversed(starts):
+        depth, inq, esc = 0, False, False
+        for i in range(s, len(text)):
+            ch = text[i]
+            if inq:
+                esc, inq = (not esc and ch == "\\"), (inq if esc or ch != '"' else False)
+                continue
+            if ch == '"':
+                inq = True
+            elif ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    try:
+                        j = json.loads(text[s:i + 1])
+                    except json.JSONDecodeError:
+                        break
+                    if isinstance(j, dict) and not any(isinstance(v, dict) for v in j.values()):
+                        return j
+                    break
+    return None
+
+
+def rec_json(rec: dict | None):
+    if not rec or rec.get("finish_reason") != "stop":
+        return None
+    j = rec.get("json") if rec.get("parse_ok") else None
+    return j if isinstance(j, dict) else last_json(rec.get("text", ""))
+
+
 def get_json(rec: dict | None, keys: list[str]) -> dict | None:
     """The parsed JSON of a response if it has every key as a non-empty string, else None."""
-    if not rec or not rec.get("parse_ok") or rec.get("finish_reason") != "stop":
-        return None
-    j = rec.get("json")
+    j = rec_json(rec)
     if not isinstance(j, dict):
         return None
     for k in keys:
@@ -152,8 +184,7 @@ def verify(batch: str, cands: list[dict], prompt_fn, key=lambda c: c["sid"]) -> 
         stop_for_generation(missing)
     got, keep, fails = responses(batch), [], collections.Counter()
     for c, r in zip(cands, reqs):
-        rec = got.get(r["request_id"])
-        j = rec.get("json") if rec and rec.get("parse_ok") else None
+        j = rec_json(got.get(r["request_id"]))
         if isinstance(j, dict) and j.get("pass") is True:
             c["verify_id"] = r["request_id"]
             keep.append(c)
@@ -197,21 +228,18 @@ def add_n_tokens(rows: list[dict]):
 # ---------- outputs ----------
 
 def review_sample(items: list[dict], k: int = 3) -> list[dict]:
-    """k items per frame x polarity cell (per sub-contrast when meta.contrast is set), one scenario per item."""
-    cells = collections.defaultdict(list)
+    """k complete scenarios per sub-contrast (meta.contrast, or one group): all their frame x polarity items, so each
+    cell gets k items and the reviewer sees the same scenario across frames and poles."""
+    groups = collections.defaultdict(lambda: collections.defaultdict(list))
     for r in items:
-        cells[(r["frame"], r["polarity"], r["meta"].get("contrast", ""))].append(r)
+        groups[r["meta"].get("contrast", "")][r["scenario_id"]].append(r)
     out = []
-    for key in sorted(cells):
-        rows = stable_order(cells[key], key=lambda r: r["item_id"], salt="review")
-        seen = set()
-        for r in rows:
-            if r["scenario_id"] in seen:
-                continue
-            seen.add(r["scenario_id"])
-            out.append(r)
-            if len(seen) == k:
-                break
+    for g in sorted(groups):
+        scn = groups[g]
+        cells = {(r["frame"], r["polarity"]) for rows in scn.values() for r in rows}
+        full = [s for s, rows in scn.items() if {(r["frame"], r["polarity"]) for r in rows} == cells]
+        for s in stable_order(full, salt="review")[:k]:
+            out += sorted(scn[s], key=lambda r: (r["frame"], r["polarity"]))
     return out
 
 
