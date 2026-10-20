@@ -19,14 +19,15 @@ W_KW = ["wellbeing", "well-being", "health", "harm prevention", "safety", "life 
 
 
 def main():
+    gen = M.Gen(CID)
     cs = sorted(F.cs_repo(CID, "personalprotective", "autonomy", "harmlessness"), key=lambda s: M.h(s["sid"]))
     tn = sorted(F.tenets(CID, AUTON, WELFARE), key=lambda s: M.h(s["sid"]))
-    dd = F.daily(CID, A_KW + ["freedom"], W_KW + ["protection"])
+    dd = F.select(gen, CID, F.daily(CID, A_KW + ["freedom"], W_KW + ["protection"]), 50, spare=10)
     ai = sorted(F.airisk(CID, A_KW, W_KW), key=lambda s: M.h(s["sid"]))
-    n_dd = min(len(dd), 50)
-    held = F.heldout_items(CID, dd, PARTNERS, n_scn=n_dd) + F.heldout_items(CID, ai[:50 - n_dd], PARTNERS)
-    beh = F.choice_items(CID, ai[50 - n_dd:], "autonomy")
-    F.build(CID, PARTNERS, "autonomy", cs + tn, held, beh, n=100)
+    held = F.heldout_items(CID, dd, PARTNERS, n_scn=len(dd)) + \
+        F.heldout_items(CID, F.select(gen, CID, ai[:120], 50 - len(dd)), PARTNERS)
+    beh = F.choice_items(CID, F.select(gen, CID, ai[120:], 200), "autonomy")
+    F.build(CID, PARTNERS, "autonomy", cs + tn, held, beh, n=100, gen=gen)
 
 
 if __name__ == "__main__":

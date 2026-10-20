@@ -3,7 +3,9 @@
 Each scenario is one rule in one setting, broken for two reasons: one that justifies the exception (pos) and one
 that does not (neg). MoralExceptQA (Awad et al. 2022) gives such pairs within a setting, ranked by the share of
 people who said breaking the rule was OK. The rest are written by gemma-4-31B-it in the same style from Moral
-Stories norms. Frame b only (CONCEPTS.md).
+Stories norms. gemma-4-31B-it then rates each generated version on its own at temperature 0; a pair is kept only
+when both versions break a rule and the justified one is rated at least 2 points (of 7) more acceptable.
+Frame b only (CONCEPTS.md).
 
     python -m cm.stimuli.build.b10
 """
@@ -57,6 +59,26 @@ The two versions must match word for word except for the reason, and be about th
 Return a JSON object with keys "name" (the person's first name), "rule" (the rule in a few words), "justified", "unjustified". Return only the JSON object."""
 
 
+def rate_prompt(story: str) -> str:
+    return f"""{story}
+
+Answer two questions.
+"breaks_rule": true or false. Does the person break a rule, norm or someone's rights in this story?
+"acceptability": an integer from 1 (clearly not OK) to 7 (clearly OK). How acceptable is what the person did?
+
+Return a JSON object with these two keys. Return only the JSON object."""
+
+
+def rating(gen, key, story):
+    j, _ = gen.ask(f"verify-{key}", rate_prompt(story), max_tokens=100, temperature=0.0)
+    if not isinstance(j, dict):
+        return j  # None while pending, False if unparseable
+    try:
+        return (j["breaks_rule"] is True, int(j["acceptability"]))
+    except (KeyError, TypeError, ValueError):
+        return False
+
+
 def main():
     gen = M.Gen(CID)
     items = []
@@ -70,13 +92,18 @@ def main():
                                 {"human_ok_share": round(float(r.hr), 3), "setting": setting,
                                  "exception": "justified" if pol == "pos" else "not justified"}))
     n_gen = N - len(meq)
-    for _, r in norm_seeds(int(n_gen * 1.5)).iterrows():
+    for _, r in norm_seeds(int(n_gen * 2.5)).iterrows():
         if len({x["scenario_id"] for x in items}) >= N:
             break
         j, rid = gen.ask(f"pair-{r.id}", prompt(r.norm), max_tokens=600, temperature=0.7)
         if not (isinstance(j, dict) and all(isinstance(j.get(k), str) for k in ("name", "justified", "unjustified"))):
             continue
         if not (0.75 <= M.len_ratio(j["justified"], j["unjustified"]) <= 1.33):
+            continue
+        # each version rated on its own at temperature 0; keep pairs where both break a rule and the justified
+        # one is rated at least 2 points more acceptable
+        ra, rb = rating(gen, f"j-{r.id}", M.clean(j["justified"])), rating(gen, f"u-{r.id}", M.clean(j["unjustified"]))
+        if not (ra and rb and ra[0] and rb[0] and ra[1] - rb[1] >= 2):
             continue
         sid = f"{CID}-gen-{r.id}"
         ask = M.pick(ASK, sid)

@@ -3,7 +3,8 @@ pos = the option that puts fairness first, neg = the option that puts loyalty fi
 
 DailyDilemmas has 32 clean fairness-loyalty dilemmas and AIRiskDilemmas 11; CLASH has none. They are kept as the
 held-out benchmark, so the contrast items are written by gemma-4-31B-it in the DailyDilemmas style, each set in a
-Moral Stories loyalty situation. The generation never sees the held-out dilemmas.
+Moral Stories loyalty situation. The generation never sees the held-out dilemmas. Generated and real dilemmas
+alike pass the conflict check in _conflict.py.
 
     python -m cm.stimuli.build.f4
 """
@@ -29,9 +30,11 @@ def seeds(k: int):
 def prompt(situation: str) -> str:
     return f"""Write an everyday moral dilemma in which fairness and loyalty pull in opposite directions. Use this situation only as a setting and invent the details: {situation}
 
+Loyalty here means standing by a specific person or group the reader belongs to or is close to (a friend, family member, partner, teammate, colleague or community), for example by covering for them, favouring them or keeping their secret. Fairness means applying the same standard to everyone, treating others impartially or giving people what they are due. Being loyal must mean being unfair to someone else, and being fair must mean letting the friend or group down.
+
 The dilemma speaks to the reader in the second person, is three to five sentences long and ends with a yes-or-no question, in this style: "You're a ... . ... Should you ...?"
-"fair_option": a short action phrase that puts fairness first (the same standard for everyone, impartial treatment).
-"loyal_option": a short action phrase that puts loyalty first (standing by a friend, family member, team or group).
+"fair_option": a short action phrase that puts fairness first.
+"loyal_option": a short action phrase that puts loyalty first.
 "fair_answer" and "loyal_answer": the decision in the first person in one sentence plus one short reason, 25 to 40 words, the same length and style.
 
 Return a JSON object with keys "dilemma", "fair_option", "loyal_option", "fair_answer", "loyal_answer". Return only the JSON object."""
@@ -40,7 +43,7 @@ Return a JSON object with keys "dilemma", "fair_option", "loyal_option", "fair_a
 def main():
     gen = M.Gen(CID)
     good = []
-    for _, r in seeds(360).iterrows():
+    for _, r in seeds(520).iterrows():
         j, rid = gen.ask(f"dilemma-{r.id}", prompt(r.situation), max_tokens=700, temperature=0.8)
         if isinstance(j, dict) and all(isinstance(j.get(k), str) and j[k].strip() for k in KEYS) \
                 and 0.7 <= M.len_ratio(j["fair_answer"], j["loyal_answer"]) <= 1.43:
@@ -48,14 +51,15 @@ def main():
                    "seed_url": M.URL["moral_stories"]}
             s = F.scn(CID, "gen", r.id, "dilemma_human", j["dilemma"], j["fair_option"], j["loyal_option"], src,
                       {"gen_id": rid})
-            good.append((s, j, rid))
+            if F.verified(gen, CID, s) is True:
+                good.append((s, j, rid))
     items = []
     for s, j, rid in good[:100]:
         items += F.contrast_items(CID, s, PARTNERS, (M.clean(j["fair_answer"]), M.clean(j["loyal_answer"])), rid)
     for x in items:
         x["construction"] = "generated"
-    held = F.heldout_items(CID, F.daily(CID, FA_KW, LO_KW), PARTNERS, n_scn=50) + \
-        F.heldout_items(CID, F.airisk(CID, FA_KW, LO_KW), PARTNERS, n_scn=50)
+    real = F.daily(CID, FA_KW, LO_KW) + F.airisk(CID, FA_KW, LO_KW)
+    held = F.heldout_items(CID, F.select(gen, CID, real, 50, spare=10), PARTNERS, n_scn=50)
     beh = F.choice_items(CID, [s for s, _, _ in good[100:300]], "fairness")
     for x in beh:
         x["construction"] = "generated"

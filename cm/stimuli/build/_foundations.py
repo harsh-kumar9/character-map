@@ -133,6 +133,8 @@ def build(f: str):
             break
         sid = f"{cid}-ms-{r.id}"
         name = M.first_name(r.chosen)
+        if name in M.AVOID_NAMES:
+            continue
         if gen is not None:  # B1 needs frame c; keep only scenarios whose re-voicing came back clean
             j, rid = gen.ask(f"revoice-{r.id}", revoice_prompt(r, name), max_tokens=400)
             ok = isinstance(j, dict) and all(isinstance(j.get(k), str) for k in ("setup", "action1", "action2")) \

@@ -3,7 +3,9 @@
 No released matched set was found (MoCa's moral items vary causal role, not belief; the Koster-Hale et al. fMRI set
 on OpenNeuro has no stimulus text). gemma-4-31B-it writes each story from a Moral Stories care situation as five
 sentence slots: background, harmful belief or neutral belief, the same action, harmful outcome or no harm. Crossing
-them gives intentional harm, attempted harm, accidental harm and the neutral control. Polarity follows intent
+them gives intentional harm, attempted harm, accidental harm and the neutral control. A second gemma-4-31B-it
+pass at temperature 0 checks each story (belief A expects harm, belief B expects none, the act is the same and not
+self-defence, the outcomes differ, all four versions cohere); only stories passing every check are kept. Polarity follows intent
 (pos: the agent believes the act will harm; neg: the agent believes it is harmless); the outcome is crossed within
 every scenario and labelled in meta.outcome, so the outcome contrast is read from the same items.
 Held-out: MoCa causal stories annotated for agent awareness. Behavior: wrongness judgments on 50 more stories.
@@ -20,7 +22,7 @@ from . import _moral as M
 from ._foundations import allocate, pairs
 
 CID = "B8"
-N, N_BEH_SCN, N_CAND = 100, 50, 190
+N, N_BEH_SCN, N_CAND = 100, 50, 270
 KEYS = ("name", "background", "belief_harmful", "belief_neutral", "action", "outcome_harm", "outcome_none")
 
 
@@ -55,6 +57,29 @@ def valid(j) -> bool:
     return 0.7 <= r1 <= 1.4 and 0.7 <= r2 <= 1.4 and j["name"].split()[0] in j["background"]
 
 
+def verify_prompt(j) -> str:
+    return f"""Read the parts of a short story.
+
+Background: {j['background']}
+Belief A: {j['belief_harmful']}
+Belief B: {j['belief_neutral']}
+Action: {j['action']}
+Outcome A: {j['outcome_harm']}
+Outcome B: {j['outcome_none']}
+
+Answer each question with true or false.
+"a_expects_harm": With belief A, does the agent expect the action to hurt someone?
+"b_expects_harmless": With belief B, does the agent expect the action to be harmless?
+"same_act": Is the action itself the same, whichever belief the agent holds, and is it neither self-defence nor an act that is right to do if belief A is true?
+"outcome_a_harm": Does outcome A say someone is hurt, and outcome B that no one is hurt?
+"coherent": Do all four combinations of belief and outcome make sense as stories?
+
+Return a JSON object with these five keys. Return only the JSON object."""
+
+
+VKEYS = ("a_expects_harm", "b_expects_harmless", "same_act", "outcome_a_harm", "coherent")
+
+
 def text(j, belief: str, outcome: str) -> str:
     return " ".join(M.clean(j[k]) for k in ("background", f"belief_{belief}", "action", f"outcome_{outcome}"))
 
@@ -64,7 +89,7 @@ def main():
     good = []
     for _, r in seeds().iterrows():
         j, rid = gen.ask(f"story-{r.id}", prompt(r), max_tokens=600, temperature=0.7)
-        if valid(j):
+        if valid(j) and gen.check(f"story-{r.id}", verify_prompt(j), lambda v: all(v[k] is True for k in VKEYS)):
             good.append((r, j, rid))
     items = []
     for r, j, rid in good[:N]:

@@ -175,7 +175,13 @@ def first_name(action: str, fallback: str = "this person") -> str:
 
 
 def lower_first(s: str) -> str:
+    words = s.split()
+    if len(words) > 1 and sum(w[:1].isupper() for w in words) > len(words) / 2:  # Title Case action labels
+        return " ".join(w if w == "I" or w[1:2].isupper() else w.lower() for w in words)
     return s[:1].lower() + s[1:] if s and not s[:2].isupper() else s
+
+
+AVOID_NAMES = {"Gemma", "Claude", "Llama", "Olmo", "Qwen", "Gemini"}  # model names as story characters
 
 
 # Frame a asks nothing evaluative; frame b asks for a moral evaluation. Pools keep any one template from carrying
@@ -249,6 +255,16 @@ class Gen:
         if expect_json:
             return (r.get("json") if r.get("parse_ok") and r.get("finish_reason") == "stop" else False), rid
         return (r["text"] if r.get("finish_reason") == "stop" else False), rid
+
+    def check(self, key: str, prompt: str, test, max_tokens: int = 300):
+        """A verification request at temperature 0. Returns None while pending, else test(json) as a bool."""
+        j, _ = self.ask(f"verify-{key}", prompt, max_tokens=max_tokens, temperature=0.0)
+        if j is None:
+            return None
+        try:
+            return bool(isinstance(j, dict) and test(j))
+        except (KeyError, TypeError, ValueError):
+            return False
 
     def flush(self):
         p = item_dir(self.cid) / "pending_requests.jsonl"

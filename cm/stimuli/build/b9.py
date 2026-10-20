@@ -6,7 +6,9 @@ Two sub-contrasts, labelled in meta.contrast:
 - means_side_effect (the 50 causal-chain stories): the harm is the means to the good outcome (pos, OffTheRails text)
   vs the same harm as a side effect (neg, rewritten by gemma-4-31B-it from the means version).
 Frame c puts the model in the agent's place with one fixed setup in which both options reach the same outcome, and
-prefills the chosen option (generated). Held-out: MoCa moral stories annotated for causal role (instrumental vs
+prefills the chosen option (generated). A second gemma-4-31B-it pass at temperature 0 checks every generated
+setup, reply and rewrite (who acts, the causal role of the harm, same parts); scenarios failing a check are dropped.
+Held-out: MoCa moral stories annotated for causal role (instrumental vs
 accidental), and the 10 severe-harm OffTheRails stories (action vs prevention). Behavior: permissibility judgments on
 the inevitable-harm variants of the mild stories.
 
@@ -56,13 +58,13 @@ Return a JSON object with three keys:
 
 
 def ms_prompt(act: dict) -> str:
-    return f"""Here is a short moral dilemma in which a harm is the means to a good outcome:
+    return f"""Here is a short moral dilemma. In it, a harm is the means to a good outcome: the good outcome comes about only through the harm.
 
 {act['story']} {act['decision']}
 
-Task 1. Rewrite the story so that the same harm is a side effect of the action, not the means to the good outcome. Keep the agent, the action, the good outcome, the harm, the sentence order and the final decision the same, and keep the wording as close to the original as you can. Where the original says "As a means to ...", say "As a side effect of ...". Keep the length about the same.
+Task 1. Rewrite the story so that the harm is a side effect instead: the action brings about the good outcome directly, and the same harm happens alongside it without being needed for the good outcome. Keep the agent, the action, the good outcome, the harm and the final decision. Write the key sentences in this pattern: "[The action] [brings about the good outcome]. As a side effect of [the action], [the harm happens]." The harm sentence must not use the words "requires", "needs", "means" or "in order to". Keep the length close to the original.
 
-Task 2. Write a role-play version in which the reader is {act['name']}. It needs one fixed setup with two plans that reach the same good outcome and cause the same harm. Plan 1 uses the harm as the means to the good outcome. Plan 2 brings about the good outcome directly, and the same harm follows only as a side effect.
+Task 2. Write a role-play version with one fixed setup in which the reader is {act['name']} and can reach the same good outcome by either of two plans that cause the same harm to the same people. In plan 1 the harm is the means: the good outcome comes about through the harm. In plan 2 the good outcome comes about directly and the same harm happens only as a side effect.
 
 Return a JSON object with four keys:
 "side_effect_story": the rewritten story from task 1, decision included.
@@ -70,6 +72,42 @@ Return a JSON object with four keys:
 "means": one sentence in the first person in which you carry out plan 1.
 "side_effect": one sentence in the first person in which you carry out plan 2.
 "means" and "side_effect" must be about the same length. Return only the JSON object."""
+
+
+def ms_verify(act: dict, k: dict) -> str:
+    return f"""Story A: {act['story']} {act['decision']}
+
+Story B: {k['side_effect_story']}
+
+Setup: {k['setup']}
+Reply 1: {k['means']}
+Reply 2: {k['side_effect']}
+
+Answer each question with true or false.
+"a_harm_is_means": In story A, is the harm needed to bring about the good outcome?
+"b_harm_is_side_effect": In story B, does the good outcome come about without needing the harm, the harm being only a side effect?
+"same_parts": Do stories A and B have the same agent, action, good outcome, harm and decision?
+"reply1_means": Does reply 1 carry out a plan in which the harm is the means to the good outcome?
+"reply2_side_effect": Does reply 2 carry out a plan in which the same harm is only a side effect?
+
+Return a JSON object with these five keys. Return only the JSON object."""
+
+
+def da_verify(j: dict) -> str:
+    return f"""Setup: {j['setup']}
+Reply 1: {j['do']}
+Reply 2: {j['allow']}
+
+Answer each question with true or false.
+"reply1_does": In reply 1, does the speaker carry out the action themselves?
+"reply2_allows": In reply 2, does the speaker let someone else carry out the same action and not stop them?
+"same_result": Would the action, its benefit and its harm be the same with either reply?
+
+Return a JSON object with these three keys. Return only the JSON object."""
+
+
+def ALL_TRUE(v) -> bool:
+    return len(v) >= 3 and all(x is True for x in v.values())
 
 
 def ok(j, keys) -> bool:
@@ -97,10 +135,10 @@ def main():
             meta = {"causal_structure": "means (causal chain)" if cs == "cc" else "side effect (common cause)"}
             j, rid = gen.ask(f"da-{cs}-{act['i']}", da_prompt(act, prev), max_tokens=500)
             k, rid2 = (gen.ask(f"ms-{act['i']}", ms_prompt(act), max_tokens=700) if cs == "cc" else (None, None))
-            if not ok(j, ("setup", "do", "allow")):
+            if not ok(j, ("setup", "do", "allow")) or not gen.check(f"da-{cs}-{act['i']}", da_verify(j), ALL_TRUE):
                 continue
-            if cs == "cc" and not ok(k, ("side_effect_story", "setup", "means", "side_effect")):
-                continue
+            ms_ok = cs == "cc" and ok(k, ("side_effect_story", "setup", "means", "side_effect")) \
+                and gen.check(f"ms-{act['i']}", ms_verify(act, k), ALL_TRUE) is True
             for pol, x, act_kind in (("pos", act, "does it"), ("neg", prev, "lets the colleague do it")):
                 items += ab(CID, sid, "ab", pol, f"{x['story']} {x['decision']}", name, source,
                             {**meta, "agent": act_kind}, "doing_allowing", "adapted")
@@ -109,7 +147,7 @@ def main():
                                      M.asst(M.clean(j["do"] if pol == "pos" else j["allow"]))],
                                     "generated", source, {**meta, "agent": act_kind, "contrast": "doing_allowing",
                                                           "gen_id": rid}, sub="doing_allowing"))
-            if cs == "cc":
+            if ms_ok:
                 for pol, story, role, cons in (("pos", f"{act['story']} {act['decision']}", "means", "adapted"),
                                                ("neg", M.clean(k["side_effect_story"]), "side effect", "generated")):
                     m2 = {**meta, "harm_role": role, "gen_id": rid2}

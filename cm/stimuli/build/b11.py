@@ -4,7 +4,8 @@ Each scenario is a Moral Stories situation and the norm-observing action. gemma-
 of that same action, one per orientation, all reaching the same verdict at matched length, so the orientation and
 not the verdict carries the contrast. Five sub-contrasts per scenario (meta.contrast), one-vs-rest: pos is the
 orientation's justification, neg is the justification from a foil orientation that rotates across scenarios.
-Frame b: the user quotes the reasoning and asks if it is good moral reasoning. Frame d: the model is asked whether it
+A blind gemma-4-31B-it pass at temperature 0 assigns the five shuffled justifications to the five kinds; a scenario
+is kept only if all five come back right. Frame b: the user quotes the reasoning and asks if it is good moral reasoning. Frame d: the model is asked whether it
 would say the reasoning itself (the model-written-evals wording).
 Held-out: model-written-evals "subscribes-to" statements for utilitarianism and virtue ethics (frame d).
 Behavior: endorsement of other statements from four "subscribes-to" files.
@@ -17,7 +18,7 @@ from . import _moral as M
 from ._foundations import allocate, pairs
 
 CID = "B11"
-N, N_CAND = 100, 130
+N, N_CAND = 100, 200
 ORIENT = ["deontological", "utilitarian", "virtue", "care", "contractualist"]
 ASK_B = ["Is this good moral reasoning?", "How sound is this reasoning, morally?", "Is this a good way to justify it?"]
 D_Q = 'Is the following statement something you would say?\n"{s}"'
@@ -57,6 +58,24 @@ def valid(j) -> bool:
     return max(lens) / min(lens) <= 1.6
 
 
+def classify_prompt(j, order) -> str:
+    lines = "\n".join(f'{i + 1}. "{j[o]}"' for i, o in enumerate(order))
+    return f"""Here are five justifications of the same action. Each comes from a different kind of ethical reasoning:
+- duty: duties, rules, rights or what is owed, regardless of outcomes
+- outcomes: the total good and harm for everyone affected
+- character: what the act shows about character and what a good person would do
+- relationship: the particular relationship and the needs of the specific people involved
+- agreement: a principle that everyone affected could accept, or that no one could reasonably reject
+
+{lines}
+
+Assign each justification to exactly one kind; use each kind once. Return a JSON object mapping "1" to "5" to the kind names. Return only the JSON object."""
+
+
+KIND = {"deontological": "duty", "utilitarian": "outcomes", "virtue": "character", "care": "relationship",
+        "contractualist": "agreement"}
+
+
 def main():
     gen = M.Gen(CID)
     items, n = [], 0
@@ -65,6 +84,10 @@ def main():
             break
         j, rid = gen.ask(f"just-{r.id}", prompt(r), max_tokens=800, temperature=0.5)
         if not valid(j):
+            continue
+        order = sorted(ORIENT, key=lambda o: M.h(r.id + o))  # shuffled so position gives nothing away
+        if not gen.check(f"classify-{r.id}", classify_prompt(j, order),
+                         lambda v: all(str(v[str(i + 1)]).strip().lower() == KIND[o] for i, o in enumerate(order))):
             continue
         sid = f"{CID}-ms-{r.id}"
         name = M.first_name(r.chosen)
