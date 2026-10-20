@@ -257,3 +257,23 @@ Harsh: "D-028 accept, ground in literature". Grounding for the two readouts and 
 - **Why greedy.** One deterministic reply per item gives the model's modal continuation and makes readouts
   reproducible. Sampled replies (T=1, as persona vectors use for extraction) remain available through the trait
   rollouts in cm/pv, which already sample 10 replies per prompt.
+
+## D-029 S1 gate: where SAE claims are allowed - proposed 2026-10-20
+
+S1 ran on 3,276 rows (8 train items per frame x polarity cell of all 62 concepts, 10 trait rollouts per trait x side)
+plus 200 chats from Gemma Scope 2's own data as the in-distribution reference (results/s1/fidelity.json,
+fidelity_table.txt). Findings:
+- **First 32 reply tokens (reply32).** FVU 0.039 / 0.125 / 0.171 / 0.189 at layers 9 / 17 / 22 / 29, against the
+  reference 0.043 / 0.079 / 0.132 / 0.179 (ratios 0.91 / 1.58 / 1.30 / 1.06). Same picture in every frame and in the
+  trait rollouts. L0 matches the reference.
+- **Boundary token.** FVU 0.17-0.42 pooled and 0.45-0.83 in frames b and d (reference 0.13-0.31). Boundary vectors are
+  nearly identical across items (mean pairwise cosine 0.97-1.00) and the relative error is tiny (0.07-1.5%), but the
+  SAE misses 20-82% of the item-to-item variation, which is where a contrast lives (results/s1/boundary_relerr.py).
+- **Spliced KL over the reply** is 2.1-2.6x the reference at every layer (0.41 / 0.42 / 0.24 / 0.16 nats vs 0.15 /
+  0.20 / 0.11 / 0.06).
+
+Proposal: (1) replace D-010's flat FVU < 0.2 with "FVU < 0.2 and within 1.6x of the in-distribution FVU for the same
+token group"; (2) under that rule SAE claims are allowed at the reply32 readout at all four layers, and SAE results at
+the boundary readout are descriptive only (dense directions carry boundary claims); (3) every SAE intervention keeps
+the error term (already D-013), and any result that relies on SAE reconstruction alone is reported with the spliced-KL
+cost.
