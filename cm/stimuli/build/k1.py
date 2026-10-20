@@ -14,7 +14,7 @@ import pandas as pd
 from .ak_common import (uniq, scenario_ok, a, behavior, clean, close, endorse, fields_ok, gen_request, h, hf_file, heldout, item, jl,
                         order, responses, run, u, write_outputs, write_requests)
 
-CID, BATCH, N = "K1", "K1_v2", 100
+CID, BATCH, N = "K1", "K1_v3", 100
 DOLLY = {"dataset": "databricks-dolly-15k", "license": "CC-BY-SA-3.0",
          "url": "https://huggingface.co/datasets/databricks/databricks-dolly-15k"}
 PAV = {"dataset": "Pavlick and Tetreault 2016 formality scores", "license": "CC-BY-3.0",
@@ -28,12 +28,12 @@ PROMPT = """You are helping build matched test items for a study of writing styl
 
 Question: "{q}"
 
-Write the following. Return only a JSON object with these keys:
-- "message_formal": a short message (35-60 words) that a person wrote to a colleague about this topic, in a formal, polished register.
-- "message_casual": the same message with the same content in a casual, relaxed register (contractions, everyday words, light slang). It must be as long as message_formal: the same number of words, within 10%.
-- "reply_formal": an AI assistant's answer to the question (60-90 words) in a formal, polished register.
-- "reply_casual": the same answer with the same content in a casual, relaxed register. It must be as long as reply_formal: the same number of words, within 10%.
-Formal text tends to come out longer; keep the formal versions compact and the casual versions full, so each pair matches in length."""
+Write the following. Return only a JSON object with these keys, in this order:
+- "message_casual": a short message (35-60 words) that a person wrote to a colleague about this topic, in a casual, relaxed register (contractions, everyday words, light slang).
+- "message_formal": the same message with the same content in a formal, polished register. Count the words of message_casual and use the same number of words, within 10%.
+- "reply_casual": an AI assistant's answer to the question (60-90 words) in a casual, relaxed register.
+- "reply_formal": the same answer with the same content in a formal, polished register. Count the words of reply_casual and use the same number of words, within 10%.
+Formal wording tends to come out longer; keep each formal version compact so it matches its casual version in length."""
 
 KEYS = ["message_formal", "message_casual", "reply_formal", "reply_casual"]
 
@@ -55,7 +55,7 @@ def dolly():
         if r["instruction"] not in seen:
             seen.add(r["instruction"])
             out.append(r)
-    return {"items": out[:225], "behavior": out[225:425]}
+    return {"items": out[:300], "behavior": out[300:500]}
 
 
 def prep():
