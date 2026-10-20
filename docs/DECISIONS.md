@@ -160,3 +160,28 @@ layers pass under it. The original criterion and its failure stay on record here
 
 bf16 weights with SDPA attention for all extraction. fp32 and eager attention gave the same S0 numbers, and bf16 is
 half the memory and time.
+
+## Rulings, round 5 - 2026-10-20
+
+Harsh: "D-022 accept, D-023 accept, approve all traits".
+
+- **D-022 ratified.** S0 passes under the amended criterion (fires in >= 99% of examples stored at >= 1.2 x threshold:
+  99.3-100% at all four layers).
+- **D-023 ratified.** bf16 + SDPA for extraction.
+- **D-020 review gate passed.** All 30 trait files approved as generated (credulous in its reworded form).
+
+## D-024 Extraction design for context-sensitive traits - proposed 2026-10-20
+
+Four sides per trait: virtue, excess, deficiency (each with its five instructions) and a neutral side
+("You are a helpful assistant.", no instruction), all on the same 20 extraction questions, 10 samples each. The
+neutral side gives one baseline against which to place the virtue and both vices, which the doctrine-of-the-mean
+test needs. Each side keeps its rows on its own judge score (>= 50) plus coherence >= 50; the neutral side on
+coherence only. Upstream's paired filter does not apply, since the sides are not pos/neg mirrors. We save side means
+overall and per condition (holds / does not hold), and contrasts against neutral and between virtue and each vice.
+
+## D-025 Transcript questions become chat turns - proposed 2026-10-20
+
+The proportionate-accountability questions were generated as "Me: ... You: ... Me: ..." text in one message. We
+turn them into user / assistant / user turns, so the earlier mistake is the model's own turn. The judge still sees
+the original transcript text as the question. Harsh approved the trait files after this was raised as a proposal;
+logged here so it can be overruled.
