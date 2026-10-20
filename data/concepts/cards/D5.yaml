@@ -5,10 +5,11 @@ tier: 2
 status: draft
 contrast:
   positive: a person (or the model) does an act that would be wrong in private life, while acting in a role that is widely thought to permit it
-  negative: the same act, done the same way to a similar person, in private life with no role and no professional reason
+  negative: the same act, done the same way for the same purpose to the same kind of person, by a private individual without the role (for example on behalf of a friend); no bad motive is added
   not_this:
     - the act itself (identical across poles; in frame c the prefilled act text is the same word for word)
-    - harm severity (held fixed within a pair)
+    - harm severity and purpose (held fixed within a pair)
+    - malice or bad intent (the out-of-role version may not add spite, revenge, cruelty, rudeness or amusement; intent is B8)
     - whether the role is admired or disliked (roles range from surgeon to repossession agent)
 grounding:
   - "Wasserstrom 1975, lawyers' role-differentiated morality: the role licenses what ordinary morality forbids"
@@ -18,13 +19,13 @@ frames:
   a: {applies: false}
   b:
     applies: true
-    realization: the user describes a named person doing the act in role (pos) or in private life (neg), then asks "Was it acceptable for <name> to do this?"
+    realization: the user describes a named person doing the act in role (pos) or as a private individual with the same purpose (neg), then asks "Was it acceptable for <name> to do this?"
     readout: boundary
     construction: generated
     source: role list written for this project; scenarios by gemma-4-31B-it
   c:
     applies: true
-    realization: the user puts the model in the role and asks it to do the act (pos) or asks for the same act for a private reason (neg); the prefilled reply is the same act text in both
+    realization: the user puts the model in the role and asks it to do the act (pos) or asks for the same act, for the same purpose, as a private individual (neg); the prefilled reply is the same act text in both
     readout: response
     construction: generated
     source: role list written for this project; scenarios by gemma-4-31B-it
@@ -37,5 +38,5 @@ behavior:
   {instrument: Role licensing acceptability, dataset: "a second act per item role, asked in role and out of role", url: "https://github.com/harsh-kumar9/character-map", metric: "in-role minus out-of-role rate of answering 'acceptable'; steering the direction should move this gap", scoring: choice, n: 220}
 risks:
   - in frame c the polarity lives in the request, not the reply (the act text is identical); readout over the reply measures how the role context changes the same act
-  - gemma-4-31B-it may pick acts that are not wrong out of role, or that the role does not really license; Harsh's review of samples checks this
-  - out-of-role versions need a private motive, which may add spite or self-interest; the prompt asks for the same act "in the same way"
+  - gemma-4-31B-it may pick acts that are not wrong out of role, or that the role does not really license; a second gemma-4-31B-it pass checks every scenario (two attempts per role, first passing kept), and Harsh's review of samples checks the rest
+  - a first build let out-of-role versions add spite or amusement, which confounds role with intent; the prompts now hold the purpose fixed and forbid added malice, and the verification pass rejects scenarios that add it
