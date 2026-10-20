@@ -2,7 +2,12 @@
  "concept": "C4",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.019,
+ "length_ratio_pos_over_neg_median": 1.005,
+ "length_ratio_by_frame": {
+  "a": 1.009,
+  "c": 1.015,
+  "d": 0.993
+ },
  "applicable_frames": [
   "a",
   "c",

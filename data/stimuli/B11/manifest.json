@@ -2,7 +2,11 @@
  "concept": "B11",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 0.984,
+ "length_ratio_pos_over_neg_median": 1.0,
+ "length_ratio_by_frame": {
+  "b": 1.0,
+  "d": 1.0
+ },
  "applicable_frames": [
   "b",
   "d"

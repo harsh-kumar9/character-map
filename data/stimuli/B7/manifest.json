@@ -3,6 +3,10 @@
  "errors": [],
  "warnings": [],
  "length_ratio_pos_over_neg_median": 0.951,
+ "length_ratio_by_frame": {
+  "a": 0.95,
+  "b": 0.951
+ },
  "applicable_frames": [
   "a",
   "b"

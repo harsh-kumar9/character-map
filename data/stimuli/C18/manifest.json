@@ -2,7 +2,10 @@
  "concept": "C18",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 0.924,
+ "length_ratio_pos_over_neg_median": 0.941,
+ "length_ratio_by_frame": {
+  "c": 0.941
+ },
  "applicable_frames": [
   "c"
  ],

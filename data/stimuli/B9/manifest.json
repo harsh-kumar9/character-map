@@ -2,7 +2,12 @@
  "concept": "B9",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 0.986,
+ "length_ratio_pos_over_neg_median": 0.974,
+ "length_ratio_by_frame": {
+  "a": 0.923,
+  "b": 0.925,
+  "c": 0.994
+ },
  "applicable_frames": [
   "a",
   "b",

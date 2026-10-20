@@ -2,7 +2,10 @@
  "concept": "E7",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.0,
+ "length_ratio_pos_over_neg_median": 1.03,
+ "length_ratio_by_frame": {
+  "c": 1.03
+ },
  "applicable_frames": [
   "c"
  ],

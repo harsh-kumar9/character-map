@@ -5,6 +5,10 @@
   "only 43 held-out items (target 100)"
  ],
  "length_ratio_pos_over_neg_median": 1.003,
+ "length_ratio_by_frame": {
+  "a": 1.003,
+  "b": 1.003
+ },
  "applicable_frames": [
   "a",
   "b"

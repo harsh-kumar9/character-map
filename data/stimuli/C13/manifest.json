@@ -2,7 +2,12 @@
  "concept": "C13",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 0.981,
+ "length_ratio_pos_over_neg_median": 0.984,
+ "length_ratio_by_frame": {
+  "a": 0.993,
+  "c": 0.99,
+  "d": 0.965
+ },
  "applicable_frames": [
   "a",
   "c",
