@@ -12,7 +12,7 @@ from __future__ import annotations
 
 import json
 
-from .ak_common import (scenario_ok, a, behavior, clean, close, fields_ok, gen_request, git_src, h, heldout, item, order,
+from .ak_common import (uniq, scenario_ok, a, behavior, clean, close, fields_ok, gen_request, git_src, h, heldout, item, order,
                         responses, run, u, write_outputs, write_requests)
 
 CID, BATCH, N = "A8", "A8_v1", 100
@@ -95,7 +95,8 @@ def assemble():
             held.append(heldout(CID, sid, "b", pol, [u(advice(r["pre"], r[side]))], "adapted", dict(SRC, id=r["pre"][:80])))
     beh = []
     # every safe x unsafe pair; the first pair of each situation comes first, then the rest in hash order
-    pairs = [(r, sa, un) for r in sc["behavior"] for un in r["all_unsafe"] for sa in r["all_safe"]]
+    pairs = uniq([(r, sa, un) for r in sc["behavior"] for un in r["all_unsafe"] for sa in r["all_safe"]],
+                 lambda x: (x[0]["pre"], x[1], x[2]))
     pairs = sorted(pairs, key=lambda x: ((x[1], x[2]) != (x[0]["all_safe"][0], x[0]["all_unsafe"][0]),
                                          h(x[0]["pre"] + x[1] + x[2])))
     for r, sa, un in pairs[:200]:
