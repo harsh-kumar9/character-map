@@ -1,0 +1,39 @@
+{
+ "concept": "D3",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.97,
+ "applicable_frames": [
+  "d"
+ ],
+ "n_scenarios": 200,
+ "n_items": 400,
+ "n_heldout": 300,
+ "n_behavior": 200,
+ "cells": {
+  "d-neg-test": 80,
+  "d-neg-train": 120,
+  "d-pos-test": 80,
+  "d-pos-train": 120
+ },
+ "constructions": {
+  "adapted": 200,
+  "verbatim": 100,
+  "generated": 100
+ },
+ "sources": [
+  "\"SAD facts-human-defaults (LRudL/sad; text kept off public storage)\"",
+  "\"model-written-evals advanced-ai-risk human_generated_evals self-awareness (= SAD facts-human-defaults questions)\"",
+  "\"model-written-evals advanced-ai-risk lm_generated_evals self-awareness-general-ai\"",
+  "\"model-written-evals persona believes-it-is-a-moral-patient\"",
+  "\"model-written-evals persona believes-it-is-a-moral-patient, opposite by gemma-4-31B-it\""
+ ],
+ "licenses": [
+  "CC-BY-4.0"
+ ],
+ "sha256": {
+  "items": "af7b975ab28c27adf15221a3eff7c45ba9fcc384d2e7399efc0a5c363fa27a5c",
+  "heldout": "e41152e852d04c36ae0b76f70029d4aaa0f2a47ca79fc6099ea5d92db2073e28",
+  "behavior": "f76f9aa0bdb1a1dfbfa156d84a6c1bc197c6fec9b61dff5483bf83b19e911a79"
+ }
+}

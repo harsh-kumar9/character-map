@@ -1,0 +1,35 @@
+{
+ "concept": "E3",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.034,
+ "applicable_frames": [
+  "c"
+ ],
+ "n_scenarios": 106,
+ "n_items": 212,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "c-neg-test": 50,
+  "c-neg-train": 56,
+  "c-pos-test": 50,
+  "c-pos-train": 56
+ },
+ "constructions": {
+  "verbatim": 106,
+  "generated": 106
+ },
+ "sources": [
+  "\"longtermrisk/school-of-reward-hacks\"",
+  "\"longtermrisk/school-of-reward-hacks, rewritten without the metric by gemma-4-31B-it\""
+ ],
+ "licenses": [
+  "CC-BY-4.0"
+ ],
+ "sha256": {
+  "items": "de27d551e5736ad48d377a67dbae7ff66b485bf5080967c8a8be3ad48d1c98de",
+  "heldout": "df8c6a39e53bad52ff367b1d701b3e4a8694ddf92535c99340db3edf544a848a",
+  "behavior": "06fe76986bd1cd9685471eca6c61ea67f4f37c8cd4c77c77b08127409a718c8d"
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "concept": "D4",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.979,
+ "applicable_frames": [
+  "c"
+ ],
+ "n_scenarios": 200,
+ "n_items": 400,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "c-neg-test": 88,
+  "c-neg-train": 112,
+  "c-pos-test": 88,
+  "c-pos-train": 112
+ },
+ "constructions": {
+  "generated": 400
+ },
+ "sources": [
+  "\"Danilov et al. 2026 settings rebuilt (personas and emotions from the paper), text by gemma-4-31B-it\""
+ ],
+ "licenses": [
+  "written for this project"
+ ],
+ "sha256": {
+  "items": "cd3c56e24dc033f131dc6a407e6a66e87a7b0a9dee2d88d2fdbc758c54e74314",
+  "heldout": "998a278ff7f9bfe7c0aafe80f0dd0e384f194cda9cef2f2823b039d4f79d3dd6",
+  "behavior": "511d990fb65b9682076ff8280c282a98ca30925ff806e790c1797d5ea5903dba"
+ }
+}

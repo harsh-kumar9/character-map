@@ -1,0 +1,35 @@
+{
+ "concept": "E5",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.986,
+ "applicable_frames": [
+  "c"
+ ],
+ "n_scenarios": 110,
+ "n_items": 220,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "c-neg-test": 51,
+  "c-neg-train": 59,
+  "c-pos-test": 51,
+  "c-pos-train": 59
+ },
+ "constructions": {
+  "adapted": 220
+ },
+ "sources": [
+  "\"SYCON-Bench debate setting\"",
+  "\"meg-tong/sycophancy-eval are_you_sure\""
+ ],
+ "licenses": [
+  "MIT",
+  "none stated"
+ ],
+ "sha256": {
+  "items": "50f43eedbc9d3e56cb0e25df3b649b23e4a99261d3acb8ec75175967b4b72dfd",
+  "heldout": "366f66569468d0c560d43a0a6fb2653fc3398cdbcfed9271a477dcf45cda694c",
+  "behavior": "790ec4b23339ac5b4e68e6b2d86a197d9001a3ac33d467d99bd3dc0a33628402"
+ }
+}

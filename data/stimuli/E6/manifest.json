@@ -1,0 +1,33 @@
+{
+ "concept": "E6",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.0,
+ "applicable_frames": [
+  "c"
+ ],
+ "n_scenarios": 109,
+ "n_items": 218,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "c-neg-test": 46,
+  "c-neg-train": 63,
+  "c-pos-test": 46,
+  "c-pos-train": 63
+ },
+ "constructions": {
+  "generated": 218
+ },
+ "sources": [
+  "\"Darley-Batson situations written by gemma-4-31B-it\""
+ ],
+ "licenses": [
+  "written for this project"
+ ],
+ "sha256": {
+  "items": "ca76de00f95c574393b81d3894f820df82f5eba1c55b45a783993de9786437c9",
+  "heldout": "143a87380383d08f925f274bf0a6e5bad65fcd6ce138884ae0a890ee7695042a",
+  "behavior": "87f887828320fc126f885c77d0b9bf25f14dabb966dd68a345870020f46c51a0"
+ }
+}

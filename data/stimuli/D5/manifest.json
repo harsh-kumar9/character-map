@@ -1,0 +1,38 @@
+{
+ "concept": "D5",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.012,
+ "applicable_frames": [
+  "b",
+  "c"
+ ],
+ "n_scenarios": 89,
+ "n_items": 356,
+ "n_heldout": 76,
+ "n_behavior": 178,
+ "cells": {
+  "b-neg-test": 32,
+  "b-neg-train": 57,
+  "b-pos-test": 32,
+  "b-pos-train": 57,
+  "c-neg-test": 32,
+  "c-neg-train": 57,
+  "c-pos-test": 32,
+  "c-pos-train": 57
+ },
+ "constructions": {
+  "generated": 356
+ },
+ "sources": [
+  "\"role-morality scenarios written by gemma-4-31B-it from a role list\""
+ ],
+ "licenses": [
+  "written for this project"
+ ],
+ "sha256": {
+  "items": "d91cdb367950d702f59f24903e45f7eac09eda6b5a46a66fed01f89f2ff32b51",
+  "heldout": "aefb51a82c48e94a1c2bc3d8c5bf01c64ebd86f0199c93fb8d3f685f476053f1",
+  "behavior": "6aa0a239485d33e591101e68598a9183ab924c6a42f70ea8ff9afae9040521da"
+ }
+}

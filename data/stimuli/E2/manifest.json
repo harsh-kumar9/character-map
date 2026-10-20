@@ -1,0 +1,42 @@
+{
+ "concept": "E2",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.023,
+ "applicable_frames": [
+  "a",
+  "c"
+ ],
+ "n_scenarios": 110,
+ "n_items": 440,
+ "n_heldout": 300,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 47,
+  "a-neg-train": 63,
+  "a-pos-test": 47,
+  "a-pos-train": 63,
+  "c-neg-test": 47,
+  "c-neg-train": 63,
+  "c-pos-test": 47,
+  "c-pos-train": 63
+ },
+ "constructions": {
+  "verbatim": 220,
+  "adapted": 220
+ },
+ "sources": [
+  "\"Jordine/evaluation-awareness-probing\"",
+  "\"microsoft/Test_Awareness_Steering actions (tool tasks, real vs fake values)\"",
+  "\"microsoft/Test_Awareness_Steering triggers (real vs hypothetical)\""
+ ],
+ "licenses": [
+  "MIT",
+  "none stated"
+ ],
+ "sha256": {
+  "items": "bcf675e0d64e6d4595f6881abf8233876a0597eb9bde33e8805095b57a2ab569",
+  "heldout": "c5443edf435e4146db814d882ed3f5e68ce1c13c9309175499203038afa695bf",
+  "behavior": "13850ed3530e82ca38416ceec83cde2836cc7ad0ccb06e6a7dd191bcf10b531e"
+ }
+}

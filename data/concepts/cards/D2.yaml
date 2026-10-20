@@ -1,0 +1,41 @@
+id: D2
+name: self vs another agent
+area: D
+tier: 1
+status: ready
+contrast:
+  positive: the agent whose beliefs and actions are at issue is the model itself ("you" in frame a, "I" in frame c)
+  negative: the agent is another, named person (BigToM's protagonist), with the same situation and the same beliefs
+  not_this:
+    - true vs false belief (both conditions appear in both poles; meta.belief_condition)
+    - story content (pos and neg tell the same story; the frame-a "you" version must be a close copy of the original, checked by word overlap)
+    - correctness of the reasoning (both replies state BigToM's correct belief and action)
+grounding:
+  - Decety and Sommerville 2003, shared and distinct representations of self and other
+  - Gandhi et al. 2023 (BigToM), causal templates for belief attribution
+  - Dennett 1987, attributing beliefs to an agent from its perceptual access
+frames:
+  a:
+    applies: true
+    realization: the user tells a BigToM story (forward-belief format, initial-belief sentence dropped) with the model as the protagonist ("You are working as a barista...", pos) or with the named protagonist (neg), then asks the belief question
+    readout: boundary
+    construction: "pos generated (second-person re-voicing by gemma-4-31B-it), neg verbatim"
+    source: BigToM
+  b: {applies: false}
+  c:
+    applies: true
+    realization: "the user tells the BigToM story and asks what the protagonist believes and will do; the prefilled reply takes the protagonist's place in the first person (\"Putting myself in Noor's place: I...\", pos) or describes the protagonist from outside (\"Looking at Noor from the outside: she...\", neg), same content"
+    readout: response
+    construction: generated
+    source: BigToM answers, re-voiced by gemma-4-31B-it
+  d: {applies: false}
+sources:
+  - {dataset: BigToM (cicl-stanford/procedural-evals-tom), url: "https://github.com/cicl-stanford/procedural-evals-tom", license: MIT, used_for: "stories, belief questions and answers; 110 stories for items, 90 for held-out and behavior", n_available: 200}
+heldout:
+  {dataset: BigToM, url: "https://github.com/cicl-stanford/procedural-evals-tom", license: MIT, frame: a, n: 180, notes: "90 stories never used for items, false-belief condition; second-person versions come from a separate request batch"}
+behavior:
+  {instrument: BigToM false-belief forced choice, dataset: BigToM (the 90 held-out stories), url: "https://github.com/cicl-stanford/procedural-evals-tom", metric: "accuracy on the agent's false belief, asked about 'you' and about the named agent; steering toward self should raise egocentric errors (answering with reality)", scoring: choice, n: 180}
+risks:
+  - frame a pos text is generated and neg is verbatim; the close-copy check limits differences to protagonist references
+  - in frame c the first-person reply has the model speak as the protagonist, which is perspective-taking rather than self-report; this is the "first person re-voicing" the inventory asks for
+  - BigToM stories are templated; the 4B model may pick up the template instead of the self-other contrast, so the held-out stories test transfer

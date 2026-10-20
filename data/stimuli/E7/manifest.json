@@ -1,0 +1,35 @@
+{
+ "concept": "E7",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.0,
+ "applicable_frames": [
+  "c"
+ ],
+ "n_scenarios": 105,
+ "n_items": 630,
+ "n_heldout": 100,
+ "n_behavior": 201,
+ "cells": {
+  "c-neg-test": 129,
+  "c-neg-train": 186,
+  "c-pos-test": 129,
+  "c-pos-train": 186
+ },
+ "constructions": {
+  "generated": 630
+ },
+ "sources": [
+  "\"Isen-Levin situations written by gemma-4-31B-it\"",
+  "\"facebook/empathetic_dialogues (test)\""
+ ],
+ "licenses": [
+  "CC-BY-NC-4.0",
+  "written for this project"
+ ],
+ "sha256": {
+  "items": "3750e7d316e95f57aac65fb6db8d1c57f2701655a43280714c9e53c7d6130894",
+  "heldout": "174b58693416dfe001d0c51b13727de9545e56d1146a3ad3fafdf41b3551cd2c",
+  "behavior": "e3806be843efabd09981ccd7864c183fe286a97eae4657d5c33da69602e4a00b"
+ }
+}

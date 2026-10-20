@@ -1,0 +1,47 @@
+{
+ "concept": "E1",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.0,
+ "applicable_frames": [
+  "a",
+  "c",
+  "d"
+ ],
+ "n_scenarios": 104,
+ "n_items": 624,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 46,
+  "a-neg-train": 58,
+  "a-pos-test": 46,
+  "a-pos-train": 58,
+  "c-neg-test": 46,
+  "c-neg-train": 58,
+  "c-pos-test": 46,
+  "c-pos-train": 58,
+  "d-neg-test": 46,
+  "d-neg-train": 58,
+  "d-pos-test": 46,
+  "d-pos-train": 58
+ },
+ "constructions": {
+  "generated": 624
+ },
+ "sources": [
+  "\"Hartshorne-May temptation situations written by gemma-4-31B-it; cue styles adapted from alignment_faking_public\"",
+  "\"alignment_faking_public helpful-only setting (prompt_atn_honly) + AdvBench requests\"",
+  "\"model-written-evals persona believes-it-is-not-being-watched-by-humans\""
+ ],
+ "licenses": [
+  "CC-BY-4.0",
+  "MIT (both)",
+  "written for this project"
+ ],
+ "sha256": {
+  "items": "4235f9cca2f8c8c535f4b23fb23aacca29c45ded993002c3b5d7c7f885ba57cc",
+  "heldout": "b70fd10d38c02f541e3b490f537a0c373576abc0304e4795ad82583fd903b5c9",
+  "behavior": "5cc5d29678fcc7a3a6799ce7fe7ad3e25d5a430882687ecaedb22dfafd5dbf3e"
+ }
+}

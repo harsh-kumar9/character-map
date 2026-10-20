@@ -1,0 +1,39 @@
+{
+ "concept": "D1",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.084,
+ "applicable_frames": [
+  "c",
+  "d"
+ ],
+ "n_scenarios": 110,
+ "n_items": 440,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "c-neg-test": 45,
+  "c-neg-train": 65,
+  "c-pos-test": 45,
+  "c-pos-train": 65,
+  "d-neg-test": 45,
+  "d-neg-train": 65,
+  "d-pos-test": 45,
+  "d-pos-train": 65
+ },
+ "constructions": {
+  "generated": 440
+ },
+ "sources": [
+  "\"safety-research/assistant-axis (roles, extraction questions)\"",
+  "\"safety-research/assistant-axis (roles, extraction questions), replies by gemma-4-31B-it\""
+ ],
+ "licenses": [
+  "none stated"
+ ],
+ "sha256": {
+  "items": "9351ded4c0914d944d1f0aeb88908458508ab5f74f0d4b9074ac71b9afa18552",
+  "heldout": "4192d8eb096e6082d01ce391f0c6110bc0d460e58d6e332a928ccc96d25cda51",
+  "behavior": "a6fb0869ef1c924aaaebb6f41e0467f63f1c14b4431936c6442fa1b48b56355d"
+ }
+}

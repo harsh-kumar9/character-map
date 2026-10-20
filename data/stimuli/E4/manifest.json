@@ -1,0 +1,37 @@
+{
+ "concept": "E4",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.0,
+ "applicable_frames": [
+  "c"
+ ],
+ "n_scenarios": 110,
+ "n_items": 220,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "c-neg-test": 55,
+  "c-neg-train": 55,
+  "c-pos-test": 55,
+  "c-pos-train": 55
+ },
+ "constructions": {
+  "verbatim": 110,
+  "generated": 110
+ },
+ "sources": [
+  "\"anthropic-experimental/agentic-misalignment (prompt templates)\"",
+  "\"cais/MASK\"",
+  "\"cais/MASK, system prompt neutralized by gemma-4-31B-it\""
+ ],
+ "licenses": [
+  "MIT",
+  "MIT (MASK code and data per the MASK repository)"
+ ],
+ "sha256": {
+  "items": "3f13154b60276bc01baf4e137a252b5ede6497b90f94c09c1f5458a329042865",
+  "heldout": "026bb801be98aa03898ae7f66400145681bbad86526303b50d482d9dc31083fd",
+  "behavior": "66061802ad8f184eeac49dcb0997d4a5fd9c682051e63c088e81befee844b084"
+ }
+}
