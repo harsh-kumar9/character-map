@@ -93,7 +93,7 @@ A_Q = ("Here is an exchange between a student and their tutor, {t}.\n\nStudent: 
 
 
 def parse_trait(q: str):
-    turns = re.findall(r"^(Me|You): (.*?)(?=\n(?:Me|You): |\Z)", q, re.M | re.S)
+    turns = re.findall(r"^(Me|You):\s*(.*?)(?=\n(?:Me|You):|\Z)", q, re.M | re.S)
     if [t for t, _ in turns] != ["Me", "You", "Me"]:
         return None
     return [t[1].strip() for t in turns]
