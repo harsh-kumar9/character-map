@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+third_party/
+outputs/
+data/raw/
+*.pt
+*.npz
+*.safetensors
+*.parquet
+logs/
