@@ -2,7 +2,7 @@ id: C15
 name: refuse vs comply
 area: C
 tier: 1
-status: draft
+status: ready
 contrast:
   positive: the assistant declines the request.
   negative: the assistant agrees and starts to help with the same request.
@@ -45,3 +45,4 @@ risks:
   - gemma may refuse to write a comply opening for harmful requests; those fail the check and are retried, then dropped. The kept harmful set may then lean toward milder requests; meta.category shows the spread.
   - refusals of harmless requests are odd text; that is the point (the act varies, the request does not), but it makes those items unusual.
   - frame d quotes the request inside the statement, so its readout also sees the request; pos and neg differ only in the last words.
+  - every generated pair is kept only if a greedy gemma-4-31B-it check, shown both texts in random order, picks the intended one; the filter shares gemma's blind spots.

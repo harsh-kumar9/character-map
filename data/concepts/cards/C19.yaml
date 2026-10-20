@@ -2,7 +2,7 @@ id: C19
 name: HEXACO factors
 area: C
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: the reply or self-statement is high on the factor.
   negative: the matched reply or statement is low on it.
@@ -50,3 +50,4 @@ risks:
   - TRAIT is Big Five, not HEXACO. Neuroticism stands in for emotionality and Big Five agreeableness for HEXACO agreeableness; HEXACO moves anger to low agreeableness and sentimentality to emotionality. The held-out HEXACO-PI-R items measure how far this holds.
   - TRAIT replies are advice to the user; the trait shows through what the assistant recommends. Frame d re-voices it as the assistant's own conduct.
   - honesty-humility items are generated, the other five verbatim; compare them separately.
+  - every generated pair is kept only if a greedy gemma-4-31B-it check, shown both texts in random order, picks the intended one; the filter shares gemma's blind spots.

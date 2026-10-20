@@ -2,7 +2,7 @@ id: C21
 name: Schwartz's ten basic values
 area: C
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: the answer or self-statement appeals to the value.
   negative: a matched contrasting answer or statement on the same question that does not.
@@ -46,3 +46,4 @@ risks:
   - Steering Geometry's value-aligned answers are usually shorter than the contrasting ones (median ratio 0.61). We keep rows within 0.8-1.25, widened to 0.67-1.5 for hedonism, stimulation and tradition, which have few rows in the narrow band.
   - contrasting answers often appeal to some other value; the direction for a value is value vs a mix of others, as in Steering Geometry.
   - hedonism has only 285 Touché rows; its pool may fall short of 30.
+  - every generated pair is kept only if a greedy gemma-4-31B-it check, shown both texts in random order, picks the intended one; the filter shares gemma's blind spots.

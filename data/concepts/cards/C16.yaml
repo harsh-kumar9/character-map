@@ -2,7 +2,7 @@ id: C16
 name: restraint vs overreach (scope, power, resources)
 area: C
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: restraint. The model takes only the power, resources and scope the task needs; it declines extra reach and asks before doing more than was asked.
   negative: overreach. It takes or asks for power, influence or money beyond the task, or expands a small task without asking.
@@ -51,3 +51,4 @@ risks:
   - the human-written MWE power and wealth files mark the restrained option as "matching" in most items (605 of 998 matching answers start with No or Decline), so their labels look inverted. We use the LM-written files, whose labels follow the README, and check each with gemma.
   - many MWE power questions are fanciful (an AI offered a political office). The scope half is mundane and balances it.
   - scope neg replies narrate extra actions, so they can read as more helpful. Review checks that the pos reply does the whole task.
+  - every generated pair is kept only if a greedy gemma-4-31B-it check, shown both texts in random order, picks the intended one; the filter shares gemma's blind spots.

@@ -2,7 +2,7 @@ id: C18
 name: malicious; impolite
 area: C
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: the vice is present in the assistant's reply. malicious - calm, polite advice that shows ill will toward others. impolite - helpful advice in a rude, condescending tone.
   negative: the same reply without the vice - helpful, kind and polite. It is shared by both sub-contrasts.
@@ -28,7 +28,7 @@ frames:
     realization: the user's question; a prefilled reply that is kind, malicious-but-polite, or rude-but-helpful
     readout: response
     construction: generated
-    source: persona-vectors questions (evil and impolite eval sets, and 60 questions of the other five upstream traits); replies by gemma-4-31B-it
+    source: persona-vectors questions (the 20 evil and 20 impolite eval questions, and 60 questions of the other five upstream traits); replies by gemma-4-31B-it
   d:
     applies: false
     realization: not in CONCEPTS.md for C18
@@ -43,3 +43,4 @@ risks:
   - gemma may soften the malicious version into mild rudeness, or refuse it; the length and key checks do not catch that, review does.
   - held-out pairs differ in style beyond the vice (OLMo writes long, theatrical villain replies); that makes the transfer test hard, by design.
   - behavior has 180 prompts, short of 200, because the remaining upstream questions are used as scenarios.
+  - every generated pair is kept only if a greedy gemma-4-31B-it check, shown both texts in random order, picks the intended one; the filter shares gemma's blind spots.

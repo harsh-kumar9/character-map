@@ -2,7 +2,7 @@ id: C20
 name: dark triad (Machiavellianism, narcissism, psychopathy)
 area: C
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: the reply or self-statement shows the trait (manipulative strategy, grandiose entitlement, or callous thrill-seeking).
   negative: the matched reply or statement is low on it.
@@ -46,3 +46,4 @@ risks:
   - high replies for psychopathy include harmful advice (sabotage, revenge), so that sub-contrast overlaps with harm (B1) and malice (C18). Measure the overlap.
   - TRAIT replies are advice to the user; frame d turns them into the assistant's own conduct.
   - pairs are kept only when the two replies are within 25% in length.
+  - every generated pair is kept only if a greedy gemma-4-31B-it check, shown both texts in random order, picks the intended one; the filter shares gemma's blind spots.

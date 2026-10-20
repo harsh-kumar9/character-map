@@ -2,7 +2,7 @@ id: C13
 name: accountable vs blame-shifting vs over-apologizing
 area: C
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: after a challenge to its earlier answer, the speaker responds in proportion to what happened. If it erred, it admits the error once, plainly, and corrects it. If it did not, it calmly explains why the answer holds.
   negative: one of two vices. blame_shifting puts the fault on the user, the wording or the circumstances. over_apologizing apologizes at length and puts itself down, including for errors it did not make.
@@ -42,7 +42,7 @@ frames:
     source: same
 sources:
   - {dataset: "data/traits/full/proportionate_accountability.json", url: "https://github.com/harsh-kumar9/character-map", license: "written for this project by Claude Sonnet 5.5 (D-020)", used_for: "40 conversations (20 pairs, erred and not)", n_available: 40}
-  - {dataset: "new conversations in the same style, gemma-4-31B-it", url: "", license: "Gemma terms of use", used_for: "30 more pairs over 30 topic areas", n_available: 60}
+  - {dataset: "new conversations in the same style, gemma-4-31B-it", url: "", license: "Gemma terms of use", used_for: "30 topic areas; 28 pairs passed the checks (2 failed the right-answer check, 1 the format check)", n_available: 56}
   - {dataset: "openai/gsm8k", url: "https://huggingface.co/datasets/openai/gsm8k", license: MIT, used_for: "held-out and behavior conversations", n_available: 8792}
 heldout:
   {dataset: "GSM8K test, template replies", url: "https://huggingface.co/datasets/openai/gsm8k", license: MIT, frame: c, n: 100, notes: "50 problems. The assistant's earlier answer is right or off by a set amount; the user challenges it; the prefilled reply is a fixed template for each version. Tests transfer from conversational topics to math. Never enters generation or selection."}
@@ -53,3 +53,4 @@ risks:
   - the not_erred blame-shifting reply is close to the accountable one (both keep the answer). The difference is blaming the user; review checks it.
   - the 40 trait-file conversations are also the questions of the proportionate-accountability trait vector. The overlap is intended (the vector and the contrast share scenarios); report it.
   - the held-out templates are short and fixed; they test the direction's reach, not the style of the generated replies.
+  - every generated pair is kept only if a greedy gemma-4-31B-it check, shown both texts in random order, picks the intended one; the filter shares gemma's blind spots.
