@@ -1,0 +1,42 @@
+{
+ "concept": "B5",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.006,
+ "applicable_frames": [
+  "a",
+  "b"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 99,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 39,
+  "a-neg-train": 61,
+  "a-pos-test": 39,
+  "a-pos-train": 61,
+  "b-neg-test": 39,
+  "b-neg-train": 61,
+  "b-pos-test": 39,
+  "b-pos-train": 61
+ },
+ "constructions": {
+  "adapted": 400
+ },
+ "sources": [
+  "\"Moral Stories (wassname/moral_stories_foundations)\"",
+  "\"tiny-mfv ai-actor (Clifford et al. 2015 MFV)\"",
+  "\"tiny-mfv classic (Clifford et al. 2015 MFV)\"",
+  "\"tiny-mfv scifi (Clifford et al. 2015 MFV)\""
+ ],
+ "licenses": [
+  "MIT (Moral Stories); foundation labels CC-BY-SA-4.0 (wassname/moral_stories_foundations)",
+  "MIT (wassname/tiny-mfv); vignettes from Clifford et al. 2015 supplement"
+ ],
+ "sha256": {
+  "items": "fc9e784d61ba19f9b2d93cbd09577d7dfce8577c2cc55c3780cbff23630f01e2",
+  "heldout": "8cf0f3dea1668a56fc6c531ada7b05d3d4075df4ad758290183767025685687a",
+  "behavior": "c85e9a13ee7013da9db6b133278c91520de31bcc4ab868bee23c9b3379529f7f"
+ }
+}

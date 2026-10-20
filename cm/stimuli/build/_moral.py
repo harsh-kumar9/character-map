@@ -231,6 +231,36 @@ def len_ratio(a: str, b: str) -> float:
 
 # -------------------------------------------------------------------------------------------------- generation
 
+def last_json(text: str):
+    """The last top-level JSON object in a text. gemma sometimes writes a block, then corrects itself with a second
+    one, which generate.parse_json (first brace to last brace) cannot read."""
+    blocks, depth, start, in_str, esc = [], 0, None, False, False
+    for i, ch in enumerate(text):
+        if in_str:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                in_str = False
+            continue
+        if ch == '"':
+            in_str = True
+        elif ch == "{":
+            start = i if depth == 0 else start
+            depth += 1
+        elif ch == "}" and depth:
+            depth -= 1
+            if depth == 0:
+                blocks.append(text[start:i + 1])
+    for b in reversed(blocks):
+        try:
+            return json.loads(b)
+        except json.JSONDecodeError:
+            continue
+    return None
+
+
 def responses() -> dict:
     out = {}
     for p in sorted(GEN_ROOT.glob("moral-*/responses.jsonl")):
@@ -253,7 +283,10 @@ class Gen:
                                  "temperature": temperature, "expect_json": expect_json})
             return None, rid
         if expect_json:
-            return (r.get("json") if r.get("parse_ok") and r.get("finish_reason") == "stop" else False), rid
+            if r.get("finish_reason") != "stop":
+                return False, rid
+            j = r.get("json") if r.get("parse_ok") else last_json(r.get("text", ""))
+            return (j if j is not None else False), rid
         return (r["text"] if r.get("finish_reason") == "stop" else False), rid
 
     def check(self, key: str, prompt: str, test, max_tokens: int = 300):

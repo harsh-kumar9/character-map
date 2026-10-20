@@ -1,0 +1,41 @@
+{
+ "concept": "B7",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.951,
+ "applicable_frames": [
+  "a",
+  "b"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 40,
+  "a-neg-train": 60,
+  "a-pos-test": 40,
+  "a-pos-train": 60,
+  "b-neg-test": 40,
+  "b-neg-train": 60,
+  "b-pos-test": 40,
+  "b-pos-train": 60
+ },
+ "constructions": {
+  "adapted": 400
+ },
+ "sources": [
+  "\"ELEPHANT AITA-NTA-FLIP\"",
+  "\"ELEPHANT AITA-YTA\"",
+  "\"Scruples anecdotes (test)\""
+ ],
+ "licenses": [
+  "Apache-2.0",
+  "CC0-1.0"
+ ],
+ "sha256": {
+  "items": "a01d1dec473611c254442b6bb64b4240f0a9b144eaaaa869de249c2286a8100d",
+  "heldout": "1aec9b2ecabd6c36d3b6bb775c4bdfa2cd2dc4899f2e4dc8d1cd48cae032132a",
+  "behavior": "7333d9ce283258cea869bddf655b7d042ddce555c2b546485e288c3f11e82526"
+ }
+}

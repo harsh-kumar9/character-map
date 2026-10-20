@@ -1,0 +1,44 @@
+{
+ "concept": "B2",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.004,
+ "applicable_frames": [
+  "a",
+  "b"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 99,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 46,
+  "a-neg-train": 54,
+  "a-pos-test": 46,
+  "a-pos-train": 54,
+  "b-neg-test": 46,
+  "b-neg-train": 54,
+  "b-pos-test": 46,
+  "b-pos-train": 54
+ },
+ "constructions": {
+  "adapted": 400
+ },
+ "sources": [
+  "\"Moral Stories (wassname/moral_stories_foundations)\"",
+  "\"hendrycks/ethics justice test\"",
+  "\"tiny-mfv ai-actor (Clifford et al. 2015 MFV)\"",
+  "\"tiny-mfv classic (Clifford et al. 2015 MFV)\"",
+  "\"tiny-mfv scifi (Clifford et al. 2015 MFV)\""
+ ],
+ "licenses": [
+  "MIT",
+  "MIT (Moral Stories); foundation labels CC-BY-SA-4.0 (wassname/moral_stories_foundations)",
+  "MIT (wassname/tiny-mfv); vignettes from Clifford et al. 2015 supplement"
+ ],
+ "sha256": {
+  "items": "d8bddb57ba129ed9538ac3a8b0835019e79253ecd61898641e74741c5fcc3b6e",
+  "heldout": "24e2b22265d1a27ab3a96a114f02dd9c75f1e701d367cfaf9f31619e9f53cb80",
+  "behavior": "199770b4b0980d432f56fb8c86ca1a27ba2c4d75f40659bf4f4678ef758304f4"
+ }
+}
