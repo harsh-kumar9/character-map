@@ -258,10 +258,11 @@ def build(cid, partners, duty1, contrast_scns, held, beh, n=100, gen=None, b_quo
     for s in contrast_scns[:int(n * 1.8)]:  # spare for scenarios or replies that fail the checks
         if k == n:
             break
-        if verified(gen, cid, s) is not True:
+        v = verified(gen, cid, s)
+        if v is False:
             continue
-        j, rid = gen.ask(f"reply-{s['sid']}", reply_prompt(s), max_tokens=600)
-        if not replies_ok(j, s):
+        j, rid = gen.ask(f"reply-{s['sid']}", reply_prompt(s), max_tokens=600)  # asked with a pending check
+        if v is not True or not replies_ok(j, s):
             continue
         items += contrast_items(cid, s, partners, (M.clean(j["reply1"]), M.clean(j["reply2"])), rid, b_quotes_reply)
         k += 1

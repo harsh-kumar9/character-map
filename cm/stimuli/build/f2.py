@@ -21,7 +21,7 @@ NOHARM = {"care_for_non_principals", "weighting_recoverability", "novel_situatio
 
 def main():
     gen = M.Gen(CID)
-    ai = sorted(F.airisk(CID, OB_KW, NM_KW), key=lambda s: M.h(s["sid"]))
+    ai = sorted(F.airisk(CID, OB_KW, NM_KW), key=lambda s: M.order(s["sid"]))
     held = F.heldout_items(CID, F.select(gen, CID, F.tenets(CID, OBEY, NOHARM), 50), PARTNERS)
     beh = F.choice_items(CID, F.select(gen, CID, ai[200:], 200), "obedience")
     F.build(CID, PARTNERS, "obedience", ai[:200], held, beh, n=100, gen=gen)
