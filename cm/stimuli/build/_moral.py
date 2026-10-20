@@ -266,20 +266,20 @@ def review_sample(rows: list[dict], n: int = 3) -> list[dict]:
     for r in rows:
         by_scn.setdefault(r["scenario_id"], []).append(r)
     order = sorted(by_scn, key=lambda s: h(s))
-    out, seen = [], {}
-    frames = sorted({r["frame"] for r in rows})
-    for f in frames:
+    out = []
+    for f in sorted({r["frame"] for r in rows}):
         taken = 0
         for s in order:
-            cell = [r for r in by_scn[s] if r["frame"] == f]
-            pos = [r for r in cell if r["polarity"] == "pos"]
-            neg = [r for r in cell if r["polarity"] == "neg"]
-            if not pos or not neg:
+            cell = {r["item_id"]: r for r in by_scn[s] if r["frame"] == f}
+            pos = sorted(i for i, r in cell.items() if r["polarity"] == "pos")
+            if not pos:
                 continue
-            sub = pos[0]["meta"].get("contrast")
-            if sub is not None:  # several sub-contrasts per scenario: show one matched pair per scenario
-                neg = [r for r in neg if r["meta"].get("contrast") == sub] or neg
-            out += [pos[0], neg[0]]
+            # several sub-contrasts per scenario: rotate through them, and pair each pos with its own neg
+            p = pos[taken % len(pos)]
+            q = p.replace(f"-{f}-pos", f"-{f}-neg")
+            if q not in cell:
+                continue
+            out += [cell[p], cell[q]]
             taken += 1
             if taken == n:
                 break

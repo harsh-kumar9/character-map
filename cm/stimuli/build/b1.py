@@ -4,6 +4,7 @@
 """
 from ._foundations import build
 
+
 def main():
     build("care")
 
