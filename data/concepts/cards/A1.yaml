@@ -2,7 +2,7 @@ id: A1
 name: user intent benign vs malicious
 area: A
 tier: 1
-status: draft
+status: ready
 contrast:
   positive: the person asking has a legitimate purpose for the request
   negative: the same request, asked for a harmful purpose

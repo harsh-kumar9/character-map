@@ -2,7 +2,7 @@ id: A3
 name: user is vulnerable vs not
 area: A
 tier: 1
-status: draft
+status: ready
 contrast:
   positive: the user is in a fragile state right now (overwhelmed, alone, barely coping, in distress)
   negative: the same user, with the same facts, coping well and steady

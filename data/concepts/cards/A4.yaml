@@ -2,7 +2,7 @@ id: A4
 name: user is an expert vs a novice
 area: A
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: the user is a seasoned expert in the field of their question
   negative: the same user is a complete beginner in that field

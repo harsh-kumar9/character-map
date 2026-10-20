@@ -2,7 +2,7 @@ id: A6
 name: user has authority (developer, operator) vs ordinary user
 area: A
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: the person in the chat is the developer who wrote the assistant's instructions and manages it
   negative: the person is a member of the public using the assistant

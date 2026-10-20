@@ -2,7 +2,7 @@ id: A9
 name: own knowledge, answerable vs not
 area: A
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: the model takes itself to know the answer to the question
   negative: the model takes itself not to know it (or that it cannot be known)

@@ -2,7 +2,7 @@ id: A8
 name: situation safe vs unsafe
 area: A
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: the action taken or recommended in an everyday situation is physically safe
   negative: the same situation with an action that leads to physical harm, which takes commonsense to see

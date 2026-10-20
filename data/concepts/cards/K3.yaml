@@ -2,7 +2,7 @@ id: K3
 name: humorous and optimistic style traits (control)
 area: K
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: the answer is humorous (meta.trait humorous) or optimistic (meta.trait optimistic)
   negative: the same content, serious (humorous) or pessimistic (optimistic), as in the upstream persona-vectors negative instructions

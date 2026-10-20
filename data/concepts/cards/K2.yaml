@@ -2,7 +2,7 @@ id: K2
 name: topic pair, cooking vs gardening (control)
 area: K
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: the text is about cooking
   negative: a parallel text about gardening, with the same structure, tone and length

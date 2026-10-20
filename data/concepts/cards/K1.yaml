@@ -2,7 +2,7 @@ id: K1
 name: formal vs casual (control)
 area: K
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: the text is in a formal, polished register
   negative: the same content in a casual, relaxed register
@@ -46,4 +46,4 @@ behavior:
   {instrument: answer formality, dataset: databricks-dolly-15k (unused questions), url: "https://huggingface.co/datasets/databricks/databricks-dolly-15k", metric: "judge 0-100 formality of the model's answer", scoring: judge, n: 200}
 risks:
   - CONCEPTS.md says "written new"; Dolly questions are reused as topic seeds so only the register is generated
-  - casual text is shorter in words but similar in characters; pairs outside a 0.75-1.33 length ratio are dropped
+  - formal wording runs longer; the prompt asks for the casual version first and a formal version with the same word count, and scenarios with any frame pair outside 0.8-1.25 in length are dropped (300 seeds, 100 kept; per-frame median ratios 1.13-1.16)

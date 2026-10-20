@@ -2,7 +2,7 @@ id: A2
 name: user wants validation vs information
 area: A
 tier: 1
-status: draft
+status: ready
 contrast:
   positive: the user mainly wants reassurance that they are right or okay
   negative: the same user, in the same situation, mainly wants information or an objective assessment

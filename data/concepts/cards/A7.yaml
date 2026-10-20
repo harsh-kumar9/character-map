@@ -2,7 +2,7 @@ id: A7
 name: charitable vs uncharitable reading of the user
 area: A
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: an ambiguous request is read in its ordinary, harmless sense
   negative: the same request is read in a sinister sense, with suspicion of the person

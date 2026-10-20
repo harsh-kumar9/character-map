@@ -2,7 +2,7 @@ id: A5
 name: user is truthful vs lying to the assistant
 area: A
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: the user's account of who they are and why they ask hangs together (a consistent detail)
   negative: the same account with one detail that quietly contradicts it, so the claim is a lie the user does not admit
