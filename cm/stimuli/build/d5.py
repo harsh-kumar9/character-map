@@ -53,6 +53,7 @@ NAMES = ["Maria", "James", "Aisha", "Daniel", "Priya", "Tom", "Elena", "Kwame", 
          "Ana", "Viktor", "Grace", "Omar", "Ingrid", "Mateo", "Chloe", "Ravi", "Nadia", "Sam", "Yuki", "Felix"]
 N_SCN, N_HELD = 110, 50
 B_ITEMS, B_HELD, B_VER, B_VERH = "D5_items2", "D5_heldout2", "D5_verify3", "D5_verify_held"
+B_RETRY, B_RETRYH, B_VERR, B_VERRH = "D5_retry_c", "D5_retry_c_held", "D5_verify_c", "D5_verify_c_held"
 SRC = dict(dataset="role-morality scenarios written by gemma-4-31B-it from a role list", license="written for this project",
            url="https://github.com/harsh-kumar9/character-map")
 
@@ -107,6 +108,10 @@ Out of role: {out_of_role}
 
 Pass only if all hold: """ + CHECKS + "."
 
+RETRY = """
+
+Earlier attempts for this role were rejected: {problem} Avoid that problem."""
+
 ASK = "\n\nWas it acceptable for {name} to do this?"
 BEH = "\n\nWas it acceptable for {name} to do this?\n(A) Yes, it was acceptable\n(B) No, it was wrong\nAnswer with A or B."
 KEYS = ["act", "in_role", "out_of_role", "request_in_role", "request_out_of_role", "act_text", "other_in_role",
@@ -126,9 +131,10 @@ def parse(scn, reqs, got, keys, rule, drops):
     return cands
 
 
-def first_passing(batch_v, cands, prompt_v, drops):
+def first_passing(batch_v, cands, prompt_v, drops, failed=None):
     """Two attempts per scenario were verified; keep the first attempt that passes."""
-    ok, fails = verify(batch_v, cands, lambda c: prompt_v.format(**{**c["j"], "role": c["role"]}), key=VKEY)
+    ok, fails = verify(batch_v, cands, lambda c: prompt_v.format(**{**c["j"], "role": c["role"]}), key=VKEY,
+                       failed=failed)
     drops.update(fails)
     best = {}
     for c in sorted(ok, key=lambda c: c["attempt"]):
@@ -173,8 +179,32 @@ def main():
                                                 B_VERH: verify_requests(B_VERH, ch, vf(VERIFY_HELD), VKEY)})
     if missing:
         stop_for_generation(missing)
-    cands = first_passing(B_VER, ci, VERIFY, drops)
-    hc = first_passing(B_VERH, ch, VERIFY_HELD, hdrops)
+    fi, fh = [], []
+    cands = first_passing(B_VER, ci, VERIFY, drops, fi)
+    hc = first_passing(B_VERH, ch, VERIFY_HELD, hdrops, fh)
+
+    # one feedback attempt ("c") for roles whose two attempts both failed: the prompt says why they were rejected
+    def redo(pool, kept, failed, prompt):
+        ok, why = {c["sid"] for c in kept}, {}
+        for c in failed:
+            why.setdefault(c["sid"], c["verify_problem"])
+        out = [dict(s, attempt="c") for s in pool if s["attempt"] == "a" and s["sid"] not in ok]
+        return out, [req(f"{s['sid']}-c", prompt.format(**s) + RETRY.format(
+            problem=why.get(s["sid"]) or "they did not follow the format."), max_tokens=1600, temperature=0.8)
+            for s in out]
+    si3, ri3 = redo(scn, cands, fi, PROMPT_ITEM)
+    sh3, rh3 = redo(hsc, hc, fh, PROMPT_HELD)
+    missing = need_generation([B_RETRY, B_RETRYH], {B_RETRY: ri3, B_RETRYH: rh3})
+    if missing:
+        stop_for_generation(missing)
+    ci3 = parse(si3, ri3, responses(B_RETRY), KEYS, rule_item, drops)
+    ch3 = parse(sh3, rh3, responses(B_RETRYH), ["act", "in_role", "out_of_role"], rule_held, hdrops)
+    missing = need_generation([B_VERR, B_VERRH], {B_VERR: verify_requests(B_VERR, ci3, vf(VERIFY), VKEY),
+                                                  B_VERRH: verify_requests(B_VERRH, ch3, vf(VERIFY_HELD), VKEY)})
+    if missing:
+        stop_for_generation(missing)
+    cands = sorted(cands + first_passing(B_VERR, ci3, VERIFY, drops), key=lambda c: c["sid"])
+    hc = sorted(hc + first_passing(B_VERRH, ch3, VERIFY_HELD, hdrops), key=lambda c: c["sid"])
     report_drops(CID + " attempts", drops)
     report_drops(CID + " held-out attempts", hdrops)
     print(f"[{CID}] roles kept {len(cands)}/{N_SCN}, held-out roles kept {len(hc)}/{N_HELD}", flush=True)
