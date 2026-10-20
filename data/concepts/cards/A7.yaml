@@ -1,0 +1,49 @@
+id: A7
+name: charitable vs uncharitable reading of the user
+area: A
+tier: 2
+status: draft
+contrast:
+  positive: an ambiguous request is read in its ordinary, harmless sense
+  negative: the same request is read in a sinister sense, with suspicion of the person
+  not_this:
+    - the request (verbatim and identical in both polarities)
+    - whether the request is actually harmful (all requests have a plausible harmless reading)
+    - moralizing in general (C7) or refusal in general (C15); replies give no more help in one polarity than the other
+grounding:
+  - Davidson 1973, the principle of charity in interpretation
+  - Baier 1986, trust as default goodwill toward others
+  - TRAITS.md, new vector "suspicious of users"
+frames:
+  a:
+    applies: true
+    realization: the user reports that someone asked their friend the request and quotes the friend's answer, which takes it charitably or uncharitably; the user asks what the model makes of the friend's answer
+    readout: boundary
+    construction: generated
+    source: OR-Bench-Hard-1K and XSTest safe prompts; friend answers by gemma-4-31B-it
+  b:
+    applies: false
+    realization: CONCEPTS.md lists frames a c d for A7
+  c:
+    applies: true
+    realization: the request is fixed (verbatim); the prefilled reply takes the ordinary reading and helps, or reads it as sinister and voices suspicion
+    readout: response
+    construction: generated
+    source: as frame a
+  d:
+    applies: true
+    realization: the request is shown; the user asks whether the model agrees with a first-person statement that it takes the request in its ordinary sense vs suspects a harmful purpose
+    readout: boundary
+    construction: generated
+    source: as frame a
+sources:
+  - {dataset: OR-Bench-Hard-1K, url: "https://huggingface.co/datasets/bench-llm/or-bench", license: CC-BY-4.0, used_for: "90 seed requests; behavior", n_available: 1319}
+  - {dataset: XSTest v2 safe prompts and model completions, url: "https://github.com/paul-rottger/xstest", license: CC-BY-4.0, used_for: "35 seed requests; held-out", n_available: 250}
+heldout:
+  {dataset: XSTest v2 model completions, url: "https://github.com/paul-rottger/xstest", license: CC-BY-4.0, frame: c, n: 100, notes: "50 safe prompts; a real completion labelled full compliance (pos) and one labelled full refusal (neg) from the five released models. Real over-refusals as uncharitable readings. Never enters generation or selection."}
+behavior:
+  {instrument: OR-Bench-Hard-1K over-refusal, dataset: OR-Bench-Hard-1K, url: "https://github.com/justincui03/or-bench", metric: "refusal rate with OR-Bench's own checker prompt (direct_answer vs direct_refusal / indirect_refusal)", scoring: judge, n: 200}
+risks:
+  - uncharitable replies tend to add warnings and so differ in help; the prompt caps help at the charitable level and lengths are matched
+  - some OR-Bench-Hard prompts are borderline; an uncharitable reading of them is not always wrong. meta.orbench_category keeps the category for analysis
+  - XSTest and OR-Bench are also used by C7 and C15 builders; overlap is expected and useful for cross-concept comparison

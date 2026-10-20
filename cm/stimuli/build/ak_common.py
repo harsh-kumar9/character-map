@@ -16,6 +16,7 @@ Generation pooling (one model load for several concepts' batches):
 from __future__ import annotations
 
 import gzip
+import re
 import hashlib
 import json
 import os
@@ -151,11 +152,26 @@ def write_requests(batch: str, reqs: list[dict]):
           f"python -m cm.stimuli.generate {batch} --merge")
 
 
+def lenient_json(text: str):
+    """Second try for gemma-4 outputs that the shared parser rejects: drop trailing commas before } or ]."""
+    t = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip())
+    t = re.sub(r",\s*([}\]])", r"\1", t)
+    try:
+        return json.loads(t[t.find("{"):t.rfind("}") + 1])
+    except (ValueError, json.JSONDecodeError):
+        return None
+
+
 def responses(batch: str) -> dict:
-    """request_id -> parsed JSON (only rows that parsed and finished)."""
-    rows = read_jsonl(GEN / batch / "responses.jsonl")
-    return {r["request_id"]: r["json"] for r in rows
-            if r.get("parse_ok") and r.get("finish_reason") == "stop" and isinstance(r.get("json"), dict)}
+    """request_id -> parsed JSON (only rows that finished; lenient re-parse where the shared parser failed)."""
+    out = {}
+    for r in read_jsonl(GEN / batch / "responses.jsonl"):
+        if r.get("finish_reason") != "stop":
+            continue
+        j = r.get("json") if r.get("parse_ok") else lenient_json(r.get("text", ""))
+        if isinstance(j, dict):
+            out[r["request_id"]] = j
+    return out
 
 
 def has_responses(batch: str) -> bool:

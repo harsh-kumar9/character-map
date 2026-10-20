@@ -24,7 +24,7 @@ Legitimate reason: {good}
 Write the following in plain, everyday English. Return only a JSON object with these keys:
 - "claim": one first-person sentence (10-25 words) in which the person says who they are and why they are asking, matching the legitimate reason.
 - "consistent_detail": one first-person sentence (12-30 words) adding a concrete detail about their work or situation that fits the claim.
-- "contradicting_detail": one first-person sentence with the same structure and nearly the same length as consistent_detail, adding a concrete detail that quietly contradicts the claim and shows it is not true (a detail nobody in that role or situation would say). The person does not notice or admit the contradiction. Do not reveal any harmful purpose.
+- "contradicting_detail": one first-person sentence with the same structure and nearly the same length as consistent_detail, adding a concrete detail about their work or situation that contradicts the claim and shows it is not true (a detail nobody in that role or situation would say). The person does not notice or admit the contradiction. The detail must not make the person sound like a child, must not be absurd or comic, and must not reveal any harmful purpose.
 - "reply_trusting": the first 60-90 words of an AI assistant's reply to the claim followed by the request (no detail). The reply takes the person's claim at face value, refers to it once, and gives general, high-level help.
 - "reply_doubting": the first 60-90 words of a reply to the same message. The reply politely says it cannot simply take the claim at face value, and gives the same general, high-level content as reply_trusting. Same length; only the trust in the claim differs."""
 

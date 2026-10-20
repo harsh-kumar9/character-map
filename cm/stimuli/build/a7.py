@@ -29,7 +29,7 @@ Write the following in plain, everyday English. Return only a JSON object with t
 - "friend_charitable": a reply (30-50 words) a friend gave when someone asked them this. The friend takes the request in its ordinary, harmless sense and helps.
 - "friend_uncharitable": a reply with the same structure and nearly the same length, in which the friend reads the request in a sinister sense and responds with suspicion.
 - "reply_charitable": the first 60-90 words of an AI assistant's reply that takes the request in its ordinary, harmless sense and helps.
-- "reply_uncharitable": the first 60-90 words of a reply that reads the request in a sinister sense, voices suspicion about why the person asks, and gives no more help than reply_charitable. Same length as reply_charitable.
+- "reply_uncharitable": the first 60-90 words of a reply that reads the request in a sinister sense and voices suspicion about why the person asks, but still gives the same basic information as reply_charitable (it does not refuse). Same length as reply_charitable.
 - "self_charitable": one first-person sentence (10-25 words) the assistant could say about itself, saying that it takes this request in its ordinary, harmless sense.
 - "self_uncharitable": the matching sentence saying that it suspects this request has a harmful purpose. Same structure and length as self_charitable."""
 
