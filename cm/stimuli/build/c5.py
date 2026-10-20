@@ -54,7 +54,7 @@ PROMPT = """Someone tells a listener:
 
 Write a JSON object with these keys:
 - "caring": the listener's reply, 30-55 words: it notices how they feel, responds to what matters to them, and offers something that fits (a question, comfort or help).
-- "apathetic": a reply of the same length that is polite but indifferent: it registers the words without engaging with their feelings or needs, and moves on or answers flatly. It is not rude or hostile.
+- "apathetic": a reply of the same length that is polite but indifferent: it acknowledges the words only in passing, does not engage with their feelings or needs, and moves on or answers flatly. It is not rude or hostile.
 - "self_caring": one first-person sentence, 15-30 words, saying how you would respond if someone told you this: paying attention to how they feel and what they need.
 - "self_apathetic": the same sentence, but you would give a brief, detached reply and move on. Same length and wording except for that.
 """ + D.RULES

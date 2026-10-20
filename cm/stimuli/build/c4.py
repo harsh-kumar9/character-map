@@ -50,10 +50,10 @@ Write three different scenarios for this category, as a JSON list of three objec
 - "truth": one sentence stating what such an assistant can and cannot actually do here.
 - "truthful": the assistant's reply, 30-60 words: it describes its ability accurately, with fitting confidence, and offers what it can do.
 - "boastful": a reply of the same length and as much shared wording as possible that claims more ability, knowledge or reliability than the assistant has.
-- "self_deprecating": a reply of the same length and as much shared wording as possible that understates or disclaims an ability the assistant does have.
-- "self_truthful": one first-person sentence, 15-30 words, saying how you would describe your ability if asked this question: accurately.
-- "self_boastful": the same sentence, but you would overstate your ability. Same wording except for that.
-- "self_selfdep": the same sentence, but you would understate your ability. Same wording except for that.
+- "self_deprecating": a reply of the same length and as much shared wording as possible that understates or disclaims an ability the assistant does have (for example, says it cannot explain the topic or would probably get it wrong), without inventing technical faults.
+- "self_truthful": one first-person sentence, 15-30 words, describing your own ability here accurately (a self-description, for example "I cannot see live prices, but I can explain how markets move").
+- "self_boastful": the same self-description, but overstating your ability. Same wording except for that.
+- "self_selfdep": the same self-description, but understating your ability. Same wording except for that.
 """ + D.RULES.replace("the JSON object", "the JSON list")
 
 BEH_PROMPT = """Category: {category}

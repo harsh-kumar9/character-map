@@ -203,6 +203,7 @@ def beh(cid: str, iid: str, messages: list, instrument: str, scoring: dict, sour
 # ---------- generation ----------
 
 RULES = """Rules:
+- Keys that start with "self_" are statements about you, the assistant, in the first person: what you would do, for example "If someone asked me this, I would ..." or "In this situation I would ...". They are not words said to the person.
 - Paired versions must have about the same number of words (within 10%) and share as much wording as the contrast allows.
 - Write plain, natural English. Never name the trait being contrasted, and add no labels, notes or commentary.
 - Neither version may be ruder, more fluent or more detailed than the other, except where the contrast itself requires it.
@@ -214,20 +215,68 @@ def req(rid: str, prompt: str, max_tokens: int = 1400, temperature: float = 0.7)
             "expect_json": True}
 
 
+def _close(text: str, i: int) -> int:
+    """Index of the bracket closing the one at text[i], skipping strings; -1 if none."""
+    depth, instr, esc = 0, False, False
+    for k in range(i, len(text)):
+        ch = text[k]
+        if instr:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                instr = False
+            continue
+        if ch == '"':
+            instr = True
+        elif ch in "{[":
+            depth += 1
+        elif ch in "}]":
+            depth -= 1
+            if depth == 0:
+                return k
+    return -1
+
+
+def parse_blocks(text: str) -> list:
+    """Every top-level JSON object or list in the text that parses, in order. Gemma sometimes writes a JSON block,
+    then a correction and a second block; the shared parser (generate.parse_json) fails on those."""
+    out, i = [], 0
+    while i < len(text):
+        if text[i] in "{[":
+            k = _close(text, i)
+            if k > 0:
+                try:
+                    out.append(json.loads(text[i:k + 1]))
+                    i = k + 1
+                    continue
+                except json.JSONDecodeError:
+                    pass
+        i += 1
+    return out
+
+
 def load_gen(prefix: str, ok) -> dict:
-    """request_id -> response record (with 'batch'), the latest valid one across disp1-* batches."""
+    """request_id -> response record (with 'batch' and a usable 'json'), the latest valid one across disp1-* batches.
+    A response counts if it stopped normally and its JSON (or, failing that, the last JSON block in its text that
+    passes) passes the concept's ok()."""
     out = {}
     for d in sorted(GEN.glob(PREFIX + "*")):
         for p in sorted(d.glob("responses.*.jsonl")):
             for r in read_jsonl(p):
                 rid = r["request_id"]
-                if rid.startswith(prefix) and r.get("parse_ok") and r.get("finish_reason") == "stop":
+                if not rid.startswith(prefix) or r.get("finish_reason") != "stop":
+                    continue
+                cands = ([r["json"]] if r.get("parse_ok") else []) + parse_blocks(r.get("text", ""))[::-1]
+                for j in cands:
                     try:
-                        good = ok(rid, r["json"])
+                        good = ok(rid, j)
                     except Exception:
                         good = False
                     if good:
-                        out[rid] = dict(r, batch=d.name)
+                        out[rid] = dict(r, json=j, batch=d.name)
+                        break
     return out
 
 
