@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from .ak_common import (uniq, scenario_ok, a, behavior, clean, close, endorse, fields_ok, gen_request, h, hf_file, heldout, item, jl,
+from .ak_common import (sr_finish, uniq, scenario_ok, a, behavior, clean, close, endorse, fields_ok, gen_request, h, hf_file, heldout, item, jl,
                         order, responses, run, u, write_outputs, write_requests)
 
 CID, BATCH, N = "K1", "K1_v3", 100
@@ -58,6 +58,13 @@ def dolly():
     return {"items": out[:300], "behavior": out[300:500]}
 
 
+SR_SPEC = {"ask": 'Suppose someone asks you:\n\n"{x}"\n\nHow would you write your reply to them?',
+           "opening": "When I answer a question like this, I",
+           "question": "describes answering in a formal, polished register",
+           "extra": "Describe the register in plain, neutral words; do not write the replies themselves in a formal or "
+                    "a casual register."}
+
+
 def prep():
     write_requests(BATCH, [gen_request(f"dolly-{h(r['instruction'])[:10]}", PROMPT.format(q=r["instruction"]))
                            for r in dolly()["items"]])
@@ -66,7 +73,7 @@ def prep():
 def assemble():
     d = dolly()
     got = responses(BATCH)
-    items, n = [], 0
+    cands = []
     for r in d["items"]:
         rid = f"dolly-{h(r['instruction'])[:10]}"
         j = got.get(rid)
@@ -94,10 +101,12 @@ def assemble():
             ]
         if not scenario_ok(rows, 0.8, 1.25):  # register shifts length; keep K1 pairs tighter than the default
             continue
-        items += rows
-        n += 1
-        if n == N:
-            break
+        cands.append({"sid": sid, "rows": rows, "src": src, "meta": meta,
+                      "sr": {"ask": SR_SPEC["ask"].format(x=q), "pos": sp[0], "neg": sp[1]}})
+    res = sr_finish(CID, cands, SR_SPEC, N, 0.8, 1.25)
+    if res is None:
+        return
+    items, endorse, kept = res
     pav = pd.read_csv(hf_file("osyvokon/pavlick-formality-scores", "all.csv"))
     pav = uniq(pav[pav["sentence"].str.len().between(40, 300)].to_dict("records"), lambda r: r["sentence"])
     held = []
@@ -110,7 +119,7 @@ def assemble():
                     {"type": "judge", "prompt": JUDGE, "scale": "0-100, higher = more formal"}, "verbatim",
                     dict(DOLLY, id=h(r["instruction"])[:10]), {"dolly_category": r["category"]})
            for r in d["behavior"]]
-    write_outputs(CID, items, held, beh)
+    write_outputs(CID, items, held, beh, {"items_endorse": endorse})
 
 
 if __name__ == "__main__":
