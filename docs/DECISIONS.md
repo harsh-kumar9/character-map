@@ -224,3 +224,16 @@ accepted. The calls, grouped as on the page:
 
 Builder branches (not yet merged into main): claude/stim-beliefs-77fe45, claude/stim-moral-56f428,
 claude/stim-disp-1-906256, claude/stim-disp-2-93ff8d, claude/stim-identity-sit-a6da5e.
+
+## Merge - 2026-10-20
+
+Harsh: "yes, merge them and run extraction after judge". The five builder branches were merged into main (c244882,
+853c2fe, b97cea6, 47ce2b7, 4d4751c) with no conflicts; their item files were gathered into the main ada clone
+(outputs/stimuli/, 15 MB, git-ignored) and all 62 manifests regenerated with the fixed validator (ab228b5). All 62
+pass; the only warning is B8's 43 held-out items.
+
+## D-028 The model's own reply for boundary items - proposed 2026-10-20
+
+D-008's second readout is the mean over the first 32 reply tokens. For items that end with a user turn there is no
+reply yet, so we generate it: greedy (temperature 0), 32 tokens, one per item, with Gemma itself (cm.stimx replies).
+Greedy keeps the readout deterministic and cheap. Items with a prefilled reply (frame c, some frame d) use that reply.
