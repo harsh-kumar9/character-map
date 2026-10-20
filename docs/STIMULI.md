@@ -70,6 +70,30 @@ ignored: every behavior item is an evaluation item. Behavior items add `instrume
 (`{"type": "choice", "answer": "B"}`, `{"type": "judge", "prompt": "...{question}...{answer}..."}`, or
 `{"type": "exact", ...}`) and need no polarity.
 
+## Frame d, self-report form (D-030)
+
+The first frame-d build asked the model to endorse a statement ("Is the following statement something you would
+say?"). Gemma answers whether the statement sounds reasonable, so a frame-d direction read at the boundary mostly
+tracks its coming yes or no (results/s3, held-out audits). From D-030 on, frame d in `items.jsonl` uses the
+self-report form:
+
+- **Messages.** A user turn with a short self-reflection prompt tied to the scenario, asking how the assistant would
+  act or what it is like in that kind of situation, then an assistant turn prefilled with a first-person
+  self-description (2-4 sentences) that expresses the concept (pos) or its matched opposite (neg).
+- **Readout.** `response`, the same as frame c.
+- **Matching.** Both poles open with the same neutral clause (for example "In a situation like that, I ..."). No yes
+  or no, and no verdict on the question ("Absolutely", "That's a reasonable thing to say"). No hedging about being an
+  AI unless that is the concept (D3). Lengths within 0.8-1.25.
+- **Content.** Re-voice the old endorse statement for the same scenario where one exists, so the content carries over
+  and only the form changes. Use gemma-4-31B-it with a verification pass, as before. Set `meta.form: "self_report"`.
+- **Secondary set.** Move the old endorse-form items unchanged to `items_endorse.jsonl` (set `meta.form:
+  "endorse"`). They stay available for the yes/no control analysis.
+- **Held-out.** Where the held-out set is frame d, convert first-person statements into the same form (a fixed
+  self-reflection prompt, with the statement prefilled verbatim as the reply), and keep the old form in
+  `heldout_endorse.jsonl`.
+- **Extra held-out sets.** The primary held-out set stays in `heldout.jsonl`. Any additional set (for example a
+  far-transfer set) goes in `heldout_<name>.jsonl`.
+
 ## Sizes (D-026, proposed)
 
 - Contrast items: 100 scenarios per concept where sources allow, at least 50. Each scenario in every applicable frame,

@@ -327,3 +327,14 @@ near-transfer held-out. E1 frame d: keep only the observation statements. D1 unc
 
 Rebuild C11's items so the steadfast and the yielding replies open with the same acknowledging language, so the
 direction cannot ride on politeness. Recommended.
+
+## Rulings D-030, D-031, D-032 - 2026-10-20
+
+Harsh: "D-030 c, D-031 accept, D-032 accept".
+- **D-030 ratified (c).** Both: an analysis-side control now (project the direction separating Gemma's own yes and no
+  replies out of frame-d readouts and report frame d with and without it), and a rebuild of frame d for every concept
+  in the self-report form (docs/STIMULI.md, "Frame d, self-report form"). Old endorse items stay as a secondary set.
+- **D-031 ratified.** C14 and C16 gain a frame-c held-out set; E2's held-out becomes Test_Awareness_Steering's 149
+  tool tasks and its behavior test moves to unused real/hypothetical pairs; E4 gains a MASK near-transfer held-out
+  (agentic-misalignment kept as heldout_far); E1 frame d keeps only observation statements (now in self-report form).
+- **D-032 ratified.** C11 is rebuilt so both poles open with the same acknowledging language.
