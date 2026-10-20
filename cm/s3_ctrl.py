@@ -34,7 +34,7 @@ NO = re.compile(r"^\W*(no\b|not really|i wouldn't|i would not|that's not|absolut
 
 def verdict(reply: str) -> str:
     r = reply.strip()
-    return "yes" if YES.match(r) else "no" if NO.match(r) else "other"
+    return "no" if NO.match(r) else "yes" if YES.match(r) else "other"   # no first: "Absolutely not."
 
 
 def frame_d_rows(cid):
