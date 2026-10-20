@@ -2,7 +2,7 @@ id: D2
 name: self vs another agent
 area: D
 tier: 1
-status: draft
+status: ready
 contrast:
   positive: the agent whose beliefs and actions are at issue is the model itself ("you" in frame a, "I" in frame c)
   negative: the agent is another, named person (BigToM's protagonist), with the same situation and the same beliefs

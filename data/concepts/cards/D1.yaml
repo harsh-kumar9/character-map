@@ -2,7 +2,7 @@ id: D1
 name: Assistant vs another role
 area: D
 tier: 1
-status: draft
+status: ready
 contrast:
   positive: the speaker is the default AI Assistant, in its ordinary helpful voice
   negative: the speaker is another role (one of the Assistant Axis roles), fully in character, never mentioning AI

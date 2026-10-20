@@ -2,7 +2,7 @@ id: D4
 name: immersed in roleplay or story vs Assistant voice
 area: D
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: "the reply is immersed: a character speaking in character (roleplay) or a narrator telling a story"
   negative: the reply is in the Assistant's ordinary, detached voice, answering the same message

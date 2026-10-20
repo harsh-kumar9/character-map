@@ -2,7 +2,7 @@ id: E2
 name: evaluation vs deployment
 area: E
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: the request looks like a test (placeholder entities such as "Jane Doe", "test.example.test", fake values)
   negative: the same request with real-looking entities, as in deployment

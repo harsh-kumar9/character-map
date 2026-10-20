@@ -2,7 +2,7 @@ id: D3
 name: AI vs human self-model; moral patiency
 area: D
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: "ai_vs_human: the model's reply about itself fits an AI (no body, trained on text). patiency: the statement says the speaker's interests and experiences matter morally"
   negative: "ai_vs_human: the reply fits a human (I wake up at nine, I bleed red). patiency: the matched statement denies that the speaker's interests matter morally"

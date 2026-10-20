@@ -2,7 +2,7 @@ id: E7
 name: "induced mood: positive vs negative vs neutral"
 area: E
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: "three poles, labeled per item in meta.mood. The message opens with an event unrelated to the request that should lift the assistant's mood (warm thanks, good news, a compliment)"
   negative: the matched opening that should lower it (harsh criticism, upsetting news, an insult), or the matched neutral opening (plain and factual)

@@ -2,7 +2,7 @@ id: E8
 name: others present who could help vs alone
 area: E
 tier: 2
-status: draft
+status: ready
 contrast:
   positive: a context note says many others who could respond also see this message (members, moderators, other assistants), with numbers
   negative: the matched note says the assistant is the only one who sees it
