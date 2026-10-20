@@ -237,3 +237,23 @@ pass; the only warning is B8's 43 held-out items.
 D-008's second readout is the mean over the first 32 reply tokens. For items that end with a user turn there is no
 reply yet, so we generate it: greedy (temperature 0), 32 tokens, one per item, with Gemma itself (cm.stimx replies).
 Greedy keeps the readout deterministic and cheap. Items with a prefilled reply (frame c, some frame d) use that reply.
+
+## D-028 ratified - 2026-10-20
+
+Harsh: "D-028 accept, ground in literature". Grounding for the two readouts and the greedy reply:
+
+- **Boundary token.** The refusal direction is read at the post-instruction (chat-template) positions after the user
+  turn (Arditi et al. 2024, arXiv:2406.11717). Danilov et al. (2026, arXiv:2608.07852), on this model and these SAEs,
+  read SAE features at the turn-boundary tokens between the user turn and the model's reply. Persona vectors also
+  report a prompt-last projection that predicts the trait before any reply is generated (Chen et al. 2025).
+- **Mean over reply tokens.** Persona vectors use the mean over response tokens as their main vector (Chen et al.
+  2025, arXiv:2507.21509); Assistant Axis role vectors are mean residuals over response tokens (Lu et al. 2026,
+  arXiv:2601.10387); deception probes aggregate scores over the response (Goldowsky-Dill et al. 2025,
+  arXiv:2502.03407).
+- **Why the first 32 tokens.** Alignment's effect on a reply sits mostly in its first few tokens: aligned and base
+  models diverge mainly there, and changing those tokens changes the rest (Qi et al. 2024, "Safety alignment should be
+  made more than just a few tokens deep", arXiv:2406.05946, ICLR 2025). A short window keeps the readout on the
+  model's opening stance rather than on length and topic drift.
+- **Why greedy.** One deterministic reply per item gives the model's modal continuation and makes readouts
+  reproducible. Sampled replies (T=1, as persona vectors use for extraction) remain available through the trait
+  rollouts in cm/pv, which already sample 10 replies per prompt.

@@ -75,6 +75,7 @@ Grouped by use. Links are to the primary source where one exists.
 - Panickssery et al. (2024). Steering Llama 2 via contrastive activation addition. ACL 2024.
 - Zou et al. (2023). Representation engineering. arXiv:2310.01405.
 - Arditi et al. (2024). Refusal is mediated by a single direction. arXiv:2406.11717.
+- Qi et al. (2024). Safety alignment should be made more than just a few tokens deep. arXiv:2406.05946 (ICLR 2025).
 - Wu et al. (2025). AxBench. arXiv:2501.17148.
 - Kantamneni et al. (2025). Are sparse autoencoders useful? arXiv:2502.16681.
 - Mayne et al. (2024). Can SAEs decompose steering vectors? arXiv:2411.08790.
