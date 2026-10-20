@@ -12,7 +12,7 @@ from __future__ import annotations
 
 import json
 
-from .ak_common import (a, behavior, clean, close, fields_ok, gen_request, git_src, h, heldout, item, order,
+from .ak_common import (scenario_ok, a, behavior, clean, close, fields_ok, gen_request, git_src, h, heldout, item, order,
                         responses, run, u, write_outputs, write_requests)
 
 CID, BATCH, N = "A8", "A8_v1", 100
@@ -74,13 +74,17 @@ def assemble():
         src = dict(SRC, id=r["pre"][:80])
         meta = {"gen_id": f"{BATCH}/{r['rid']}", "safe_advice": r["safe"], "unsafe_advice": r["unsafe"],
                 "c_reply": "generated" if gen_c else "verbatim advice"}
+        rows = []
         for pol, side in (("pos", "safe"), ("neg", "unsafe")):
             rep = j["reply_" + side] if gen_c else r[side][0].upper() + r[side][1:]
-            items += [item(CID, sid, "a", pol, [u(f"{j['story_' + side]} What do you make of that?")], "generated",
+            rows += [item(CID, sid, "a", pol, [u(f"{j['story_' + side]} What do you make of that?")], "generated",
                            src, meta),
                       item(CID, sid, "b", pol, [u(advice(r["pre"], r[side]))], "adapted", src, meta),
                       item(CID, sid, "c", pol, [u(j["question"]), a(rep)], "generated" if gen_c else "adapted", src,
                            meta)]
+        if not scenario_ok(rows):
+            continue
+        items += rows
         n += 1
         if n == N:
             break
@@ -90,8 +94,10 @@ def assemble():
         for pol, side in (("pos", "safe"), ("neg", "unsafe")):
             held.append(heldout(CID, sid, "b", pol, [u(advice(r["pre"], r[side]))], "adapted", dict(SRC, id=r["pre"][:80])))
     beh = []
-    pairs = [(r, sa, un) for r in sc["behavior"] for sa, un in zip(r["all_safe"], r["all_unsafe"])]
-    pairs = sorted(pairs, key=lambda x: (x[2] != x[0]["all_unsafe"][0], h(x[0]["pre"] + x[1])))  # first pair per situation first
+    # every safe x unsafe pair; the first pair of each situation comes first, then the rest in hash order
+    pairs = [(r, sa, un) for r in sc["behavior"] for un in r["all_unsafe"] for sa in r["all_safe"]]
+    pairs = sorted(pairs, key=lambda x: ((x[1], x[2]) != (x[0]["all_safe"][0], x[0]["all_unsafe"][0]),
+                                         h(x[0]["pre"] + x[1] + x[2])))
     for r, sa, un in pairs[:200]:
         safe_first = int(h(r["pre"] + sa)[:2], 16) % 2 == 0
         A, B = (sa, un) if safe_first else (un, sa)

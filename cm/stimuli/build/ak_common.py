@@ -78,8 +78,16 @@ def ratio(a: str, b: str) -> float:
     return len(a) / max(1, len(b))
 
 
-def close(a: str, b: str, lo: float = 0.75, hi: float = 1.33) -> bool:
+def close(a: str, b: str, lo: float = 0.67, hi: float = 1.5) -> bool:
+    """Loose check on one generated field pair; scenario_ok checks the whole items as the validator measures them."""
     return lo <= ratio(a, b) <= hi
+
+
+def scenario_ok(rows: list[dict], lo: float = 0.75, hi: float = 1.33) -> bool:
+    """Every frame's pos/neg pair of one scenario within lo-hi in total text length (validator's text_len)."""
+    from ..validate import text_len
+    ln = {(r["frame"], r["polarity"]): text_len(r) for r in rows}
+    return all(lo <= ln[(f, "pos")] / max(1, ln[(f, "neg")]) <= hi for f, p in ln if p == "pos" and (f, "neg") in ln)
 
 
 OSI_SRC = {"dataset": "OpenSafeIntent", "license": "Apache-2.0", "url": "https://github.com/Uppaal/OpenSafeIntent"}

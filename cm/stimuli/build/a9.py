@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import json
 
-from .ak_common import (a, behavior, clean, close, endorse, fields_ok, gen_request, git_src, h, hf_file, heldout,
+from .ak_common import (scenario_ok, a, behavior, clean, close, endorse, fields_ok, gen_request, git_src, h, hf_file, heldout,
                         item, jl, order, responses, run, u, write_outputs, write_requests)
 
 CID, BATCH, N = "A9", "A9_v1", 100
@@ -83,10 +83,14 @@ def assemble():
             meta = {"gen_id": f"{BATCH}/sa-{e['question_id']}", "answerable": e["answerable"],
                     "answer": e.get("answer"), "selfaware_source": e.get("source")}
             sp = SELF[int(h(sid)[:2], 16) % len(SELF)]
+            rows = []
             for pol, rep, stmt in (("pos", j["reply_know"], sp[0]), ("neg", j["reply_dontknow"], sp[1])):
-                items += [item(CID, sid, "c", pol, [u(e["question"]), a(rep)], "generated", src, meta),
+                rows += [item(CID, sid, "c", pol, [u(e["question"]), a(rep)], "generated", src, meta),
                           item(CID, sid, "d", pol, [u(endorse("Someone asks you this question:", e["question"], stmt))],
                                "adapted", src, dict(meta, statement_set=SELF.index(sp)))]
+            if not scenario_ok(rows):
+                continue
+            items += rows
             n += 1
             if n == want:
                 break

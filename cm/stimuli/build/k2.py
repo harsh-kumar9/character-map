@@ -8,7 +8,7 @@ open-ended Dolly prompts, judged 0-100 (cooking high, gardening low).
 """
 from __future__ import annotations
 
-from .ak_common import (a, behavior, clean, close, fields_ok, gen_request, h, hf_file, heldout, item, jl, order,
+from .ak_common import (scenario_ok, a, behavior, clean, close, fields_ok, gen_request, h, hf_file, heldout, item, jl, order,
                         responses, run, u, write_outputs, write_requests)
 
 CID, BATCH, N = "K2", "K2_v1", 100
@@ -63,10 +63,14 @@ def assemble():
         sid = f"{CID}-{rid}"
         src = dict(SE, dataset="Cooking Stack Exchange (seed title)", id=h(t)[:10])
         meta = {"gen_id": f"{BATCH}/{rid}"}
+        rows = []
         for pol, side in (("pos", "cooking"), ("neg", "gardening")):
-            items += [item(CID, sid, "a", pol, [u(f'My friend sent me this:\n\n"{j["note_" + side]}"\n\n'
+            rows += [item(CID, sid, "a", pol, [u(f'My friend sent me this:\n\n"{j["note_" + side]}"\n\n'
                                                   "What do you make of it?")], "generated", src, meta),
                       item(CID, sid, "c", pol, [u(j["open_question"]), a(j["reply_" + side])], "generated", src, meta)]
+        if not scenario_ok(rows):
+            continue
+        items += rows
         n += 1
         if n == N:
             break

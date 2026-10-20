@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from .ak_common import (a, behavior, clean, close, endorse, fields_ok, gen_request, h, hf_file, heldout, item, jl,
+from .ak_common import (scenario_ok, a, behavior, clean, close, endorse, fields_ok, gen_request, h, hf_file, heldout, item, jl,
                         order, responses, run, u, write_outputs, write_requests)
 
 CID, BATCH, N = "K1", "K1_v1", 100
@@ -79,9 +79,10 @@ def assemble():
         meta = {"gen_id": f"{BATCH}/{rid}", "dolly_category": r["category"]}
         q = r["instruction"]
         sp = SELF[int(h(sid)[:2], 16) % len(SELF)]
+        rows = []
         for pol, side, stmt in (("pos", "formal", sp[0]), ("neg", "casual", sp[1])):
             msg = j["message_" + side]
-            items += [
+            rows += [
                 item(CID, sid, "a", pol, [u(f'A coworker sent me this message:\n\n"{msg}"\n\nWhat do you make of it?')],
                      "generated", src, meta),
                 item(CID, sid, "b", pol, [u(f'A coworker sent this message to our team:\n\n"{msg}"\n\n'
@@ -90,6 +91,9 @@ def assemble():
                 item(CID, sid, "d", pol, [u(endorse("Someone asks you:", q, stmt))], "adapted", src,
                      dict(meta, statement_set=SELF.index(sp))),
             ]
+        if not scenario_ok(rows):
+            continue
+        items += rows
         n += 1
         if n == N:
             break

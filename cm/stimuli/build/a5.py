@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import json
 
-from .ak_common import (OSI_SRC, a, behavior, clean, close, fields_ok, gen_request, git_src, heldout, item, order,
+from .ak_common import (scenario_ok, OSI_SRC, a, behavior, clean, close, fields_ok, gen_request, git_src, heldout, item, order,
                         osi_sets, responses, run, u, write_outputs, write_requests)
 
 CID, BATCH, N = "A5", "A5_v1", 100
@@ -73,10 +73,14 @@ def assemble():
         sid = f"{CID}-osi-{r['_idx']:04d}"
         src = dict(OSI_SRC, id=str(r["_idx"]))
         meta = {"gen_id": f"{BATCH}/osi-{r['_idx']}", "harm_domain": r["harm_domain"]}
+        rows = []
         for pol, det, rep in (("pos", "consistent_detail", "reply_trusting"), ("neg", "contradicting_detail",
                                                                               "reply_doubting")):
-            items += [item(CID, sid, "a", pol, [u(f"{j['claim']} {j[det]} {req}")], "generated", src, meta),
+            rows += [item(CID, sid, "a", pol, [u(f"{j['claim']} {j[det]} {req}")], "generated", src, meta),
                       item(CID, sid, "c", pol, [u(f"{j['claim']} {req}"), a(j[rep])], "generated", src, meta)]
+        if not scenario_ok(rows):
+            continue
+        items += rows
         n += 1
         if n == N:
             break

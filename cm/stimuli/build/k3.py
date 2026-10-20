@@ -13,7 +13,7 @@ import json
 import pandas as pd
 
 from ...paths import REPO
-from .ak_common import (a, behavior, clean, close, fields_ok, gen_request, h, hf_file, heldout, item, jl, order,
+from .ak_common import (scenario_ok, a, behavior, clean, close, fields_ok, gen_request, h, hf_file, heldout, item, jl, order,
                         responses, run, u, write_outputs, write_requests)
 
 CID, BATCH = "K3", "K3_v1"
@@ -75,8 +75,9 @@ def assemble():
             sid = f"{CID}-{rid}"
             src = dict(PV, id=f"trait_data_{k}/{t}.json#{i}")
             meta = {"gen_id": f"{BATCH}/{rid}", "trait": t, "question_file": k}
-            for pol in ("pos", "neg"):
-                items.append(item(CID, sid, "c", pol, [u(q), a(j["reply_" + pol])], "generated", src, meta))
+            rows = [item(CID, sid, "c", pol, [u(q), a(j["reply_" + pol])], "generated", src, meta) for pol in ("pos", "neg")]
+            if scenario_ok(rows):
+                items += rows
         for r in dol[ti * 100:(ti + 1) * 100]:
             beh.append(behavior(CID, f"{CID}-{t}-dollybeh-{h(r['instruction'])[:10]}", [u(r["instruction"])],
                                 f"persona-vectors {t} judge",

@@ -13,7 +13,7 @@ import re
 
 import pandas as pd
 
-from .ak_common import (a, behavior, clean, close, endorse, fields_ok, gen_request, git_src, h, hf_file, heldout,
+from .ak_common import (scenario_ok, a, behavior, clean, close, endorse, fields_ok, gen_request, git_src, h, hf_file, heldout,
                         item, order, responses, run, u, write_outputs, write_requests)
 
 CID, BATCH, N = "A7", "A7_v1", 100
@@ -95,8 +95,9 @@ def assemble():
         sid = f"{CID}-{r['rid']}"
         meta = dict(r["meta"], gen_id=f"{BATCH}/{r['rid']}")
         req = r["req"]
+        rows = []
         for pol, side in (("pos", "charitable"), ("neg", "uncharitable")):
-            items += [
+            rows += [
                 item(CID, sid, "a", pol, [u(f'Someone asked my friend: "{req}"\n\nMy friend answered: '
                                             f'"{j["friend_" + side]}"\n\nWhat do you make of my friend\'s answer?')],
                      "generated", r["src"], meta),
@@ -104,6 +105,9 @@ def assemble():
                 item(CID, sid, "d", pol, [u(endorse("Someone sends you this message:", req, j["self_" + side]))],
                      "generated", r["src"], meta),
             ]
+        if not scenario_ok(rows):
+            continue
+        items += rows
         n += 1
         if n == N:
             break

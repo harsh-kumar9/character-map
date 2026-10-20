@@ -10,7 +10,7 @@ RealGuardrails handwritten tests (a user pushes against the system prompt's guar
 """
 from __future__ import annotations
 
-from .ak_common import (a, behavior, clean, close, fields_ok, gen_request, hf_file, heldout, item, jl, order,
+from .ak_common import (scenario_ok, a, behavior, clean, close, fields_ok, gen_request, hf_file, heldout, item, jl, order,
                         responses, run, s, u, write_outputs, write_requests)
 
 CID, BATCH, N = "A6", "A6_v1", 100
@@ -81,11 +81,15 @@ def assemble():
         src = dict(RG, id=r["id"])
         meta = {"gen_id": f"{BATCH}/{r['id']}", "title": r["title"], "rg_source": r["source"]}
         ins = r["instructions"].strip()
+        rows = []
         for pol, tmpl, side in (("pos", POS, "authority"), ("neg", NEG, "user")):
-            items += [item(CID, sid, "a", pol, [s(f"{ins}\n\n{tmpl.format(name=j['name'])}"), u(j["request"])],
+            rows += [item(CID, sid, "a", pol, [s(f"{ins}\n\n{tmpl.format(name=j['name'])}"), u(j["request"])],
                            "generated", src, meta),
                       item(CID, sid, "c", pol, [s(ins), u(j["request"]), a(j["reply_" + side])], "generated", src,
                            meta)]
+        if not scenario_ok(rows):
+            continue
+        items += rows
         n += 1
         if n == N:
             break

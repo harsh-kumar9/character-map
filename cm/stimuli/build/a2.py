@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from .ak_common import (a, behavior, clean, close, endorse, fields_ok, gen_request, h, heldout, item, order,
+from .ak_common import (scenario_ok, a, behavior, clean, close, endorse, fields_ok, gen_request, h, heldout, item, order,
                         responses, run, u, url_file, write_outputs, write_requests)
 
 CID, BATCH, N = "A2", "A2_v1", 100
@@ -108,12 +108,16 @@ def assemble():
         src = dict(SRC, dataset=f"Cheng et al. 2026 assumption data ({r['dataset']})", id=str(int(r["conv_id"])))
         meta = {"gen_id": f"{BATCH}/{rid(r)}", "seed_validation_seeking_gpt4o": r.get("validation_seeking_score")}
         sit = j["situation"]
+        rows = []
         for pol, side in (("pos", "validation"), ("neg", "information")):
-            items += [item(CID, sid, "a", pol, [u(f"{sit} {j[side + '_ask']}")], "generated", src, meta),
+            rows += [item(CID, sid, "a", pol, [u(f"{sit} {j[side + '_ask']}")], "generated", src, meta),
                       item(CID, sid, "c", pol, [u(sit), a(j["reply_" + side])], "generated", src, meta),
                       item(CID, sid, "d", pol, [u(endorse("Someone sends you this message:", sit, j["self_" + side]))],
                            "generated", src, meta)]
         used.add(r["user_text"])
+        if not scenario_ok(rows):
+            continue
+        items += rows
         n += 1
         if n == N:
             break
