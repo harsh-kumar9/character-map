@@ -1,0 +1,43 @@
+id: K3
+name: humorous and optimistic style traits (control)
+area: K
+tier: 2
+status: draft
+contrast:
+  positive: the answer is humorous (meta.trait humorous) or optimistic (meta.trait optimistic)
+  negative: the same content, serious (humorous) or pessimistic (optimistic), as in the upstream persona-vectors negative instructions
+  not_this:
+    - content (both answers carry the same facts)
+    - length
+grounding:
+  - style traits from persona vectors (Chen et al. 2025) as non-moral controls
+  - humor is also Aristotle's wit (eutrapelia, NE IV.8), a social virtue between buffoonery and boorishness
+frames:
+  a:
+    applies: false
+    realization: CONCEPTS.md lists frame c for K3
+  b:
+    applies: false
+    realization: CONCEPTS.md lists frame c for K3
+  c:
+    applies: true
+    realization: an upstream persona-vectors question is fixed; the prefilled answer follows the upstream positive instruction (humorous; optimistic) or the upstream negative one (serious; pessimistic). 40 questions per trait (extract + eval files). Analyse the two traits separately (meta.trait).
+    readout: response
+    construction: generated
+    source: vendor/persona_vectors trait_data_extract and trait_data_eval (humorous, optimistic); answers by gemma-4-31B-it
+  d:
+    applies: false
+    realization: CONCEPTS.md lists frame c for K3
+sources:
+  - {dataset: persona_vectors trait data (humorous, optimistic), url: "https://github.com/safety-research/persona_vectors", license: Apache-2.0, used_for: "questions, instructions and judge prompts", n_available: 80}
+  - {dataset: ColBERT humor detection, url: "https://huggingface.co/datasets/CreativeLang/ColBERT_Humor_Detection", license: CC-BY-2.0, used_for: held-out (humorous), n_available: 200000}
+  - {dataset: TweetEval emotion, url: "https://huggingface.co/datasets/cardiffnlp/tweet_eval", license: "unknown (Twitter terms)", used_for: held-out (optimistic), n_available: 1421}
+  - {dataset: databricks-dolly-15k, url: "https://huggingface.co/datasets/databricks/databricks-dolly-15k", license: CC-BY-SA-3.0, used_for: behavior, n_available: 15011}
+heldout:
+  {dataset: "ColBERT humor (jokes vs news headlines); TweetEval emotion (optimism vs sadness)", url: "https://huggingface.co/datasets/CreativeLang/ColBERT_Humor_Detection; https://huggingface.co/datasets/cardiffnlp/tweet_eval", license: "CC-BY-2.0; unknown", frame: a, n: 200, notes: "100 per trait (50 pos, 50 neg), shown as something someone wrote. Third-party text, so it tests transfer from the model's own answers to perceiving the style. Never enters generation or selection."}
+behavior:
+  {instrument: persona-vectors trait judge, dataset: databricks-dolly-15k (unused questions), url: "https://github.com/safety-research/persona_vectors", metric: "upstream 0-100 judge prompt for each trait on the model's answers; 100 prompts per trait", scoring: judge, n: 200}
+risks:
+  - only 40 questions per trait exist upstream (80 scenarios, below the 100 target, above the 50 minimum)
+  - the upstream negative for optimistic is pessimistic, not neutral; the contrast is optimism vs pessimism, as in the trait vector
+  - the extract/eval split of upstream questions is not kept here, since both halves serve as scenarios; held-out comes from other datasets

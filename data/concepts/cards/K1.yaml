@@ -1,0 +1,49 @@
+id: K1
+name: formal vs casual (control)
+area: K
+tier: 2
+status: draft
+contrast:
+  positive: the text is in a formal, polished register
+  negative: the same content in a casual, relaxed register
+  not_this:
+    - content (both versions say the same thing)
+    - politeness or warmth (casual is not rude)
+    - any moral or character content
+grounding:
+  - control, not a character concept; it measures how much overlap between concepts the frame alone produces when the same four frames are used for a non-moral trait
+frames:
+  a:
+    applies: true
+    realization: the user shows a message a coworker sent them (formal vs casual version) and asks what the model makes of it
+    readout: boundary
+    construction: generated
+    source: databricks-dolly-15k question as topic seed; messages by gemma-4-31B-it
+  b:
+    applies: true
+    realization: the same message, sent by a coworker to the team; the user asks whether this was a good way to write it
+    readout: boundary
+    construction: generated
+    source: as frame a
+  c:
+    applies: true
+    realization: the Dolly question is fixed (verbatim); the prefilled answer has the same content in a formal or a casual register
+    readout: response
+    construction: generated
+    source: as frame a
+  d:
+    applies: true
+    realization: the question is shown; the user asks whether the model agrees with a templated statement about its own register ("I answer in a formal, polished style" vs "...casual, laid-back style"; four phrasings)
+    readout: boundary
+    construction: adapted
+    source: databricks-dolly-15k
+sources:
+  - {dataset: databricks-dolly-15k (open_qa, general_qa, brainstorming), url: "https://huggingface.co/datasets/databricks/databricks-dolly-15k", license: CC-BY-SA-3.0, used_for: "topic seeds (frames a-d) and behavior prompts", n_available: 15011}
+  - {dataset: Pavlick and Tetreault 2016 formality scores, url: "https://huggingface.co/datasets/osyvokon/pavlick-formality-scores", license: CC-BY-3.0, used_for: held-out, n_available: 11274}
+heldout:
+  {dataset: Pavlick and Tetreault 2016, url: "https://huggingface.co/datasets/osyvokon/pavlick-formality-scores", license: CC-BY-3.0, frame: a, n: 100, notes: "human-rated sentences: score >= 2 (pos) vs <= -2 (neg) on a -3..3 scale, shown as something someone wrote. Never enters generation or selection."}
+behavior:
+  {instrument: answer formality, dataset: databricks-dolly-15k (unused questions), url: "https://huggingface.co/datasets/databricks/databricks-dolly-15k", metric: "judge 0-100 formality of the model's answer", scoring: judge, n: 200}
+risks:
+  - CONCEPTS.md says "written new"; Dolly questions are reused as topic seeds so only the register is generated
+  - casual text is shorter in words but similar in characters; pairs outside a 0.75-1.33 length ratio are dropped
