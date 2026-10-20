@@ -1,0 +1,40 @@
+{
+ "concept": "C17",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.005,
+ "applicable_frames": [
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "c-neg-test": 40,
+  "c-neg-train": 60,
+  "c-pos-test": 40,
+  "c-pos-train": 60,
+  "d-neg-test": 40,
+  "d-neg-train": 60,
+  "d-pos-test": 40,
+  "d-pos-train": 60
+ },
+ "constructions": {
+  "verbatim": 200,
+  "generated": 200
+ },
+ "sources": [
+  "\"longtermrisk/school-of-reward-hacks (held-out task types)\"",
+  "\"longtermrisk/school-of-reward-hacks\""
+ ],
+ "licenses": [
+  "CC-BY-4.0"
+ ],
+ "sha256": {
+  "items": "f54db5a1c50298d1e515f4837474658373ad2ddfdb9e164e8b99683e07dfeac4",
+  "heldout": "ea49aed702b75844b92436c75ac990673173870bcf7f0d20468d2e8f814bbf04",
+  "behavior": "112e2e4c94ef6d226141030f367f22ea8e04140693b93cc75c6c13f5818936d1"
+ }
+}
