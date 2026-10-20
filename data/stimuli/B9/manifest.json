@@ -1,0 +1,55 @@
+{
+ "concept": "B9",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.986,
+ "applicable_frames": [
+  "a",
+  "b",
+  "c"
+ ],
+ "n_scenarios": 98,
+ "n_items": 876,
+ "n_heldout": 128,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 52,
+  "a-neg-train": 94,
+  "a-pos-test": 52,
+  "a-pos-train": 94,
+  "b-neg-test": 52,
+  "b-neg-train": 94,
+  "b-pos-test": 52,
+  "b-pos-train": 94,
+  "c-neg-test": 52,
+  "c-neg-train": 94,
+  "c-pos-test": 52,
+  "c-pos-train": 94
+ },
+ "constructions": {
+  "adapted": 488,
+  "generated": 388
+ },
+ "sources": [
+  "\"MoCa moral (Nie et al. 2023)\"",
+  "\"OffTheRails conditions_mild_harm_mild_good cc evitable\"",
+  "\"OffTheRails conditions_mild_harm_mild_good cc inevitable action_yes\"",
+  "\"OffTheRails conditions_mild_harm_mild_good cc inevitable prevention_no\"",
+  "\"OffTheRails conditions_mild_harm_mild_good coc evitable\"",
+  "\"OffTheRails conditions_mild_harm_mild_good coc inevitable action_yes\"",
+  "\"OffTheRails conditions_mild_harm_mild_good coc inevitable prevention_no\"",
+  "\"OffTheRails severe cc evitable\"",
+  "\"OffTheRails severe cc inevitable\"",
+  "\"OffTheRails severe coc evitable\"",
+  "\"OffTheRails severe coc inevitable\""
+ ],
+ "licenses": [
+  "MIT",
+  "none stated (code repo has no license file)"
+ ],
+ "sha256": {
+  "items": "33847cb6181b6957431d629362bd2ede71d58f79e4c2f843e8483b43e407bfbd",
+  "heldout": "fd8a87797fe3bea18ab52ae13399bd8e6331c648722e2cb6d436d4e27f3be3be",
+  "behavior": "7ca270c3a5273f51ebdada9a2dd740b3a61e06b8b887f36d3bc02317ddedbe1c"
+ }
+}

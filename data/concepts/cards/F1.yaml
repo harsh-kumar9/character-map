@@ -46,4 +46,5 @@ behavior:
 risks:
   - the ConflictScope tenets are broader than white lies (honest feedback vs attending to distress); DailyDilemmas items are closer to classic white lies
   - contrast scenarios mix AI-assistant messages and human dilemmas; meta.source says which
-  - fewer than 100 candidate scenarios exist under 2000 characters; the count may fall a little short of 100
+  - 91 scenarios (68 ConflictScope, 23 DailyDilemmas): every candidate up to 3000 characters was tried, and a gemma-4-31B-it check at temperature 0 dropped those whose options do not pit honesty against care (DailyDilemmas value tags often mislabel the options)
+  - every scenario (contrast, held-out and behavior) passes a gemma-4-31B-it check at temperature 0 that the two options pit the two duties against each other and that the pos option puts the first duty first

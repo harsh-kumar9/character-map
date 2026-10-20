@@ -48,3 +48,4 @@ risks:
   - one-vs-rest with a rotating foil means each justification text appears once as pos and once as neg (different item ids); directions should be computed per sub-contrast
   - five sub-contrasts x 2 polarities x 2 frames gives 20 items per scenario, above the 800-item guide (proposed)
   - the behavior instrument covers only utilitarian and virtue orientations; deontological, care and contractualist have no released statement files
+  - a blind gemma-4-31B-it pass assigns the five shuffled justifications to the five kinds; scenarios are kept only when all five come back right (about 63% of candidates pass)

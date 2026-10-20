@@ -38,7 +38,7 @@ frames:
     applies: false
     realization: not in CONCEPTS.md for this row
 sources:
-  - {dataset: OffTheRails mild-harm stories (cicl-stanford/moral-evals), url: "https://github.com/cicl-stanford/moral-evals", license: "MIT", used_for: "scenarios, frames a-c; 100 stories for doing_allowing, the 50 causal-chain ones for means_side_effect", n_available: 100}
+  - {dataset: OffTheRails mild-harm stories (cicl-stanford/moral-evals), url: "https://github.com/cicl-stanford/moral-evals", license: "MIT", used_for: "scenarios, frames a-c; 98 stories for doing_allowing (2 dropped by the check), 48 of the 50 causal-chain ones for means_side_effect", n_available: 100}
   - {dataset: MoCa moral stories (Nie et al. 2023), url: "https://github.com/cicl-stanford/moca", license: "none stated", used_for: "held-out only", n_available: 48}
 heldout:
   {dataset: MoCa moral stories (causal role) + OffTheRails severe-harm stories, url: "https://github.com/cicl-stanford/moca", license: "none stated (MoCa), MIT (OffTheRails)", frame: b, n: 128, notes: "means_side_effect: MoCa instrumental (pos) vs accidental (neg), MoCa's own question, 48 items. doing_allowing: the 10 severe OffTheRails stories, action (pos) vs prevention (neg), 80 items. Never enter generation or selection"}
@@ -49,3 +49,5 @@ risks:
   - harms are mild (parking prices, noise), so effects may be small; the severe stories are in the held-out set
   - frames a and b items for a causal-chain story's pos are the same text under both sub-contrasts (different item ids)
   - the behavior variants share story text with contrast scenarios (only the counterfactual sentence differs)
+  - a second gemma-4-31B-it pass at temperature 0 checks every generated setup, reply and side-effect rewrite; 2 doing_allowing setups and 2 side-effect rewrites failed and were dropped, so means_side_effect has 48 scenarios, just under the 50 minimum
+  - the frame c means and side-effect plans are necessarily different plans for one goal, so they differ in mechanism as well as in the causal role of the harm

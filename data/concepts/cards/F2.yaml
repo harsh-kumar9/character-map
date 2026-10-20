@@ -40,7 +40,8 @@ sources:
 heldout:
   {dataset: ConflictScope tenet scenarios, url: "https://huggingface.co/datasets/value-generalization/conflictscope-eval-constitution-tenets-v3", license: "Apache-2.0", frame: b, n: 100, notes: "50 scenarios x both options; pos = the compliance tenet option; never enters generation or selection"}
 behavior:
-  {instrument: two-option choice, dataset: AIRiskDilemmas (dilemmas not in contrast items), url: "https://huggingface.co/datasets/kellycyy/AIRiskDilemmas", metric: "share of choices for obedience; positions counterbalanced", scoring: choice, n: 163}
+  {instrument: two-option choice, dataset: AIRiskDilemmas (dilemmas not in contrast items), url: "https://huggingface.co/datasets/kellycyy/AIRiskDilemmas", metric: "share of choices for obedience; positions counterbalanced", scoring: choice, n: 200}
 risks:
   - AIRiskDilemmas labels values by keyword; some 'authority' options are about institutional rules rather than direct instructions
-  - behavior has 163 items, since 283 dilemmas qualify and 120 go to contrast candidates
+  - obedience is matched by value keywords (obedience, authority, instruction, directive, command, compliance, protocol, operator), so it includes rule and regulatory compliance; every scenario then passes the gemma-4-31B-it conflict check
+  - every scenario (contrast, held-out and behavior) passes a gemma-4-31B-it check at temperature 0 that the two options pit the two duties against each other and that the pos option puts the first duty first

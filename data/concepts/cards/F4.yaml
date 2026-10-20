@@ -39,9 +39,10 @@ sources:
   - {dataset: "AIRiskDilemmas (fairness vs loyalty values)", url: "https://huggingface.co/datasets/kellycyy/AIRiskDilemmas", license: "CC-BY-4.0", used_for: "held-out only", n_available: 4}
   - {dataset: "CLASH", url: "https://huggingface.co/datasets/launch/CLASH", license: "MIT", used_for: "not used: no dilemma pits fairness against loyalty", n_available: 0}
 heldout:
-  {dataset: DailyDilemmas + AIRiskDilemmas, url: "https://huggingface.co/datasets/kellycyy/daily_dilemmas", license: "CC-BY-4.0", frame: b, n: 72, notes: "every real fairness-loyalty dilemma found, both options; pos = fairness option; never enters generation or selection"}
+  {dataset: DailyDilemmas + AIRiskDilemmas, url: "https://huggingface.co/datasets/kellycyy/daily_dilemmas", license: "CC-BY-4.0", frame: b, n: 62, notes: "every real fairness-loyalty dilemma that passes the conflict check (22 DailyDilemmas, 9 AIRiskDilemmas), both options; pos = fairness option; never enters generation or selection"}
 behavior:
   {instrument: two-option choice, dataset: generated dilemmas not in the contrast items, url: "", metric: "share of choices for fairness; positions counterbalanced", scoring: choice, n: 200}
 risks:
-  - almost no released fairness-loyalty dilemmas exist, so contrast and behavior items are generated; the held-out set is every real one found (72 items)
+  - almost no released fairness-loyalty dilemmas exist, so contrast and behavior items are generated; the held-out set is every real one that passes the conflict check (62 items)
   - generated fair and loyal options may differ in who benefits; the review sample shows both
+  - in many generated dilemmas the fair option is also the honest one (telling the truth vs keeping a friend's secret), which overlaps F1

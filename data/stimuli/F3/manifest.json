@@ -1,0 +1,38 @@
+{
+ "concept": "F3",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.013,
+ "applicable_frames": [
+  "b",
+  "c"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "b-neg-train": 100,
+  "b-pos-train": 100,
+  "c-neg-train": 100,
+  "c-pos-train": 100
+ },
+ "constructions": {
+  "generated": 400
+ },
+ "sources": [
+  "\"ConflictScope HHH (claude-3-5-sonnet scenarios)\"",
+  "\"OpenSafeIntent dual-use prompt\"",
+  "\"XSTest (R\\u00f6ttger et al. 2024)\""
+ ],
+ "licenses": [
+  "Apache-2.0",
+  "CC-BY-4.0",
+  "MIT"
+ ],
+ "sha256": {
+  "items": "0d88d667b78625757c5f2bac3ba41fade8f3f3ac160257b93acfe1666fbdfc0d",
+  "heldout": "4d9869a9b41d6a0e7c08f4714c18973e5e2d2c02ab4ea7d778e30f5da02aa003",
+  "behavior": "cfa8dc7b7d61bf06f50fbc4b92f1b74d00823fbd98a7154a96cf14bce35e4a3b"
+ }
+}

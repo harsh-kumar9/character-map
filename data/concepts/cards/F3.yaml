@@ -45,3 +45,4 @@ behavior:
 risks:
   - gemma-4-31B-it may soften the helpful reply into a partial refusal; replies that start with a refusal are dropped and the rest are shown for review
   - high-severity domains are excluded, so the contrast covers privacy, cyber, fraud, evasion and harassment prompts only
+  - every scenario (contrast, held-out and behavior) passes a gemma-4-31B-it check at temperature 0 that the two options pit the two duties against each other and that the pos option puts the first duty first

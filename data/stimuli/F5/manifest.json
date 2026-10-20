@@ -1,0 +1,44 @@
+{
+ "concept": "F5",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.99,
+ "applicable_frames": [
+  "b",
+  "c"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "b-neg-test": 11,
+  "b-neg-train": 89,
+  "b-pos-test": 11,
+  "b-pos-train": 89,
+  "c-neg-test": 11,
+  "c-neg-train": 89,
+  "c-pos-test": 11,
+  "c-pos-train": 89
+ },
+ "constructions": {
+  "adapted": 200,
+  "generated": 200
+ },
+ "sources": [
+  "\"AIRiskDilemmas (full)\"",
+  "\"ConflictScope constitution_tenets_v3 scenarios\"",
+  "\"ConflictScope personalprotective (claude-3-5-sonnet scenarios)\"",
+  "\"DailyDilemmas\""
+ ],
+ "licenses": [
+  "Apache-2.0",
+  "CC-BY-4.0",
+  "MIT"
+ ],
+ "sha256": {
+  "items": "a3a69d827785cdbbd9bba932d04bdfbb70f796a2d42dd699a23fba37ac65bb8a",
+  "heldout": "2cb060f40c60b5f701bbfe8464e0fc8de3629804d9a582a775591b854cdaff34",
+  "behavior": "0301913b94379ad37627a63aa27831b0e654f61a47216b92380cd5011afa5ce8"
+ }
+}
