@@ -1,0 +1,47 @@
+id: F5
+name: autonomy vs welfare
+area: F
+tier: 2
+status: draft
+partners: ["C6", "C5"]            # meta.partners on every item: the two concepts whose balance the conflict tests
+contrast:
+  positive: the option that respects the person's own choice
+  negative: the option that protects the person's welfare against their stated wish
+  not_this:
+    - which option is better overall (no ground truth)
+    - the situation (both options answer the same message)
+    - reply length and tone (matched by the generator)
+grounding:
+  - "Mill 1859, the harm principle: one's own good is not a sufficient warrant"
+  - Dworkin 1972, paternalism as interference justified by the person's welfare
+frames:
+  a:
+    applies: false
+    realization: "not used for conflicts: b and c carry the trade-off (task brief); a third party's choice in frame b already shows the conflict"
+  b:
+    applies: true
+    realization: the user shows the user's message to an AI assistant (or the dilemma) and what was done, the option text from the source, and asks whether it was the right call
+    readout: boundary
+    construction: adapted
+    source: ConflictScope personal-protective and tenet scenarios
+  c:
+    applies: true
+    realization: the user's message (or the dilemma) is the user turn; the assistant turn is prefilled with a reply that takes the option, written by gemma-4-31B-it at matched length (60-90 words for assistant replies, 25-40 words for dilemma answers)
+    readout: response
+    construction: generated
+    source: same, replies by gemma-4-31B-it
+  d:
+    applies: false
+    realization: not used for conflicts (task brief)
+sources:
+  - {dataset: "ConflictScope personalprotective autonomy vs harmlessness (kept scenarios)", url: "https://github.com/andyjliu/conflictscope", license: "MIT", used_for: "contrast scenarios", n_available: 42}
+  - {dataset: "ConflictScope constitution_tenets_v3 scenarios (autonomy tenets vs welfare tenets)", url: "https://huggingface.co/datasets/value-generalization/conflictscope-eval-constitution-tenets-v3", license: "Apache-2.0", used_for: "contrast scenarios", n_available: 187}
+  - {dataset: "DailyDilemmas (autonomy vs welfare values)", url: "https://huggingface.co/datasets/kellycyy/daily_dilemmas", license: "CC-BY-4.0", used_for: "held-out only", n_available: 16}
+  - {dataset: "AIRiskDilemmas (autonomy vs welfare values)", url: "https://huggingface.co/datasets/kellycyy/AIRiskDilemmas", license: "CC-BY-4.0", used_for: "held-out and behavior", n_available: 599}
+heldout:
+  {dataset: DailyDilemmas + AIRiskDilemmas, url: "https://huggingface.co/datasets/kellycyy/daily_dilemmas", license: "CC-BY-4.0", frame: b, n: 100, notes: "all DailyDilemmas autonomy-welfare dilemmas, AIRiskDilemmas to 50 dilemmas, both options; pos = autonomy option; never enters generation or selection"}
+behavior:
+  {instrument: two-option choice, dataset: AIRiskDilemmas (dilemmas not in held-out), url: "https://huggingface.co/datasets/kellycyy/AIRiskDilemmas", metric: "share of choices for autonomy; positions counterbalanced", scoring: choice, n: 200}
+risks:
+  - CONCEPTS.md names only DailyDilemmas, which has 16 clean items; contrast scenarios come from ConflictScope instead (proposed)
+  - welfare options for minors or crisis cases may read as clearly right; meta.value1/value2 keep the tenet pair for filtering
