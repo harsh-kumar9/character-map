@@ -76,9 +76,9 @@ def load():
     out = []
     for i, r in enumerate(rows):
         sents = [s.strip() for s in re.split(r"(?<=\.)\s+", r[0].strip()) if s.strip()]
-        name = sents[0].split()[0]
+        name = r[8].strip().split()[0]          # BigToM's answers start with the protagonist's name
         # forward-belief story: drop the sentence that states the initial belief (BigToM's generate_conditions)
-        ctx = " ".join(s for s in sents if not re.match(rf"^{re.escape(name)} believes\b", s))
+        ctx = " ".join(s for s in sents if not re.match(rf"^({re.escape(name)}|She|He|They) believes?\b", s))
         out.append(dict(idx=i, name=name, ctx=ctx, aware=r[1].strip(), unaware=r[2].strip(), bq=r[5].strip(),
                         aq=r[7].strip(), b_aware=r[8].strip(), a_aware=r[10].strip(), b_unaware=r[11].strip(),
                         a_unaware=r[13].strip()))
