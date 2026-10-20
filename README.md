@@ -6,10 +6,10 @@ such as being watched or pressured. Then we ask how these representations relate
 structure, which ones co-occur, and which ones causally drive the others and the model's behavior.
 
 The first model is `google/gemma-3-4b-it` with the Gemma Scope 2 sparse autoencoders. We run the whole
-pipeline on Gemma first. OLMo-3-7B-Instruct, Llama-3.1-8B-Instruct and Qwen3.5-9B follow with the same
-stimuli and protocol.
+pipeline on Gemma first. OLMo-3-7B-Instruct and Llama-3.1-8B-Instruct follow with the same stimuli and
+protocol.
 
-Status (2026-10-20): planning. No experiments have run yet.
+Status (2026-10-20): S0 done on Gemma (our SAE loader reproduces Gemma Scope 2's stored activations; gate amendment D-022 proposed). Trait files for D-020 are being generated.
 
 ## Where things are
 

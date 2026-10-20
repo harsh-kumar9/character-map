@@ -122,3 +122,41 @@ Load Gemma Scope 2 `params.safetensors` from Hugging Face and implement the Jump
 inside the `sote` environment, as Thought Atlas did for Qwen-Scope. This avoids installing SAELens and
 TransformerLens next to vLLM. We check our encoder against the stored activations in `examples.safetensors`
 at S0. SAELens or circuit-tracer go in a separate venv if a later stage needs them.
+
+## Rulings, round 4 - 2026-10-20
+
+Harsh, in chat: "We can use three models like Gemma, Olmo, and Llama, but let's run the whole thing in Gemma
+first. For concept inventory, behavioral causal tests for every concept regardless, widen judgment except new
+trait vectors. We can use open router and use Claude Sonnet through that, like 5.5, the current one we're
+thinking, to keep in line with their method. Load SAE weights directly, yes." Then: "openrouter key should be on
+ada already."
+
+- **D-004 amended, ratified.** Three models: Gemma-3-4B-IT, OLMo-3-7B-Instruct, Llama-3.1-8B-Instruct. Qwen3.5-9B
+  is dropped. Every stage runs on Gemma first.
+- **D-018 ratified.** The full inventory in CONCEPTS.md stands. Tier rule: behavioral causal tests for every
+  concept, regardless of baseline behavior. Tiers now only set the run order (tier 1 first).
+- **D-019 ratified.** F2 to F5 join the white-lie set.
+- **D-020 ratified.** "except" read as "accept", since the same message then chose the generator for the new
+  traits; to be corrected if wrong. Generator: Claude Sonnet 5.5 (`anthropic/claude-sonnet-5.5`) through OpenRouter,
+  adaptive thinking at effort "high", max_tokens 16000, default sampling, Anthropic as the preferred provider.
+  Sonnet 5.5 rejects a fixed thinking budget and custom temperature, so this is the closest match to upstream's
+  Claude-3.7-Sonnet with a 5000-token budget. Key read at run time from the demand-worlds `.env` on ada.
+- **D-021 ratified.** SAE weights loaded directly.
+
+## D-022 S0 gate: count only examples clear of the threshold - proposed 2026-10-20
+
+The S0 gate written before the run (Pearson r >= 0.98, median relative error <= 5%, feature above threshold in >= 95%
+of re-checked examples) failed on the last criterion at every layer: 91-93% above threshold. Results
+(`results/s0/`): r 0.986-0.999 and median relative error 1.7-2.3% at layers 9, 17, 22, 29; our L0 on in-distribution
+text matches each config (53, 61, 59, 60 vs 53, 60, 60, 60). 16-23% of re-checked examples sit within 20% of
+their feature's threshold (mostly rank 999 of the stored top 1,000). When the stored activation is at least 1.2 times
+the threshold, the feature fires in 99.3-100% of cases. The error is unbiased scatter: median ratio ours/stored
+0.997-1.001, interquartile range about +-2%, half above and half below. It does not change with fp32 or eager
+attention, so it most likely comes from the precision of the reference run, not from our code.
+Proposal: amend the third criterion to ">= 99% above threshold among examples stored at >= 1.2 x threshold". All four
+layers pass under it. The original criterion and its failure stay on record here.
+
+## D-023 Extraction precision - proposed 2026-10-20
+
+bf16 weights with SDPA attention for all extraction. fp32 and eager attention gave the same S0 numbers, and bf16 is
+half the memory and time.

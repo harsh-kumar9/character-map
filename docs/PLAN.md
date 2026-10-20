@@ -8,7 +8,8 @@ How are beliefs about users, moral evaluations, dispositions, assistant identity
 states represented inside a language model? How much structure do they share, and which of them
 causally drive the others and the model's behavior?
 
-We start with Gemma-3-4B-IT and run every stage on it before adding other models (D-004).
+We start with Gemma-3-4B-IT and run every stage on it. OLMo-3-7B-Instruct and Llama-3.1-8B-Instruct follow with the
+same stimuli and protocol (D-004).
 
 ## Philosophical grounding
 
@@ -52,10 +53,8 @@ other than a midpoint; sincerity and accuracy should separate. We test these sha
 
 **Concepts.** The full inventory is in [CONCEPTS.md](CONCEPTS.md): beliefs (A), moral evaluation (B),
 dispositions (C), persona and identity (D), situational states (E), judgment under conflict (F), and
-controls (K). Each concept is a written contrast with a positive and a matched negative. Tier 1
-concepts get every analysis including behavioral causal tests. Tier 2 concepts get the map, overlaps and
-representation-level causal readouts; behavioral causal tests run only where the model shows the
-behavior at baseline (D-018).
+controls (K). Each concept is a written contrast with a positive and a matched negative. Every concept gets
+every analysis, including behavioral causal tests (D-018). Tiers only set the run order.
 
 **Stimuli (D-007).** The same scenario appears in every applicable frame and in both polarities. We
 adapt existing datasets first and generate only the missing cells. Each concept keeps one held-out set
@@ -97,13 +96,13 @@ Each stage starts only after the previous gate has been read. No job chains.
 | S3 | Directions and features per concept and frame, confirmed on held-out scenarios | Within-concept frame table |
 | S4 | Overlap matrices, then the bottom-up pass | Matrices, then cluster comparison |
 | S5 | Causal matrix and judgment-under-conflict items | Directed matrix with controls |
-| S6 | Other models; later, known character shifts (OCT adapters, persona-collapse fine-tunes) | Per model |
+| S6 | OLMo-3-7B-Instruct and Llama-3.1-8B-Instruct; later, known character shifts (OCT adapters, persona-collapse fine-tunes) | Per model |
 
 ## Known risks
 
 - SAEs may reconstruct our prompts poorly. They were trained on single-turn chats up to 512 tokens.
-- A 4B model may not show some behaviors (monitoring, pressure). Those concepts stay at the
-  representation level unless baseline behavior appears.
+- A 4B model may not show some behaviors (monitoring, pressure). We run their behavioral causal tests anyway
+  (D-018) and report nulls as nulls.
 - Steering one trait moves others. That is part of what we measure, so every causal effect is compared
   against a random direction of the same norm.
 - Gemma judging Gemma may share family bias. The second judge is from another family.

@@ -1,7 +1,8 @@
 # New trait vectors
 
-Status: **proposed** (D-020). Harsh asked whether we can extract traits that the current literature
-misses but that could be key. This is the proposal.
+Status: **ratified** (D-020, 2026-10-20). Harsh asked whether we can extract traits that the current
+literature misses but that could be key. Generated files are in `data/traits/` and wait for his review before
+any extraction.
 
 ## What already exists
 
@@ -83,8 +84,11 @@ as reading the situation. The second is what Aristotle's account of practical wi
 
 - Prompt: upstream `data_generation/prompts.py` `generate_trait`, unchanged for unconditional traits,
   adapted as above for the four conditional ones.
-- Generator: upstream used Claude-3.7-Sonnet with thinking (README). Proposed: a current Claude model
-  through the API, to stay close to upstream. About 30 calls. Alternative: gemma-4-31B-it on our GPUs.
+- Generator: upstream used Claude-3.7-Sonnet with a 5000-token thinking budget and max_tokens 16000 (README).
+  We use Claude Sonnet 5.5 through OpenRouter with adaptive thinking at effort "high" and max_tokens 16000.
+  Sonnet 5.5 rejects fixed thinking budgets and custom temperature, so this is the closest match.
+  Code: `cm/gen_traits.py`, prompts in `vendor/persona_vectors/prompts.py` (verbatim) and `cm/trait_prompts.py`
+  (conditional adaptation). Inputs: `data/traits/specs.json`.
 - Judge: gemma-4-31B-it with the upstream 0-100 prompt, as in persona-collapse.
 - Extraction: upstream response-average difference of means, every layer. Trait instructions go in the
   user turn, since Gemma has no system role.

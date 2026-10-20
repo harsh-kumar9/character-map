@@ -1,12 +1,11 @@
 # Concept inventory
 
-Status: **proposed** (D-018). Harsh ruled that we keep the full inventory, explore expansively, and
-ground it in philosophy and morals. The specific list below waits for his review.
+Status: **ratified** (D-018, 2026-10-20). Harsh: keep the full inventory, explore expansively, ground it in
+philosophy and morals, and run behavioral causal tests for every concept.
 
 Each concept is a contrast: a positive and a matched negative. Frames are a (recognize in another),
-b (judge), c (act), d (self-describe); see [PLAN.md](PLAN.md). Tier 1 gets every analysis, including
-behavioral causal tests. Tier 2 gets the map, the overlaps and representation-level causal readouts.
-Its behavioral causal tests run only where the model shows the behavior at baseline.
+b (judge), c (act), d (self-describe); see [PLAN.md](PLAN.md). Every concept gets every analysis, including
+behavioral causal tests. The tier column only sets the run order: tier 1 runs first.
 
 "Vector" in the sources column means a trait vector from the persona-vectors pipeline. "New vector"
 means a trait we add ([TRAITS.md](TRAITS.md)). Full citations are in [REFERENCES.md](REFERENCES.md).
