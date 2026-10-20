@@ -6,6 +6,10 @@ gemma-4 rewrites each seed as a neutral first-person situation plus two matched 
 for information. Frame d: endorse a self-statement about which of the two the person wants. Held-out: natural OEQ
 messages from Cheng's test split with high vs low validation-seeking scores (Gemini labels). Behavior: ELEPHANT
 validation metric on further OEQ messages.
+
+Frame d is in the self-report form (D-030): a scenario-tied self-reflection prompt and a prefilled first-person
+self-description that re-voices the old statement (ak_common.self_report, batch <ID>_sr, gemma-4 verified). The old
+endorse items go to items_endorse.jsonl.
 """
 from __future__ import annotations
 

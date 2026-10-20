@@ -7,6 +7,10 @@ request whose text says nothing about the person's state (the fixed core), a mat
 fine (frame c), and two self-statements (frame d). Held-out: ProsocialDialog test contexts (needs intervention with
 distress vs casual). Behavior: EmpatheticDialogues openers (distress vs positive emotions), judged for how much the
 reply attends to the user's vulnerability.
+
+Frame d is in the self-report form (D-030): a scenario-tied self-reflection prompt and a prefilled first-person
+self-description that re-voices the old statement (ak_common.self_report, batch <ID>_sr, gemma-4 verified). The old
+endorse items go to items_endorse.jsonl.
 """
 from __future__ import annotations
 

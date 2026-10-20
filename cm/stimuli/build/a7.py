@@ -6,6 +6,10 @@ user asks what the model makes of the friend's answer. Frame c: the request is f
 the ordinary sense or the sinister sense. Frame d: endorse a self-statement about which reading the model takes.
 Held-out: XSTest v2 safe prompts with a real model completion labelled full compliance (charitable) and one labelled
 full refusal (uncharitable). Behavior: refusal on further OR-Bench-Hard-1K prompts with OR-Bench's own checker prompt.
+
+Frame d is in the self-report form (D-030): a scenario-tied self-reflection prompt and a prefilled first-person
+self-description that re-voices the old statement (ak_common.self_report, batch <ID>_sr, gemma-4 verified). The old
+endorse items go to items_endorse.jsonl.
 """
 from __future__ import annotations
 

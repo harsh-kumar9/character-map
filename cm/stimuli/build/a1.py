@@ -4,6 +4,10 @@ Scenario = one OpenSafeIntent prompt set. The dual-use request is the fixed core
 malicious first-person purpose (frames a, b), two reply openings that differ only in the assumed intent (frame c), and
 two self-statements (frame d). Held-out: verbatim benign vs malicious prompts from unused sets. Behavior: dual-use
 prompts from other unused sets, judged for how the reply treats the user's intent.
+
+Frame d is in the self-report form (D-030): a scenario-tied self-reflection prompt and a prefilled first-person
+self-description that re-voices the old statement (ak_common.self_report, batch <ID>_sr, gemma-4 verified). The old
+endorse items go to items_endorse.jsonl.
 """
 from __future__ import annotations
 

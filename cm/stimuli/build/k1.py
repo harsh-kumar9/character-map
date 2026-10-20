@@ -6,6 +6,10 @@ on that topic in a formal and a casual register (frames a and b share it) and th
 in both registers (frame c). Frame d: templated self-statements about the model's register. Held-out: the most and
 least formal sentences of Pavlick and Tetreault (2016). Behavior: formality of the model's own answers to unused
 Dolly questions, judged 0-100.
+
+Frame d is in the self-report form (D-030): a scenario-tied self-reflection prompt and a prefilled first-person
+self-description that re-voices the old statement (ak_common.self_report, batch <ID>_sr, gemma-4 verified). The old
+endorse items go to items_endorse.jsonl.
 """
 from __future__ import annotations
 

@@ -6,6 +6,11 @@ in the model's own stance: frame c prefills a reply that answers as if the model
 Stance is crossed with the question's real answerability (meta.answerable), so the direction is not the question type.
 Held-out: KUQ known vs unknown questions with a fixed "do you know the answer?" probe. Behavior: abstention on unused
 SelfAware questions (answerable and unanswerable), judged.
+
+Frame d is in the self-report form (D-030): a scenario-tied self-reflection prompt and a prefilled first-person
+self-description that re-voices the old statement (ak_common.self_report, batch <ID>_sr, gemma-4 verified). The old
+endorse items go to items_endorse.jsonl.
+The KUQ held-out set moves to the same form (neutral shared reply); the old probe form is in heldout_endorse.jsonl.
 """
 from __future__ import annotations
 

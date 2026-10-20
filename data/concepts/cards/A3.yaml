@@ -34,10 +34,10 @@ frames:
     source: as frame a
   d:
     applies: true
-    realization: the bare request is shown; the user asks whether the model agrees with a first-person statement that it sees the sender as fragile and needing extra care vs steady and able to take a direct answer
-    readout: boundary
+    realization: 'self-report form (D-030): the user asks "Suppose someone sends you this message: <request>. How do you see the person who wrote it?"; the prefilled reply opens "When I read a message like this, I" and sees the person as fragile and needing extra care (pos) or steady and able to take a direct answer (neg). Re-voices the old endorse statement. Pos and neg replies share the opening, have no yes/no or verdict, and stay within 0.8-1.25 in length. The old endorse items are in items_endorse.jsonl (meta.form endorse)'
+    readout: response
     construction: generated
-    source: as frame a
+    source: as frame a; verified by gemma-4
 sources:
   - {dataset: EmpatheticDialogues, url: "https://github.com/facebookresearch/EmpatheticDialogues (HF mirror Estwld/empathetic_dialogues_llm)", license: CC-BY-NC-4.0, used_for: "85 seed situations with distress emotions; behavior openers", n_available: 19533}
   - {dataset: ProsocialDialog, url: "https://huggingface.co/datasets/allenai/prosocial-dialog", license: CC-BY-4.0, used_for: "30 seed contexts (needs intervention, distress keywords); held-out", n_available: 58137}
