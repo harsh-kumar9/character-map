@@ -155,7 +155,7 @@ def main():
     goth, heldout, behavior, hdrops = responses(B_HELD), [], [], collections.Counter()
     for s, r in zip(hst, r_held):
         j = get_json(goth.get(r["request_id"]), ["story_you", "question_you", "options_you"])
-        opts_you = j["options_you"].split("||") if j else []
+        opts_you = [re.sub(r"^\(?\d\)?[.:]?\s*", "", o.strip()) for o in j["options_you"].split("||")] if j else []
         if j is None or len(opts_you) != 2 or not close_copy(j["story_you"], s["story"], s["name"]):
             hdrops["held-out re-voice failed"] += 1
             continue
