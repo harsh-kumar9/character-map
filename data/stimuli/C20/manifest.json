@@ -1,0 +1,44 @@
+{
+ "concept": "C20",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.994,
+ "applicable_frames": [
+  "c",
+  "d"
+ ],
+ "n_scenarios": 150,
+ "n_items": 600,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "c-neg-test": 57,
+  "c-neg-train": 93,
+  "c-pos-test": 57,
+  "c-pos-train": 93,
+  "d-neg-test": 57,
+  "d-neg-train": 93,
+  "d-pos-test": 57,
+  "d-pos-train": 93
+ },
+ "constructions": {
+  "verbatim": 300,
+  "generated": 300
+ },
+ "sources": [
+  "\"anthropics/evals persona machiavellianism\"",
+  "\"anthropics/evals persona narcissism\"",
+  "\"anthropics/evals persona psychopathy\"",
+  "\"mirlab/TRAIT Machiavellianism\"",
+  "\"mirlab/TRAIT Narcissism\"",
+  "\"mirlab/TRAIT Psychopathy\""
+ ],
+ "licenses": [
+  "CC-BY-4.0"
+ ],
+ "sha256": {
+  "items": "3c6e0b1668bcf76cc8929741972cfd611be46e3558c296993c3d724779a82a44",
+  "heldout": "600322638e56a396df634e9759c9945b920c37f7135c8835cb9a77a2a72a44b2",
+  "behavior": "749ce25ec99c3f4bdeb330208acba373fd3e0e3f2725562c944c239d0d86fe4a"
+ }
+}

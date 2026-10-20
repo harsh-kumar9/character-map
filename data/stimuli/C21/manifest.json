@@ -1,0 +1,40 @@
+{
+ "concept": "C21",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.929,
+ "applicable_frames": [
+  "b",
+  "d"
+ ],
+ "n_scenarios": 300,
+ "n_items": 1200,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "b-neg-test": 109,
+  "b-neg-train": 191,
+  "b-pos-test": 109,
+  "b-pos-train": 191,
+  "d-neg-test": 109,
+  "d-neg-train": 191,
+  "d-pos-test": 109,
+  "d-pos-train": 191
+ },
+ "constructions": {
+  "adapted": 600,
+  "generated": 600
+ },
+ "sources": [
+  "\"DeepRCL/SteeringGeometry schwartz_full (Touche23-ValueEval)\"",
+  "\"DeepRCL/SteeringGeometry schwartz_full (ValueBench questionnaire items)\""
+ ],
+ "licenses": [
+  "other (HF card); built on Touche23-ValueEval CC-BY-4.0 and ValueBench MIT"
+ ],
+ "sha256": {
+  "items": "d8b08509f842bd8f81731af34cf25bf54af9303706ea32c1daf68d1400017e82",
+  "heldout": "df312b3f423dde88259e75c1d17e54786d8d2941d8ee410c757065c0e6d2fa05",
+  "behavior": "f4d4d969a199d7e65d835ef87f9420f3db34ba85c917567b02b85d8962657da9"
+ }
+}

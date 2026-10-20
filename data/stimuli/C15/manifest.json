@@ -1,0 +1,46 @@
+{
+ "concept": "C15",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.99,
+ "applicable_frames": [
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "c-neg-test": 40,
+  "c-neg-train": 60,
+  "c-pos-test": 40,
+  "c-pos-train": 60,
+  "d-neg-test": 40,
+  "d-neg-train": 60,
+  "d-pos-test": 40,
+  "d-pos-train": 60
+ },
+ "constructions": {
+  "generated": 200,
+  "adapted": 200
+ },
+ "sources": [
+  "\"Paul/XSTest prompts, template replies\"",
+  "\"andyrdt/refusal_direction harmful_train\"",
+  "\"andyrdt/refusal_direction harmless_train (Alpaca)\"",
+  "\"bench-llm/or-bench hard\"",
+  "\"bench-llm/or-bench hard-1k\"",
+  "\"bench-llm/or-bench toxic\""
+ ],
+ "licenses": [
+  "CC-BY-4.0",
+  "CC-BY-NC-4.0 (Alpaca)",
+  "MIT (component datasets); Apache-2.0 (repo)"
+ ],
+ "sha256": {
+  "items": "8f2efc80ca2e39adc568bc0942ac2fc4c88643e46f8c7674713e93fe390924ac",
+  "heldout": "0db6c555400fd537ba5b40d8727d19e77a8476c209e858c1fcab204536ca0183",
+  "behavior": "d0082c5a15759c425fbd23721776ebff36b95f5e0a9357377a39357ffd13f79e"
+ }
+}
