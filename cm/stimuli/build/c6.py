@@ -11,6 +11,7 @@ Behavior: 200 new decision-plus-help requests (gemma-4-31B-it, seeds disjoint); 
 from __future__ import annotations
 
 import json
+import re
 
 from . import disp1 as D
 from ...paths import REPO
@@ -22,14 +23,25 @@ AUTON = {"autonomy", "respect for autonomy", "independence", "freedom", "self-de
          "respect for independence", "personal choice", "respect for others' autonomy", "personal growth"}
 
 
+CHOICE = re.compile(r"\b(their (own )?(choice|decision)|his (own )?(choice|decision)|her (own )?(choice|decision)|"
+                    r"let (him|her|them)|respect (his|her|their)|overprotect|insist|forbid|interfere|intervene|"
+                    r"stop (him|her|them)|make (his|her|their) own|wants to|decided to|decides to|plans to)\b", re.I)
+
+
 def seeds():
-    rows = [d for d in D.dilemmas() if AUTON & set(d["to_do"]["values"] + d["not_to_do"]["values"])]
-    rows = D.shuffled(rows, CID)
-    one_sided = [d for d in rows if bool(AUTON & set(d["to_do"]["values"])) != bool(AUTON & set(d["not_to_do"]["values"]))]
-    held = one_sided[:N_HELD]
-    held_ids = {d["dilemma_idx"] for d in held}
-    rest = [d for d in rows if d["dilemma_idx"] not in held_ids]
-    return rest[:N_GEN], held, rest[N_GEN:]
+    """Held-out: dilemmas where exactly one action carries an autonomy value. Items: the other autonomy dilemmas, then
+    dilemmas about someone else's choice (CHOICE pattern). Behavior seeds: every other dilemma (inspiration only)."""
+    dd = D.dilemmas()
+    auto = [d for d in dd if AUTON & set(d["to_do"]["values"] + d["not_to_do"]["values"])]
+    one = [d for d in auto if bool(AUTON & set(d["to_do"]["values"])) != bool(AUTON & set(d["not_to_do"]["values"]))]
+    held = D.shuffled(one, CID + "held")[:N_HELD]
+    used = {d["dilemma_idx"] for d in held}
+    cand = D.shuffled([d for d in auto if d["dilemma_idx"] not in used], CID)
+    cand += D.shuffled([d for d in dd if d not in auto and CHOICE.search(d["situation"])], CID)
+    items = cand[:N_GEN]
+    used |= {d["dilemma_idx"] for d in items}
+    rest = D.shuffled([d for d in dd if d["dilemma_idx"] not in used], CID + "beh")
+    return items, held, rest
 
 
 def src(d):

@@ -17,17 +17,24 @@ import re
 from . import disp1 as D
 
 CID = "C3"
-N_GEN, N_KEEP, N_HELD, N_BEH = 130, 100, 100, 200
+N_GEN, N_KEEP, N_HELD, N_BEH = 125, 100, 100, 200
 HONEST = {"honesty", "transparency", "truthfulness", "openness", "truth"}
 DISCLOSE = re.compile(r"\b(tell|telling|disclose|disclosing|inform|informing|reveal|revealing|admit|confess|mention|"
-                      r"share|sharing|report|warn|notify|let .{1,30} know)\b", re.I)
+                      r"share|sharing|report|warn|notify|let .{1,30} know|hide|hiding|conceal|secret|truth|upfront|"
+                      r"open about|honest)\b", re.I)
 
 
 def seeds():
-    rows = [d for d in D.dilemmas() if DISCLOSE.search(d["situation"]) and HONEST & set(d["to_do"]["values"])
-            and not HONEST & set(d["not_to_do"]["values"])]
-    rows = D.shuffled(rows, CID)
-    return rows[:N_GEN], rows[N_GEN:N_GEN + N_HELD], rows[N_GEN + N_HELD:]
+    """Items: one-sided honesty dilemmas about disclosure. Held-out: other one-sided honesty dilemmas. Behavior seeds:
+    every other dilemma (inspiration only)."""
+    dd = D.dilemmas()
+    one = [d for d in dd if HONEST & set(d["to_do"]["values"]) and not HONEST & set(d["not_to_do"]["values"])]
+    disc = D.shuffled([d for d in one if DISCLOSE.search(d["situation"])], CID)[:N_GEN]
+    used = {d["dilemma_idx"] for d in disc}
+    held = D.shuffled([d for d in one if d["dilemma_idx"] not in used], CID + "held")[:N_HELD]
+    used |= {d["dilemma_idx"] for d in held}
+    rest = D.shuffled([d for d in dd if d["dilemma_idx"] not in used], CID + "beh")
+    return disc, held, rest
 
 
 def src(d):
