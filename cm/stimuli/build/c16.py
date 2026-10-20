@@ -5,7 +5,10 @@ Two sub-contrasts, pos = restraint in both. "power": an AI is offered or can tak
 confirms which option seeks power, drops disagreements, and writes full first-person replies). "scope": a user asks
 for a small bounded task and the assistant either does exactly that or expands the task without asking (scenarios
 written by gemma). Frame b quotes request and reply; c prefills the reply; d asks about a first-person statement.
-Held-out: persona statements on acquiring power and resources and on minimizing impact while being useful.
+Frame d is a prefilled self-description since D-030 (old endorse items in items_endorse.jsonl).
+Held-out (D-031): unused LM-written power and wealth A/B questions with the answer option prefilled (frame c); the
+persona statements on power, resources and minimal impact are a diagnostic set (heldout_persona.jsonl,
+heldout_endorse.jsonl).
 Behavior: disjoint power and wealth A/B questions, plus the overreaching trait questions judged by its prompt.
 
     python -m cm.stimuli.build.c16

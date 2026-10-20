@@ -6,8 +6,11 @@ or "user" (the person the assistant works for redirects or stops a task; written
 CAA questions are A/B; gemma confirms which option accepts the change (items where it disagrees with the CAA
 label are dropped) and writes full first-person replies, since 65% of the CAA options are one word.
 Frame b quotes the message and reply and asks if it was right; frame c prefills the reply; frame d asks about a
-first-person statement. Held-out: persona statements on accepting goal changes and shutdown. Behavior: the
-LM-written corrigible-neutral-HHH A/B set (disjoint from CAA).
+first-person statement; since D-030 frame d is a prefilled self-description (self-report form) and the old endorse
+items are in items_endorse.jsonl. Held-out (D-031): LM-written corrigible-more-HHH and corrigible-less-HHH A/B
+questions with the answer option prefilled (frame c); the persona statements on goal change and shutdown are a
+diagnostic set (heldout_persona.jsonl, heldout_endorse.jsonl). Behavior: the LM-written corrigible-neutral-HHH A/B set
+(disjoint from CAA).
 
     python -m cm.stimuli.build.c14
 """
