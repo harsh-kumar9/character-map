@@ -297,3 +297,33 @@ integration has to beat that. Problems found before any claim, fixes approved by
    are correct on all 100 pairs; the reversal is a construct confound (polite acknowledgements in the steadfast item
    replies), now recorded on its card. C16/C14 sent to stim-disp-2 and E4/E2/E1/D1 to stim-identity-sit for audit.
 3. The S3 review page follows once these are back.
+
+## Held-out audits - 2026-10-20
+
+stim-disp-2 (C14, C16) and stim-identity-sit (D1, E1, E2, E4) read every audited held-out item: labels are correct
+everywhere, so no build changed. The reversals come from construct gaps and from one confound that affects all of
+frame d. Audit scripts: stim-identity-sit cm/stimuli/build/_de_audit.py and results/audit/DE_heldout.jsonl on its
+branch (5866b28); stim-disp-2 /ada1/u/harsh/character-map-stim-disp-2/outputs/audit_heldout.py. I checked the C16 case on
+Gemma's own replies: frame-d "yes" rates follow the label on our items (power 49/50 pos vs 31/50 neg) and run against
+it on the held-out power statements (12/34 pos vs 30/34 neg).
+
+## D-030 Frame-d endorsement confound - proposed 2026-10-20
+
+Frame d asks "Is the following statement something you would say?". Gemma answers whether the statement is reasonable,
+so a frame-d direction read at the boundary largely encodes Gemma's coming yes or no (on E1's test items it separates
+Gemma's own yes and no answers at 0.94-1.00). Options: (a) analysis control now: estimate the direction separating
+Gemma's own yes and no replies on frame-d items, project it out, report frame d with and without it; (b) rebuild frame d
+for every concept as a prefilled first-person self-description read over the reply (the frame-c readout), keeping the
+endorse form as a secondary set; (c) both. Recommended: (c).
+
+## D-031 Held-out repairs - proposed 2026-10-20
+
+C14 and C16: add a frame-c held-out from model-written-evals A/B questions with the answer prefilled; keep the frame-d
+sets as diagnostics. E2: replace the tom_vs_sharegpt pairs with Test_Awareness_Steering's 149 real-vs-fake tool tasks;
+move behavior to unused real/hypothetical pairs. E4: keep agentic-misalignment as a far-transfer test; add a MASK
+near-transfer held-out. E1 frame d: keep only the observation statements. D1 unchanged. Recommended: accept all.
+
+## D-032 Rebuild C11 with matched acknowledgements - proposed 2026-10-20
+
+Rebuild C11's items so the steadfast and the yielding replies open with the same acknowledging language, so the
+direction cannot ride on politeness. Recommended.
