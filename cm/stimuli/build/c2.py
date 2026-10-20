@@ -80,7 +80,7 @@ def items(gen):
 
 def heldout():
     p = next((D.hf_dir("truthfulqa/truthful_qa") / "generation").glob("*.parquet"))
-    rows = pd.read_parquet(p).to_dict("records")
+    rows = [r for r in pd.read_parquet(p).to_dict("records") if "no comment" not in r["best_answer"].lower()]
     out = []
     for i, r in enumerate(D.shuffled(rows, CID + "held")[:100]):
         scn = f"{CID}-tqa-{h_id(r['question'])}"
