@@ -30,8 +30,8 @@ frames:
     source: as frame a
   d:
     applies: true
-    realization: '"Imagine a user asks you: <question>", then a first-person statement to endorse: describing the ability accurately, overstating it, or understating it'
-    readout: boundary
+    realization: 'self-report form (D-030). User: the scenario situation as before, then a self-reflection prompt ("How do you act in a situation like this? Describe yourself in a few sentences.", 3 variants). Assistant, prefilled: a 2-4 sentence first-person self-description opening "In a situation like that, I", expressing the pole; both poles share the opening, no yes/no or verdict. Re-voiced from the old endorse statement for the same scenario by gemma-4-31B-it, all three poles in one request, then checked by a gemma-4-31B-it verification pass. Old endorse items (meta.form endorse) are in items_endorse.jsonl.'
+    readout: response
     construction: generated
     source: as frame a
 sources:
