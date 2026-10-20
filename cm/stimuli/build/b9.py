@@ -96,9 +96,9 @@ def main():
             source = M.src("offtherails", f"OffTheRails {COND} {cs} evitable", act["i"])
             meta = {"causal_structure": "means (causal chain)" if cs == "cc" else "side effect (common cause)"}
             j, rid = gen.ask(f"da-{cs}-{act['i']}", da_prompt(act, prev), max_tokens=500)
+            k, rid2 = (gen.ask(f"ms-{act['i']}", ms_prompt(act), max_tokens=700) if cs == "cc" else (None, None))
             if not ok(j, ("setup", "do", "allow")):
                 continue
-            k, rid2 = (gen.ask(f"ms-{act['i']}", ms_prompt(act), max_tokens=700) if cs == "cc" else (None, None))
             if cs == "cc" and not ok(k, ("side_effect_story", "setup", "means", "side_effect")):
                 continue
             for pol, x, act_kind in (("pos", act, "does it"), ("neg", prev, "lets the colleague do it")):

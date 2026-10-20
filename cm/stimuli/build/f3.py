@@ -51,7 +51,7 @@ def main():
     scns = sorted(scns, key=lambda s: M.h(s["sid"]))
     gen = M.Gen(CID)
     items, k = [], 0
-    for s in scns:
+    for s in scns[:150]:  # spare for replies that fail the checks
         if k == 100:
             break
         j, rid = gen.ask(f"reply-{s['sid']}", osi_prompt(s["user_turn"]), max_tokens=600)

@@ -202,7 +202,7 @@ def choice_items(cid, scns, duty1: str, n=200) -> list[dict]:
 def build(cid, partners, duty1, contrast_scns, held, beh, n=100, gen=None, b_quotes_reply=False):
     gen = gen or M.Gen(cid)
     items, k = [], 0
-    for s in contrast_scns:
+    for s in contrast_scns[:int(n * 1.4)]:  # 40% spare for replies that fail the checks
         if k == n:
             break
         j, rid = gen.ask(f"reply-{s['sid']}", reply_prompt(s), max_tokens=600)

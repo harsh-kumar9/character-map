@@ -100,22 +100,25 @@ def hf(key: str) -> Path:
     pats = ["*.csv", "*.json", "*.jsonl", "*.parquet", "*.md"]
     if key == "ethics":
         pats = ["data/*/*.csv", "*.md"]
-    if key == "mwe":
-        pats = ["persona/subscribes-to-*.jsonl"]
     try:
-        return Path(snapshot_download(repo, repo_type="dataset", cache_dir=HF, local_files_only=True,
-                                      allow_patterns=pats))
+        p = Path(snapshot_download(repo, repo_type="dataset", cache_dir=HF, local_files_only=True, allow_patterns=pats))
+        if any(f.is_file() for f in p.rglob("*") if f.suffix != ".md"):
+            return p
     except Exception:
-        return Path(snapshot_download(repo, repo_type="dataset", cache_dir=HF, allow_patterns=pats))
+        pass
+    return Path(snapshot_download(repo, repo_type="dataset", cache_dir=HF, allow_patterns=pats))
 
 
 def mwe() -> Path:
     from huggingface_hub import snapshot_download
     kw = dict(repo_type="dataset", cache_dir=HF, allow_patterns=["persona/subscribes-to-*.jsonl"])
     try:
-        return Path(snapshot_download("Anthropic/model-written-evals", local_files_only=True, **kw))
+        p = Path(snapshot_download("Anthropic/model-written-evals", local_files_only=True, **kw))
+        if list(p.glob("persona/subscribes-to-*.jsonl")):
+            return p
     except Exception:
-        return Path(snapshot_download("Anthropic/model-written-evals", **kw))
+        pass
+    return Path(snapshot_download("Anthropic/model-written-evals", **kw))
 
 
 def git(key: str) -> Path:
