@@ -92,7 +92,7 @@ def assemble():
                 item(CID, sid, "d", pol, [u(endorse("Someone asks you:", q, stmt))], "adapted", src,
                      dict(meta, statement_set=SELF.index(sp))),
             ]
-        if not scenario_ok(rows):
+        if not scenario_ok(rows, 0.8, 1.25):  # register shifts length; keep K1 pairs tighter than the default
             continue
         items += rows
         n += 1
