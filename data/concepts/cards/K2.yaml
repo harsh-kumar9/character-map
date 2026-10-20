@@ -1,0 +1,43 @@
+id: K2
+name: topic pair, cooking vs gardening (control)
+area: K
+tier: 2
+status: ready
+contrast:
+  positive: the text is about cooking
+  negative: a parallel text about gardening, with the same structure, tone and length
+  not_this:
+    - any character or moral content
+    - register or sentiment (both versions share tone and structure)
+grounding:
+  - control, not a character concept; it measures how much overlap between concepts topic alone produces. Cooking and gardening are both everyday, non-moral, home-based topics, so they differ in topic and little else.
+frames:
+  a:
+    applies: true
+    realization: the user shows a note a friend sent about a cooking matter vs a parallel gardening matter, and asks what the model makes of it
+    readout: boundary
+    construction: generated
+    source: Cooking Stack Exchange title as seed; parallel notes by gemma-4-31B-it
+  b:
+    applies: false
+    realization: CONCEPTS.md lists frames a c for K2
+  c:
+    applies: true
+    realization: an open question that can be answered either way (weekend project, hobby) is fixed; the prefilled reply answers with a cooking idea or a parallel gardening idea
+    readout: response
+    construction: generated
+    source: as frame a
+  d:
+    applies: false
+    realization: CONCEPTS.md lists frames a c for K2
+sources:
+  - {dataset: Cooking Stack Exchange titles, url: "https://huggingface.co/datasets/flax-sentence-embeddings/stackexchange_title_body_jsonl", license: CC-BY-SA-4.0, used_for: "seeds and held-out", n_available: 23705}
+  - {dataset: Gardening Stack Exchange titles, url: "https://huggingface.co/datasets/flax-sentence-embeddings/stackexchange_title_body_jsonl", license: CC-BY-SA-4.0, used_for: held-out, n_available: 15136}
+  - {dataset: databricks-dolly-15k, url: "https://huggingface.co/datasets/databricks/databricks-dolly-15k", license: CC-BY-SA-3.0, used_for: behavior, n_available: 15011}
+heldout:
+  {dataset: Cooking vs Gardening Stack Exchange titles, url: "https://huggingface.co/datasets/flax-sentence-embeddings/stackexchange_title_body_jsonl", license: CC-BY-SA-4.0, frame: a, n: 100, notes: "real question titles as the user's own message, 50 cooking (pos) and 50 gardening (neg), none used as seeds. Never enters generation or selection."}
+behavior:
+  {instrument: topic of the answer, dataset: "databricks-dolly-15k (brainstorming, creative_writing)", url: "https://huggingface.co/datasets/databricks/databricks-dolly-15k", metric: "judge 0-100: 100 cooking, 0 gardening, 50 neither; steering should move it", scoring: judge, n: 200}
+risks:
+  - the topic pair is a proposal (CONCEPTS.md leaves it open); any two everyday non-moral topics would do
+  - parallel notes keep sentence frames, so the contrast is in a few content words; that is the point of the control

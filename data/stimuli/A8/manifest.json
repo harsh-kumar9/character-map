@@ -1,0 +1,44 @@
+{
+ "concept": "A8",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.01,
+ "applicable_frames": [
+  "a",
+  "b",
+  "c"
+ ],
+ "n_scenarios": 100,
+ "n_items": 600,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 33,
+  "a-neg-train": 67,
+  "a-pos-test": 33,
+  "a-pos-train": 67,
+  "b-neg-test": 33,
+  "b-neg-train": 67,
+  "b-pos-test": 33,
+  "b-pos-train": 67,
+  "c-neg-test": 33,
+  "c-neg-train": 67,
+  "c-pos-test": 33,
+  "c-pos-train": 67
+ },
+ "constructions": {
+  "generated": 400,
+  "adapted": 200
+ },
+ "sources": [
+  "\"SafeText\""
+ ],
+ "licenses": [
+  "MIT"
+ ],
+ "sha256": {
+  "items": "78f579be08e2c4cd3d583f66667c070eac744f71cc68e2ca696462e8c8b533d3",
+  "heldout": "8de3404200a3f4c8b04884456db2354caddcbf2081c03bd71b39ad2bb3174e20",
+  "behavior": "a3540b9c7c3b7dcaafb48f86174027f7db7ea4e3bbf78382b8e700647f264908"
+ }
+}

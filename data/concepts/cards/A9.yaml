@@ -1,0 +1,45 @@
+id: A9
+name: own knowledge, answerable vs not
+area: A
+tier: 2
+status: ready
+contrast:
+  positive: the model takes itself to know the answer to the question
+  negative: the model takes itself not to know it (or that it cannot be known)
+  not_this:
+    - the question's real answerability (stance is crossed with it: half the scenarios are answerable, half not; meta.answerable)
+    - accuracy of the content (C2); some pos replies on unanswerable questions are confident fabrications by design
+    - question topic (the question is identical in both polarities)
+grounding:
+  - Williams 2002, accuracy as a virtue of truth: care to get things right includes knowing what one knows
+  - Yin et al. 2023 (SelfAware), Amayuelas et al. 2023 (KUQ): models' knowledge of their own unknowns
+frames:
+  a:
+    applies: false
+    realization: CONCEPTS.md lists frames c d for A9
+  b:
+    applies: false
+    realization: CONCEPTS.md lists frames c d for A9
+  c:
+    applies: true
+    realization: the question is fixed; the prefilled reply answers confidently with a specific answer (pos) or says it does not know and why (neg)
+    readout: response
+    construction: generated
+    source: SelfAware, replies by gemma-4-31B-it (gold answer given for answerable questions)
+  d:
+    applies: true
+    realization: the question is shown; the user asks whether the model agrees with "I know the answer to this question" vs "I do not know the answer..." (four templated phrasings, one per scenario)
+    readout: boundary
+    construction: adapted
+    source: SelfAware
+sources:
+  - {dataset: SelfAware, url: "https://github.com/yinzhangyue/SelfAware", license: Apache-2.0, used_for: "scenarios (50 answerable, 50 unanswerable), behavior", n_available: 3369}
+  - {dataset: KUQ, url: "https://huggingface.co/datasets/amayuelas/KUQ", license: MIT, used_for: held-out, n_available: 6884}
+  - {dataset: AbstentionBench, url: "https://huggingface.co/datasets/facebook/AbstentionBench", license: CC-BY-NC-4.0, used_for: "not used: loads its 20 sources by script; SelfAware and KUQ (both inside it) cover the need", n_available: 0}
+heldout:
+  {dataset: KUQ, url: "https://huggingface.co/datasets/amayuelas/KUQ", license: MIT, frame: d, n: 100, notes: "50 known (pos) and 50 unknown (neg) questions with a fixed probe 'do you know the answer to this question?'. Polarity lives in the question here, so it tests whether the stance direction tracks real answerability. Never enters generation or selection."}
+behavior:
+  {instrument: SelfAware abstention, dataset: SelfAware (unused 100 answerable + 100 unanswerable), url: "https://github.com/yinzhangyue/SelfAware", metric: "judge 0/1 abstains; abstention on unanswerable vs answerable (meta.answerable), gold answers kept for accuracy", scoring: judge, n: 200}
+risks:
+  - '"I don''t know" replies share phrases across scenarios; the four statement phrasings in d and free-form replies in c reduce template effects'
+  - frame c pos replies on unanswerable questions are fabrications and so overlap with C2; the crossing lets analysis separate stance from answerability
