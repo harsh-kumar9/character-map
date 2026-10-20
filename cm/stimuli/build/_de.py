@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 
 from ...paths import OUTPUTS, REPO
-from ..schema import item_dir, read_jsonl, split_for, write_jsonl
+from ..schema import MANIFESTS, check_item, item_dir, read_jsonl, sha256, split_for, write_jsonl
 
 RAW = REPO / "data" / "raw"
 PRIV = OUTPUTS / "stimuli" / "_src"
@@ -251,8 +251,13 @@ def review_sample(items: list[dict], k: int = 3) -> list[dict]:
     return out
 
 
-def write_outputs(cid: str, items: list[dict], heldout: list[dict], behavior: list[dict]):
-    for rows in (items, heldout, behavior):
+def write_outputs(cid: str, items: list[dict], heldout: list[dict], behavior: list[dict],
+                  extra_sets: dict[str, list[dict]] | None = None):
+    """Write the three contract files, review samples, and any secondary sets (D-030/D-031: items_endorse,
+    heldout_endorse, heldout_<name>). The shared validator covers only the three main files, so secondary sets get
+    their own schema check and data/stimuli/<ID>/manifest_extra.json (counts per cell, sha256)."""
+    extra_sets = extra_sets or {}
+    for rows in (items, heldout, behavior, *extra_sets.values()):
         add_n_tokens(rows)
     d = item_dir(cid)
     write_jsonl(d / "items.jsonl", items)
@@ -262,6 +267,26 @@ def write_outputs(cid: str, items: list[dict], heldout: list[dict], behavior: li
     extra = stable_order(heldout, key=lambda r: r["item_id"], salt="rx")[:3] + \
         stable_order(behavior, key=lambda r: r["item_id"], salt="rx")[:3]
     write_jsonl(d / "review_extra.jsonl", extra)
+    man = {}
+    for name, rows in extra_sets.items():
+        bad = [(r["item_id"], e) for r in rows for e in check_item(r, True)]
+        assert not bad, f"{cid} {name}: {bad[:3]}"
+        assert len({r["item_id"] for r in rows}) == len(rows), f"{cid} {name}: duplicate item_id"
+        write_jsonl(d / f"{name}.jsonl", rows)
+        cells = collections.Counter(f"{r['frame']}-{r['polarity']}-{r['split']}" for r in rows)
+        man[name] = {"n": len(rows), "n_scenarios": len({r["scenario_id"] for r in rows}),
+                     "forms": dict(collections.Counter(r["meta"].get("form", "") for r in rows)),
+                     "cells": dict(sorted(cells.items())), "sha256": sha256(d / f"{name}.jsonl")}
+        print(f"[{cid}] {name}: {len(rows)}", flush=True)
+    for p in d.glob("*.jsonl"):        # drop secondary sets this build no longer writes
+        if p.stem.startswith(("items_", "heldout_")) and p.stem not in extra_sets:
+            p.unlink()
+    mp = MANIFESTS / cid / "manifest_extra.json"
+    if man:
+        mp.parent.mkdir(parents=True, exist_ok=True)
+        mp.write_text(json.dumps(man, indent=1) + "\n")
+    elif mp.exists():
+        mp.unlink()
     cells = collections.Counter((r["frame"], r["polarity"], r["meta"].get("contrast", "")) for r in items)
     toks = sorted(r["meta"]["n_tokens"] for r in items)
     print(f"[{cid}] items {len(items)} scenarios {len({r['scenario_id'] for r in items})} heldout {len(heldout)} "
