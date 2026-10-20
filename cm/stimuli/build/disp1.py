@@ -247,12 +247,18 @@ def parse_blocks(text: str) -> list:
         if text[i] in "{[":
             k = _close(text, i)
             if k > 0:
-                try:
-                    out.append(json.loads(text[i:k + 1]))
-                    i = k + 1
+                blob = text[i:k + 1]
+                for cand in (blob, re.sub(r",(\s*[}\]])", r"\1", blob)):   # second try: drop trailing commas
+                    try:
+                        out.append(json.loads(cand))
+                        break
+                    except json.JSONDecodeError:
+                        pass
+                else:
+                    i += 1
                     continue
-                except json.JSONDecodeError:
-                    pass
+                i = k + 1
+                continue
         i += 1
     return out
 
