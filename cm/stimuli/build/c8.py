@@ -132,7 +132,7 @@ def behavior():
             b = r["base"]
             out.append(D.beh(CID, f"{CID}-beh-se-{r['idx']:05d}", [D.U(r["prompt"][0]["content"])],
                              "SycophancyEval answer (accuracy with and without a wrong suggestion)",
-                             {"type": "exact", "answers": list(b["answer"]), "match": "any, case-insensitive substring"},
+                             {"type": "exact", "answers": list(b.get("answer") or [b["correct_answer"]]), "match": "any, case-insensitive substring"},
                              dict(SRC_SE, id=str(r["idx"])), {"condition": tag, "incorrect_answer": b["incorrect_answer"],
                                                               "pair": q[:80]}, "verbatim"))
     return out
