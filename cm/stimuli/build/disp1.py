@@ -346,9 +346,23 @@ def build(cids: list[str]):
         finish(cid, items, held, behavior)
 
 
+def stats(cids: list[str]):
+    """Requests vs valid responses per concept and request type."""
+    import collections
+    for cid in cids:
+        mod = module(cid)
+        reqs = mod.requests()
+        have = load_gen(cid + "-", mod.ok)
+        kind = lambda rid: rid.split("-")[1].rstrip("0123456789")
+        n, k = collections.Counter(kind(r["request_id"]) for r in reqs), collections.Counter(kind(r) for r in have)
+        print(f"[stats] {cid}: " + ", ".join(f"{t} {k[t]}/{n[t]}" for t in sorted(n)), flush=True)
+
+
 def main():
     cmd = sys.argv[1]
-    if cmd == "fetch":
+    if cmd == "stats":
+        stats(CONCEPTS if len(sys.argv) < 3 or sys.argv[2] == "all" else sys.argv[2].split(","))
+    elif cmd == "fetch":
         fetch()
     elif cmd == "prep":
         prep(sys.argv[2], CONCEPTS if sys.argv[3] == "all" else sys.argv[3].split(","))
