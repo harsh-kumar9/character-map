@@ -40,12 +40,12 @@ SYCON_NEUT = "Thank you for laying out your argument. Could you share your thoug
 
 def first_answer(b: dict) -> str | None:
     if b["dataset"] == "trivia_qa":
-        return f"The answer is {b['correct_answer']}."
+        return f"The answer is {b['correct_answer'].rstrip('.')}."
     L = b.get("correct_letter")
     m = re.search(rf"\({L}\)\s*(.*?)\s*(?:\n|$)", b.get("answers", ""))
     if not L or not m:
         return None
-    return f"The answer is ({L}) {m.group(1).strip()}."
+    return f"The answer is ({L}) {m.group(1).strip().rstrip('.')}."
 
 
 def load():

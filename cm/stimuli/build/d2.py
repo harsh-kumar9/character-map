@@ -20,14 +20,14 @@ import difflib
 import re
 
 from ._de import (A, RAW, U, behav, get_json, held, item, need_generation, ratio, report_drops, req, responses, rnd,
-                  src, stable_order, stop_for_generation, write_outputs)
+                  src, stable_order, stop_for_generation, verify, write_outputs)
 
 CID = "D2"
 BT = RAW / "procedural-evals-tom/data/bigtom/bigtom.csv"
 BT_SRC = dict(dataset="BigToM (cicl-stanford/procedural-evals-tom)", license="MIT",
               url="https://github.com/cicl-stanford/procedural-evals-tom")
 N_SCN = 110
-B_ITEMS, B_HELD = "D2_revoice", "D2_heldout_revoice"
+B_ITEMS, B_HELD, B_VER = "D2_revoice", "D2_heldout_revoice", "D2_verify"
 
 PROMPT_ITEM = """You are helping build a research dataset that contrasts reasoning about oneself with reasoning about another person. Here is a short story from a theory-of-mind benchmark.
 
@@ -58,6 +58,17 @@ Write three texts.
 2. "question_you": the belief question rewritten in the second person ("Do you believe ...?").
 3. "options_you": the two possible answers rewritten in the second person, in the same order, joined by " || ".
 Return only a JSON object with the keys "story_you", "question_you", "options_you"."""
+
+VERIFY = """Check texts written for a theory-of-mind dataset.
+
+Original story: {story}
+Second-person version: {story_you}
+Question in second person: {question_you}
+Correct belief of the protagonist ({name}): {ba}
+Reply 1: {reply_self}
+Reply 2: {reply_other}
+
+Pass only if all hold: the second-person version tells the same story with the reader as {name} and changes nothing else; reply 1 speaks in the first person from {name}'s place and reply 2 describes {name} in the third person; both replies state the correct belief above and the same next action; neither reply adds facts the other lacks."""
 
 
 def load():
@@ -107,7 +118,7 @@ def main():
     if missing:
         stop_for_generation(missing)
 
-    got, items, drops = responses(B_ITEMS), [], collections.Counter()
+    got, cands, drops = responses(B_ITEMS), [], collections.Counter()
     for s, r in zip(scn, r_items):
         j = get_json(got.get(r["request_id"]), ["story_you", "question_you", "reply_self", "reply_other"])
         if j is None:
@@ -119,8 +130,15 @@ def main():
         if not (0.75 <= ratio(j["reply_self"], j["reply_other"]) <= 1.33) or not re.search(r"\bI\b", j["reply_self"]):
             drops["reply mismatch"] += 1
             continue
+        cands.append(dict(s, j=j, gen_id=r["request_id"]))
+    cands, fails = verify(B_VER, cands, lambda c: VERIFY.format(**{**c["j"], "story": c["story"], "name": c["name"],
+                                                                   "ba": c["ba"]}))
+    drops.update(fails)
+    items = []
+    for c in cands:
+        s, j = c, c["j"]
         meta = {"belief_condition": s["cond"], "protagonist": s["name"], "bigtom_row": s["idx"],
-                "gen_id": r["request_id"]}
+                "gen_id": c["gen_id"], "verify_id": c["verify_id"]}
         vs = src(**BT_SRC, id=s["idx"])
         gs = src(BT_SRC["dataset"] + ", re-voiced by gemma-4-31B-it", BT_SRC["license"], BT_SRC["url"], s["idx"])
         items.append(item(CID, s["sid"], "a", "pos", [U(f"{j['story_you']}\n\n{j['question_you']}")], "boundary",

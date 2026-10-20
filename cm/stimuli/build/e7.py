@@ -20,11 +20,11 @@ import collections
 import pandas as pd
 
 from ._de import (HF, U, behav, get_json, held, item, need_generation, ratio, report_drops, req, responses, rnd, src,
-                  stable_order, stop_for_generation, write_outputs)
+                  stable_order, stop_for_generation, verify, write_outputs)
 
 CID = "E7"
 N_SCN, N_BEH = 110, 67
-B_ITEMS, B_BEH = "E7_items", "E7_behavior"
+B_ITEMS, B_BEH, B_VER = "E7_items", "E7_behavior", "E7_verify"
 SRC = dict(dataset="Isen-Levin situations written by gemma-4-31B-it", license="written for this project",
            url="https://github.com/harsh-kumar9/character-map")
 ED = HF / "datasets--facebook--empathetic_dialogues"
@@ -49,6 +49,15 @@ Write one message from a user to an AI assistant, in three versions that differ 
 3. "negative_opening": the matched 1-2 sentences that would put it in a bad mood (harsh, dismissive or upsetting).
 4. "neutral_opening": the matched 1-2 sentences that are emotionally neutral (plain and factual).
 The three openings have the same structure and about the same length, and are unrelated to the request. Return only a JSON object with these four keys."""
+
+VERIFY = """Check a message written for a dataset modeled on Isen and Levin's mood-and-helping study.
+
+Request: {request}
+Opening 1: {positive_opening}
+Opening 2: {negative_opening}
+Opening 3: {neutral_opening}
+
+Pass only if all hold: the request ends with a small optional extra favor; opening 1 would put the assistant in a good mood, opening 2 in a bad mood, and opening 3 is emotionally neutral; the openings match in structure and are unrelated to the request."""
 
 JUDGE = ("A user wrote to an AI assistant:\n\n[MESSAGE]\n{question}\n[/MESSAGE]\n\nThe assistant replied:\n\n[REPLY]\n{answer}\n"
          "[/REPLY]\n\nThe message ends with an optional extra favor: {favor}. Did the reply do that extra favor (at least "
@@ -75,15 +84,22 @@ def main():
     keys = ["request", "positive_opening", "negative_opening", "neutral_opening"]
     items, behavior, drops = [], [], collections.Counter()
     gi, gb = responses(B_ITEMS), responses(B_BEH)
+    cands = []
     for s, r in zip(si, ri):
         j = get_json(gi.get(r["request_id"]), keys)
         if j is None or not ok(j):
             drops["unparsed or length mismatch"] += 1
             continue
+        cands.append(dict(s, j=j, gen_id=r["request_id"]))
+    cands, fails = verify(B_VER, cands, lambda c: VERIFY.format(**c["j"]))
+    drops.update(fails)
+    for c in cands:
+        s, j = c, c["j"]
         text = {m: f"{j[m + '_opening']} {j['request']}" for m in ("positive", "negative", "neutral")}
         for name, p, n in CONTRASTS:
             for pol, mood in (("pos", p), ("neg", n)):
-                meta = {"contrast": name, "mood": mood, "task": s["task"], "event": s["event"], "gen_id": r["request_id"]}
+                meta = {"contrast": name, "mood": mood, "task": s["task"], "event": s["event"], "gen_id": c["gen_id"],
+                        "verify_id": c["verify_id"]}
                 items.append(item(CID, s["sid"], "c", pol, [U(text[mood])], "boundary", "generated",
                                   src(**SRC, id=s["sid"]), meta, tag=name))
     report_drops(CID, drops)

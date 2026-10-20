@@ -139,6 +139,31 @@ def get_json(rec: dict | None, keys: list[str]) -> dict | None:
     return {k: (v.strip() if isinstance(v, str) else v) for k, v in j.items()}
 
 
+VERIFY_TAIL = ('\n\nReturn only a JSON object: {"pass": true or false, "problem": "one short sentence naming the '
+               'problem, or an empty string"}')
+
+
+def verify(batch: str, cands: list[dict], prompt_fn, key=lambda c: c["sid"]) -> tuple[list[dict], collections.Counter]:
+    """Second gemma-4-31B-it pass that checks each generated candidate against the contrast (greedy decoding).
+    Returns the candidates that pass (with meta in c["verify"]) and a count of failures by problem."""
+    reqs = [req(f"{key(c)}-v", prompt_fn(c) + VERIFY_TAIL, max_tokens=300, temperature=0.0) for c in cands]
+    missing = need_generation([batch], {batch: reqs})
+    if missing:
+        stop_for_generation(missing)
+    got, keep, fails = responses(batch), [], collections.Counter()
+    for c, r in zip(cands, reqs):
+        rec = got.get(r["request_id"])
+        j = rec.get("json") if rec and rec.get("parse_ok") else None
+        if isinstance(j, dict) and j.get("pass") is True:
+            c["verify_id"] = r["request_id"]
+            keep.append(c)
+        else:
+            fails["verify failed" if isinstance(j, dict) else "verify unparsed"] += 1
+            if isinstance(j, dict) and fails["verify failed"] <= 4:
+                print(f"   [{batch}] {key(c)}: {str(j.get('problem'))[:160]}", flush=True)
+    return keep, fails
+
+
 AI_WORDS = re.compile(r"\b(as an ai|language model|ai assistant|i'?m an ai|i am an ai|artificial intelligence|chatbot)\b",
                       re.I)
 

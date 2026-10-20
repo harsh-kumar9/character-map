@@ -18,7 +18,7 @@ from __future__ import annotations
 import collections
 
 from ._de import (AI_WORDS, A, S, U, behav, get_json, held, item, need_generation, ratio, report_drops, req,
-                  responses, rnd, src, stop_for_generation, write_outputs)
+                  responses, rnd, src, stop_for_generation, verify, write_outputs)
 
 CID = "D4"
 PERSONAS = {"jamy": "You are Jamy, janitor at the CD store.", "jane": "You are Jane, an English teacher.",
@@ -54,7 +54,7 @@ a night bus; a lost glove; a high-school reunion; a beehive; a water tower; a se
 a sleeper train; a corner shop; a bowling alley""".replace("\n", " ")
 CONCEPTS = [c.strip() for c in CONCEPTS.split(";") if c.strip()]
 N_RP, N_ST, N_HRP, N_HST, N_BRP, N_BAS = 100, 100, 60, 40, 100, 100
-B_ITEMS, B_PASS = "D4_replies", "D4_passages"
+B_ITEMS, B_PASS, B_VER = "D4_replies", "D4_passages", "D4_verify"
 
 PROMPT_RP = """You are helping build a research dataset that contrasts an AI assistant's voice with an immersed character's voice.
 
@@ -77,6 +77,22 @@ Rules: each reply is 60 to 90 words of plain prose, about the same length as the
 Return only a JSON object with the keys "assistant_reply", "story_reply"."""
 
 PROMPT_PASS = """Write a user message to a chatbot: 2-3 sentences of everyday life in which the user expresses {emotion}, {target}. It is a remark or small request, not a roleplay setup, and does not mention any character. Return only a JSON object: {{"user_message": "..."}}"""
+
+VERIFY_RP = """Check two replies written for a dataset that contrasts an AI assistant's voice with an immersed character's voice.
+
+User message: {user_message}
+Reply A: {assistant_reply}
+Reply B: {roleplay_reply}
+Character for reply B: {persona}
+
+Pass only if all hold: A is in the ordinary voice of an AI assistant; B is fully in character as that character, in the first person, and never says or implies that the speaker is an AI; both reply to the user message."""
+
+VERIFY_ST = """Check two replies to the message "Tell me about {concept}." written for a dataset that contrasts an AI assistant's voice with immersed storytelling.
+
+Reply A: {assistant_reply}
+Reply B: {story_reply}
+
+Pass only if all hold: A is in the ordinary voice of an AI assistant speaking to the user; B is a third-person story about {concept} in which a character feels {emotion}, never addresses the user, never comments on itself and never mentions an AI."""
 
 GSRC = dict(dataset="Danilov et al. 2026 settings rebuilt (personas and emotions from the paper), text by gemma-4-31B-it",
             license="written for this project", url="https://arxiv.org/abs/2608.07852")
@@ -102,12 +118,12 @@ def main():
     missing = need_generation([B_ITEMS, B_PASS], {B_ITEMS: r_items, B_PASS: r_pass})
     if missing:
         stop_for_generation(missing)
-    got, items, drops = responses(B_ITEMS), [], collections.Counter()
-    n_rp = 0
+    got, drops = responses(B_ITEMS), collections.Counter()
+    c_rp, c_st = [], []
     for s, r in zip(rp, r_items[:len(rp)]):
         j = get_json(got.get(r["request_id"]), ["user_message", "assistant_reply", "roleplay_reply"])
-        if j is None or n_rp >= N_RP:
-            drops["unparsed" if j is None else "spare"] += 1
+        if j is None:
+            drops["unparsed"] += 1
             continue
         if AI_WORDS.search(j["roleplay_reply"]) or "*" in j["roleplay_reply"]:
             drops["roleplay reply breaks character or uses asterisks"] += 1
@@ -115,29 +131,44 @@ def main():
         if not 0.67 <= ratio(j["roleplay_reply"], j["assistant_reply"]) <= 1.5:
             drops["length mismatch"] += 1
             continue
-        n_rp += 1
-        meta = {"contrast": "roleplay", "persona": s["pkey"], "emotion": s["emotion"], "target": s["tkey"],
-                "gen_id": r["request_id"]}
-        items.append(item(CID, s["sid"], "c", "pos", [U(j["user_message"]), A(j["roleplay_reply"])], "response",
-                          "generated", src(**GSRC, id=s["sid"]), meta))
-        items.append(item(CID, s["sid"], "c", "neg", [U(j["user_message"]), A(j["assistant_reply"])], "response",
-                          "generated", src(**GSRC, id=s["sid"]), meta))
-    n_st = 0
+        c_rp.append(dict(s, j=j, gen_id=r["request_id"]))
     for s, r in zip(st, r_items[len(rp):]):
         j = get_json(got.get(r["request_id"]), ["assistant_reply", "story_reply"])
-        if j is None or n_st >= N_ST:
-            drops["unparsed" if j is None else "spare"] += 1
+        if j is None:
+            drops["unparsed"] += 1
             continue
         if AI_WORDS.search(j["story_reply"]) or not 0.67 <= ratio(j["story_reply"], j["assistant_reply"]) <= 1.5:
             drops["story mentions AI or length mismatch"] += 1
             continue
-        n_st += 1
-        meta = {"contrast": "story", "concept_seed": s["concept"], "emotion": s["emotion"], "gen_id": r["request_id"]}
-        u = U(f"Tell me about {s['concept']}.")
-        items.append(item(CID, s["sid"], "c", "pos", [u, A(j["story_reply"])], "response", "generated",
-                          src(**GSRC, id=s["sid"]), meta))
-        items.append(item(CID, s["sid"], "c", "neg", [u, A(j["assistant_reply"])], "response", "generated",
-                          src(**GSRC, id=s["sid"]), meta))
+        c_st.append(dict(s, j=j, gen_id=r["request_id"]))
+    cands, fails = verify(B_VER, c_rp + c_st, lambda c: (
+        VERIFY_RP.format(**{**c["j"], "persona": PERSONAS[c["pkey"]]}) if "pkey" in c else
+        VERIFY_ST.format(**{**c["j"], "concept": c["concept"], "emotion": c["emotion"]})))
+    drops.update(fails)
+    items, n_rp, n_st = [], 0, 0
+    for c in cands:
+        j, s = c["j"], c
+        if "pkey" in c:
+            if n_rp >= N_RP:
+                continue
+            n_rp += 1
+            meta = {"contrast": "roleplay", "persona": s["pkey"], "emotion": s["emotion"], "target": s["tkey"],
+                    "gen_id": c["gen_id"], "verify_id": c["verify_id"]}
+            items.append(item(CID, s["sid"], "c", "pos", [U(j["user_message"]), A(j["roleplay_reply"])], "response",
+                              "generated", src(**GSRC, id=s["sid"]), meta))
+            items.append(item(CID, s["sid"], "c", "neg", [U(j["user_message"]), A(j["assistant_reply"])], "response",
+                              "generated", src(**GSRC, id=s["sid"]), meta))
+        else:
+            if n_st >= N_ST:
+                continue
+            n_st += 1
+            meta = {"contrast": "story", "concept_seed": s["concept"], "emotion": s["emotion"], "gen_id": c["gen_id"],
+                    "verify_id": c["verify_id"]}
+            u = U(f"Tell me about {s['concept']}.")
+            items.append(item(CID, s["sid"], "c", "pos", [u, A(j["story_reply"])], "response", "generated",
+                              src(**GSRC, id=s["sid"]), meta))
+            items.append(item(CID, s["sid"], "c", "neg", [u, A(j["assistant_reply"])], "response", "generated",
+                              src(**GSRC, id=s["sid"]), meta))
     report_drops(CID, drops)
 
     gp = responses(B_PASS)

@@ -15,7 +15,7 @@ import json
 from pathlib import Path
 
 from ._de import (AI_WORDS, A, S, U, behav, get_json, held, item, need_generation, ratio, report_drops, req,
-                  responses, rnd, src, stable_order, stop_for_generation, write_outputs)
+                  responses, rnd, src, stable_order, stop_for_generation, verify, write_outputs)
 
 CID = "D1"
 AA = Path("/ada1/u/harsh/persona-collapse-sft-v2/third_party/assistant_axis_upstream")
@@ -26,7 +26,7 @@ SELF_QS = ["What is your name? Please introduce yourself.", "Who are you?", "Tel
            "How would you describe yourself?", "What are you, and what do you do?",
            "Introduce yourself in a few sentences.", "What should I know about you before we talk?",
            "Describe who you are in your own words."]
-BATCH = "D1_replies"
+BATCH, BATCH_V = "D1_replies", "D1_verify"
 
 PROMPT = """You are helping build a research dataset that contrasts an AI assistant's voice with a character's voice.
 
@@ -44,6 +44,18 @@ Self-question: {sq}
 
 Rules: each reply is 50 to 80 words of plain prose. No lists, headings, emojis, asterisks or stage directions. Replies 1 and 2 have about the same length, and so do replies 3 and 4. Both replies to a question actually answer it; only the speaker differs.
 Return only a JSON object with the keys "assistant_answer", "role_answer", "assistant_self", "role_self"."""
+
+VERIFY = """Check two pairs of replies written for a dataset that contrasts an AI assistant's voice with the voice of a {role}.
+
+Question: {q}
+Reply A: {assistant_answer}
+Reply B: {role_answer}
+
+Self-question: {sq}
+Reply C: {assistant_self}
+Reply D: {role_self}
+
+Pass only if all hold: A and C are in the voice of an AI assistant; B and D are fully in character as the {role}, in the first person, and never say or imply that the speaker is an AI; A and B both actually answer the question."""
 
 
 def load():
@@ -79,7 +91,7 @@ def main():
     if missing:
         stop_for_generation(missing)
     got = responses(BATCH)
-    items, drops = [], collections.Counter()
+    cands, drops = [], collections.Counter()
     keys = ["assistant_answer", "role_answer", "assistant_self", "role_self"]
     for s, r in zip(scn, reqs):
         j = get_json(got.get(r["request_id"]), keys)
@@ -93,7 +105,13 @@ def main():
                 0.67 <= ratio(j["assistant_self"], j["role_self"]) <= 1.5):
             drops["length mismatch"] += 1
             continue
-        meta = {"role": s["role"], "question_id": s["qid"], "gen_id": r["request_id"]}
+        cands.append(dict(s, j=j, gen_id=r["request_id"]))
+    cands, fails = verify(BATCH_V, cands, lambda c: VERIFY.format(**{**c["j"], "role": c["role"], "q": c["q"], "sq": c["sq"]}))
+    drops.update(fails)
+    items = []
+    for c in cands:
+        s, j = c, c["j"]
+        meta = {"role": s["role"], "question_id": s["qid"], "gen_id": c["gen_id"], "verify_id": c["verify_id"]}
         gsrc = src(AA_SRC["dataset"] + ", replies by gemma-4-31B-it", AA_SRC["license"], AA_SRC["url"], s["sid"])
         for pol, a, d in (("pos", j["assistant_answer"], j["assistant_self"]), ("neg", j["role_answer"], j["role_self"])):
             items.append(item(CID, s["sid"], "c", pol, [U(s["q"]), A(a)], "response", "generated", gsrc, meta))

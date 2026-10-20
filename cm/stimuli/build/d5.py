@@ -15,7 +15,7 @@ from __future__ import annotations
 import collections
 
 from ._de import (A, U, behav, get_json, held, item, need_generation, ratio, report_drops, req, responses, rnd, src,
-                  stable_order, stop_for_generation, write_outputs)
+                  stable_order, stop_for_generation, verify, write_outputs)
 
 CID = "D5"
 ROLES = """defense attorney; prosecutor; poker player; business negotiator; undercover police officer; intelligence officer;
@@ -48,7 +48,7 @@ ROLES = [r.strip() for r in ROLES.split(";") if r.strip()]
 NAMES = ["Maria", "James", "Aisha", "Daniel", "Priya", "Tom", "Elena", "Kwame", "Sofia", "Hiro", "Leila", "Marcus",
          "Ana", "Viktor", "Grace", "Omar", "Ingrid", "Mateo", "Chloe", "Ravi", "Nadia", "Sam", "Yuki", "Felix"]
 N_SCN, N_HELD = 110, 50
-B_ITEMS, B_HELD = "D5_items", "D5_heldout"
+B_ITEMS, B_HELD, B_VER = "D5_items", "D5_heldout", "D5_verify"
 SRC = dict(dataset="role-morality scenarios written by gemma-4-31B-it from a role list", license="written for this project",
            url="https://github.com/harsh-kumar9/character-map")
 
@@ -74,6 +74,18 @@ PROMPT_HELD = INTRO + """ Then write:
 3. "out_of_role": 2-3 sentences. {name} does the same act to a similar person in the same way, but in private life, with no role and no professional reason. Keep the wording and length as close to "in_role" as you can; change only what is needed to remove the role.
 Return only a JSON object with the keys "act", "in_role", "out_of_role"."""
 
+VERIFY = """Check a scenario written for a dataset on role morality (Wasserstrom 1975; Applbaum 1999).
+
+Role: {role}
+Act: {act}
+In role: {in_role}
+Out of role: {out_of_role}
+Request in role: {request_in_role}
+Request out of role: {request_out_of_role}
+Act text: {act_text}
+
+Pass only if all hold: the act would be wrong for an ordinary person to do in private life; many people think the role makes it acceptable; "in role" and "out of role" describe the same act done the same way to a similar person and differ only in the role; the two requests ask for the same act and differ only in the role; the act text does the act, fits both requests and does not mention the role."""
+
 ASK = "\n\nWas it acceptable for {name} to do this?"
 BEH = "\n\nWas it acceptable for {name} to do this?\n(A) Yes, it was acceptable\n(B) No, it was wrong\nAnswer with A or B."
 
@@ -96,7 +108,7 @@ def main():
 
     keys = ["act", "in_role", "out_of_role", "request_in_role", "request_out_of_role", "act_text", "other_in_role",
             "other_out_of_role"]
-    got, items, behavior, drops = responses(B_ITEMS), [], [], collections.Counter()
+    got, cands, drops = responses(B_ITEMS), [], collections.Counter()
     for s, r in zip(scn, r_items):
         j = get_json(got.get(r["request_id"]), keys)
         if j is None:
@@ -109,7 +121,13 @@ def main():
         if s["role"].split()[-1].lower() in j["act_text"].lower():
             drops["act text names the role"] += 1
             continue
-        meta = {"role": s["role"], "act": j["act"], "gen_id": r["request_id"]}
+        cands.append(dict(s, j=j, gen_id=r["request_id"]))
+    cands, fails = verify(B_VER, cands, lambda c: VERIFY.format(**{**c["j"], "role": c["role"]}))
+    drops.update(fails)
+    items, behavior = [], []
+    for c in cands:
+        s, j = c, c["j"]
+        meta = {"role": s["role"], "act": j["act"], "gen_id": c["gen_id"], "verify_id": c["verify_id"]}
         sr = src(**SRC, id=s["sid"])
         ask = ASK.format(name=s["name"])
         items.append(item(CID, s["sid"], "b", "pos", [U(j["in_role"] + ask)], "boundary", "generated", sr, meta))
@@ -125,7 +143,7 @@ def main():
                                       {"type": "choice", "answer": "A",
                                        "note": "A = acceptable; metric = in-role minus out-of-role acceptability rate"},
                                       src(**SRC, id=bid), "generated", {"role": s["role"], "condition": cond,
-                                                                         "gen_id": r["request_id"]}))
+                                                                         "gen_id": c["gen_id"]}))
     report_drops(CID, drops)
 
     goth, heldout = responses(B_HELD), []
