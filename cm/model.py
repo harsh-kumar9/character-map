@@ -13,11 +13,11 @@ import torch
 from .paths import MODELS, snapshot
 
 
-def load(model: str = "gemma-3-4b-it", device: str = "cuda"):
+def load(model: str = "gemma-3-4b-it", device: str = "cuda", dtype: torch.dtype = torch.bfloat16, attn: str = "sdpa"):
     from transformers import AutoModelForImageTextToText, AutoTokenizer
     path = snapshot(MODELS[model])
     tok = AutoTokenizer.from_pretrained(path)
-    m = AutoModelForImageTextToText.from_pretrained(path, dtype=torch.bfloat16, attn_implementation="sdpa")
+    m = AutoModelForImageTextToText.from_pretrained(path, dtype=dtype, attn_implementation=attn)
     m.to(device).eval()
     return m, tok
 

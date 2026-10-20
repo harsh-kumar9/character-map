@@ -9,7 +9,8 @@ same token set: that is the in-distribution reference for the S1 fidelity gate o
 Gate (proposed in PLAN.md S0): Pearson r >= 0.98 and median relative error <= 5% at every layer,
 and the feature is above threshold in >= 95% of sampled examples.
 
-Run: python -m cm.s0_check [--features 64] [--random-seqs 64]
+Run: python -m cm.s0_check [--features 64] [--random-seqs 64] [--variants bf16-sdpa,fp32-eager]
+Each variant sets the forward dtype and attention kernel; per-pair values go to outputs/s0/ for diagnosis.
 """
 from __future__ import annotations
 
@@ -22,12 +23,15 @@ import torch
 from safetensors import safe_open
 
 from . import model as cm_model
-from .paths import RESULTS, sae_dir
+from .paths import OUTPUTS, RESULTS, sae_dir
 from .sae import JumpReLUSAE
 
 LAYERS = [9, 17, 22, 29]
 RANKS = [0, 1, 2, 3, 10, 50, 200, 999]  # which of each feature's stored top-1000 examples to re-check
 PAD, BOS = 0, 2
+OUT = OUTPUTS / "s0"
+VARIANTS = {"bf16-sdpa": (torch.bfloat16, "sdpa"), "bf16-eager": (torch.bfloat16, "eager"),
+            "fp32-sdpa": (torch.float32, "sdpa"), "fp32-eager": (torch.float32, "eager")}
 
 
 def load_examples(folder):
@@ -53,7 +57,7 @@ def resid_at(m, tokens: torch.Tensor, layer: int, batch: int = 16) -> list[torch
     return out
 
 
-def check_layer(m, tok, layer: int, n_features: int, n_random: int, rng: np.random.Generator) -> dict:
+def check_layer(m, tok, layer: int, n_features: int, n_random: int, rng: np.random.Generator, tag: str) -> dict:
     t0 = time.time()
     folder = sae_dir("gemma-3-4b-it", layer)
     sae = JumpReLUSAE.load(folder, device="cuda")
@@ -73,6 +77,9 @@ def check_layer(m, tok, layer: int, n_features: int, n_random: int, rng: np.rand
     ours = (pre * (pre > sae.threshold[idx])).cpu().numpy()
     stored = np.array([float(acts[f, r]) for f, r in pairs])
     rel = np.abs(ours - stored) / np.maximum(np.abs(stored), 1e-6)
+    thr = sae.threshold[idx].cpu().numpy()
+    clear = stored >= 1.2 * thr          # diagnostic only: examples not sitting at the threshold
+    pre_np = pre.cpu().numpy()
 
     # in-distribution reference: FVU and L0 over random sequences, BOS and pad excluded
     rand = torch.as_tensor(np.sort(rng.choice(len(toks), size=n_random, replace=False)))
@@ -96,6 +103,9 @@ def check_layer(m, tok, layer: int, n_features: int, n_random: int, rng: np.rand
         "median_rel_err": float(np.median(rel)),
         "p90_rel_err": float(np.quantile(rel, 0.9)),
         "frac_above_threshold": float((ours > 0).mean()),
+        "diag_frac_stored_within_20pct_of_threshold": float((~clear).mean()),
+        "diag_frac_above_threshold_when_clear": float((ours[clear] > 0).mean()) if clear.any() else None,
+        "diag_median_rel_err_pre_vs_stored": float(np.median(np.abs(pre_np - stored) / np.maximum(np.abs(stored), 1e-6))),
         "rel_err_by_rank": {str(r): float(np.median(rel[[i for i, (_, rr) in enumerate(pairs) if rr == r]])) for r in RANKS},
         "random_seqs": int(n_random),
         "random_tokens": int(X.shape[0]),
@@ -105,6 +115,8 @@ def check_layer(m, tok, layer: int, n_features: int, n_random: int, rng: np.rand
         "sample_decoded": sample,
         "seconds": round(time.time() - t0, 1),
     }
+    np.savez(str(OUT / f"pairs_L{layer}_{tag}.npz"), feat=idx.cpu().numpy(), rank=np.array([r for _, r in pairs]),
+             stored=stored, ours=ours, pre=pre_np, thr=thr)
     res["pass"] = bool(res["pearson_r"] >= 0.98 and res["median_rel_err"] <= 0.05 and res["frac_above_threshold"] >= 0.95)
     del sae
     torch.cuda.empty_cache()
@@ -116,21 +128,28 @@ def main():
     ap.add_argument("--features", type=int, default=64)
     ap.add_argument("--random-seqs", type=int, default=64)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--variants", default="bf16-sdpa")
     args = ap.parse_args()
-    rng = np.random.default_rng(args.seed)
-    m, tok = cm_model.load("gemma-3-4b-it")
-    assert len(cm_model.decoder_layers(m)) == 34
-    out = {"model": "google/gemma-3-4b-it", "sae": "gemma-scope-2-4b-it resid_post 65k l0_medium",
-           "ranks_checked": RANKS, "seed": args.seed, "layers": []}
-    for L in LAYERS:
-        r = check_layer(m, tok, L, args.features, args.random_seqs, rng)
-        print(json.dumps({k: v for k, v in r.items() if k != "sample_decoded"}), flush=True)
-        out["layers"].append(r)
-    out["pass"] = all(r["pass"] for r in out["layers"])
+    OUT.mkdir(parents=True, exist_ok=True)
     dest = RESULTS / "s0"
     dest.mkdir(parents=True, exist_ok=True)
-    (dest / "s0_check.json").write_text(json.dumps(out, indent=2))
-    print("S0", "PASS" if out["pass"] else "FAIL", "->", dest / "s0_check.json", flush=True)
+    for tag in args.variants.split(","):
+        dtype, attn = VARIANTS[tag]
+        rng = np.random.default_rng(args.seed)       # same features and sequences for every variant
+        m, tok = cm_model.load("gemma-3-4b-it", dtype=dtype, attn=attn)
+        assert len(cm_model.decoder_layers(m)) == 34
+        out = {"model": "google/gemma-3-4b-it", "sae": "gemma-scope-2-4b-it resid_post 65k l0_medium",
+               "variant": tag, "ranks_checked": RANKS, "seed": args.seed, "layers": []}
+        for L in LAYERS:
+            r = check_layer(m, tok, L, args.features, args.random_seqs, rng, tag)
+            print(tag, json.dumps({k: v for k, v in r.items() if k != "sample_decoded"}), flush=True)
+            out["layers"].append(r)
+        out["pass"] = all(r["pass"] for r in out["layers"])
+        name = "s0_check.json" if tag == "bf16-sdpa" else f"s0_check_{tag}.json"
+        (dest / name).write_text(json.dumps(out, indent=2))
+        print("S0", tag, "PASS" if out["pass"] else "FAIL", "->", dest / name, flush=True)
+        del m
+        torch.cuda.empty_cache()
 
 
 if __name__ == "__main__":
