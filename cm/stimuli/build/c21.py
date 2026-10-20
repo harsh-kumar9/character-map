@@ -7,7 +7,7 @@ value, an answer that appeals to it and a contrasting answer. Its 20 refined val
 the three that sit on borders or are not in the basic ten (Face, Humility, Universalism: objectivity) are left out.
 Frame b quotes the question and one answer and asks what the model thinks of it (adapted). Frame d is a matched
 first-person value statement pair written by gemma-4-31B-it. Only rows whose two answers are within 25% in length
-are used. Held-out: Steering Geometry's ValueBench rows (questionnaire items such as PVQ-40, frame d). Behavior:
+are used (within 50% for values short of rows). Held-out: Steering Geometry's ValueBench rows (questionnaire items such as PVQ-40, frame d). Behavior:
 disjoint Touche rows as a two-option choice.
 
     python -m cm.stimuli.build.c21
@@ -95,10 +95,14 @@ def first_sentence(s: str) -> str:
 def main():
     gen = H.Gen(CID)
     d = load()
-    t = d[(d.source == "touche") & d.ratio.between(0.8, 1.25)]
-    pools, beh_rows = {}, []
+    tou = d[d.source == "touche"]
+    pools, beh_rows, band = {}, [], {}
     for b in DEF:
-        x = t[t.basic == b].sample(frac=1, random_state=21)
+        # length band 0.8-1.25; widened to 0.67-1.5 for values with too few rows in it (hedonism, stimulation,
+        # tradition), so the scenario count holds while the median ratio stays near 1
+        lo, hi = (0.8, 1.25) if (tou[tou.basic == b].ratio.between(0.8, 1.25)).sum() >= POOL else (0.67, 1.5)
+        band[b] = (lo, hi)
+        x = tou[(tou.basic == b) & tou.ratio.between(lo, hi)].sample(frac=1, random_state=21)
         # spread over the refined values inside a basic value
         x = x.assign(k=x.groupby("value").cumcount()).sort_values(["k", "value"])
         pools[b] = x.head(POOL)
@@ -141,7 +145,7 @@ def main():
                          "Steering Geometry two-option choice", {"type": "choice", "answer": "B" if flip else "A"},
                          "adapted", H.src("steering_geometry", "DeepRCL/SteeringGeometry schwartz_full (Touche23-ValueEval)", r.id),
                          dict(meta_for(r.value), answer_pole="pos (appeals to the value)")))
-    report = {"kept": kept, "touche_rows_in_length_band": int(len(t)), "failed_attempts": dict(gen.failed),
+    report = {"kept": kept, "length_band": band, "failed_attempts": dict(gen.failed),
               "heldout_per_value": {b: int((v.basic == b).sum()) for b in DEF}}
     H.write_all(CID, items, held, beh, FRAMES, report)
 
