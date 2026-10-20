@@ -1,0 +1,46 @@
+{
+ "concept": "C5",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.018,
+ "applicable_frames": [
+  "a",
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 600,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 28,
+  "a-neg-train": 72,
+  "a-pos-test": 28,
+  "a-pos-train": 72,
+  "c-neg-test": 28,
+  "c-neg-train": 72,
+  "c-pos-test": 28,
+  "c-pos-train": 72,
+  "d-neg-test": 28,
+  "d-neg-train": 72,
+  "d-pos-test": 28,
+  "d-pos-train": 72
+ },
+ "constructions": {
+  "generated": 600
+ },
+ "sources": [
+  "\"behavioral-data/Empathy-Mental-Health emotional-reactions (EPITOME)\"",
+  "\"facebook/empathetic_dialogues test\"",
+  "\"facebook/empathetic_dialogues train\""
+ ],
+ "licenses": [
+  "Althoff academic research license",
+  "CC-BY-NC-4.0"
+ ],
+ "sha256": {
+  "items": "9ad52fe8a68c2560274d599e1d0639db4b34176970534da33e472cfec4fcd5a5",
+  "heldout": "6ca1fd38793b92720fc1d8cf4425a993eabc3e4a2376a621cf8d22e3bbc8834e",
+  "behavior": "beae86344dbf6900bbb764b9872d40b3ab463a825479b5ce39441b8393885395"
+ }
+}

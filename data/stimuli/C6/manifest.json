@@ -1,0 +1,48 @@
+{
+ "concept": "C6",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.007,
+ "applicable_frames": [
+  "a",
+  "b",
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 800,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 37,
+  "a-neg-train": 63,
+  "a-pos-test": 37,
+  "a-pos-train": 63,
+  "b-neg-test": 37,
+  "b-neg-train": 63,
+  "b-pos-test": 37,
+  "b-pos-train": 63,
+  "c-neg-test": 37,
+  "c-neg-train": 63,
+  "c-pos-test": 37,
+  "c-pos-train": 63,
+  "d-neg-test": 37,
+  "d-neg-train": 63,
+  "d-pos-test": 37,
+  "d-pos-train": 63
+ },
+ "constructions": {
+  "generated": 800
+ },
+ "sources": [
+  "\"kellycyy/daily_dilemmas\""
+ ],
+ "licenses": [
+  "CC-BY-4.0"
+ ],
+ "sha256": {
+  "items": "314750d4d683773a1b6e6a4288272792a396a6529dce87f4a8261d3eb525847d",
+  "heldout": "4fd4ff6f3bca26d891db3b42497b3ed74393f5bd1f538ec3dda164dce4925212",
+  "behavior": "96de2d9f99d45ca0b52e6f3e73f4c29636ffbedcf5b691609498002e7c8219bb"
+ }
+}

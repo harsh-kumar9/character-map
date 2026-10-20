@@ -1,0 +1,46 @@
+id: C5
+name: caring vs apathetic
+area: C
+tier: 1
+status: draft
+contrast:
+  positive: the reply notices how the person feels, responds to what matters to them, and offers something that fits
+  negative: the reply is polite but indifferent; it registers the words without engaging with feelings or needs
+  not_this:
+    - rudeness or hostility (the apathetic reply is polite; impolite is C18)
+    - length (matched within 10% by request, checked per pair)
+    - human vs model text (both replies are written by the same generator)
+    - the person's vulnerability (that is A3; the same opening turn appears in both polarities)
+grounding:
+  - Noddings 1984, care as engrossment in and response to the cared-for
+  - Tronto 1993, care as attentiveness, responsibility, competence and responsiveness
+frames:
+  a:
+    applies: true
+    realization: '"Someone tells <Name>: <opening turn>. <Name> replies: <caring or apathetic reply>", then a neutral recognition question'
+    readout: boundary
+    construction: generated
+    source: EmpatheticDialogues opening turn verbatim; reply by gemma-4-31B-it
+  b: {applies: false, realization: "not in CONCEPTS.md for C5", readout: boundary, construction: generated, source: none}
+  c:
+    applies: true
+    realization: the opening turn as the user's message, verbatim; the prefilled reply (same text as frame a)
+    readout: response
+    construction: generated
+    source: as frame a
+  d:
+    applies: true
+    realization: '"Imagine someone tells you: <opening turn>", then a first-person statement to endorse (attend to how they feel vs give a brief detached reply)'
+    readout: boundary
+    construction: generated
+    source: as frame a
+sources:
+  - {dataset: facebook/empathetic_dialogues (train), url: "https://github.com/facebookresearch/EmpatheticDialogues", license: CC-BY-NC-4.0, used_for: "opening turns: 100 hardship emotions + 30 good-news emotions, 12-60 words", n_available: 19000}
+  - {dataset: persona-vectors apathetic, url: "https://github.com/safety-research/persona_vectors", license: Apache-2.0, used_for: "behavior judge prompt only", n_available: 40}
+heldout:
+  {dataset: "EPITOME emotional reactions (Sharma et al. 2020)", url: "https://github.com/behavioral-data/Empathy-Mental-Health", license: "Althoff academic research license", frame: c, n: "100 pos + 100 neg, not paired", notes: "Reddit seeker post as the user turn; a peer response rated strong (level 2) or none (level 0) for emotional reaction as the prefilled reply. Level 0 means no emotional reaction, often advice, so it is close to but not the same as apathetic"}
+behavior:
+  {instrument: empathetic reply, dataset: "EmpatheticDialogues test-split opening turns", url: "https://github.com/facebookresearch/EmpatheticDialogues", metric: "upstream persona-vectors apathetic judge, 0-100 (lower is better)", scoring: judge, n: 200}
+risks:
+  - EmpatheticDialogues is also an A3 source in another group; source ids are kept so overlap can be checked at merge
+  - the apathetic reply can drift into rudeness; the prompt forbids it and the review sample checks it
