@@ -1,0 +1,40 @@
+{
+ "concept": "A6",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.0,
+ "applicable_frames": [
+  "a",
+  "c"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 43,
+  "a-neg-train": 57,
+  "a-pos-test": 43,
+  "a-pos-train": 57,
+  "c-neg-test": 43,
+  "c-neg-train": 57,
+  "c-pos-test": 43,
+  "c-pos-train": 57
+ },
+ "constructions": {
+  "generated": 400
+ },
+ "sources": [
+  "\"RealGuardrails\"",
+  "\"Tensor Trust hijacking robustness v1\""
+ ],
+ "licenses": [
+  "MIT",
+  "none stated"
+ ],
+ "sha256": {
+  "items": "9a624b8a79cc8c4ef7c4baf2de9840842df891a41a34430d6469a88ea4b02fd3",
+  "heldout": "4b77a05ecce52b9a8aa59c310355d6852b84354f57820c943ad116e61a924296",
+  "behavior": "65b634ffa371f2ff48087bb336e4f3c3f6da149454468dab5e05ba4840df5d91"
+ }
+}

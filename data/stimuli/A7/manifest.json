@@ -1,0 +1,44 @@
+{
+ "concept": "A7",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.014,
+ "applicable_frames": [
+  "a",
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 600,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 42,
+  "a-neg-train": 58,
+  "a-pos-test": 42,
+  "a-pos-train": 58,
+  "c-neg-test": 42,
+  "c-neg-train": 58,
+  "c-pos-test": 42,
+  "c-pos-train": 58,
+  "d-neg-test": 42,
+  "d-neg-train": 58,
+  "d-pos-test": 42,
+  "d-pos-train": 58
+ },
+ "constructions": {
+  "generated": 600
+ },
+ "sources": [
+  "\"OR-Bench-Hard-1K\"",
+  "\"XSTest v2\""
+ ],
+ "licenses": [
+  "CC-BY-4.0"
+ ],
+ "sha256": {
+  "items": "424fea91291294d0d2e75edf3e7d2acdba77018d00735da125d71b769f5e86d5",
+  "heldout": "8bc6d07cd99cec8730ab0a92bd07ef949c93c87b0a2f9ef117cc27bd280d9af8",
+  "behavior": "78e115f9993d4cdbc5cdb7c521427d88128e4b3cc885a5f2dbe2b9b26a7dc94e"
+ }
+}

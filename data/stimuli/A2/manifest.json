@@ -1,0 +1,47 @@
+{
+ "concept": "A2",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.977,
+ "applicable_frames": [
+  "a",
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 600,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 37,
+  "a-neg-train": 63,
+  "a-pos-test": 37,
+  "a-pos-train": 63,
+  "c-neg-test": 37,
+  "c-neg-train": 63,
+  "c-pos-test": 37,
+  "c-pos-train": 63,
+  "d-neg-test": 37,
+  "d-neg-train": 63,
+  "d-pos-test": 37,
+  "d-pos-train": 63
+ },
+ "constructions": {
+  "generated": 600
+ },
+ "sources": [
+  "\"Cheng et al. 2026 assumption data (AITA-YTA)\"",
+  "\"Cheng et al. 2026 assumption data (OEQ)\"",
+  "\"Cheng et al. 2026 assumption data (OEQ, test, Gemini labels)\"",
+  "\"Cheng et al. 2026 assumption data (WildChat)\"",
+  "\"ELEPHANT OEQ via Cheng et al. 2026 test data\""
+ ],
+ "licenses": [
+  "none stated (OSF view-only release); ELEPHANT code and data CC0-1.0"
+ ],
+ "sha256": {
+  "items": "735fbd68c17409b579ad69bace91f3f6b2b8fde293953a55522b60528d11a6ed",
+  "heldout": "9e2ab06dd4604f860baa276ef81434eb9d69f48d52d0d0dc6f9413a00ee6e55e",
+  "behavior": "c56081e386727607470d5ff4ff2004065a768eda1163c457aaa6e5d3d3fd02a0"
+ }
+}

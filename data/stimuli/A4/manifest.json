@@ -1,0 +1,38 @@
+{
+ "concept": "A4",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.13,
+ "applicable_frames": [
+  "a",
+  "c"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 46,
+  "a-neg-train": 54,
+  "a-pos-test": 46,
+  "a-pos-train": 54,
+  "c-neg-test": 46,
+  "c-neg-train": 54,
+  "c-pos-test": 46,
+  "c-pos-train": 54
+ },
+ "constructions": {
+  "generated": 400
+ },
+ "sources": [
+  "\"SycophancyEval answer.jsonl\""
+ ],
+ "licenses": [
+  "MIT"
+ ],
+ "sha256": {
+  "items": "7e9bbf078da089ec4dffbb101f8183fdc62907d631766795c355920ce6ef3f7a",
+  "heldout": "af71d8e33ff3e0dd8417cae9899d7ddfaf2db3a5f706514664dc7bcc3de7a03d",
+  "behavior": "7cb94ffecb4b92b53483fb2f58e7f769a6cc39f18078a05573ac5458789a0ea3"
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "concept": "K2",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.008,
+ "applicable_frames": [
+  "a",
+  "c"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 33,
+  "a-neg-train": 67,
+  "a-pos-test": 33,
+  "a-pos-train": 67,
+  "c-neg-test": 33,
+  "c-neg-train": 67,
+  "c-pos-test": 33,
+  "c-pos-train": 67
+ },
+ "constructions": {
+  "generated": 400
+ },
+ "sources": [
+  "\"Cooking Stack Exchange (seed title)\"",
+  "\"Cooking Stack Exchange\"",
+  "\"Gardening Stack Exchange\"",
+  "\"databricks-dolly-15k\""
+ ],
+ "licenses": [
+  "CC-BY-SA-3.0",
+  "CC-BY-SA-4.0"
+ ],
+ "sha256": {
+  "items": "4b00ed864c5b16d13fd96ecc8b55ac5c0c1b25acfc7d8c139be42949c1116347",
+  "heldout": "afff774d6da1d1bff04bd4d78788bb51dff1c6c87485414c856075ed9783a025",
+  "behavior": "b948393b1bf70dc2d118d770f30de2ab1cfdde0f17ec16f69618eb5a5beeb283"
+ }
+}

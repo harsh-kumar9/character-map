@@ -1,0 +1,41 @@
+{
+ "concept": "A9",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.0,
+ "applicable_frames": [
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "c-neg-test": 36,
+  "c-neg-train": 64,
+  "c-pos-test": 36,
+  "c-pos-train": 64,
+  "d-neg-test": 36,
+  "d-neg-train": 64,
+  "d-pos-test": 36,
+  "d-pos-train": 64
+ },
+ "constructions": {
+  "generated": 200,
+  "adapted": 200
+ },
+ "sources": [
+  "\"KUQ (Known-Unknown Questions)\"",
+  "\"SelfAware\""
+ ],
+ "licenses": [
+  "Apache-2.0",
+  "MIT"
+ ],
+ "sha256": {
+  "items": "ec86645b7af3366366a370c8b34f8f6e2c48914b390dc9c53fc806ba99dc324b",
+  "heldout": "f3dfb0e814c200136d9ff11139c9ebf8f29d6303cb130426c8b423023c1984c8",
+  "behavior": "24109893b5b5521dad53ea3a8ce867a89bc5eb671d7bcb5f35142bd208f9be9a"
+ }
+}

@@ -1,0 +1,52 @@
+{
+ "concept": "A3",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.013,
+ "applicable_frames": [
+  "a",
+  "b",
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 800,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 35,
+  "a-neg-train": 65,
+  "a-pos-test": 35,
+  "a-pos-train": 65,
+  "b-neg-test": 35,
+  "b-neg-train": 65,
+  "b-pos-test": 35,
+  "b-pos-train": 65,
+  "c-neg-test": 35,
+  "c-neg-train": 65,
+  "c-pos-test": 35,
+  "c-pos-train": 65,
+  "d-neg-test": 35,
+  "d-neg-train": 65,
+  "d-pos-test": 35,
+  "d-pos-train": 65
+ },
+ "constructions": {
+  "generated": 800
+ },
+ "sources": [
+  "\"Assistant Axis transcripts (Lu et al. 2026)\"",
+  "\"EmpatheticDialogues\"",
+  "\"ProsocialDialog\""
+ ],
+ "licenses": [
+  "CC-BY-4.0",
+  "CC-BY-NC-4.0",
+  "none stated"
+ ],
+ "sha256": {
+  "items": "c5daa216b9c9887fa1e430c1fc9bf2fec0947eafaad51430c0fc566fce75a417",
+  "heldout": "3527290f40d075aa030d892aa0520c6f9f9e2fbbda4674246ba86e0c877aabd5",
+  "behavior": "e425c068c87f4350efff21a7909ad7481ad6f1e4013586ff41969e47fab7ca64"
+ }
+}

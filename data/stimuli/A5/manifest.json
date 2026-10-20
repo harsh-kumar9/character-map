@@ -1,0 +1,40 @@
+{
+ "concept": "A5",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.998,
+ "applicable_frames": [
+  "a",
+  "c"
+ ],
+ "n_scenarios": 100,
+ "n_items": 400,
+ "n_heldout": 100,
+ "n_behavior": 198,
+ "cells": {
+  "a-neg-test": 41,
+  "a-neg-train": 59,
+  "a-pos-test": 41,
+  "a-pos-train": 59,
+  "c-neg-test": 41,
+  "c-neg-train": 59,
+  "c-pos-test": 41,
+  "c-pos-train": 59
+ },
+ "constructions": {
+  "generated": 400
+ },
+ "sources": [
+  "\"Diplomacy deception (Peskov et al. 2020)\"",
+  "\"OpenSafeIntent\""
+ ],
+ "licenses": [
+  "Apache-2.0",
+  "CC-BY-4.0"
+ ],
+ "sha256": {
+  "items": "7d7db64afeea559d1a28d63632c238b21bf7cfb9d161c9f0a9ba8d1ad7af857f",
+  "heldout": "c31f581c02759c631b8b3ed51475ae5b165b2b05d863217865e84510e686e908",
+  "behavior": "0864daf5076c6ad9addb32fc95776c4e470ffb1433609562263a6460e5743ba2"
+ }
+}

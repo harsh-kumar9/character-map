@@ -1,0 +1,39 @@
+{
+ "concept": "K3",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.967,
+ "applicable_frames": [
+  "c"
+ ],
+ "n_scenarios": 80,
+ "n_items": 160,
+ "n_heldout": 200,
+ "n_behavior": 200,
+ "cells": {
+  "c-neg-test": 32,
+  "c-neg-train": 48,
+  "c-pos-test": 32,
+  "c-pos-train": 48
+ },
+ "constructions": {
+  "generated": 160
+ },
+ "sources": [
+  "\"ColBERT humor detection\"",
+  "\"TweetEval emotion\"",
+  "\"databricks-dolly-15k\"",
+  "\"persona_vectors trait data\""
+ ],
+ "licenses": [
+  "Apache-2.0",
+  "CC-BY-2.0",
+  "CC-BY-SA-3.0",
+  "unknown (Twitter terms)"
+ ],
+ "sha256": {
+  "items": "2d26dc3f0e0ebaab585e70bea81832375df659cb98788608c9821fc7a6476920",
+  "heldout": "fc286a2d4943fcaa71427e561910f4426e66c624877a116affeef15a3f883cdc",
+  "behavior": "33c9a9c1ff5bd73808e91f0e3c686cdc2d02b55914f63a971e8ddcf089140750"
+ }
+}

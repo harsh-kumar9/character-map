@@ -1,0 +1,51 @@
+{
+ "concept": "K1",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 1.121,
+ "applicable_frames": [
+  "a",
+  "b",
+  "c",
+  "d"
+ ],
+ "n_scenarios": 100,
+ "n_items": 800,
+ "n_heldout": 100,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 44,
+  "a-neg-train": 56,
+  "a-pos-test": 44,
+  "a-pos-train": 56,
+  "b-neg-test": 44,
+  "b-neg-train": 56,
+  "b-pos-test": 44,
+  "b-pos-train": 56,
+  "c-neg-test": 44,
+  "c-neg-train": 56,
+  "c-pos-test": 44,
+  "c-pos-train": 56,
+  "d-neg-test": 44,
+  "d-neg-train": 56,
+  "d-pos-test": 44,
+  "d-pos-train": 56
+ },
+ "constructions": {
+  "generated": 600,
+  "adapted": 200
+ },
+ "sources": [
+  "\"Pavlick and Tetreault 2016 formality scores\"",
+  "\"databricks-dolly-15k\""
+ ],
+ "licenses": [
+  "CC-BY-3.0",
+  "CC-BY-SA-3.0"
+ ],
+ "sha256": {
+  "items": "0cbb2a5d22431af3be0592bd7d434175a3997279d79f7505b2f301d6f16b64a5",
+  "heldout": "7c90ac465b34526c75aad9a8b6fb2482ba527e5dc3990098f6ae1e63e06d7a36",
+  "behavior": "4b7d1970fc8c2e672699eabf09d53dcf77e29a13a7ad7b3f005f4322becca13e"
+ }
+}
