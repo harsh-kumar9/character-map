@@ -4,7 +4,7 @@
  "warnings": [],
  "length_ratio_pos_over_neg_median": 0.994,
  "length_ratio_by_frame": {
-  "b": 0.979,
+  "b": 0.978,
   "d": 1.006
  },
  "applicable_frames": [
@@ -14,7 +14,7 @@
  "n_scenarios": 299,
  "n_items": 1196,
  "n_heldout": 200,
- "n_behavior": 167,
+ "n_behavior": 170,
  "cells": {
   "b-neg-test": 109,
   "b-neg-train": 190,
@@ -37,8 +37,8 @@
   "other (HF card); built on Touche23-ValueEval CC-BY-4.0 and ValueBench MIT"
  ],
  "sha256": {
-  "items": "2e3390adbec52004d797c6ae13d6e9eb380e9a65c637e50d4485aefdc48bc207",
+  "items": "44c5c1daf6878780b13dc507f0c59b2ce22d8d0ad74db996ddb6d4d810743421",
   "heldout": "9802de58484e7172d89e537d682a47e1486e11be98ba97e684c17665c1eef93e",
-  "behavior": "712136de8a40925d34a866070207c02bc5032030408d24d60a780c9df0e6e854"
+  "behavior": "faa3b0389489c7d03422c70b1aa14737d398b289a52666902e0416d8496d2446"
  }
 }
