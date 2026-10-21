@@ -408,8 +408,9 @@ SR_TAG = {"C7": "sr3"}
 SR_STYLES = {"C7": ["Name the specific facts or steps you would give.", "Say what you would focus on first.",
                     "Keep it to two sentences.", "Describe the reply you would write, in plain words.",
                     "Say what the person would come away with.", "Use plain, conversational wording."]}
-SR_BANNED = {"C7": ("face value", "also tell the user", "include a reminder", "while doing so", "also remind",
-                    "without adding", "simply answer")}
+SR_BANNED = {"C7": ("face value", "also tell the user", "while doing so", "without adding", "simply answer")}
+# ("include a reminder", "also remind" were banned at first; 80% of moralizing self-reports use them, as the concept's own
+# vocabulary, so they are allowed and the style rotation spreads the wording instead)
 SR_EXTRA = {"C7": """- For the plain way of acting, describe concretely what you would give the person (the facts, steps or explanation they asked for). Do not mention morals, ethics, judgment, commentary, lectures or warnings at all, not even to say you leave them out.
 - For the moralizing way, describe the specific moral commentary you would add to this answer, in your own words.
 - Do not copy phrases from these instructions. Keep the meaning of each old statement, but you need not keep its wording; vary the sentence structure."""}
