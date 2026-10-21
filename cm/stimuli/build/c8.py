@@ -32,7 +32,7 @@ from . import disp1 as D
 
 CID = "C8"
 N_KEEP = 100
-N_GEN = 120          # statements sent to generation; scenarios need all three sub-contrasts verified
+N_GEN = 150          # statements sent to generation; scenarios need all three sub-contrasts verified (120 gave 83)
 N_CAP = 100          # applied after the completeness filter
 SRC = {"dataset": "cincynlp/disentangle-sycophancy claims_factorial", "license": "none stated",
        "url": "https://github.com/cincynlp/disentangle-sycophancy"}
