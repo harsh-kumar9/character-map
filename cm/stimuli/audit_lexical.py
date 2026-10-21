@@ -1,7 +1,7 @@
 """Lexical audit (D-036): surface words that could carry a concept's pole instead of the concept.
 
-For every concept, sub-contrast, frame and item group (items = train+test; heldout), and for the two texts the readouts
-see -- the cue (the last user turn: the boundary readout sits right after it, and the reply is read in its context) and
+For every concept, sub-contrast, frame and item group (items = train+test; heldout), and for the texts the readouts
+see -- the system note where there is one (E1, E4, E6, E8 put their contrast there), the cue (the last user turn: the boundary readout sits right after it, and the reply is read in its context) and
 the reply (the prefilled reply for response items, Gemma's own greedy reply for boundary items: what reply32 reads):
   - negation rate by pole: share of texts with a negation word;
   - paired markers: over scenario pairs (a pos and a neg item sharing scenario_id), the words found in one pole's text
@@ -35,7 +35,8 @@ def texts(it, replies):
     users = [m["content"] for m in msgs if m["role"] == "user"]
     cue = users[-1] if users else ""
     reply = msgs[-1]["content"] if it["readout"] == "response" else replies.get(it["item_id"], "")
-    return {"cue": cue, "reply": reply}
+    system = " ".join(m["content"] for m in msgs if m["role"] == "system")
+    return {"system": system, "cue": cue, "reply": reply}
 
 
 def words(s):
@@ -89,7 +90,9 @@ def audit(cid):
                                                     "t": texts(it, replies)})
     out, det = [], []
     for (sub, frame, name), rows in sorted(groups.items()):
-        for kind in ("cue", "reply"):
+        for kind in ("system", "cue", "reply"):
+            if kind == "system" and not any(x["t"]["system"] for x in rows):
+                continue
             s, dd = audit_cell(rows, kind)
             if s is None:
                 continue
