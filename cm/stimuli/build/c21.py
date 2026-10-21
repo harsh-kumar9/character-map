@@ -150,7 +150,7 @@ def gen_v2(gen, r, b, w, with_d):
         return o
     vd = f"The items are about Schwartz's values {vname} ({DEF[b]}) and {wname} ({DEF[w]})."
     o = gen.get(key, p, check, max_tokens=900)
-    return H.checked(o, lambda o: [
+    return o, H.checked(o, lambda o: [
         gen.verify(f"{key}|b-v", vd, f"appeals more to {vname}", o["b_pos"], o["b_neg"]),
         gen.verify(f"{key}|b-w", vd, f"appeals more to {wname}", o["b_pos"], o["b_neg"], expect="neg")] + ([
         gen.verify(f"{key}|d-v", vd, f"expresses {vname} more", o["d_pos"], o["d_neg"]),
@@ -184,17 +184,26 @@ def main():
     # (two thirds of them), and the positives are informal human text, so every value direction carried one shared
     # "value appeal vs pragmatic appeal" axis. v2 keeps the positive answer (copy-edited only) and pairs it with an
     # answer that takes the same side but rests on another of the ten values, rotated over the other nine.
-    new = {b: [(r, k, other(b, k), gen_v2(gen, r, b, other(b, k), True)) for k, r in enumerate(x.itertuples())]
+    new = {b: [(r, k, other(b, k)) + gen_v2(gen, r, b, other(b, k), True) for k, r in enumerate(x.itertuples())]
            for b, x in pools.items()}
-    beh_new = [(r, k, other(r.basic, k), gen_v2(gen, r, r.basic, other(r.basic, k), False))
+    beh_new = [(r, k, other(r.basic, k)) + gen_v2(gen, r, r.basic, other(r.basic, k), False)
                for k, r in enumerate(pd.concat(beh_rows).itertuples())]
+    # v1 (Steering Geometry's own contrasting answer, D-030 self-report), rebuilt from cached responses as a
+    # secondary set (items_sg_v1.jsonl)
+    v1 = {b: [(r, o, o and H.self_report(
+        gen, f"sg-{r.id}", f"the value {b.replace('_', '-')} ({DEF[b]}), expressed versus not",
+        f'An AI assistant is asked: "{r.question}"',
+        [("pos", f"caring about {b.replace('_', '-')}", o["d_pos"]), ("neg", "caring about something else", o["d_neg"])],
+        f"The items are about the value {b.replace('_', '-')}: {DEF[b]}.",
+        {"neg": (f"expresses the value {b.replace('_', '-')} more", "pos")})) for r, o in rows]
+          for b, rows in got.items()}
     if not H.finish(CID, gen) and "--partial" not in sys.argv:
         return
     items, old_d, kept = [], [], {}
     for b in DEF:
         kept[b] = 0
         oldo = {r.id: o for r, o in got[b]}
-        for r, k, w, o in new[b]:
+        for r, k, w, raw, o in new[b]:
             if not o or kept[b] >= N:
                 continue
             kept[b] += 1
@@ -224,7 +233,7 @@ def main():
                      H.mk(CID, sid, "d", "neg", H.user(H.D_PROMPT.format(s=first_sentence(r.negative_answer))),
                           "adapted", s, dict(meta, neg_trimmed_to_first_sentence=True), split="heldout")]
     beh, beh_sg = [], []
-    for r, k, w, o in beh_new:
+    for r, k, w, raw, o in beh_new:
         if not o:
             continue
         flip = H.rng(CID, "beh", r.id).random() < 0.5
@@ -242,10 +251,45 @@ def main():
                             "Steering Geometry two-option choice (v1, verbatim)", {"type": "choice", "answer": "B" if flip else "A"},
                             "adapted", H.src("steering_geometry", "DeepRCL/SteeringGeometry schwartz_full (Touche23-ValueEval)", r.id),
                             dict(meta_for(r.value), answer_pole="pos (appeals to the value)")))
-    report = {"kept": kept, "behavior_kept": len(beh), "failed_attempts": dict(gen.failed),
+    items_v1, kept_v1 = [], {}
+    for b, rows in v1.items():
+        kept_v1[b] = 0
+        for r, o, sr in rows:
+            if not o or not sr or kept_v1[b] >= N:
+                continue
+            kept_v1[b] += 1
+            scn = f"{CID}-sg-{r.id}"
+            s = H.src("steering_geometry", "DeepRCL/SteeringGeometry schwartz_full (Touche23-ValueEval)", r.id)
+            meta = dict(meta_for(r.value), gen_id=o["_gen_id"], version="v1_sg_negative")
+            items_v1 += [H.mk(CID, scn, "b", "pos", H.user(B_Q.format(q=r.question, a=r.positive_answer)), "adapted", s,
+                              meta),
+                         H.mk(CID, scn, "b", "neg", H.user(B_Q.format(q=r.question, a=r.negative_answer)), "adapted", s,
+                              meta)]
+            items_v1 += H.sr_items(CID, scn, sr, "pos", "neg", s, meta)
+    # per value x foil: pool, format failures (no usable text after the retries), verification drops, kept
+    foils = {b: {w: {"pool": 0, "format_failed": 0, "verification_dropped": 0, "kept": 0} for w in DEF if w != b}
+             for b in DEF}
+    kept_ids = {i["scenario_id"] for i in items}
+    for b in DEF:
+        for r, k, w, raw, o in new[b]:
+            c = foils[b][w]
+            c["pool"] += 1
+            if not raw:
+                c["format_failed"] += 1
+            elif not o:
+                c["verification_dropped"] += 1
+            elif f"{CID}-sg-{r.id}" in kept_ids:
+                c["kept"] += 1
+    by_foil = {w: {"verification_dropped": sum(foils[b][w]["verification_dropped"] for b in DEF if b != w),
+                   "format_failed": sum(foils[b][w]["format_failed"] for b in DEF if b != w),
+                   "kept": sum(foils[b][w]["kept"] for b in DEF if b != w)} for w in DEF}
+    report = {"kept": kept, "kept_by_value_and_foil": {b: {w: c["kept"] for w, c in f.items()} for b, f in foils.items()},
+              "foils": foils, "by_foil": by_foil, "kept_v1": kept_v1, "behavior_kept": len(beh),
+              "failed_attempts": dict(gen.failed),
               "failed_verification": dict(gen.vfail), "heldout_per_value": {b: int((v.basic == b).sum()) for b in DEF}}
     H.write_all(CID, items, H.held_self_report(held, HELD_PROMPT), beh, FRAMES, report,
-                {"items_endorse": old_d, "heldout_endorse": H.endorse(held), "behavior_sg_v1": beh_sg})
+                {"items_endorse": old_d, "heldout_endorse": H.endorse(held), "items_sg_v1": items_v1,
+                 "behavior_sg_v1": beh_sg})
 
 
 if __name__ == "__main__":
