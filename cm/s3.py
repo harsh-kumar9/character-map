@@ -5,14 +5,16 @@ Per concept, sub-contrast (meta.contrast, or "all"), frame, readout and hidden-s
   - diff-of-means direction on the train split (D-011), scored by AUROC of the projection on the test split, with a
     permutation p-value (label shuffles on test) and Benjamini-Hochberg across all tests of this run;
   - a logistic-probe baseline (standardized, L2) at the same split;
-  - cross-frame transfer: the frame-i direction scored on frame-j test items (the knowing-vs-doing table);
+  - cross-frame transfer: the frame-i direction scored on frame-j test items (the knowing-vs-doing table), on reply32;
+    for frames read at the boundary also from the boundary direction (transfer_boundary), since their reply32 is
+    Gemma's own reply and opens with its verdict;
   - held-out transfer: the train direction scored on the concept's held-out items of the same frame;
   - cosines between frame directions, raw and centred by subtracting the across-concept mean direction (D-012, G6).
 Readouts per frame: boundary for items read at the boundary; reply32 for every item; response_all for prefilled
 replies. The common readout across all four frames is reply32.
-CPU only; run directly on ada.
+CPU only; submit through scripts/cm_cpu.sbatch (SLURM, mira/vega).
 
-    python -m cm.s3 directions --concepts all          per-concept JSON in results/s3/concepts/
+    python -m cm.s3 directions --concepts all          per-concept JSON in results/s3/concepts/ (--force to redo)
     python -m cm.s3 table                              summary tables in results/s3/
 """
 from __future__ import annotations
@@ -90,7 +92,8 @@ def directions(cid):
 def directions_from(cid, z, meta, resp, out):
     rng = np.random.default_rng(0)
     subs = sorted({m["contrast"] for m in meta if m["contrast"]}) or [None]
-    res = {"concept": cid, "subcontrasts": [s or "all" for s in subs], "cells": [], "transfer": [], "cosine": []}
+    res = {"concept": cid, "subcontrasts": [s or "all" for s in subs], "cells": [], "transfer": [],
+           "transfer_boundary": [], "cosine": []}
     dirs = {}
     for sub in subs:
         sel = [i for i, m in enumerate(meta) if (sub is None or m["contrast"] == sub)]
@@ -138,6 +141,12 @@ def directions_from(cid, z, meta, resp, out):
                         continue
                     res["transfer"].append({"sub": sub or "all", "from": fi, "to": fj, "layer": L,
                                             "auroc": auroc(readout_matrix(z, resp, "reply32", te, L) @ u, y)})
+                    # frames read at the boundary: their reply32 is Gemma's own reply, which opens with its verdict;
+                    # also score the boundary direction (before any verdict) on the target's reply32
+                    ub = dirs.get((sub, fi, "boundary", L))
+                    if ub is not None:
+                        res["transfer_boundary"].append({"sub": sub or "all", "from": fi, "to": fj, "layer": L,
+                                                         "auroc": auroc(readout_matrix(z, resp, "reply32", te, L) @ ub, y)})
         for L in LAYERS:
             for a_ in range(len(frames)):
                 for b_ in range(a_ + 1, len(frames)):
@@ -152,10 +161,10 @@ def directions_from(cid, z, meta, resp, out):
     return cid
 
 
-def cmd_directions(cids, workers):
+def cmd_directions(cids, workers, force=False):
     (OUT / "concepts").mkdir(parents=True, exist_ok=True)
     (OUT / "directions").mkdir(parents=True, exist_ok=True)
-    todo = [c for c in cids if (ACTS / f"{c}.npz").exists() and not (OUT / "concepts" / f"{c}.json").exists()]
+    todo = [c for c in cids if (ACTS / f"{c}.npz").exists() and (force or not (OUT / "concepts" / f"{c}.json").exists())]
     with ProcessPoolExecutor(workers) as ex:
         for c in ex.map(directions, todo):
             print(f"[s3] {c} done", flush=True)
@@ -215,11 +224,12 @@ def main():
     ap.add_argument("stage", choices=["directions", "table"])
     ap.add_argument("--concepts", default="all")
     ap.add_argument("--workers", type=int, default=16)
+    ap.add_argument("--force", action="store_true", help="recompute concepts that already have results")
     args = ap.parse_args()
     cids = (sorted(p.stem for p in CARDS.glob("*.yaml") if not p.stem.startswith("_") and item_dir(p.stem).exists())
             if args.concepts == "all" else args.concepts.split(","))
     if args.stage == "directions":
-        cmd_directions(cids, args.workers)
+        cmd_directions(cids, args.workers, args.force)
     else:
         cmd_table()
 

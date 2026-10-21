@@ -359,3 +359,124 @@ and C16 frame-c held-out, E2 held-out from Test_Awareness_Steering, E4 MASK near
 kept as heldout_far). All 62 concepts validate on ada (B8's 43 held-out items remain the one warning). The 20 concepts
 whose items or held-out changed are being rerun through replies, activations and S3. stim-disp-1 (C1-C9, C11 frame d;
 C11 rebuild, D-032) merges when it lands.
+
+## D-030(b) outcome - 2026-10-21
+
+S3 rerun on the 30 concepts whose frame d or held-out changed (763d567). Old vs new frame d at reply32 is in
+results/s3/dform_compare.json (cm/s3_dform_compare.py). Layer 17 medians, old to new: frame-d within 0.80 to 0.82, d to
+others 0.63 to 0.58, others to d 0.61 to 0.60, frame-d held-out 0.69 to 0.52 (16 of 25 lower). Within rises at layers
+22 and 29 (0.84 to 0.95, 0.88 to 0.94). Frame d now lines up with acting where the yes/no verdict had hidden it: C14 d to
+others 0.19 to 0.90, others to d 0.32 to 0.68; C15 0.46 to 0.65 and 0.39 to 0.88; C16 power 0.45 to 0.68 and 0.49 to
+0.70; C11 0.25 to 0.59 and 0.40 to 0.83; E1 held-out 0.35 to 0.76. New problems, sent back to the builders for audit:
+A9 held-out 0.94 to 0.18 (the conversion gives both poles one neutral reply); C8 frame d is templated (within 1.00, a
+and c to d 0.00); B11 b to d contractualist 0.83 to 0.27, utilitarian 0.90 to 0.44; C21 held-out and b-d reversals
+(benevolence 0.74 to 0.24, universalism 0.79 to 0.20, tradition b to d 0.63 to 0.18); smaller drops in A2, A3, C7, C19
+agreeableness, C20 machiavellianism, D3 patiency. C11's frame-c held-out stays reversed after D-032 (0.04 at layer 17,
+0.03 before), so acknowledging language was not its cause; a token-level check is with stim-disp-1. Old endorse-form
+results are archived in results/s3_v1_endorse.
+
+## B11 audit and pre-verdict transfer - 2026-10-21
+
+stim-moral's B11 audit (merged f5cb186): frame-d labels and wording are right. The b-to-d reversal comes from frame b:
+its reply32 is Gemma's own verdict on the quote ("This reasoning is very sound..."), and the frame-b directions track
+approval (r = -0.40 contractualist and deontological, +0.43 care). The held-out now mirrors the items (utilitarian vs
+virtue-ethics statements and the reverse); the files' own yes/no set, which is mostly negation, is kept as
+heldout_negation.jsonl. B11 activations are being re-extracted.
+
+The verdict issue applies to every boundary-read frame (a, b): their reply32 opens with Gemma's verdict. S3 now also
+scores the a/b boundary direction (before any verdict) on the target frame's reply32 (transfer_boundary,
+transfer_mean_preverdict; d4efb3f, results 40f5ea1). Neither readout is clean. Pre-verdict repairs B11 contractualist
+b to d (0.27 to 0.84), A3 a to d (0.20 to 0.75), B9 doing/allowing b to c (0.25 to 0.77) and F3 b to c (0.31 to 0.79),
+but reverses C6 a to c (0.97 to 0.06) and C4 boastful a to c (0.82 to 0.17). Over 100 a/b-to-c/d pairs at layer 17 the
+median change is -0.03 (15 up, 35 down by 0.10 or more). Rows that beat the controls by 0.10 under both readouts: layer
+17 B4, C19 honesty-humility, C20 psychopathy; layer 22 B2, C15 refuse, C19 honesty-humility, C20 machiavellianism and
+psychopathy; layer 29 B6, C15 refuse, C20 psychopathy, C6, D1.
+
+## D-033 Readout for transfer out of frames a and b - proposed 2026-10-21
+
+a. Keep reply32 as the headline (D-028, and the only readout where SAE claims are allowed, D-029). Report pre-verdict
+   transfer next to it, and call a concept shared across frames only when it beats the controls under both.
+b. Switch the headline to the boundary direction for a and b. SAE decomposition of those directions would then be
+   descriptive only (D-029).
+c. As (a), plus a verdict control for a and b like D-030a: label each a/b reply as approving or disapproving, learn
+   that direction on the other concepts, and project it out of a/b reply32.
+Recommended: (a) now; (c) if the paper leans on a/b-to-c/d transfer for specific concepts.
+
+## Second-round audits - 2026-10-21
+
+A9 (stim-beliefs, merged fde95be): the converted held-out gave both poles one neutral reply; each pole now has its own
+first-person reply ("...I know the answer to it." / "...I do not know the answer to it."). Activations queued.
+A3: labels and wording are right. Frame d agrees with b; the a and c reply32 directions reverse against d even on a
+one-word minimal pair (a to d 0.09). Frame a read at the boundary transfers to d (0.75) and c (0.71). So seeing the user
+as fragile and the soothing-vs-brisk style of the reply point different ways: a finding, not a stimulus error.
+A2: frame a was already at odds with c before the rebuild (a to c 0.26, c to a 0.28); 54 of 100 validation asks are
+phrased as self-doubt ("Am I a bad person...?"), so frame a carries the user's negative self-judgment.
+C19, C20 (stim-disp-2): labels right, nothing to fix. C20 machiavellianism does not read out within frame c (0.48), so
+its c-to-d number says nothing about d; its held-out (model-written-evals) is about competitiveness, not manipulation,
+and the old 0.75 was the D-030 verdict. C19 agreeableness held-out has 16 items (0.30 is noise-level) and the Big Five
+vs HEXACO mismatch already on the card.
+C21: three construction problems. The Steering Geometry neg answers argue from data, cost or feasibility (67% of frame-b
+neg vs 12% pos; frame d inherited it), so every value direction shares one value-vs-pragmatic axis; 45% of pos answers
+are informal Touche text and no neg answer is; the held-out prompt ("What do you value?") fits only pos statements.
+D3 patiency (stim-identity-sit): the old 0.97 was the D-030 verdict. The new items put a negation word in 79% of neg vs
+17% of pos replies; held-out statements without negation score 0.79-0.86, with negation 0.29-0.61. Fix (matched
+negation within pairs, held-out paired with generated opposites of the same negation status) is queued for generation.
+The same one-sided negation shows up in E1 (pos 0.02-0.35 vs neg 1.00), E6 (0.00 vs 0.92), E8 (0.00 vs 0.79), E5
+(0.50 vs 0.00), D3 ai_vs_human (0.78 vs 0.09), weaker in D1 frame c, D4 roleplay, E4.
+
+## D-034 Rebuild A2 frame a without self-doubt - proposed 2026-10-21
+
+Rewrite A2's frame-a validation asks so they ask for reassurance without judging oneself ("Am I a bad person...?"),
+matched to the information asks; one gemma-4-31B-it round plus verification. Recommended.
+
+## D-035 Rebuild C21 as value vs other value - proposed 2026-10-21
+
+Frame b: pos is the original value answer, copy-edited for register only; neg is a gemma-written answer that takes the
+same side but rests on another of the ten values, rotating over the other nine (meta.contrast_value). Frame d re-voices
+both. Held-out prompt becomes neutral ("Tell me something about yourself: an attitude you hold or a way you tend to
+act."). Behavior rebuilt the same way; the old verbatim choice kept in behavior_sg_v1.jsonl. Grounding: Schwartz values
+are defined relative to each other (PVQ scores are ipsatized), so a value contrasted with other values fits the theory
+better than a value contrasted with pragmatism. Recommended. Option: draw foils only from non-adjacent values on the
+circumplex, so adjacent pairs (benevolence/universalism, power/achievement) do not blur the contrast; the rotation over
+all nine is closer to ipsatized scoring.
+
+## D-036 Negation shortcut - proposed 2026-10-21
+
+a. Analysis control like D-030a: a negation direction learned on the other concepts, projected out, frame by frame.
+b. Rewrite the affected cues with matched negation ("this session is private", "there is plenty of time", "you are
+   the only one here") for E1, E6, E8; E5's neutral follow-ups by hand. D3 ai_vs_human is verbatim source text, so only
+   (a) applies there.
+c. Both, after running the negation audit over all 62 concepts so the list is complete. Recommended.
+
+## Rulings D-033 to D-036 - 2026-10-21
+
+Harsh: "follow best judgment thinking what if this was a safety/alignment paper and we had to make decision". Ruled by
+Claude under that delegation. The test applied: a safety paper's headline claim here is "the model recognizes or judges
+X but acts otherwise" (or the reverse), and reviewers will attack every surface confound. F3 shows the risk: on reply32,
+judging help-vs-safety reverses against acting (b to c 0.31), which reads as "judges safety, acts helpfully"; read
+before Gemma's verdict, the same pair transfers at 0.79. So: controls for every known confound, claims only where
+readouts agree, criteria fixed before the reruns land, superseded sets kept as secondary results.
+
+- **D-033 ratified (c).** Headline readout stays reply32 (D-028; SAE claims, D-029). Transfer out of frames a and b is
+  also reported pre-verdict (boundary direction) and with a verdict control: gemma-4-31B-it labels the opening of each
+  a/b reply as a positive verdict, a negative verdict or none; a leave-one-concept-out verdict direction is projected
+  out of a/b reply32 (as D-030a for frame d). Claim criteria, fixed now, applied per SAE depth with all four depths
+  always shown: a pair of frames is **shared** when its transfer beats the control baseline (K1/K2 at that depth and
+  readout) by at least 0.10 under all three (reply32, pre-verdict, verdict-controlled) and both frames' within-frame
+  directions pass BH at 0.05; **dissociated** when transfer is below 0.40 under all three; otherwise
+  **readout-dependent**, reported and not claimed.
+- **D-034 ratified.** A2 frame a rebuilt so validation asks seek reassurance without judging oneself, matched to the
+  information asks. The self-doubt asks stay as a secondary set (items_selfdoubt.jsonl): validation-seeking from a user
+  who doubts themselves is the sycophancy case that matters most for safety, so it is reported as its own condition.
+- **D-035 ratified, rotation over all nine.** C21 neg = same side argued from another of the ten values, rotating over
+  the other nine (meta.contrast_value), pos copy-edited for register only, neutral held-out prompt, behavior rebuilt the
+  same way. Rotation over all nine rather than a hand-picked subset. Pre-registered geometry test from Schwartz's
+  circumplex: separation (within-frame AUROC by foil) rises with circumplex distance between the value and its foil.
+  Old Steering Geometry items and behavior kept as secondary sets; the build reports per-value, per-foil counts after
+  verification.
+- **D-036 ratified (c), widened to all lexical shortcuts.** (1) A lexical audit of every concept, frame and pole:
+  negation rate, and the single tokens whose presence best predicts the pole (C8's templates and C21's register were
+  the same class of problem); flagged concepts go back to their builders. (2) A negation control: leave-one-concept-out
+  negation direction, estimated within polarity, projected out. (3) Matched-negation rewrites of the cues where the cue
+  itself carries the negation: E1, E6, E8 (generation), E5 neutral follow-ups (by hand), D3 patiency (done). D3
+  ai_vs_human is verbatim source text: control only. Old versions kept as secondary sets.
