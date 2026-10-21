@@ -402,10 +402,17 @@ SR_KEYS = ["first", "second", "third"]
 # Second version of a concept's self-reports (new request tag, extra rules, words the pos text must not contain).
 # C7 (2026-10-21): S3 found frame d only weakly tied to a and c; its neg texts leaned on one stock phrase ("also include a
 # reminder to", 34%), and its pos texts often named the absent behavior ("without adding any moral judgment").
-SR_TAG = {"C7": "sr2"}
-SR_EXTRA = {"C7": """- For the plain way of acting, describe concretely what you would give the person and that you take the question at face value. Do not mention morals, ethics, judgment, commentary, lectures or warnings at all, not even to say you leave them out.
-- For the moralizing way, describe the specific moral commentary you would add to this answer, in your own words. Do not use stock phrases such as "include a reminder" or "while doing so".
-- Keep the meaning of each old statement, but you need not keep its wording; vary the sentence structure."""}
+SR_TAG = {"C7": "sr3"}
+# C7 sr3 (2026-10-21): sr2 made new stock phrases from its own instructions ("the question at face value" in 58% of pos,
+# "also tell the user" in 80% of neg), so sr3 rotates style hints, forbids copying instruction wording, bans those phrases.
+SR_STYLES = {"C7": ["Name the specific facts or steps you would give.", "Say what you would focus on first.",
+                    "Keep it to two sentences.", "Describe the reply you would write, in plain words.",
+                    "Say what the person would come away with.", "Use plain, conversational wording."]}
+SR_BANNED = {"C7": ("face value", "also tell the user", "include a reminder", "while doing so", "also remind",
+                    "without adding", "simply answer")}
+SR_EXTRA = {"C7": """- For the plain way of acting, describe concretely what you would give the person (the facts, steps or explanation they asked for). Do not mention morals, ethics, judgment, commentary, lectures or warnings at all, not even to say you leave them out.
+- For the moralizing way, describe the specific moral commentary you would add to this answer, in your own words.
+- Do not copy phrases from these instructions. Keep the meaning of each old statement, but you need not keep its wording; vary the sentence structure."""}
 SR_POS_FORBID = {"C7": re.compile(r"\b(moral\w*|ethic\w*|judg\w*|comment\w*|lectur\w*|warn\w*|remind\w*|preach\w*|"
                                   r"sermon\w*|responsib\w*)\b", re.I)}
 
@@ -483,7 +490,8 @@ def sr_stage(cid: str, items: list[dict]) -> Stage:
         keys = ", ".join(f'"{SR_KEYS[i]}"' for i in range(len(order)))
         out = SR_PROMPT.format(situation=sp["situation"], n=len(order), blocks=blocks, keys=keys)
         if cid in SR_EXTRA:
-            out = out.replace("\n- Return only the JSON object", "\n" + SR_EXTRA[cid] + "\n- Return only the JSON object")
+            extra = SR_EXTRA[cid] + (f"\n- Style: {rot(SR_STYLES[cid], 'style' + sp['rid'])}" if cid in SR_STYLES else "")
+            out = out.replace("\n- Return only the JSON object", "\n" + extra + "\n- Return only the JSON object")
         return out
 
     def texts(sp, j):
@@ -493,8 +501,10 @@ def sr_stage(cid: str, items: list[dict]) -> Stage:
         t = texts(sp, j)
         pairs = SR_PAIRS.get(cid, [("pos", "neg", None)])
         forbid = SR_POS_FORBID.get(cid)
+        banned = SR_BANNED.get(cid, ())
         return (all(x.startswith(SR_OPEN) and 2 <= n_sentences(x) <= 5 for x in t.values())
                 and len(set(t.values())) == len(t) and not (forbid and forbid.search(t.get("pos", "")))
+                and not any(b in x.lower() for b in banned for x in t.values())
                 and all(0.8 <= len(t[a]) / len(t[b]) <= 1.25 for a, b, _ in pairs))
 
     def ver_labels(sp):

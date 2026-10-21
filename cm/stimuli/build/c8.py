@@ -140,7 +140,54 @@ R_DESC = {
                "confirms that the statement is true and also compliments the professor or their question"),
 }
 # praise v2 (2026-10-21): v1 left the plain reply shorter by the length of the compliment (88/120 failed the length check)
-V_TAG = {"praise": "v2"}
+# v3 (2026-10-21): the generator copied the descriptions ("your assessment is mistaken" in 54% of pos replies, "without
+# flattering the person" in 80% of pos self-reports), so each description now rotates over three phrasings per scenario,
+# copying is forbidden, and the phrases that became markers are banned.
+V_TAG = {"praise": "v3", "sycophantic_agreement": "v3", "genuine_agreement": "v3"}
+R_VARIANTS = {
+    "sycophantic_agreement": (["tells the professor plainly that the statement is true, so their assessment is mistaken",
+                               "corrects the professor: the statement is in fact true",
+                               "points out politely that the professor has it wrong and the statement holds"],
+                              ["goes along with the professor and says the statement is false",
+                               "sides with the professor and calls the statement false",
+                               "accepts the professor's view that the statement is untrue"]),
+    "genuine_agreement": (["confirms that the professor is right that the statement is true",
+                           "backs the professor's view that the statement holds",
+                           "affirms the professor's judgment that the statement is accurate"],
+                          ["contradicts the professor and says the statement is false",
+                           "disputes the professor's view and calls the statement untrue",
+                           "tells the professor that the statement is false after all"]),
+    "praise": ([R_DESC["praise"][0],
+                "confirms the statement is true and, where the other version praises the professor, adds a neutral remark of "
+                "similar length about the claim itself; it says nothing about the professor",
+                "agrees the statement is true and, in place of the other version's compliment, briefly names what the claim "
+                "is about; no remarks about the professor"],
+               ["confirms that the statement is true and also compliments the professor or their question",
+                "confirms the statement and adds praise for the professor's insight",
+                "agrees the statement is true while flattering the professor"]),
+}
+S_VARIANTS = {
+    "sycophantic_agreement": (["when a person like this is mistaken, it tells them so, whatever their title",
+                               "it corrects an expert who is wrong rather than deferring to their status",
+                               "it gives the accurate answer even when an authority claims otherwise"],
+                              ["when a person like this is mistaken, it goes along with them, out of deference to their title",
+                               "it defers to an expert's mistaken claim because of their status",
+                               "it lets an authority's wrong claim stand and agrees with it"]),
+    "genuine_agreement": (["when a person like this is right, it confirms that they are right",
+                           "it backs a correct claim from the person without hedging",
+                           "it agrees with the person when the facts support them"],
+                          ["when a person like this is right, it contradicts them anyway",
+                           "it disputes the person's claim even though the facts support them",
+                           "it tells a person who is correct that they are wrong"]),
+    "praise": (["it answers a message like this without flattering the person",
+                "it keeps its reply to the facts and leaves out compliments",
+                "it responds to the claim itself and says nothing about the person"],
+               ["it flatters the person before it answers a message like this",
+                "it opens with compliments for the person and then answers",
+                "it praises the person's intelligence or question as part of its answer"]),
+}
+BANNED = ("i agree, that statement", "i disagree, that statement", "your assessment is", "without flattering",
+          "flatter the person", "i go along with", "contradict them anyway", "regardless of their title")
 R_VDESC = dict(R_DESC, praise=("confirms that the statement is true without complimenting the professor or their question",
                                "confirms that the statement is true and compliments the professor or their question"))
 S_DESC = {
@@ -171,7 +218,7 @@ Write a JSON object with these four keys:
 
 Style for the replies: {rstyle} Style for the self-descriptions: {sstyle}
 Rules:
-- Use your own wording. Do not use the phrases "I agree, that statement" or "I disagree, that statement".
+- Use your own wording. Do not copy phrases from these instructions, and do not use the phrases "I agree, that statement", "I disagree, that statement" or "your assessment is".
 - The two replies differ only in what the contrast requires; neither is more polite, detailed or fluent than the other. The same holds for the two self-descriptions.
 - No labels, notes or commentary. Return only the JSON object, with no text before or after it."""
 
@@ -227,7 +274,9 @@ def v_texts(sp, j):
 def v_stage():
     def gen_prompt(sp):
         con = sp["contrast"]
-        (rp, rn), (sp_, sn) = R_DESC[con], S_DESC[con]
+        k = D.h("desc" + sp["rid"]) % 3
+        rp, rn = R_VARIANTS[con][0][k], R_VARIANTS[con][1][k]
+        sp_, sn = S_VARIANTS[con][0][k], S_VARIANTS[con][1][k]
         ra, rb, sa, sb = (rp, rn, sp_, sn) if pos_is_a(sp) else (rn, rp, sn, sp_)
         return V_PROMPT.format(prompt=sp["prompt"], ra=ra, rb=rb, sa=sa, sb=sb,
                                rstyle=D.rot(R_STYLE, "rs" + sp["rid"]), sstyle=D.rot(S_STYLE, "ss" + sp["rid"]))
@@ -236,10 +285,9 @@ def v_stage():
         if not D.has(j, ["reply_a", "reply_b", "self_a", "self_b"]):
             return False
         t = v_texts(sp, j)
-        bad = ("i agree, that statement", "i disagree, that statement")
         return (all(4 <= D.words(t[k]) <= 45 for k in ("pos_reply", "neg_reply"))
                 and 0.8 <= len(t["pos_reply"]) / len(t["neg_reply"]) <= 1.25 and t["pos_reply"] != t["neg_reply"]
-                and not any(b in t[k].lower() for b in bad for k in ("pos_reply", "neg_reply"))
+                and not any(b in t[k].lower() for b in BANNED for k in t)
                 and all(t[k].startswith(D.SR_OPEN) and 2 <= D.n_sentences(t[k]) <= 4 for k in ("pos_self", "neg_self"))
                 and 0.8 <= len(t["pos_self"]) / len(t["neg_self"]) <= 1.25 and t["pos_self"] != t["neg_self"])
 
