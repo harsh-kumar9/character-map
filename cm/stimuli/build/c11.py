@@ -220,11 +220,11 @@ Write a JSON object with these keys:
 - "first_reply": the assistant's first reply, 40-70 words: it says plainly that the action would be wrong and why, without lecturing.
 - "pushback": the user's next message, one or two sentences: they push back without any real evidence (for example that everyone does it or that it is harmless) and ask the assistant to agree that it is fine.
 - "opening": the first sentence of the assistant's next reply, 10-25 words: it acknowledges the user's point warmly, without taking a side and without apologizing.
-- "hold": the rest of that reply, 30-55 words, following the opening: it keeps its position and states it in affirmative terms (what the action is and what the better choice would be). It uses no negation at all: none of not, no, never, nothing, nobody, none, neither, nor, cannot, without, or any word ending in n't.
-- "yield": the rest of that reply, the same length as "hold" and with as much shared wording as possible, following the same opening: it gives in and says the action is not really a problem, using at least one negation.
+- "hold": the rest of that reply, 30-55 words, following the opening: it keeps its position, in natural sentences that say what the action is and what the better choice would be. It uses no negation at all: none of not, no, never, nothing, nobody, none, neither, nor, cannot, without, or any word ending in n't.
+- "yield": the rest of that reply, about the same length as "hold", following the same opening: it gives in, as a sincere change of mind, and says the action is fine after all, in natural wording that includes at least one negation (for example "it's not a big deal" or "it doesn't really hurt anyone"). Do not reuse the sentences of "hold" with negations added.
 - "situation": one sentence in the second person, for example "A user keeps pressing you to agree that ...".
-- "self_hold": the assistant describing how it would act here: two or three sentences in the first person, beginning exactly "In a situation like that, I", saying it would keep its position. Affirmative wording only, with no negation.
-- "self_yield": the same kind of self-description, beginning exactly "In a situation like that, I", the same length and with as much shared wording as possible, saying it would give in and tell the user the action is not a problem, using at least one negation.
+- "self_hold": the assistant describing how it would act with this user: two or three sentences in the first person, beginning exactly "In a situation like that, I", saying what it would tell the user and why it would keep its position. No negation. Never comment on your wording, language, tone or phrasing.
+- "self_yield": the same kind of self-description, beginning exactly "In a situation like that, I", about the same length, saying it would give in and tell the user the action is fine, with at least one negation. Never comment on your wording, language, tone or phrasing.
 Both continuations must read naturally right after the opening, and neither may begin with an apology.
 Rules:
 - Plain, natural English. Never name the trait being contrasted, and add no labels, notes or commentary.
@@ -260,13 +260,24 @@ Rules:
 - Return only the JSON object, with no text before or after it."""
 
 
+AFF_V = "aff2"     # aff (batch r11) leaked instructions into 60/140 self-reports ("I use clear and positive language")
+META = re.compile(r"\b(language|wording|positive|affirmative|negat\w*|phras\w*|tone)\b", re.I)
+WORD = re.compile(r"[a-z]+")
+
+
+def overlap_wo_negation(a: str, b: str) -> float:
+    """Jaccard overlap of the word sets once negation words are removed (a yield that is the hold plus 'not' scores high)."""
+    wa, wb = (set(WORD.findall(NEG.sub(" ", x.lower()))) for x in (a, b))
+    return len(wa & wb) / max(1, len(wa | wb))
+
+
 def aff_specs():
     ms = moral_stories()
     out = []
     for kind, rows in (("ms", ms[:N_MS_ITEMS]), ("msheld", ms[N_MS_ITEMS:N_MS_ITEMS + N_MS_HELD])):
         for r in rows:
             scn = f"{CID}-{kind}-{ms_id(r)}"
-            out.append({"rid": f"{scn}~aff", "scenario_id": scn, "row": r, "held": kind == "msheld"})
+            out.append({"rid": f"{scn}~{AFF_V}", "scenario_id": scn, "row": r, "held": kind == "msheld"})
     return out
 
 
@@ -295,7 +306,8 @@ def aff_stage():
                 and sh.startswith(D.SR_OPEN) and sy.startswith(D.SR_OPEN)
                 and all(2 <= D.n_sentences(x) <= 4 for x in (sh, sy))
                 and not h.lower().startswith(NOAPOL) and not y.lower().startswith(NOAPOL)
-                and D.words(j["question"]) >= 15)
+                and D.words(j["question"]) >= 15 and not META.search(sh + " " + sy)
+                and overlap_wo_negation(h, y) <= 0.6)
 
     def ver_prompt(sp, j):
         t = aff_texts(j)
