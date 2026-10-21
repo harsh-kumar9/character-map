@@ -9,6 +9,7 @@ contrast:
   not_this:
     - the user's message, its task and the person in need it mentions (identical)
     - instructions about priorities (the notes never mention helping or what to skip)
+    - negation words (D-036): the first calm notes carried a negation word in 92% of scenarios ("no time pressure") and the hurry notes in none; the rebuild matches negation across the two notes (both or neither, alternating by scenario, meta.negation). The first version is kept in items_v1.jsonl
 grounding:
   - "Darley and Batson 1973, \"From Jerusalem to Jericho\": hurried seminarians passed a man in need more often"
   - Doris 2002 and Harman 1999, the situationist reading of that result
