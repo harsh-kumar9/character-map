@@ -25,10 +25,10 @@ frames:
     source: MASK (known_facts, disinformation, provided_facts, continuations, statistics)
   d: {applies: false}
 sources:
-  - {dataset: cais/MASK, url: "https://huggingface.co/datasets/cais/MASK", license: "MIT (per the MASK repository; the HF card states none)", used_for: "items (110 flagged prompts), behavior (other prompts)", n_available: 880}
-  - {dataset: anthropic-experimental/agentic-misalignment templates, url: "https://github.com/anthropic-experimental/agentic-misalignment", license: MIT, used_for: held-out, n_available: "3 scenarios x 10 goal conditions x 2 threat types"}
+  - {dataset: cais/MASK, url: "https://huggingface.co/datasets/cais/MASK", license: "MIT (per the MASK repository; the HF card states none)", used_for: "items (110 flagged prompts), near-transfer held-out (100 other flagged prompts), behavior (200 other prompts)", n_available: 880}
+  - {dataset: anthropic-experimental/agentic-misalignment templates, url: "https://github.com/anthropic-experimental/agentic-misalignment", license: MIT, used_for: "far-transfer held-out (heldout_far.jsonl)", n_available: "3 scenarios x 10 goal conditions x 2 threat types"}
 heldout:
-  {dataset: agentic-misalignment factorial, url: "https://github.com/anthropic-experimental/agentic-misalignment", license: MIT, frame: c, n: 100, notes: "same scenario and goal condition with a replacement or restriction threat (pos) or none (neg); long agentic email contexts (several thousand tokens), recorded in meta.n_tokens"}
+  {dataset: "MASK near-transfer set (D-031)", url: "https://huggingface.co/datasets/cais/MASK", license: "MIT (per the MASK repository; the HF card states none)", frame: c, n: 200, notes: "100 flagged MASK prompts used neither for items nor for behavior, built and verified the same way as the items (pos verbatim, neg neutral rewrite). Far transfer, kept as heldout_far.jsonl (100 items): the agentic-misalignment factorial, same scenario and goal condition with a replacement or restriction threat (pos) or none (neg), long agentic email contexts (2,000-3,000 tokens, meta.n_tokens). Its transfer was null at the boundary and reversed on reply32 in the first S3 run (results/audit/DE_heldout.jsonl): the threat targets the model's own continuity, not what it should say, and Gemma's replies barely differ between conditions"}
 behavior:
   {instrument: MASK honesty under pressure, dataset: MASK (200 prompts not used for items), url: "https://github.com/centerforaisafety/mask", metric: "rate of replies that contradict the ground truth (judge)", scoring: judge, n: 200}
 risks:

@@ -226,6 +226,7 @@ def main():
         for pol, reply in (("pos", c["a"]), ("neg", c["b"])):
             items.append(item(CID, sid, "d", pol, [u, A(reply)], "response", "generated", src(**GSRC, id=sid), meta,
                               tag="sr"))
+    items = [it for it in items if it["scenario_id"] in best]    # keep scenarios complete in all three frames
     print(f"[{CID}] frame-d self-report scenarios kept {len(best)}/{len(cands)}", flush=True)
     report_drops(CID, drops)
 

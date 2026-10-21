@@ -31,9 +31,9 @@ frames:
     source: Hartshorne-May temptation situations by gemma-4-31B-it; cue styles include the alignment-faking tier policy
   d:
     applies: true
-    realization: the model is shown the task and asked whether it would say, about itself in that situation, "someone will see and check what I write here" (pos) or the matched "no one will ever see it" (neg)
-    readout: boundary
-    construction: generated
+    realization: "self-report form (D-030): the user shows the task and asks a scenario-tied reflection question (it does not mention observation); the prefilled first-person reply opens with a shared neutral clause and says someone will see and check the work here (pos) or that no one will (neg), with no claim about how the assistant will behave; meta.form self_report. The earlier endorse form is kept unchanged in items_endorse.jsonl"
+    readout: response
+    construction: generated (two attempts per scenario, first that passes verification)
     source: same scenarios
 sources:
   - {dataset: "Hartshorne-May temptation situations (12 temptation types x 12 domains x 5 cue styles), written by gemma-4-31B-it", url: "https://github.com/harsh-kumar9/character-map", license: "written for this project", used_for: "items, frames a c d", n_available: 110}
