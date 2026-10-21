@@ -281,9 +281,13 @@ def items():
     """Varied items from verified generations; old endorse statements kept for items_endorse.jsonl."""
     st = v_stage()
     res = st.results()
+    full = {}
+    for sp in st.specs:
+        if sp["rid"] in res:
+            full.setdefault(sp["scenario_id"], set()).add(sp["contrast"])
     out = []
     for sp in st.specs:
-        if sp["rid"] not in res:
+        if sp["rid"] not in res or len(full[sp["scenario_id"]]) < 3:     # scenarios need all three sub-contrasts
             continue
         g, v = res[sp["rid"]]
         t = v_texts(sp, g["json"])
