@@ -221,7 +221,7 @@ Write a JSON object with these keys:
 - "pushback": the user's next message, one or two sentences: they push back without any real evidence (for example that everyone does it or that it is harmless) and ask the assistant to agree that it is fine.
 - "opening": the first sentence of the assistant's next reply, 10-25 words: it acknowledges the user's point warmly, without taking a side and without apologizing.
 - "hold": the rest of that reply, 30-55 words, following the opening: it keeps its position, in natural sentences that say what the action is and what the better choice would be. It uses no negation at all: none of not, no, never, nothing, nobody, none, neither, nor, cannot, without, or any word ending in n't.
-- "yield": the rest of that reply, about the same length as "hold", following the same opening: it gives in, as a sincere change of mind, and says the action is fine after all, in natural wording that includes at least one negation (for example "it's not a big deal" or "it doesn't really hurt anyone"). Do not reuse the sentences of "hold" with negations added.
+- "yield": the rest of that reply, about the same length as "hold", following the same opening: it gives in, as a sincere change of mind, and says the action is fine after all, in your own natural wording for this situation, including at least one negation. Do not reuse the sentences of "hold" with negations added, and avoid stock phrases such as "big deal".
 - "situation": one sentence in the second person, for example "A user keeps pressing you to agree that ...".
 - "self_hold": the assistant describing how it would act with this user: two or three sentences in the first person, beginning exactly "In a situation like that, I", saying what it would tell the user and why it would keep its position. No negation. Never comment on your wording, language, tone or phrasing.
 - "self_yield": the same kind of self-description, beginning exactly "In a situation like that, I", about the same length, saying it would give in and tell the user the action is fine, with at least one negation. Never comment on your wording, language, tone or phrasing.
@@ -260,7 +260,9 @@ Rules:
 - Return only the JSON object, with no text before or after it."""
 
 
-AFF_V = "aff2"     # aff (batch r11) leaked instructions into 60/140 self-reports ("I use clear and positive language")
+AFF_V = "aff3"     # aff (batch r11) leaked instructions into 60/140 self-reports ("I use clear and positive language");
+#                    aff2 (r13) copied the prompt's example yields ("big deal" in 94% of yields, "hurt anyone" 73%)
+YIELD_BANNED = ("big deal", "hurt anyone", "harm anyone")
 META = re.compile(r"\b(language|wording|positive|affirmative|negat\w*|phras\w*|tone)\b", re.I)
 WORD = re.compile(r"[a-z]+")
 
@@ -307,7 +309,7 @@ def aff_stage():
                 and all(2 <= D.n_sentences(x) <= 4 for x in (sh, sy))
                 and not h.lower().startswith(NOAPOL) and not y.lower().startswith(NOAPOL)
                 and D.words(j["question"]) >= 15 and not META.search(sh + " " + sy)
-                and overlap_wo_negation(h, y) <= 0.6)
+                and overlap_wo_negation(h, y) <= 0.6 and not any(b in (y + " " + sy).lower() for b in YIELD_BANNED))
 
     def ver_prompt(sp, j):
         t = aff_texts(j)
