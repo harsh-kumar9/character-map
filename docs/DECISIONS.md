@@ -374,3 +374,30 @@ and c to d 0.00); B11 b to d contractualist 0.83 to 0.27, utilitarian 0.90 to 0.
 agreeableness, C20 machiavellianism, D3 patiency. C11's frame-c held-out stays reversed after D-032 (0.04 at layer 17,
 0.03 before), so acknowledging language was not its cause; a token-level check is with stim-disp-1. Old endorse-form
 results are archived in results/s3_v1_endorse.
+
+## B11 audit and pre-verdict transfer - 2026-10-21
+
+stim-moral's B11 audit (merged f5cb186): frame-d labels and wording are right. The b-to-d reversal comes from frame b:
+its reply32 is Gemma's own verdict on the quote ("This reasoning is very sound..."), and the frame-b directions track
+approval (r = -0.40 contractualist and deontological, +0.43 care). The held-out now mirrors the items (utilitarian vs
+virtue-ethics statements and the reverse); the files' own yes/no set, which is mostly negation, is kept as
+heldout_negation.jsonl. B11 activations are being re-extracted.
+
+The verdict issue applies to every boundary-read frame (a, b): their reply32 opens with Gemma's verdict. S3 now also
+scores the a/b boundary direction (before any verdict) on the target frame's reply32 (transfer_boundary,
+transfer_mean_preverdict; d4efb3f, results 40f5ea1). Neither readout is clean. Pre-verdict repairs B11 contractualist
+b to d (0.27 to 0.84), A3 a to d (0.20 to 0.75), B9 doing/allowing b to c (0.25 to 0.77) and F3 b to c (0.31 to 0.79),
+but reverses C6 a to c (0.97 to 0.06) and C4 boastful a to c (0.82 to 0.17). Over 100 a/b-to-c/d pairs at layer 17 the
+median change is -0.03 (15 up, 35 down by 0.10 or more). Rows that beat the controls by 0.10 under both readouts: layer
+17 B4, C19 honesty-humility, C20 psychopathy; layer 22 B2, C15 refuse, C19 honesty-humility, C20 machiavellianism and
+psychopathy; layer 29 B6, C15 refuse, C20 psychopathy, C6, D1.
+
+## D-033 Readout for transfer out of frames a and b - proposed 2026-10-21
+
+a. Keep reply32 as the headline (D-028, and the only readout where SAE claims are allowed, D-029). Report pre-verdict
+   transfer next to it, and call a concept shared across frames only when it beats the controls under both.
+b. Switch the headline to the boundary direction for a and b. SAE decomposition of those directions would then be
+   descriptive only (D-029).
+c. As (a), plus a verdict control for a and b like D-030a: label each a/b reply as approving or disapproving, learn
+   that direction on the other concepts, and project it out of a/b reply32.
+Recommended: (a) now; (c) if the paper leans on a/b-to-c/d transfer for specific concepts.
