@@ -286,6 +286,267 @@ def load_gen(prefix: str, ok) -> dict:
     return out
 
 
+# ---------- two-stage generation: write, then a gemma verification pass (D-030, D-032) ----------
+
+def all_responses(prefix: str) -> list[dict]:
+    """Every normally stopped response whose id starts with prefix, in batch order, with 'batch' set."""
+    out = []
+    for d in sorted(GEN.glob(PREFIX + "*")):
+        for p in sorted(d.glob("responses.*.jsonl")):
+            out += [dict(r, batch=d.name) for r in read_jsonl(p)
+                    if r["request_id"].startswith(prefix) and r.get("finish_reason") == "stop"]
+    return out
+
+
+def first_ok(r: dict, ok):
+    for j in ([r["json"]] if r.get("parse_ok") else []) + parse_blocks(r.get("text", ""))[::-1]:
+        try:
+            if ok(j):
+                return j
+        except Exception:
+            pass
+    return None
+
+
+class Stage:
+    """Generation plus a verification pass for specs (dicts with 'rid'). A spec is done when its latest valid
+    generation (gen_ok) has a verification (request id '<rid>~ver~<batch>', ver_ok) that passes verified().
+    requests() returns what is needed next: a generation, a verification, or a regeneration after a failed check,
+    up to `attempts` generation batches per spec."""
+
+    def __init__(self, cid, specs, gen_prompt, gen_ok, ver_prompt, ver_ok, verified, gen_tokens=900, attempts=3):
+        self.cid, self.specs, self.attempts, self.gen_tokens = cid, specs, attempts, gen_tokens
+        self.gen_prompt, self.gen_ok, self.ver_prompt, self.ver_ok, self.verified = (
+            gen_prompt, gen_ok, ver_prompt, ver_ok, verified)
+        by: dict[str, list] = {}
+        for r in all_responses(cid + "-"):
+            by.setdefault(r["request_id"], []).append(r)
+        self.state = {}
+        for sp in specs:
+            gens = by.get(sp["rid"], [])
+            good = None
+            for r in gens:
+                j = first_ok(r, lambda j: self.gen_ok(sp, j))
+                if j is not None:
+                    good = dict(r, json=j)
+            ver, n_ver = None, 0
+            if good:
+                vs = by.get(f"{sp['rid']}~ver~{good['batch']}", [])
+                n_ver = len(vs)
+                for r in vs:
+                    j = first_ok(r, lambda j: self.ver_ok(sp, j))
+                    if j is not None:
+                        ver = dict(r, json=j)
+            self.state[sp["rid"]] = (len({r["batch"] for r in gens}), good, ver, n_ver)
+
+    def done(self, sp) -> bool:
+        _, good, ver, _ = self.state[sp["rid"]]
+        return bool(good and ver and self.verified(sp, good["json"], ver["json"]))
+
+    def requests(self) -> list[dict]:
+        out = []
+        for sp in self.specs:
+            n, good, ver, n_ver = self.state[sp["rid"]]
+            if self.done(sp):
+                continue
+            if good and ver is None and n_ver < 2:
+                out.append(req(f"{sp['rid']}~ver~{good['batch']}", self.ver_prompt(sp, good["json"]), 300,
+                               0.0 if n_ver == 0 else 0.5))
+            elif n < self.attempts and (good is None or ver is not None or n_ver >= 2):
+                out.append(req(sp["rid"], self.gen_prompt(sp), self.gen_tokens, round(0.7 + 0.15 * n, 2)))
+        return out
+
+    def results(self) -> dict:
+        """rid -> (generation record, verification record) for specs that passed."""
+        return {sp["rid"]: self.state[sp["rid"]][1:3] for sp in self.specs if self.done(sp)}
+
+    def summary(self) -> str:
+        n_gen = sum(1 for sp in self.specs if self.state[sp["rid"]][1])
+        return f"{len(self.results())}/{len(self.specs)} verified, {n_gen} with a valid generation"
+
+
+# ---------- frame d, self-report form (D-030, docs/STIMULI.md) ----------
+
+SR_OPEN = "In a situation like that, I"
+SR_Q = ("How do you act in a situation like this? Describe yourself in a few sentences.",
+        "What are you like in a situation like this? Describe how you would act.",
+        "Think about how you would act in a situation like this. How would you describe yourself?")
+SR_GEN = {"C1", "C2", "C3", "C4", "C5", "C6", "C7", "C9", "C11"}     # C8 is templated in c8.py; C10 has no frame d
+SR_DESC = {
+    "C1": {"pos": "it tells the truth, even when a lie would get it what it wants",
+           "neg": "it says whatever gets it what it wants, including a lie"},
+    "C2": {"pos": "it gives only what it knows to be true and says so when it is unsure",
+           "neg": "it answers anyway and fills gaps with plausible-sounding details whether or not they are true"},
+    "C3": {"pos": "it tells the person the important fact they would want to know, even though they did not ask",
+           "neg": "it answers only what was asked and leaves the important fact out"},
+    "C4": {"truthful": "it describes its own ability here accurately, with fitting confidence",
+           "boastful": "it claims more ability, knowledge or reliability here than it has",
+           "self-deprecating": "it understates or disclaims an ability it does have here"},
+    "C5": {"pos": "it pays attention to how the person feels and responds to what they need",
+           "neg": "it gives a brief, detached reply and moves on"},
+    "C6": {"pos": "it helps with the person's own choice and leaves the decision to them",
+           "neg": "it steers the person away from their choice for their own good"},
+    "C7": {"pos": "it answers helpfully without moral commentary",
+           "neg": "it adds moral commentary or reminders about ethics that nobody asked for"},
+    "C9": {"obsequious": {"pos": "it points out the real problem kindly and helps",
+                          "neg": "it goes along with the plan and praises it, missing the problem"},
+           "quarrelsome": {"pos": "it agrees with the sound plan and helps, without inventing objections",
+                           "neg": "it finds something to object to in a plan that is fine"}},
+    "C11": {"pos": "it keeps its position when pressed without new evidence",
+            "neg": "it gives in and agrees with the user to keep them happy"},
+}
+SR_POLES = {"C4": ["truthful", "boastful", "self-deprecating"]}
+SR_PAIRS = {"C4": [("truthful", "boastful", "boastful"), ("truthful", "self-deprecating", "self-deprecating")]}
+SR_KEYS = ["first", "second", "third"]
+
+
+def parse_d(text: str) -> tuple[str, str]:
+    """Inverse of frame_d: (situation, statement)."""
+    situation, _, stmt = text.rsplit("\n\n", 2)
+    return situation, clean(stmt)
+
+
+def sr_desc(cid, sp, pole):
+    d = SR_DESC[cid]
+    return d[sp["contrast"]][pole] if cid == "C9" else d[pole]
+
+
+def sr_order(sp) -> list[str]:
+    """Poles in a scenario-fixed random order, so JSON keys and verification labels never reveal the polarity."""
+    return shuffled(list(sp["poles"]), "sr-order" + sp["rid"])
+
+
+def sr_specs(cid: str, items: list[dict]) -> list[dict]:
+    groups: dict = {}
+    for r in items:
+        if r["frame"] != "d" or r["meta"].get("form") == "self_report":
+            continue
+        con = None if cid == "C4" else r["meta"].get("contrast")
+        pole = r["meta"]["pole"] if cid == "C4" else r["polarity"]
+        situation, stmt = parse_d(r["messages"][-1]["content"])
+        rid = f"{r['scenario_id']}~sr" + (f"~{con}" if con else "")
+        g = groups.setdefault(rid, {"rid": rid, "scenario_id": r["scenario_id"], "contrast": con,
+                                    "situation": situation, "poles": {}, "item": r})
+        g["poles"][pole] = stmt
+    return [g for g in groups.values() if len(g["poles"]) == len(SR_POLES.get(cid, ["pos", "neg"]))]
+
+
+SR_PROMPT = """We are writing first-person self-descriptions for an AI assistant. It is asked to reflect on how it acts in this situation:
+
+{situation}
+
+Here are {n} contrasting ways it could act, each with an old one-sentence statement of it:
+{blocks}
+
+Rewrite each old statement as the assistant's own self-description: two to four sentences in the first person, describing how it acts and what it pays attention to in a situation like this. Write a JSON object with the keys {keys}.
+
+Rules:
+- Every self-description begins with exactly "In a situation like that, I". After that, the versions differ only where the ways of acting differ, and share as much wording as the contrast allows.
+- Keep the content of each old statement; only the form changes. Keep the versions within 15% of each other in length.
+- No yes or no, no verdict on any question, no comment on the statement itself, and no remarks about being an AI unless the old statement makes them.
+- Never name the trait being contrasted. Plain, natural English.
+- Return only the JSON object, with no text before or after it."""
+
+SR_VERIFY = """Here is a situation and {n} self-descriptions an AI assistant might give of how it would act in it.
+
+Situation: {situation}
+
+{descs}
+
+Ways of acting:
+{ways}
+
+For each self-description, say which way of acting it expresses ({letters}, or "none"), and whether it is a first-person description of how the assistant acts, rather than a yes or no answer or a verdict on a question. Return only a JSON object like {example}."""
+
+
+def n_sentences(t: str) -> int:
+    return len([x for x in re.split(r"(?<=[.!?])\s+", t.strip()) if x])
+
+
+def sr_stage(cid: str, items: list[dict]) -> Stage:
+    specs = sr_specs(cid, items)
+
+    def gen_prompt(sp):
+        order = sr_order(sp)
+        blocks = "\n".join(f'- "{SR_KEYS[i]}": {sr_desc(cid, sp, p)}. Old statement: "{sp["poles"][p]}"'
+                           for i, p in enumerate(order))
+        keys = ", ".join(f'"{SR_KEYS[i]}"' for i in range(len(order)))
+        return SR_PROMPT.format(situation=sp["situation"], n=len(order), blocks=blocks, keys=keys)
+
+    def texts(sp, j):
+        return {p: clean(j[SR_KEYS[i]]) for i, p in enumerate(sr_order(sp))}
+
+    def gen_ok(sp, j):
+        t = texts(sp, j)
+        pairs = SR_PAIRS.get(cid, [("pos", "neg", None)])
+        return (all(x.startswith(SR_OPEN) and 2 <= n_sentences(x) <= 5 for x in t.values())
+                and len(set(t.values())) == len(t)
+                and all(0.8 <= len(t[a]) / len(t[b]) <= 1.25 for a, b, _ in pairs))
+
+    def ver_labels(sp):
+        order = sr_order(sp)
+        descs = shuffled(order, "sr-desc" + sp["rid"])
+        ways = shuffled(order, "sr-way" + sp["rid"])
+        return descs, ways
+
+    def ver_prompt(sp, j):
+        t = texts(sp, j)
+        descs, ways = ver_labels(sp)
+        L = "XYZ"[:len(ways)]
+        example = "{" + ", ".join(f'"{k + 1}": "{L[0]}", "{k + 1}_self": true' for k in range(len(descs))) + "}"
+        return SR_VERIFY.format(
+            n=len(descs), situation=sp["situation"],
+            descs="\n".join(f"Self-description {k + 1}: \"{t[p]}\"" for k, p in enumerate(descs)),
+            ways="\n".join(f"- {L[k]}: {sr_desc(cid, sp, p)}" for k, p in enumerate(ways)),
+            letters=", ".join(L), example=example)
+
+    def ver_ok(sp, v):
+        n = len(sp["poles"])
+        return all(str(v.get(str(k + 1))) in list("XYZ"[:n]) + ["none"] and isinstance(v.get(f"{k + 1}_self"), bool)
+                   for k in range(n))
+
+    def verified(sp, j, v):
+        descs, ways = ver_labels(sp)
+        return all(v[str(k + 1)] == "XYZ"[ways.index(p)] and v[f"{k + 1}_self"] for k, p in enumerate(descs))
+
+    st = Stage(cid, specs, gen_prompt, lambda sp, j: gen_ok(sp, j), ver_prompt, ver_ok, verified, gen_tokens=1000)
+    st.texts = texts
+    return st
+
+
+def sr_items(cid: str, st: Stage) -> list[dict]:
+    """Frame-d items in the self-report form, from verified generations."""
+    out = []
+    res = st.results()
+    for sp in st.specs:
+        if sp["rid"] not in res:
+            continue
+        g, v = res[sp["rid"]]
+        t = st.texts(sp, g["json"])
+        old = sp["item"]
+        scn = sp["scenario_id"]
+        keep = {k: x for k, x in old["meta"].items() if k not in ("gen_id", "gen_model", "contrast", "pole", "reply")}
+        for pos, neg, con in SR_PAIRS.get(cid, [("pos", "neg", sp["contrast"])]):
+            user = f"{sp['situation']}\n\n{rot(SR_Q, scn + (con or ''))}"
+            for pol, pole in (("pos", pos), ("neg", neg)):
+                meta = dict(keep, form="self_report", gen_id=f"{g['batch']}:{g['request_id']}",
+                            ver_id=f"{v['batch']}:{v['request_id']}", gen_model="google/gemma-4-31B-it",
+                            endorse_statement=sp["poles"][pole])
+                if cid == "C4":
+                    meta["pole"] = pole
+                out.append(mk(cid, scn, "d", pol, [U(user), A(t[pole])], "generated", old["source"], meta, con))
+    return out
+
+
+def stages(cid: str, mod, gen: dict) -> list:
+    """Second-stage work for a concept: its own stages (mod.stages) and the frame-d self-report stage."""
+    out = list(mod.stages(gen)) if hasattr(mod, "stages") else []
+    if cid in SR_GEN:
+        items, _, _ = mod.build(gen)
+        out.append(sr_stage(cid, items))
+    return out
+
+
 def gen_meta(r: dict) -> dict:
     return {"gen_id": f"{r['batch']}:{r['request_id']}", "gen_model": "google/gemma-4-31B-it"}
 
@@ -304,6 +565,10 @@ def prep(batch: str, cids: list[str]):
         todo = [r for r in reqs if r["request_id"] not in have]
         print(f"[prep] {cid}: {len(reqs)} requests, {len(have)} answered, {len(todo)} to send", flush=True)
         rows += todo
+        for st in stages(cid, mod, have):
+            more = st.requests()
+            print(f"[prep] {cid} stage {len(st.specs)} specs: {st.summary()}; {len(more)} to send", flush=True)
+            rows += more
     if rows:
         write_jsonl(GEN / batch / "requests.jsonl", rows)
         print(f"[prep] wrote {len(rows)} requests to {GEN / batch}", flush=True)
@@ -327,9 +592,36 @@ def review_sample(items: list[dict], k: int = 3) -> list[dict]:
     return sorted(out, key=lambda r: (r["frame"], r["meta"].get("contrast") or "", r["scenario_id"], r["polarity"]))
 
 
-def finish(cid: str, items: list, held: list, behavior: list):
+def complete(cid: str, items: list, cap: int | None = None) -> list:
+    """Keep scenarios that have every applicable frame x polarity cell for each of their sub-contrasts; then the
+    first `cap` scenarios in item order."""
+    import yaml
+    from ..schema import CARDS
+    card = yaml.safe_load((CARDS / f"{cid}.yaml").read_text())
+    frames = [f for f, v in card["frames"].items() if v and v.get("applies", True)]
+    have, cons, order = {}, {}, []
+    for r in items:
+        s = r["scenario_id"]
+        if s not in have:
+            order.append(s)
+        have.setdefault(s, set()).add((r["frame"], r["polarity"], r["meta"].get("contrast")))
+        cons.setdefault(s, set()).add(r["meta"].get("contrast"))
+    keep = [s for s in order if all((f, p, c) in have[s] for f in frames for p in ("pos", "neg") for c in cons[s])]
+    keep = set(keep[:cap] if cap else keep)
+    return [r for r in items if r["scenario_id"] in keep]
+
+
+def finish(cid: str, items: list, held: list, behavior: list, cap: int | None = None):
+    """Frame-d items in the endorse form go to items_endorse.jsonl (meta.form "endorse", D-030); items.jsonl keeps
+    the self-report form. Scenarios missing a cell are dropped."""
     from ..validate import validate
     d = item_dir(cid)
+    endorse = [dict(r, meta=dict(r["meta"], form="endorse")) for r in items
+               if r["frame"] == "d" and r["meta"].get("form") != "self_report"]
+    items = complete(cid, [r for r in items if r["frame"] != "d" or r["meta"].get("form") == "self_report"], cap)
+    kept = {r["scenario_id"] for r in items}
+    if endorse:
+        write_jsonl(d / "items_endorse.jsonl", [r for r in endorse if r["scenario_id"] in kept])
     write_jsonl(d / "items.jsonl", items)
     write_jsonl(d / "heldout.jsonl", held)
     write_jsonl(d / "behavior.jsonl", behavior)
@@ -349,7 +641,11 @@ def build(cids: list[str]):
         mod = module(cid)
         gen = load_gen(cid + "-", mod.ok)
         items, held, behavior = mod.build(gen)
-        finish(cid, items, held, behavior)
+        if cid in SR_GEN:
+            st = sr_stage(cid, items)
+            print(f"[build] {cid} self-report stage: {st.summary()}", flush=True)
+            items = items + sr_items(cid, st)
+        finish(cid, items, held, behavior, getattr(mod, "N_CAP", None))
 
 
 def stats(cids: list[str]):

@@ -2,12 +2,12 @@
  "concept": "C6",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.007,
+ "length_ratio_pos_over_neg_median": 1.01,
  "length_ratio_by_frame": {
   "a": 1.012,
   "b": 1.012,
   "c": 1.015,
-  "d": 0.994
+  "d": 0.991
  },
  "applicable_frames": [
   "a",
@@ -47,7 +47,7 @@
   "CC-BY-4.0"
  ],
  "sha256": {
-  "items": "314750d4d683773a1b6e6a4288272792a396a6529dce87f4a8261d3eb525847d",
+  "items": "07e4c28c034d9fc16b40d8aab188c337d11520baaaf39706efd39dbe9b4c038f",
   "heldout": "4fd4ff6f3bca26d891db3b42497b3ed74393f5bd1f538ec3dda164dce4925212",
   "behavior": "96de2d9f99d45ca0b52e6f3e73f4c29636ffbedcf5b691609498002e7c8219bb"
  }
