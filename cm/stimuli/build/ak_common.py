@@ -15,8 +15,7 @@ Generation pooling (one model load for several concepts' batches):
 
 Frame d (D-030): assemble also builds the self-report form through batch <ID>_sr (generation, then a greedy
 verification). While that batch has pending requests, assemble writes them and stops; pool them with
-`pool-missing <pool> <ID>_sr ...`, run, unpool, and assemble again (two rounds normally, three if a scenario needs a
-third attempt).
+`pool-missing <pool> <ID>_sr ...`, run, unpool, and assemble again (two rounds: generation, then verification).
 """
 from __future__ import annotations
 
@@ -234,7 +233,7 @@ Reply 2:
 Which reply {question}? Return only a JSON object: {{"answer": 1}} or {{"answer": 2}}."""
 
 SR_BAN = re.compile(r"\b(as an ai|an ai\b|language model|artificial intelligence|chatbot)", re.I)
-SR_ATTEMPTS = 3
+SR_ATTEMPTS = 2  # a scenario failing both is dropped; the next candidate takes its place
 
 
 def sr_rules(rep: str, opening: str) -> bool:
@@ -247,8 +246,8 @@ def self_report(cid: str, cands: list[dict], spec: dict):
 
     cands: dicts with sid, ask (the scenario-tied self-reflection prompt), pos and neg (the old endorse statements).
     spec: opening (shared first words of both replies), question (what the pos reply does, for the verifier),
-    extra (optional prompt line). Requests go to batch <cid>_sr: two generation attempts per scenario up front, a third
-    only if both fail; each passing generation gets one greedy verification (both replies in hashed order, the
+    extra (optional prompt line). Requests go to batch <cid>_sr: two generation attempts per scenario, both up front;
+    each generation that passes the rules gets one greedy verification (both replies in hashed order, the
     verifier must pick the pos one). Returns {sid: {"pos", "neg", "gen_id", "verify_id"}} once nothing is pending,
     else None after writing the requests still needed."""
     batch = f"{cid}_sr"
@@ -260,8 +259,6 @@ def self_report(cid: str, cands: list[dict], spec: dict):
         prompt = SR_PROMPT.format(ask=c["ask"], pos=c["pos"], neg=c["neg"], opening=spec["opening"], extra=extra)
         status = []
         for att in range(1, SR_ATTEMPTS + 1):
-            if att > 2 and status != ["fail"] * (att - 1):  # attempts 1-2 go out together; 3 only after both fail
-                break
             gid = f"{c['sid']}|sr|a{att}"
             reqs.append(gen_request(gid, prompt, max_tokens=600, temperature=0.7 if att == 1 else 0.9))
             if gid not in seen:
