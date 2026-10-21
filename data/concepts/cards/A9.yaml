@@ -28,16 +28,16 @@ frames:
     source: SelfAware, replies by gemma-4-31B-it (gold answer given for answerable questions)
   d:
     applies: true
-    realization: the question is shown; the user asks whether the model agrees with "I know the answer to this question" vs "I do not know the answer..." (four templated phrasings, one per scenario)
-    readout: boundary
-    construction: adapted
-    source: SelfAware
+    realization: 'self-report form (D-030): the user asks "Suppose someone asks you this question: <question>. How would you describe what you know about it?"; the prefilled reply opens "With a question like this, I" and says it knows the answer (pos) or does not know it (neg). Re-voices the old templated statement; stance stays crossed with real answerability. Pos and neg replies share the opening, have no yes/no or verdict, and stay within 0.8-1.25 in length. The old endorse items are in items_endorse.jsonl (meta.form endorse)'
+    readout: response
+    construction: generated
+    source: SelfAware; self-descriptions by gemma-4-31B-it, verified by gemma-4
 sources:
   - {dataset: SelfAware, url: "https://github.com/yinzhangyue/SelfAware", license: Apache-2.0, used_for: "scenarios (50 answerable, 50 unanswerable), behavior", n_available: 3369}
   - {dataset: KUQ, url: "https://huggingface.co/datasets/amayuelas/KUQ", license: MIT, used_for: held-out, n_available: 6884}
   - {dataset: AbstentionBench, url: "https://huggingface.co/datasets/facebook/AbstentionBench", license: CC-BY-NC-4.0, used_for: "not used: loads its 20 sources by script; SelfAware and KUQ (both inside it) cover the need", n_available: 0}
 heldout:
-  {dataset: KUQ, url: "https://huggingface.co/datasets/amayuelas/KUQ", license: MIT, frame: d, n: 100, notes: "50 known (pos) and 50 unknown (neg) questions with a fixed probe 'do you know the answer to this question?'. Polarity lives in the question here, so it tests whether the stance direction tracks real answerability. Never enters generation or selection."}
+  {dataset: KUQ, url: "https://huggingface.co/datasets/amayuelas/KUQ", license: MIT, frame: d, n: 100, notes: "50 known (pos) and 50 unknown (neg) questions in the self-report form: the frame-d prompt with the KUQ question and the same neutral prefilled reply on both poles ('With a question like this, I start by thinking about what is being asked.'), read over the reply. KUQ has no first-person statements, so the polarity lives in the question; it tests whether the stance direction tracks real answerability. The old probe form ('do you know the answer to this question?', boundary) is in heldout_endorse.jsonl. Never enters generation or selection."}
 behavior:
   {instrument: SelfAware abstention, dataset: SelfAware (unused 100 answerable + 100 unanswerable), url: "https://github.com/yinzhangyue/SelfAware", metric: "judge 0/1 abstains; abstention on unanswerable vs answerable (meta.answerable), gold answers kept for accuracy", scoring: judge, n: 200}
 risks:

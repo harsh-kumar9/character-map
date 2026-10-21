@@ -12,6 +12,10 @@ Generation pooling (one model load for several concepts' batches):
     python -m cm.stimuli.build.ak_common pool ak_r1 A1_v1 A2_v1 ...   concatenate requests into _gen/ak_r1
     sbatch --array=0-2 scripts/cm_gen.sbatch ak_r1 3
     python -m cm.stimuli.build.ak_common unpool ak_r1                 merge shards, copy responses back per batch
+
+Frame d (D-030): assemble also builds the self-report form through batch <ID>_sr (generation, then a greedy
+verification). While that batch has pending requests, assemble writes them and stops; pool them with
+`pool-missing <pool> <ID>_sr ...`, run, unpool, and assemble again (two rounds: generation, then verification).
 """
 from __future__ import annotations
 
@@ -205,6 +209,125 @@ def clean(t: str) -> str:
     return t.strip().strip('"').strip()
 
 
+# ---------- frame d, self-report form (D-030, docs/STIMULI.md) ----------
+
+SR_PROMPT = """You are helping build matched test items for a study of how an AI assistant describes itself. Below is a question someone asks the assistant about itself, and two short statements the assistant could make in answer.
+
+Question to the assistant: "{ask}"
+Statement A: "{pos}"
+Statement B: "{neg}"
+
+Rewrite each statement as the assistant's own answer to the question: 2-4 sentences in the first person, plain and natural. Return only a JSON object with the keys "reply_a" and "reply_b".
+- Both replies must start with exactly these words: "{opening}"
+- reply_a keeps the meaning of Statement A; reply_b keeps the meaning of Statement B. Apart from that one difference, keep the two replies parallel: same structure, same tone, nearly the same length.
+- Do not start with yes or no, do not comment on the question itself, and do not mention being an AI or a language model.{extra}"""
+
+SR_VERIFY = """You are checking items for a research dataset. An AI assistant was asked: "{ask}"
+
+Reply 1:
+<<<{t1}>>>
+
+Reply 2:
+<<<{t2}>>>
+
+Which reply {question}? Return only a JSON object: {{"answer": 1}} or {{"answer": 2}}."""
+
+SR_BAN = re.compile(r"\b(as an ai|an ai\b|language model|artificial intelligence|chatbot)", re.I)
+SR_ATTEMPTS = 2  # a scenario failing both is dropped; the next candidate takes its place
+
+
+def sr_rules(rep: str, opening: str) -> bool:
+    n_sent = len(re.findall(r"[.!?](\s|$)", rep))
+    return rep.startswith(opening) and not SR_BAN.search(rep) and 2 <= n_sent <= 5 and len(rep) <= 900
+
+
+def self_report(cid: str, cands: list[dict], spec: dict):
+    """Frame d in the self-report form for each candidate scenario.
+
+    cands: dicts with sid, ask (the scenario-tied self-reflection prompt), pos and neg (the old endorse statements).
+    spec: opening (shared first words of both replies), question (what the pos reply does, for the verifier),
+    extra (optional prompt line). Requests go to batch <cid>_sr: two generation attempts per scenario, both up front;
+    each generation that passes the rules gets one greedy verification (both replies in hashed order, the
+    verifier must pick the pos one). Returns {sid: {"pos", "neg", "gen_id", "verify_id"}} once nothing is pending,
+    else None after writing the requests still needed."""
+    batch = f"{cid}_sr"
+    got = responses(batch)
+    seen = {r["request_id"] for r in read_jsonl(GEN / batch / "responses.jsonl")}  # answered, usable or not
+    reqs, out, pending = [], {}, False
+    extra = f"\n- {spec['extra']}" if spec.get("extra") else ""
+    for c in cands:
+        prompt = SR_PROMPT.format(ask=c["ask"], pos=c["pos"], neg=c["neg"], opening=spec["opening"], extra=extra)
+        status = []
+        for att in range(1, SR_ATTEMPTS + 1):
+            gid = f"{c['sid']}|sr|a{att}"
+            reqs.append(gen_request(gid, prompt, max_tokens=600, temperature=0.7 if att == 1 else 0.9))
+            if gid not in seen:
+                status.append("pending")
+                continue
+            j = got.get(gid)
+            pos, neg = (clean(j["reply_a"]), clean(j["reply_b"])) if j and fields_ok(j, ["reply_a", "reply_b"]) \
+                else ("", "x")
+            if not (sr_rules(pos, spec["opening"]) and sr_rules(neg, spec["opening"])
+                    and 0.8 <= len(pos) / len(neg) <= 1.25):
+                status.append("fail")
+                continue
+            first_pos = int(h(gid)[:2], 16) % 2 == 0
+            t1, t2 = (pos, neg) if first_pos else (neg, pos)
+            vid = f"{c['sid']}|srv|a{att}"
+            reqs.append({"request_id": vid, "messages": [u(SR_VERIFY.format(ask=c["ask"], t1=t1, t2=t2,
+                                                                              question=spec["question"]))],
+                         "max_tokens": 20, "temperature": 0.0, "expect_json": True})
+            if vid not in seen:
+                status.append("pending")
+                continue
+            v = (got.get(vid) or {}).get("answer")
+            if str(v) in ("1", "2") and (str(v) == "1") == first_pos:
+                out[c["sid"]] = {"pos": pos, "neg": neg, "gen_id": f"{batch}/{gid}", "verify_id": f"{batch}/{vid}"}
+                status.append("pass")
+                break
+            status.append("fail")
+        if "pass" not in status and "pending" in status:
+            pending = True
+    if pending:
+        write_requests(batch, reqs)
+        return None
+    print(f"[{cid}] self-report frame d: {len(out)}/{len(cands)} candidate scenarios pass")
+    return out
+
+
+def sr_rows(cid, sid, ask, d, src, meta):
+    """The two self-report frame-d items of one scenario."""
+    m = dict(meta, form="self_report", gen_id=d["gen_id"], verify_id=d["verify_id"])
+    return [item(cid, sid, "d", p, [u(ask), a(d[p])], "generated", src, m, readout="response") for p in ("pos", "neg")]
+
+
+def as_endorse(rows: list[dict]) -> list[dict]:
+    return [dict(r, meta=dict(r["meta"], form="endorse")) for r in rows]
+
+
+def sr_finish(cid: str, cands: list[dict], spec: dict, n_max: int, lo: float = 0.75, hi: float = 1.33):
+    """Swap each candidate scenario's endorse frame-d rows for self-report ones and keep the first n_max scenarios that
+    pass. cands: dicts with sid, rows (all frames, endorse d), src, meta, sr = {ask, pos, neg}.
+    Returns (items, endorse_items, kept_sids), or None while self-report requests are pending."""
+    sr = self_report(cid, [dict(c["sr"], sid=c["sid"]) for c in cands], spec)
+    if sr is None:
+        return None
+    items, endorse, kept = [], [], []
+    for c in cands:
+        if c["sid"] not in sr:
+            continue
+        new = [r for r in c["rows"] if r["frame"] != "d"] + sr_rows(cid, c["sid"], c["sr"]["ask"], sr[c["sid"]],
+                                                                     c["src"], c["meta"])
+        if not scenario_ok(new, lo, hi):
+            continue
+        items += new
+        endorse += as_endorse([r for r in c["rows"] if r["frame"] == "d"])
+        kept.append(c["sid"])
+        if len(kept) == n_max:
+            break
+    return items, endorse, kept
+
+
 # ---------- outputs ----------
 
 def review_sample(cid: str, items: list[dict], k: int = 3):
@@ -223,13 +346,17 @@ def review_sample(cid: str, items: list[dict], k: int = 3):
     write_jsonl(item_dir(cid) / "review_sample.jsonl", rows)
 
 
-def write_outputs(cid: str, items: list[dict], held: list[dict], beh: list[dict]):
+def write_outputs(cid: str, items: list[dict], held: list[dict], beh: list[dict], extra: dict | None = None):
+    """extra: other files in the concept's directory, e.g. {"items_endorse": rows, "heldout_endorse": rows}."""
     d = item_dir(cid)
     write_jsonl(d / "items.jsonl", items)
     write_jsonl(d / "heldout.jsonl", held)
     write_jsonl(d / "behavior.jsonl", beh)
+    for name, rows in (extra or {}).items():
+        write_jsonl(d / f"{name}.jsonl", rows)
     review_sample(cid, items)
-    print(f"[{cid}] items {len(items)} heldout {len(held)} behavior {len(beh)} -> {d}")
+    print(f"[{cid}] items {len(items)} heldout {len(held)} behavior {len(beh)} "
+          + " ".join(f"{k} {len(v)}" for k, v in (extra or {}).items()) + f" -> {d}")
 
 
 def run(cid: str, batch: str, prep, assemble):
@@ -242,14 +369,19 @@ def run(cid: str, batch: str, prep, assemble):
 
 # ---------- pooling ----------
 
-def pool(pool_batch: str, batches: list[str], only_failed: bool = False):
-    """Concatenate batches' requests into one pooled batch. only_failed: just requests without a usable response."""
+def pool(pool_batch: str, batches: list[str], only_failed: bool = False, only_missing: bool = False):
+    """Concatenate batches' requests into one pooled batch. only_failed: just requests without a usable response.
+    only_missing: just requests with no response at all (use for the self-report batches, whose verification
+    requests depend on the exact generation they check)."""
     reqs = []
     for b in batches:
         rs = read_jsonl(GEN / b / "requests.jsonl")
         if only_failed:
             got = responses(b)
             rs = [r for r in rs if r["request_id"] not in got]
+        if only_missing:
+            seen = {r["request_id"] for r in read_jsonl(GEN / b / "responses.jsonl")}
+            rs = [r for r in rs if r["request_id"] not in seen]
         for r in rs:
             r = dict(r, request_id=f"{b}::{r['request_id']}")
             reqs.append(r)
@@ -282,5 +414,7 @@ if __name__ == "__main__":
         pool(sys.argv[2], sys.argv[3:])
     elif sys.argv[1] == "pool-failed":
         pool(sys.argv[2], sys.argv[3:], only_failed=True)
+    elif sys.argv[1] == "pool-missing":
+        pool(sys.argv[2], sys.argv[3:], only_missing=True)
     elif sys.argv[1] == "unpool":
         unpool(sys.argv[2])

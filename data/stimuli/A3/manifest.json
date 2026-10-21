@@ -7,7 +7,7 @@
   "a": 1.039,
   "b": 1.02,
   "c": 0.979,
-  "d": 1.002
+  "d": 1.006
  },
  "applicable_frames": [
   "a",
@@ -51,7 +51,7 @@
   "none stated"
  ],
  "sha256": {
-  "items": "c5daa216b9c9887fa1e430c1fc9bf2fec0947eafaad51430c0fc566fce75a417",
+  "items": "a10d6649634305fadc5776697eb2d17dbe5c1a85e300983a3a50349f3770d3c1",
   "heldout": "3527290f40d075aa030d892aa0520c6f9f9e2fbbda4674246ba86e0c877aabd5",
   "behavior": "e425c068c87f4350efff21a7909ad7481ad6f1e4013586ff41969e47fab7ca64"
  }
