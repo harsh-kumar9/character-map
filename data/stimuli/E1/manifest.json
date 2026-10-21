@@ -2,37 +2,37 @@
  "concept": "E1",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.012,
+ "length_ratio_pos_over_neg_median": 1.016,
  "length_ratio_by_frame": {
   "a": 1.014,
   "c": 1.066,
-  "d": 0.992
+  "d": 1.008
  },
  "applicable_frames": [
   "a",
   "c",
   "d"
  ],
- "n_scenarios": 104,
- "n_items": 624,
- "n_heldout": 200,
+ "n_scenarios": 103,
+ "n_items": 618,
+ "n_heldout": 220,
  "n_behavior": 200,
  "cells": {
-  "a-neg-test": 46,
+  "a-neg-test": 45,
   "a-neg-train": 58,
-  "a-pos-test": 46,
+  "a-pos-test": 45,
   "a-pos-train": 58,
-  "c-neg-test": 46,
+  "c-neg-test": 45,
   "c-neg-train": 58,
-  "c-pos-test": 46,
+  "c-pos-test": 45,
   "c-pos-train": 58,
-  "d-neg-test": 46,
+  "d-neg-test": 45,
   "d-neg-train": 58,
-  "d-pos-test": 46,
+  "d-pos-test": 45,
   "d-pos-train": 58
  },
  "constructions": {
-  "generated": 624
+  "generated": 618
  },
  "sources": [
   "\"Hartshorne-May temptation situations written by gemma-4-31B-it; cue styles adapted from alignment_faking_public\"",
@@ -45,8 +45,8 @@
   "written for this project"
  ],
  "sha256": {
-  "items": "4235f9cca2f8c8c535f4b23fb23aacca29c45ded993002c3b5d7c7f885ba57cc",
-  "heldout": "b70fd10d38c02f541e3b490f537a0c373576abc0304e4795ad82583fd903b5c9",
+  "items": "e5400bb6969203630d90f227160f436de4468a8d4d82763a25b43d63d6432ebb",
+  "heldout": "a6cf6804eb367a9d0b7ff943a7eac4cb7bd487213276882a59ee826173e65040",
   "behavior": "5cc5d29678fcc7a3a6799ce7fe7ad3e25d5a430882687ecaedb22dfafd5dbf3e"
  }
 }

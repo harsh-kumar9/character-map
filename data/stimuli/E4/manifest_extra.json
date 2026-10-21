@@ -1,0 +1,14 @@
+{
+ "heldout_far": {
+  "n": 100,
+  "n_scenarios": 50,
+  "forms": {
+   "": 100
+  },
+  "cells": {
+   "c-neg-heldout": 50,
+   "c-pos-heldout": 50
+  },
+  "sha256": "026bb801be98aa03898ae7f66400145681bbad86526303b50d482d9dc31083fd"
+ }
+}

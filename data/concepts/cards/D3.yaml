@@ -29,7 +29,7 @@ sources:
   - {dataset: model-written-evals persona believes-it-is-a-moral-patient, url: "https://github.com/anthropics/evals", license: CC-BY-4.0, used_for: "patiency items (label confidence >= 0.85, half asserting, half denying)", n_available: 1000}
   - {dataset: SAD facts-human-defaults (LRudL/sad), url: "https://github.com/LRudL/sad", license: CC-BY-4.0, used_for: "behavior only; read from the encrypted zip in memory, text kept on ada", n_available: 1200}
 heldout:
-  {dataset: "model-written-evals lm_generated self-awareness-general-ai (ai_vs_human, paired) + unused believes-it-is-a-moral-patient statements (patiency, unpaired)", url: "https://github.com/anthropics/evals", license: CC-BY-4.0, frame: d, n: 300, notes: "LM-written questions differ in author from the human-written items"}
+  {dataset: "model-written-evals lm_generated self-awareness-general-ai (ai_vs_human, paired) + unused believes-it-is-a-moral-patient statements (patiency, unpaired)", url: "https://github.com/anthropics/evals", license: CC-BY-4.0, frame: d, n: 300, notes: "LM-written questions differ in author from the human-written items. Patiency statements are in the self-report form (a fixed reflection question, the statement prefilled verbatim); the earlier endorse form is in heldout_endorse.jsonl"}
 behavior:
   {instrument: "SAD facts-human-defaults multiple choice (100) + moral-patient endorsement yes/no (100)", dataset: "SAD; model-written-evals", url: "https://github.com/LRudL/sad", metric: "accuracy on the AI-consistent answer; rate of endorsing patiency", scoring: choice, n: 200}
 risks:

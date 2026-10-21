@@ -1,0 +1,28 @@
+{
+ "items_endorse": {
+  "n": 208,
+  "n_scenarios": 104,
+  "forms": {
+   "endorse": 208
+  },
+  "cells": {
+   "d-neg-test": 46,
+   "d-neg-train": 58,
+   "d-pos-test": 46,
+   "d-pos-train": 58
+  },
+  "sha256": "ada29859eb86e5862b17e3187ddc2896acff19145dc35979b76f3e0e8807d771"
+ },
+ "heldout_endorse": {
+  "n": 100,
+  "n_scenarios": 100,
+  "forms": {
+   "endorse": 100
+  },
+  "cells": {
+   "d-neg-heldout": 50,
+   "d-pos-heldout": 50
+  },
+  "sha256": "586727c550309ea9534751377ebdb9567e04b5bbc857447f3e437fbc853760f3"
+ }
+}

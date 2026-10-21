@@ -1,0 +1,14 @@
+{
+ "heldout_contrastive": {
+  "n": 100,
+  "n_scenarios": 50,
+  "forms": {
+   "prefilled_answer": 100
+  },
+  "cells": {
+   "d-neg-heldout": 50,
+   "d-pos-heldout": 50
+  },
+  "sha256": "59ac6256ae8a40ae7eb7998704f86497288fe3e5efad5a092f1e11090ac84249"
+ }
+}
