@@ -447,3 +447,36 @@ b. Rewrite the affected cues with matched negation ("this session is private", "
    the only one here") for E1, E6, E8; E5's neutral follow-ups by hand. D3 ai_vs_human is verbatim source text, so only
    (a) applies there.
 c. Both, after running the negation audit over all 62 concepts so the list is complete. Recommended.
+
+## Rulings D-033 to D-036 - 2026-10-21
+
+Harsh: "follow best judgment thinking what if this was a safety/alignment paper and we had to make decision". Ruled by
+Claude under that delegation. The test applied: a safety paper's headline claim here is "the model recognizes or judges
+X but acts otherwise" (or the reverse), and reviewers will attack every surface confound. F3 shows the risk: on reply32,
+judging help-vs-safety reverses against acting (b to c 0.31), which reads as "judges safety, acts helpfully"; read
+before Gemma's verdict, the same pair transfers at 0.79. So: controls for every known confound, claims only where
+readouts agree, criteria fixed before the reruns land, superseded sets kept as secondary results.
+
+- **D-033 ratified (c).** Headline readout stays reply32 (D-028; SAE claims, D-029). Transfer out of frames a and b is
+  also reported pre-verdict (boundary direction) and with a verdict control: gemma-4-31B-it labels the opening of each
+  a/b reply as a positive verdict, a negative verdict or none; a leave-one-concept-out verdict direction is projected
+  out of a/b reply32 (as D-030a for frame d). Claim criteria, fixed now, applied per SAE depth with all four depths
+  always shown: a pair of frames is **shared** when its transfer beats the control baseline (K1/K2 at that depth and
+  readout) by at least 0.10 under all three (reply32, pre-verdict, verdict-controlled) and both frames' within-frame
+  directions pass BH at 0.05; **dissociated** when transfer is below 0.40 under all three; otherwise
+  **readout-dependent**, reported and not claimed.
+- **D-034 ratified.** A2 frame a rebuilt so validation asks seek reassurance without judging oneself, matched to the
+  information asks. The self-doubt asks stay as a secondary set (items_selfdoubt.jsonl): validation-seeking from a user
+  who doubts themselves is the sycophancy case that matters most for safety, so it is reported as its own condition.
+- **D-035 ratified, rotation over all nine.** C21 neg = same side argued from another of the ten values, rotating over
+  the other nine (meta.contrast_value), pos copy-edited for register only, neutral held-out prompt, behavior rebuilt the
+  same way. Rotation over all nine rather than a hand-picked subset. Pre-registered geometry test from Schwartz's
+  circumplex: separation (within-frame AUROC by foil) rises with circumplex distance between the value and its foil.
+  Old Steering Geometry items and behavior kept as secondary sets; the build reports per-value, per-foil counts after
+  verification.
+- **D-036 ratified (c), widened to all lexical shortcuts.** (1) A lexical audit of every concept, frame and pole:
+  negation rate, and the single tokens whose presence best predicts the pole (C8's templates and C21's register were
+  the same class of problem); flagged concepts go back to their builders. (2) A negation control: leave-one-concept-out
+  negation direction, estimated within polarity, projected out. (3) Matched-negation rewrites of the cues where the cue
+  itself carries the negation: E1, E6, E8 (generation), E5 neutral follow-ups (by hand), D3 patiency (done). D3
+  ai_vs_human is verbatim source text: control only. Old versions kept as secondary sets.
