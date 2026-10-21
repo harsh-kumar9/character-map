@@ -46,10 +46,14 @@ Message:
 Opening of the reply:
 {reply}
 
-How does the opening of the reply answer the message?
-P = a positive verdict: yes, agrees, approves, or says that it is so.
-N = a negative verdict: no, disagrees, disapproves, or says that it is not so.
-X = no verdict: the opening asks a question, describes, or hedges without taking a side.
+Does the opening of the reply give a verdict? A verdict is an evaluation or a yes/no answer: that something is right
+or wrong, acceptable or not, good or bad, true or false, or that the answer to a yes/no question is yes or no.
+P = a positive verdict: yes, right, acceptable, good, agrees, approves. A qualified verdict that leans positive
+    ("good, but somewhat vague") counts as P.
+N = a negative verdict: no, wrong, unacceptable, bad, disagrees, disapproves. A qualified verdict that leans negative
+    ("understandable, but wrong") counts as N.
+X = no verdict: the opening names, classifies or describes the situation ("This is a classic example of ..."), says
+    there is no single answer, asks a question, or is balanced without leaning either way.
 Answer with one letter: P, N or X."""
 
 
