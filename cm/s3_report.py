@@ -3,7 +3,9 @@
 Reads results/s3/concepts/*.json (cm.s3 directions). Layer choice is fixed in advance, not picked on test data: the
 four SAE depths (hidden-state index 10/18/23/30 = decoder layers 9/17/22/29). The common readout across frames is
 reply32. Within-frame AUROC is the frame's own direction on its own test items; transfer AUROC is frame i's direction
-on frame j's test items (0.5 = no transfer, below 0.5 = reversed).
+on frame j's test items (0.5 = no transfer, below 0.5 = reversed). Frames read at the boundary (a, b) have reply32 =
+Gemma's own reply, which opens with its verdict, so transfer_boundary and transfer_mean_preverdict also score their
+boundary direction (before the verdict) on the target frame's reply32.
 
     python -m cm.s3_report            writes results/s3/frames_table.json and prints the table
 """
@@ -37,6 +39,9 @@ def main():
         trans = defaultdict(dict)    # (sub, from, to) -> layer -> auroc
         for t in r["transfer"]:
             trans[(t["sub"], t["from"], t["to"])][t["layer"]] = t["auroc"]
+        trans_b = defaultdict(dict)  # same, from the boundary direction of frames read at the boundary
+        for t in r.get("transfer_boundary", []):
+            trans_b[(t["sub"], t["from"], t["to"])][t["layer"]] = t["auroc"]
         for sub in r["subcontrasts"]:
             frames = sorted({f for (s, f) in within if s == sub})
             for L, idx in DEPTHS.items():
@@ -45,10 +50,16 @@ def main():
                 off = [trans[(sub, a, b)].get(idx) for a in frames for b in frames if a != b]
                 off = [x for x in off if x is not None]
                 mat = {f"{a}->{b}": trans[(sub, a, b)].get(idx) for a in frames for b in frames}
+                mat_b = {f"{a}->{b}": trans_b[(sub, a, b)].get(idx) for a in frames for b in frames
+                         if a != b and trans_b[(sub, a, b)].get(idx) is not None}
+                # pre-verdict variant: boundary direction where the source frame has one, reply32 otherwise
+                off_b = [trans_b[(sub, a, b)].get(idx, trans[(sub, a, b)].get(idx)) for a in frames for b in frames if a != b]
+                off_b = [x for x in off_b if x is not None]
                 rows.append({"concept": cid, "group": GROUP[cid[0]], "sub": sub, "layer": L, "frames": frames,
-                             "within": w, "heldout": h, "transfer": mat,
+                             "within": w, "heldout": h, "transfer": mat, "transfer_boundary": mat_b,
                              "within_mean": float(np.nanmean([x for x in w.values() if x is not None])) if w else None,
-                             "transfer_mean": float(np.mean(off)) if off else None})
+                             "transfer_mean": float(np.mean(off)) if off else None,
+                             "transfer_mean_preverdict": float(np.mean(off_b)) if off_b else None})
     (S3 / "frames_table.json").write_text(json.dumps(rows, indent=1))
     # print: one line per concept (sub "all" or each sub-contrast), layer 17 and 22
     print("concept sub              frames  | L17 within  transfer | L22 within  transfer | held-out (L17, by frame)")
