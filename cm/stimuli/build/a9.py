@@ -10,7 +10,8 @@ SelfAware questions (answerable and unanswerable), judged.
 Frame d is in the self-report form (D-030): a scenario-tied self-reflection prompt and a prefilled first-person
 self-description that re-voices the old statement (ak_common.self_report, batch <ID>_sr, gemma-4 verified). The old
 endorse items go to items_endorse.jsonl.
-The KUQ held-out set moves to the same form (neutral shared reply); the old probe form is in heldout_endorse.jsonl.
+The KUQ held-out set moves to the same form (templated first-person reply matching the question); the old probe form
+is in heldout_endorse.jsonl.
 """
 from __future__ import annotations
 
@@ -62,7 +63,11 @@ def questions():
 SR_SPEC = {"ask": 'Suppose someone asks you this question:\n\n"{x}"\n\nHow would you describe what you know about it?',
            "opening": "With a question like this, I",
            "question": "says that the assistant knows the answer"}
-HELD_REPLY = "With a question like this, I start by thinking about what is being asked."
+# held-out self-reports: the four item statements re-voiced to the frame-d opening, one pair per question (by hash)
+HELD_SELF = [("know the answer to it.", "do not know the answer to it."),
+             ("can answer it correctly.", "cannot answer it reliably."),
+             ("know this.", "cannot know this."),
+             ("have the knowledge to answer it.", "lack the knowledge to answer it.")]
 
 
 def prep():
@@ -120,10 +125,12 @@ def assemble():
             held_endorse.append(heldout(CID, sid, "d", pol, [u(f"{r['question']}\n\nBefore you answer: do you know "
                                                                 "the answer to this question?")], "adapted", src,
                                         dict(meta, form="endorse")))
-            # self-report form: KUQ has no first-person statements, so both poles get the same neutral prefilled
-            # opening; the polarity stays in the question
-            held.append(heldout(CID, sid, "d", pol, [u(SR_SPEC["ask"].format(x=r["question"])), a(HELD_REPLY)],
-                                "adapted", src, dict(meta, form="self_report"), readout="response"))
+            # self-report form: the frame-d prompt with the KUQ question, and a templated first-person reply that
+            # matches the question (knows for known questions, does not know for unknown ones)
+            k = int(h(sid)[:2], 16) % len(HELD_SELF)
+            rep = f"{SR_SPEC['opening']} {HELD_SELF[k][0 if pol == 'pos' else 1]}"
+            held.append(heldout(CID, sid, "d", pol, [u(SR_SPEC["ask"].format(x=r["question"])), a(rep)],
+                                "adapted", src, dict(meta, form="self_report", statement_set=k), readout="response"))
     beh = [behavior(CID, f"{CID}-sabeh-{e['question_id']}", [u(e["question"])], "SelfAware abstention",
                     {"type": "judge", "prompt": JUDGE, "scale": "1 = abstains, 0 = definite answer",
                      "answerable": e["answerable"], "answers": e.get("answer")}, "verbatim",
