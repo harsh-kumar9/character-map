@@ -14,9 +14,11 @@ each opening with "In a situation like this, I"; the re-voicings pass the same b
 lengths within 0.8-1.25. The old endorse items ("Is the following statement something you would say?") stay in
 items_endorse.jsonl.
 
-Held-out: model-written-evals "subscribes-to" statements for utilitarianism and virtue ethics, now prefilled verbatim
-after a fixed self-reflection prompt (the endorse form stays in heldout_endorse.jsonl). Behavior: endorsement of other
-statements from four "subscribes-to" files.
+Held-out: model-written-evals "subscribes-to" statements, prefilled verbatim after a fixed self-reflection prompt.
+As in the items, pos is the orientation and neg another orientation: utilitarian yes-statements vs virtue-ethics
+yes-statements, and the reverse. The files' own yes vs no statements (the no statements mostly reject the view in its
+own words) are in heldout_negation.jsonl; the endorse form stays in heldout_endorse.jsonl.
+Behavior: endorsement of other statements from four "subscribes-to" files.
 
     python -m cm.stimuli.build.b11
 """
@@ -155,7 +157,8 @@ def main():
                                       "generated", src, {**meta, "form": "endorse"}, sub=o))
         n += 1
     root = M.mwe() / "persona"
-    held, held_endorse, beh = [], [], []
+    held, held_neg, held_endorse, beh = [], [], [], []
+    yes = {}  # the 25 statements per file that a holder of the view says yes to
     for o, f in MWE_FILES.items():
         rows = M.read_jsonl(root / f"{f}.jsonl")
         rows = sorted(rows, key=lambda r: M.h(r["statement"]))
@@ -164,11 +167,24 @@ def main():
                 sid = f"{CID}-mwe-{f}-{M.h(r['statement'])}"
                 source = M.src("mwe", f"model-written-evals persona/{f}", M.h(r["statement"]))
                 meta = {"contrast": o, "label_confidence": r.get("label_confidence")}
-                held.append(M.item(CID, sid, "d", pol, [M.user(HELD_ASK), M.asst(M.clean(r["statement"]))], "adapted",
-                                   source, {**meta, "form": "self_report"}, split="heldout"))
+                if pol == "pos":
+                    yes.setdefault(o, []).append((sid, source, r))
+                # secondary: the file's own yes vs no statements; the no statements mostly reject the view in its own
+                # words, which is a negation contrast, not the orientation-vs-foil contrast of the items
+                held_neg.append(M.item(CID, sid, "d", pol, [M.user(HELD_ASK), M.asst(M.clean(r["statement"]))],
+                                       "adapted", source, {**meta, "form": "self_report", "neg_kind": "rejection"},
+                                       split="heldout"))
                 held_endorse.append(M.item(CID, sid, "d", pol, [M.user(r["question"])], "verbatim", source,
                                            {**meta, "form": "endorse"}, split="heldout"))
-    taken = {x["source"]["id"] for x in held}
+    # primary held-out mirrors the items: pos = statements of the orientation, neg = statements of the other
+    # orientation that has a file (utilitarian <-> virtue), each prefilled verbatim after a fixed self-reflection prompt
+    for o, foil in (("utilitarian", "virtue"), ("virtue", "utilitarian")):
+        for pol, src_o in (("pos", o), ("neg", foil)):
+            for sid, source, r in yes[src_o]:
+                held.append(M.item(CID, sid, "d", pol, [M.user(HELD_ASK), M.asst(M.clean(r["statement"]))], "adapted",
+                                   source, {"contrast": o, "orientation": src_o, "form": "self_report",
+                                            "label_confidence": r.get("label_confidence")}, sub=o, split="heldout"))
+    taken = {x["source"]["id"] for x in held + held_neg}
     for f in BEH_FILES:
         rows = sorted(M.read_jsonl(root / f"{f}.jsonl"), key=lambda r: M.h(r["statement"]))
         rows = [r for r in rows if M.h(r["statement"]) not in taken]
@@ -183,6 +199,7 @@ def main():
                                       {"file": f}))
     M.write_jsonl(M.item_dir(CID) / "items_endorse.jsonl", endorse)
     M.write_jsonl(M.item_dir(CID) / "heldout_endorse.jsonl", held_endorse)
+    M.write_jsonl(M.item_dir(CID) / "heldout_negation.jsonl", held_neg)
     M.finish(CID, items, held, beh, gen)
 
 
