@@ -338,3 +338,14 @@ Harsh: "D-030 c, D-031 accept, D-032 accept".
   tool tasks and its behavior test moves to unused real/hypothetical pairs; E4 gains a MASK near-transfer held-out
   (agentic-misalignment kept as heldout_far); E1 frame d keeps only observation statements (now in self-report form).
 - **D-032 ratified.** C11 is rebuilt so both poles open with the same acknowledging language.
+
+## D-030(a) outcome - 2026-10-21
+
+Control run on all 28 concepts with endorse-form frame-d items (cm/s3_ctrl.py, results/s3_endorse_ctrl/, compare via
+cm/s3_ctrl_compare.py). Gemma's yes rate on frame-d statements often splits by polarity (A1 0.79 pos vs 0.06 neg; C15,
+C17 about 1.00 vs 0.50; C20 0.21 vs 0.95). The leave-one-concept-out yes/no direction is real and shared: it separates a
+held-out concept's own yes and no replies at median AUROC 0.92 (layer 17) and 0.99 (layers 22, 29). Projecting it out
+leaves frame-d within-frame AUROCs high (often slightly higher) and repairs reversed held-out transfer only partly (E1
+0.35 to 0.60, C19 emotionality 0.59 to 0.83, C16 scope 0.16 to 0.25, C14 unchanged at 0.42). So the verdict signal is
+not one direction, and the self-report rebuild (D-030b, in progress with the five builders) is needed. The control stays
+as a reported robustness check on the endorse set.
