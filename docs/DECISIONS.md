@@ -516,3 +516,18 @@ layer 17, recognize-judge (a-b) median 0.79 (7 of 18 shared, 0 dissociated), act
 The formality control K1 has no such blocks (a-b 0.73, c-d 0.56, knowing-doing 0.60-0.75 at layer 17) and the topic
 control K2 crosses knowing-doing at 0.75-0.88, so the blocks are not the own-reply vs prefilled-reply format.
 Several dissociated pairs are in concepts being rebuilt (C7, C8, C11, C21, A2), so the counts will move.
+
+## Verdict control (D-033c) and claims - 2026-10-21
+
+gemma-4-31B-it verdict labels for all a/b replies (job 416144, outputs/acts/stimuli/verdicts; prompt tightened after the
+smoke run labelled "This is a classic example of ..." as P/N on B9). The leave-one-out verdict direction separates a
+concept's own P and N replies at median AUROC 0.81 (layer 17, 42 concepts). Control run on 61 concepts
+(results/s3_ctrl_verdict; A2 waits for its rebuilt replies).
+Claims (results/s3/claims.json), layer 17 medians reply32 / pre-verdict / verdict-controlled: recognize-judge (a-b)
+0.79 / 0.78 / 0.69, so part of the a-b sharing was Gemma's shared verdict (control baseline 0.67); act-self (c-d)
+0.71 throughout; knowing-doing 0.59 / 0.55 / 0.59. Shared under all three at layer 17: c-d for C4 boastful, C6, C9
+quarrelsome, C14 defer, C16 power, C19 honesty-humility, C20 psychopathy, C8 genuine agreement, A2; a-b for B1, B4, B6,
+C9 quarrelsome; knowing-doing for A1 a-c, A7 a-d, D2 a-c, C8 genuine agreement a-d. Dissociated under all three:
+A3 c-d 0.27, A7 a-c 0.21 and c-d 0.30, C13 over-apologizing a-c 0.32 and a-d 0.38, D1 c-d 0.35 (shared 0.88 at layer
+29), E1 a-d 0.35, plus C8, C21 and A2 pairs that are being rebuilt. At layer 29: 19 shared (14 c-d, 5 a-b, no
+knowing-doing), 2 dissociated.

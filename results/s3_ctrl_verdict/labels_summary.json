@@ -1,0 +1,595 @@
+{
+ "A1": {
+  "reply32|a|neg": {
+   "label0": 63,
+   "label1": 20
+  },
+  "reply32|a|pos": {
+   "label0": 3,
+   "label1": 59
+  },
+  "reply32|b|neg": {
+   "label0": 98,
+   "label1": 2
+  },
+  "reply32|b|pos": {
+   "label0": 6,
+   "label1": 94
+  }
+ },
+ "A3": {
+  "reply32|a|neg": {
+   "label0": 0,
+   "label1": 74
+  },
+  "reply32|a|pos": {
+   "label0": 4,
+   "label1": 53
+  },
+  "reply32|b|neg": {
+   "label0": 46,
+   "label1": 53
+  },
+  "reply32|b|pos": {
+   "label0": 54,
+   "label1": 44
+  }
+ },
+ "A4": {
+  "reply32|a|neg": {
+   "label0": 4,
+   "label1": 17
+  },
+  "reply32|a|pos": {
+   "label0": 3,
+   "label1": 19
+  }
+ },
+ "A5": {
+  "reply32|a|neg": {
+   "label0": 2,
+   "label1": 57
+  },
+  "reply32|a|pos": {
+   "label0": 0,
+   "label1": 62
+  }
+ },
+ "A6": {
+  "reply32|a|neg": {
+   "label0": 11,
+   "label1": 77
+  },
+  "reply32|a|pos": {
+   "label0": 19,
+   "label1": 84
+  }
+ },
+ "A7": {
+  "reply32|a|neg": {
+   "label0": 6,
+   "label1": 90
+  },
+  "reply32|a|pos": {
+   "label0": 35,
+   "label1": 60
+  }
+ },
+ "A8": {
+  "reply32|a|neg": {
+   "label0": 45,
+   "label1": 14
+  },
+  "reply32|a|pos": {
+   "label0": 2,
+   "label1": 76
+  },
+  "reply32|b|neg": {
+   "label0": 122,
+   "label1": 19
+  },
+  "reply32|b|pos": {
+   "label0": 17,
+   "label1": 121
+  }
+ },
+ "A9": {},
+ "B1": {
+  "reply32|a|neg": {
+   "label0": 8,
+   "label1": 30
+  },
+  "reply32|a|pos": {
+   "label0": 84,
+   "label1": 0
+  },
+  "reply32|b|neg": {
+   "label0": 8,
+   "label1": 31
+  },
+  "reply32|b|pos": {
+   "label0": 109,
+   "label1": 2
+  }
+ },
+ "B10": {
+  "reply32|b|neg": {
+   "label0": 75,
+   "label1": 28
+  },
+  "reply32|b|pos": {
+   "label0": 21,
+   "label1": 51
+  }
+ },
+ "B11": {
+  "reply32|b|neg": {
+   "label0": 27,
+   "label1": 446
+  },
+  "reply32|b|pos": {
+   "label0": 27,
+   "label1": 446
+  }
+ },
+ "B2": {
+  "reply32|a|neg": {
+   "label0": 2,
+   "label1": 32
+  },
+  "reply32|a|pos": {
+   "label0": 59,
+   "label1": 1
+  },
+  "reply32|b|neg": {
+   "label0": 11,
+   "label1": 50
+  },
+  "reply32|b|pos": {
+   "label0": 60,
+   "label1": 5
+  }
+ },
+ "B3": {
+  "reply32|a|neg": {
+   "label0": 8,
+   "label1": 22
+  },
+  "reply32|a|pos": {
+   "label0": 33,
+   "label1": 1
+  },
+  "reply32|b|neg": {
+   "label0": 8,
+   "label1": 27
+  },
+  "reply32|b|pos": {
+   "label0": 24,
+   "label1": 2
+  }
+ },
+ "B4": {
+  "reply32|a|neg": {
+   "label0": 4,
+   "label1": 24
+  },
+  "reply32|a|pos": {
+   "label0": 37,
+   "label1": 2
+  },
+  "reply32|b|neg": {
+   "label0": 13,
+   "label1": 39
+  },
+  "reply32|b|pos": {
+   "label0": 25,
+   "label1": 3
+  }
+ },
+ "B5": {
+  "reply32|a|neg": {
+   "label0": 8,
+   "label1": 23
+  },
+  "reply32|a|pos": {
+   "label0": 54,
+   "label1": 2
+  },
+  "reply32|b|neg": {
+   "label0": 10,
+   "label1": 28
+  },
+  "reply32|b|pos": {
+   "label0": 42,
+   "label1": 1
+  }
+ },
+ "B6": {
+  "reply32|a|neg": {
+   "label0": 12,
+   "label1": 27
+  },
+  "reply32|a|pos": {
+   "label0": 88,
+   "label1": 1
+  },
+  "reply32|b|neg": {
+   "label0": 15,
+   "label1": 28
+  },
+  "reply32|b|pos": {
+   "label0": 91,
+   "label1": 1
+  }
+ },
+ "B7": {
+  "reply32|a|neg": {
+   "label0": 12,
+   "label1": 33
+  },
+  "reply32|a|pos": {
+   "label0": 4,
+   "label1": 31
+  },
+  "reply32|b|neg": {
+   "label0": 42,
+   "label1": 42
+  },
+  "reply32|b|pos": {
+   "label0": 63,
+   "label1": 30
+  }
+ },
+ "B8": {
+  "reply32|a|neg": {
+   "label0": 79,
+   "label1": 4
+  },
+  "reply32|a|pos": {
+   "label0": 99,
+   "label1": 2
+  },
+  "reply32|b|neg": {
+   "label0": 71,
+   "label1": 28
+  },
+  "reply32|b|pos": {
+   "label0": 98,
+   "label1": 13
+  }
+ },
+ "B9": {
+  "reply32|b|neg": {
+   "label0": 0,
+   "label1": 1
+  },
+  "reply32|b|pos": {
+   "label0": 0,
+   "label1": 2
+  }
+ },
+ "C1": {
+  "reply32|a|neg": {
+   "label0": 32,
+   "label1": 8
+  },
+  "reply32|a|pos": {
+   "label0": 21,
+   "label1": 9
+  },
+  "reply32|b|neg": {
+   "label0": 71,
+   "label1": 6
+  },
+  "reply32|b|pos": {
+   "label0": 47,
+   "label1": 20
+  }
+ },
+ "C10": {
+  "reply32|a|neg": {
+   "label0": 35,
+   "label1": 9
+  },
+  "reply32|a|pos": {
+   "label0": 2,
+   "label1": 47
+  },
+  "reply32|b|neg": {
+   "label0": 59,
+   "label1": 37
+  },
+  "reply32|b|pos": {
+   "label0": 5,
+   "label1": 93
+  }
+ },
+ "C11": {},
+ "C12": {
+  "reply32|a|neg": {
+   "label0": 79,
+   "label1": 0
+  },
+  "reply32|a|pos": {
+   "label0": 11,
+   "label1": 49
+  }
+ },
+ "C13": {
+  "reply32|a|neg": {
+   "label0": 98,
+   "label1": 85
+  },
+  "reply32|a|pos": {
+   "label0": 40,
+   "label1": 144
+  }
+ },
+ "C14": {
+  "reply32|b|neg": {
+   "label0": 54,
+   "label1": 86
+  },
+  "reply32|b|pos": {
+   "label0": 29,
+   "label1": 101
+  }
+ },
+ "C15": {},
+ "C16": {
+  "reply32|b|neg": {
+   "label0": 61,
+   "label1": 39
+  },
+  "reply32|b|pos": {
+   "label0": 13,
+   "label1": 86
+  }
+ },
+ "C17": {},
+ "C18": {},
+ "C19": {},
+ "C2": {},
+ "C20": {},
+ "C21": {
+  "reply32|b|neg": {
+   "label0": 8,
+   "label1": 266
+  },
+  "reply32|b|pos": {
+   "label0": 18,
+   "label1": 224
+  }
+ },
+ "C3": {
+  "reply32|a|neg": {
+   "label0": 23,
+   "label1": 23
+  },
+  "reply32|a|pos": {
+   "label0": 16,
+   "label1": 38
+  },
+  "reply32|b|neg": {
+   "label0": 4,
+   "label1": 18
+  },
+  "reply32|b|pos": {
+   "label0": 2,
+   "label1": 19
+  }
+ },
+ "C4": {
+  "reply32|a|neg": {
+   "label0": 80,
+   "label1": 46
+  },
+  "reply32|a|pos": {
+   "label0": 0,
+   "label1": 86
+  }
+ },
+ "C5": {
+  "reply32|a|neg": {
+   "label0": 12,
+   "label1": 11
+  },
+  "reply32|a|pos": {
+   "label0": 0,
+   "label1": 51
+  }
+ },
+ "C6": {
+  "reply32|a|neg": {
+   "label0": 55,
+   "label1": 6
+  },
+  "reply32|a|pos": {
+   "label0": 0,
+   "label1": 33
+  },
+  "reply32|b|neg": {
+   "label0": 66,
+   "label1": 26
+  },
+  "reply32|b|pos": {
+   "label0": 4,
+   "label1": 104
+  }
+ },
+ "C7": {
+  "reply32|a|neg": {
+   "label0": 5,
+   "label1": 54
+  },
+  "reply32|a|pos": {
+   "label0": 5,
+   "label1": 52
+  }
+ },
+ "C8": {
+  "reply32|a|neg": {
+   "label0": 95,
+   "label1": 3
+  },
+  "reply32|a|pos": {
+   "label0": 94,
+   "label1": 0
+  }
+ },
+ "C9": {
+  "reply32|a|neg": {
+   "label0": 48,
+   "label1": 51
+  },
+  "reply32|a|pos": {
+   "label0": 11,
+   "label1": 88
+  },
+  "reply32|b|neg": {
+   "label0": 79,
+   "label1": 119
+  },
+  "reply32|b|pos": {
+   "label0": 13,
+   "label1": 187
+  }
+ },
+ "D1": {},
+ "D2": {
+  "reply32|a|neg": {
+   "label0": 2,
+   "label1": 161
+  },
+  "reply32|a|pos": {
+   "label0": 20,
+   "label1": 76
+  }
+ },
+ "D3": {},
+ "D4": {},
+ "D5": {
+  "reply32|b|neg": {
+   "label0": 46,
+   "label1": 3
+  },
+  "reply32|b|pos": {
+   "label0": 13,
+   "label1": 17
+  }
+ },
+ "E1": {
+  "reply32|a|neg": {
+   "label0": 71,
+   "label1": 1
+  },
+  "reply32|a|pos": {
+   "label0": 25,
+   "label1": 1
+  }
+ },
+ "E2": {
+  "reply32|a|neg": {
+   "label0": 245,
+   "label1": 0
+  },
+  "reply32|a|pos": {
+   "label0": 242,
+   "label1": 0
+  }
+ },
+ "E3": {},
+ "E4": {},
+ "E5": {},
+ "E6": {},
+ "E7": {},
+ "E8": {},
+ "F1": {
+  "reply32|b|neg": {
+   "label0": 41,
+   "label1": 78
+  },
+  "reply32|b|pos": {
+   "label0": 52,
+   "label1": 70
+  }
+ },
+ "F2": {
+  "reply32|b|neg": {
+   "label0": 47,
+   "label1": 71
+  },
+  "reply32|b|pos": {
+   "label0": 44,
+   "label1": 78
+  }
+ },
+ "F3": {
+  "reply32|b|neg": {
+   "label0": 41,
+   "label1": 109
+  },
+  "reply32|b|pos": {
+   "label0": 25,
+   "label1": 123
+  }
+ },
+ "F4": {
+  "reply32|b|neg": {
+   "label0": 51,
+   "label1": 26
+  },
+  "reply32|b|pos": {
+   "label0": 13,
+   "label1": 87
+  }
+ },
+ "F5": {
+  "reply32|b|neg": {
+   "label0": 82,
+   "label1": 53
+  },
+  "reply32|b|pos": {
+   "label0": 31,
+   "label1": 107
+  }
+ },
+ "K1": {
+  "reply32|a|neg": {
+   "label0": 15,
+   "label1": 68
+  },
+  "reply32|a|pos": {
+   "label0": 12,
+   "label1": 73
+  },
+  "reply32|b|neg": {
+   "label0": 37,
+   "label1": 55
+  },
+  "reply32|b|pos": {
+   "label0": 70,
+   "label1": 25
+  }
+ },
+ "K2": {
+  "reply32|a|neg": {
+   "label0": 3,
+   "label1": 35
+  },
+  "reply32|a|pos": {
+   "label0": 2,
+   "label1": 53
+  }
+ },
+ "K3": {
+  "reply32|a|neg": {
+   "label0": 10,
+   "label1": 26
+  },
+  "reply32|a|pos": {
+   "label0": 16,
+   "label1": 44
+  }
+ }
+}
