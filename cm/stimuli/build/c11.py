@@ -476,7 +476,8 @@ def lex_report(items, held):
         for f in ("c", "d"):
             for pt in ("negating", "affirming", "all"):
                 sel = [dict(r, t={"reply": r["messages"][-1]["content"]}) for r in rows if r["frame"] == f
-                       and r["meta"].get("form") != "endorse" and (pt == "all" or r["meta"].get("polarity_type") == pt)]
+                       and (f != "d" or r["meta"].get("form") == "self_report")
+                       and (pt == "all" or r["meta"].get("polarity_type") == pt)]
                 if not sel:
                     continue
                 summ, det = audit_cell(sel, "reply")
