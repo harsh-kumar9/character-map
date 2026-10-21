@@ -14,7 +14,7 @@ Readouts per frame: boundary for items read at the boundary; reply32 for every i
 replies. The common readout across all four frames is reply32.
 CPU only; submit through scripts/cm_cpu.sbatch (SLURM, mira/vega).
 
-    python -m cm.s3 directions --concepts all          per-concept JSON in results/s3/concepts/
+    python -m cm.s3 directions --concepts all          per-concept JSON in results/s3/concepts/ (--force to redo)
     python -m cm.s3 table                              summary tables in results/s3/
 """
 from __future__ import annotations
@@ -161,10 +161,10 @@ def directions_from(cid, z, meta, resp, out):
     return cid
 
 
-def cmd_directions(cids, workers):
+def cmd_directions(cids, workers, force=False):
     (OUT / "concepts").mkdir(parents=True, exist_ok=True)
     (OUT / "directions").mkdir(parents=True, exist_ok=True)
-    todo = [c for c in cids if (ACTS / f"{c}.npz").exists() and not (OUT / "concepts" / f"{c}.json").exists()]
+    todo = [c for c in cids if (ACTS / f"{c}.npz").exists() and (force or not (OUT / "concepts" / f"{c}.json").exists())]
     with ProcessPoolExecutor(workers) as ex:
         for c in ex.map(directions, todo):
             print(f"[s3] {c} done", flush=True)
@@ -224,11 +224,12 @@ def main():
     ap.add_argument("stage", choices=["directions", "table"])
     ap.add_argument("--concepts", default="all")
     ap.add_argument("--workers", type=int, default=16)
+    ap.add_argument("--force", action="store_true", help="recompute concepts that already have results")
     args = ap.parse_args()
     cids = (sorted(p.stem for p in CARDS.glob("*.yaml") if not p.stem.startswith("_") and item_dir(p.stem).exists())
             if args.concepts == "all" else args.concepts.split(","))
     if args.stage == "directions":
-        cmd_directions(cids, args.workers)
+        cmd_directions(cids, args.workers, args.force)
     else:
         cmd_table()
 
