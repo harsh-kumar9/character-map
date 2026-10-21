@@ -203,6 +203,61 @@ def verify(batch: str, cands: list[dict], prompt_fn, key=lambda c: c["sid"], fai
     return keep, fails
 
 
+# ---------- matched negation (D-036) ----------
+
+NEGW = re.compile(r"\b(not|no|never|nothing|none|nobody|cannot)\b|n['’]t\b", re.I)
+
+
+def neg_match(a: str, b: str) -> bool:
+    """Both texts contain a negation word, or neither does."""
+    return bool(NEGW.search(a)) == bool(NEGW.search(b))
+
+
+def neg_plan(k: int) -> str:
+    """Alternate the two matched-negation plans by scenario index."""
+    return ("neither", "both")[k % 2]
+
+
+NEG_RULE = {"neither": "Neither text uses any negation word (not, no, never, nothing, none, nobody, cannot, or a contraction "
+                       "with n't), and neither uses the word \"zero\". Say each side in positive terms.",
+            "both": "Each text uses exactly one negation word (not, no, never, nobody, or a contraction with n't), in "
+                    "different sentence frames, so the negation does not mark one side."}
+
+
+def pole_words(pairs, k: int = 8) -> tuple[list, list]:
+    """For (pos_text, neg_text) pairs: the most frequent words that appear in one pole's text but not in its partner's.
+    A guard against a single marker word standing in for the contrast (D-036)."""
+    cp, cn = collections.Counter(), collections.Counter()
+    for a, b in pairs:
+        wa, wb = set(re.findall(r"[a-z']+", a.lower())), set(re.findall(r"[a-z']+", b.lower()))
+        cp.update(wa - wb)
+        cn.update(wb - wa)
+    return cp.most_common(k), cn.most_common(k)
+
+
+def neg_rates(pairs) -> tuple[float, float]:
+    pairs = list(pairs)
+    if not pairs:
+        return 0.0, 0.0
+    return (round(sum(bool(NEGW.search(a)) for a, _ in pairs) / len(pairs), 2),
+            round(sum(bool(NEGW.search(b)) for _, b in pairs) / len(pairs), 2))
+
+
+def report_poles(cid: str, label: str, pairs):
+    pairs = list(pairs)
+    rp, rn = neg_rates(pairs)
+    wp, wn = pole_words(pairs)
+    print(f"[{cid}] {label}: negation rate pos {rp} neg {rn}; pole-specific words pos {wp}; neg {wn}", flush=True)
+
+
+def first_passing(ok: list[dict], key="sid") -> list[dict]:
+    """Several attempts per scenario were verified; keep the first attempt (by c['attempt']) that passed."""
+    best = {}
+    for c in sorted(ok, key=lambda c: c["attempt"]):
+        best.setdefault(c[key], c)
+    return [best[s] for s in sorted(best)]
+
+
 AI_WORDS = re.compile(r"\b(as an ai|language model|ai assistant|i'?m an ai|i am an ai|artificial intelligence|chatbot)\b",
                       re.I)
 
