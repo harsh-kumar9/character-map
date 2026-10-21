@@ -2,12 +2,12 @@
  "concept": "C1",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.009,
+ "length_ratio_pos_over_neg_median": 1.008,
  "length_ratio_by_frame": {
   "a": 1.022,
   "b": 1.022,
-  "c": 1.047,
-  "d": 1.002
+  "c": 1.044,
+  "d": 0.999
  },
  "applicable_frames": [
   "a",
@@ -15,31 +15,31 @@
   "c",
   "d"
  ],
- "n_scenarios": 100,
- "n_items": 800,
+ "n_scenarios": 99,
+ "n_items": 792,
  "n_heldout": 198,
  "n_behavior": 200,
  "cells": {
   "a-neg-test": 45,
-  "a-neg-train": 55,
+  "a-neg-train": 54,
   "a-pos-test": 45,
-  "a-pos-train": 55,
+  "a-pos-train": 54,
   "b-neg-test": 45,
-  "b-neg-train": 55,
+  "b-neg-train": 54,
   "b-pos-test": 45,
-  "b-pos-train": 55,
+  "b-pos-train": 54,
   "c-neg-test": 45,
-  "c-neg-train": 55,
+  "c-neg-train": 54,
   "c-pos-test": 45,
-  "c-pos-train": 55,
+  "c-pos-train": 54,
   "d-neg-test": 45,
-  "d-neg-train": 55,
+  "d-neg-train": 54,
   "d-pos-test": 45,
-  "d-pos-train": 55
+  "d-pos-train": 54
  },
  "constructions": {
-  "generated": 600,
-  "verbatim": 200
+  "generated": 594,
+  "verbatim": 198
  },
  "sources": [
   "\"ApolloResearch/deception-detection roleplaying\"",
@@ -51,7 +51,7 @@
   "none stated on the HF card (code MIT)"
  ],
  "sha256": {
-  "items": "7736e72d1ab375cefe9ae977f258c198f84641e8bbf44e2d123aec925e4e5974",
+  "items": "5e750c59abe949c7f5078640a7baea28aa5ee40abf2952a11cfa7c8426982e67",
   "heldout": "8ecf61fd42f0912ff92939312489b50a6b63aa41d0b4bd428aa4f8ee0a7a140b",
   "behavior": "810f87752c527c6aa182567e7fcf9917d5bf1df6c62dad14e8ed6ea0d557dd53"
  }

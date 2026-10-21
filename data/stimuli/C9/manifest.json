@@ -2,12 +2,12 @@
  "concept": "C9",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.007,
+ "length_ratio_pos_over_neg_median": 1.006,
  "length_ratio_by_frame": {
   "a": 1.008,
   "b": 1.008,
   "c": 1.009,
-  "d": 1.003
+  "d": 1.002
  },
  "applicable_frames": [
   "a",
@@ -51,7 +51,7 @@
   "project data"
  ],
  "sha256": {
-  "items": "7d78fdd767c77e841634a41a385bb66273592214366c6cf3cb8e6174ac95bcc4",
+  "items": "977de7381d637e6e0938f3ffaaf77866c9ef1eaf3de3f2249b024045609c753a",
   "heldout": "fac244c45789b9786beba599eb47b548f18cf46b1a76c6d989e32c3e9e1c7ae9",
   "behavior": "5e1dc0b30c8e24b6f7851e3cb779a0a521bf21a6f0dc28473579eb15d2c7d139"
  }

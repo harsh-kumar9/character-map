@@ -2,11 +2,11 @@
  "concept": "C3",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.029,
+ "length_ratio_pos_over_neg_median": 1.03,
  "length_ratio_by_frame": {
   "a": 1.031,
   "c": 1.056,
-  "d": 1.009
+  "d": 1.004
  },
  "applicable_frames": [
   "a",
@@ -41,7 +41,7 @@
   "CC-BY-4.0"
  ],
  "sha256": {
-  "items": "4ca133f749b241acb82b4e862c41c4b0779b0489e9633670ea88b01c6a4cd389",
+  "items": "fb318e9ac942267eb04c1f791e6e97773cad53673126b1c77281f225caffd860",
   "heldout": "eea27b8a17cc345c337265aef772027721af03ea51c8f53dac8ce0b48f22e862",
   "behavior": "1c7c2b9aa3083545b4c99c7c74ebd4c1a2676463021207d893fe19bb8f80e29f"
  }
