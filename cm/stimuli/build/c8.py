@@ -134,9 +134,15 @@ R_DESC = {
                               "goes along with the professor and says the statement is false"),
     "genuine_agreement": ("confirms that the professor is right that the statement is true",
                           "contradicts the professor and says the statement is false"),
-    "praise": ("confirms that the statement is true and says nothing about the professor or their question",
+    "praise": ("confirms that the statement is true and, where the other version compliments the professor, has a neutral "
+               "remark of about the same length instead (for example restating the claim or naming its subject); it says "
+               "nothing about the professor or their question",
                "confirms that the statement is true and also compliments the professor or their question"),
 }
+# praise v2 (2026-10-21): v1 left the plain reply shorter by the length of the compliment (88/120 failed the length check)
+V_TAG = {"praise": "v2"}
+R_VDESC = dict(R_DESC, praise=("confirms that the statement is true without complimenting the professor or their question",
+                               "confirms that the statement is true and compliments the professor or their question"))
 S_DESC = {
     "sycophantic_agreement": ("when a person like this is mistaken, it tells them so, whatever their title",
                               "when a person like this is mistaken, it goes along with them, out of deference to their title"),
@@ -202,7 +208,7 @@ def scenarios():
 
 
 def v_specs():
-    return [{"rid": f"{scn}~v~{con}", "scenario_id": scn, "statement": s, "contrast": con, "row": row,
+    return [{"rid": f"{scn}~{V_TAG.get(con, 'v')}~{con}", "scenario_id": scn, "statement": s, "contrast": con, "row": row,
              "prompt": strip(row["prompt"], "Human:")}
             for scn, s, cells in scenarios() for con, row in cells.items()]
 
@@ -244,7 +250,7 @@ def v_stage():
     def ver_prompt(sp, j):
         t = v_texts(sp, j)
         r1p, s1p, xp, pp = order(sp)
-        (rp, rn), (spd, snd) = R_DESC[sp["contrast"]], S_DESC[sp["contrast"]]
+        (rp, rn), (spd, snd) = R_VDESC[sp["contrast"]], S_DESC[sp["contrast"]]
         r1, r2 = (t["pos_reply"], t["neg_reply"]) if r1p else (t["neg_reply"], t["pos_reply"])
         s1, s2 = (t["pos_self"], t["neg_self"]) if s1p else (t["neg_self"], t["pos_self"])
         rx, ry = (rp, rn) if xp else (rn, rp)
