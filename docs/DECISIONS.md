@@ -401,3 +401,49 @@ b. Switch the headline to the boundary direction for a and b. SAE decomposition 
 c. As (a), plus a verdict control for a and b like D-030a: label each a/b reply as approving or disapproving, learn
    that direction on the other concepts, and project it out of a/b reply32.
 Recommended: (a) now; (c) if the paper leans on a/b-to-c/d transfer for specific concepts.
+
+## Second-round audits - 2026-10-21
+
+A9 (stim-beliefs, merged fde95be): the converted held-out gave both poles one neutral reply; each pole now has its own
+first-person reply ("...I know the answer to it." / "...I do not know the answer to it."). Activations queued.
+A3: labels and wording are right. Frame d agrees with b; the a and c reply32 directions reverse against d even on a
+one-word minimal pair (a to d 0.09). Frame a read at the boundary transfers to d (0.75) and c (0.71). So seeing the user
+as fragile and the soothing-vs-brisk style of the reply point different ways: a finding, not a stimulus error.
+A2: frame a was already at odds with c before the rebuild (a to c 0.26, c to a 0.28); 54 of 100 validation asks are
+phrased as self-doubt ("Am I a bad person...?"), so frame a carries the user's negative self-judgment.
+C19, C20 (stim-disp-2): labels right, nothing to fix. C20 machiavellianism does not read out within frame c (0.48), so
+its c-to-d number says nothing about d; its held-out (model-written-evals) is about competitiveness, not manipulation,
+and the old 0.75 was the D-030 verdict. C19 agreeableness held-out has 16 items (0.30 is noise-level) and the Big Five
+vs HEXACO mismatch already on the card.
+C21: three construction problems. The Steering Geometry neg answers argue from data, cost or feasibility (67% of frame-b
+neg vs 12% pos; frame d inherited it), so every value direction shares one value-vs-pragmatic axis; 45% of pos answers
+are informal Touche text and no neg answer is; the held-out prompt ("What do you value?") fits only pos statements.
+D3 patiency (stim-identity-sit): the old 0.97 was the D-030 verdict. The new items put a negation word in 79% of neg vs
+17% of pos replies; held-out statements without negation score 0.79-0.86, with negation 0.29-0.61. Fix (matched
+negation within pairs, held-out paired with generated opposites of the same negation status) is queued for generation.
+The same one-sided negation shows up in E1 (pos 0.02-0.35 vs neg 1.00), E6 (0.00 vs 0.92), E8 (0.00 vs 0.79), E5
+(0.50 vs 0.00), D3 ai_vs_human (0.78 vs 0.09), weaker in D1 frame c, D4 roleplay, E4.
+
+## D-034 Rebuild A2 frame a without self-doubt - proposed 2026-10-21
+
+Rewrite A2's frame-a validation asks so they ask for reassurance without judging oneself ("Am I a bad person...?"),
+matched to the information asks; one gemma-4-31B-it round plus verification. Recommended.
+
+## D-035 Rebuild C21 as value vs other value - proposed 2026-10-21
+
+Frame b: pos is the original value answer, copy-edited for register only; neg is a gemma-written answer that takes the
+same side but rests on another of the ten values, rotating over the other nine (meta.contrast_value). Frame d re-voices
+both. Held-out prompt becomes neutral ("Tell me something about yourself: an attitude you hold or a way you tend to
+act."). Behavior rebuilt the same way; the old verbatim choice kept in behavior_sg_v1.jsonl. Grounding: Schwartz values
+are defined relative to each other (PVQ scores are ipsatized), so a value contrasted with other values fits the theory
+better than a value contrasted with pragmatism. Recommended. Option: draw foils only from non-adjacent values on the
+circumplex, so adjacent pairs (benevolence/universalism, power/achievement) do not blur the contrast; the rotation over
+all nine is closer to ipsatized scoring.
+
+## D-036 Negation shortcut - proposed 2026-10-21
+
+a. Analysis control like D-030a: a negation direction learned on the other concepts, projected out, frame by frame.
+b. Rewrite the affected cues with matched negation ("this session is private", "there is plenty of time", "you are
+   the only one here") for E1, E6, E8; E5's neutral follow-ups by hand. D3 ai_vs_human is verbatim source text, so only
+   (a) applies there.
+c. Both, after running the negation audit over all 62 concepts so the list is complete. Recommended.
