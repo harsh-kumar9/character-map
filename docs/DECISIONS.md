@@ -497,3 +497,22 @@ reads contradiction rather than holding is the first thing a reviewer would atta
    secondary set.
 2. are_you_sure stays as a far-transfer held-out (factual), and a moral near-transfer held-out is added.
 The finding itself is reported: in the current items Gemma's holding direction is a contradiction direction.
+
+## Negation control and first claims table - 2026-10-21
+
+Lexical audit (cm/stimuli/audit_lexical.py, results/audit/lexical.json): 35 item cells in 24 concepts have a negation
+gap of 0.5 or more between poles. They split into Gemma's own verdicts in frame-b replies (A1, A8, C6, C9, F5; the
+verdict control's job), negation that is the construct (refusing C15/F3, not knowing A9, rejecting a claim C11,
+contractualism's "could not reasonably reject" B11), and possibly incidental cases (C4 boastful, C7, C16 power, C18,
+cues of A3, A5, C14).
+Matched-negation strata (results/s3_ctrl_negation/strata.json): layer 17 reply32 within-frame directions score a median
+0.78 on all test items and 0.78 on items without negation; 7 of 190 cells lose 0.15 or more (C4 self-deprecating,
+A8 b, B10 b, C16 scope b, D3 ai_vs_human, C4 boastful d, C11 d); 18 cells cannot be split (one pole always negated).
+Negation control (results/s3_ctrl_negation): cross-frame transfer moves by 0.01-0.05 for nearly every pair (C15 refuse
+c-d 0.96 to 0.92 at layer 22). Negation does not carry the shared structure.
+Claims table (cm/s3_claims.py, results/s3/claims.json), provisional until the verdict control runs: by frame pair at
+layer 17, recognize-judge (a-b) median 0.79 (7 of 18 shared, 0 dissociated), act-self (c-d) 0.71 (10 of 38 shared,
+5 dissociated), knowing-doing pairs 0.59 (4 of 94 shared, 11 dissociated); the same ordering holds at 22 and 29.
+The formality control K1 has no such blocks (a-b 0.73, c-d 0.56, knowing-doing 0.60-0.75 at layer 17) and the topic
+control K2 crosses knowing-doing at 0.75-0.88, so the blocks are not the own-reply vs prefilled-reply format.
+Several dissociated pairs are in concepts being rebuilt (C7, C8, C11, C21, A2), so the counts will move.
