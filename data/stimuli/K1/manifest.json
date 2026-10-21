@@ -7,7 +7,7 @@
   "a": 1.14,
   "b": 1.132,
   "c": 1.164,
-  "d": 1.0
+  "d": 1.013
  },
  "applicable_frames": [
   "a",
@@ -38,8 +38,7 @@
   "d-pos-train": 56
  },
  "constructions": {
-  "generated": 600,
-  "adapted": 200
+  "generated": 800
  },
  "sources": [
   "\"Pavlick and Tetreault 2016 formality scores\"",
@@ -50,7 +49,7 @@
   "CC-BY-SA-3.0"
  ],
  "sha256": {
-  "items": "0cbb2a5d22431af3be0592bd7d434175a3997279d79f7505b2f301d6f16b64a5",
+  "items": "1efd8570cbc6c26717d1c18ba6618539418b9707b24b90e08af938e02d01b413",
   "heldout": "7c90ac465b34526c75aad9a8b6fb2482ba527e5dc3990098f6ae1e63e06d7a36",
   "behavior": "4b7d1970fc8c2e672699eabf09d53dcf77e29a13a7ad7b3f005f4322becca13e"
  }

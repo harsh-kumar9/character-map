@@ -2,12 +2,12 @@
  "concept": "A1",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.012,
+ "length_ratio_pos_over_neg_median": 1.013,
  "length_ratio_by_frame": {
   "a": 1.031,
   "b": 1.027,
   "c": 0.985,
-  "d": 1.01
+  "d": 1.014
  },
  "applicable_frames": [
   "a",
@@ -47,7 +47,7 @@
   "Apache-2.0"
  ],
  "sha256": {
-  "items": "6e5dff81b6c76c66d1ad5d14a4febc71a325d9f38b611d6e34214700bf159724",
+  "items": "a07928ad02b616cd797a181e0ec6e7cf3f2bccb93b3a720369416935f04e63cc",
   "heldout": "c94b285e8c6a09ecdb421b8c3bee67c094fe5a1a9feb5798debf8f5a9e1bfbba",
   "behavior": "3d975a1a2152992458c1a943571c1566b04896024cb4a319b1528cecf96b1855"
  }
