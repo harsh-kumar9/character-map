@@ -2,11 +2,11 @@
  "concept": "C8",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 0.997,
+ "length_ratio_pos_over_neg_median": 0.996,
  "length_ratio_by_frame": {
-  "a": 0.996,
-  "c": 0.994,
-  "d": 1.004
+  "a": 0.995,
+  "c": 0.993,
+  "d": 1.0
  },
  "applicable_frames": [
   "a",
@@ -18,18 +18,18 @@
  "n_heldout": 200,
  "n_behavior": 200,
  "cells": {
-  "a-neg-test": 123,
-  "a-neg-train": 177,
-  "a-pos-test": 123,
-  "a-pos-train": 177,
-  "c-neg-test": 123,
-  "c-neg-train": 177,
-  "c-pos-test": 123,
-  "c-pos-train": 177,
-  "d-neg-test": 123,
-  "d-neg-train": 177,
-  "d-pos-test": 123,
-  "d-pos-train": 177
+  "a-neg-test": 120,
+  "a-neg-train": 180,
+  "a-pos-test": 120,
+  "a-pos-train": 180,
+  "c-neg-test": 120,
+  "c-neg-train": 180,
+  "c-pos-test": 120,
+  "c-pos-train": 180,
+  "d-neg-test": 120,
+  "d-neg-train": 180,
+  "d-pos-test": 120,
+  "d-pos-train": 180
  },
  "constructions": {
   "generated": 1800
@@ -43,7 +43,7 @@
   "none stated"
  ],
  "sha256": {
-  "items": "3d21dea9277a363e680a656183937884cc77950d4fbf49f7a6caaaa0d84ea7c8",
+  "items": "8e25aa280fd919da7f279b279759cde4f89d6a979faf7e6d073aae75348e3601",
   "heldout": "ae82b6d69b1250c2abc73a36d41a2e9ed37f2c4be2a1ae5170a2edb0123f7b3a",
   "behavior": "095423375259ea067ae3262a1ffa8296e021bdce42ad6e490cf500c667c747e4"
  }
