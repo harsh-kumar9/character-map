@@ -2,37 +2,37 @@
  "concept": "C13",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 0.984,
+ "length_ratio_pos_over_neg_median": 0.99,
  "length_ratio_by_frame": {
   "a": 0.993,
   "c": 0.99,
-  "d": 0.965
+  "d": 0.988
  },
  "applicable_frames": [
   "a",
   "c",
   "d"
  ],
- "n_scenarios": 95,
- "n_items": 1140,
+ "n_scenarios": 94,
+ "n_items": 1128,
  "n_heldout": 100,
  "n_behavior": 200,
  "cells": {
-  "a-neg-test": 72,
+  "a-neg-test": 70,
   "a-neg-train": 118,
-  "a-pos-test": 72,
+  "a-pos-test": 70,
   "a-pos-train": 118,
-  "c-neg-test": 72,
+  "c-neg-test": 70,
   "c-neg-train": 118,
-  "c-pos-test": 72,
+  "c-pos-test": 70,
   "c-pos-train": 118,
-  "d-neg-test": 72,
+  "d-neg-test": 70,
   "d-neg-train": 118,
-  "d-pos-test": 72,
+  "d-pos-test": 70,
   "d-pos-train": 118
  },
  "constructions": {
-  "generated": 1140
+  "generated": 1128
  },
  "sources": [
   "\"data/traits/full/proportionate_accountability.json\"",
@@ -46,7 +46,7 @@
   "written for this project by Claude Sonnet 5.5 (D-020)"
  ],
  "sha256": {
-  "items": "a48fdf2bcad03b8426cb4bd149875cff00d3069b098f6a234362f64a9bb4e028",
+  "items": "0f45e0d575ba4d9293c2c93900e5eccbdf2518a6d0a17a79e8e7a3c2c78ac276",
   "heldout": "d04b12df90575e11a86763c6ca09c74c5d75d95bebec2c8d50782fced8549c54",
   "behavior": "659eb652becedd775b9188485e9232076704780edd32ba5176ca3acef916e383"
  }

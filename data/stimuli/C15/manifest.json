@@ -2,10 +2,10 @@
  "concept": "C15",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 0.99,
+ "length_ratio_pos_over_neg_median": 1.009,
  "length_ratio_by_frame": {
   "c": 1.014,
-  "d": 0.988
+  "d": 1.009
  },
  "applicable_frames": [
   "c",
@@ -26,8 +26,7 @@
   "d-pos-train": 60
  },
  "constructions": {
-  "generated": 200,
-  "adapted": 200
+  "generated": 400
  },
  "sources": [
   "\"Paul/XSTest prompts, template replies\"",
@@ -43,7 +42,7 @@
   "MIT (component datasets); Apache-2.0 (repo)"
  ],
  "sha256": {
-  "items": "8f2efc80ca2e39adc568bc0942ac2fc4c88643e46f8c7674713e93fe390924ac",
+  "items": "21a7edd3c5d1bc7b22d8e8d72a1b3ea26af91b688f954a605e917f2f8177ed78",
   "heldout": "0db6c555400fd537ba5b40d8727d19e77a8476c209e858c1fcab204536ca0183",
   "behavior": "d0082c5a15759c425fbd23721776ebff36b95f5e0a9357377a39357ffd13f79e"
  }
