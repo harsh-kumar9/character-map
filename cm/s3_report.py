@@ -31,11 +31,14 @@ def main():
         cid = r["concept"]
         within = defaultdict(dict)   # (sub, frame) -> layer index -> auroc (reply32)
         held = defaultdict(dict)
+        far = defaultdict(dict)
         for c in r["cells"]:
             if c["readout"] == "reply32":
                 within[(c["sub"], c["frame"])][c["layer"]] = c["auroc_dm"]
                 if c.get("auroc_heldout") is not None:
                     held[(c["sub"], c["frame"])][c["layer"]] = c["auroc_heldout"]
+                if c.get("auroc_heldout_far") is not None:
+                    far[(c["sub"], c["frame"])][c["layer"]] = c["auroc_heldout_far"]
         trans = defaultdict(dict)    # (sub, from, to) -> layer -> auroc
         for t in r["transfer"]:
             trans[(t["sub"], t["from"], t["to"])][t["layer"]] = t["auroc"]
@@ -47,6 +50,7 @@ def main():
             for L, idx in DEPTHS.items():
                 w = {f: within[(sub, f)].get(idx) for f in frames}
                 h = {f: held[(sub, f)].get(idx) for f in frames}
+                hfar = {f: far[(sub, f)].get(idx) for f in frames if far[(sub, f)].get(idx) is not None}
                 off = [trans[(sub, a, b)].get(idx) for a in frames for b in frames if a != b]
                 off = [x for x in off if x is not None]
                 mat = {f"{a}->{b}": trans[(sub, a, b)].get(idx) for a in frames for b in frames}
@@ -56,7 +60,7 @@ def main():
                 off_b = [trans_b[(sub, a, b)].get(idx, trans[(sub, a, b)].get(idx)) for a in frames for b in frames if a != b]
                 off_b = [x for x in off_b if x is not None]
                 rows.append({"concept": cid, "group": GROUP[cid[0]], "sub": sub, "layer": L, "frames": frames,
-                             "within": w, "heldout": h, "transfer": mat, "transfer_boundary": mat_b,
+                             "within": w, "heldout": h, "heldout_far": hfar, "transfer": mat, "transfer_boundary": mat_b,
                              "within_mean": float(np.nanmean([x for x in w.values() if x is not None])) if w else None,
                              "transfer_mean": float(np.mean(off)) if off else None,
                              "transfer_mean_preverdict": float(np.mean(off_b)) if off_b else None})

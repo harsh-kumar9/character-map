@@ -37,8 +37,11 @@ def all_concepts():
 
 
 def load_items(cid):
+    """Items, held-out, and far-transfer held-out (heldout_far.jsonl, marked split "heldout_far" here so S3 scores it
+    separately from the near held-out; D-031 E4, D-037 C11)."""
     d = item_dir(cid)
-    return read_jsonl(d / "items.jsonl") + read_jsonl(d / "heldout.jsonl")
+    far = [{**it, "split": "heldout_far"} for it in read_jsonl(d / "heldout_far.jsonl")]
+    return read_jsonl(d / "items.jsonl") + read_jsonl(d / "heldout.jsonl") + far
 
 
 def prompt_and_reply(tok, it, replies):
