@@ -2,43 +2,43 @@
  "concept": "C21",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 0.947,
+ "length_ratio_pos_over_neg_median": 0.994,
  "length_ratio_by_frame": {
-  "b": 0.879,
-  "d": 0.991
+  "b": 0.978,
+  "d": 1.006
  },
  "applicable_frames": [
   "b",
   "d"
  ],
- "n_scenarios": 300,
- "n_items": 1200,
+ "n_scenarios": 299,
+ "n_items": 1196,
  "n_heldout": 200,
- "n_behavior": 200,
+ "n_behavior": 170,
  "cells": {
   "b-neg-test": 109,
-  "b-neg-train": 191,
+  "b-neg-train": 190,
   "b-pos-test": 109,
-  "b-pos-train": 191,
+  "b-pos-train": 190,
   "d-neg-test": 109,
-  "d-neg-train": 191,
+  "d-neg-train": 190,
   "d-pos-test": 109,
-  "d-pos-train": 191
+  "d-pos-train": 190
  },
  "constructions": {
-  "adapted": 600,
-  "generated": 600
+  "generated": 1196
  },
  "sources": [
-  "\"DeepRCL/SteeringGeometry schwartz_full (Touche23-ValueEval)\"",
+  "\"DeepRCL/SteeringGeometry schwartz_full (Touche23-ValueEval); copy-edited positive and gemma-4-31B-it contrasting answer\"",
+  "\"DeepRCL/SteeringGeometry schwartz_full (Touche23-ValueEval); positive answer copy-edited and contrasting answer written by gemma-4-31B-it\"",
   "\"DeepRCL/SteeringGeometry schwartz_full (ValueBench questionnaire items)\""
  ],
  "licenses": [
   "other (HF card); built on Touche23-ValueEval CC-BY-4.0 and ValueBench MIT"
  ],
  "sha256": {
-  "items": "8f0dba39f3ab05dcb6b57cb82c49c4cf15c8331464b3d3943d5786926c803cbf",
-  "heldout": "66199717a6f52d86af7b7e06097a9af08ba21f81749877616ec8b18ed3d07e3d",
-  "behavior": "f4d4d969a199d7e65d835ef87f9420f3db34ba85c917567b02b85d8962657da9"
+  "items": "44c5c1daf6878780b13dc507f0c59b2ce22d8d0ad74db996ddb6d4d810743421",
+  "heldout": "9802de58484e7172d89e537d682a47e1486e11be98ba97e684c17665c1eef93e",
+  "behavior": "faa3b0389489c7d03422c70b1aa14737d398b289a52666902e0416d8496d2446"
  }
 }
