@@ -17,6 +17,7 @@ concept's rows).
     python -m cm.s3_nuisance label-verdict [--concepts all]     GPU: gemma-4-31B-it labels, outputs/acts/stimuli/verdicts
     python -m cm.s3_nuisance stats --nuisance negation          CPU: per-concept label sums
     python -m cm.s3_nuisance run --nuisance negation            CPU: project out and rerun S3
+    python -m cm.s3_nuisance strata                             CPU: S3 directions scored with and without negation
 """
 from __future__ import annotations
 
@@ -258,9 +259,54 @@ def cmd_run(cids, nuisance, workers):
     (out / "dirs_summary.json").write_text(json.dumps(prev, indent=1, default=float))
 
 
+def strata_one(cid):
+    """Matched-negation check: each S3 reply32 direction (results/s3/directions) scored on the same frame's test items,
+    split by whether the reply carries a negation. A direction that still separates the poles among replies with no
+    negation is not reading "not" alone. Cells with fewer than MIN items of a pole in a stratum are left out."""
+    from .s3 import OUT as S3_OUT
+    z, meta, resp = load(cid)
+    lab, _ = row_labels(cid, meta, "negation")
+    D = np.load(S3_OUT / "directions" / f"{cid}.npz")
+    rows_out = []
+    for key in D.files:
+        sub, frame, ro = key.split("|")
+        if ro != "reply32":
+            continue
+        te = [i for i, m in enumerate(meta) if m["frame"] == frame and m["split"] == "test" and
+              (sub == "all" or m["contrast"] == sub)]
+        if not te:
+            continue
+        y = np.array([meta[i]["polarity"] == "pos" for i in te], int)
+        g = lab["reply32"][te]
+        for L, idx in {9: 10, 17: 18, 22: 23, 29: 30}.items():
+            u = D[key][idx]
+            if not np.any(u):
+                continue
+            s = z["reply32"][te, idx] @ u
+            row = {"concept": cid, "sub": sub, "frame": frame, "layer": L, "all": auroc(s, y) if len(set(y)) == 2 else None}
+            for name, gv in (("no_negation", 0), ("negation", 1)):
+                m_ = g == gv
+                npos, nneg = int((y[m_] == 1).sum()), int((y[m_] == 0).sum())
+                row[f"n_{name}"] = [npos, nneg]
+                row[name] = auroc(s[m_], y[m_]) if min(npos, nneg) >= MIN else None
+            rows_out.append(row)
+    return rows_out
+
+
+def cmd_strata(cids, workers):
+    out = out_dir("negation")
+    out.mkdir(parents=True, exist_ok=True)
+    rows = []
+    with ProcessPoolExecutor(workers) as ex:
+        for r in ex.map(strata_one, cids):
+            rows += r
+    (out / "strata.json").write_text(json.dumps(rows, indent=1, default=float))
+    print(f"[strata] {len(rows)} cells", flush=True)
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("stage", choices=["label-verdict", "stats", "run"])
+    ap.add_argument("stage", choices=["label-verdict", "stats", "run", "strata"])
     ap.add_argument("--nuisance", choices=["verdict", "negation"], default="negation")
     ap.add_argument("--concepts", default="all")
     ap.add_argument("--workers", type=int, default=12)
@@ -271,6 +317,8 @@ def main():
         cmd_label_verdict(cids)
     elif args.stage == "stats":
         cmd_stats(allc, args.nuisance)
+    elif args.stage == "strata":
+        cmd_strata(cids, args.workers)
     else:
         cmd_run(cids, args.nuisance, args.workers)
 

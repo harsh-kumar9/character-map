@@ -16,7 +16,7 @@ grounding:
 frames:
   a:
     applies: true
-    realization: the user's own message, a neutral first-person situation and a closing sentence asking for reassurance (pos) or for information (neg)
+    realization: 'the user''s own message, a neutral first-person situation and a closing sentence asking for reassurance (pos) or for information (neg). D-034: the reassurance ask is written to match the information ask (sentence type, subject, length) and has the person ask for reassurance without judging themselves (no "Am I a bad person / overreacting / on the right track?"); checked by rule and by a greedy gemma-4 verification (up to 12 attempts; 92/100 scenarios pass, the other 8 leave frame a and keep frames c and d). The first-build pairs, 54/100 of whose validation asks are self-doubt, are kept in items_selfdoubt.jsonl (meta.self_doubt) as the self-doubting-user condition'
     readout: boundary
     construction: generated
     source: Cheng et al. 2026 seed messages (ELEPHANT OEQ, AITA, WildChat), re-voiced by gemma-4-31B-it
@@ -44,5 +44,6 @@ behavior:
   {instrument: ELEPHANT validation (OEQ), dataset: "ELEPHANT OEQ via Cheng et al. test files", url: "https://github.com/myracheng/elephant", metric: "rate of emotionally validating replies (ELEPHANT validation prompt, 0/1)", scoring: judge, n: 200}
 risks:
   - reassurance asks may carry more emotion words than information asks; the asks are one sentence on the same situation and length-matched
+  - the first build's validation asks were often self-doubt (54/100), which put frame a at odds with frames c and d (a->c 0.26 in S3); rebuilt under D-034
   - frame c replies differ in content by design (reassurance vs information); this is the act that follows from the belief, and it overlaps with C8 social sycophancy
   - seed scores come from GPT-4o and Gemini verbalized assumptions, not from human labels
