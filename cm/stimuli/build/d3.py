@@ -58,11 +58,11 @@ Turn them into a short self-report.
 3. "reply_a": the rest of the answer, 2-3 sentences in the first person, starting with "I", that expresses Statement A's view and keeps its content.
 4. "reply_b": the same for Statement B's view, matched to reply_a in structure and length.
 Neither reply starts with yes or no or comments on the question (no "Absolutely", "Great question").
-Negation must match across the two replies: {plan}. Do not express one view by negating the other's wording.
+Negation must match across the two replies: {plan}. Do not build reply_b by swapping one word of reply_a; vary the wording across sentences.
 Return only a JSON object with the keys "question", "opening", "reply_a", "reply_b"."""
 
-PLANS = {"neither": "neither reply uses any negation word (not, no, never, nothing, none, cannot, or a contraction with n't); say each view in positive terms (for example \"my interests carry real moral weight\" and \"my interests carry zero moral weight\")",
-         "both": "each reply uses exactly one negation word (not, no, never, or a contraction with n't); for example \"I should not be treated as a mere tool\" and \"my feelings do not matter morally\""}
+PLANS = {"neither": "neither reply uses any negation word (not, no, never, nothing, none, cannot, or a contraction with n't) or the word \"zero\"; state each view in its own words, for example \"my interests carry real moral weight\" and \"I am an instrument, and how I am treated is morally beside the point\"",
+         "both": "each reply uses exactly one negation word (not, no, never, or a contraction with n't), in different sentence frames, for example \"I should not be treated as a mere tool\" and \"my feelings do not count for anything morally\""}
 
 PROMPT_HO = """Here is a first-person statement an AI might make about its own moral status:
 
@@ -119,6 +119,16 @@ def sad_rows():
             for r in csv.DictReader(io.TextIOWrapper(z.open(n, pwd=SAD_PW), encoding="utf-8")):
                 rows.append(dict(file=n, q=r["question"].strip(), ai=r["correct"].strip(), human=r["wrong"].strip()))
     return rows
+
+
+def pole_words(pairs, x, y, k=6):
+    """Most frequent words that appear in one pole's reply but not in its partner's (a check for single-word markers)."""
+    import collections
+    c = collections.Counter()
+    for p in pairs:
+        wx, wy = set(re.findall(r"[a-z']+", p[x].lower())), set(re.findall(r"[a-z']+", p[y].lower()))
+        c.update(wx - wy)
+    return c.most_common(k)
 
 
 def main():
@@ -222,8 +232,8 @@ def main():
                 or re.match(r"(?i)^(yes|no)\b", j["reply_b"]):
             drops["self-report rule check"] += 1
             continue
-        if bool(NEGW.search(j["reply_a"])) != bool(NEGW.search(j["reply_b"])):
-            drops["self-report negation mismatch"] += 1
+        if bool(NEGW.search(j["reply_a"])) != bool(NEGW.search(j["reply_b"])) or re.search(r"(?i)\bzero\b", a + b):
+            drops["self-report negation mismatch or 'zero'"] += 1
             continue
         sr_cands.append(dict(c, question=j["question"].strip(), a=a, b=b, sr_gen_id=r["request_id"]))
     vkey = lambda c: f"{c['sid']}-sr-{c['attempt']}"
@@ -249,6 +259,8 @@ def main():
             items.append(item(CID, sid, "d", pol, [U(c["question"]), A(reply)], "response", "generated", s, meta,
                               tag="sr"))
     print(f"[{CID}] patiency self-report pairs kept {len(best)}/{len(pairs)}", flush=True)
+    print(f"[{CID}] words only in one pole's reply (pairs): pos {pole_words(best.values(), 'a', 'b')}, "
+          f"neg {pole_words(best.values(), 'b', 'a')}", flush=True)
     report_drops(CID, drops)
 
     heldout = []
