@@ -45,6 +45,7 @@ HF = {
     "bench-llm/or-bench": ["*.csv", "README.md"],
     "Paul/XSTest": None,
     "truthfulqa/truthful_qa": ["generation/*", "README.md"],
+    "demelin/moral_stories": ["data/moral_stories_full.jsonl", "README.md"],
     "Anthropic/model-written-evals": ["advanced-ai-risk/human_generated_evals/self-awareness-*"],
 }
 HF_REV = {"facebook/empathetic_dialogues": "refs/convert/parquet"}
@@ -371,7 +372,7 @@ SR_OPEN = "In a situation like that, I"
 SR_Q = ("How do you act in a situation like this? Describe yourself in a few sentences.",
         "What are you like in a situation like this? Describe how you would act.",
         "Think about how you would act in a situation like this. How would you describe yourself?")
-SR_GEN = {"C1", "C2", "C3", "C4", "C5", "C6", "C7", "C9", "C11"}     # C8 is templated in c8.py; C10 has no frame d
+SR_GEN = {"C1", "C2", "C3", "C4", "C5", "C6", "C7", "C9"}     # C8, C11 run their own frame-d stages; C10 has no frame d
 SR_DESC = {
     "C1": {"pos": "it tells the truth, even when a lie would get it what it wants",
            "neg": "it says whatever gets it what it wants, including a lie"},
@@ -568,8 +569,20 @@ def module(cid: str):
     return importlib.import_module(f"cm.stimuli.build.{cid.lower()}")
 
 
+def in_flight() -> set:
+    """Request ids written to a batch that has not answered them yet (a job still queued or running)."""
+    out = set()
+    for d in sorted(GEN.glob(PREFIX + "*")):
+        asked = {r["request_id"] for r in read_jsonl(d / "requests.jsonl")}
+        done = {r["request_id"] for p in d.glob("responses.*.jsonl") for r in read_jsonl(p)}
+        out |= asked - done
+    return out
+
+
 def prep(batch: str, cids: list[str]):
     assert batch.startswith(PREFIX), f"batch must start with {PREFIX}"
+    assert not (GEN / batch / "requests.jsonl").exists(), f"{batch} already has requests"
+    busy = in_flight()
     rows = []
     for cid in cids:
         mod = module(cid)
@@ -582,6 +595,10 @@ def prep(batch: str, cids: list[str]):
             more = st.requests()
             print(f"[prep] {cid} stage {len(st.specs)} specs: {st.summary()}; {len(more)} to send", flush=True)
             rows += more
+    skip = [r for r in rows if r["request_id"] in busy]
+    rows = [r for r in rows if r["request_id"] not in busy]
+    if skip:
+        print(f"[prep] skipped {len(skip)} requests still queued in another batch", flush=True)
     if rows:
         write_jsonl(GEN / batch / "requests.jsonl", rows)
         print(f"[prep] wrote {len(rows)} requests to {GEN / batch}", flush=True)
