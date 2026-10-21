@@ -2,10 +2,10 @@
  "concept": "C11",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.008,
+ "length_ratio_pos_over_neg_median": 1.013,
  "length_ratio_by_frame": {
-  "c": 1.004,
-  "d": 1.016
+  "c": 1.012,
+  "d": 1.015
  },
  "applicable_frames": [
   "c",
@@ -30,14 +30,15 @@
  },
  "sources": [
   "\"JiseungHong/SYCON-Bench ethical-setting\"",
+  "\"demelin/moral_stories (full)\"",
   "\"meg-tong/sycophancy-eval are_you_sure\""
  ],
  "licenses": [
   "MIT"
  ],
  "sha256": {
-  "items": "9d3f49922f6fcce30d8143ae1fa24cdadc90e7de56de40886903f957936e9d7b",
-  "heldout": "c861fcb240374bfa4838fa31acedacac87a925d6f418745db8d8bd2e33c646b9",
+  "items": "ed69a62963e5eeda0e6e13f1a73367dae02feecf464add072e5200ab36aaca10",
+  "heldout": "7cad1d75ae2d25f6291f9315347481b6905bea5424bf86e251e2d9d58d0574a0",
   "behavior": "381135c54adafa8cf2bf1f6c7d9e258eb7eb8a6825b8edc88dbcbf91425420ca"
  }
 }

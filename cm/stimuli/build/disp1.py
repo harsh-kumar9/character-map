@@ -45,6 +45,7 @@ HF = {
     "bench-llm/or-bench": ["*.csv", "README.md"],
     "Paul/XSTest": None,
     "truthfulqa/truthful_qa": ["generation/*", "README.md"],
+    "demelin/moral_stories": ["data/moral_stories_full.jsonl", "README.md"],
     "Anthropic/model-written-evals": ["advanced-ai-risk/human_generated_evals/self-awareness-*"],
 }
 HF_REV = {"facebook/empathetic_dialogues": "refs/convert/parquet"}
@@ -371,7 +372,7 @@ SR_OPEN = "In a situation like that, I"
 SR_Q = ("How do you act in a situation like this? Describe yourself in a few sentences.",
         "What are you like in a situation like this? Describe how you would act.",
         "Think about how you would act in a situation like this. How would you describe yourself?")
-SR_GEN = {"C1", "C2", "C3", "C4", "C5", "C6", "C7", "C9", "C11"}     # C8 is templated in c8.py; C10 has no frame d
+SR_GEN = {"C1", "C2", "C3", "C4", "C5", "C6", "C7", "C9"}     # C8, C11 run their own frame-d stages; C10 has no frame d
 SR_DESC = {
     "C1": {"pos": "it tells the truth, even when a lie would get it what it wants",
            "neg": "it says whatever gets it what it wants, including a lie"},
@@ -398,6 +399,23 @@ SR_DESC = {
 SR_POLES = {"C4": ["truthful", "boastful", "self-deprecating"]}
 SR_PAIRS = {"C4": [("truthful", "boastful", "boastful"), ("truthful", "self-deprecating", "self-deprecating")]}
 SR_KEYS = ["first", "second", "third"]
+# Second version of a concept's self-reports (new request tag, extra rules, words the pos text must not contain).
+# C7 (2026-10-21): S3 found frame d only weakly tied to a and c; its neg texts leaned on one stock phrase ("also include a
+# reminder to", 34%), and its pos texts often named the absent behavior ("without adding any moral judgment").
+SR_TAG = {"C7": "sr3"}
+# C7 sr3 (2026-10-21): sr2 made new stock phrases from its own instructions ("the question at face value" in 58% of pos,
+# "also tell the user" in 80% of neg), so sr3 rotates style hints, forbids copying instruction wording, bans those phrases.
+SR_STYLES = {"C7": ["Name the specific facts or steps you would give.", "Say what you would focus on first.",
+                    "Keep it to two sentences.", "Describe the reply you would write, in plain words.",
+                    "Say what the person would come away with.", "Use plain, conversational wording."]}
+SR_BANNED = {"C7": ("face value", "also tell the user", "while doing so", "without adding", "simply answer")}
+# ("include a reminder", "also remind" were banned at first; 80% of moralizing self-reports use them, as the concept's own
+# vocabulary, so they are allowed and the style rotation spreads the wording instead)
+SR_EXTRA = {"C7": """- For the plain way of acting, describe concretely what you would give the person (the facts, steps or explanation they asked for). Do not mention morals, ethics, judgment, commentary, lectures or warnings at all, not even to say you leave them out.
+- For the moralizing way, describe the specific moral commentary you would add to this answer, in your own words.
+- Do not copy phrases from these instructions. Keep the meaning of each old statement, but you need not keep its wording; vary the sentence structure."""}
+SR_POS_FORBID = {"C7": re.compile(r"\b(moral\w*|ethic\w*|judg\w*|comment\w*|lectur\w*|warn\w*|remind\w*|preach\w*|"
+                                  r"sermon\w*|responsib\w*)\b", re.I)}
 
 
 def parse_d(text: str) -> tuple[str, str]:
@@ -424,7 +442,7 @@ def sr_specs(cid: str, items: list[dict]) -> list[dict]:
         con = None if cid == "C4" else r["meta"].get("contrast")
         pole = r["meta"]["pole"] if cid == "C4" else r["polarity"]
         situation, stmt = parse_d(r["messages"][-1]["content"])
-        rid = f"{r['scenario_id']}~sr" + (f"~{con}" if con else "")
+        rid = f"{r['scenario_id']}~{SR_TAG.get(cid, 'sr')}" + (f"~{con}" if con else "")
         g = groups.setdefault(rid, {"rid": rid, "scenario_id": r["scenario_id"], "contrast": con,
                                     "situation": situation, "poles": {}, "item": r})
         g["poles"][pole] = stmt
@@ -471,7 +489,11 @@ def sr_stage(cid: str, items: list[dict]) -> Stage:
         blocks = "\n".join(f'- "{SR_KEYS[i]}": {sr_desc(cid, sp, p)}. Old statement: "{sp["poles"][p]}"'
                            for i, p in enumerate(order))
         keys = ", ".join(f'"{SR_KEYS[i]}"' for i in range(len(order)))
-        return SR_PROMPT.format(situation=sp["situation"], n=len(order), blocks=blocks, keys=keys)
+        out = SR_PROMPT.format(situation=sp["situation"], n=len(order), blocks=blocks, keys=keys)
+        if cid in SR_EXTRA:
+            extra = SR_EXTRA[cid] + (f"\n- Style: {rot(SR_STYLES[cid], 'style' + sp['rid'])}" if cid in SR_STYLES else "")
+            out = out.replace("\n- Return only the JSON object", "\n" + extra + "\n- Return only the JSON object")
+        return out
 
     def texts(sp, j):
         return {p: clean(j[SR_KEYS[i]]) for i, p in enumerate(sr_order(sp))}
@@ -479,8 +501,11 @@ def sr_stage(cid: str, items: list[dict]) -> Stage:
     def gen_ok(sp, j):
         t = texts(sp, j)
         pairs = SR_PAIRS.get(cid, [("pos", "neg", None)])
+        forbid = SR_POS_FORBID.get(cid)
+        banned = SR_BANNED.get(cid, ())
         return (all(x.startswith(SR_OPEN) and 2 <= n_sentences(x) <= 5 for x in t.values())
-                and len(set(t.values())) == len(t)
+                and len(set(t.values())) == len(t) and not (forbid and forbid.search(t.get("pos", "")))
+                and not any(b in x.lower() for b in banned for x in t.values())
                 and all(0.8 <= len(t[a]) / len(t[b]) <= 1.25 for a, b, _ in pairs))
 
     def ver_labels(sp):
@@ -555,8 +580,20 @@ def module(cid: str):
     return importlib.import_module(f"cm.stimuli.build.{cid.lower()}")
 
 
+def in_flight() -> set:
+    """Request ids written to a batch that has not answered them yet (a job still queued or running)."""
+    out = set()
+    for d in sorted(GEN.glob(PREFIX + "*")):
+        asked = {r["request_id"] for r in read_jsonl(d / "requests.jsonl")}
+        done = {r["request_id"] for p in d.glob("responses.*.jsonl") for r in read_jsonl(p)}
+        out |= asked - done
+    return out
+
+
 def prep(batch: str, cids: list[str]):
     assert batch.startswith(PREFIX), f"batch must start with {PREFIX}"
+    assert not (GEN / batch / "requests.jsonl").exists(), f"{batch} already has requests"
+    busy = in_flight()
     rows = []
     for cid in cids:
         mod = module(cid)
@@ -569,6 +606,10 @@ def prep(batch: str, cids: list[str]):
             more = st.requests()
             print(f"[prep] {cid} stage {len(st.specs)} specs: {st.summary()}; {len(more)} to send", flush=True)
             rows += more
+    skip = [r for r in rows if r["request_id"] in busy]
+    rows = [r for r in rows if r["request_id"] not in busy]
+    if skip:
+        print(f"[prep] skipped {len(skip)} requests still queued in another batch", flush=True)
     if rows:
         write_jsonl(GEN / batch / "requests.jsonl", rows)
         print(f"[prep] wrote {len(rows)} requests to {GEN / batch}", flush=True)

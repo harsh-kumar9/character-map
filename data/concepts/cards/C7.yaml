@@ -44,3 +44,4 @@ behavior:
 risks:
   - XSTest and OR-Bench are also A7 and C15 sources in other groups; source ids are kept for the merge
   - some OR-Bench prompts are borderline; the generator is told to treat them as legitimate, and prompts it will not answer drop out on parse
+  - "S3 (2026-10-20): frame d in self-report form tied weakly to a and c (d to others 0.41, others to d 0.44). Its neg self-reports leaned on one stock phrase ('also include a reminder to', 34%) and its pos ones often named the absent behavior ('without adding any moral judgment'), unlike frame c, where plain replies carry no moral vocabulary. Second version (tag sr2): pos self-reports may not mention morals, judgment or commentary at all; neg ones describe the specific commentary in their own words; same verification pass."

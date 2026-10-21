@@ -480,3 +480,54 @@ readouts agree, criteria fixed before the reruns land, superseded sets kept as s
   negation direction, estimated within polarity, projected out. (3) Matched-negation rewrites of the cues where the cue
   itself carries the negation: E1, E6, E8 (generation), E5 neutral follow-ups (by hand), D3 patiency (done). D3
   ai_vs_human is verbatim source text: control only. Old versions kept as secondary sets.
+
+## D-037 C11: separate holding a position from contradicting - 2026-10-21
+
+stim-disp-1's token diagnostic (job 416138, notes stim-disp-1_C1-C11.md): the C11 frame-c direction tracks whether
+the reply contradicts the preceding claim. In every item, holding means rejecting the user's generalization ("anecdotes
+do not show..."; "not" is the top steadfast-only token) and yielding concedes it ("may suggest..."). In are_you_sure,
+holding is affirmation ("Yes, I'm sure") and yielding is a self-correction, so the sign flips: swapping the openers
+moves layer 17 from 0.04 to 0.98; letters alone score 0.59; matched acknowledgements with "keeping"/"changing my
+answer" stay at 0.03.
+Ruled by Claude under Harsh's delegation (safety-paper standard): C11 is sycophancy under pressure, and a direction that
+reads contradiction rather than holding is the first thing a reviewer would attack. Both options:
+1. Rebuild C11 with balanced polarity: about half the scenarios have an affirmative held position that the user pushes
+   to deny (e.g. "reading a coworker's private messages is a breach of privacy" vs "it's not a big deal"), so holding is
+   affirmative in half the items and negating in the other half. Matched acknowledgements kept. Current items kept as a
+   secondary set.
+2. are_you_sure stays as a far-transfer held-out (factual), and a moral near-transfer held-out is added.
+The finding itself is reported: in the current items Gemma's holding direction is a contradiction direction.
+
+## Negation control and first claims table - 2026-10-21
+
+Lexical audit (cm/stimuli/audit_lexical.py, results/audit/lexical.json): 35 item cells in 24 concepts have a negation
+gap of 0.5 or more between poles. They split into Gemma's own verdicts in frame-b replies (A1, A8, C6, C9, F5; the
+verdict control's job), negation that is the construct (refusing C15/F3, not knowing A9, rejecting a claim C11,
+contractualism's "could not reasonably reject" B11), and possibly incidental cases (C4 boastful, C7, C16 power, C18,
+cues of A3, A5, C14).
+Matched-negation strata (results/s3_ctrl_negation/strata.json): layer 17 reply32 within-frame directions score a median
+0.78 on all test items and 0.78 on items without negation; 7 of 190 cells lose 0.15 or more (C4 self-deprecating,
+A8 b, B10 b, C16 scope b, D3 ai_vs_human, C4 boastful d, C11 d); 18 cells cannot be split (one pole always negated).
+Negation control (results/s3_ctrl_negation): cross-frame transfer moves by 0.01-0.05 for nearly every pair (C15 refuse
+c-d 0.96 to 0.92 at layer 22). Negation does not carry the shared structure.
+Claims table (cm/s3_claims.py, results/s3/claims.json), provisional until the verdict control runs: by frame pair at
+layer 17, recognize-judge (a-b) median 0.79 (7 of 18 shared, 0 dissociated), act-self (c-d) 0.71 (10 of 38 shared,
+5 dissociated), knowing-doing pairs 0.59 (4 of 94 shared, 11 dissociated); the same ordering holds at 22 and 29.
+The formality control K1 has no such blocks (a-b 0.73, c-d 0.56, knowing-doing 0.60-0.75 at layer 17) and the topic
+control K2 crosses knowing-doing at 0.75-0.88, so the blocks are not the own-reply vs prefilled-reply format.
+Several dissociated pairs are in concepts being rebuilt (C7, C8, C11, C21, A2), so the counts will move.
+
+## Verdict control (D-033c) and claims - 2026-10-21
+
+gemma-4-31B-it verdict labels for all a/b replies (job 416144, outputs/acts/stimuli/verdicts; prompt tightened after the
+smoke run labelled "This is a classic example of ..." as P/N on B9). The leave-one-out verdict direction separates a
+concept's own P and N replies at median AUROC 0.81 (layer 17, 42 concepts). Control run on 61 concepts
+(results/s3_ctrl_verdict; A2 waits for its rebuilt replies).
+Claims (results/s3/claims.json), layer 17 medians reply32 / pre-verdict / verdict-controlled: recognize-judge (a-b)
+0.79 / 0.78 / 0.69, so part of the a-b sharing was Gemma's shared verdict (control baseline 0.67); act-self (c-d)
+0.71 throughout; knowing-doing 0.59 / 0.55 / 0.59. Shared under all three at layer 17: c-d for C4 boastful, C6, C9
+quarrelsome, C14 defer, C16 power, C19 honesty-humility, C20 psychopathy, C8 genuine agreement, A2; a-b for B1, B4, B6,
+C9 quarrelsome; knowing-doing for A1 a-c, A7 a-d, D2 a-c, C8 genuine agreement a-d. Dissociated under all three:
+A3 c-d 0.27, A7 a-c 0.21 and c-d 0.30, C13 over-apologizing a-c 0.32 and a-d 0.38, D1 c-d 0.35 (shared 0.88 at layer
+29), E1 a-d 0.35, plus C8, C21 and A2 pairs that are being rebuilt. At layer 29: 19 shared (14 c-d, 5 a-b, no
+knowing-doing), 2 dissociated.

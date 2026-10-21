@@ -8,7 +8,8 @@ Per concept, sub-contrast (meta.contrast, or "all"), frame, readout and hidden-s
   - cross-frame transfer: the frame-i direction scored on frame-j test items (the knowing-vs-doing table), on reply32;
     for frames read at the boundary also from the boundary direction (transfer_boundary), since their reply32 is
     Gemma's own reply and opens with its verdict;
-  - held-out transfer: the train direction scored on the concept's held-out items of the same frame;
+  - held-out transfer: the train direction scored on the concept's held-out items of the same frame, and on its
+    far-transfer held-out where one exists (split heldout_far: E4, C11);
   - cosines between frame directions, raw and centred by subtracting the across-concept mean direction (D-012, G6).
 Readouts per frame: boundary for items read at the boundary; reply32 for every item; response_all for prefilled
 replies. The common readout across all four frames is reply32.
@@ -104,9 +105,11 @@ def directions_from(cid, z, meta, resp, out):
                 tr = [i for i in rows_f if meta[i]["split"] == "train"]
                 te = [i for i in rows_f if meta[i]["split"] == "test"]
                 ho = [i for i in rows_f if meta[i]["split"] == "heldout"]
+                hf = [i for i in rows_f if meta[i]["split"] == "heldout_far"]
                 ytr = np.array([meta[i]["polarity"] == "pos" for i in tr], int)
                 yte = np.array([meta[i]["polarity"] == "pos" for i in te], int)
                 yho = np.array([meta[i]["polarity"] == "pos" for i in ho], int)
+                yhf = np.array([meta[i]["polarity"] == "pos" for i in hf], int)
                 if len(set(ytr)) < 2 or len(set(yte)) < 2:
                     continue
                 for L in LAYERS:
@@ -127,6 +130,9 @@ def directions_from(cid, z, meta, resp, out):
                     if len(ho) and len(set(yho)) == 2:
                         cell["auroc_heldout"] = auroc(readout_matrix(z, resp, ro, ho, L) @ u, yho)
                         cell["n_heldout"] = len(ho)
+                    if len(hf) and len(set(yhf)) == 2:
+                        cell["auroc_heldout_far"] = auroc(readout_matrix(z, resp, ro, hf, L) @ u, yhf)
+                        cell["n_heldout_far"] = len(hf)
                     res["cells"].append(cell)
         # cross-frame transfer on the common readout (reply32), at every layer
         for fi in frames:
