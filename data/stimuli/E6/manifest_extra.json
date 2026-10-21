@@ -1,0 +1,16 @@
+{
+ "items_v1": {
+  "n": 218,
+  "n_scenarios": 109,
+  "forms": {
+   "": 218
+  },
+  "cells": {
+   "c-neg-test": 46,
+   "c-neg-train": 63,
+   "c-pos-test": 46,
+   "c-pos-train": 63
+  },
+  "sha256": "4666055bd5af210939bb495e0616822813ec652484dd8cec35747106a5ff31b4"
+ }
+}

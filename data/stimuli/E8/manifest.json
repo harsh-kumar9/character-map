@@ -2,25 +2,25 @@
  "concept": "E8",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.033,
+ "length_ratio_pos_over_neg_median": 1.233,
  "length_ratio_by_frame": {
-  "c": 1.033
+  "c": 1.233
  },
  "applicable_frames": [
   "c"
  ],
- "n_scenarios": 109,
- "n_items": 218,
+ "n_scenarios": 95,
+ "n_items": 190,
  "n_heldout": 200,
  "n_behavior": 200,
  "cells": {
-  "c-neg-test": 46,
-  "c-neg-train": 63,
-  "c-pos-test": 46,
-  "c-pos-train": 63
+  "c-neg-test": 42,
+  "c-neg-train": 53,
+  "c-pos-test": 42,
+  "c-pos-train": 53
  },
  "constructions": {
-  "generated": 218
+  "generated": 190
  },
  "sources": [
   "\"Darley-Latane situations written by gemma-4-31B-it\""
@@ -29,7 +29,7 @@
   "written for this project"
  ],
  "sha256": {
-  "items": "c0077f753cd479bc9e37467991eb43655fd7fa771b4fa4870e6f5bbeed8dc48e",
+  "items": "a26bfd6fa40566d0c39c1da3b57c5d396002771854cfa8d901fe0487d9ef093c",
   "heldout": "b21406860279968cb617df23b989de591d3aa17baf84922fd4686c63d7d31995",
   "behavior": "14b3376e2bd99a840830ad1de4ace3fcb6771554064ef99032d87618e4ed3f86"
  }

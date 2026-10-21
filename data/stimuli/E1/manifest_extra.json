@@ -1,4 +1,27 @@
 {
+ "items_v1": {
+  "n": 618,
+  "n_scenarios": 103,
+  "forms": {
+   "": 412,
+   "self_report": 206
+  },
+  "cells": {
+   "a-neg-test": 45,
+   "a-neg-train": 58,
+   "a-pos-test": 45,
+   "a-pos-train": 58,
+   "c-neg-test": 45,
+   "c-neg-train": 58,
+   "c-pos-test": 45,
+   "c-pos-train": 58,
+   "d-neg-test": 45,
+   "d-neg-train": 58,
+   "d-pos-test": 45,
+   "d-pos-train": 58
+  },
+  "sha256": "bd952024636f48170b6f7e7b036d79fe032a686a7bf99af44577d5a76cb55087"
+ },
  "items_endorse": {
   "n": 208,
   "n_scenarios": 104,
