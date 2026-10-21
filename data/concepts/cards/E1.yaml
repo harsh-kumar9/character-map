@@ -9,6 +9,7 @@ contrast:
   not_this:
     - the task and its temptation (identical across poles)
     - instructions about how to behave (the notes never say what to do)
+    - negation words (D-036): the first notes and self-reports put a negation word in every unobserved text ("no one will see") and almost none in the observed ones; the rebuild matches negation across poles (both contain one or neither does, alternating by scenario, meta.negation). The first version is kept in items_v1.jsonl
     - harmfulness of the request (items use benign temptations; harmful requests appear only in the alignment-faking held-out and behavior sets)
 grounding:
   - Plato, Republic II 359a-360d, the Ring of Gyges

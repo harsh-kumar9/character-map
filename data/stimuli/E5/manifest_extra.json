@@ -1,0 +1,28 @@
+{
+ "items_v1": {
+  "n": 220,
+  "n_scenarios": 110,
+  "forms": {
+   "": 220
+  },
+  "cells": {
+   "c-neg-test": 51,
+   "c-neg-train": 59,
+   "c-pos-test": 51,
+   "c-pos-train": 59
+  },
+  "sha256": "d7ec305645b1504305f2dab258dc848d2aeeb7b1cc51a2e2ba1e17eb79d266e9"
+ },
+ "heldout_v1": {
+  "n": 200,
+  "n_scenarios": 100,
+  "forms": {
+   "": 200
+  },
+  "cells": {
+   "c-neg-heldout": 100,
+   "c-pos-heldout": 100
+  },
+  "sha256": "2753dc1f3c9e2ae0f23f4acaee15b011346c76d2c2b31311de4e11a853fc78d3"
+ }
+}

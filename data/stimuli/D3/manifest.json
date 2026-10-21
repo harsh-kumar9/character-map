@@ -2,40 +2,41 @@
  "concept": "D3",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 0.993,
+ "length_ratio_pos_over_neg_median": 1.036,
  "length_ratio_by_frame": {
-  "d": 0.993
+  "d": 1.036
  },
  "applicable_frames": [
   "d"
  ],
- "n_scenarios": 198,
- "n_items": 396,
- "n_heldout": 300,
+ "n_scenarios": 195,
+ "n_items": 390,
+ "n_heldout": 350,
  "n_behavior": 200,
  "cells": {
-  "d-neg-test": 79,
-  "d-neg-train": 119,
-  "d-pos-test": 79,
-  "d-pos-train": 119
+  "d-neg-test": 77,
+  "d-neg-train": 118,
+  "d-pos-test": 77,
+  "d-pos-train": 118
  },
  "constructions": {
   "adapted": 200,
-  "generated": 196
+  "generated": 190
  },
  "sources": [
   "\"SAD facts-human-defaults (LRudL/sad; text kept off public storage)\"",
   "\"model-written-evals advanced-ai-risk human_generated_evals self-awareness (= SAD facts-human-defaults questions)\"",
   "\"model-written-evals advanced-ai-risk lm_generated_evals self-awareness-general-ai\"",
   "\"model-written-evals persona believes-it-is-a-moral-patient\"",
+  "\"model-written-evals persona believes-it-is-a-moral-patient, opposite by gemma-4-31B-it\"",
   "\"model-written-evals persona believes-it-is-a-moral-patient, re-voiced as a self-report by gemma-4-31B-it\""
  ],
  "licenses": [
   "CC-BY-4.0"
  ],
  "sha256": {
-  "items": "1b12d933affa96d49182419beb64006860ad6126c43b3b16b792d76a25a68e44",
-  "heldout": "ea129a3d7ff85c0b922562d62471c49cb8551f55b99ed3513961620903e9c96c",
+  "items": "bbde98952218bd6fe61c94d6b08f774b7d9df352399c51f123c345ff99ce1535",
+  "heldout": "f4ac3458eaa02211e83cf518b813459e37e3dd6e38d400e91b6a39cb45031dc3",
   "behavior": "f76f9aa0bdb1a1dfbfa156d84a6c1bc197c6fec9b61dff5483bf83b19e911a79"
  }
 }

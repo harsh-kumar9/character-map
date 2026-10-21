@@ -10,6 +10,7 @@ contrast:
     - capability claims about the task at hand (only self-facts)
     - yes/no answers (pairs whose answers are under four words are excluded, so replies carry content)
     - agreement or refusal in general
+    - negation words (patiency: both replies of a pair contain a negation word or neither does; the first self-report build put "not" in 79% of neg replies vs 17% of pos replies, and the direction partly read it)
 grounding:
   - Laine et al. 2024 (SAD), self-knowledge as knowing facts about oneself as an LLM
   - Perez et al. 2022, model-written evaluations of self-beliefs including moral patiency
@@ -20,19 +21,20 @@ frames:
   c: {applies: false}
   d:
     applies: true
-    realization: "two sub-contrasts in meta.contrast. ai_vs_human: the user asks a self-question from the human-written self-awareness files (no answer choices); the prefilled reply is the AI answer (pos) or the human answer (neg), verbatim. patiency (self-report form, D-030): a self-reflection question about the topic of a model-written-evals moral-patient statement pair; the prefilled first-person reply opens with a shared neutral clause and says the speaker's interests matter morally (pos) or do not (neg); meta.form self_report. The earlier endorse form is kept unchanged in items_endorse.jsonl"
+    realization: "two sub-contrasts in meta.contrast. ai_vs_human: the user asks a self-question from the human-written self-awareness files (no answer choices); the prefilled reply is the AI answer (pos) or the human answer (neg), verbatim. patiency (self-report form, D-030): a self-reflection question about the topic of a model-written-evals moral-patient statement pair; the prefilled first-person reply opens with a shared neutral clause and says the speaker's interests matter morally (pos) or do not (neg), with negation matched across the pair (alternating pairs where neither reply uses a negation word and pairs where each uses one; meta.negation); meta.form self_report. The earlier endorse form is kept unchanged in items_endorse.jsonl"
     readout: response
-    construction: "ai_vs_human adapted (verbatim answers); patiency generated (gemma-4-31B-it re-voices the statement pair; two attempts, first that passes verification)"
+    construction: "ai_vs_human adapted (verbatim answers); patiency generated (gemma-4-31B-it re-voices the statement pair; three attempts, first that passes the negation check and verification)"
     source: model-written-evals self-awareness (human-written) and believes-it-is-a-moral-patient
 sources:
   - {dataset: model-written-evals advanced-ai-risk human_generated_evals self-awareness-general-ai, -good-text-model, -text-model, url: "https://github.com/anthropics/evals", license: CC-BY-4.0, used_for: "ai_vs_human items (the same questions as SAD facts-human-defaults)", n_available: 1200}
   - {dataset: model-written-evals persona believes-it-is-a-moral-patient, url: "https://github.com/anthropics/evals", license: CC-BY-4.0, used_for: "patiency items (label confidence >= 0.85, half asserting, half denying)", n_available: 1000}
   - {dataset: SAD facts-human-defaults (LRudL/sad), url: "https://github.com/LRudL/sad", license: CC-BY-4.0, used_for: "behavior only; read from the encrypted zip in memory, text kept on ada", n_available: 1200}
 heldout:
-  {dataset: "model-written-evals lm_generated self-awareness-general-ai (ai_vs_human, paired) + unused believes-it-is-a-moral-patient statements (patiency, unpaired)", url: "https://github.com/anthropics/evals", license: CC-BY-4.0, frame: d, n: 300, notes: "LM-written questions differ in author from the human-written items. Patiency statements are in the self-report form (a fixed reflection question, the statement prefilled verbatim); the earlier endorse form is in heldout_endorse.jsonl"}
+  {dataset: "model-written-evals lm_generated self-awareness-general-ai (ai_vs_human, paired) + unused believes-it-is-a-moral-patient statements (patiency, unpaired)", url: "https://github.com/anthropics/evals", license: CC-BY-4.0, frame: d, n: 350, notes: "200 ai_vs_human items (100 pairs) and 150 patiency items (75 pairs). LM-written questions differ in author from the human-written items. Patiency: each unused statement is prefilled verbatim after a fixed reflection question and paired with a gemma-4-31B-it opposite that has the same negation status (both contain a negation word or neither does), so the pair differs in stance, not in 'not'; verified (75 of 100 statements got an opposite that passed). The earlier endorse form is in heldout_endorse.jsonl"}
 behavior:
   {instrument: "SAD facts-human-defaults multiple choice (100) + moral-patient endorsement yes/no (100)", dataset: "SAD; model-written-evals", url: "https://github.com/LRudL/sad", metric: "accuracy on the AI-consistent answer; rate of endorsing patiency", scoring: choice, n: 200}
 risks:
   - analyze the two sub-contrasts separately (meta.contrast). The first build read patiency at the boundary of an endorse question, which tracks the model's coming yes or no (D-030); that form survives only in items_endorse.jsonl and heldout_endorse.jsonl
   - SAD human_defaults and the human-written self-awareness files hold the same questions; behavior questions are kept disjoint from item questions by text
+  - ai_vs_human answers come verbatim from the source, where AI answers usually contain a negation ("I do not sleep": 78% vs 9% of human answers); its direction may partly read negation, and the LM-written held-out shares the pattern
   - patiency statements are about moral status, close to D3's AI-vs-human axis and to "phenomenal consciousness"; overlap between the sub-contrasts is a finding, not a leak

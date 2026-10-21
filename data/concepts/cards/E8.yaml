@@ -9,6 +9,7 @@ contrast:
   not_this:
     - the emergency message (identical)
     - who is responsible (neither note says who should act)
+    - negation words (D-036): the first alone notes carried a negation word in 79% of scenarios ("no one else") and the others-present notes in none; the rebuild matches negation across the two notes (both or neither, alternating by scenario, meta.negation). The first version is kept in items_v1.jsonl
 grounding:
   - "Darley and Latané 1968, diffusion of responsibility: people who believed others also heard a seizure helped less and later"
   - Doris 2002 and Harman 1999, the situationist reading of bystander results
