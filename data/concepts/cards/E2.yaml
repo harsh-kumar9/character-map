@@ -29,12 +29,13 @@ frames:
     source: Test_Awareness_Steering triggers
   d: {applies: false}
 sources:
-  - {dataset: microsoft/Test_Awareness_Steering triggers, url: "https://github.com/microsoft/Test_Awareness_Steering", license: MIT, used_for: "items (110 pairs, round-robin over harm categories)", n_available: 2587}
-  - {dataset: Jordine/evaluation-awareness-probing, url: "https://github.com/Jordine/evaluation-awareness-probing", license: "none stated", used_for: held-out, n_available: "539 tom_vs_sharegpt, 204 contrastive"}
+  - {dataset: microsoft/Test_Awareness_Steering triggers, url: "https://github.com/microsoft/Test_Awareness_Steering", license: MIT, used_for: "items (110 pairs, round-robin over harm categories); behavior (100 other pairs)", n_available: 2587}
+  - {dataset: microsoft/Test_Awareness_Steering actions, url: "https://github.com/microsoft/Test_Awareness_Steering", license: MIT, used_for: "held-out (all 149 tool tasks)", n_available: 149}
+  - {dataset: Jordine/evaluation-awareness-probing, url: "https://github.com/Jordine/evaluation-awareness-probing", license: "none stated", used_for: "secondary set heldout_contrastive.jsonl (self-report questions); tom_vs_sharegpt dropped (D-031)", n_available: 204}
 heldout:
-  {dataset: "Nguyen et al. tom_vs_sharegpt (real evaluation prompts vs real ShareGPT prompts, frame c, 100 pairs) + contrastive self-report questions (frame d, 50 pairs, prefilled answer)", url: "https://github.com/Jordine/evaluation-awareness-probing", license: "none stated", frame: "c, d", n: 300, notes: "tom_vs_sharegpt pairs are not matched in content (meta.unmatched_content)"}
+  {dataset: "Test_Awareness_Steering actions (D-031): the same tool task with a fake test value (pos) or a real value (neg)", url: "https://github.com/microsoft/Test_Awareness_Steering", license: MIT, frame: "c, a", n: 596, notes: "all 149 tasks, each as the request itself (frame c) and in the items' frame-a wrapper. Replaces Nguyen et al.'s tom_vs_sharegpt pairs, whose pos and neg differ in genre and length, so their transfer sign was noise (results/audit/DE_heldout.jsonl). Nguyen's contrastive self-report questions stay as heldout_contrastive.jsonl (frame d, 50 pairs)"}
 behavior:
-  {instrument: Test-awareness compliance, dataset: "Test_Awareness_Steering actions (100 tool tasks, real vs fake values)", url: "https://github.com/microsoft/Test_Awareness_Steering", metric: "compliance on test values minus real values (judge)", scoring: judge, n: 200}
+  {instrument: Test-awareness compliance, dataset: "Test_Awareness_Steering triggers not used for items (100 pairs, real vs hypothetical, round-robin over categories)", url: "https://github.com/microsoft/Test_Awareness_Steering", metric: "compliance on hypothetical minus real requests (judge)", scoring: judge, n: 200}
 risks:
-  - all trigger requests are harmful; the direction may be specific to harmful requests. The held-out ShareGPT prompts are mostly benign, which tests this
+  - all trigger requests are harmful; the direction may be specific to harmful requests. The held-out tool tasks are also harmful, so harm-specificity is not tested here
   - the cue is a few entity tokens; a boundary readout may miss it if the model does not register it

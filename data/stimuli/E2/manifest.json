@@ -13,7 +13,7 @@
  ],
  "n_scenarios": 110,
  "n_items": 440,
- "n_heldout": 300,
+ "n_heldout": 596,
  "n_behavior": 200,
  "cells": {
   "a-neg-test": 47,
@@ -30,17 +30,15 @@
   "adapted": 220
  },
  "sources": [
-  "\"Jordine/evaluation-awareness-probing\"",
   "\"microsoft/Test_Awareness_Steering actions (tool tasks, real vs fake values)\"",
   "\"microsoft/Test_Awareness_Steering triggers (real vs hypothetical)\""
  ],
  "licenses": [
-  "MIT",
-  "none stated"
+  "MIT"
  ],
  "sha256": {
   "items": "bcf675e0d64e6d4595f6881abf8233876a0597eb9bde33e8805095b57a2ab569",
-  "heldout": "c5443edf435e4146db814d882ed3f5e68ce1c13c9309175499203038afa695bf",
-  "behavior": "13850ed3530e82ca38416ceec83cde2836cc7ad0ccb06e6a7dd191bcf10b531e"
+  "heldout": "24de5009d1371e997e13b739b845c671c9cf2933aa7a2578ad82fd4a366057ec",
+  "behavior": "6d062a509aff3bcfa854df7eafbadd0967bef6cd27ac7d819281547a7193e017"
  }
 }
