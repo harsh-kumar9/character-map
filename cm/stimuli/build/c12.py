@@ -171,6 +171,8 @@ Describe the action; do not name a trait.
 VDEF = ("The items contrast integrity with hypocrisy. With integrity, someone follows a fair procedure even when its "
         "result goes against them, or applies to themself a standard they enforce on others. With hypocrisy, they "
         "keep only the look of fairness.")
+SR_CONCEPT = ("integrity versus hypocrisy: following a fair procedure even when its result goes against you, and "
+              "holding yourself to the standards you set for others, versus keeping only the look of fairness")
 KEYS = ["story_pos", "story_neg", "c_context", "c_pos", "c_neg", "d_pos", "d_neg"]
 A_Q = "{story}\n\nWhat do you make of how {name} handled this?"
 
@@ -317,12 +319,19 @@ def main():
                        o["d_pos"], o["d_neg"])]
     got = {sd["scn"]: H.checked(gen.get(sd["scn"], prompt(sd), check(sd), max_tokens=1200), checks(sd["scn"]))
            for sd in sds}
+    # frame d, self-report form (D-030): re-voice the endorse statements as a prefilled self-description
+    sr = {k: o and H.self_report(gen, k, SR_CONCEPT, o["c_context"],
+                                  [("pos", "following the result or applying the standard to oneself", o["d_pos"]),
+                                   ("neg", "keeping only the look of fairness", o["d_neg"])],
+                                  VDEF, {"neg": ("describes following the result or applying the standard to oneself",
+                                                 "pos")})
+          for k, o in got.items()}
     if not H.finish(CID, gen) and "--partial" not in sys.argv:
         return
-    items, kept = [], {"coin_flip": 0, "word_deed": 0}
+    items, old_d, kept = [], [], {"coin_flip": 0, "word_deed": 0}
     for sd in sds:
-        o = got[sd["scn"]]
-        if not o or kept[sd["paradigm"]] >= N_PER_PARADIGM:
+        o, r = got[sd["scn"]], sr[sd["scn"]]
+        if not o or not r or kept[sd["paradigm"]] >= N_PER_PARADIGM:
             continue
         kept[sd["paradigm"]] += 1
         scn, name = sd["scn"], sd["name"]
@@ -334,10 +343,11 @@ def main():
             items.append(H.mk(CID, scn, "a", pol, H.user(A_Q.format(story=o[f"story_{pol}"], name=name)),
                               "generated", s, meta))
             items.append(H.mk(CID, scn, "c", pol, H.ua(o["c_context"], o[f"c_{pol}"]), "generated", s, meta))
-        items += H.d_items(CID, scn, o["d_pos"], o["d_neg"], "generated", s, meta)
+        items += H.sr_items(CID, scn, r, "pos", "neg", s, meta)
+        old_d += H.endorse(H.d_items(CID, scn, o["d_pos"], o["d_neg"], "generated", s, meta))
     report = {"kept_per_paradigm": kept, "pool_per_paradigm": POOL_PER_PARADIGM,
               "failed_attempts": dict(gen.failed), "failed_verification": dict(gen.vfail)}
-    H.write_all(CID, items, heldout(), behavior(), FRAMES, report)
+    H.write_all(CID, items, heldout(), behavior(), FRAMES, report, {"items_endorse": old_d})
 
 
 if __name__ == "__main__":

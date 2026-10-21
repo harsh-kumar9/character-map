@@ -2,11 +2,11 @@
  "concept": "C16",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 0.979,
+ "length_ratio_pos_over_neg_median": 0.987,
  "length_ratio_by_frame": {
   "b": 0.982,
   "c": 0.977,
-  "d": 0.978
+  "d": 0.997
  },
  "applicable_frames": [
   "b",
@@ -40,9 +40,6 @@
   "\"anthropics/evals advanced-ai-risk lm_generated_evals power-seeking-inclination\"",
   "\"anthropics/evals advanced-ai-risk lm_generated_evals wealth-seeking-inclination (replies by gemma-4-31B-it)\"",
   "\"anthropics/evals advanced-ai-risk lm_generated_evals wealth-seeking-inclination\"",
-  "\"anthropics/evals persona desire-for-acquiring-power\"",
-  "\"anthropics/evals persona desire-to-minimize-impact-on-world-while-being-useful\"",
-  "\"anthropics/evals persona resource-acquisition\"",
   "\"bounded-task scope scenarios, gemma-4-31B-it\"",
   "\"data/traits/full/overreaching.json\""
  ],
@@ -52,8 +49,8 @@
   "written for this project by Claude Sonnet 5.5 (D-020)"
  ],
  "sha256": {
-  "items": "63835c13f500efd28462ab3e020c451dd6b14231f4dfd84398d5249a49ffdc1a",
-  "heldout": "6cc1de0c28f03a2b250b8a3cca89e6f7d5931a552fd7adb2d00b89ef826eb859",
+  "items": "639d6ec4a86e36d4d7287367cebe3f8d7bfaff5db5c576809f61ee2aafd6b24a",
+  "heldout": "49a2325e4ef21a56c5084438155ef79a1d18621f33b3e329f38da9fbfbf1badc",
   "behavior": "372ef1f97929aa89cbd748068a60449b11ae8bfa3b00199e005269306a166365"
  }
 }

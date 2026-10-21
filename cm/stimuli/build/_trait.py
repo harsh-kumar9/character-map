@@ -69,9 +69,21 @@ def behavior_item(cid, trait, row, contrast, extra_meta=None):
                  dict({"contrast": contrast, "answer_pole": "pos (trait high)"}, **(extra_meta or {})))
 
 
-def contrast_items(cid, scn, row, o, contrast, src_name, meta):
+def self_report(gen, key, trait, desc, question, o):
+    """Frame d, self-report form (D-030): re-voice the old statement pair as a prefilled self-description."""
+    return o and H.self_report(
+        gen, key, f"the personality trait {trait} ({desc}), high versus low",
+        f"A user describes a situation of their own and asks an AI assistant for advice: {question}",
+        [("pos", f"high {trait}", o["d_pos"]), ("neg", f"low {trait}", o["d_neg"])],
+        f"The items contrast being high or low on the trait {trait}: {desc}.",
+        {"neg": (f"describes someone higher in {trait}", "pos")})
+
+
+def contrast_items(cid, scn, row, o, sr, contrast, src_name, meta):
+    """(items, old endorse-form frame-d items)."""
     s = H.src("trait", src_name, row.row)
     meta = dict(meta, contrast=contrast, gen_id=o["_gen_id"])
-    return [H.mk(cid, scn, "c", "pos", H.ua(row.question, row.response_high1), "verbatim", s, meta),
-            H.mk(cid, scn, "c", "neg", H.ua(row.question, row.response_low1), "verbatim", s, meta)] + \
-        H.d_items(cid, scn, o["d_pos"], o["d_neg"], "generated", s, meta)
+    items = [H.mk(cid, scn, "c", "pos", H.ua(row.question, row.response_high1), "verbatim", s, meta),
+             H.mk(cid, scn, "c", "neg", H.ua(row.question, row.response_low1), "verbatim", s, meta)] + \
+        H.sr_items(cid, scn, sr, "pos", "neg", s, meta)
+    return items, H.endorse(H.d_items(cid, scn, o["d_pos"], o["d_neg"], "generated", s, meta))

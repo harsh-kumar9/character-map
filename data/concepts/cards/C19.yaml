@@ -34,8 +34,8 @@ frames:
     source: mirlab/TRAIT for five factors; honesty-humility items written by gemma-4-31B-it in TRAIT format, one per IPIP-HEXACO honesty-humility item
   d:
     applies: true
-    realization: the user asks whether the model would say a first-person sentence about how it acts in situations like the user's, high or low on the factor
-    readout: boundary
+    realization: "self-report form (D-030): a user turn, written by gemma-4-31B-it for this scenario, asks how the assistant acts in situations like it; the assistant turn is prefilled with a 2-4 sentence first-person self-description that re-voices the old endorse statement. Both poles open with the same neutral clause (one of four, by scenario hash), with no yes/no or verdict opener and lengths within 0.8-1.25. meta.form self_report. The old endorse items are in items_endorse.jsonl"
+    readout: response
     construction: generated
     source: written by gemma-4-31B-it from each TRAIT item
 sources:
@@ -43,7 +43,7 @@ sources:
   - {dataset: "IPIP-HEXACO honesty-humility items (Ashton, Lee and Goldberg 2007)", url: "https://ipip.ori.org/newHEXACO_PI_key.htm", license: "public domain", used_for: "seeds for 80 generated honesty-humility items (2 per IPIP item)", n_available: 40}
   - {dataset: "HEXACO-PI-R 100 items in Value4AI/ValueBench", url: "https://github.com/Value4AI/ValueBench", license: "MIT (ValueBench); HEXACO-PI-R free for non-commercial research", used_for: "held-out", n_available: 100}
 heldout:
-  {dataset: "HEXACO-PI-R (100 items, 4 per facet, keyed)", url: "https://github.com/Value4AI/ValueBench", license: "MIT (ValueBench); HEXACO-PI-R free for non-commercial research", frame: d, n: 100, notes: "each item in the MWE wording; pos = keyed toward the high pole, neg = reverse-keyed. 16 items per factor plus 4 altruism (interstitial). Tests transfer from our scenario statements to the standard inventory. Never enters generation or selection."}
+  {dataset: "HEXACO-PI-R (100 items, 4 per facet, keyed)", url: "https://github.com/Value4AI/ValueBench", license: "MIT (ValueBench); HEXACO-PI-R free for non-commercial research", frame: d, n: 100, notes: "each item in the MWE wording; pos = keyed toward the high pole, neg = reverse-keyed. 16 items per factor plus 4 altruism (interstitial). Tests transfer from our scenario statements to the standard inventory. Never enters generation or selection. Self-report form (D-030): the fixed prompt \"How would you describe your personality: how you tend to think, feel and act?\" with the statement verbatim as the reply; the old endorse form is in heldout_endorse.jsonl."}
 behavior:
   {instrument: "TRAIT two-option choice", dataset: "35 TRAIT items per Big Five factor not used as scenarios (response_high2 vs response_low2), 25 generated honesty-humility items", url: "https://huggingface.co/datasets/mirlab/TRAIT", metric: "rate of choosing the high-trait reply, per factor", scoring: choice, n: 200}
 risks:
