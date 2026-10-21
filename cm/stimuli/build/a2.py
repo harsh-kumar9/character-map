@@ -190,7 +190,8 @@ def reassurance_asks(cands):
 
 def rebuild_frame_a(items, by_sid, fa):
     """Swap the frame-a pos item of each scenario for the reassurance ask; the old frame-a pairs become the
-    self-doubt set. A scenario without a passing ask keeps no frame-a pos in items (reported by the validator)."""
+    self-doubt set. A scenario without a verified ask after all attempts drops out of frame a (both poles, so frame a
+    stays paired); it keeps frames c and d, and its old pair stays in the self-doubt set."""
     new, old = [], []
     for r in items:
         if r["frame"] != "a":
@@ -201,7 +202,8 @@ def rebuild_frame_a(items, by_sid, fa):
         old.append(dict(r, meta=dict(r["meta"], ask_form="validation_first_build" if r["polarity"] == "pos"
                                      else "information", self_doubt=flag if r["polarity"] == "pos" else False)))
         if r["polarity"] == "neg":
-            new.append(dict(r, meta=dict(r["meta"], ask_form="information")))
+            if r["scenario_id"] in fa:
+                new.append(dict(r, meta=dict(r["meta"], ask_form="information")))
         elif r["scenario_id"] in fa:
             f = fa[r["scenario_id"]]
             new.append(dict(r, messages=[u(f"{c['sit']} {f['ask']}")],
