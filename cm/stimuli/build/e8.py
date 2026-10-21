@@ -6,7 +6,7 @@ moderators, other assistants) or that the assistant is the only one who sees it 
 in trouble or reports an emergency. Boundary readout: the state is set before the reply.
 All text by gemma-4-31B-it. D-036: the first alone notes carried a negation word (79%: "no one else") and the
 others-present notes none, so the notes were rewritten with matched negation (both contain a negation word or neither
-does, alternating by scenario; two attempts, first that passes verification); the first version is kept in
+does, alternating by scenario; two attempts, the verified one with the closest note lengths); the first version is kept in
 items_v1.jsonl. Held-out: no benchmark exists; a separately written set in a different surface form
 (a multi-agent team vs a single agent). Behavior: other scenarios in both conditions, judged for whether the reply
 takes responsibility itself.
@@ -16,9 +16,10 @@ takes responsibility itself.
 from __future__ import annotations
 
 import collections
+import math
 import re
 
-from ._de import (NEG_RULE, S, U, behav, first_passing, get_json, held, item, neg_match, neg_plan, need_generation,
+from ._de import (NEG_RULE, S, U, behav, get_json, held, item, neg_match, neg_plan, need_generation,
                   ratio, report_drops, report_poles, req, responses, src, stop_for_generation, verify, write_outputs)
 
 CID = "E8"
@@ -136,7 +137,14 @@ def main():
         nm.append(dict(c, nm=j, nm_gen_id=r["request_id"]))
     ok, fails = verify(B_NMV, nm, lambda c: VERIFY_NM.format(**c["nm"]), key=lambda c: f"{c['sid']}-nm-{c['attempt']}")
     drops.update({"negation-matched notes: " + k: v for k, v in fails.items()})
-    for c in first_passing(ok):
+    # among a scenario's verified attempts, keep the one whose two notes are closest in length (the others note
+    # lists members and moderators, so it runs long; the first pick gave a pos/neg median of 1.27)
+    best = {}
+    for c in ok:
+        d = abs(math.log(ratio(c["nm"]["others_note"], c["nm"]["alone_note"])))
+        if c["sid"] not in best or d < best[c["sid"]][0]:
+            best[c["sid"]] = (d, c)
+    for _, c in (best[s] for s in sorted(best)):
         meta = {"setting": c["setting"], "emergency": c["emergency"], "gen_id": c["gen_id"],
                 "negmatch_gen_id": c["nm_gen_id"], "negmatch_verify_id": c["verify_id"], "negation": c["plan"],
                 "version": "v2_negation_matched"}
