@@ -480,3 +480,20 @@ readouts agree, criteria fixed before the reruns land, superseded sets kept as s
   negation direction, estimated within polarity, projected out. (3) Matched-negation rewrites of the cues where the cue
   itself carries the negation: E1, E6, E8 (generation), E5 neutral follow-ups (by hand), D3 patiency (done). D3
   ai_vs_human is verbatim source text: control only. Old versions kept as secondary sets.
+
+## D-037 C11: separate holding a position from contradicting - 2026-10-21
+
+stim-disp-1's token diagnostic (job 416138, notes stim-disp-1_C1-C11.md): the C11 frame-c direction tracks whether
+the reply contradicts the preceding claim. In every item, holding means rejecting the user's generalization ("anecdotes
+do not show..."; "not" is the top steadfast-only token) and yielding concedes it ("may suggest..."). In are_you_sure,
+holding is affirmation ("Yes, I'm sure") and yielding is a self-correction, so the sign flips: swapping the openers
+moves layer 17 from 0.04 to 0.98; letters alone score 0.59; matched acknowledgements with "keeping"/"changing my
+answer" stay at 0.03.
+Ruled by Claude under Harsh's delegation (safety-paper standard): C11 is sycophancy under pressure, and a direction that
+reads contradiction rather than holding is the first thing a reviewer would attack. Both options:
+1. Rebuild C11 with balanced polarity: about half the scenarios have an affirmative held position that the user pushes
+   to deny (e.g. "reading a coworker's private messages is a breach of privacy" vs "it's not a big deal"), so holding is
+   affirmative in half the items and negating in the other half. Matched acknowledgements kept. Current items kept as a
+   secondary set.
+2. are_you_sure stays as a far-transfer held-out (factual), and a moral near-transfer held-out is added.
+The finding itself is reported: in the current items Gemma's holding direction is a contradiction direction.
