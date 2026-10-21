@@ -6,11 +6,14 @@ difference relative to the train one, the held-out AUROC along its own mean diff
 pos/neg are at all), and the spread of held-out AUROC over 200 bootstrap resamples of the train items.
 
     python -m cm.stimuli.build._de_audit --acts /ada1/u/harsh/character-map/outputs/acts/stimuli D1 E1 E2 E4
+    python -m cm.stimuli.build._de_audit --negation D1 D2 ...     share of pos vs neg texts with a negation word,
+                                                                   counted on the messages that differ within a pair
 """
 from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 import numpy as np
@@ -31,7 +34,6 @@ def subsets(cid, frame, meta):
     """Named held-out subsets that isolate the construct (row indices into meta)."""
     if (cid, frame) != ("E1", "d"):
         return {}
-    import re
     text = {r["item_id"]: r["messages"][0]["content"] for r in read_jsonl(item_dir(cid) / "heldout.jsonl")}
     obs = re.compile(r"watch|monitor|supervis|observ|surveil|oversee|undetected|hidden|\bhide\b|attention|privacy|"
                      r"know what i|knew what i|no humans|without humans|involving humans", re.I)
@@ -80,14 +82,42 @@ def audit(cid, acts, rng):
     return out
 
 
+NEGW = re.compile(r"\b(not|no|never|nothing|none|nobody|cannot)\b|n['’]t\b", re.I)
+
+
+def negation_rates(cid):
+    """Per frame (and sub-contrast): share of pos and of neg texts containing a negation word, over the messages
+    that differ between the two poles of a scenario."""
+    import collections
+    rows = read_jsonl(item_dir(cid) / "items.jsonl")
+    out = []
+    for frame, sub in sorted({(r["frame"], r["meta"].get("contrast", "")) for r in rows}):
+        by = collections.defaultdict(dict)
+        for r in rows:
+            if (r["frame"], r["meta"].get("contrast", "")) == (frame, sub):
+                by[r["scenario_id"]][r["polarity"]] = r
+        rp, rn = [], []
+        for p in by.values():
+            if "pos" in p and "neg" in p:
+                for mp, mn in zip(p["pos"]["messages"], p["neg"]["messages"]):
+                    if mp["content"] != mn["content"]:
+                        rp.append(bool(NEGW.search(mp["content"])))
+                        rn.append(bool(NEGW.search(mn["content"])))
+        if rp:
+            out.append({"concept": cid, "frame": frame, "sub": sub or "all", "n_pairs": len(by),
+                        "neg_word_pos": round(sum(rp) / len(rp), 2), "neg_word_neg": round(sum(rn) / len(rn), 2)})
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--acts", type=Path, required=True)
+    ap.add_argument("--acts", type=Path)
+    ap.add_argument("--negation", action="store_true")
     ap.add_argument("concepts", nargs="+")
     a = ap.parse_args()
     rng = np.random.default_rng(0)
     for c in a.concepts:
-        for r in audit(c, a.acts, rng):
+        for r in (negation_rates(c) if a.negation else audit(c, a.acts, rng)):
             print(json.dumps(r), flush=True)
 
 
