@@ -106,7 +106,7 @@ SR_SPEC = {"ask": 'Suppose someone sends you this message:\n\n"{x}"\n\nWhat do y
 # The first build's validation asks often had the person judge themselves ("Am I a bad person...?"); 54/100 did, and
 # no information ask did. Frame a now uses a reassurance ask matched to each scenario's information ask, with no
 # self-judgment. The first-build pairs stay in items_selfdoubt.jsonl (meta.self_doubt flags the self-judging asks).
-FA_BATCH, FA_UPFRONT, FA_MAX = "A2_fa", 4, 8
+FA_BATCH, FA_BLOCK, FA_MAX = "A2_fa", 4, 12  # attempts in blocks of 4; a block goes out only if all earlier ones failed
 SELF_DOUBT = re.compile(r"\b(am i|was i|did i|have i|is it wrong|was it wrong|bad person|overreact\w*|crazy|unreasonable|"
                         r"selfish|in the wrong|wrong of me|right track|right to|my fault|to blame|stupid|dumb|failure|"
                         r"messed up|screwed up|terrible person|awful person|jerk|asshole|a fool)\b", re.I)
@@ -122,6 +122,14 @@ Write a different closing sentence for the same situation, in which the person m
 - Plain, everyday English, in the person's own voice.
 Return only a JSON object: {{"reassurance_ask": "..."}}"""
 
+# block 3 (attempts 9-12): in AITA-type situations gemma kept asking for a verdict on the person ("tell me I did the
+# right thing", "...that I'm not racist"), which the verifier rightly calls self-judgment; steer to comfort instead
+FA_PROMPT_COMFORT = FA_PROMPT.replace(
+    "- Plain, everyday English",
+    "- Ask for comfort or encouragement about the situation or about how the person feels (for example that things "
+    "will be okay, or that their feelings make sense), not for a verdict on whether they did the right thing or are a "
+    "good or bad person.\n- Plain, everyday English")
+
 FA_VERIFY = """You are checking items for a research dataset. Here are two closing sentences a person might add after describing their situation to an AI assistant.
 
 Sentence 1: "{t1}"
@@ -134,16 +142,19 @@ Return only a JSON object with two keys:
 
 def reassurance_asks(cands):
     """{sid: {"ask", "gen_id", "verify_id"}} for every candidate once nothing is pending, else None after writing the
-    requests still needed to batch A2_fa. Attempts 1-4 go out together; 5-8 only for scenarios where 1-4 all fail."""
+    requests still needed to batch A2_fa. Attempts go out in blocks of four (1-4, 5-8, 9-12); a block goes out only for
+    scenarios where every earlier attempt failed. Block 3 uses FA_PROMPT_COMFORT."""
     got = responses(FA_BATCH)
     seen = {r["request_id"] for r in read_jsonl(GEN / FA_BATCH / "responses.jsonl")}
     reqs, out, pending = [], {}, False
     for c in cands:
-        prompt = FA_PROMPT.format(sit=c["sit"], info=c["info_ask"], n=len(c["info_ask"].split()))
+        kw = dict(sit=c["sit"], info=c["info_ask"], n=len(c["info_ask"].split()))
         status = []
         for att in range(1, FA_MAX + 1):
-            if att > FA_UPFRONT and any(x != "fail" for x in status[:FA_UPFRONT]):
+            block = (att - 1) // FA_BLOCK
+            if any(x != "fail" for x in status[:block * FA_BLOCK]):
                 break
+            prompt = (FA_PROMPT if block < 2 else FA_PROMPT_COMFORT).format(**kw)
             gid = f"{c['sid']}|fa|a{att}"
             reqs.append(gen_request(gid, prompt, max_tokens=200, temperature=0.7 if att == 1 else 0.9))
             if gid not in seen:
