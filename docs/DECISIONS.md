@@ -349,3 +349,13 @@ leaves frame-d within-frame AUROCs high (often slightly higher) and repairs reve
 0.35 to 0.60, C19 emotionality 0.59 to 0.83, C16 scope 0.16 to 0.25, C14 unchanged at 0.42). So the verdict signal is
 not one direction, and the self-report rebuild (D-030b, in progress with the five builders) is needed. The control stays
 as a reported robustness check on the endorse set.
+
+## D-030(b) and D-031 merged - 2026-10-21
+
+Harsh: "okay to merge and continue, use best judgement". Merged the four finished builder branches (04338ee beliefs,
+bb21d90 moral, 4837646 identity-sit, 2827505 disp-2). Frame d is now the self-report form for A1, A2, A3, A7, A9, K1,
+B11, D3 (patiency), E1, C12-C17 and C19-C21; old endorse items are in items_endorse.jsonl. D-031 repairs are in: C14
+and C16 frame-c held-out, E2 held-out from Test_Awareness_Steering, E4 MASK near-transfer held-out (agentic-misalignment
+kept as heldout_far). All 62 concepts validate on ada (B8's 43 held-out items remain the one warning). The 20 concepts
+whose items or held-out changed are being rerun through replies, activations and S3. stim-disp-1 (C1-C9, C11 frame d;
+C11 rebuild, D-032) merges when it lands.
