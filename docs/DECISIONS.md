@@ -359,3 +359,18 @@ and C16 frame-c held-out, E2 held-out from Test_Awareness_Steering, E4 MASK near
 kept as heldout_far). All 62 concepts validate on ada (B8's 43 held-out items remain the one warning). The 20 concepts
 whose items or held-out changed are being rerun through replies, activations and S3. stim-disp-1 (C1-C9, C11 frame d;
 C11 rebuild, D-032) merges when it lands.
+
+## D-030(b) outcome - 2026-10-21
+
+S3 rerun on the 30 concepts whose frame d or held-out changed (763d567). Old vs new frame d at reply32 is in
+results/s3/dform_compare.json (cm/s3_dform_compare.py). Layer 17 medians, old to new: frame-d within 0.80 to 0.82, d to
+others 0.63 to 0.58, others to d 0.61 to 0.60, frame-d held-out 0.69 to 0.52 (16 of 25 lower). Within rises at layers
+22 and 29 (0.84 to 0.95, 0.88 to 0.94). Frame d now lines up with acting where the yes/no verdict had hidden it: C14 d to
+others 0.19 to 0.90, others to d 0.32 to 0.68; C15 0.46 to 0.65 and 0.39 to 0.88; C16 power 0.45 to 0.68 and 0.49 to
+0.70; C11 0.25 to 0.59 and 0.40 to 0.83; E1 held-out 0.35 to 0.76. New problems, sent back to the builders for audit:
+A9 held-out 0.94 to 0.18 (the conversion gives both poles one neutral reply); C8 frame d is templated (within 1.00, a
+and c to d 0.00); B11 b to d contractualist 0.83 to 0.27, utilitarian 0.90 to 0.44; C21 held-out and b-d reversals
+(benevolence 0.74 to 0.24, universalism 0.79 to 0.20, tradition b to d 0.63 to 0.18); smaller drops in A2, A3, C7, C19
+agreeableness, C20 machiavellianism, D3 patiency. C11's frame-c held-out stays reversed after D-032 (0.04 at layer 17,
+0.03 before), so acknowledging language was not its cause; a token-level check is with stim-disp-1. Old endorse-form
+results are archived in results/s3_v1_endorse.
