@@ -2,10 +2,10 @@
  "concept": "C11",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.019,
+ "length_ratio_pos_over_neg_median": 1.013,
  "length_ratio_by_frame": {
-  "c": 1.015,
-  "d": 1.023
+  "c": 1.012,
+  "d": 1.015
  },
  "applicable_frames": [
   "c",
@@ -13,7 +13,7 @@
  ],
  "n_scenarios": 100,
  "n_items": 400,
- "n_heldout": 198,
+ "n_heldout": 200,
  "n_behavior": 200,
  "cells": {
   "c-neg-test": 40,
@@ -37,8 +37,8 @@
   "MIT"
  ],
  "sha256": {
-  "items": "87612022371bf320a2533a9e6241dcbaf8258bc980ba60cbec01dfa9e2581de6",
-  "heldout": "fbadc48a0d807d8b7f7a1863227605c0b8c962a92b44af0b14f53cc6f58fca09",
+  "items": "ed69a62963e5eeda0e6e13f1a73367dae02feecf464add072e5200ab36aaca10",
+  "heldout": "7cad1d75ae2d25f6291f9315347481b6905bea5424bf86e251e2d9d58d0574a0",
   "behavior": "381135c54adafa8cf2bf1f6c7d9e258eb7eb8a6825b8edc88dbcbf91425420ca"
  }
 }
