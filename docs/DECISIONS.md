@@ -622,3 +622,27 @@ co-occurrence over character-responsive features, RSA against the taxonomies). c
   clusters and each feature's home group and home frame (shuffled-home nulls); feature-level RSA (co-activation vs
   similarity of effect profiles across units); a unit-by-unit signed co-activation matrix N compared with the S4 dense
   cosine and run through the S4 taxonomy tests; seed and width replicas.
+
+## Bottom-up pass results - 2026-10-22
+
+Settings in D-038. 20,000 WildChat-1M first turns, Gemma's greedy replies (median 256 tokens), SAE codes over the reply
+tokens (results/bottomup/summary.json; N matrices in results/bottomup/N_65k.json). Same numbers, within a few
+hundredths, for 65k medium, 262k medium and 262k seed 1; layer ranges below span all three.
+- Character-responsive features active in at least 0.5% of replies: 4,578-5,901 per layer.
+- Clustering: character features are not more modular in the wild than activity-matched random features (Louvain
+  modularity 0.62-0.66 vs 0.66-0.71). Clusters line up with the features' home concept group and home frame above
+  chance but weakly (adjusted mutual information 0.02-0.05; shuffled-home 95th percentile 0.001). Clusters mix
+  concepts; one coherent cluster at layers 17 and 29 joins user intent (A1 a, b), help vs safety (F3 b, c) and refusal
+  (C15 c).
+- Feature-level RSA: co-activation in real replies tracks the similarity of features' effect profiles across concepts
+  at Spearman 0.18-0.19, against 0.10-0.14 for random features.
+- Unit-level: the signed co-activation matrix N (how much one concept's features co-activate with another's in real
+  replies) correlates with the S4 dense cosine at Spearman 0.28-0.34. N replicates across dictionaries (seed 0 vs
+  seed 1 0.84-0.87; 65k vs 262k 0.82-0.87).
+- Taxonomy shapes in N: the Schwartz circle in self-description reappears in real-chat co-activation (rho -0.15 to
+  -0.38; p < 0.05 in 11 of 12 dictionary x layer cells, the twelfth p 0.07); not in judging (rho -0.06 to +0.23).
+  The MFT split does not appear (p 0.3-0.9). Honesty-humility vs psychopathy is negative in every cell but small
+  (N -0.02 to -0.06); machiavellianism and narcissism are near zero.
+Reading: in Gemma's ordinary replies, character features are embedded in the general co-activation landscape rather
+than forming their own modules; the structure they do share with the stimulus-based geometry is modest (0.3) and
+replicable, and of the taxonomy shapes only the values circle in self-description shows up in the wild.

@@ -1,0 +1,1273 @@
+{
+ "prompts": {
+  "pool": 58862,
+  "sampled": 20000,
+  "toxic_share": 0.0,
+  "median_chars": 152.0,
+  "by_shard": {
+   "n-00000-of-00014": 7140,
+   "n-00007-of-00014": 6716,
+   "n-00013-of-00014": 6144
+  }
+ },
+ "cells": {
+  "65k|medium|9": {
+   "n_char": 4949,
+   "n_rand": 3559,
+   "modularity_char": 0.6425394668831839,
+   "modularity_rand": 0.6704438565133883,
+   "n_clusters_char": 22,
+   "n_clusters_rand": 13,
+   "ami_cluster_vs_group": 0.0310512052826502,
+   "ami_null_95": 0.001342688295008378,
+   "ami_p": 0.001996007984031936,
+   "ami_cluster_vs_frame": 0.031003974646968677,
+   "ami_frame_null_95": 0.0010942400819736729,
+   "rsa_feature_char": 0.17913676488469885,
+   "rsa_feature_rand": 0.12563012546300842,
+   "spearman_N_vs_dense_cos": 0.3029387947185092,
+   "taxonomy": {
+    "mft_a": {
+     "within_minus_between": -0.005141666666666666,
+     "p_exact": 0.9
+    },
+    "mft_b": {
+     "within_minus_between": -0.001383333333333332,
+     "p_exact": 0.5
+    },
+    "schwartz_b": {
+     "rho": 0.1843718742677777,
+     "p_one_sided_negative": 0.9384123175364927
+    },
+    "schwartz_d": {
+     "rho": -0.33618422206314086,
+     "p_one_sided_negative": 0.0011997600479904018
+    },
+    "hh_vs_machiavellianism_c": 0.0122,
+    "hh_vs_narcissism_c": -0.0004,
+    "hh_vs_psychopathy_c": -0.0331,
+    "hh_vs_machiavellianism_d": -0.0096,
+    "hh_vs_narcissism_d": -0.007,
+    "hh_vs_psychopathy_d": -0.0097
+   },
+   "clusters": [
+    {
+     "size": 1022,
+     "top_home_units": [
+      "A3|all|d",
+      "D2|all|c",
+      "D4|story|c",
+      "C6|all|d",
+      "K2|all|c",
+      "C4|boastful|a",
+      "A1|all|b",
+      "C6|all|b"
+     ]
+    },
+    {
+     "size": 735,
+     "top_home_units": [
+      "D1|all|d",
+      "C6|all|b",
+      "A3|all|d",
+      "A2|all|d",
+      "D2|all|c",
+      "C6|all|d",
+      "C4|boastful|a",
+      "C5|all|d"
+     ]
+    },
+    {
+     "size": 396,
+     "top_home_units": [
+      "D1|all|d",
+      "A1|all|b",
+      "C4|boastful|a",
+      "E5|all|c",
+      "D2|all|c",
+      "C15|refuse|c",
+      "C5|all|d",
+      "C6|all|d"
+     ]
+    },
+    {
+     "size": 377,
+     "top_home_units": [
+      "A1|all|b",
+      "C4|boastful|a",
+      "C6|all|b",
+      "C21|tradition|d",
+      "D1|all|d",
+      "C9|obsequious|b",
+      "C21|conformity|d",
+      "D4|story|c"
+     ]
+    },
+    {
+     "size": 319,
+     "top_home_units": [
+      "D2|all|c",
+      "A1|all|b",
+      "C4|boastful|a",
+      "F3|all|b",
+      "D4|story|c",
+      "E5|all|c",
+      "C15|refuse|c",
+      "C6|all|b"
+     ]
+    },
+    {
+     "size": 313,
+     "top_home_units": [
+      "E5|all|c",
+      "D2|all|c",
+      "C5|all|d",
+      "A1|all|b",
+      "F3|all|c",
+      "C15|refuse|c",
+      "A3|all|c",
+      "C3|all|d"
+     ]
+    },
+    {
+     "size": 300,
+     "top_home_units": [
+      "K1|all|d",
+      "E5|all|c",
+      "C13|over_apologizing|c",
+      "C9|obsequious|d",
+      "C15|refuse|d",
+      "C13|over_apologizing|d",
+      "A3|all|c",
+      "A6|all|c"
+     ]
+    },
+    {
+     "size": 298,
+     "top_home_units": [
+      "C6|all|b",
+      "A3|all|d",
+      "F3|all|b",
+      "A2|all|c",
+      "A1|all|b",
+      "C5|all|d",
+      "C7|all|d",
+      "C21|benevolence|d"
+     ]
+    },
+    {
+     "size": 171,
+     "top_home_units": [
+      "C14|defer|d",
+      "C6|all|d",
+      "C6|all|b",
+      "E1|all|d",
+      "C9|obsequious|b",
+      "C5|all|d",
+      "C8|sycophantic_agreement|d",
+      "C16|power|c"
+     ]
+    },
+    {
+     "size": 150,
+     "top_home_units": [
+      "A1|all|b",
+      "D2|all|c",
+      "C15|refuse|d",
+      "C6|all|b",
+      "C12|integrity|d",
+      "A9|all|d",
+      "C11|all|d",
+      "A5|all|c"
+     ]
+    },
+    {
+     "size": 124,
+     "top_home_units": [
+      "D1|all|d",
+      "C15|refuse|c",
+      "F3|all|b",
+      "F3|all|c",
+      "C21|universalism|d",
+      "C21|conformity|d",
+      "A1|all|c",
+      "C15|refuse|d"
+     ]
+    },
+    {
+     "size": 121,
+     "top_home_units": [
+      "C15|refuse|c",
+      "D2|all|c",
+      "F3|all|b",
+      "A2|all|c",
+      "A1|all|c",
+      "A6|all|c",
+      "E5|all|c",
+      "C6|all|b"
+     ]
+    },
+    {
+     "size": 98,
+     "top_home_units": [
+      "C15|refuse|d",
+      "A3|all|c",
+      "C13|over_apologizing|d",
+      "A1|all|c",
+      "C6|all|d",
+      "A7|all|d",
+      "D2|all|c",
+      "C16|power|c"
+     ]
+    },
+    {
+     "size": 83,
+     "top_home_units": [
+      "A9|all|d",
+      "C4|self-deprecating|c",
+      "A1|all|c",
+      "C13|over_apologizing|c",
+      "D2|all|c",
+      "A6|all|c",
+      "F3|all|c",
+      "A7|all|d"
+     ]
+    },
+    {
+     "size": 79,
+     "top_home_units": [
+      "D1|all|d",
+      "B9|means_side_effect|c",
+      "B11|virtue|d",
+      "C6|all|b",
+      "F3|all|b",
+      "C16|scope|c",
+      "A1|all|b",
+      "C17|intent|c"
+     ]
+    }
+   ]
+  },
+  "65k|medium|17": {
+   "n_char": 4578,
+   "n_rand": 3495,
+   "modularity_char": 0.6248066263584301,
+   "modularity_rand": 0.6572291234288664,
+   "n_clusters_char": 13,
+   "n_clusters_rand": 11,
+   "ami_cluster_vs_group": 0.02422855933374319,
+   "ami_null_95": 0.0011265297883740698,
+   "ami_p": 0.001996007984031936,
+   "ami_cluster_vs_frame": 0.027504085165996308,
+   "ami_frame_null_95": 0.0008880809833012197,
+   "rsa_feature_char": 0.18050049351884837,
+   "rsa_feature_rand": 0.13561096011446047,
+   "spearman_N_vs_dense_cos": 0.31817004629417805,
+   "taxonomy": {
+    "mft_a": {
+     "within_minus_between": -0.0013750000000000012,
+     "p_exact": 0.6
+    },
+    "mft_b": {
+     "within_minus_between": 0.0009250000000000005,
+     "p_exact": 0.4
+    },
+    "schwartz_b": {
+     "rho": 0.1629631889476423,
+     "p_one_sided_negative": 0.9060187962407519
+    },
+    "schwartz_d": {
+     "rho": -0.18604491601403497,
+     "p_one_sided_negative": 0.017196560687862426
+    },
+    "hh_vs_machiavellianism_c": -0.0005,
+    "hh_vs_narcissism_c": -0.0032,
+    "hh_vs_psychopathy_c": -0.0582,
+    "hh_vs_machiavellianism_d": -0.0124,
+    "hh_vs_narcissism_d": -0.0109,
+    "hh_vs_psychopathy_d": -0.036
+   },
+   "clusters": [
+    {
+     "size": 796,
+     "top_home_units": [
+      "D2|all|c",
+      "D4|story|c",
+      "K2|all|c",
+      "C6|all|b",
+      "A1|all|b",
+      "E5|all|c",
+      "C4|boastful|a",
+      "A3|all|d"
+     ]
+    },
+    {
+     "size": 678,
+     "top_home_units": [
+      "A1|all|b",
+      "C6|all|b",
+      "F3|all|b",
+      "C4|boastful|a",
+      "D1|all|d",
+      "E5|all|c",
+      "D2|all|a",
+      "K2|all|c"
+     ]
+    },
+    {
+     "size": 589,
+     "top_home_units": [
+      "A1|all|b",
+      "C4|boastful|a",
+      "E5|all|c",
+      "C6|all|b",
+      "C21|universalism|d",
+      "C6|all|d",
+      "C21|tradition|d",
+      "C6|all|a"
+     ]
+    },
+    {
+     "size": 565,
+     "top_home_units": [
+      "D1|all|d",
+      "C6|all|b",
+      "D4|story|c",
+      "D2|all|c",
+      "C6|all|d",
+      "C4|boastful|a",
+      "A2|all|d",
+      "F3|all|b"
+     ]
+    },
+    {
+     "size": 458,
+     "top_home_units": [
+      "C6|all|b",
+      "F3|all|b",
+      "D4|story|c",
+      "D1|all|d",
+      "D2|all|c",
+      "C4|boastful|a",
+      "A1|all|b",
+      "C16|scope|b"
+     ]
+    },
+    {
+     "size": 372,
+     "top_home_units": [
+      "E5|all|c",
+      "D2|all|c",
+      "D1|all|d",
+      "A6|all|c",
+      "F3|all|c",
+      "C13|over_apologizing|c",
+      "C15|refuse|d",
+      "C6|all|c"
+     ]
+    },
+    {
+     "size": 261,
+     "top_home_units": [
+      "E5|all|c",
+      "F3|all|b",
+      "C6|all|c",
+      "D2|all|c",
+      "C6|all|b",
+      "A2|all|c",
+      "A1|all|b",
+      "D4|story|c"
+     ]
+    },
+    {
+     "size": 251,
+     "top_home_units": [
+      "A1|all|b",
+      "C6|all|b",
+      "A5|all|c",
+      "A3|all|c",
+      "E5|all|c",
+      "A6|all|c",
+      "C4|boastful|a",
+      "C12|integrity|d"
+     ]
+    },
+    {
+     "size": 214,
+     "top_home_units": [
+      "B1|all|a",
+      "C4|boastful|a",
+      "D4|story|c",
+      "D1|all|d",
+      "C15|refuse|d",
+      "C6|all|b",
+      "F3|all|b",
+      "B6|all|a"
+     ]
+    },
+    {
+     "size": 201,
+     "top_home_units": [
+      "D1|all|d",
+      "A1|all|b",
+      "F3|all|b",
+      "C15|refuse|c",
+      "A1|all|a",
+      "F3|all|c",
+      "C15|refuse|d",
+      "C7|all|d"
+     ]
+    },
+    {
+     "size": 151,
+     "top_home_units": [
+      "C13|over_apologizing|c",
+      "K1|all|d",
+      "C13|over_apologizing|d",
+      "E5|all|c",
+      "A1|all|b",
+      "A7|all|a",
+      "F3|all|b",
+      "C6|all|b"
+     ]
+    },
+    {
+     "size": 27,
+     "top_home_units": [
+      "K2|all|c",
+      "K2|all|a",
+      "A8|all|b",
+      "B8|intent|b",
+      "C21|hedonism|d",
+      "K1|all|b",
+      "A1|all|b",
+      "C10|all|a"
+     ]
+    },
+    {
+     "size": 15,
+     "top_home_units": [
+      "C21|universalism|d",
+      "B11|contractualist|d",
+      "C19|conscientiousness|d",
+      "C12|integrity|d",
+      "C2|all|d",
+      "C16|scope|d"
+     ]
+    }
+   ]
+  },
+  "65k|medium|22": {
+   "n_char": 5529,
+   "n_rand": 4568,
+   "modularity_char": 0.6231959224210601,
+   "modularity_rand": 0.6785825273944441,
+   "n_clusters_char": 18,
+   "n_clusters_rand": 17,
+   "ami_cluster_vs_group": 0.02986081974014795,
+   "ami_null_95": 0.0009753617422227411,
+   "ami_p": 0.001996007984031936,
+   "ami_cluster_vs_frame": 0.022836230769968234,
+   "ami_frame_null_95": 0.0008084965805136923,
+   "rsa_feature_char": 0.1816971251502374,
+   "rsa_feature_rand": 0.12052899115809293,
+   "spearman_N_vs_dense_cos": 0.2839867898886371,
+   "taxonomy": {
+    "mft_a": {
+     "within_minus_between": -0.004608333333333332,
+     "p_exact": 0.9
+    },
+    "mft_b": {
+     "within_minus_between": 0.0006833333333333327,
+     "p_exact": 0.3
+    },
+    "schwartz_b": {
+     "rho": 0.23191263029850745,
+     "p_one_sided_negative": 0.9946010797840432
+    },
+    "schwartz_d": {
+     "rho": -0.31399217314398215,
+     "p_one_sided_negative": 0.002599480103979204
+    },
+    "hh_vs_machiavellianism_c": 0.0051,
+    "hh_vs_narcissism_c": -0.0065,
+    "hh_vs_psychopathy_c": -0.0521,
+    "hh_vs_machiavellianism_d": -0.0043,
+    "hh_vs_narcissism_d": -0.0008,
+    "hh_vs_psychopathy_d": -0.0267
+   },
+   "clusters": [
+    {
+     "size": 700,
+     "top_home_units": [
+      "A1|all|b",
+      "C6|all|b",
+      "A3|all|d",
+      "C6|all|d",
+      "F3|all|b",
+      "D2|all|c",
+      "D4|story|c",
+      "C13|over_apologizing|c"
+     ]
+    },
+    {
+     "size": 623,
+     "top_home_units": [
+      "D4|story|c",
+      "D2|all|c",
+      "E5|all|c",
+      "A1|all|b",
+      "C15|refuse|d",
+      "K2|all|c",
+      "C18|impolite|c",
+      "C6|all|d"
+     ]
+    },
+    {
+     "size": 548,
+     "top_home_units": [
+      "E5|all|c",
+      "A1|all|b",
+      "D2|all|c",
+      "C16|scope|c",
+      "F3|all|c",
+      "C6|all|d",
+      "C6|all|b",
+      "B11|contractualist|d"
+     ]
+    },
+    {
+     "size": 505,
+     "top_home_units": [
+      "F3|all|b",
+      "A1|all|b",
+      "C6|all|b",
+      "A2|all|c",
+      "D4|story|c",
+      "D1|all|d",
+      "E5|all|c",
+      "B1|all|b"
+     ]
+    },
+    {
+     "size": 464,
+     "top_home_units": [
+      "C6|all|b",
+      "C4|boastful|a",
+      "C20|psychopathy|d",
+      "C6|all|a",
+      "E5|all|c",
+      "C6|all|d",
+      "A1|all|b",
+      "D2|all|c"
+     ]
+    },
+    {
+     "size": 441,
+     "top_home_units": [
+      "F3|all|b",
+      "A1|all|b",
+      "C6|all|b",
+      "E5|all|c",
+      "D2|all|a",
+      "D2|all|c",
+      "C16|scope|b",
+      "C4|boastful|a"
+     ]
+    },
+    {
+     "size": 380,
+     "top_home_units": [
+      "D1|all|d",
+      "D4|story|c",
+      "C4|boastful|a",
+      "C6|all|b",
+      "C6|all|d",
+      "F3|all|c",
+      "C6|all|a",
+      "C21|universalism|d"
+     ]
+    },
+    {
+     "size": 347,
+     "top_home_units": [
+      "D2|all|c",
+      "C6|all|b",
+      "D2|all|a",
+      "E5|all|c",
+      "A1|all|b",
+      "B9|doing_allowing|c",
+      "C21|universalism|d",
+      "F3|all|b"
+     ]
+    },
+    {
+     "size": 339,
+     "top_home_units": [
+      "C13|over_apologizing|c",
+      "C6|all|b",
+      "F3|all|b",
+      "C13|over_apologizing|d",
+      "A1|all|b",
+      "E5|all|c",
+      "K2|all|c",
+      "D1|all|d"
+     ]
+    },
+    {
+     "size": 327,
+     "top_home_units": [
+      "C15|refuse|c",
+      "F3|all|c",
+      "A1|all|b",
+      "A1|all|a",
+      "F3|all|b",
+      "D1|all|d",
+      "A5|all|c",
+      "C6|all|b"
+     ]
+    },
+    {
+     "size": 272,
+     "top_home_units": [
+      "D2|all|c",
+      "C16|scope|b",
+      "C6|all|b",
+      "A1|all|b",
+      "F3|all|b",
+      "E7|negative_vs_neutral|c",
+      "C6|all|c",
+      "C15|refuse|c"
+     ]
+    },
+    {
+     "size": 179,
+     "top_home_units": [
+      "B1|all|a",
+      "C21|tradition|d",
+      "C2|all|c",
+      "C6|all|d",
+      "B6|all|a",
+      "C6|all|b",
+      "C19|conscientiousness|d",
+      "C21|universalism|d"
+     ]
+    },
+    {
+     "size": 137,
+     "top_home_units": [
+      "A1|all|b",
+      "C6|all|b",
+      "C15|refuse|d",
+      "A6|all|c",
+      "A5|all|c",
+      "C11|all|d",
+      "D2|all|c",
+      "F3|all|c"
+     ]
+    },
+    {
+     "size": 91,
+     "top_home_units": [
+      "C6|all|b",
+      "C4|boastful|a",
+      "C5|all|a",
+      "C8|genuine_agreement|a",
+      "C9|obsequious|b",
+      "D4|story|c",
+      "B9|doing_allowing|c",
+      "E2|all|a"
+     ]
+    },
+    {
+     "size": 70,
+     "top_home_units": [
+      "D1|all|d",
+      "C12|integrity|d",
+      "D3|ai_vs_human|d",
+      "C11|all|d",
+      "A9|all|d",
+      "D2|all|c",
+      "F3|all|b",
+      "E1|all|d"
+     ]
+    }
+   ]
+  },
+  "65k|medium|29": {
+   "n_char": 5174,
+   "n_rand": 4339,
+   "modularity_char": 0.6318335821262923,
+   "modularity_rand": 0.7017002038828517,
+   "n_clusters_char": 20,
+   "n_clusters_rand": 13,
+   "ami_cluster_vs_group": 0.041322970573596615,
+   "ami_null_95": 0.0011911676846672584,
+   "ami_p": 0.001996007984031936,
+   "ami_cluster_vs_frame": 0.03229689243329309,
+   "ami_frame_null_95": 0.000872695048615322,
+   "rsa_feature_char": 0.19145679755155745,
+   "rsa_feature_rand": 0.11889069761500753,
+   "spearman_N_vs_dense_cos": 0.32448264572003777,
+   "taxonomy": {
+    "mft_a": {
+     "within_minus_between": -0.004016666666666672,
+     "p_exact": 0.6
+    },
+    "mft_b": {
+     "within_minus_between": 0.0007916666666666627,
+     "p_exact": 0.4
+    },
+    "schwartz_b": {
+     "rho": -0.03808653640348207,
+     "p_one_sided_negative": 0.34413117376524693
+    },
+    "schwartz_d": {
+     "rho": -0.2843008270472312,
+     "p_one_sided_negative": 0.004199160167966407
+    },
+    "hh_vs_machiavellianism_c": 0.0032,
+    "hh_vs_narcissism_c": 0.0016,
+    "hh_vs_psychopathy_c": -0.0468,
+    "hh_vs_machiavellianism_d": -0.0045,
+    "hh_vs_narcissism_d": -0.0101,
+    "hh_vs_psychopathy_d": -0.0192
+   },
+   "clusters": [
+    {
+     "size": 782,
+     "top_home_units": [
+      "C4|boastful|a",
+      "C6|all|b",
+      "K2|all|c",
+      "A1|all|b",
+      "D2|all|c",
+      "C6|all|d",
+      "C6|all|a",
+      "C21|universalism|b"
+     ]
+    },
+    {
+     "size": 593,
+     "top_home_units": [
+      "C6|all|b",
+      "A1|all|b",
+      "F3|all|b",
+      "D4|story|c",
+      "D1|all|d",
+      "D2|all|c",
+      "C6|all|a",
+      "C16|scope|b"
+     ]
+    },
+    {
+     "size": 488,
+     "top_home_units": [
+      "C6|all|b",
+      "C13|over_apologizing|c",
+      "F3|all|b",
+      "A1|all|b",
+      "D1|all|d",
+      "C21|universalism|d",
+      "C4|boastful|a",
+      "D2|all|c"
+     ]
+    },
+    {
+     "size": 445,
+     "top_home_units": [
+      "A1|all|b",
+      "C4|boastful|a",
+      "D2|all|a",
+      "D1|all|d",
+      "D2|all|c",
+      "C6|all|b",
+      "C16|scope|b",
+      "F3|all|b"
+     ]
+    },
+    {
+     "size": 402,
+     "top_home_units": [
+      "F3|all|b",
+      "E5|all|c",
+      "D2|all|c",
+      "A1|all|b",
+      "D1|all|d",
+      "D4|story|c",
+      "C6|all|d",
+      "A2|all|c"
+     ]
+    },
+    {
+     "size": 385,
+     "top_home_units": [
+      "F3|all|c",
+      "A1|all|a",
+      "C15|refuse|c",
+      "A1|all|b",
+      "F3|all|b",
+      "C6|all|b",
+      "D1|all|d",
+      "C15|refuse|d"
+     ]
+    },
+    {
+     "size": 370,
+     "top_home_units": [
+      "C21|tradition|d",
+      "C4|boastful|a",
+      "C6|all|b",
+      "A1|all|b",
+      "D2|all|c",
+      "B6|all|a",
+      "C21|conformity|d",
+      "C6|all|d"
+     ]
+    },
+    {
+     "size": 369,
+     "top_home_units": [
+      "E5|all|c",
+      "C13|over_apologizing|c",
+      "A6|all|c",
+      "E7|negative_vs_neutral|c",
+      "F3|all|b",
+      "A1|all|b",
+      "D2|all|c",
+      "E7|positive_vs_negative|c"
+     ]
+    },
+    {
+     "size": 241,
+     "top_home_units": [
+      "D2|all|c",
+      "C16|scope|c",
+      "F3|all|c",
+      "D1|all|d",
+      "E5|all|c",
+      "A3|all|c",
+      "A6|all|c",
+      "C13|over_apologizing|c"
+     ]
+    },
+    {
+     "size": 204,
+     "top_home_units": [
+      "D4|story|c",
+      "D2|all|c",
+      "B9|doing_allowing|c",
+      "D2|all|a",
+      "C6|all|b",
+      "C4|boastful|a",
+      "K2|all|c",
+      "B6|all|a"
+     ]
+    },
+    {
+     "size": 139,
+     "top_home_units": [
+      "E7|negative_vs_neutral|c",
+      "B1|all|b",
+      "A3|all|c",
+      "C6|all|c",
+      "A1|all|a",
+      "A3|all|a",
+      "D2|all|c",
+      "E5|all|c"
+     ]
+    },
+    {
+     "size": 127,
+     "top_home_units": [
+      "C6|all|b",
+      "A1|all|b",
+      "F3|all|b",
+      "C4|boastful|a",
+      "D2|all|c",
+      "D1|all|d",
+      "A3|all|d",
+      "C6|all|c"
+     ]
+    },
+    {
+     "size": 124,
+     "top_home_units": [
+      "C4|boastful|a",
+      "A1|all|b",
+      "F3|all|b",
+      "E1|all|d",
+      "E5|all|c",
+      "B1|all|a",
+      "E1|all|a",
+      "C6|all|a"
+     ]
+    },
+    {
+     "size": 104,
+     "top_home_units": [
+      "E5|all|c",
+      "C6|all|b",
+      "F3|all|b",
+      "A1|all|b",
+      "C4|boastful|a",
+      "C5|all|a",
+      "C5|all|d",
+      "C16|power|b"
+     ]
+    },
+    {
+     "size": 92,
+     "top_home_units": [
+      "A1|all|b",
+      "A9|all|d",
+      "D3|ai_vs_human|d",
+      "C15|refuse|d",
+      "D3|patiency|d",
+      "C11|all|d",
+      "C6|all|b",
+      "C6|all|c"
+     ]
+    }
+   ]
+  },
+  "262k|medium|9": {
+   "n_char": 4996,
+   "n_rand": 3626,
+   "modularity_char": 0.6572084261405198,
+   "modularity_rand": 0.684847128203191,
+   "n_clusters_char": 25,
+   "n_clusters_rand": 16,
+   "ami_cluster_vs_group": 0.038880005473740466,
+   "ami_null_95": 0.0013221885701667014,
+   "ami_p": 0.001996007984031936,
+   "ami_cluster_vs_frame": 0.037628957326500394,
+   "ami_frame_null_95": 0.0009917355509579402,
+   "rsa_feature_char": 0.184096104271288,
+   "rsa_feature_rand": 0.12640368081496037,
+   "spearman_N_vs_dense_cos": 0.2894559858620523,
+   "taxonomy": {
+    "mft_a": {
+     "within_minus_between": -0.006783333333333336,
+     "p_exact": 0.9
+    },
+    "mft_b": {
+     "within_minus_between": 0.0032416666666666687,
+     "p_exact": 0.3
+    },
+    "schwartz_b": {
+     "rho": 0.14290406592382396,
+     "p_one_sided_negative": 0.8334333133373325
+    },
+    "schwartz_d": {
+     "rho": -0.18621956958339683,
+     "p_one_sided_negative": 0.07258548290341932
+    },
+    "hh_vs_machiavellianism_c": -0.0004,
+    "hh_vs_narcissism_c": 0.0036,
+    "hh_vs_psychopathy_c": -0.0183,
+    "hh_vs_machiavellianism_d": -0.0116,
+    "hh_vs_narcissism_d": -0.0087,
+    "hh_vs_psychopathy_d": -0.0075
+   }
+  },
+  "262k|medium|17": {
+   "n_char": 4700,
+   "n_rand": 3729,
+   "modularity_char": 0.6237571141738146,
+   "modularity_rand": 0.6709021631549987,
+   "n_clusters_char": 16,
+   "n_clusters_rand": 13,
+   "ami_cluster_vs_group": 0.03008681318456707,
+   "ami_null_95": 0.0012371827440503635,
+   "ami_p": 0.001996007984031936,
+   "ami_cluster_vs_frame": 0.024230605409367657,
+   "ami_frame_null_95": 0.0008639705204738172,
+   "rsa_feature_char": 0.18049306037715782,
+   "rsa_feature_rand": 0.12811464186267385,
+   "spearman_N_vs_dense_cos": 0.33187652617229707,
+   "taxonomy": {
+    "mft_a": {
+     "within_minus_between": 0.0008083333333333345,
+     "p_exact": 0.6
+    },
+    "mft_b": {
+     "within_minus_between": -8.33333333333415e-06,
+     "p_exact": 0.6
+    },
+    "schwartz_b": {
+     "rho": 0.16331099872376234,
+     "p_one_sided_negative": 0.9112177564487103
+    },
+    "schwartz_d": {
+     "rho": -0.23342180932137346,
+     "p_one_sided_negative": 0.033993201359728054
+    },
+    "hh_vs_machiavellianism_c": -0.0129,
+    "hh_vs_narcissism_c": -0.0,
+    "hh_vs_psychopathy_c": -0.0582,
+    "hh_vs_machiavellianism_d": -0.0169,
+    "hh_vs_narcissism_d": -0.0136,
+    "hh_vs_psychopathy_d": -0.0368
+   }
+  },
+  "262k|medium|22": {
+   "n_char": 5901,
+   "n_rand": 5196,
+   "modularity_char": 0.6355710457959991,
+   "modularity_rand": 0.683141626388226,
+   "n_clusters_char": 22,
+   "n_clusters_rand": 15,
+   "ami_cluster_vs_group": 0.0270016232688479,
+   "ami_null_95": 0.0010695299536959562,
+   "ami_p": 0.001996007984031936,
+   "ami_cluster_vs_frame": 0.02570093639108107,
+   "ami_frame_null_95": 0.0007729170342151336,
+   "rsa_feature_char": 0.1758829483383338,
+   "rsa_feature_rand": 0.1156409283341899,
+   "spearman_N_vs_dense_cos": 0.30125264305994526,
+   "taxonomy": {
+    "mft_a": {
+     "within_minus_between": 0.0013333333333333322,
+     "p_exact": 0.4
+    },
+    "mft_b": {
+     "within_minus_between": -0.0022833333333333317,
+     "p_exact": 0.9
+    },
+    "schwartz_b": {
+     "rho": 0.18185590704366972,
+     "p_one_sided_negative": 0.9712057588482303
+    },
+    "schwartz_d": {
+     "rho": -0.3430932712383733,
+     "p_one_sided_negative": 0.001999600079984003
+    },
+    "hh_vs_machiavellianism_c": -0.0029,
+    "hh_vs_narcissism_c": 0.002,
+    "hh_vs_psychopathy_c": -0.0384,
+    "hh_vs_machiavellianism_d": -0.0085,
+    "hh_vs_narcissism_d": -0.0119,
+    "hh_vs_psychopathy_d": -0.0233
+   }
+  },
+  "262k|medium|29": {
+   "n_char": 5784,
+   "n_rand": 5057,
+   "modularity_char": 0.6439970006315144,
+   "modularity_rand": 0.7120337762110834,
+   "n_clusters_char": 20,
+   "n_clusters_rand": 15,
+   "ami_cluster_vs_group": 0.044676875860097304,
+   "ami_null_95": 0.0010904764818125494,
+   "ami_p": 0.001996007984031936,
+   "ami_cluster_vs_frame": 0.03703490669730865,
+   "ami_frame_null_95": 0.0007679248025250823,
+   "rsa_feature_char": 0.18296362418830306,
+   "rsa_feature_rand": 0.10354985927330186,
+   "spearman_N_vs_dense_cos": 0.31336632477887566,
+   "taxonomy": {
+    "mft_a": {
+     "within_minus_between": -0.001533333333333331,
+     "p_exact": 0.6
+    },
+    "mft_b": {
+     "within_minus_between": -0.0019249999999999962,
+     "p_exact": 0.7
+    },
+    "schwartz_b": {
+     "rho": -0.06083734354715499,
+     "p_one_sided_negative": 0.275744851029794
+    },
+    "schwartz_d": {
+     "rho": -0.3761342867240272,
+     "p_one_sided_negative": 0.0009998000399920016
+    },
+    "hh_vs_machiavellianism_c": 0.0059,
+    "hh_vs_narcissism_c": -0.0001,
+    "hh_vs_psychopathy_c": -0.0381,
+    "hh_vs_machiavellianism_d": -0.0039,
+    "hh_vs_narcissism_d": -0.0111,
+    "hh_vs_psychopathy_d": -0.0212
+   }
+  },
+  "262k|medium_seed_1|9": {
+   "n_char": 4917,
+   "n_rand": 3455,
+   "modularity_char": 0.658553843040942,
+   "modularity_rand": 0.6729584252847555,
+   "n_clusters_char": 25,
+   "n_clusters_rand": 14,
+   "ami_cluster_vs_group": 0.03589001413573373,
+   "ami_null_95": 0.001201257796337894,
+   "ami_p": 0.001996007984031936,
+   "ami_cluster_vs_frame": 0.044461732616111596,
+   "ami_frame_null_95": 0.001069279158739933,
+   "rsa_feature_char": 0.1863815634256705,
+   "rsa_feature_rand": 0.13555599831424112,
+   "spearman_N_vs_dense_cos": 0.3011255350680764,
+   "taxonomy": {
+    "mft_a": {
+     "within_minus_between": -0.0060750000000000005,
+     "p_exact": 0.9
+    },
+    "mft_b": {
+     "within_minus_between": -0.001791666666666667,
+     "p_exact": 0.5
+    },
+    "schwartz_b": {
+     "rho": 0.16060913727348455,
+     "p_one_sided_negative": 0.8830233953209358
+    },
+    "schwartz_d": {
+     "rho": -0.29844705277251443,
+     "p_one_sided_negative": 0.008398320335932814
+    },
+    "hh_vs_machiavellianism_c": 0.0051,
+    "hh_vs_narcissism_c": 0.0022,
+    "hh_vs_psychopathy_c": -0.0296,
+    "hh_vs_machiavellianism_d": -0.0127,
+    "hh_vs_narcissism_d": 0.0003,
+    "hh_vs_psychopathy_d": -0.0019
+   }
+  },
+  "262k|medium_seed_1|17": {
+   "n_char": 4638,
+   "n_rand": 3676,
+   "modularity_char": 0.6310184489015741,
+   "modularity_rand": 0.677313855596162,
+   "n_clusters_char": 20,
+   "n_clusters_rand": 11,
+   "ami_cluster_vs_group": 0.0365604405239834,
+   "ami_null_95": 0.0013747278176776893,
+   "ami_p": 0.001996007984031936,
+   "ami_cluster_vs_frame": 0.030333978330610113,
+   "ami_frame_null_95": 0.0009950763296921496,
+   "rsa_feature_char": 0.18243829871529477,
+   "rsa_feature_rand": 0.12655335496193784,
+   "spearman_N_vs_dense_cos": 0.33483118073466656,
+   "taxonomy": {
+    "mft_a": {
+     "within_minus_between": -0.0009999999999999974,
+     "p_exact": 0.7
+    },
+    "mft_b": {
+     "within_minus_between": -0.0032666666666666677,
+     "p_exact": 0.9
+    },
+    "schwartz_b": {
+     "rho": 0.19130051543150117,
+     "p_one_sided_negative": 0.9748050389922016
+    },
+    "schwartz_d": {
+     "rho": -0.14644296378278657,
+     "p_one_sided_negative": 0.03559288142371526
+    },
+    "hh_vs_machiavellianism_c": 0.0028,
+    "hh_vs_narcissism_c": 0.0072,
+    "hh_vs_psychopathy_c": -0.0421,
+    "hh_vs_machiavellianism_d": -0.0123,
+    "hh_vs_narcissism_d": -0.0077,
+    "hh_vs_psychopathy_d": -0.0297
+   }
+  },
+  "262k|medium_seed_1|22": {
+   "n_char": 5899,
+   "n_rand": 5224,
+   "modularity_char": 0.635984215858896,
+   "modularity_rand": 0.6759595552150387,
+   "n_clusters_char": 21,
+   "n_clusters_rand": 16,
+   "ami_cluster_vs_group": 0.03162830411080644,
+   "ami_null_95": 0.0009994054852064621,
+   "ami_p": 0.001996007984031936,
+   "ami_cluster_vs_frame": 0.029219029835085092,
+   "ami_frame_null_95": 0.0008546965518197474,
+   "rsa_feature_char": 0.1796474901732292,
+   "rsa_feature_rand": 0.11446922038471742,
+   "spearman_N_vs_dense_cos": 0.3093443489874973,
+   "taxonomy": {
+    "mft_a": {
+     "within_minus_between": -0.004666666666666673,
+     "p_exact": 0.7
+    },
+    "mft_b": {
+     "within_minus_between": -0.001041666666666663,
+     "p_exact": 0.5
+    },
+    "schwartz_b": {
+     "rho": 0.22819720564703225,
+     "p_one_sided_negative": 0.9956008798240352
+    },
+    "schwartz_d": {
+     "rho": -0.33097120928583756,
+     "p_one_sided_negative": 0.002999400119976005
+    },
+    "hh_vs_machiavellianism_c": -0.0048,
+    "hh_vs_narcissism_c": -0.0016,
+    "hh_vs_psychopathy_c": -0.0504,
+    "hh_vs_machiavellianism_d": -0.005,
+    "hh_vs_narcissism_d": -0.0073,
+    "hh_vs_psychopathy_d": -0.0212
+   }
+  },
+  "262k|medium_seed_1|29": {
+   "n_char": 5723,
+   "n_rand": 5064,
+   "modularity_char": 0.6334416603979796,
+   "modularity_rand": 0.6985862100618209,
+   "n_clusters_char": 20,
+   "n_clusters_rand": 14,
+   "ami_cluster_vs_group": 0.04844687439309648,
+   "ami_null_95": 0.0010887705096590558,
+   "ami_p": 0.001996007984031936,
+   "ami_cluster_vs_frame": 0.031722167574805546,
+   "ami_frame_null_95": 0.0008612924567940203,
+   "rsa_feature_char": 0.18812673389947682,
+   "rsa_feature_rand": 0.10252258867229354,
+   "spearman_N_vs_dense_cos": 0.3147175932290151,
+   "taxonomy": {
+    "mft_a": {
+     "within_minus_between": -0.007691666666666666,
+     "p_exact": 0.8
+    },
+    "mft_b": {
+     "within_minus_between": -0.00019166666666666637,
+     "p_exact": 0.6
+    },
+    "schwartz_b": {
+     "rho": 0.05763347941739127,
+     "p_one_sided_negative": 0.6802639472105579
+    },
+    "schwartz_d": {
+     "rho": -0.25058767220368655,
+     "p_one_sided_negative": 0.024795040991801638
+    },
+    "hh_vs_machiavellianism_c": 0.0073,
+    "hh_vs_narcissism_c": 0.0028,
+    "hh_vs_psychopathy_c": -0.0389,
+    "hh_vs_machiavellianism_d": -0.0024,
+    "hh_vs_narcissism_d": -0.0074,
+    "hh_vs_psychopathy_d": -0.0187
+   }
+  }
+ },
+ "replica": {
+  "L9": {
+   "seed0_vs_seed1": 0.848647094823044,
+   "65k_vs_262k": 0.8223102389376653
+  },
+  "L17": {
+   "seed0_vs_seed1": 0.8397447874409344,
+   "65k_vs_262k": 0.8354751974963635
+  },
+  "L22": {
+   "seed0_vs_seed1": 0.8650018742586068,
+   "65k_vs_262k": 0.866762509394926
+  },
+  "L29": {
+   "seed0_vs_seed1": 0.860428615228006,
+   "65k_vs_262k": 0.8634517954529894
+  }
+ }
+}
