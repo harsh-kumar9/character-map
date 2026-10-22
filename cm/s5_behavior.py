@@ -147,6 +147,8 @@ def cmd_judge(judge):
     kw = dict(model=model_id, dtype="bfloat16", max_model_len=16384, gpu_memory_utilization=0.90, enable_prefix_caching=True)
     if judge == "gemma":
         kw["hf_overrides"] = partial(hetero_safe_overrides, model_id=model_id)
+    else:
+        kw["max_num_seqs"] = 256   # Qwen3.5 is hybrid: each decode sequence needs a Mamba cache block (614 available)
     try:
         llm = LLM(**kw, limit_mm_per_prompt={"image": 0, "audio": 0})
     except TypeError:
