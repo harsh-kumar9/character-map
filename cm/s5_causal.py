@@ -323,7 +323,8 @@ def cmd_matrix(nshards):
     for li, L in enumerate(L_OUT):
         selfE = [Ed[s, li, tix[u]] for s, u in enumerate(src) if u in tix]
         selfZ = [Zd[s, li, tix[u]] for s, u in enumerate(src) if u in tix]
-        off = np.array([[Zd[s, li, t] for t, u in enumerate(U) if u.split("|")[0] != src[s].split("|")[0]] for s in range(len(src))])
+        off = np.array([Zd[s, li, t] for s in range(len(src)) for t, u in enumerate(U)
+                        if u.split("|")[0] != src[s].split("|")[0]])
         ok = ~np.isnan(Ed[:, li].ravel())
         print(f"[s5] layer {L}: self effect median {np.nanmedian(selfE):.2f} gap units (z {np.nanmedian(selfZ):.1f}); "
               f"off-concept cells |z|>3: {np.nanmean(np.abs(off) > 3):.3f}; sign symmetry r(E+, -E-) "
