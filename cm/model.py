@@ -55,3 +55,21 @@ def capture_resid(m, layers: list[int]):
     finally:
         for h in handles:
             h.remove()
+
+
+@contextmanager
+def steer(m, layer: int, vec: torch.Tensor):
+    """Add `vec` ([d], already scaled) to the output of decoder layer `layer` at every position (hidden-state index
+    layer + 1). The residual stream carries it forward unchanged except for what later layers do with it."""
+    block = decoder_layers(m)[layer]
+
+    def hook(_mod, _inp, out):
+        if isinstance(out, tuple):
+            return (out[0] + vec.to(out[0].dtype),) + tuple(out[1:])
+        return out + vec.to(out.dtype)
+
+    h = block.register_forward_hook(hook)
+    try:
+        yield
+    finally:
+        h.remove()
