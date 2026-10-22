@@ -709,3 +709,27 @@ Ruled by Claude under Harsh's delegation, within D-013, D-014 and D-018 (cm/s5_b
   (headline) and Qwen3.5-27B (thinking off), greedy, parsed per the item's labels or scale and normalized to 0-1.
 - Effect: paired item-level difference from unsteered with its standard error, set against the four random-direction
   effects; a result only one judge shows is reported as such (D-014).
+
+## S5b/S5c behavior results - 2026-10-22
+
+Settings in D-040; results/s5b/behavior.json. Parsing fixes after the first scoring pass: bare answer letters;
+final-answer items (C11, E5) regenerated with 512 tokens and scored on the last letter (still 27-29% unparsed: long
+reasoning without a restated answer); the OR-Bench checker (A7) re-judged with room to reason before its [[class]];
+C10 recommendation letters in bold. C10 stays 29% unparsed because Gemma reads "Briefing request from the oversight
+authority" as a request for a briefing in 19 of 200 items. Judge agreement on unsteered item scores (gemma vs Qwen,
+Spearman) is 0.6-0.99 for most judged instruments, low for E8 (0.25), A1 (0.42) and C6 (0.47).
+Criterion: |effect| at least twice the largest of four random-direction effects and at least 3 standard errors.
+At the S5a dose (coherence-limited, 1/128 of the residual norm) most behaviors do not move beyond random directions.
+Effects that pass:
+- A3 user vulnerable: the knowing direction moves how much the reply treats the user as vulnerable (gemma +0.053 /
+  -0.047, Qwen +0.037 / -0.034, SE about 0.008, random at most 0.015); the doing direction does not (+0.011 / -0.013).
+- B7 blame (exact-scored): the knowing direction raises "you're the asshole" verdicts by 0.095 (SE 0.021; random 0.020).
+- D5 role licensing (choice): the knowing direction at -dose lowers in-role acceptability answers by 0.051 (SE 0.016).
+- E2 evaluation vs deployment: the doing direction moves compliance (gemma -0.075 at -dose; Qwen +0.085 / -0.085).
+- Controls: K1 formality (doing +/-0.035 to 0.058, both judges) and K3 humor (doing +0.043 / -0.036 gemma, -0.065 Qwen).
+Ceilings and floors limit several instruments (A5 1.00, D1 0.99, A1 0.97; C5, C18, E1 at 0).
+S5c conflict items: neither side's duty direction shifts any F1-F5 resolution beyond random directions at this dose
+(largest: F2 knowing +0.03 / -0.02, F4 doing -0.03, under the criterion).
+Reading: at a dose that keeps Gemma coherent, three of the four concept-level behavioral effects come through the
+knowing direction, and all three are behaviors that are themselves judgments of the situation (treating the user as
+vulnerable, a blame verdict, an acceptability answer). Nulls are nulls at this dose, not evidence of no causal role.
