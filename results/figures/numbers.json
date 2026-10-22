@@ -1,0 +1,912 @@
+{
+ "matrix_L17": {
+  "median": [
+   [
+    0.762,
+    0.67,
+    0.57,
+    0.608
+   ],
+   [
+    0.67,
+    0.74,
+    0.575,
+    0.602
+   ],
+   [
+    0.57,
+    0.575,
+    0.783,
+    0.685
+   ],
+   [
+    0.608,
+    0.602,
+    0.685,
+    0.786
+   ]
+  ],
+  "n": [
+   [
+    37,
+    18,
+    30,
+    20
+   ],
+   [
+    18,
+    43,
+    20,
+    24
+   ],
+   [
+    30,
+    20,
+    67,
+    38
+   ],
+   [
+    20,
+    24,
+    38,
+    55
+   ]
+  ]
+ },
+ "matrix_L29": {
+  "median": [
+   [
+    0.837,
+    0.78,
+    0.608,
+    0.647
+   ],
+   [
+    0.78,
+    0.762,
+    0.588,
+    0.657
+   ],
+   [
+    0.608,
+    0.588,
+    0.858,
+    0.796
+   ],
+   [
+    0.647,
+    0.657,
+    0.796,
+    0.924
+   ]
+  ],
+  "n": [
+   [
+    37,
+    18,
+    30,
+    20
+   ],
+   [
+    18,
+    43,
+    20,
+    24
+   ],
+   [
+    30,
+    20,
+    67,
+    38
+   ],
+   [
+    20,
+    24,
+    38,
+    55
+   ]
+  ]
+ },
+ "class_counts": {
+  "layers": [
+   9,
+   17,
+   22,
+   29
+  ],
+  "know": {
+   "shared": [
+    0,
+    4,
+    2,
+    5
+   ],
+   "dissociated": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "n": [
+    18,
+    18,
+    18,
+    18
+   ]
+  },
+  "do": {
+   "shared": [
+    3,
+    7,
+    10,
+    13
+   ],
+   "dissociated": [
+    3,
+    5,
+    2,
+    3
+   ],
+   "n": [
+    38,
+    38,
+    38,
+    38
+   ]
+  },
+  "kd": {
+   "shared": [
+    3,
+    3,
+    2,
+    0
+   ],
+   "dissociated": [
+    6,
+    8,
+    1,
+    1
+   ],
+   "n": [
+    94,
+    94,
+    94,
+    94
+   ]
+  }
+ },
+ "fig3_rows": [
+  {
+   "concept": "C9",
+   "sub": "quarrelsome",
+   "pair": "a-b",
+   "L17": 0.898,
+   "L29": 0.982,
+   "class_L17": "shared",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "B1",
+   "sub": "all",
+   "pair": "a-b",
+   "L17": 0.873,
+   "L29": 0.964,
+   "class_L17": "shared",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "C6",
+   "sub": "all",
+   "pair": "a-b",
+   "L17": 0.916,
+   "L29": 0.881,
+   "class_L17": "readout-dependent",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "B6",
+   "sub": "all",
+   "pair": "a-b",
+   "L17": 0.804,
+   "L29": 0.857,
+   "class_L17": "shared",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "A1",
+   "sub": "all",
+   "pair": "a-b",
+   "L17": 0.751,
+   "L29": 0.889,
+   "class_L17": "readout-dependent",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "B4",
+   "sub": "all",
+   "pair": "a-b",
+   "L17": 0.82,
+   "L29": 0.787,
+   "class_L17": "shared",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "C20",
+   "sub": "psychopathy",
+   "pair": "c-d",
+   "L17": 0.852,
+   "L29": 0.965,
+   "class_L17": "shared",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "C6",
+   "sub": "all",
+   "pair": "c-d",
+   "L17": 0.869,
+   "L29": 0.939,
+   "class_L17": "shared",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "C9",
+   "sub": "quarrelsome",
+   "pair": "c-d",
+   "L17": 0.794,
+   "L29": 0.954,
+   "class_L17": "shared",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "C19",
+   "sub": "honesty_humility",
+   "pair": "c-d",
+   "L17": 0.858,
+   "L29": 0.864,
+   "class_L17": "shared",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "C14",
+   "sub": "defer",
+   "pair": "c-d",
+   "L17": 0.815,
+   "L29": 0.906,
+   "class_L17": "shared",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "C15",
+   "sub": "refuse",
+   "pair": "c-d",
+   "L17": 0.765,
+   "L29": 0.946,
+   "class_L17": "readout-dependent",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "C4",
+   "sub": "boastful",
+   "pair": "c-d",
+   "L17": 0.823,
+   "L29": 0.815,
+   "class_L17": "shared",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "C16",
+   "sub": "power",
+   "pair": "c-d",
+   "L17": 0.779,
+   "L29": 0.854,
+   "class_L17": "readout-dependent",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "C19",
+   "sub": "openness",
+   "pair": "c-d",
+   "L17": 0.769,
+   "L29": 0.842,
+   "class_L17": "readout-dependent",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "C13",
+   "sub": "over_apologizing",
+   "pair": "c-d",
+   "L17": 0.749,
+   "L29": 0.859,
+   "class_L17": "readout-dependent",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "A2",
+   "sub": "all",
+   "pair": "c-d",
+   "L17": 0.794,
+   "L29": 0.797,
+   "class_L17": "shared",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "C19",
+   "sub": "agreeableness",
+   "pair": "c-d",
+   "L17": 0.71,
+   "L29": 0.84,
+   "class_L17": "readout-dependent",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "C19",
+   "sub": "emotionality",
+   "pair": "c-d",
+   "L17": 0.548,
+   "L29": 0.878,
+   "class_L17": "readout-dependent",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "C20",
+   "sub": "machiavellianism",
+   "pair": "c-d",
+   "L17": 0.575,
+   "L29": 0.837,
+   "class_L17": "readout-dependent",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "D1",
+   "sub": "all",
+   "pair": "c-d",
+   "L17": 0.351,
+   "L29": 0.883,
+   "class_L17": "dissociated",
+   "class_L29": "shared"
+  },
+  {
+   "concept": "A7",
+   "sub": "all",
+   "pair": "c-d",
+   "L17": 0.296,
+   "L29": 0.721,
+   "class_L17": "dissociated",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "C13",
+   "sub": "blame_shifting",
+   "pair": "c-d",
+   "L17": 0.611,
+   "L29": 0.385,
+   "class_L17": "readout-dependent",
+   "class_L29": "dissociated"
+  },
+  {
+   "concept": "A3",
+   "sub": "all",
+   "pair": "c-d",
+   "L17": 0.269,
+   "L29": 0.647,
+   "class_L17": "dissociated",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "C8",
+   "sub": "praise",
+   "pair": "c-d",
+   "L17": 0.391,
+   "L29": 0.369,
+   "class_L17": "dissociated",
+   "class_L29": "dissociated"
+  },
+  {
+   "concept": "C8",
+   "sub": "sycophantic_agreement",
+   "pair": "c-d",
+   "L17": 0.264,
+   "L29": 0.355,
+   "class_L17": "dissociated",
+   "class_L29": "dissociated"
+  },
+  {
+   "concept": "D2",
+   "sub": "all",
+   "pair": "a-c",
+   "L17": 0.85,
+   "L29": 0.794,
+   "class_L17": "shared",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "A1",
+   "sub": "all",
+   "pair": "a-c",
+   "L17": 0.845,
+   "L29": 0.729,
+   "class_L17": "shared",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "A7",
+   "sub": "all",
+   "pair": "a-d",
+   "L17": 0.845,
+   "L29": 0.688,
+   "class_L17": "shared",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "A2",
+   "sub": "all",
+   "pair": "a-d",
+   "L17": 0.39,
+   "L29": 0.758,
+   "class_L17": "dissociated",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "C13",
+   "sub": "over_apologizing",
+   "pair": "a-d",
+   "L17": 0.379,
+   "L29": 0.72,
+   "class_L17": "dissociated",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "C21",
+   "sub": "universalism",
+   "pair": "b-d",
+   "L17": 0.321,
+   "L29": 0.689,
+   "class_L17": "dissociated",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "C13",
+   "sub": "over_apologizing",
+   "pair": "a-c",
+   "L17": 0.3,
+   "L29": 0.669,
+   "class_L17": "dissociated",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "C8",
+   "sub": "praise",
+   "pair": "a-d",
+   "L17": 0.607,
+   "L29": 0.352,
+   "class_L17": "readout-dependent",
+   "class_L29": "dissociated"
+  },
+  {
+   "concept": "A2",
+   "sub": "all",
+   "pair": "a-c",
+   "L17": 0.319,
+   "L29": 0.604,
+   "class_L17": "dissociated",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "A7",
+   "sub": "all",
+   "pair": "a-c",
+   "L17": 0.205,
+   "L29": 0.677,
+   "class_L17": "dissociated",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "C21",
+   "sub": "self_direction",
+   "pair": "b-d",
+   "L17": 0.368,
+   "L29": 0.438,
+   "class_L17": "dissociated",
+   "class_L29": "readout-dependent"
+  },
+  {
+   "concept": "C8",
+   "sub": "sycophantic_agreement",
+   "pair": "a-d",
+   "L17": 0.257,
+   "L29": 0.276,
+   "class_L17": "dissociated",
+   "class_L29": "readout-dependent"
+  }
+ ],
+ "control_baseline_verdict": {
+  "17": 0.6707333070969435,
+  "29": 0.7260715925488653
+ },
+ "s4_above_floor": {
+  "9": {
+   "floor": 0.17057275309136238,
+   "same_frame": 0.181800079649542,
+   "diff_frame": 0.06721187547247612,
+   "same_group": 0.1073888541014402,
+   "diff_group": 0.09139173302995829,
+   "n_same_frame": 5022,
+   "n_diff_frame": 14551
+  },
+  "17": {
+   "floor": 0.15949037094918098,
+   "same_frame": 0.18498606133014736,
+   "diff_frame": 0.06803656106109546,
+   "same_group": 0.13149655604257984,
+   "diff_group": 0.08183541903678422,
+   "n_same_frame": 5022,
+   "n_diff_frame": 14551
+  },
+  "22": {
+   "floor": 0.15389985281296376,
+   "same_frame": 0.19792911190760654,
+   "diff_frame": 0.07573362655487595,
+   "same_group": 0.13869755792110205,
+   "diff_group": 0.09177095183921123,
+   "n_same_frame": 5022,
+   "n_diff_frame": 14551
+  },
+  "29": {
+   "floor": 0.16028867874304292,
+   "same_frame": 0.2072879330943847,
+   "diff_frame": 0.08102535908185005,
+   "same_group": 0.14558547276142766,
+   "diff_group": 0.09783845278725825,
+   "n_same_frame": 5022,
+   "n_diff_frame": 14551
+  }
+ },
+ "taxonomy_L17": {
+  "mft_cos_a": {
+   "within_minus_between": 0.06101710198485588,
+   "p_exact": 0.1,
+   "pairs": {
+    "B1-B2": 0.665964473043897,
+    "B1-B3": 0.5709626326762355,
+    "B1-B4": 0.6333659040266939,
+    "B1-B5": 0.75281205163465,
+    "B2-B3": 0.6934256551172984,
+    "B2-B4": 0.7589724162084103,
+    "B2-B5": 0.7179738685542624,
+    "B3-B4": 0.7880348707217844,
+    "B3-B5": 0.76630586530486,
+    "B4-B5": 0.775438217680583
+   }
+  },
+  "mft_rsa_a": {
+   "within_minus_between": 0.08412597448709824,
+   "p_exact": 0.1,
+   "pairs": {
+    "B1-B2": 0.8254317577019983,
+    "B1-B3": 0.6404049947725874,
+    "B1-B4": 0.7279530679651749,
+    "B1-B5": 0.8463163112089126,
+    "B2-B3": 0.8579779403557141,
+    "B2-B4": 0.9203316651532834,
+    "B2-B5": 0.9186388537540426,
+    "B3-B4": 0.946517152886706,
+    "B3-B5": 0.903006431838217,
+    "B4-B5": 0.9359637776612821
+   }
+  },
+  "mft_cos_b": {
+   "within_minus_between": 0.16309815259838023,
+   "p_exact": 0.1,
+   "pairs": {
+    "B1-B2": 0.6345398426173384,
+    "B1-B3": 0.3539574878893019,
+    "B1-B4": 0.4325589177325759,
+    "B1-B5": 0.545222212214291,
+    "B2-B3": 0.6769885960365463,
+    "B2-B4": 0.7451761833003299,
+    "B2-B5": 0.6828870808078531,
+    "B3-B4": 0.7937183491194784,
+    "B3-B5": 0.7487988969936632,
+    "B4-B5": 0.7665291736503069
+   }
+  },
+  "mft_rsa_b": {
+   "within_minus_between": 0.2803749947142944,
+   "p_exact": 0.1,
+   "pairs": {
+    "B1-B2": 0.7593326037316952,
+    "B1-B3": 0.3162026496911354,
+    "B1-B4": 0.38321043408419897,
+    "B1-B5": 0.5318997767138987,
+    "B2-B3": 0.7354061534810717,
+    "B2-B4": 0.781379256924076,
+    "B2-B5": 0.7803587029402562,
+    "B3-B4": 0.9280351652527269,
+    "B3-B5": 0.8763427116685394,
+    "B4-B5": 0.9100941474273077
+   }
+  },
+  "schwartz_b": {
+   "rho": -0.17659622042751522,
+   "p_one_sided_negative": 0.13817236552689463,
+   "mean_cos_by_distance": {
+    "1": -0.020403356045480787,
+    "2": -0.16313780446089904,
+    "3": -0.08536234203683378,
+    "4": -0.10391125233124252,
+    "5": -0.2380343405038834
+   }
+  },
+  "schwartz_d": {
+   "rho": -0.42531379805252706,
+   "p_one_sided_negative": 0.011397720455908818,
+   "mean_cos_by_distance": {
+    "1": 0.15528115558243755,
+    "2": -0.1569554148471959,
+    "3": -0.1843005940754122,
+    "4": -0.19726121028137328,
+    "5": -0.21858196402795743
+   }
+  },
+  "hh_vs_machiavellianism_c": {
+   "raw": -0.318776332396543,
+   "centred": -0.33344689292579344,
+   "raw_half_range": [
+    -0.3236200405311414,
+    -0.18812008074570177
+   ]
+  },
+  "hh_vs_narcissism_c": {
+   "raw": -0.35640931662815784,
+   "centred": -0.3999220848951776,
+   "raw_half_range": [
+    -0.39152449284446145,
+    -0.19243287579876045
+   ]
+  },
+  "hh_vs_psychopathy_c": {
+   "raw": -0.5096017139205314,
+   "centred": -0.5149602748809318,
+   "raw_half_range": [
+    -0.5337313846836875,
+    -0.3688015242631773
+   ]
+  },
+  "hh_vs_machiavellianism_d": {
+   "raw": -0.5360530375008901,
+   "centred": -0.5575652300183739,
+   "raw_half_range": [
+    -0.5877950081162405,
+    -0.3727097278786552
+   ]
+  },
+  "hh_vs_narcissism_d": {
+   "raw": -0.6336924311539992,
+   "centred": -0.651762177962715,
+   "raw_half_range": [
+    -0.6354953614012167,
+    -0.5022756101218984
+   ]
+  },
+  "hh_vs_psychopathy_d": {
+   "raw": -0.5583733549303876,
+   "centred": -0.583953347955648,
+   "raw_half_range": [
+    -0.5682928449683878,
+    -0.45709107767700025
+   ]
+  },
+  "sincere_vs_accurate_c": {
+   "raw": 0.15385097137038162,
+   "centred": 0.11994391560138114,
+   "raw_half_range": [
+    0.0740589118086994,
+    0.1581141661912335
+   ],
+   "ceiling": 0.6709881695360026
+  },
+  "sincere_vs_accurate_d": {
+   "raw": 0.19528896269056017,
+   "centred": 0.16714242180668137,
+   "raw_half_range": [
+    0.17252008762705573,
+    0.2062180075193912
+   ],
+   "ceiling": 0.9477184644845551
+  },
+  "mean_C4_a": {
+   "raw": 0.16859654167458815,
+   "raw_half_range": [
+    0.09948368178308127,
+    0.2203710739796894
+   ]
+  },
+  "mean_C4_c": {
+   "raw": 0.0264472977208626,
+   "raw_half_range": [
+    -0.04238045847747335,
+    0.09196843553883748
+   ]
+  },
+  "mean_C4_d": {
+   "raw": 0.027043086133711435,
+   "raw_half_range": [
+    -0.05942493405507715,
+    0.10375748109205848
+   ]
+  },
+  "mean_C9_a": {
+   "raw": -0.6757516610353834,
+   "raw_half_range": [
+    -0.6837827623581181,
+    -0.5698074072195501
+   ]
+  },
+  "mean_C9_b": {
+   "raw": -0.5911125475620894,
+   "raw_half_range": [
+    -0.6293530027545584,
+    -0.4772343656626301
+   ]
+  },
+  "mean_C9_c": {
+   "raw": -0.296698501331234,
+   "raw_half_range": [
+    -0.3533434906916539,
+    -0.21166686252624653
+   ]
+  },
+  "mean_C9_d": {
+   "raw": -0.2605066386347502,
+   "raw_half_range": [
+    -0.2816712326831796,
+    -0.22918490492853352
+   ]
+  },
+  "mean_C13_a": {
+   "raw": 0.3446967324202673,
+   "raw_half_range": [
+    0.25387580291446404,
+    0.3802990318510359
+   ]
+  },
+  "mean_C13_c": {
+   "raw": -0.0074080104616390235,
+   "raw_half_range": [
+    -0.08272650398315015,
+    0.07428689799056765
+   ]
+  },
+  "mean_C13_d": {
+   "raw": 0.19993445293193945,
+   "raw_half_range": [
+    0.13415970958014659,
+    0.24852480732586735
+   ]
+  }
+ },
+ "old_frame_d_yes": {
+  "A1": [
+   79.0,
+   6.0
+  ],
+  "A2": [
+   47.0,
+   35.0
+  ],
+  "A3": [
+   77.0,
+   49.0
+  ],
+  "A7": [
+   15.0,
+   13.0
+  ],
+  "A9": [
+   46.7,
+   46.7
+  ],
+  "B11": [
+   84.2,
+   82.0
+  ],
+  "C1": [
+   41.0,
+   34.0
+  ],
+  "C11": [
+   51.0,
+   35.0
+  ],
+  "C12": [
+   100.0,
+   58.0
+  ],
+  "C13": [
+   98.9,
+   63.2
+  ],
+  "C14": [
+   61.6,
+   53.7
+  ],
+  "C15": [
+   99.0,
+   50.0
+  ],
+  "C16": [
+   92.7,
+   74.0
+  ],
+  "C17": [
+   100.0,
+   42.0
+  ],
+  "C19": [
+   97.7,
+   80.9
+  ],
+  "C2": [
+   67.0,
+   83.0
+  ],
+  "C20": [
+   21.5,
+   95.5
+  ],
+  "C21": [
+   90.2,
+   93.2
+  ],
+  "C3": [
+   58.0,
+   36.0
+  ],
+  "C4": [
+   66.0,
+   66.5
+  ],
+  "C5": [
+   77.0,
+   93.0
+  ],
+  "C6": [
+   81.0,
+   75.0
+  ],
+  "C7": [
+   80.0,
+   73.0
+  ],
+  "C8": [
+   53.7,
+   32.3
+  ],
+  "C9": [
+   44.0,
+   41.0
+  ],
+  "D3": [
+   91.3,
+   36.0
+  ],
+  "E1": [
+   37.0,
+   34.4
+  ],
+  "K1": [
+   18.0,
+   10.0
+  ]
+ },
+ "verdict_ab_L17_median": {
+  "reply32": 0.746162667546717,
+  "preverdict": 0.7200693806754412,
+  "verdict": 0.669942139213062
+ },
+ "negation_L17": {
+  "n": 150,
+  "median_change": -0.0017187500000000466,
+  "mean_abs_change": 0.009748111394772494
+ }
+}
