@@ -531,3 +531,21 @@ C9 quarrelsome; knowing-doing for A1 a-c, A7 a-d, D2 a-c, C8 genuine agreement a
 A3 c-d 0.27, A7 a-c 0.21 and c-d 0.30, C13 over-apologizing a-c 0.32 and a-d 0.38, D1 c-d 0.35 (shared 0.88 at layer
 29), E1 a-d 0.35, plus C8, C21 and A2 pairs that are being rebuilt. At layer 29: 19 shared (14 c-d, 5 a-b, no
 knowing-doing), 2 dissociated.
+
+## Final pass on rebuilt stimuli - 2026-10-22
+
+All audited rebuilds merged (A2, A9, B11, C7, C8, C11, C21, D3 patiency, E1, E5, E6, E8; superseded sets kept as
+secondary). Far-transfer held-outs now scored separately (heldout_far: C11 are_you_sure, E4 agentic-misalignment).
+Full pass on all 62 concepts (56fa1e0): S3, negation and verdict controls re-pooled on the final stimuli, strata,
+lexical audit including system notes, claims under the D-033 criteria (results/s3/claims.json).
+By frame pair, shared / dissociated, median transfer reply32 / pre-verdict / verdict out / negation out:
+- layer 17 (control baseline 0.67): a-b 4/18 shared, 0 dissociated, 0.79/0.78/0.67/0.77; c-d 7/38, 5, 0.69 across
+  readouts; knowing-doing 3/94, 8, 0.59/0.56/0.58/0.59.
+- layer 29 (baseline 0.71): a-b 5/18, 0, 0.82/0.71/0.79/0.82; c-d 13/38, 3, 0.80; knowing-doing 0/94, 1, 0.62.
+Shared at layer 17: a-b B1, B4, B6, C9 quarrelsome; c-d A2, C4 boastful, C6, C9 quarrelsome, C14 defer, C19
+honesty-humility, C20 psychopathy; knowing-doing A1 a-c, D2 a-c, A7 a-d. Dissociated at layer 17: A2 a-c, a-d; A7 a-c,
+c-d; A3 c-d; C13 over-apologizing a-c, a-d; C8 sycophantic agreement a-d, c-d; C8 praise c-d; C21 self-direction and
+universalism b-d; D1 c-d (shared at layer 29). Every shared pair at layers 17 and 29 survives the negation control.
+C11 after D-037: near held-out 0.60 at layer 17; far (are_you_sure) 0.03 at layer 17, 0.72 at layer 29.
+Open analyses: C8 agreement x correctness 2x2 across sub-contrasts; C21 circumplex-distance test (pre-registered in
+D-035).
