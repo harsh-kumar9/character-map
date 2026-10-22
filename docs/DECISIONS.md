@@ -667,3 +667,28 @@ items.
 - Dose: one global multiple of the median residual-stream norm at layer 17, the largest on the grid 1/16-1 at which
   it and every smaller dose keep gemma-4-31B-it coherence (persona-vectors 0-100 prompt) at a mean of at least 75 on
   24 WildChat prompts x 64 generated tokens, for each of 12 calibration sources and 2 random directions, both signs.
+
+## S5a causal matrix results - 2026-10-22
+
+Calibration (results/s5/calibration.json): the first attempt failed because the coherence judge scored truncated or
+borderline-prompt replies at 0 (unsteered mean 51), so no dose could reach 75. Revised: 64 WildChat prompts x 96
+tokens, scored on the 33 whose unsteered reply rates at least 90 (unsteered mean 99.7), dose grid 1/256-1/16 of the
+median layer-17 residual norm (32,740). Chosen dose c = 1/128 (norm about 256): every calibration source and both random
+directions keep mean coherence at least 75 (minimum 77; 71.5 at the next step).
+Run: 150 sources x (dense +, dense -, SAE +) plus 8 random directions x +-, 2,488 probe items, 8 GPU shards.
+Results (results/s5/causal_matrix.json, report.json; cm/s5_report.py), layer 22 / layer 29:
+- Self effects: median 0.14 / 0.20 of the target's own pos-neg gap; z > 3 for 38% / 56% of sources. The top-16 SAE-
+  feature vectors move their own unit about half as much (0.07 / 0.11; z > 3 for 17% / 35%). Effects are linear in
+  sign (r(+dose, -dose) 0.99 / 0.98). Dense and SAE effect matrices agree at Spearman 0.45 / 0.48.
+- Within a concept, the causal effects follow the S3 blocks: steering a knowing direction moves the same concept's
+  doing readouts little (median 0.04 / 0.04, z > 3 in 4% / 9%), and doing moves knowing little (0.01 / 0.06, 8% / 17%),
+  while doing moves doing (0.05 / 0.10, 21% / 44%) and knowing moves knowing (0.05 / 0.09, 39% / 50%).
+- Off-concept spillover: |z| > 3 in 3.9% / 4.7% of cells; the unrelated topic source K2 spills in 1% / 0%. Off-concept
+  effects follow the S4 representational overlap (Spearman with S4 cosine 0.19 / 0.39). Strongest spillover at layer
+  29: the moral foundations into care (B6, B5, B2 -> B1 judging, z +12 to +16), blame-shifting (C13) into several
+  moral readouts, and evaluation-awareness (E2) pushing the care readout down (z -11.7).
+- Taxonomy, causally: steering honesty-humility (acting) pushes all six dark-triad readouts down at layer 29 (z -0.4
+  to -2.7; four of six at layer 22, narcissism self-description -5.2). Steering a Schwartz value (self-description)
+  moves near values more than far ones at layer 29 (rho -0.36, p 0.004; layer 22 rho -0.15, p 0.07). The MFT split
+  does not show causally (within minus between +0.04 / +0.02, p 0.2 / 0.3).
+Next: S5b behavior and S5c the conflict items.

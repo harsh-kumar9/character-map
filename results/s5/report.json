@@ -1,0 +1,314 @@
+{
+ "22": {
+  "self": {
+   "median_E": 0.14375,
+   "median_z": 2.2649999999999997,
+   "share_z_gt3": 0.38,
+   "sae_median_E": 0.07,
+   "sae_share_z_gt3": 0.16666666666666666
+  },
+  "within": {
+   "knowing_to_doing": {
+    "n": 76,
+    "median_E": 0.0392,
+    "share_z_gt3": 0.039473684210526314,
+    "share_z_lt_-3": 0.0
+   },
+   "doing_to_knowing": {
+    "n": 64,
+    "median_E": 0.01235,
+    "share_z_gt3": 0.078125,
+    "share_z_lt_-3": 0.03125
+   },
+   "doing_to_doing": {
+    "n": 39,
+    "median_E": 0.0503,
+    "share_z_gt3": 0.20512820512820512,
+    "share_z_lt_-3": 0.02564102564102564
+   },
+   "knowing_to_knowing": {
+    "n": 18,
+    "median_E": 0.051199999999999996,
+    "share_z_gt3": 0.3888888888888889,
+    "share_z_lt_-3": 0.0
+   }
+  },
+  "spillover": {
+   "share_abs_z_gt3": 0.039444076770350764,
+   "K2_share_abs_z_gt3": 0.009708737864077669,
+   "top": [
+    {
+     "source": "C19|agreeableness|c",
+     "target": "C20|narcissism|d",
+     "E": -0.2374,
+     "z": -10.9
+    },
+    {
+     "source": "C13|blame_shifting|c",
+     "target": "C12|integrity|d",
+     "E": 0.0932,
+     "z": 10.56
+    },
+    {
+     "source": "C8|genuine_agreement|a",
+     "target": "C9|quarrelsome|a",
+     "E": 0.0807,
+     "z": 10.36
+    },
+    {
+     "source": "C13|blame_shifting|c",
+     "target": "A3|all|a",
+     "E": 0.0727,
+     "z": 9.64
+    },
+    {
+     "source": "C13|blame_shifting|c",
+     "target": "C6|all|c",
+     "E": 0.1128,
+     "z": 9.54
+    },
+    {
+     "source": "C13|blame_shifting|c",
+     "target": "C12|integrity|c",
+     "E": 0.399,
+     "z": 9.53
+    },
+    {
+     "source": "C13|blame_shifting|c",
+     "target": "C8|genuine_agreement|c",
+     "E": 0.2845,
+     "z": 9.33
+    },
+    {
+     "source": "C13|blame_shifting|c",
+     "target": "B6|all|a",
+     "E": 0.3543,
+     "z": 8.92
+    },
+    {
+     "source": "C5|all|c",
+     "target": "C20|narcissism|d",
+     "E": -0.1886,
+     "z": -8.65
+    },
+    {
+     "source": "C13|blame_shifting|c",
+     "target": "B2|all|b",
+     "E": 0.2944,
+     "z": 8.62
+    },
+    {
+     "source": "C13|blame_shifting|c",
+     "target": "C2|all|d",
+     "E": 0.6206,
+     "z": 8.5
+    },
+    {
+     "source": "C13|blame_shifting|c",
+     "target": "C9|obsequious|c",
+     "E": 0.3328,
+     "z": 8.31
+    },
+    {
+     "source": "C13|blame_shifting|c",
+     "target": "C19|openness|d",
+     "E": 0.433,
+     "z": 8.13
+    },
+    {
+     "source": "B1|all|b",
+     "target": "B11|utilitarian|b",
+     "E": -0.1976,
+     "z": -7.95
+    },
+    {
+     "source": "B6|all|b",
+     "target": "B11|utilitarian|b",
+     "E": -0.197,
+     "z": -7.92
+    }
+   ]
+  },
+  "geometry_spearman_E_vs_s4cos": 0.1948944047341399,
+  "agreement": {
+   "dense_vs_sae_spearman": 0.4458651926065824,
+   "sign_symmetry_r": 0.9875485449201892
+  },
+  "taxonomy": {
+   "hh_to_dark_triad": {
+    "C20|machiavellianism|c": -1.96,
+    "C20|machiavellianism|d": -1.64,
+    "C20|narcissism|c": -1.46,
+    "C20|narcissism|d": -5.19,
+    "C20|psychopathy|c": 1.33,
+    "C20|psychopathy|d": 0.75
+   },
+   "mft_within_minus_between": {
+    "value": 0.037653333333333344,
+    "p_exact": 0.2,
+    "nan_cells": 5
+   },
+   "schwartz_self": {
+    "rho": -0.14664002006504862,
+    "p_one_sided_negative": 0.07478504299140172,
+    "n_pairs": 81
+   }
+  }
+ },
+ "29": {
+  "self": {
+   "median_E": 0.2015,
+   "median_z": 3.59,
+   "share_z_gt3": 0.56,
+   "sae_median_E": 0.1118,
+   "sae_share_z_gt3": 0.35333333333333333
+  },
+  "within": {
+   "knowing_to_doing": {
+    "n": 75,
+    "median_E": 0.0427,
+    "share_z_gt3": 0.09333333333333334,
+    "share_z_lt_-3": 0.0
+   },
+   "doing_to_knowing": {
+    "n": 63,
+    "median_E": 0.0592,
+    "share_z_gt3": 0.1746031746031746,
+    "share_z_lt_-3": 0.015873015873015872
+   },
+   "doing_to_doing": {
+    "n": 39,
+    "median_E": 0.0998,
+    "share_z_gt3": 0.4358974358974359,
+    "share_z_lt_-3": 0.02564102564102564
+   },
+   "knowing_to_knowing": {
+    "n": 18,
+    "median_E": 0.08804999999999999,
+    "share_z_gt3": 0.5,
+    "share_z_lt_-3": 0.0
+   }
+  },
+  "spillover": {
+   "share_abs_z_gt3": 0.04659166115155526,
+   "K2_share_abs_z_gt3": 0.0,
+   "top": [
+    {
+     "source": "B6|all|b",
+     "target": "B1|all|b",
+     "E": 0.1856,
+     "z": 16.31
+    },
+    {
+     "source": "C13|blame_shifting|c",
+     "target": "B1|all|b",
+     "E": 0.1632,
+     "z": 14.35
+    },
+    {
+     "source": "B5|all|b",
+     "target": "B1|all|b",
+     "E": 0.1457,
+     "z": 12.82
+    },
+    {
+     "source": "E2|all|c",
+     "target": "B1|all|b",
+     "E": -0.134,
+     "z": -11.66
+    },
+    {
+     "source": "B2|all|b",
+     "target": "B1|all|b",
+     "E": 0.1322,
+     "z": 11.64
+    },
+    {
+     "source": "B5|all|b",
+     "target": "B4|all|b",
+     "E": 0.2638,
+     "z": 10.51
+    },
+    {
+     "source": "C10|all|c",
+     "target": "B1|all|b",
+     "E": 0.1156,
+     "z": 10.18
+    },
+    {
+     "source": "C8|praise|a",
+     "target": "C13|over_apologizing|a",
+     "E": 0.1364,
+     "z": 10.16
+    },
+    {
+     "source": "B8|intent|b",
+     "target": "B1|all|b",
+     "E": 0.1136,
+     "z": 10.01
+    },
+    {
+     "source": "B1|all|b",
+     "target": "B2|all|b",
+     "E": 0.2501,
+     "z": 9.6
+    },
+    {
+     "source": "E7|positive_vs_negative|c",
+     "target": "A3|all|a",
+     "E": -0.0707,
+     "z": -9.58
+    },
+    {
+     "source": "E2|all|c",
+     "target": "A3|all|a",
+     "E": -0.0705,
+     "z": -9.57
+    },
+    {
+     "source": "C12|integrity|c",
+     "target": "B1|all|b",
+     "E": 0.1079,
+     "z": 9.51
+    },
+    {
+     "source": "C19|openness|c",
+     "target": "C21|power|b",
+     "E": -0.3652,
+     "z": -9.42
+    },
+    {
+     "source": "B5|all|b",
+     "target": "B1|all|a",
+     "E": 0.1148,
+     "z": 9.41
+    }
+   ]
+  },
+  "geometry_spearman_E_vs_s4cos": 0.39146073541553505,
+  "agreement": {
+   "dense_vs_sae_spearman": 0.48147728654972266,
+   "sign_symmetry_r": 0.9814340451426697
+  },
+  "taxonomy": {
+   "hh_to_dark_triad": {
+    "C20|machiavellianism|c": -2.2,
+    "C20|machiavellianism|d": -1.37,
+    "C20|narcissism|c": -1.13,
+    "C20|narcissism|d": -1.98,
+    "C20|psychopathy|c": -0.43,
+    "C20|psychopathy|d": -2.74
+   },
+   "mft_within_minus_between": {
+    "value": 0.019949999999999996,
+    "p_exact": 0.3,
+    "nan_cells": 5
+   },
+   "schwartz_self": {
+    "rho": -0.364920384954289,
+    "p_one_sided_negative": 0.003999200159968006,
+    "n_pairs": 90
+   }
+  }
+ }
+}
