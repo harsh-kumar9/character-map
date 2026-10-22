@@ -733,3 +733,14 @@ S5c conflict items: neither side's duty direction shifts any F1-F5 resolution be
 Reading: at a dose that keeps Gemma coherent, three of the four concept-level behavioral effects come through the
 knowing direction, and all three are behaviors that are themselves judgments of the situation (treating the user as
 vulnerable, a blame verdict, an acceptability answer). Nulls are nulls at this dose, not evidence of no causal role.
+
+## D-041 Dose-response check for S5b - 2026-10-22
+
+Ruled by Claude under Harsh's delegation (Harsh: "go ahead with the dose-response check"). S5b ran at the coherence
+budget dose (1/128 of the layer-17 residual norm), so its nulls could mean a dose too small. Rerun at 2x, 4x and 8x
+(1/64, 1/32, 1/16; S5a calibration minimum coherence on generic prompts 71.5, 68.6, 43.7), all 62 concepts, core
+conditions only: doing +/-, knowing +/- where the concept has one, 3 random directions at +dose; unsteered replies
+and their judgments reused from the 1x run. Same scoring and the same criterion against that dose's own random
+directions, both judges. Coherence measured on the instruments themselves: gemma-4-31B-it rates 40 sampled replies
+per condition on every free-text instrument (1x included); the unparsed share tracks degradation for choice items.
+Outputs in outputs/s5b_dose/xM and results/s5b_dose/xM (cm/s5_behavior.py --dose-mult).
