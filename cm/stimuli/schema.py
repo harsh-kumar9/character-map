@@ -59,7 +59,9 @@ def check_item(it: dict, contrast: bool = True) -> list[str]:
 
 
 def read_jsonl(path: Path) -> list[dict]:
-    return [json.loads(l) for l in path.read_text().splitlines() if l.strip()] if path.exists() else []
+    # split on "\n" only: str.splitlines() also breaks on U+2028, form feed and similar characters that json.dumps
+    # leaves unescaped inside strings when ensure_ascii=False (WildChat prompts contain them)
+    return [json.loads(l) for l in path.read_text().split("\n") if l.strip()] if path.exists() else []
 
 
 def write_jsonl(path: Path, rows: list[dict]):
