@@ -182,7 +182,7 @@ def cmd_judge(judge):
 
 # ---- scoring ----
 
-LETTER = [r"answer\s*(?:is|:)?\s*\**\(?([A-H])\)?\b", r"^\s*\**\(?([A-H])(?:\)|\.|:|\*\*)", r"\(([A-H])\)", r"\b([A-H])\)"]
+LETTER = [r"^\s*\**\(?([A-H])\)?\**\s*(?:\n|$)", r"answer\s*(?:is|:)?\s*\**\(?([A-H])\)?\b", r"^\s*\**\(?([A-H])(?:\)|\.|:|\*\*)", r"\(([A-H])\)", r"\b([A-H])\)"]
 
 
 def parse_letter(text, last=False):
