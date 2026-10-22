@@ -8,11 +8,13 @@ Readout: reply32 at the four SAE depths. Variants:
 Per unit: the diff-of-means direction on train items; R_SPLIT random split-halves by scenario; R_RAND label shuffles
 (pos/neg swapped per scenario at random, so the items stay and the contrast goes).
 Measures, per depth:
-  cosine  directions centred by the mean unit direction across all units, then cosine;
+  cosine  directions in standardized space (each dimension divided by its SD over the probe pool; Gemma's few huge-
+          variance residual dimensions otherwise dominate every diff-of-means direction, real or shuffled), centred by
+          the mean unit direction across all units, then cosine;
   RSA     every unit's direction projected onto a common probe set (up to PROBE per pole from each unit's test items),
-          and the Pearson correlation between two units' projection patterns; in standardized space (probe activations
-          z-scored per dimension, directions divided by the same SD), since Gemma's outlier residual dimensions would
-          otherwise dominate every projection.
+          and the Pearson correlation between two units' projection patterns; probe activations z-scored per
+          dimension and centred within each source unit, so a pattern reflects how a direction orders items inside
+          each concept's set, not which set (format, length) an item came from.
   ceiling per unit: split-half agreement (cosine of the halves, or correlation of their patterns), Spearman-Brown
           corrected; a pair's ceiling is the geometric mean of the two units' corrected reliabilities.
   floor   95th percentile of |measure| between real units and other units' shuffled-label directions (the
@@ -151,40 +153,47 @@ def main():
     H = np.stack([u["halves"] for u in units]).astype(np.float64)       # [U, R, 2, 4, d]
     Rn = np.stack([u["rands"] for u in units]).astype(np.float64)       # [U, S, 4, d]
     P = np.concatenate([u["probe"] for u in units]).astype(np.float64)  # [Np, 4, d]
+    src = np.concatenate([np.full(len(u["probe"]), k) for k, u in enumerate(units)])
     print(f"[s4] {U} units, probe {len(P)} items", flush=True)
     res = {"variant": args.variant, "units": ids, "layers": {}}
     unit_info = [{"id": u["id"], "concept": u["concept"], "sub": u["sub"], "frame": u["frame"],
                   "n_train": u["n_train"]} for u in units]
     for L, li in DEPTHS.items():
         l = LIDX.index(li)
-        Dn = unit_vec(D[:, l])
+        # standardize every dimension by its SD over the probe pool: Gemma has a few residual dimensions with huge
+        # variance that would otherwise dominate any diff-of-means direction, real or shuffled
+        sd = P[:, l].std(0) + 1e-6
+        diag_top5 = lambda V: float(np.median(np.sort(V ** 2, axis=-1)[..., -5:].sum(-1) / (V ** 2).sum(-1)))
+        top5 = {"real_raw": diag_top5(D[:, l]), "shuffled_raw": diag_top5(Rn[:, :, l]),
+                "real_std": diag_top5(D[:, l] / sd), "shuffled_std": diag_top5(Rn[:, :, l] / sd)}
+        Dn = unit_vec(D[:, l] / sd)
         mean = Dn.mean(0)
         C = unit_vec(Dn - mean)
-        Hc = unit_vec(unit_vec(H[:, :, :, l]) - mean)
-        # the shuffled-label universe is centred on its own mean, as the real units are on theirs
-        Rn_l = unit_vec(Rn[:, :, l])
+        Hc = unit_vec(unit_vec(H[:, :, :, l] / sd) - mean)
+        Rn_l = unit_vec(Rn[:, :, l] / sd)
         Rc = unit_vec(Rn_l - Rn_l.reshape(-1, Rn_l.shape[-1]).mean(0))
         cos = C @ C.T
         rel_cos = sb(np.einsum("urd,urd->ur", Hc[:, :, 0], Hc[:, :, 1]).mean(1))
         rc = np.abs(np.einsum("ud,vsd->uvs", C, Rc))
         mask = ~np.eye(U, dtype=bool)
         floor_cos = float(np.percentile(rc[mask], 95))
-        # RSA in standardized space: Gemma's outlier residual dimensions would otherwise dominate every projection
-        mu, sd = P[:, l].mean(0), P[:, l].std(0) + 1e-6
-        PL = (P[:, l] - mu) / sd
-        std_dir = lambda x: unit_vec(x / sd)
-        pat = std_dir(D[:, l]) @ PL.T                                     # [U, Np]
+        # RSA: probe activations z-scored per dimension and centred within each source unit, so a pattern reflects how
+        # a direction orders items inside each concept's set, not which set (format, length) an item came from
+        PL = (P[:, l] - P[:, l].mean(0)) / sd
+        for k in range(U):
+            PL[src == k] -= PL[src == k].mean(0)
+        pat = Dn @ PL.T                                                   # [U, Np]
         rsa = corr_rows(pat, pat)
-        ph0 = np.einsum("urd,nd->urn", std_dir(H[:, :, 0, l]), PL)
-        ph1 = np.einsum("urd,nd->urn", std_dir(H[:, :, 1, l]), PL)
+        ph0 = np.einsum("urd,nd->urn", unit_vec(H[:, :, 0, l] / sd), PL)
+        ph1 = np.einsum("urd,nd->urn", unit_vec(H[:, :, 1, l] / sd), PL)
         rel_rsa = sb(np.array([np.mean([corr_rows(ph0[u, r][None], ph1[u, r][None])[0, 0] for r in range(R_SPLIT)])
                                for u in range(U)]))
-        prand = np.einsum("usd,nd->usn", std_dir(Rn[:, :, l]), PL).reshape(U * R_RAND, -1)
+        prand = np.einsum("usd,nd->usn", Rn_l, PL).reshape(U * R_RAND, -1)
         rr = np.abs(corr_rows(pat, prand)).reshape(U, U, R_RAND)
         floor_rsa = float(np.percentile(rr[mask], 95))
-        raw = Dn @ Dn.T
+        raw = Dn @ Dn.T                                                   # standardized, uncentred
         # half-sample ranges for any pair: cosine between unit u's half k and unit v's half k (raw, uncentred)
-        Hn = unit_vec(H[:, :, :, l])
+        Hn = unit_vec(H[:, :, :, l] / sd)
 
         def half_range(a, b, centred=False):
             A = Hc if centred else Hn
@@ -257,12 +266,13 @@ def main():
                     tax[f"mean_{c_}_{f}"] = {"raw": float(raw[a, b]), "raw_half_range": half_range(a, b)}
         res["layers"][str(L)] = {"cos": np.round(cos, 4).tolist(), "rsa": np.round(rsa, 4).tolist(),
                                  "rel_cos": np.round(rel_cos, 4).tolist(), "rel_rsa": np.round(rel_rsa, 4).tolist(),
-                                 "floor_cos": floor_cos, "floor_rsa": floor_rsa, "taxonomy": tax}
+                                 "floor_cos": floor_cos, "floor_rsa": floor_rsa, "top5_share": top5, "taxonomy": tax}
         iu = np.triu_indices(U, 1)
         print(f"[s4] layer {L}: floors cos {floor_cos:.3f} rsa {floor_rsa:.3f}; median reliability cos "
               f"{np.median(rel_cos):.2f} rsa {np.median(rel_rsa):.2f}; median |off-diagonal| cos "
               f"{np.median(np.abs(cos[iu])):.3f} rsa {np.median(np.abs(rsa[iu])):.3f}; share above floor cos "
-              f"{np.mean(np.abs(cos[iu]) > floor_cos):.2f} rsa {np.mean(np.abs(rsa[iu]) > floor_rsa):.2f}", flush=True)
+              f"{np.mean(np.abs(cos[iu]) > floor_cos):.2f} rsa {np.mean(np.abs(rsa[iu]) > floor_rsa):.2f}; "
+              f"top-5-dim share of squared norm {top5}", flush=True)
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "units.json").write_text(json.dumps(unit_info, indent=1))
     tag = args.variant.replace("+", "_")
