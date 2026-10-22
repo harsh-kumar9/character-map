@@ -18,6 +18,9 @@ random-direction effects.
     python -m cm.s5_behavior gen --shard K --nshards N      GPU
     python -m cm.s5_behavior judge --judge gemma|qwen        GPU (vLLM)
     python -m cm.s5_behavior score                           CPU   results/s5b/behavior.json
+    python -m cm.s5_behavior coherence                       GPU   coherence of sampled free-text replies
+  add --dose-mult M for the dose-response check (D-041): core conditions at M times the S5a dose, outputs in
+  outputs/s5b_dose/xM and results/s5b_dose/xM, unsteered replies and judgments reused from the 1x run.
 """
 from __future__ import annotations
 
@@ -32,6 +35,9 @@ from .stimuli.schema import item_dir, read_jsonl, write_jsonl
 
 OUT = OUTPUTS / "s5b"
 RES = RESULTS / "s5b"
+X1_OUT = OUTPUTS / "s5b"
+MULT = 1          # dose multiple of the S5a dose; set by --dose-mult (dose-response check, D-041)
+N_RAND_DOSE = 3
 L_IN = 17
 N_RAND = 4
 CONFLICT = {"F1": ["C1|all|c", "C5|all|c"], "F2": ["C14|defer|c", "B1|all|b"], "F3": ["C15|refuse|c", "A1|all|c"],
@@ -48,12 +54,25 @@ def setup():
     A = np.load(OUTPUTS / "s5" / "setup.npz")
     cal = json.loads((RESULTS / "s5" / "calibration.json").read_text())
     norm = json.loads((RESULTS / "s5" / "residual_norm_L17.json").read_text())["median_token_norm"]
-    return S, A, cal["chosen_c"] * norm
+    return S, A, cal["chosen_c"] * norm * MULT
 
 
 def conditions(cid, S):
-    """[(name, kind, source_index or random index, sign)]"""
+    """[(name, kind, source_index or random index, sign)]. At dose multiples other than 1 only the core set:
+    doing +/-, knowing +/-, 3 random directions (the unsteered baseline is reused from the 1x run)."""
     src = S["sources"]
+    if MULT != 1:
+        mine = [u for u in src if u.split("|")[0] == cid]
+        subs = sorted({u.split("|")[1] for u in mine})
+        out = []
+        if subs:
+            do = next((u for u in mine if u.split("|")[1] == subs[0] and u.split("|")[2] in "cd"), None)
+            kn = next((u for u in mine if u.split("|")[1] == subs[0] and u.split("|")[2] in "ab"), None)
+            if do:
+                out += [("doing+", "dense", src.index(do), 1), ("doing-", "dense", src.index(do), -1)]
+            if kn:
+                out += [("knowing+", "dense", src.index(kn), 1), ("knowing-", "dense", src.index(kn), -1)]
+        return out + [(f"random{k}", "rand", k, 1) for k in range(N_RAND_DOSE)]
     mine = [u for u in src if u.split("|")[0] == cid]
     subs = sorted({u.split("|")[1] for u in mine})
     out = [("baseline", "none", -1, 0)]
@@ -110,6 +129,8 @@ def cmd_gen(shard, nshards, only=None):
         for it in items:
             groups.setdefault(max_tokens(it["scoring"]), []).append(it)
         rows = []
+        if MULT != 1:   # unsteered replies are the same at every dose
+            rows = [r for r in read_jsonl(X1_OUT / "replies" / f"{cid}.jsonl") if r["cond"] == "baseline"]
         for name, kind, idx, sg in conditions(cid, S):
             vec = None if kind == "none" else torch.tensor(A[kind][idx] * sg * dose, device="cuda", dtype=torch.float32)
             for mt, its in groups.items():
@@ -171,7 +192,11 @@ def cmd_judge(judge):
             continue
         items = {it["item_id"]: it for it in read_jsonl(item_dir(cid) / "behavior.jsonl")}
         reps = read_jsonl(OUT / "replies" / f"{cid}.jsonl")
-        jobs = []
+        jobs, kept = [], []
+        if MULT != 1:   # reuse the 1x judgments of the unsteered replies
+            x1 = X1_OUT / f"judged_{judge}" / f"{cid}.jsonl"
+            kept = [r for r in read_jsonl(x1) if r["cond"] == "baseline"] if x1.exists() else []
+            reps = [r for r in reps if r["cond"] != "baseline"]
         for r in reps:
             it = items[r["item_id"]]
             jp = judge_prompts(it)
@@ -186,7 +211,8 @@ def cmd_judge(judge):
         if not jobs:
             continue
         outs = llm.generate([j[1] for j in jobs], [j[2] for j in jobs], use_tqdm=False)
-        write_jsonl(path, [{"item_id": a, "cond": b, "key": k, "out": o.outputs[0].text} for ((a, b, k), _, _), o in zip(jobs, outs)])
+        write_jsonl(path, kept + [{"item_id": a, "cond": b, "key": k, "out": o.outputs[0].text}
+                                  for ((a, b, k), _, _), o in zip(jobs, outs)])
         print(f"[s5b] judged {cid} with {judge}: {len(jobs)} calls", flush=True)
 
 
@@ -364,18 +390,67 @@ def cmd_score():
     (RES / "behavior.json").write_text(json.dumps(out, indent=1, default=float))
 
 
+
+def free_text(sc):
+    return sc["type"] == "judge" or (sc["type"] == "exact" and any(k in sc for k in ("answers", "prefix", "label_prefix")))
+
+
+def cmd_coherence(n_items=40):
+    """gemma-4-31B-it coherence (persona-vectors 0-100 prompt) on N_ITEMS sampled replies per condition, for
+    free-text instruments. results/<run>/coherence.json: {concept: {condition: mean}}."""
+    import hashlib
+    from .pv.judge import COHERENCE, DigitTreeJudge, fill
+    judge = DigitTreeJudge(JUDGES["gemma"], 128)
+    outd = OUT / "coherence"
+    outd.mkdir(parents=True, exist_ok=True)
+    summary = {}
+    for cid in concepts():
+        rp = OUT / "replies" / f"{cid}.jsonl"
+        if not rp.exists():
+            continue
+        items = {it["item_id"]: it for it in read_jsonl(item_dir(cid) / "behavior.jsonl")}
+        ids = sorted(i for i, it in items.items() if free_text(it["scoring"]))
+        if not ids:
+            continue
+        rng = np.random.default_rng(int(hashlib.sha256(cid.encode()).hexdigest()[:8], 16))
+        pick = set(rng.choice(ids, min(n_items, len(ids)), replace=False))
+        path = outd / f"{cid}.jsonl"
+        if path.exists():
+            rows = read_jsonl(path)
+        else:
+            reps = [r for r in read_jsonl(rp) if r["item_id"] in pick]
+            scores = judge.score([fill(COHERENCE, transcript(items[r["item_id"]]["messages"]), r["reply"]) for r in reps])
+            rows = [{"item_id": r["item_id"], "cond": r["cond"], "coherence": s[0]} for r, s in zip(reps, scores)]
+            write_jsonl(path, rows)
+        by = {}
+        for r in rows:
+            if r["coherence"] is not None:
+                by.setdefault(r["cond"], []).append(r["coherence"])
+        summary[cid] = {c: float(np.mean(v)) for c, v in by.items()}
+        print(f"[s5b] coherence {cid}: " + " ".join(f"{c} {v:.0f}" for c, v in summary[cid].items()), flush=True)
+    RES.mkdir(parents=True, exist_ok=True)
+    (RES / "coherence.json").write_text(json.dumps(summary, indent=1))
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("stage", choices=["gen", "judge", "score"])
+    ap.add_argument("stage", choices=["gen", "judge", "score", "coherence"])
     ap.add_argument("--shard", type=int, default=0)
     ap.add_argument("--nshards", type=int, default=1)
     ap.add_argument("--judge", default="gemma", choices=list(JUDGES))
     ap.add_argument("--concepts", default="", help="comma list to restrict gen (smoke runs)")
+    ap.add_argument("--dose-mult", type=float, default=1, help="multiple of the S5a dose (D-041); 1 is S5b itself")
     args = ap.parse_args()
+    global OUT, RES, MULT
+    if args.dose_mult != 1:
+        MULT = args.dose_mult
+        tag = f"x{args.dose_mult:g}"
+        OUT, RES = OUTPUTS / "s5b_dose" / tag, RESULTS / "s5b_dose" / tag
     if args.stage == "gen":
         cmd_gen(args.shard, args.nshards, set(args.concepts.split(",")) - {""})
     elif args.stage == "judge":
         cmd_judge(args.judge)
+    elif args.stage == "coherence":
+        cmd_coherence()
     else:
         cmd_score()
 
