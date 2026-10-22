@@ -1,7 +1,8 @@
 """S4 overlap across concepts (D-012), dense part: centred cosine and RSA, with split-half ceilings and random floors,
 plus the taxonomy shape tests fixed in PLAN.md ("Taxonomies as structural predictions").
 
-Units are (concept, sub-contrast, frame) with at least MIN_TRAIN train items per pole and 5 test items per pole.
+Units are (concept, sub-contrast, frame) with at least MIN_TRAIN (10) train items per pole and MIN_TEST (3) test items
+per pole (test items only feed the RSA probe set; C21 conformity has 4).
 Readout: reply32 at the four SAE depths. Variants:
   verdict           (headline) Gemma's verdict direction projected out of frame a/b rows (D-033c)
   verdict+negation  (robustness) a negation direction also projected out of every row (D-036)
@@ -50,7 +51,7 @@ from .s3_nuisance import nuisance_dirs, row_labels
 
 DEPTHS = {9: 10, 17: 18, 22: 23, 29: 30}
 LIDX = list(DEPTHS.values())
-R_SPLIT, R_RAND, PROBE, MIN_TRAIN = 10, 10, 20, 10
+R_SPLIT, R_RAND, PROBE, MIN_TRAIN, MIN_TEST = 10, 10, 20, 10, 3
 OUT = RESULTS / "s4"
 SCHWARTZ = ["universalism", "benevolence", "tradition", "conformity", "security", "power", "achievement", "hedonism",
             "stimulation", "self_direction"]
@@ -93,7 +94,7 @@ def concept_units(cid, variant):
         neg = [i for i in tr if meta[i]["polarity"] == "neg"]
         tpos = [i for i in te if meta[i]["polarity"] == "pos"]
         tneg = [i for i in te if meta[i]["polarity"] == "neg"]
-        if min(len(pos), len(neg)) < MIN_TRAIN or min(len(tpos), len(tneg)) < 5:
+        if min(len(pos), len(neg)) < MIN_TRAIN or min(len(tpos), len(tneg)) < MIN_TEST:
             continue
         d = X[pos].mean(0) - X[neg].mean(0)
         scen = sorted({meta[i]["scenario_id"] for i in tr})

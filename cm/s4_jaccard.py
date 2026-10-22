@@ -1,7 +1,7 @@
 """S4 overlap, SAE part (D-012): Jaccard over selected SAE features with k swept, split-half ceilings, random floors,
 and the replicas (262k medium and its seed-1 copy, D-009).
 
-Units are the same as cm.s4_overlap: (concept, sub-contrast, frame) with at least MIN_TRAIN train items per pole and 5
+Units are the same as cm.s4_overlap: (concept, sub-contrast, frame) with at least MIN_TRAIN train items and MIN_TEST
 test items per pole. Codes come from cm.stimx saecodes (SAE codes averaged over the first 32 reply tokens).
 Per unit, dictionary and layer, the effect of each feature is (mean code pos - mean code neg) / pooled SD on train
 items. For frame a and b units the effect is averaged within Gemma's verdict strata (P, N, X items separately,
@@ -33,7 +33,7 @@ from scipy.stats import spearmanr
 
 from .paths import RESULTS
 from .s3 import ACTS
-from .s4_overlap import MIN_TRAIN, R_RAND, R_SPLIT, SCHWARTZ
+from .s4_overlap import MIN_TEST, MIN_TRAIN, R_RAND, R_SPLIT, SCHWARTZ
 from .stimuli.schema import read_jsonl
 
 CODES = ACTS / "saecodes"
@@ -98,7 +98,7 @@ def concept_sets(cid):
         pos = [i for i in tr if meta[i]["polarity"] == "pos"]
         neg = [i for i in tr if meta[i]["polarity"] == "neg"]
         if min(len(pos), len(neg)) < MIN_TRAIN or min(sum(meta[i]["polarity"] == "pos" for i in te),
-                                                      sum(meta[i]["polarity"] == "neg" for i in te)) < 5:
+                                                      sum(meta[i]["polarity"] == "neg" for i in te)) < MIN_TEST:
             continue
         use_strata = f in ("a", "b") and verdict
 
