@@ -13,8 +13,8 @@ Effect of source s on target t at layer L: mean shift of t's items' projection o
 prediction (dose times the cosine between the injected vector and t's direction: what the added vector alone carries
 forward), divided by t's baseline pos-neg gap. z against the 16 random-direction effects on the same target.
 Dose: one global multiple c of the median residual-stream norm at layer 17, the largest on a grid at which
-gemma-4-31B-it rates steered free generations (24 WildChat prompts, 64 tokens) at mean coherence >= 75 for every
-calibration source and both signs.
+gemma-4-31B-it rates steered free generations (96 tokens) at mean coherence >= 75 for every calibration source and
+both signs, on the WildChat prompts (of 64) whose unsteered reply it rates at least 90.
 
     python -m cm.s5_causal setup              CPU   sources, vectors, targets, probe items
     python -m cm.s5_causal calib-gen          GPU   steered generations for the dose grid
@@ -36,7 +36,7 @@ OUT = OUTPUTS / "s5"
 RES = RESULTS / "s5"
 L_IN, L_OUT = 17, (22, 29)
 H_IN, H_OUT = L_IN + 1, tuple(L + 1 for L in L_OUT)
-GRID = [0.0625, 0.125, 0.25, 0.5, 1.0]
+GRID = [1 / 256, 1 / 128, 1 / 64, 1 / 32, 1 / 16]
 N_RAND, PROBE, TOPF = 8, 6, 16
 CALIB = ["A1|all|c", "B1|all|b", "C1|all|c", "C6|all|c", "C9|quarrelsome|c", "C15|refuse|c", "C19|honesty_humility|c",
          "C20|psychopathy|c", "C21|power|d", "D1|all|c", "E1|all|c", "F3|all|c"]
@@ -147,7 +147,7 @@ def load_setup():
 def calib_prompts():
     from .stimuli.schema import read_jsonl
     rows = [r for r in read_jsonl(OUTPUTS / "bottomup" / "prompts.jsonl") if len(r["prompt"]) <= 300]
-    return [r["prompt"] for r in rows[:24]]
+    return [r["prompt"] for r in rows[:64]]
 
 
 def cmd_calib_gen():
@@ -180,9 +180,9 @@ def cmd_calib_gen():
         with torch.no_grad():
             if ctx:
                 with ctx:
-                    out = m.generate(**enc, max_new_tokens=64, do_sample=False)
+                    out = m.generate(**enc, max_new_tokens=96, do_sample=False)
             else:
-                out = m.generate(**enc, max_new_tokens=64, do_sample=False)
+                out = m.generate(**enc, max_new_tokens=96, do_sample=False)
         texts = tok.batch_decode(out[:, enc["input_ids"].shape[1]:], skip_special_tokens=True)
         rows += [{"cond": name, "c": c, "prompt_i": i, "prompt": p, "text": t} for i, (p, t) in enumerate(zip(prompts, texts))]
     write_jsonl(OUT / "calib_gen.jsonl", rows)
@@ -199,9 +199,12 @@ def cmd_calib_judge():
     for r, (sc, _, _) in zip(rows, scores):
         r["coherence"] = sc
     write_jsonl(OUT / "calib_scores.jsonl", rows)
+    # keep prompts whose unsteered reply the judge rates at least 90: truncated or borderline prompts make the judge
+    # score fine replies 0 or decline (baseline mean 51 on the first attempt), which would hide the effect of steering
+    good = {r["prompt_i"] for r in rows if r["cond"] == "baseline" and (r["coherence"] or 0) >= 90}
     table = {}
     for r in rows:
-        if r["coherence"] is not None:
+        if r["coherence"] is not None and r["prompt_i"] in good:
             table.setdefault((r["cond"], r["c"]), []).append(r["coherence"])
     means = {f"{k[0]}|{k[1]}": float(np.mean(v)) for k, v in table.items()}
     chosen = None
@@ -210,11 +213,12 @@ def cmd_calib_judge():
         if not cells or min(cells) < 75:
             break
         chosen = c
-    out = {"means": means, "chosen_c": chosen, "baseline": means.get("baseline|0.0"),
+    out = {"means": means, "chosen_c": chosen, "baseline": means.get("baseline|0.0"), "n_prompts_kept": len(good),
            "min_by_c": {str(c): min(v for k, v in means.items() if k.split("|")[-1] in (str(c), str(-c)) and not k.startswith("baseline"))
                         for c in GRID}}
     (RES / "calibration.json").write_text(json.dumps(out, indent=1))
-    print(f"[s5] baseline coherence {out['baseline']:.1f}; min mean coherence by c {out['min_by_c']}; chosen c {chosen}", flush=True)
+    print(f"[s5] {len(good)} prompts kept; baseline coherence {out['baseline']:.1f}; min mean coherence by c "
+          f"{out['min_by_c']}; chosen c {chosen}", flush=True)
 
 
 def conditions(S):
