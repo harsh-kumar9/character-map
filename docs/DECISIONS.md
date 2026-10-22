@@ -646,3 +646,24 @@ hundredths, for 65k medium, 262k medium and 262k seed 1; layer ranges below span
 Reading: in Gemma's ordinary replies, character features are embedded in the general co-activation landscape rather
 than forming their own modules; the structure they do share with the stimulus-based geometry is modest (0.3) and
 replicable, and of the taxonomy shapes only the values circle in self-description shows up in the wild.
+
+## D-039 S5a causal matrix design - 2026-10-22
+
+Ruled by Claude under Harsh's delegation, within D-013 (cm/s5_causal.py). S5 runs in parts: S5a the representation-
+level causal matrix, S5b behavior (each concept's instrument, steered and unsteered), S5c the judgment-under-conflict
+items.
+- Sources: per concept and sub-contrast, the doing-side direction (frame c, else d) and, where the concept has a
+  knowing frame too, the knowing-side direction (b, else a): 150 sources. Frames a and b use the verdict-controlled
+  directions (D-033c). Each knowing source makes knowing-to-doing a causal test of the S3 dissociation.
+- Interventions at decoder layer 17, every position: the dense S3 direction at +dose and -dose, and a top-16 SAE-feature
+  vector at +dose (decoder-weighted sum of the source's top 65k-medium layer-17 features by |effect| with their mean
+  code differences as weights; added, not reconstructed, so the SAE error term is kept). Median cosine between the
+  dense and SAE vectors is 0.43.
+- Readouts: all 208 S4 units at layers 22 and 29, reply32 on each unit's own test items (6 per pole, 2,488 items),
+  reply text held fixed (behavior is S5b).
+- Effect: mean projection shift on the target direction minus the skip-path prediction (dose x cosine between the
+  injected vector and the target direction), in units of the target's baseline pos-neg gap; z against 8 norm-matched
+  random directions at +-dose. K2 (topic) is a source and the unrelated-concept control.
+- Dose: one global multiple of the median residual-stream norm at layer 17, the largest on the grid 1/16-1 at which
+  it and every smaller dose keep gemma-4-31B-it coherence (persona-vectors 0-100 prompt) at a mean of at least 75 on
+  24 WildChat prompts x 64 generated tokens, for each of 12 calibration sources and 2 random directions, both signs.
