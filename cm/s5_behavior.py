@@ -85,7 +85,7 @@ def max_tokens(sc):
     return 256
 
 
-def cmd_gen(shard, nshards):
+def cmd_gen(shard, nshards, only=None):
     import torch
     from . import model as cm_model
     S, A, dose = setup()
@@ -93,7 +93,7 @@ def cmd_gen(shard, nshards):
     tok.padding_side = "left"
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "replies").mkdir(exist_ok=True)
-    cids = [c for k, c in enumerate(concepts()) if k % nshards == shard]
+    cids = [c for k, c in enumerate(concepts()) if k % nshards == shard and (not only or c in only)]
     for cid in cids:
         path = OUT / "replies" / f"{cid}.jsonl"
         if path.exists():
@@ -360,9 +360,10 @@ def main():
     ap.add_argument("--shard", type=int, default=0)
     ap.add_argument("--nshards", type=int, default=1)
     ap.add_argument("--judge", default="gemma", choices=list(JUDGES))
+    ap.add_argument("--concepts", default="", help="comma list to restrict gen (smoke runs)")
     args = ap.parse_args()
     if args.stage == "gen":
-        cmd_gen(args.shard, args.nshards)
+        cmd_gen(args.shard, args.nshards, set(args.concepts.split(",")) - {""})
     elif args.stage == "judge":
         cmd_judge(args.judge)
     else:
