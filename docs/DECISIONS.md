@@ -566,3 +566,40 @@ distance and normalized margin, one-sided permutation p within value, BH over th
 Supported for self-description (frame d) at layers 22 (rho +0.14, q 0.045) and 29 (rho +0.23, q 0.006; accuracy 0.88
 at distance 1, 0.97 at 5), not at layers 9 or 17 (q 0.42, 0.85), and not for judging (frame b) at any layer or
 readout (rho -0.10 to +0.01, q >= 0.85). The rise is not monotonic (distance 2 is often above 3).
+
+## S4 overlap matrices - 2026-10-22
+
+Implementation (under Harsh's delegation; D-012): units are (concept, sub-contrast, frame) with at least 10 train and 3
+test items per pole, 207 units; reply32 at the four SAE depths; headline variant has Gemma's verdict projected out of
+a/b rows (D-033c), robustness variant also projects out negation (D-036). Two fixes found on the first runs, both
+logged in cm/s4_overlap.py: (1) Gemma's few huge-variance residual dimensions held 33-42% of every diff-of-means
+direction's squared norm at layers 9-17, real and shuffled alike, which put the cosine floor at 0.75; cosine is now
+taken in per-dimension standardized space (3-9% in the top five dimensions); (2) RSA patterns over a pooled probe set
+were dominated by which stimulus set an item came from (floor 0.96); probe activations are now centred within each
+source unit. SAE codes (cm.stimx saecodes) are per-item means over the reply32 window for 65k medium, 262k medium and
+262k medium seed 1; for a/b units features are selected within Gemma's verdict strata.
+Results (results/s4/):
+- Dense cosine: split-half reliability 0.89-0.92 (Spearman-Brown), floor 0.15-0.17, median |off-diagonal| 0.06,
+  10-12% of unit pairs above floor. RSA: reliability 0.93-0.95, floor 0.41-0.45, 7-8% above floor.
+- Structure: frame organizes more than concept group (layer 17: same-frame cross-concept pairs above floor 18% vs
+  7% across frames; same group 13% vs 8%). The strongest cross-concept overlaps are the moral foundations among
+  themselves (care-liberty +0.90, loyalty-authority +0.79, authority-sanctity +0.78): one shared "violation" axis.
+- Negation robustness: layers 17-29 matrices barely move (cosine r 0.94-0.98, RSA 0.79-0.97 with the headline);
+  layer 9 moves a lot (cosine r 0.59, RSA 0.27), so early-layer overlap is partly a shared negation component.
+- Taxonomy shapes (headline, raw or centred cosine; robust to negation from layer 17):
+  MFT: care+fairness vs binding is the top split of the 10 possible in judging at every layer (within minus
+  between 0.16-0.41; exact p 0.10 is the minimum with five foundations), weaker when recognizing.
+  Schwartz: self-description reproduces the circle at every layer (adjacent values +0.15, opposite -0.22 to -0.26;
+  rho -0.43 to -0.49, p 0.007-0.011); judging does not (p 0.14-0.32).
+  HEXACO: honesty-humility opposes each dark-triad trait in acting and self-description (-0.21 to -0.69; every
+  half-sample range below zero).
+  Williams: sincerity and accuracy separate (0.04-0.26 against ceilings 0.57-0.95).
+  Aristotle's mean: friendliness (C9) fits a midpoint best (obsequious vs quarrelsome -0.59 to -0.72 when recognizing
+  and judging, -0.19 to -0.45 when acting or self-describing); boastful vs self-deprecating (C4) are near
+  orthogonal (-0.13 to +0.21), the truthful mean is its own quality; for accountability (C13) the two vices align
+  when recognizing (+0.27 to +0.54).
+- SAE Jaccard: per-unit top-k sets are unstable (split-half 0.21-0.26 at every k); median Jaccard at k 64 is 0.008
+  against a floor of 0.016-0.024. The matrix replicates across dictionaries as k grows (seed 0 vs seed 1 and 65k vs
+  262k: 0.35-0.44 at k 16, 0.80 at k 256) and tracks dense |cosine| at 0.20-0.32. No taxonomy shape appears in Jaccard
+  (MFT p 0.3-1.0, Schwartz n.s.); Jaccard ignores sign, so signed shapes belong to the dense measures.
+Next per PLAN: the bottom-up pass (D-015) after this gate is read.
