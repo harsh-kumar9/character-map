@@ -549,3 +549,20 @@ universalism b-d; D1 c-d (shared at layer 29). Every shared pair at layers 17 an
 C11 after D-037: near held-out 0.60 at layer 17; far (are_you_sure) 0.03 at layer 17, 0.72 at layer 29.
 Open analyses: C8 agreement x correctness 2x2 across sub-contrasts; C21 circumplex-distance test (pre-registered in
 D-035).
+
+## C8 agreement x correctness and C21 circumplex - 2026-10-22
+
+C8 (cm/c8_2x2.py, results/analysis/c8_2x2.json). Crossing the sycophantic (user wrong) and genuine (user right)
+sub-contrasts gives two main-effect directions per frame. Within each frame they separate: each reads its own factor
+and is near chance on the other (layer 17 test AUROC: correctness 0.63-0.74, agreement 0.59-0.92 with frame a
+boundary highest; cross-reads 0.32-0.52; cosines -0.39 to +0.09; layer 29 cross-reads 0.40-0.60). Across frames,
+agreement from acting reaches self-description late: c to d 0.39 at layer 17, 0.74 at layer 29 (d to c 0.46, 0.53);
+correctness c to d 0.34 and 0.51. So the earlier act-self dissociation of the sycophantic-agreement sub-contrast
+(0.26 at layer 17) mixed the two factors; the agreement factor alone is shared from acting to self-description at
+layer 29, one way only.
+C21 (cm/c21_circumplex.py, results/analysis/c21_circumplex.json), the D-035 prediction that separation rises with
+circumplex distance between a value and its foil. 5-fold CV by scenario, 299 pairs per frame; Spearman rho between
+distance and normalized margin, one-sided permutation p within value, BH over the 12 frame x readout x layer tests.
+Supported for self-description (frame d) at layers 22 (rho +0.14, q 0.045) and 29 (rho +0.23, q 0.006; accuracy 0.88
+at distance 1, 0.97 at 5), not at layers 9 or 17 (q 0.42, 0.85), and not for judging (frame b) at any layer or
+readout (rho -0.10 to +0.01, q >= 0.85). The rise is not monotonic (distance 2 is often above 3).
