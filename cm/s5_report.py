@@ -86,15 +86,16 @@ def main():
         bt = [f"B{i}|all|b" for i in range(1, 6)]
         if all(x in sx for x in bs) and all(x in tix for x in bt):
             M = np.array([[E[sx[a], tix[b]] for b in bt] for a in bs])
-            def stat(group):
+            def stat(group):   # cells without a target gap are NaN and left out
                 wi = [M[p, q] for p in range(5) for q in range(5) if p != q and (p in group) == (q in group)]
                 be = [M[p, q] for p in range(5) for q in range(5) if p != q and (p in group) != (q in group)]
-                return float(np.mean(wi) - np.mean(be))
+                return float(np.nanmean(wi) - np.nanmean(be))
             obs = stat({0, 1})
-            tax["mft_within_minus_between"] = {"value": obs, "p_exact": sum(stat(set(g)) >= obs for g in itertools.combinations(range(5), 2)) / 10}
+            tax["mft_within_minus_between"] = {"value": obs, "p_exact": sum(stat(set(g)) >= obs for g in itertools.combinations(range(5), 2)) / 10,
+                                               "nan_cells": int(np.isnan(M).sum())}
         cs = [f"C21|{v}|d" for v in SCHWARTZ]
         if all(x in sx for x in cs) and all(x in tix for x in cs):
-            prs = [(a, b) for a in range(10) for b in range(10) if a != b]
+            prs = [(a, b) for a in range(10) for b in range(10) if a != b and not np.isnan(E[sx[cs[a]], tix[cs[b]]])]
             vals = [E[sx[cs[a]], tix[cs[b]]] for a, b in prs]
             dd = [min(abs(a - b), 10 - abs(a - b)) for a, b in prs]
             rho = spearmanr(dd, vals).correlation
@@ -103,7 +104,8 @@ def main():
             for _ in range(5000):
                 pp = rng.permutation(10)
                 null.append(spearmanr([min(abs(pp[a] - pp[b]), 10 - abs(pp[a] - pp[b])) for a, b in prs], vals).correlation)
-            tax["schwartz_self"] = {"rho": float(rho), "p_one_sided_negative": (1 + sum(x <= rho for x in null)) / 5001}
+            tax["schwartz_self"] = {"rho": float(rho), "p_one_sided_negative": (1 + sum(x <= rho for x in null)) / 5001,
+                                    "n_pairs": len(prs)}
         o["taxonomy"] = tax
         out[str(L)] = o
         print(f"\nlayer {L}")
