@@ -603,3 +603,22 @@ Results (results/s4/):
   262k: 0.35-0.44 at k 16, 0.80 at k 256) and tracks dense |cosine| at 0.20-0.32. No taxonomy shape appears in Jaccard
   (MFT p 0.3-1.0, Schwartz n.s.); Jaccard ignores sign, so signed shapes belong to the dense measures.
 Next per PLAN: the bottom-up pass (D-015) after this gate is read.
+
+## D-038 Bottom-up pass settings - 2026-10-22
+
+Ruled by Claude under Harsh's delegation (D-015 fixes the shape: own replies to about 20k WildChat prompts,
+co-occurrence over character-responsive features, RSA against the taxonomies). cm/bottomup.py.
+- Prompts: first user turns from allenai/WildChat-1M (ODC-BY, ungated; shards 0, 7 and 13 to span the collection
+  period), English, deduplicated, 10-2000 characters, 20,000 sampled with seed 0 from a pool of 58,862 (median 152
+  characters). The public 1M release excludes toxic-flagged conversations (toxic share 0), so this is the non-toxic
+  natural mix. WildChat text stays on ada.
+- Replies: Gemma-3-4B-IT greedy, up to 256 tokens (as D-028).
+- Codes: SAE codes averaged over each reply's tokens, layers 9/17/22/29, 65k medium (main), 262k medium and its seed-1
+  copy (replicas).
+- Character-responsive features: the union of S4 units' top 64 features by |effect| (verdict-stratified for a/b),
+  kept if active in at least 0.5% of replies; baseline is an activity-matched random set of the same size.
+- Co-activation: Pearson correlation of log1p(mean code) across replies. Clusters: Louvain on the 10-nearest-neighbour
+  graph of positive correlations. Comparisons: modularity vs the random set; adjusted mutual information between
+  clusters and each feature's home group and home frame (shuffled-home nulls); feature-level RSA (co-activation vs
+  similarity of effect profiles across units); a unit-by-unit signed co-activation matrix N compared with the S4 dense
+  cosine and run through the S4 taxonomy tests; seed and width replicas.
