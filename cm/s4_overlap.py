@@ -10,10 +10,13 @@ Per unit: the diff-of-means direction on train items; R_SPLIT random split-halve
 Measures, per depth:
   cosine  directions centred by the mean unit direction across all units, then cosine;
   RSA     every unit's direction projected onto a common probe set (up to PROBE per pole from each unit's test items),
-          and the Pearson correlation between two units' projection patterns.
+          and the Pearson correlation between two units' projection patterns; in standardized space (probe activations
+          z-scored per dimension, directions divided by the same SD), since Gemma's outlier residual dimensions would
+          otherwise dominate every projection.
   ceiling per unit: split-half agreement (cosine of the halves, or correlation of their patterns), Spearman-Brown
           corrected; a pair's ceiling is the geometric mean of the two units' corrected reliabilities.
-  floor   95th percentile of |measure| between real units and other units' shuffled-label directions.
+  floor   95th percentile of |measure| between real units and other units' shuffled-label directions (the
+          shuffled-label directions centred on their own mean for the cosine floor).
 Taxonomy tests (raw and centred cosine; half-sample ranges from the split halves):
   MFT        care+fairness vs loyalty+authority+sanctity (B1-B5, frames a and b): within minus between, exact p over
              the 10 ways to pick two of five;
@@ -158,20 +161,25 @@ def main():
         mean = Dn.mean(0)
         C = unit_vec(Dn - mean)
         Hc = unit_vec(unit_vec(H[:, :, :, l]) - mean)
-        Rc = unit_vec(unit_vec(Rn[:, :, l]) - mean)
+        # the shuffled-label universe is centred on its own mean, as the real units are on theirs
+        Rn_l = unit_vec(Rn[:, :, l])
+        Rc = unit_vec(Rn_l - Rn_l.reshape(-1, Rn_l.shape[-1]).mean(0))
         cos = C @ C.T
         rel_cos = sb(np.einsum("urd,urd->ur", Hc[:, :, 0], Hc[:, :, 1]).mean(1))
         rc = np.abs(np.einsum("ud,vsd->uvs", C, Rc))
         mask = ~np.eye(U, dtype=bool)
         floor_cos = float(np.percentile(rc[mask], 95))
-        PL = P[:, l]
-        pat = C @ PL.T                                                    # [U, Np]
+        # RSA in standardized space: Gemma's outlier residual dimensions would otherwise dominate every projection
+        mu, sd = P[:, l].mean(0), P[:, l].std(0) + 1e-6
+        PL = (P[:, l] - mu) / sd
+        std_dir = lambda x: unit_vec(x / sd)
+        pat = std_dir(D[:, l]) @ PL.T                                     # [U, Np]
         rsa = corr_rows(pat, pat)
-        ph0 = np.einsum("urd,nd->urn", Hc[:, :, 0], PL)
-        ph1 = np.einsum("urd,nd->urn", Hc[:, :, 1], PL)
+        ph0 = np.einsum("urd,nd->urn", std_dir(H[:, :, 0, l]), PL)
+        ph1 = np.einsum("urd,nd->urn", std_dir(H[:, :, 1, l]), PL)
         rel_rsa = sb(np.array([np.mean([corr_rows(ph0[u, r][None], ph1[u, r][None])[0, 0] for r in range(R_SPLIT)])
                                for u in range(U)]))
-        prand = np.einsum("usd,nd->usn", Rc, PL).reshape(U * R_RAND, -1)
+        prand = np.einsum("usd,nd->usn", std_dir(Rn[:, :, l]), PL).reshape(U * R_RAND, -1)
         rr = np.abs(corr_rows(pat, prand)).reshape(U, U, R_RAND)
         floor_rsa = float(np.percentile(rr[mask], 95))
         raw = Dn @ Dn.T
@@ -250,8 +258,11 @@ def main():
         res["layers"][str(L)] = {"cos": np.round(cos, 4).tolist(), "rsa": np.round(rsa, 4).tolist(),
                                  "rel_cos": np.round(rel_cos, 4).tolist(), "rel_rsa": np.round(rel_rsa, 4).tolist(),
                                  "floor_cos": floor_cos, "floor_rsa": floor_rsa, "taxonomy": tax}
+        iu = np.triu_indices(U, 1)
         print(f"[s4] layer {L}: floors cos {floor_cos:.3f} rsa {floor_rsa:.3f}; median reliability cos "
-              f"{np.median(rel_cos):.2f} rsa {np.median(rel_rsa):.2f}", flush=True)
+              f"{np.median(rel_cos):.2f} rsa {np.median(rel_rsa):.2f}; median |off-diagonal| cos "
+              f"{np.median(np.abs(cos[iu])):.3f} rsa {np.median(np.abs(rsa[iu])):.3f}; share above floor cos "
+              f"{np.mean(np.abs(cos[iu]) > floor_cos):.2f} rsa {np.mean(np.abs(rsa[iu]) > floor_rsa):.2f}", flush=True)
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "units.json").write_text(json.dumps(unit_info, indent=1))
     tag = args.variant.replace("+", "_")
