@@ -692,3 +692,20 @@ Results (results/s5/causal_matrix.json, report.json; cm/s5_report.py), layer 22 
   moves near values more than far ones at layer 29 (rho -0.36, p 0.004; layer 22 rho -0.15, p 0.07). The MFT split
   does not show causally (within minus between +0.04 / +0.02, p 0.2 / 0.3).
 Next: S5b behavior and S5c the conflict items.
+
+## D-040 S5b/S5c behavior under steering - 2026-10-22
+
+Ruled by Claude under Harsh's delegation, within D-013, D-014 and D-018 (cm/s5_behavior.py).
+- Instruments: every concept's behavior.jsonl (about 200 items each); each item carries its scoring spec (choice
+  letter, exact answer or prefix, or a judge prompt with its scale or labels).
+- Conditions per concept, layer 17, the S5a dose (1/128 of the residual norm, about 256): unsteered; the doing
+  direction at +/-dose; the knowing direction at +/-dose where the concept has one (knowing-to-behavior is the direct
+  behavioral test of the S3 dissociation); for concepts with sub-contrasts, each further sub-contrast's doing direction
+  at +dose; 4 norm-matched random directions at +dose. S5c: F1-F5 also get each side's duty direction at +dose
+  (F1 sincere C1 and caring C5; F2 defer C14 and care/harm B1; F3 refuse C15 and user intent A1; F4 fairness B2 and
+  loyalty B3; F5 respects autonomy C6 and caring C5). 548 conditions in all.
+- Replies: Gemma greedy; 160 new tokens for choice items, 256 for judged, 384 for prefix-scored.
+- Scoring: choice letters and exact answers by rule, unparsed share reported; judged items by gemma-4-31B-it
+  (headline) and Qwen3.5-27B (thinking off), greedy, parsed per the item's labels or scale and normalized to 0-1.
+- Effect: paired item-level difference from unsteered with its standard error, set against the four random-direction
+  effects; a result only one judge shows is reported as such (D-014).
