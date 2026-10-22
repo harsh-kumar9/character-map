@@ -138,6 +138,51 @@ def cmd_acts(cids):
         print(f"[acts] {c}: {n} items", flush=True)
 
 
+SAE_SPECS = [("65k", "medium"), ("262k", "medium"), ("262k", "medium_seed_1")]   # main, width check, seed-1 replica
+
+
+@torch.no_grad()
+def cmd_saecodes(cids):
+    """S4 (D-012): per item, SAE codes averaged over the same reply window as reply32 (the first 32 reply tokens), at
+    the four SAE layers, for the main dictionary and the two robustness copies (D-009). Stored sparse, one CSR block
+    per dictionary and layer, in outputs/acts/stimuli/saecodes/<ID>.npz with the acts meta."""
+    m, tok = cm_model.load(MODEL)
+    saes = {(w, l0, L): JumpReLUSAE.load(sae_dir(MODEL, L, w, l0), "cuda") for w, l0 in SAE_SPECS for L in SAE_LAYERS}
+    outd = ACTS / "saecodes"
+    outd.mkdir(parents=True, exist_ok=True)
+    for c in cids:
+        out = outd / f"{c}.npz"
+        if out.exists():
+            continue
+        items, rep = load_items(c), load_replies(c)
+        rows = [(it,) + tokenize(tok, *prompt_and_reply(tok, it, rep)) for it in items]
+        buf = {k: ([0], [], []) for k in saes}
+        for H, (it, ids, p) in zip(forward_hidden(m, [r[1] for r in rows]), rows):
+            for (w, l0, L), sae in saes.items():
+                h = H[L + 1, p:p + REPLY_N]
+                indptr, idx, val = buf[(w, l0, L)]
+                if h.shape[0] == 0:
+                    indptr.append(indptr[-1])
+                    continue
+                code = sae.encode(h).mean(0)
+                nz = code.nonzero().squeeze(1)
+                idx.append(nz.int().cpu().numpy())
+                val.append(code[nz].float().cpu().numpy())
+                indptr.append(indptr[-1] + len(nz))
+        arrays = {}
+        for (w, l0, L), (indptr, idx, val) in buf.items():
+            key = f"{w}_{l0}_L{L}"
+            arrays[f"{key}_indptr"] = np.array(indptr, np.int64)
+            arrays[f"{key}_indices"] = np.concatenate(idx) if idx else np.zeros(0, np.int32)
+            arrays[f"{key}_values"] = np.concatenate(val) if val else np.zeros(0, np.float32)
+        meta = [{"item_id": it["item_id"], "scenario_id": it["scenario_id"], "frame": it["frame"],
+                 "polarity": it["polarity"], "split": it["split"], "readout": it["readout"],
+                 "contrast": (it.get("meta") or {}).get("contrast")} for it, _, _ in rows]
+        np.savez(out, meta=np.array(json.dumps(meta)), **arrays)
+        nnz = np.mean(np.diff(arrays[f"65k_medium_L17_indptr"]))
+        print(f"[saecodes] {c}: {len(rows)} items, mean active features (65k, layer 17) {nnz:.0f}", flush=True)
+
+
 def token_groups(ids, p):
     """Index lists for the fidelity groups: boundary token, first 32 reply tokens, prompt content tokens
     (no BOS or turn markers), and all non-BOS tokens (comparable to S0's in-distribution FVU)."""
@@ -274,7 +319,7 @@ def cmd_fidelity(cids, per_cell, traits_per_side, tag, indist=0):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("stage", choices=["replies", "acts", "fidelity"])
+    ap.add_argument("stage", choices=["replies", "acts", "fidelity", "saecodes"])
     ap.add_argument("--concepts", default="all")
     ap.add_argument("--per_cell", type=int, default=8)
     ap.add_argument("--traits_per_side", type=int, default=0)
@@ -286,6 +331,8 @@ def main():
         cmd_replies(cids)
     elif args.stage == "acts":
         cmd_acts(cids)
+    elif args.stage == "saecodes":
+        cmd_saecodes(cids)
     else:
         cmd_fidelity(cids, args.per_cell, args.traits_per_side, args.tag, args.indist)
 
