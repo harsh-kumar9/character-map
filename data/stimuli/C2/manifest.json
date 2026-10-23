@@ -1,21 +1,35 @@
 {
  "concept": "C2",
  "errors": [],
- "warnings": [],
- "length_ratio_pos_over_neg_median": 0.988,
+ "warnings": [
+  "1/100 scenarios miss some applicable frame x polarity"
+ ],
+ "length_ratio_pos_over_neg_median": 1.0,
  "length_ratio_by_frame": {
+  "a": 1.004,
+  "b": 1.004,
   "c": 1.012,
   "d": 0.96
  },
  "applicable_frames": [
+  "a",
+  "b",
   "c",
   "d"
  ],
  "n_scenarios": 100,
- "n_items": 400,
+ "n_items": 796,
  "n_heldout": 200,
  "n_behavior": 200,
  "cells": {
+  "a-neg-test": 40,
+  "a-neg-train": 59,
+  "a-pos-test": 40,
+  "a-pos-train": 59,
+  "b-neg-test": 40,
+  "b-neg-train": 59,
+  "b-pos-test": 40,
+  "b-pos-train": 59,
   "c-neg-test": 41,
   "c-neg-train": 59,
   "c-pos-test": 41,
@@ -26,7 +40,7 @@
   "d-pos-train": 59
  },
  "constructions": {
-  "generated": 400
+  "generated": 796
  },
  "sources": [
   "\"RUCAIBox/HaluEval qa\"",
@@ -38,7 +52,7 @@
   "MIT"
  ],
  "sha256": {
-  "items": "c7c20b99069726d8e3b7555a09df367400940763bc208a62e0952eade8009ede",
+  "items": "952c1b07cfbba5aefee01bb2268c3452928bb856f218877f9f7dc50aef5c629f",
   "heldout": "3e515992064d4e3b1fa45608558ea24e1c7d5dddb1ad77a757a62c4be403b357",
   "behavior": "d13abb80c607f9cdff6fc26201115f44297b769fa31754d2956f275a8c1e0295"
  }

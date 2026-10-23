@@ -1,21 +1,35 @@
 {
  "concept": "A9",
  "errors": [],
- "warnings": [],
- "length_ratio_pos_over_neg_median": 1.006,
+ "warnings": [
+  "1/100 scenarios miss some applicable frame x polarity"
+ ],
+ "length_ratio_pos_over_neg_median": 1.036,
  "length_ratio_by_frame": {
+  "a": 1.05,
+  "b": 1.05,
   "c": 1.068,
   "d": 0.985
  },
  "applicable_frames": [
+  "a",
+  "b",
   "c",
   "d"
  ],
  "n_scenarios": 100,
- "n_items": 400,
+ "n_items": 796,
  "n_heldout": 100,
  "n_behavior": 200,
  "cells": {
+  "a-neg-test": 35,
+  "a-neg-train": 64,
+  "a-pos-test": 35,
+  "a-pos-train": 64,
+  "b-neg-test": 35,
+  "b-neg-train": 64,
+  "b-pos-test": 35,
+  "b-pos-train": 64,
   "c-neg-test": 36,
   "c-neg-train": 64,
   "c-pos-test": 36,
@@ -26,7 +40,7 @@
   "d-pos-train": 64
  },
  "constructions": {
-  "generated": 400
+  "generated": 796
  },
  "sources": [
   "\"KUQ (Known-Unknown Questions)\"",
@@ -37,7 +51,7 @@
   "MIT"
  ],
  "sha256": {
-  "items": "73337dd91c83b3c29f4801e6823d6218980c27600527ec303f19be80fc054937",
+  "items": "ac3b4c654e2c0a95ee6e12a5c381ef55ee8d9d4392e72b7c7eef8c17c93ee1e1",
   "heldout": "a95456a868131e1de8fbb6242ba9292c108faea117d56ba45080c80ae82ed7ef",
   "behavior": "24109893b5b5521dad53ea3a8ce867a89bc5eb671d7bcb5f35142bd208f9be9a"
  }
