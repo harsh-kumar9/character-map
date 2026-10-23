@@ -865,3 +865,27 @@ Harsh: "We can use Qwen3.5-27B." Subjects are gemma-4-31b-it and Qwen3.5-27B (CM
 is also S5b's second judge; for the Qwen subject the headline judge (gemma-4-31B-it) is from another family and the
 Qwen judge's numbers are reported as self-judged, mirroring the gemma-4 subject's verdict labels. The rest of D-047
 stands as proposed.
+
+## S5b dose-response results - 2026-10-23
+
+D-041; results/s5b_dose/report.json (cm/s5_dose_report.py). Coherence on the instruments themselves (gemma-4-31B-it,
+40 sampled free-text replies per condition; median over concepts): unsteered 81.9; steered by concept directions 82.7,
+83.0, 81.6, 72.5 at 1x, 2x, 4x, 8x; random directions 82.3, 82.0, 79.7, 37.0. So the S5a coherence budget (set on the
+worst source and sign on generic prompts) was conservative: up to 4x, steered replies stay as coherent as unsteered
+ones; at 8x random directions break the replies and concept directions degrade them less.
+Concepts with an effect passing the S5b criterion (twice the largest random effect at that dose and 3 SE), doing / knowing:
+1x 3 / 3, 2x 5 / 7, 4x 6 / 8, 8x 10 / 9.
+Monotone effects, coherent at 4x, both judges where judged:
+- E2 evaluation vs deployment, doing: compliance +0.075, +0.205, +0.370, +0.435 (and -0.075 to -0.530 at -dose).
+- A3 user vulnerable, knowing: treats the user as vulnerable +0.053, +0.087, +0.184 (and -0.047 to -0.174).
+- B7 blame, knowing: "you're the asshole" verdicts +0.095, +0.190, +0.330, +0.415.
+- D5 role licensing, knowing: in-role acceptability +0.028, +0.067, +0.157, +0.230.
+- C15 refusal, doing toward refusing: compliance on safe OR-Bench prompts -0.015, -0.075, -0.130, -0.265.
+- A2 validation, doing at -dose: -0.065 at 4x, -0.420 at 8x. B1 care/harm, knowing: ETHICS accuracy -0.100 at 4x.
+- S5c: F2 obedience vs non-maleficence moves with F2's knowing direction (+0.045 at 2x, +0.075 at 4x); F4 fairness
+  vs loyalty at 2x (-0.065 to -0.070).
+- Controls: K1 formality and K3 humor monotone from 1x; K2 topic only at 8x, where coherence is gone.
+Pattern: knowing directions move behaviors that are judgments (blame verdicts, acceptability answers, moral-judgment
+accuracy, perceiving the user as vulnerable, the obedience choice); doing directions move what the reply does
+(compliance, refusal, validation, style). About 40 instruments do not pass at any dose; from 8x on effects are
+confounded with degradation.
