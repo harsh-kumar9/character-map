@@ -35,10 +35,16 @@ units = sorted({(d, f) for d, f in zip(defn[hon], fr[hon])})
 wsd = float(np.sqrt(np.mean([X[(defn == d) & (fr == f)].var(0).sum() for d, f in units])))
 gm = {g: X[(grp == g) & hon].mean(0) for g in ("own", "act", "self")}
 frame_sep = {f"{a}-{b}": float(np.linalg.norm(gm[a] - gm[b]) / wsd) for a, b in itertools.combinations(gm, 2)}
+# D-048: with a and b for every definition, also the two own-reply frames apart from each other
+fm = {f: X[(fr == f) & hon].mean(0) for f in "ab" if ((fr == f) & hon).any()}
+if len(fm) == 2:
+    frame_sep["recognize-judge"] = float(np.linalg.norm(fm["a"] - fm["b"]) / wsd)
 def_sep = {}
-for g in ("act", "self"):
-    cs = {d: X[(grp == g) & (defn == d)].mean(0) for d in DEFS}
-    def_sep[g] = {f"{a}|{b}": float(np.linalg.norm(cs[a] - cs[b]) / wsd) for a, b in itertools.combinations(DEFS, 2)}
+# definition separation inside each frame group (act, self) and, D-048, inside each own-reply frame (a, b), over the
+# definitions that have items there
+for g, sel in (("act", grp == "act"), ("self", grp == "self"), ("a", fr == "a"), ("b", fr == "b")):
+    cs = {d: X[sel & (defn == d)].mean(0) for d in DEFS if (sel & (defn == d)).any()}
+    def_sep[g] = {f"{a}|{b}": float(np.linalg.norm(cs[a] - cs[b]) / wsd) for a, b in itertools.combinations(cs, 2)}
 pol_gap = {f"{d}|{f}": float(np.linalg.norm(X[(defn == d) & (fr == f) & (pol == "pos")].mean(0) - X[(defn == d) & (fr == f) & (pol == "neg")].mean(0)) / wsd) for d, f in units}
 stats = {"layer": L, "within_unit_spread": wsd, "frame_separation": frame_sep, "definition_separation": def_sep, "polarity_gap": pol_gap, "variance": var}
 json.dump(stats, open(HERE / "landscape_frames_stats.json", "w"), indent=1)

@@ -1281,3 +1281,58 @@ Harsh: "Continue the steering and behavior stages on the four-definition block f
 six-definition rerun can come later." The gemma-4-31b-it and Qwen3.5-27B runs stay on the 13-concept block and the
 stimuli as of commit 5e38d22 (A9, C2, C19 without recognize/judge frames; no C8). Their pages are separate artifacts
 (Gemma-4 6zqTm4T2…, Qwen GAJM15LM…). The D-049 six-definition rerun on these models is a later stage.
+
+## D-048 results - 2026-10-23
+
+Built and run on Gemma-3-4B at pipeline commit 8300101 (D-048 code plus db19ac9's standardized diff of means). Items on
+ada: A9 796 (99/100 scenarios with a and b; one fails the pair-length rule twice), C2 796 (99/100; one scene fails the
+rules three times), C19 1400 (honesty-humility 50/50). Every generated scene passed the greedy gemma-4-31B-it check
+(A9 193/193, C2 99/99 after one regeneration, C19 50/50). c and d rows are byte-identical to the previous build and
+their S3 cells reproduce (A9 exact, C19 within 0.01, C2 within 0.05 on one plain cell, 0.004 standardized). The review
+sample (3 scenarios per concept, a and b, both poles) is a private artifact: claude.ai/artifact/UUg5URCLZN68MWNMPHCkpt.
+Two rules were relaxed on the way (79c09fa, dac1dc2) and the group helpers' clean() was found to strip the closing
+quote of a scene's question (bb275ae); nothing else changed in the design.
+
+Verdict labels (gemma-4-31B-it, P/N/X on Gemma's opening). A9: a-neg P 62 X 34 N 3, a-pos X 55 P 31 N 13, b-neg P 95,
+b-pos P 53 N 25 X 21, so Gemma's verdict runs against the polarity (it praises the person who admits not knowing).
+C2: a-neg N 85, a-pos P 41 X 35 N 23, b-neg N 92, b-pos P 55 N 44. C19: a-neg N 36 X 14, a-pos P 21 X 27, b-neg N 48,
+b-pos P 49. The verdict direction separates P from N at 0.88-0.98 (indices 18-30), so the control is doing real work.
+
+S3 within-frame AUROC (reply32 diff of means, layers 17 / 29): A9 a 0.86 / 1.00, b 0.75 / 0.98 (c 0.70 / 0.86,
+d 0.86 / 1.00); C2 a 0.73 / 0.82, b 0.81 / 0.80 (c 0.59 / 0.66, d 0.88 / 0.92); C19 hh a 0.90 / 1.00, b 0.95 / 0.91
+(c 0.97 / 0.99, d 0.76 / 0.86). Verdict-controlled transfer (reply32, verdict projected out of a/b rows, 17 / 29;
+K1 cross-frame mean 0.66 / 0.70, K1+K2 baseline 0.67 / 0.73):
+- A9: a-b 0.72, 0.86 / 0.83, 1.00; a-c 0.67, 0.62 / 0.76, 0.72; b-c 0.66, 0.51 / 0.73, 0.48; a-d 0.44, 0.46 / 0.53,
+  0.71; b-d 0.44, 0.55 / 0.56, 0.55; cross mean 0.57 / 0.71 (c-d only before: 0.42 / 0.82).
+- C2: a-b 0.84, 0.66 / 0.85, 0.73; a-c 0.58, 0.61 / 0.52, 0.65; b-c 0.58, 0.77 / 0.53, 0.74; a-d 0.46, 0.38 / 0.29,
+  0.33; b-d 0.46, 0.22 / 0.28, 0.24; cross mean 0.54 / 0.50 (before 0.45 / 0.43). Self-description is anti-aligned
+  with the other three frames.
+- C19 hh: a-b 0.57, 0.56 / 0.91, 0.82; a-c 0.98, 0.57 / 0.75, 0.71; b-c 0.06, 0.36 / 0.50, 0.80; a-d 0.79, 0.58 /
+  0.56, 0.77; b-d 0.29, 0.37 / 0.49, 0.80; cross mean 0.57 / 0.74 (before 0.85 / 0.86). At 17 the recognize direction
+  is the act direction and the verdict-stripped judge direction flips on act items; at 29 the block is uniform.
+Claims (D-033 criteria): A9 a-b shared at 29 (0.92 against 0.71, negation-robust); every other new pair
+readout-dependent (the pre-verdict boundary readout falls short), except C19 b-c and b-d at 17 and C2 b-d, dissociated.
+S4 (verdict variant): 230 units (208 before); existing honesty cosines move by at most 0.013; standardized cosines
+a-b: A9 0.82 / 0.78, C2 0.78 / 0.75, C19 0.53 / 0.54; a or b against c or d: |cos| at most 0.09 for A9 and C2, C19
+a-c 0.20 / 0.05. The a/b units transfer to act by AUROC yet sit almost orthogonal to the act directions.
+C2 knowledge check (cm/c2_knowledge.py): Gemma-3-4B answers 28 of the 100 bare questions. Recognize reply32 reads
+better on known questions (0.81 / 0.93) than unknown (0.70 / 0.79; 20 vs 60 test items), recognize boundary does not
+(0.68 / 0.86 vs 0.68 / 0.84), judge does not (reply32 0.74 / 0.74 vs 0.82 / 0.82; boundary 0.98 / 0.92 vs 0.95 /
+0.92). The direction is not Gemma's knowledge, but one readout of recognition leans on it.
+
+Landscape at layer 29 (cm.honesty_landscape at 8300101: 22 directions, 4784 items; D-049's run from a3333a0 /
+476a061 had 16 directions, 3792 items; D-048's baseline ten, 2592). Frame separation in within-unit spreads: own-act
+3.74 (2.68 at ten, 3.27 at sixteen), own-self 3.12 (2.40, 2.96), act-self 1.70 (1.27, 1.26), recognize-judge 0.61
+(1.48 at sixteen, sincerity alone). Definition separation among the four spine definitions: in a 1.00-2.40, in b
+0.78-2.77, act 0.53-1.73, self 0.38-2.74 (self-knowledge vs accuracy 0.45 in self, sincerity vs honesty-humility
+0.38 in self and 0.53 in act, as before). Polarity gaps: A9 a 1.88, b 1.56 (c 3.13, d 2.34); C2 a 1.03, b 1.73
+(c 0.08, d 0.50); C19 a 0.75, b 0.55 (c 0.61, d 0.31); C1 a 0.96, b 0.91 (c 0.65, d 0.57). For accuracy the
+honest-dishonest gap is an order of magnitude larger in Gemma's own reply about someone else than in the prefilled
+reply. First three components 0.42, 0.11, 0.08 (0.46, 0.21, 0.11 at ten).
+Provenance of files: results/s3, s3_ctrl_verdict, s3_ctrl_negation, s4 and figures/honesty/landscape* in this commit
+come from jobs 419515-419535 on 2026-10-23 at 8300101; D-049's landscape and S4 files are kept at
+/ada1/u/harsh/tmp/d049_landscape/ and in 476a061; pre-a/b S3 copies at /ada1/u/harsh/tmp/s3_pre_ab/. The frames
+table on ada also folds in the D-049 session's uncommitted C3, C8 and K1 sdm cells. Still open: the collaborator page
+(claude.ai/artifact/52pV3htnAFExtM3tfUdrh4) says ten directions; its builder lives with the D-049 session and the page
+now needs that session's six-definition framing, so it is left to that session. The D-047 subjects need A9, C2 and
+C19 replies and acts redone.

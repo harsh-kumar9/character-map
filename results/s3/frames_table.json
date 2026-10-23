@@ -49,6 +49,8 @@
    "b->c": 0.19211102994886778,
    "b->d": 0.5018261504747992
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7925493060628195,
   "transfer_mean": 0.5356099342585828,
   "transfer_mean_preverdict": 0.5121134648161675
@@ -103,6 +105,8 @@
    "b->c": 0.7786705624543463,
    "b->d": 0.5945945945945946
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9223886048210374,
   "transfer_mean": 0.6912283905527149,
   "transfer_mean_preverdict": 0.6787496956415876
@@ -157,6 +161,8 @@
    "b->c": 0.5047479912344777,
    "b->d": 0.5902118334550767
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.962563915266618,
   "transfer_mean": 0.6552227903579254,
   "transfer_mean_preverdict": 0.6633187241295349
@@ -211,6 +217,8 @@
    "b->c": 0.41490138787436087,
    "b->d": 0.48575602629656683
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9671292914536158,
   "transfer_mean": 0.7790966642317994,
   "transfer_mean_preverdict": 0.7484782079376674
@@ -251,6 +259,8 @@
    "a->c": 0.47114682249817386,
    "a->d": 0.37034331628926226
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7951328771959091,
   "transfer_mean": 0.5298521892321575,
   "transfer_mean_preverdict": 0.541174322175912
@@ -291,6 +301,8 @@
    "a->c": 0.26515704894083275,
    "a->d": 0.408327246165084
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8164516569314101,
   "transfer_mean": 0.4962434378641243,
   "transfer_mean_preverdict": 0.49819133170391
@@ -331,6 +343,8 @@
    "a->c": 0.32651570489408327,
    "a->d": 0.7443389335281227
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8973027315167034,
   "transfer_mean": 0.6479610513908654,
   "transfer_mean_preverdict": 0.6307952369277535
@@ -371,6 +385,8 @@
    "a->c": 0.4528853177501826,
    "a->d": 0.7779401022644266
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.884622675607432,
   "transfer_mean": 0.7216294780706077,
   "transfer_mean_preverdict": 0.6919240970138754
@@ -425,6 +441,8 @@
    "b->c": 0.24489795918367346,
    "b->d": 0.9591836734693877
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7683673469387755,
   "transfer_mean": 0.4394557823129252,
   "transfer_mean_preverdict": 0.46619047619047627
@@ -479,6 +497,8 @@
    "b->c": 0.3893877551020408,
    "b->d": 0.8628571428571429
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7787755102040816,
   "transfer_mean": 0.4899319727891156,
   "transfer_mean_preverdict": 0.5579591836734694
@@ -533,6 +553,8 @@
    "b->c": 0.5648979591836735,
    "b->d": 0.5779591836734694
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9010204081632652,
   "transfer_mean": 0.6908843537414967,
   "transfer_mean_preverdict": 0.6612925170068028
@@ -587,6 +609,8 @@
    "b->c": 0.529795918367347,
    "b->d": 0.6424489795918368
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.900408163265306,
   "transfer_mean": 0.7103401360544218,
   "transfer_mean_preverdict": 0.7036734693877552
@@ -618,6 +642,8 @@
   "transfer_boundary": {
    "a->c": 0.5590737240075614
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6294896030245747,
   "transfer_mean": 0.5985349716446124,
   "transfer_mean_preverdict": 0.5829395085066162
@@ -649,6 +675,8 @@
   "transfer_boundary": {
    "a->c": 0.5051984877126654
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5909735349716446,
   "transfer_mean": 0.5678166351606806,
   "transfer_mean_preverdict": 0.56734404536862
@@ -680,6 +708,8 @@
   "transfer_boundary": {
    "a->c": 0.499054820415879
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6202741020793952,
   "transfer_mean": 0.5734877126654064,
   "transfer_mean_preverdict": 0.5741965973534972
@@ -711,6 +741,8 @@
   "transfer_boundary": {
    "a->c": 0.4948015122873346
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6254725897920606,
   "transfer_mean": 0.5793950850661627,
   "transfer_mean_preverdict": 0.5784499054820416
@@ -742,6 +774,8 @@
   "transfer_boundary": {
    "a->c": 0.37953599048185604
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6748958953004164,
   "transfer_mean": 0.3997620464009518,
   "transfer_mean_preverdict": 0.405116002379536
@@ -773,6 +807,8 @@
   "transfer_boundary": {
    "a->c": 0.7715645449137418
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7111838191552647,
   "transfer_mean": 0.5707911957168352,
   "transfer_mean_preverdict": 0.6246281975014872
@@ -804,6 +840,8 @@
   "transfer_boundary": {
    "a->c": 0.8072575847709696
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8370017846519928,
   "transfer_mean": 0.661511005353956,
   "transfer_mean_preverdict": 0.6787626412849495
@@ -835,6 +873,8 @@
   "transfer_boundary": {
    "a->c": 0.6989886972040452
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9021415823914336,
   "transfer_mean": 0.592207019631172,
   "transfer_mean_preverdict": 0.6403926234384295
@@ -866,6 +906,8 @@
   "transfer_boundary": {
    "a->c": 0.515413737155219
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7544618712817739,
   "transfer_mean": 0.6151974040021633,
   "transfer_mean_preverdict": 0.5762574364521362
@@ -897,6 +939,8 @@
   "transfer_boundary": {
    "a->c": 0.3650621957815035
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7847485127095728,
   "transfer_mean": 0.5462412114656572,
   "transfer_mean_preverdict": 0.4399675500270417
@@ -928,6 +972,8 @@
   "transfer_boundary": {
    "a->c": 0.3044889129259059
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8009734991887507,
   "transfer_mean": 0.5018929150892374,
   "transfer_mean_preverdict": 0.37371552190373175
@@ -959,6 +1005,8 @@
   "transfer_boundary": {
    "a->c": 0.5089237425635479
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8155759870200108,
   "transfer_mean": 0.5827474310438074,
   "transfer_mean_preverdict": 0.5319091400757165
@@ -999,6 +1047,8 @@
    "a->c": 0.28988642509464574,
    "a->d": 0.34505137912385075
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7371552190373175,
   "transfer_mean": 0.6259239228411754,
   "transfer_mean_preverdict": 0.4945916711736074
@@ -1039,6 +1089,8 @@
    "a->c": 0.298539751216874,
    "a->d": 0.756625202812331
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8804759329367225,
   "transfer_mean": 0.4548404542996214,
   "transfer_mean_preverdict": 0.4515053181900126
@@ -1079,6 +1131,8 @@
    "a->c": 0.3591130340724716,
    "a->d": 0.5673336938885885
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9460969893636199,
   "transfer_mean": 0.5623760591310619,
   "transfer_mean_preverdict": 0.5409230214530376
@@ -1119,6 +1173,8 @@
    "a->c": 0.33910221741481883,
    "a->d": 0.5327203893996755
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9376239408689381,
   "transfer_mean": 0.6181719848566792,
   "transfer_mean_preverdict": 0.5402019109428521
@@ -1161,6 +1217,8 @@
    "b->a": 0.5114784205693297,
    "b->c": 0.2662993572084481
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7260483624119988,
   "transfer_mean": 0.43403734312825226,
   "transfer_mean_preverdict": 0.4280685644322008
@@ -1203,6 +1261,8 @@
    "b->a": 0.8181818181818182,
    "b->c": 0.27089072543618
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8751147842056932,
   "transfer_mean": 0.6319253137434956,
   "transfer_mean_preverdict": 0.5535659626568717
@@ -1245,6 +1305,8 @@
    "b->a": 0.7539026629935721,
    "b->c": 0.40128558310376494
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8895010713192532,
   "transfer_mean": 0.5935108662381389,
   "transfer_mean_preverdict": 0.586164677073768
@@ -1287,6 +1349,8 @@
    "b->a": 0.7786960514233241,
    "b->c": 0.5169880624426079
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8310376492194674,
   "transfer_mean": 0.628405264768901,
   "transfer_mean_preverdict": 0.6333027242118151
@@ -1297,28 +1361,62 @@
   "sub": "all",
   "layer": 9,
   "frames": [
+   "a",
+   "b",
    "c",
    "d"
   ],
   "within": {
+   "a": 0.5877551020408164,
+   "b": 0.6840816326530612,
    "c": 0.8572530864197531,
    "d": 0.7885802469135802
   },
   "heldout": {
+   "a": null,
+   "b": null,
    "c": null,
-   "d": 0.824
+   "d": 0.8244
   },
   "heldout_far": {},
   "transfer": {
+   "a->a": 0.5877551020408164,
+   "a->b": 0.6261224489795918,
+   "a->c": 0.628858024691358,
+   "a->d": 0.6936728395061729,
+   "b->a": 0.5355102040816326,
+   "b->b": 0.6840816326530612,
+   "b->c": 0.6118827160493827,
+   "b->d": 0.6597222222222222,
+   "c->a": 0.5338775510204081,
+   "c->b": 0.5722448979591837,
    "c->c": 0.8572530864197531,
    "c->d": 0.8001543209876543,
+   "d->a": 0.5077551020408163,
+   "d->b": 0.5493877551020409,
    "d->c": 0.6334876543209876,
    "d->d": 0.7885802469135802
   },
-  "transfer_boundary": {},
-  "within_mean": 0.8229166666666666,
-  "transfer_mean": 0.716820987654321,
-  "transfer_mean_preverdict": 0.716820987654321
+  "transfer_boundary": {
+   "a->b": 0.8416326530612245,
+   "a->c": 0.7214506172839507,
+   "a->d": 0.5192901234567902,
+   "b->a": 0.5118367346938776,
+   "b->c": 0.6172839506172839,
+   "b->d": 0.6574074074074074
+  },
+  "within_sdm": {
+   "a": 0.9942857142857143,
+   "b": 0.9697959183673469,
+   "c": 1.0,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "d": 1.0
+  },
+  "within_mean": 0.7294175170068028,
+  "transfer_mean": 0.6127229780801209,
+  "transfer_mean_preverdict": 0.6221507306626354
  },
  {
   "concept": "A9",
@@ -1326,28 +1424,62 @@
   "sub": "all",
   "layer": 17,
   "frames": [
+   "a",
+   "b",
    "c",
    "d"
   ],
   "within": {
+   "a": 0.856326530612245,
+   "b": 0.7485714285714286,
    "c": 0.6983024691358025,
    "d": 0.8641975308641975
   },
   "heldout": {
+   "a": null,
+   "b": null,
    "c": null,
-   "d": 0.6008
+   "d": 0.602
   },
   "heldout_far": {},
   "transfer": {
+   "a->a": 0.856326530612245,
+   "a->b": 0.7191836734693877,
+   "a->c": 0.6643518518518519,
+   "a->d": 0.408179012345679,
+   "b->a": 0.8195918367346938,
+   "b->b": 0.7485714285714286,
+   "b->c": 0.6504629629629629,
+   "b->d": 0.3896604938271605,
+   "c->a": 0.6236734693877551,
+   "c->b": 0.5208163265306123,
    "c->c": 0.6983024691358025,
    "c->d": 0.4243827160493827,
+   "d->a": 0.4416326530612245,
+   "d->b": 0.5151020408163265,
    "d->c": 0.42592592592592593,
    "d->d": 0.8641975308641975
   },
-  "transfer_boundary": {},
-  "within_mean": 0.78125,
-  "transfer_mean": 0.4251543209876543,
-  "transfer_mean_preverdict": 0.4251543209876543
+  "transfer_boundary": {
+   "a->b": 0.6302040816326531,
+   "a->c": 0.3626543209876543,
+   "a->d": 0.6141975308641975,
+   "b->a": 0.7273469387755102,
+   "b->c": 0.6388888888888888,
+   "b->d": 0.3765432098765432
+  },
+  "within_sdm": {
+   "a": 1.0,
+   "b": 0.996734693877551,
+   "c": 1.0,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "d": 1.0
+  },
+  "within_mean": 0.7918494897959184,
+  "transfer_mean": 0.5502469135802469,
+  "transfer_mean_preverdict": 0.5251140085663896
  },
  {
   "concept": "A9",
@@ -1355,28 +1487,62 @@
   "sub": "all",
   "layer": 22,
   "frames": [
+   "a",
+   "b",
    "c",
    "d"
   ],
   "within": {
+   "a": 0.9714285714285714,
+   "b": 0.8751020408163265,
    "c": 0.845679012345679,
    "d": 1.0
   },
   "heldout": {
+   "a": null,
+   "b": null,
    "c": null,
    "d": 1.0
   },
   "heldout_far": {},
   "transfer": {
+   "a->a": 0.9714285714285714,
+   "a->b": 0.7902040816326531,
+   "a->c": 0.7901234567901234,
+   "a->d": 0.5138888888888888,
+   "b->a": 0.9395918367346939,
+   "b->b": 0.8751020408163265,
+   "b->c": 0.7677469135802469,
+   "b->d": 0.49614197530864196,
+   "c->a": 0.6661224489795918,
+   "c->b": 0.4555102040816327,
    "c->c": 0.845679012345679,
    "c->d": 0.6597222222222222,
+   "d->a": 0.6595918367346939,
+   "d->b": 0.46530612244897956,
    "d->c": 0.9382716049382716,
    "d->d": 1.0
   },
-  "transfer_boundary": {},
-  "within_mean": 0.9228395061728395,
-  "transfer_mean": 0.7989969135802468,
-  "transfer_mean_preverdict": 0.7989969135802468
+  "transfer_boundary": {
+   "a->b": 0.7322448979591837,
+   "a->c": 0.2052469135802469,
+   "a->d": 0.4097222222222222,
+   "b->a": 0.8024489795918367,
+   "b->c": 0.12962962962962962,
+   "b->d": 0.2800925925925926
+  },
+  "within_sdm": {
+   "a": 1.0,
+   "b": 0.986938775510204,
+   "c": 0.9992283950617284,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "d": 1.0
+  },
+  "within_mean": 0.9230524061476442,
+  "transfer_mean": 0.6785184660283866,
+  "transfer_mean_preverdict": 0.5336591395817586
  },
  {
   "concept": "A9",
@@ -1384,28 +1550,62 @@
   "sub": "all",
   "layer": 29,
   "frames": [
+   "a",
+   "b",
    "c",
    "d"
   ],
   "within": {
+   "a": 0.9983673469387755,
+   "b": 0.9828571428571429,
    "c": 0.8587962962962963,
    "d": 1.0
   },
   "heldout": {
+   "a": null,
+   "b": null,
    "c": null,
    "d": 0.9984
   },
   "heldout_far": {},
   "transfer": {
+   "a->a": 0.9983673469387755,
+   "a->b": 0.8497959183673469,
+   "a->c": 0.75,
+   "a->d": 0.5015432098765432,
+   "b->a": 1.0,
+   "b->b": 0.9828571428571429,
+   "b->c": 0.7145061728395061,
+   "b->d": 0.44907407407407407,
+   "c->a": 0.7159183673469388,
+   "c->b": 0.48489795918367345,
    "c->c": 0.8587962962962963,
    "c->d": 0.7577160493827161,
+   "d->a": 0.6489795918367347,
+   "d->b": 0.5028571428571429,
    "d->c": 0.8912037037037037,
    "d->d": 1.0
   },
-  "transfer_boundary": {},
-  "within_mean": 0.9293981481481481,
-  "transfer_mean": 0.8244598765432098,
-  "transfer_mean_preverdict": 0.8244598765432098
+  "transfer_boundary": {
+   "a->b": 0.9559183673469388,
+   "a->c": 0.23842592592592593,
+   "a->d": 0.2800925925925926,
+   "b->a": 0.8726530612244898,
+   "b->c": 0.6466049382716049,
+   "b->d": 0.5895061728395061
+  },
+  "within_sdm": {
+   "a": 1.0,
+   "b": 0.986938775510204,
+   "c": 0.9992283950617284,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "d": 1.0
+  },
+  "within_mean": 0.9600051965230536,
+  "transfer_mean": 0.688874349122365,
+  "transfer_mean_preverdict": 0.6320644893759974
  },
  {
   "concept": "B1",
@@ -1445,6 +1645,8 @@
    "b->a": 0.49306062819576335,
    "b->c": 0.3528122717311907
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6888239590942294,
   "transfer_mean": 0.6387874360847333,
   "transfer_mean_preverdict": 0.45629413196980767
@@ -1487,6 +1689,8 @@
    "b->a": 0.8115412710007305,
    "b->c": 0.789627465303141
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9018748478207937,
   "transfer_mean": 0.7230338446554662,
   "transfer_mean_preverdict": 0.6865108351594839
@@ -1529,6 +1733,8 @@
    "b->a": 0.9422936449963477,
    "b->c": 0.6296566837107378
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8921353786218651,
   "transfer_mean": 0.7356951546140736,
   "transfer_mean_preverdict": 0.6840759678597518
@@ -1571,6 +1777,8 @@
    "b->a": 0.9459459459459459,
    "b->c": 0.5288531775018261
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9649379108838568,
   "transfer_mean": 0.7822011200389579,
   "transfer_mean_preverdict": 0.7447041636230826
@@ -1594,6 +1802,8 @@
    "b->b": 0.683125
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.683125,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -1617,6 +1827,8 @@
    "b->b": 0.755
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.755,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -1640,6 +1852,8 @@
    "b->b": 0.764375
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.764375,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -1663,6 +1877,8 @@
    "b->b": 0.75625
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.75625,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -1694,6 +1910,8 @@
   "transfer_boundary": {
    "b->d": 0.469375
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.78125,
   "transfer_mean": 0.4753125,
   "transfer_mean_preverdict": 0.4665625
@@ -1725,6 +1943,8 @@
   "transfer_boundary": {
    "b->d": 0.5525
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8103125,
   "transfer_mean": 0.595625,
   "transfer_mean_preverdict": 0.52
@@ -1756,6 +1976,8 @@
   "transfer_boundary": {
    "b->d": 0.544375
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9071875,
   "transfer_mean": 0.5762499999999999,
   "transfer_mean_preverdict": 0.5746875
@@ -1787,6 +2009,8 @@
   "transfer_boundary": {
    "b->d": 0.49125
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9071875,
   "transfer_mean": 0.6165624999999999,
   "transfer_mean_preverdict": 0.5540625
@@ -1818,6 +2042,8 @@
   "transfer_boundary": {
    "b->d": 0.195625
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.71,
   "transfer_mean": 0.3528125,
   "transfer_mean_preverdict": 0.34625
@@ -1849,6 +2075,8 @@
   "transfer_boundary": {
    "b->d": 0.83625
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.81875,
   "transfer_mean": 0.3734375,
   "transfer_mean_preverdict": 0.6546875000000001
@@ -1880,6 +2108,8 @@
   "transfer_boundary": {
    "b->d": 0.600625
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9290625,
   "transfer_mean": 0.65125,
   "transfer_mean_preverdict": 0.5365624999999999
@@ -1911,6 +2141,8 @@
   "transfer_boundary": {
    "b->d": 0.70875
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9393750000000001,
   "transfer_mean": 0.6990624999999999,
   "transfer_mean_preverdict": 0.6234375
@@ -1942,6 +2174,8 @@
   "transfer_boundary": {
    "b->d": 0.545
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7590625,
   "transfer_mean": 0.541875,
   "transfer_mean_preverdict": 0.515
@@ -1973,6 +2207,8 @@
   "transfer_boundary": {
    "b->d": 0.418125
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.75875,
   "transfer_mean": 0.690625,
   "transfer_mean_preverdict": 0.4603125
@@ -2004,6 +2240,8 @@
   "transfer_boundary": {
    "b->d": 0.498125
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8640625,
   "transfer_mean": 0.7203124999999999,
   "transfer_mean_preverdict": 0.5599999999999999
@@ -2035,6 +2273,8 @@
   "transfer_boundary": {
    "b->d": 0.505625
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8318749999999999,
   "transfer_mean": 0.7121875,
   "transfer_mean_preverdict": 0.5325
@@ -2066,6 +2306,8 @@
   "transfer_boundary": {
    "b->d": 0.369375
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6950000000000001,
   "transfer_mean": 0.6503125000000001,
   "transfer_mean_preverdict": 0.4946875
@@ -2097,6 +2339,8 @@
   "transfer_boundary": {
    "b->d": 0.69375
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8009375000000001,
   "transfer_mean": 0.4321875,
   "transfer_mean_preverdict": 0.56125
@@ -2128,6 +2372,8 @@
   "transfer_boundary": {
    "b->d": 0.5175
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8615625,
   "transfer_mean": 0.5956250000000001,
   "transfer_mean_preverdict": 0.498125
@@ -2159,6 +2405,8 @@
   "transfer_boundary": {
    "b->d": 0.524375
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.894375,
   "transfer_mean": 0.710625,
   "transfer_mean_preverdict": 0.58875
@@ -2190,6 +2438,8 @@
   "transfer_boundary": {
    "b->d": 0.42125
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7615625,
   "transfer_mean": 0.44875,
   "transfer_mean_preverdict": 0.45125000000000004
@@ -2221,6 +2471,8 @@
   "transfer_boundary": {
    "b->d": 0.554375
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.67625,
   "transfer_mean": 0.5653125,
   "transfer_mean_preverdict": 0.565625
@@ -2252,6 +2504,8 @@
   "transfer_boundary": {
    "b->d": 0.5225
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8290625,
   "transfer_mean": 0.533125,
   "transfer_mean_preverdict": 0.5121875
@@ -2283,6 +2537,8 @@
   "transfer_boundary": {
    "b->d": 0.676875
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.85,
   "transfer_mean": 0.5584374999999999,
   "transfer_mean_preverdict": 0.5603125
@@ -2315,6 +2571,8 @@
    "a->b": 0.6526465028355387,
    "b->a": 0.6403591682419659
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6680056710775046,
   "transfer_mean": 0.6540642722117203,
   "transfer_mean_preverdict": 0.6465028355387523
@@ -2347,6 +2605,8 @@
    "a->b": 0.9555765595463138,
    "b->a": 0.7131379962192816
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8303402646502835,
   "transfer_mean": 0.7041587901701323,
   "transfer_mean_preverdict": 0.8343572778827977
@@ -2379,6 +2639,8 @@
    "a->b": 0.9551039697542533,
    "b->a": 0.8312854442344045
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9371455576559546,
   "transfer_mean": 0.8608223062381852,
   "transfer_mean_preverdict": 0.8931947069943289
@@ -2411,6 +2673,8 @@
    "a->b": 0.6885633270321361,
    "b->a": 0.6639886578449905
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9659735349716445,
   "transfer_mean": 0.890359168241966,
   "transfer_mean_preverdict": 0.6762759924385633
@@ -2443,6 +2707,8 @@
    "a->b": 0.6139455782312925,
    "b->a": 0.5521541950113379
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5932539682539683,
   "transfer_mean": 0.5850340136054422,
   "transfer_mean_preverdict": 0.5830498866213152
@@ -2475,6 +2741,8 @@
    "a->b": 0.8452380952380952,
    "b->a": 0.828798185941043
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7003968253968254,
   "transfer_mean": 0.7040816326530612,
   "transfer_mean_preverdict": 0.8370181405895691
@@ -2507,6 +2775,8 @@
    "a->b": 0.6581632653061225,
    "b->a": 0.8361678004535147
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7261904761904762,
   "transfer_mean": 0.7310090702947846,
   "transfer_mean_preverdict": 0.7471655328798186
@@ -2539,6 +2809,8 @@
    "a->b": 0.6587301587301587,
    "b->a": 0.6439909297052154
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7599206349206349,
   "transfer_mean": 0.8024376417233561,
   "transfer_mean_preverdict": 0.6513605442176871
@@ -2571,6 +2843,8 @@
    "a->b": 0.5436179981634527,
    "b->a": 0.5794306703397613
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5996326905417815,
   "transfer_mean": 0.5858585858585859,
   "transfer_mean_preverdict": 0.561524334251607
@@ -2603,6 +2877,8 @@
    "a->b": 0.7327823691460055,
    "b->a": 0.8191000918273645
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8879706152433424,
   "transfer_mean": 0.8549127640036731,
   "transfer_mean_preverdict": 0.7759412304866851
@@ -2635,6 +2911,8 @@
    "a->b": 0.7842056932966024,
    "b->a": 0.7447199265381084
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8636363636363636,
   "transfer_mean": 0.8236914600550964,
   "transfer_mean_preverdict": 0.7644628099173554
@@ -2667,6 +2945,8 @@
    "a->b": 0.6648301193755739,
    "b->a": 0.7079889807162535
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8558310376492195,
   "transfer_mean": 0.8232323232323233,
   "transfer_mean_preverdict": 0.6864095500459138
@@ -2699,6 +2979,8 @@
    "a->b": 0.5332018408941486,
    "b->a": 0.5036160420775806
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5489809335963183,
   "transfer_mean": 0.5378040762656148,
   "transfer_mean_preverdict": 0.5184089414858646
@@ -2731,6 +3013,8 @@
    "a->b": 0.8875739644970414,
    "b->a": 0.6969099276791585
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8040762656147271,
   "transfer_mean": 0.7905982905982906,
   "transfer_mean_preverdict": 0.7922419460881
@@ -2763,6 +3047,8 @@
    "a->b": 0.7725180802103879,
    "b->a": 0.7324128862590401
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8017751479289941,
   "transfer_mean": 0.7955292570677186,
   "transfer_mean_preverdict": 0.752465483234714
@@ -2795,6 +3081,8 @@
    "a->b": 0.8047337278106509,
    "b->a": 0.722550953320184
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8356344510190664,
   "transfer_mean": 0.8284023668639053,
   "transfer_mean_preverdict": 0.7636423405654175
@@ -2827,6 +3115,8 @@
    "a->b": 0.38641344046749454,
    "b->a": 0.5157048940832725
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.631117604090577,
   "transfer_mean": 0.4883126369612856,
   "transfer_mean_preverdict": 0.45105916727538353
@@ -2859,6 +3149,8 @@
    "a->b": 0.9517896274653032,
    "b->a": 0.7567567567567568
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.837472607742878,
   "transfer_mean": 0.7881665449233017,
   "transfer_mean_preverdict": 0.85427319211103
@@ -2891,6 +3183,8 @@
    "a->b": 0.845872899926954,
    "b->a": 0.7779401022644266
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8524470416362309,
   "transfer_mean": 0.802045288531775,
   "transfer_mean_preverdict": 0.8119065010956903
@@ -2923,6 +3217,8 @@
    "a->b": 0.9086924762600438,
    "b->a": 0.8341855368882396
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8955441928414901,
   "transfer_mean": 0.8995617238860483,
   "transfer_mean_preverdict": 0.8714390065741418
@@ -2955,6 +3251,8 @@
    "a->b": 0.53375,
    "b->a": 0.53
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5234375,
   "transfer_mean": 0.5065625,
   "transfer_mean_preverdict": 0.531875
@@ -2987,6 +3285,8 @@
    "a->b": 0.636875,
    "b->a": 0.669375
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.558125,
   "transfer_mean": 0.5440625,
   "transfer_mean_preverdict": 0.653125
@@ -3019,6 +3319,8 @@
    "a->b": 0.609375,
    "b->a": 0.605
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5721875,
   "transfer_mean": 0.5321875,
   "transfer_mean_preverdict": 0.6071875
@@ -3051,6 +3353,8 @@
    "a->b": 0.62625,
    "b->a": 0.625625
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.620625,
   "transfer_mean": 0.5543750000000001,
   "transfer_mean_preverdict": 0.6259375
@@ -3083,6 +3387,8 @@
    "a->b": 0.44962962962962966,
    "b->a": 0.5079012345679013
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.4890740740740741,
   "transfer_mean": 0.4832098765432099,
   "transfer_mean_preverdict": 0.47876543209876543
@@ -3115,6 +3421,8 @@
    "a->b": 0.5581481481481482,
    "b->a": 0.6092592592592593
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5330246913580247,
   "transfer_mean": 0.5275925925925926,
   "transfer_mean_preverdict": 0.5837037037037037
@@ -3147,6 +3455,8 @@
    "a->b": 0.5433333333333333,
    "b->a": 0.6035802469135803
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6140740740740741,
   "transfer_mean": 0.5681481481481481,
   "transfer_mean_preverdict": 0.5734567901234568
@@ -3179,6 +3489,8 @@
    "a->b": 0.6018518518518519,
    "b->a": 0.5711111111111111
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6198765432098765,
   "transfer_mean": 0.5767283950617283,
   "transfer_mean_preverdict": 0.5864814814814815
@@ -3221,6 +3533,8 @@
    "b->a": 0.5439814814814815,
    "b->c": 0.8379629629629629
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6373456790123457,
   "transfer_mean": 0.40097736625514396,
   "transfer_mean_preverdict": 0.6291152263374485
@@ -3263,6 +3577,8 @@
    "b->a": 0.39351851851851855,
    "b->c": 0.7677469135802469
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6949588477366255,
   "transfer_mean": 0.4279835390946502,
   "transfer_mean_preverdict": 0.6001800411522634
@@ -3305,6 +3621,8 @@
    "b->a": 0.4537037037037037,
    "b->c": 0.38348765432098764
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8106995884773663,
   "transfer_mean": 0.5625,
   "transfer_mean_preverdict": 0.48726851851851855
@@ -3347,6 +3665,8 @@
    "b->a": 0.4714506172839506,
    "b->c": 0.29552469135802467
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8137860082304527,
   "transfer_mean": 0.6049382716049383,
   "transfer_mean_preverdict": 0.44534465020576136
@@ -3389,6 +3709,8 @@
    "b->a": 0.421875,
    "b->c": 0.2578125
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6653645833333334,
   "transfer_mean": 0.6438802083333334,
   "transfer_mean_preverdict": 0.4205729166666667
@@ -3431,6 +3753,8 @@
    "b->a": 0.5,
    "b->c": 0.609375
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6328125,
   "transfer_mean": 0.4674479166666667,
   "transfer_mean_preverdict": 0.5071614583333334
@@ -3473,6 +3797,8 @@
    "b->a": 0.59375,
    "b->c": 0.70703125
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7083333333333334,
   "transfer_mean": 0.4563802083333333,
   "transfer_mean_preverdict": 0.5377604166666666
@@ -3515,6 +3841,8 @@
    "b->a": 0.609375,
    "b->c": 0.52734375
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7421875,
   "transfer_mean": 0.5227864583333334,
   "transfer_mean_preverdict": 0.505859375
@@ -3569,6 +3897,8 @@
    "b->c": 0.5476543209876543,
    "b->d": 0.4508641975308642
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6296296296296295,
   "transfer_mean": 0.49374485596707823,
   "transfer_mean_preverdict": 0.49798353909465026
@@ -3623,6 +3953,8 @@
    "b->c": 0.577283950617284,
    "b->d": 0.671604938271605
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6509876543209876,
   "transfer_mean": 0.6227572016460906,
   "transfer_mean_preverdict": 0.6261316872427983
@@ -3677,6 +4009,8 @@
    "b->c": 0.4908641975308642,
    "b->d": 0.548641975308642
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.728641975308642,
   "transfer_mean": 0.5751028806584362,
   "transfer_mean_preverdict": 0.5792592592592593
@@ -3731,6 +4065,8 @@
    "b->c": 0.47703703703703704,
    "b->d": 0.5037037037037037
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6802469135802469,
   "transfer_mean": 0.5335802469135803,
   "transfer_mean_preverdict": 0.5385185185185185
@@ -3773,6 +4109,8 @@
    "b->a": 0.5722011898323418,
    "b->c": 0.5116279069767442
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6181719848566792,
   "transfer_mean": 0.5238867856499009,
   "transfer_mean_preverdict": 0.5155038759689923
@@ -3815,6 +4153,8 @@
    "b->a": 0.46944294213088156,
    "b->c": 0.5175770686857761
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6499008473048494,
   "transfer_mean": 0.5654407787993511,
   "transfer_mean_preverdict": 0.5484045429962142
@@ -3857,6 +4197,8 @@
    "b->a": 0.40454299621416984,
    "b->c": 0.6343969713358573
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6412475211826213,
   "transfer_mean": 0.5627366143861546,
   "transfer_mean_preverdict": 0.5387596899224806
@@ -3899,6 +4241,8 @@
    "b->a": 0.7290427257977286,
    "b->c": 0.37371552190373175
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.68613665044168,
   "transfer_mean": 0.6237605913106183,
   "transfer_mean_preverdict": 0.5931133946277266
@@ -3930,6 +4274,8 @@
    "d->d": 0.805625
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8,
   "transfer_mean": 0.645625,
   "transfer_mean_preverdict": 0.645625
@@ -3961,6 +4307,8 @@
    "d->d": 0.80875
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7415624999999999,
   "transfer_mean": 0.705625,
   "transfer_mean_preverdict": 0.705625
@@ -3992,6 +4340,8 @@
    "d->d": 0.84375
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7590625,
   "transfer_mean": 0.6865625,
   "transfer_mean_preverdict": 0.6865625
@@ -4023,6 +4373,8 @@
    "d->d": 0.861875
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.77625,
   "transfer_mean": 0.6690624999999999,
   "transfer_mean_preverdict": 0.6690624999999999
@@ -4063,6 +4415,8 @@
    "a->c": 0.6141975308641975,
    "a->d": 0.5524691358024691
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6972736625514404,
   "transfer_mean": 0.448559670781893,
   "transfer_mean_preverdict": 0.5042438271604938
@@ -4103,6 +4457,8 @@
    "a->c": 0.5401234567901234,
    "a->d": 0.6365740740740741
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7163065843621399,
   "transfer_mean": 0.6345164609053499,
   "transfer_mean_preverdict": 0.6150977366255144
@@ -4143,6 +4499,8 @@
    "a->c": 0.4683641975308642,
    "a->d": 0.45987654320987653
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8809156378600823,
   "transfer_mean": 0.6386316872427984,
   "transfer_mean_preverdict": 0.6114969135802469
@@ -4183,6 +4541,8 @@
    "a->c": 0.4236111111111111,
    "a->d": 0.5138888888888888
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8595679012345679,
   "transfer_mean": 0.5299639917695473,
   "transfer_mean_preverdict": 0.5315072016460906
@@ -4223,6 +4583,8 @@
    "a->c": 0.5697959183673469,
    "a->d": 0.41714285714285715
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6832653061224488,
   "transfer_mean": 0.5108843537414967,
   "transfer_mean_preverdict": 0.49931972789115653
@@ -4263,6 +4625,8 @@
    "a->c": 0.5020408163265306,
    "a->d": 0.3142857142857143
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8204081632653062,
   "transfer_mean": 0.6216326530612245,
   "transfer_mean_preverdict": 0.5526530612244898
@@ -4303,6 +4667,8 @@
    "a->c": 0.6302040816326531,
    "a->d": 0.35346938775510206
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7926530612244899,
   "transfer_mean": 0.4829931972789115,
   "transfer_mean_preverdict": 0.46979591836734697
@@ -4343,6 +4709,8 @@
    "a->c": 0.7395918367346939,
    "a->d": 0.3689795918367347
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8236734693877551,
   "transfer_mean": 0.4583673469387755,
   "transfer_mean_preverdict": 0.4828571428571429
@@ -4383,6 +4751,8 @@
    "a->c": 0.4489795918367347,
    "a->d": 0.5151020408163265
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7888435374149659,
   "transfer_mean": 0.5312925170068027,
   "transfer_mean_preverdict": 0.565578231292517
@@ -4423,6 +4793,8 @@
    "a->c": 0.5551020408163265,
    "a->d": 0.476734693877551
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8933333333333334,
   "transfer_mean": 0.48408163265306126,
   "transfer_mean_preverdict": 0.49619047619047624
@@ -4463,6 +4835,8 @@
    "a->c": 0.746938775510204,
    "a->d": 0.48653061224489796
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9551020408163264,
   "transfer_mean": 0.6110204081632653,
   "transfer_mean_preverdict": 0.6472108843537414
@@ -4503,6 +4877,8 @@
    "a->c": 0.8424489795918367,
    "a->d": 0.6236734693877551
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9880272108843537,
   "transfer_mean": 0.8038095238095239,
   "transfer_mean_preverdict": 0.7708843537414967
@@ -4543,6 +4919,8 @@
    "b->c": 0.2658100277147896,
    "b->d": 0.23683547493071302
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7921390778533636,
   "transfer_mean": 0.7593852355757118,
   "transfer_mean_preverdict": 0.588225413622239
@@ -4583,6 +4961,8 @@
    "b->c": 0.45729402872260017,
    "b->d": 0.6487780297304107
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8775510204081632,
   "transfer_mean": 0.8146888384983623,
   "transfer_mean_preverdict": 0.732384311749391
@@ -4623,6 +5003,8 @@
    "b->c": 0.4333585285966238,
    "b->d": 0.7059712773998488
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9732930209120685,
   "transfer_mean": 0.7574955908289241,
   "transfer_mean_preverdict": 0.6969009826152684
@@ -4663,6 +5045,8 @@
    "b->c": 0.5600907029478458,
    "b->d": 0.691861929957168
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9635508524397413,
   "transfer_mean": 0.7990257831527673,
   "transfer_mean_preverdict": 0.7287729906777525
@@ -4692,6 +5076,8 @@
    "d->d": 0.870625
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8696875,
   "transfer_mean": 0.328125,
   "transfer_mean_preverdict": 0.328125
@@ -4721,6 +5107,8 @@
    "d->d": 0.8525
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.811875,
   "transfer_mean": 0.765,
   "transfer_mean_preverdict": 0.765
@@ -4750,6 +5138,8 @@
    "d->d": 1.0
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 1.0,
   "transfer_mean": 0.9575,
   "transfer_mean_preverdict": 0.9575
@@ -4779,6 +5169,8 @@
    "d->d": 1.0
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 1.0,
   "transfer_mean": 0.9459375000000001,
   "transfer_mean_preverdict": 0.9459375000000001
@@ -4819,6 +5211,8 @@
    "b->c": 0.5147392290249433,
    "b->d": 0.4557823129251701
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6696900982615269,
   "transfer_mean": 0.5094482237339379,
   "transfer_mean_preverdict": 0.5075585789871505
@@ -4859,6 +5253,8 @@
    "b->c": 0.5170068027210885,
    "b->d": 0.5827664399092971
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7679516250944823,
   "transfer_mean": 0.6541950113378684,
   "transfer_mean_preverdict": 0.6409674981103552
@@ -4899,6 +5295,8 @@
    "b->c": 0.5668934240362812,
    "b->d": 0.4580498866213152
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.927437641723356,
   "transfer_mean": 0.6866969009826153,
   "transfer_mean_preverdict": 0.6685563114134543
@@ -4939,6 +5337,8 @@
    "b->c": 0.6009070294784581,
    "b->d": 0.3832199546485261
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.889644746787604,
   "transfer_mean": 0.6436130007558579,
   "transfer_mean_preverdict": 0.6307634164777022
@@ -4979,6 +5379,8 @@
    "b->c": 0.4336,
    "b->d": 0.4768
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6661333333333332,
   "transfer_mean": 0.5728000000000001,
   "transfer_mean_preverdict": 0.5432
@@ -5019,6 +5421,8 @@
    "b->c": 0.3456,
    "b->d": 0.616
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8394666666666666,
   "transfer_mean": 0.5586666666666666,
   "transfer_mean_preverdict": 0.5413333333333333
@@ -5059,6 +5463,8 @@
    "b->c": 0.6032,
    "b->d": 0.7392
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8378666666666666,
   "transfer_mean": 0.5058666666666667,
   "transfer_mean_preverdict": 0.6037333333333333
@@ -5099,6 +5505,8 @@
    "b->c": 0.6752,
    "b->d": 0.7488
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8522666666666666,
   "transfer_mean": 0.6437333333333334,
   "transfer_mean_preverdict": 0.6656000000000001
@@ -5128,6 +5536,8 @@
    "d->d": 0.788125
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7732812499999999,
   "transfer_mean": 0.75609375,
   "transfer_mean_preverdict": 0.75609375
@@ -5157,6 +5567,8 @@
    "d->d": 0.64625
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.69484375,
   "transfer_mean": 0.6798437500000001,
   "transfer_mean_preverdict": 0.6798437500000001
@@ -5186,6 +5598,8 @@
    "d->d": 0.844375
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.78390625,
   "transfer_mean": 0.69671875,
   "transfer_mean_preverdict": 0.69671875
@@ -5215,6 +5629,8 @@
    "d->d": 0.81375
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.76046875,
   "transfer_mean": 0.62015625,
   "transfer_mean_preverdict": 0.62015625
@@ -5238,6 +5654,8 @@
    "c->c": 0.9436734693877551
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9436734693877551,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -5261,6 +5679,8 @@
    "c->c": 0.7959183673469388
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7959183673469388,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -5284,6 +5704,8 @@
    "c->c": 0.996734693877551
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.996734693877551,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -5307,6 +5729,8 @@
    "c->c": 0.9959183673469387
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9959183673469387,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -5330,6 +5754,8 @@
    "c->c": 0.8848979591836734
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8848979591836734,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -5353,6 +5779,8 @@
    "c->c": 0.7787755102040816
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7787755102040816,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -5376,6 +5804,8 @@
    "c->c": 0.929795918367347
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.929795918367347,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -5399,6 +5829,8 @@
    "c->c": 0.8579591836734693
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8579591836734693,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -5428,6 +5860,13 @@
    "d->d": 0.7654320987654321
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.9814814814814815,
+   "d": 0.9691358024691358
+  },
+  "heldout_sdm": {
+   "d": 0.6875
+  },
   "within_mean": 0.787037037037037,
   "transfer_mean": 0.7746913580246914,
   "transfer_mean_preverdict": 0.7746913580246914
@@ -5457,6 +5896,13 @@
    "d->d": 0.7376543209876543
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.9722222222222222,
+   "d": 0.9598765432098766
+  },
+  "heldout_sdm": {
+   "d": 0.546875
+  },
   "within_mean": 0.7299382716049383,
   "transfer_mean": 0.7098765432098766,
   "transfer_mean_preverdict": 0.7098765432098766
@@ -5486,6 +5932,13 @@
    "d->d": 0.9166666666666666
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.9660493827160493,
+   "d": 0.9228395061728395
+  },
+  "heldout_sdm": {
+   "d": 0.4375
+  },
   "within_mean": 0.8734567901234568,
   "transfer_mean": 0.7839506172839505,
   "transfer_mean_preverdict": 0.7839506172839505
@@ -5515,6 +5968,13 @@
    "d->d": 0.7839506172839507
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.9660493827160493,
+   "d": 0.8703703703703703
+  },
+  "heldout_sdm": {
+   "d": 0.4375
+  },
   "within_mean": 0.8626543209876543,
   "transfer_mean": 0.8395061728395061,
   "transfer_mean_preverdict": 0.8395061728395061
@@ -5530,6 +5990,8 @@
   "heldout_far": {},
   "transfer": {},
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": null,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -5545,6 +6007,8 @@
   "heldout_far": {},
   "transfer": {},
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": null,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -5560,6 +6024,8 @@
   "heldout_far": {},
   "transfer": {},
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": null,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -5575,6 +6041,8 @@
   "heldout_far": {},
   "transfer": {},
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": null,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -5604,6 +6072,13 @@
    "d->d": 0.7325
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.97,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "d": 0.921875
+  },
   "within_mean": 0.71875,
   "transfer_mean": 0.71875,
   "transfer_mean_preverdict": 0.71875
@@ -5633,6 +6108,13 @@
    "d->d": 0.76
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.9625,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "d": 0.921875
+  },
   "within_mean": 0.71,
   "transfer_mean": 0.71,
   "transfer_mean_preverdict": 0.71
@@ -5662,6 +6144,13 @@
    "d->d": 0.76
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.965,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "d": 0.90625
+  },
   "within_mean": 0.72375,
   "transfer_mean": 0.6975,
   "transfer_mean_preverdict": 0.6975
@@ -5691,6 +6180,13 @@
    "d->d": 0.875
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.945,
+   "d": 0.99
+  },
+  "heldout_sdm": {
+   "d": 0.921875
+  },
   "within_mean": 0.83375,
   "transfer_mean": 0.8175,
   "transfer_mean_preverdict": 0.8175
@@ -5720,6 +6216,13 @@
    "d->d": 0.8214285714285714
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 1.0,
+   "d": 0.9591836734693877
+  },
+  "heldout_sdm": {
+   "d": 0.7777777777777778
+  },
   "within_mean": 0.7117346938775511,
   "transfer_mean": 0.5994897959183674,
   "transfer_mean_preverdict": 0.5994897959183674
@@ -5749,6 +6252,13 @@
    "d->d": 0.6377551020408163
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 1.0,
+   "d": 0.9489795918367347
+  },
+  "heldout_sdm": {
+   "d": 0.9365079365079365
+  },
   "within_mean": 0.5892857142857143,
   "transfer_mean": 0.548469387755102,
   "transfer_mean_preverdict": 0.548469387755102
@@ -5778,6 +6288,13 @@
    "d->d": 0.8469387755102041
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 1.0,
+   "d": 0.9285714285714286
+  },
+  "heldout_sdm": {
+   "d": 0.7936507936507936
+  },
   "within_mean": 0.875,
   "transfer_mean": 0.7117346938775511,
   "transfer_mean_preverdict": 0.7117346938775511
@@ -5807,6 +6324,13 @@
    "d->d": 0.8724489795918368
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 1.0,
+   "d": 0.8979591836734694
+  },
+  "heldout_sdm": {
+   "d": 0.7142857142857143
+  },
   "within_mean": 0.9362244897959184,
   "transfer_mean": 0.8775510204081632,
   "transfer_mean_preverdict": 0.8775510204081632
@@ -5836,6 +6360,13 @@
    "d->d": 0.7466918714555766
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.9603024574669187,
+   "d": 0.994328922495274
+  },
+  "heldout_sdm": {
+   "d": 0.7142857142857143
+  },
   "within_mean": 0.6739130434782609,
   "transfer_mean": 0.5860113421550095,
   "transfer_mean_preverdict": 0.5860113421550095
@@ -5865,6 +6396,13 @@
    "d->d": 0.6275992438563327
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.9262759924385633,
+   "d": 0.9735349716446124
+  },
+  "heldout_sdm": {
+   "d": 0.6984126984126984
+  },
   "within_mean": 0.6332703213610587,
   "transfer_mean": 0.6257088846880907,
   "transfer_mean_preverdict": 0.6257088846880907
@@ -5894,6 +6432,13 @@
    "d->d": 0.9130434782608695
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.9187145557655955,
+   "d": 0.9527410207939508
+  },
+  "heldout_sdm": {
+   "d": 0.5396825396825397
+  },
   "within_mean": 0.8620037807183365,
   "transfer_mean": 0.8241965973534972,
   "transfer_mean_preverdict": 0.8241965973534972
@@ -5923,6 +6468,13 @@
    "d->d": 0.8979206049149339
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.8582230623818525,
+   "d": 0.9168241965973535
+  },
+  "heldout_sdm": {
+   "d": 0.5555555555555556
+  },
   "within_mean": 0.8081285444234405,
   "transfer_mean": 0.7665406427221172,
   "transfer_mean_preverdict": 0.7665406427221172
@@ -5933,28 +6485,62 @@
   "sub": "honesty_humility",
   "layer": 9,
   "frames": [
+   "a",
+   "b",
    "c",
    "d"
   ],
   "within": {
-   "c": 0.7376543209876543,
+   "a": 0.7067901234567902,
+   "b": 0.941358024691358,
+   "c": 0.7314814814814815,
    "d": 0.6450617283950617
   },
   "heldout": {
+   "a": null,
+   "b": null,
    "c": null,
    "d": 0.4
   },
   "heldout_far": {},
   "transfer": {
-   "c->c": 0.7376543209876543,
-   "c->d": 0.6388888888888888,
-   "d->c": 0.7407407407407407,
+   "a->a": 0.7067901234567902,
+   "a->b": 0.32098765432098764,
+   "a->c": 0.3425925925925926,
+   "a->d": 0.4074074074074074,
+   "b->a": 0.5030864197530864,
+   "b->b": 0.941358024691358,
+   "b->c": 0.7191358024691358,
+   "b->d": 0.6203703703703703,
+   "c->a": 0.46296296296296297,
+   "c->b": 0.8333333333333334,
+   "c->c": 0.7314814814814815,
+   "c->d": 0.6450617283950617,
+   "d->a": 0.4567901234567901,
+   "d->b": 0.8333333333333334,
+   "d->c": 0.7438271604938271,
    "d->d": 0.6450617283950617
   },
-  "transfer_boundary": {},
-  "within_mean": 0.691358024691358,
-  "transfer_mean": 0.6898148148148148,
-  "transfer_mean_preverdict": 0.6898148148148148
+  "transfer_boundary": {
+   "a->b": 0.845679012345679,
+   "a->c": 0.7283950617283951,
+   "a->d": 0.6419753086419753,
+   "b->a": 0.6049382716049383,
+   "b->c": 0.3271604938271605,
+   "b->d": 0.4228395061728395
+  },
+  "within_sdm": {
+   "a": 0.9753086419753086,
+   "b": 1.0,
+   "c": 1.0,
+   "d": 0.9876543209876543
+  },
+  "heldout_sdm": {
+   "d": 0.9833333333333333
+  },
+  "within_mean": 0.7561728395061729,
+  "transfer_mean": 0.5740740740740741,
+  "transfer_mean_preverdict": 0.628858024691358
  },
  {
   "concept": "C19",
@@ -5962,28 +6548,62 @@
   "sub": "honesty_humility",
   "layer": 17,
   "frames": [
+   "a",
+   "b",
    "c",
    "d"
   ],
   "within": {
-   "c": 0.9691358024691358,
-   "d": 0.7592592592592593
+   "a": 0.9012345679012346,
+   "b": 0.9475308641975309,
+   "c": 0.9722222222222222,
+   "d": 0.7561728395061729
   },
   "heldout": {
+   "a": null,
+   "b": null,
    "c": null,
    "d": 0.6666666666666666
   },
   "heldout_far": {},
   "transfer": {
-   "c->c": 0.9691358024691358,
-   "c->d": 0.7438271604938271,
+   "a->a": 0.9012345679012346,
+   "a->b": 0.7623456790123457,
+   "a->c": 0.9691358024691358,
+   "a->d": 0.7561728395061729,
+   "b->a": 0.8302469135802469,
+   "b->b": 0.9475308641975309,
+   "b->c": 0.05246913580246913,
+   "b->d": 0.31790123456790126,
+   "c->a": 0.5987654320987654,
+   "c->b": 0.41975308641975306,
+   "c->c": 0.9722222222222222,
+   "c->d": 0.7345679012345679,
+   "d->a": 0.6080246913580247,
+   "d->b": 0.42592592592592593,
    "d->c": 0.9722222222222222,
-   "d->d": 0.7592592592592593
+   "d->d": 0.7561728395061729
   },
-  "transfer_boundary": {},
-  "within_mean": 0.8641975308641976,
-  "transfer_mean": 0.8580246913580247,
-  "transfer_mean_preverdict": 0.8580246913580247
+  "transfer_boundary": {
+   "a->b": 0.7870370370370371,
+   "a->c": 0.033950617283950615,
+   "a->d": 0.2777777777777778,
+   "b->a": 0.5864197530864198,
+   "b->c": 0.024691358024691357,
+   "b->d": 0.2777777777777778
+  },
+  "within_sdm": {
+   "a": 1.0,
+   "b": 1.0,
+   "c": 1.0,
+   "d": 0.9506172839506173
+  },
+  "heldout_sdm": {
+   "d": 0.8333333333333334
+  },
+  "within_mean": 0.8942901234567902,
+  "transfer_mean": 0.6206275720164609,
+  "transfer_mean_preverdict": 0.47890946502057613
  },
  {
   "concept": "C19",
@@ -5991,28 +6611,62 @@
   "sub": "honesty_humility",
   "layer": 22,
   "frames": [
+   "a",
+   "b",
    "c",
    "d"
   ],
   "within": {
+   "a": 1.0,
+   "b": 0.9259259259259259,
    "c": 0.9753086419753086,
-   "d": 0.8765432098765432
+   "d": 0.8796296296296297
   },
   "heldout": {
+   "a": null,
+   "b": null,
    "c": null,
    "d": 0.43333333333333335
   },
   "heldout_far": {},
   "transfer": {
+   "a->a": 1.0,
+   "a->b": 0.9938271604938271,
+   "a->c": 0.8302469135802469,
+   "a->d": 0.6790123456790124,
+   "b->a": 0.9228395061728395,
+   "b->b": 0.9259259259259259,
+   "b->c": 0.25617283950617287,
+   "b->d": 0.4444444444444444,
+   "c->a": 0.5216049382716049,
+   "c->b": 0.3333333333333333,
    "c->c": 0.9753086419753086,
-   "c->d": 0.7376543209876543,
+   "c->d": 0.7438271604938271,
+   "d->a": 0.6388888888888888,
+   "d->b": 0.41358024691358025,
    "d->c": 0.9876543209876543,
-   "d->d": 0.8765432098765432
+   "d->d": 0.8796296296296297
   },
-  "transfer_boundary": {},
-  "within_mean": 0.9259259259259259,
-  "transfer_mean": 0.8626543209876543,
-  "transfer_mean_preverdict": 0.8626543209876543
+  "transfer_boundary": {
+   "a->b": 0.9290123456790124,
+   "a->c": 0.24074074074074073,
+   "a->d": 0.42901234567901236,
+   "b->a": 0.7654320987654321,
+   "b->c": 0.1419753086419753,
+   "b->d": 0.38271604938271603
+  },
+  "within_sdm": {
+   "a": 1.0,
+   "b": 0.9938271604938271,
+   "c": 1.0,
+   "d": 0.9351851851851852
+  },
+  "heldout_sdm": {
+   "d": 0.6333333333333333
+  },
+  "within_mean": 0.9452160493827161,
+  "transfer_mean": 0.647119341563786,
+  "transfer_mean_preverdict": 0.5439814814814815
  },
  {
   "concept": "C19",
@@ -6020,28 +6674,62 @@
   "sub": "honesty_humility",
   "layer": 29,
   "frames": [
+   "a",
+   "b",
    "c",
    "d"
   ],
   "within": {
-   "c": 0.9969135802469136,
-   "d": 0.8611111111111112
+   "a": 1.0,
+   "b": 0.9104938271604939,
+   "c": 0.9938271604938271,
+   "d": 0.8580246913580247
   },
   "heldout": {
+   "a": null,
+   "b": null,
    "c": null,
    "d": 0.5833333333333334
   },
   "heldout_far": {},
   "transfer": {
-   "c->c": 0.9969135802469136,
-   "c->d": 0.8919753086419753,
+   "a->a": 1.0,
+   "a->b": 0.9660493827160493,
+   "a->c": 0.6882716049382716,
+   "a->d": 0.5154320987654321,
+   "b->a": 0.9814814814814815,
+   "b->b": 0.9104938271604939,
+   "b->c": 0.5185185185185185,
+   "b->d": 0.4691358024691358,
+   "c->a": 0.2932098765432099,
+   "c->b": 0.2932098765432099,
+   "c->c": 0.9938271604938271,
+   "c->d": 0.8888888888888888,
+   "d->a": 0.7716049382716049,
+   "d->b": 0.8055555555555556,
    "d->c": 0.8364197530864198,
-   "d->d": 0.8611111111111112
+   "d->d": 0.8580246913580247
   },
-  "transfer_boundary": {},
-  "within_mean": 0.9290123456790124,
-  "transfer_mean": 0.8641975308641976,
-  "transfer_mean_preverdict": 0.8641975308641976
+  "transfer_boundary": {
+   "a->b": 0.8611111111111112,
+   "a->c": 0.4876543209876543,
+   "a->d": 0.4722222222222222,
+   "b->a": 0.49074074074074076,
+   "b->c": 0.5154320987654321,
+   "b->d": 0.5185185185185185
+  },
+  "within_sdm": {
+   "a": 1.0,
+   "b": 0.9907407407407407,
+   "c": 0.9969135802469136,
+   "d": 0.8981481481481481
+  },
+  "heldout_sdm": {
+   "d": 0.5
+  },
+  "within_mean": 0.9405864197530864,
+  "transfer_mean": 0.6689814814814815,
+  "transfer_mean_preverdict": 0.602880658436214
  },
  {
   "concept": "C19",
@@ -6068,6 +6756,13 @@
    "d->d": 0.8526077097505669
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.9387755102040817,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "d": 0.953125
+  },
   "within_mean": 0.7188208616780045,
   "transfer_mean": 0.7244897959183674,
   "transfer_mean_preverdict": 0.7244897959183674
@@ -6097,6 +6792,13 @@
    "d->d": 0.8117913832199547
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.9433106575963719,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "d": 0.921875
+  },
   "within_mean": 0.7630385487528345,
   "transfer_mean": 0.7687074829931972,
   "transfer_mean_preverdict": 0.7687074829931972
@@ -6126,6 +6828,13 @@
    "d->d": 0.8208616780045351
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.9614512471655329,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "d": 0.921875
+  },
   "within_mean": 0.8673469387755102,
   "transfer_mean": 0.8015873015873016,
   "transfer_mean_preverdict": 0.8015873015873016
@@ -6155,6 +6864,13 @@
    "d->d": 1.0
   },
   "transfer_boundary": {},
+  "within_sdm": {
+   "c": 0.909297052154195,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "d": 0.90625
+  },
   "within_mean": 0.8673469387755102,
   "transfer_mean": 0.8424036281179139,
   "transfer_mean_preverdict": 0.8424036281179139
@@ -6165,28 +6881,62 @@
   "sub": "all",
   "layer": 9,
   "frames": [
+   "a",
+   "b",
    "c",
    "d"
   ],
   "within": {
-   "c": 0.5651397977394408,
-   "d": 0.9637120761451516
+   "a": 0.58375,
+   "b": 0.77375,
+   "c": 0.5669244497323022,
+   "d": 0.966686496133254
   },
   "heldout": {
-   "c": 0.4551,
+   "a": null,
+   "b": null,
+   "c": 0.4549,
    "d": null
   },
   "heldout_far": {},
   "transfer": {
-   "c->c": 0.5651397977394408,
-   "c->d": 0.4812611540749554,
+   "a->a": 0.58375,
+   "a->b": 0.61625,
+   "a->c": 0.46876859012492567,
+   "a->d": 0.5038667459845331,
+   "b->a": 0.633125,
+   "b->b": 0.77375,
+   "b->c": 0.5044616299821535,
+   "b->d": 0.39321832242712673,
+   "c->a": 0.468125,
+   "c->b": 0.46625,
+   "c->c": 0.5669244497323022,
+   "c->d": 0.4776918500892326,
+   "d->a": 0.44875,
+   "d->b": 0.414375,
    "d->c": 0.46876859012492567,
-   "d->d": 0.9637120761451516
+   "d->d": 0.966686496133254
   },
-  "transfer_boundary": {},
-  "within_mean": 0.7644259369422962,
-  "transfer_mean": 0.47501487209994053,
-  "transfer_mean_preverdict": 0.47501487209994053
+  "transfer_boundary": {
+   "a->b": 0.5025,
+   "a->c": 0.5496728138013087,
+   "a->d": 0.46162998215348006,
+   "b->a": 0.47375,
+   "b->c": 0.5431290898274836,
+   "b->d": 0.4681737061273052
+  },
+  "within_sdm": {
+   "a": 0.86875,
+   "b": 0.873125,
+   "c": 0.8203450327186199,
+   "d": 0.9994051160023796
+  },
+  "heldout_sdm": {
+   "c": 0.4704
+  },
+  "within_mean": 0.722777736466389,
+  "transfer_mean": 0.4886375607277415,
+  "transfer_mean_preverdict": 0.478568002676978
  },
  {
   "concept": "C2",
@@ -6194,28 +6944,62 @@
   "sub": "all",
   "layer": 17,
   "frames": [
+   "a",
+   "b",
    "c",
    "d"
   ],
   "within": {
-   "c": 0.5871505056513979,
-   "d": 0.8691255205234979
+   "a": 0.729375,
+   "b": 0.80625,
+   "c": 0.5889351576442594,
+   "d": 0.8750743604997026
   },
   "heldout": {
-   "c": 0.5841,
+   "a": null,
+   "b": null,
+   "c": 0.5847,
    "d": null
   },
   "heldout_far": {},
   "transfer": {
-   "c->c": 0.5871505056513979,
+   "a->a": 0.729375,
+   "a->b": 0.835,
+   "a->c": 0.5812016656751934,
+   "a->d": 0.4562760261748959,
+   "b->a": 0.663125,
+   "b->b": 0.80625,
+   "b->c": 0.5817965496728138,
+   "b->d": 0.45211183819155265,
+   "c->a": 0.624375,
+   "c->b": 0.780625,
+   "c->c": 0.5889351576442594,
    "c->d": 0.45865556216537773,
-   "d->c": 0.4271267102914932,
-   "d->d": 0.8691255205234979
+   "d->a": 0.373125,
+   "d->b": 0.2075,
+   "d->c": 0.4283164782867341,
+   "d->d": 0.8750743604997026
   },
-  "transfer_boundary": {},
-  "within_mean": 0.728138013087448,
-  "transfer_mean": 0.44289113622843546,
-  "transfer_mean_preverdict": 0.44289113622843546
+  "transfer_boundary": {
+   "a->b": 0.255,
+   "a->c": 0.41939321832242715,
+   "a->d": 0.5336109458655562,
+   "b->a": 0.5025,
+   "b->c": 0.4199881023200476,
+   "b->d": 0.5252825698988697
+  },
+  "within_sdm": {
+   "a": 0.92875,
+   "b": 0.93125,
+   "c": 0.8197501487209994,
+   "d": 0.998810232004759
+  },
+  "heldout_sdm": {
+   "c": 0.561
+  },
+  "within_mean": 0.7499086295359905,
+  "transfer_mean": 0.5368423433472139,
+  "transfer_mean_preverdict": 0.46069765640491767
  },
  {
   "concept": "C2",
@@ -6223,28 +7007,62 @@
   "sub": "all",
   "layer": 22,
   "frames": [
+   "a",
+   "b",
    "c",
    "d"
   ],
   "within": {
+   "a": 0.77375,
+   "b": 0.8,
    "c": 0.6157049375371803,
-   "d": 0.9399167162403331
+   "d": 0.942296252230815
   },
   "heldout": {
-   "c": 0.5907,
+   "a": null,
+   "b": null,
+   "c": 0.5908,
    "d": null
   },
   "heldout_far": {},
   "transfer": {
+   "a->a": 0.77375,
+   "a->b": 0.8175,
+   "a->c": 0.5580011897679953,
+   "a->d": 0.3408685306365259,
+   "b->a": 0.716875,
+   "b->b": 0.8,
+   "b->c": 0.5591909577632361,
+   "b->d": 0.3491969066032124,
+   "c->a": 0.675625,
+   "c->b": 0.776875,
    "c->c": 0.6157049375371803,
    "c->d": 0.3914336704342653,
-   "d->c": 0.44854253420582985,
-   "d->d": 0.9399167162403331
+   "d->a": 0.321875,
+   "d->b": 0.20875,
+   "d->c": 0.45211183819155265,
+   "d->d": 0.942296252230815
   },
-  "transfer_boundary": {},
-  "within_mean": 0.7778108268887567,
-  "transfer_mean": 0.4199881023200476,
-  "transfer_mean_preverdict": 0.4199881023200476
+  "transfer_boundary": {
+   "a->b": 0.276875,
+   "a->c": 0.4360499702558001,
+   "a->d": 0.6198691255205235,
+   "b->a": 0.38375,
+   "b->c": 0.43426531826293874,
+   "b->d": 0.619274241522903
+  },
+  "within_sdm": {
+   "a": 0.935,
+   "b": 0.91875,
+   "c": 0.8310529446757883,
+   "d": 0.9964306960142773
+  },
+  "heldout_sdm": {
+   "c": 0.572
+  },
+  "within_mean": 0.7829377974419989,
+  "transfer_mean": 0.5140252577830657,
+  "transfer_mean_preverdict": 0.4663961803489987
  },
  {
   "concept": "C2",
@@ -6252,28 +7070,62 @@
   "sub": "all",
   "layer": 29,
   "frames": [
+   "a",
+   "b",
    "c",
    "d"
   ],
   "within": {
-   "c": 0.6490184414039263,
-   "d": 0.9220701963117193
+   "a": 0.82,
+   "b": 0.799375,
+   "c": 0.6555621653777514,
+   "d": 0.9214753123140987
   },
   "heldout": {
-   "c": 0.6114,
+   "a": null,
+   "b": null,
+   "c": 0.6131,
    "d": null
   },
   "heldout_far": {},
   "transfer": {
-   "c->c": 0.6490184414039263,
-   "c->d": 0.38786436644854255,
-   "d->c": 0.47828673408685307,
-   "d->d": 0.9220701963117193
+   "a->a": 0.82,
+   "a->b": 0.84875,
+   "a->c": 0.5187388459250446,
+   "a->d": 0.28316478286734087,
+   "b->a": 0.731875,
+   "b->b": 0.799375,
+   "b->c": 0.5288518738845925,
+   "b->d": 0.2825698988697204,
+   "c->a": 0.64875,
+   "c->b": 0.738125,
+   "c->c": 0.6555621653777514,
+   "c->d": 0.3908387864366449,
+   "d->a": 0.32875,
+   "d->b": 0.241875,
+   "d->c": 0.47888161808447355,
+   "d->d": 0.9214753123140987
   },
-  "transfer_boundary": {},
-  "within_mean": 0.7855443188578228,
-  "transfer_mean": 0.43307555026769784,
-  "transfer_mean_preverdict": 0.43307555026769784
+  "transfer_boundary": {
+   "a->b": 0.331875,
+   "a->c": 0.46638905413444376,
+   "a->d": 0.6894705532421178,
+   "b->a": 0.67375,
+   "b->c": 0.4634146341463415,
+   "b->d": 0.5234979179060083
+  },
+  "within_sdm": {
+   "a": 0.925625,
+   "b": 0.918125,
+   "c": 0.834622248661511,
+   "d": 0.9904818560380726
+  },
+  "heldout_sdm": {
+   "c": 0.5931
+  },
+  "within_mean": 0.7991031194229624,
+  "transfer_mean": 0.5017642338389848,
+  "transfer_mean_preverdict": 0.4979681303291692
  },
  {
   "concept": "C20",
@@ -6300,6 +7152,8 @@
    "d->d": 0.8275
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.67875,
   "transfer_mean": 0.55125,
   "transfer_mean_preverdict": 0.55125
@@ -6329,6 +7183,8 @@
    "d->d": 0.8375
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.66,
   "transfer_mean": 0.575,
   "transfer_mean_preverdict": 0.575
@@ -6358,6 +7214,8 @@
    "d->d": 0.9
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.86,
   "transfer_mean": 0.86,
   "transfer_mean_preverdict": 0.86
@@ -6387,6 +7245,8 @@
    "d->d": 0.875
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8275,
   "transfer_mean": 0.8374999999999999,
   "transfer_mean_preverdict": 0.8374999999999999
@@ -6416,6 +7276,8 @@
    "d->d": 0.691609977324263
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6405895691609977,
   "transfer_mean": 0.6337868480725624,
   "transfer_mean_preverdict": 0.6337868480725624
@@ -6445,6 +7307,8 @@
    "d->d": 0.764172335600907
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7777777777777778,
   "transfer_mean": 0.7426303854875284,
   "transfer_mean_preverdict": 0.7426303854875284
@@ -6474,6 +7338,8 @@
    "d->d": 0.9614512471655329
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8163265306122449,
   "transfer_mean": 0.7301587301587302,
   "transfer_mean_preverdict": 0.7301587301587302
@@ -6503,6 +7369,8 @@
    "d->d": 0.8503401360544217
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7834467120181405,
   "transfer_mean": 0.7210884353741497,
   "transfer_mean_preverdict": 0.7210884353741497
@@ -6532,6 +7400,8 @@
    "d->d": 0.67578125
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.740234375,
   "transfer_mean": 0.337890625,
   "transfer_mean_preverdict": 0.337890625
@@ -6561,6 +7431,8 @@
    "d->d": 0.921875
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.880859375,
   "transfer_mean": 0.8515625,
   "transfer_mean_preverdict": 0.8515625
@@ -6590,6 +7462,8 @@
    "d->d": 0.953125
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.955078125,
   "transfer_mean": 0.923828125,
   "transfer_mean_preverdict": 0.923828125
@@ -6619,6 +7493,8 @@
    "d->d": 0.984375
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9921875,
   "transfer_mean": 0.96484375,
   "transfer_mean_preverdict": 0.96484375
@@ -6650,6 +7526,8 @@
   "transfer_boundary": {
    "b->d": 0.37
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6950000000000001,
   "transfer_mean": 0.405,
   "transfer_mean_preverdict": 0.365
@@ -6681,6 +7559,8 @@
   "transfer_boundary": {
    "b->d": 0.31
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.74,
   "transfer_mean": 0.51,
   "transfer_mean_preverdict": 0.44999999999999996
@@ -6712,6 +7592,8 @@
   "transfer_boundary": {
    "b->d": 0.72
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.65,
   "transfer_mean": 0.545,
   "transfer_mean_preverdict": 0.685
@@ -6743,6 +7625,8 @@
   "transfer_boundary": {
    "b->d": 0.75
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.815,
   "transfer_mean": 0.7150000000000001,
   "transfer_mean_preverdict": 0.755
@@ -6774,6 +7658,8 @@
   "transfer_boundary": {
    "b->d": 0.41333333333333333
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5666666666666667,
   "transfer_mean": 0.46444444444444444,
   "transfer_mean_preverdict": 0.4822222222222222
@@ -6805,6 +7691,8 @@
   "transfer_boundary": {
    "b->d": 0.3333333333333333
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5844444444444444,
   "transfer_mean": 0.48444444444444446,
   "transfer_mean_preverdict": 0.48
@@ -6836,6 +7724,8 @@
   "transfer_boundary": {
    "b->d": 0.38222222222222224
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6911111111111111,
   "transfer_mean": 0.5,
   "transfer_mean_preverdict": 0.39555555555555555
@@ -6867,6 +7757,8 @@
   "transfer_boundary": {
    "b->d": 0.6133333333333333
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7155555555555555,
   "transfer_mean": 0.5733333333333334,
   "transfer_mean_preverdict": 0.5444444444444444
@@ -6898,6 +7790,8 @@
   "transfer_boundary": {
    "b->d": 0.5625
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.65625,
   "transfer_mean": 0.3125,
   "transfer_mean_preverdict": 0.40625
@@ -6929,6 +7823,8 @@
   "transfer_boundary": {
    "b->d": 0.625
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.59375,
   "transfer_mean": 0.5,
   "transfer_mean_preverdict": 0.59375
@@ -6960,6 +7856,8 @@
   "transfer_boundary": {
    "b->d": 0.75
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.625,
   "transfer_mean": 0.6875,
   "transfer_mean_preverdict": 0.6875
@@ -6991,6 +7889,8 @@
   "transfer_boundary": {
    "b->d": 0.75
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.625,
   "transfer_mean": 0.65625,
   "transfer_mean_preverdict": 0.65625
@@ -7022,6 +7922,8 @@
   "transfer_boundary": {
    "b->d": 0.2781065088757396
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6124260355029586,
   "transfer_mean": 0.3994082840236686,
   "transfer_mean_preverdict": 0.3994082840236686
@@ -7053,6 +7955,8 @@
   "transfer_boundary": {
    "b->d": 0.34911242603550297
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5887573964497042,
   "transfer_mean": 0.5295857988165681,
   "transfer_mean_preverdict": 0.4822485207100592
@@ -7084,6 +7988,8 @@
   "transfer_boundary": {
    "b->d": 0.5207100591715976
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6982248520710059,
   "transfer_mean": 0.47928994082840237,
   "transfer_mean_preverdict": 0.4911242603550296
@@ -7115,6 +8021,8 @@
   "transfer_boundary": {
    "b->d": 0.5325443786982249
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7159763313609467,
   "transfer_mean": 0.5502958579881656,
   "transfer_mean_preverdict": 0.514792899408284
@@ -7146,6 +8054,8 @@
   "transfer_boundary": {
    "b->d": 0.3727810650887574
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5976331360946745,
   "transfer_mean": 0.5710059171597633,
   "transfer_mean_preverdict": 0.44082840236686394
@@ -7177,6 +8087,8 @@
   "transfer_boundary": {
    "b->d": 0.6035502958579881
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5887573964497042,
   "transfer_mean": 0.47633136094674555,
   "transfer_mean_preverdict": 0.49408284023668636
@@ -7208,6 +8120,8 @@
   "transfer_boundary": {
    "b->d": 0.591715976331361
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7100591715976331,
   "transfer_mean": 0.4822485207100592,
   "transfer_mean_preverdict": 0.5650887573964497
@@ -7239,6 +8153,8 @@
   "transfer_boundary": {
    "b->d": 0.44970414201183434
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7751479289940828,
   "transfer_mean": 0.4970414201183432,
   "transfer_mean_preverdict": 0.49408284023668636
@@ -7270,6 +8186,8 @@
   "transfer_boundary": {
    "b->d": 0.6296296296296297
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5432098765432098,
   "transfer_mean": 0.5308641975308642,
   "transfer_mean_preverdict": 0.5308641975308642
@@ -7301,6 +8219,8 @@
   "transfer_boundary": {
    "b->d": 0.3950617283950617
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7469135802469136,
   "transfer_mean": 0.5432098765432098,
   "transfer_mean_preverdict": 0.4074074074074074
@@ -7332,6 +8252,8 @@
   "transfer_boundary": {
    "b->d": 0.41975308641975306
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9012345679012346,
   "transfer_mean": 0.7160493827160493,
   "transfer_mean_preverdict": 0.5802469135802468
@@ -7363,6 +8285,8 @@
   "transfer_boundary": {
    "b->d": 0.4444444444444444
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.808641975308642,
   "transfer_mean": 0.691358024691358,
   "transfer_mean_preverdict": 0.5740740740740741
@@ -7394,6 +8318,8 @@
   "transfer_boundary": {
    "b->d": 0.8541666666666666
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6631944444444444,
   "transfer_mean": 0.2916666666666667,
   "transfer_mean_preverdict": 0.6527777777777778
@@ -7425,6 +8351,8 @@
   "transfer_boundary": {
    "b->d": 0.4027777777777778
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6354166666666666,
   "transfer_mean": 0.38541666666666663,
   "transfer_mean_preverdict": 0.3819444444444444
@@ -7456,6 +8384,8 @@
   "transfer_boundary": {
    "b->d": 0.5138888888888888
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7326388888888888,
   "transfer_mean": 0.4930555555555556,
   "transfer_mean_preverdict": 0.4965277777777778
@@ -7487,6 +8417,8 @@
   "transfer_boundary": {
    "b->d": 0.4583333333333333
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7291666666666666,
   "transfer_mean": 0.4409722222222222,
   "transfer_mean_preverdict": 0.3923611111111111
@@ -7518,6 +8450,8 @@
   "transfer_boundary": {
    "b->d": 0.609375
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.609375,
   "transfer_mean": 0.421875,
   "transfer_mean_preverdict": 0.53125
@@ -7549,6 +8483,8 @@
   "transfer_boundary": {
    "b->d": 0.515625
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.4296875,
   "transfer_mean": 0.59375,
   "transfer_mean_preverdict": 0.59375
@@ -7580,6 +8516,8 @@
   "transfer_boundary": {
    "b->d": 0.53125
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.71875,
   "transfer_mean": 0.515625,
   "transfer_mean_preverdict": 0.6953125
@@ -7611,6 +8549,8 @@
   "transfer_boundary": {
    "b->d": 0.40625
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7734375,
   "transfer_mean": 0.5390625,
   "transfer_mean_preverdict": 0.6484375
@@ -7642,6 +8582,8 @@
   "transfer_boundary": {
    "b->d": 0.6611570247933884
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6735537190082644,
   "transfer_mean": 0.628099173553719,
   "transfer_mean_preverdict": 0.5991735537190083
@@ -7673,6 +8615,8 @@
   "transfer_boundary": {
    "b->d": 0.5619834710743802
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7024793388429752,
   "transfer_mean": 0.6363636363636364,
   "transfer_mean_preverdict": 0.6322314049586777
@@ -7704,6 +8648,8 @@
   "transfer_boundary": {
    "b->d": 0.4132231404958678
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8099173553719008,
   "transfer_mean": 0.6694214876033058,
   "transfer_mean_preverdict": 0.5247933884297521
@@ -7735,6 +8681,8 @@
   "transfer_boundary": {
    "b->d": 0.6942148760330579
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7727272727272727,
   "transfer_mean": 0.5619834710743802,
   "transfer_mean_preverdict": 0.628099173553719
@@ -7766,6 +8714,8 @@
   "transfer_boundary": {
    "b->d": 0.7142857142857143
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7040816326530612,
   "transfer_mean": 0.6096938775510203,
   "transfer_mean_preverdict": 0.5790816326530612
@@ -7797,6 +8747,8 @@
   "transfer_boundary": {
    "b->d": 0.2857142857142857
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7397959183673469,
   "transfer_mean": 0.31887755102040816,
   "transfer_mean_preverdict": 0.29591836734693877
@@ -7828,6 +8780,8 @@
   "transfer_boundary": {
    "b->d": 0.3622448979591837
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8596938775510203,
   "transfer_mean": 0.7346938775510203,
   "transfer_mean_preverdict": 0.528061224489796
@@ -7859,6 +8813,8 @@
   "transfer_boundary": {
    "b->d": 0.35714285714285715
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8188775510204082,
   "transfer_mean": 0.6989795918367347,
   "transfer_mean_preverdict": 0.4897959183673469
@@ -7899,6 +8855,12 @@
    "a->c": 0.5673898750821827,
    "a->d": 0.5233399079552926
   },
+  "within_sdm": {
+   "a": 0.7468770545693623,
+   "c": 0.9901380670611439,
+   "d": 1.0
+  },
+  "heldout_sdm": {},
   "within_mean": 0.6131930747315363,
   "transfer_mean": 0.5501862809555118,
   "transfer_mean_preverdict": 0.5489809335963183
@@ -7939,6 +8901,12 @@
    "a->c": 0.42932281393819854,
    "a->d": 0.4339250493096647
   },
+  "within_sdm": {
+   "a": 0.8560157790927022,
+   "c": 0.9730440499671269,
+   "d": 1.0
+  },
+  "heldout_sdm": {},
   "within_mean": 0.7383300460223537,
   "transfer_mean": 0.5746219592373438,
   "transfer_mean_preverdict": 0.5302432610124918
@@ -7979,6 +8947,12 @@
    "a->c": 0.2182774490466798,
    "a->d": 0.48652202498356345
   },
+  "within_sdm": {
+   "a": 0.834319526627219,
+   "c": 0.960552268244576,
+   "d": 0.9986850756081526
+  },
+  "heldout_sdm": {},
   "within_mean": 0.8417707648476879,
   "transfer_mean": 0.5647600262984879,
   "transfer_mean_preverdict": 0.5403243480166556
@@ -8019,6 +8993,12 @@
    "a->c": 0.32807363576594345,
    "a->d": 0.5621301775147929
   },
+  "within_sdm": {
+   "a": 0.8099934253780408,
+   "c": 0.9421433267587114,
+   "d": 0.9934253780407627
+  },
+  "heldout_sdm": {},
   "within_mean": 0.8430856892395354,
   "transfer_mean": 0.6134122287968441,
   "transfer_mean_preverdict": 0.5867850098619329
@@ -8059,6 +9039,8 @@
    "a->c": 0.3123268698060942,
    "a->d": 0.3414127423822715
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7241458910433979,
   "transfer_mean": 0.6812096029547554,
   "transfer_mean_preverdict": 0.5644044321329641
@@ -8099,6 +9081,8 @@
    "a->c": 0.1682825484764543,
    "a->d": 0.20290858725761773
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8550323176361957,
   "transfer_mean": 0.8114035087719297,
   "transfer_mean_preverdict": 0.6031855955678671
@@ -8139,6 +9123,8 @@
    "a->c": 0.3698060941828255,
    "a->d": 0.31994459833795014
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8314866112650044,
   "transfer_mean": 0.7169898430286242,
   "transfer_mean_preverdict": 0.6151892890120038
@@ -8179,6 +9165,8 @@
    "a->c": 0.5554016620498615,
    "a->d": 0.4937673130193906
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8933518005540165,
   "transfer_mean": 0.5529778393351801,
   "transfer_mean_preverdict": 0.5917590027700831
@@ -8219,6 +9207,8 @@
    "a->c": 0.2756232686980609,
    "a->d": 0.3234072022160665
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6913665743305634,
   "transfer_mean": 0.671860572483841,
   "transfer_mean_preverdict": 0.5282779316712835
@@ -8259,6 +9249,8 @@
    "a->c": 0.5457063711911357,
    "a->d": 0.5768698060941828
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7426131117266852,
   "transfer_mean": 0.7121421975992613,
   "transfer_mean_preverdict": 0.6485457063711911
@@ -8299,6 +9291,8 @@
    "a->c": 0.5727146814404432,
    "a->d": 0.5990304709141274
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8164819944598337,
   "transfer_mean": 0.6087257617728533,
   "transfer_mean_preverdict": 0.6094182825484765
@@ -8339,6 +9333,8 @@
    "a->c": 0.7541551246537396,
    "a->d": 0.6433518005540166
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8434903047091412,
   "transfer_mean": 0.6987534626038782,
   "transfer_mean_preverdict": 0.693444136657433
@@ -8379,6 +9375,8 @@
    "a->c": 0.8877551020408163,
    "a->d": 0.8150510204081632
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8694727891156462,
   "transfer_mean": 0.8469387755102041,
   "transfer_mean_preverdict": 0.8624574829931974
@@ -8419,6 +9417,8 @@
    "a->c": 0.2653061224489796,
    "a->d": 0.5344387755102041
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9039115646258503,
   "transfer_mean": 0.7304421768707483,
   "transfer_mean_preverdict": 0.6326530612244898
@@ -8459,6 +9459,8 @@
    "a->c": 0.6798469387755102,
    "a->d": 0.2423469387755102
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9778911564625851,
   "transfer_mean": 0.6851615646258503,
   "transfer_mean_preverdict": 0.5805697278911565
@@ -8499,6 +9501,8 @@
    "a->c": 0.5778061224489796,
    "a->d": 0.3048469387755102
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9230442176870749,
   "transfer_mean": 0.6987670068027211,
   "transfer_mean_preverdict": 0.5931122448979592
@@ -8553,6 +9557,8 @@
    "b->c": 0.24324324324324326,
    "b->d": 0.1891891891891892
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8363769174579986,
   "transfer_mean": 0.752191380569759,
   "transfer_mean_preverdict": 0.4852081811541271
@@ -8607,6 +9613,8 @@
    "b->c": 0.06501095690284879,
    "b->d": 0.337472607742878
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9441197954711469,
   "transfer_mean": 0.8435597759922083,
   "transfer_mean_preverdict": 0.5322619917214512
@@ -8661,6 +9669,8 @@
    "b->c": 0.6274653031409788,
    "b->d": 0.6442658875091307
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9921475529583638,
   "transfer_mean": 0.9119186754321889,
   "transfer_mean_preverdict": 0.8055149744338933
@@ -8715,6 +9725,8 @@
    "b->c": 0.4579985390796202,
    "b->d": 0.660336011687363
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9844777209642075,
   "transfer_mean": 0.8894570245921596,
   "transfer_mean_preverdict": 0.8139761383004626
@@ -8755,6 +9767,8 @@
    "a->c": 0.29986149584487537,
    "a->d": 0.4224376731301939
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7686980609418282,
   "transfer_mean": 0.6783240997229917,
   "transfer_mean_preverdict": 0.5395891043397968
@@ -8795,6 +9809,8 @@
    "a->c": 0.5713296398891967,
    "a->d": 0.4376731301939058
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6999076638965835,
   "transfer_mean": 0.5105032317636197,
   "transfer_mean_preverdict": 0.5054247460757156
@@ -8835,6 +9851,8 @@
    "a->c": 0.6869806094182825,
    "a->d": 0.5727146814404432
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8259464450600186,
   "transfer_mean": 0.6850184672206833,
   "transfer_mean_preverdict": 0.6745152354570637
@@ -8875,6 +9893,8 @@
    "a->c": 0.6925207756232687,
    "a->d": 0.5837950138504155
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7940904893813482,
   "transfer_mean": 0.6950600184672208,
   "transfer_mean_preverdict": 0.6859418282548476
@@ -8914,6 +9934,14 @@
   "transfer_boundary": {
    "a->c": 0.589375,
    "a->d": 0.646875
+  },
+  "within_sdm": {
+   "a": 0.94125,
+   "c": 0.999375,
+   "d": 0.994375
+  },
+  "heldout_sdm": {
+   "c": 0.7344
   },
   "within_mean": 0.6364583333333332,
   "transfer_mean": 0.5017708333333334,
@@ -8955,6 +9983,14 @@
    "a->c": 0.529375,
    "a->d": 0.5975
   },
+  "within_sdm": {
+   "a": 0.993125,
+   "c": 0.974375,
+   "d": 0.99
+  },
+  "heldout_sdm": {
+   "c": 0.7604
+  },
   "within_mean": 0.6989583333333332,
   "transfer_mean": 0.5904166666666667,
   "transfer_mean_preverdict": 0.5780208333333333
@@ -8994,6 +10030,14 @@
   "transfer_boundary": {
    "a->c": 0.549375,
    "a->d": 0.40625
+  },
+  "within_sdm": {
+   "a": 0.99125,
+   "c": 0.94875,
+   "d": 0.9725
+  },
+  "heldout_sdm": {
+   "c": 0.6784
   },
   "within_mean": 0.8991666666666666,
   "transfer_mean": 0.6115625,
@@ -9035,6 +10079,14 @@
    "a->c": 0.631875,
    "a->d": 0.545625
   },
+  "within_sdm": {
+   "a": 0.991875,
+   "c": 0.938125,
+   "d": 0.9625
+  },
+  "heldout_sdm": {
+   "c": 0.6668
+  },
   "within_mean": 0.9254166666666667,
   "transfer_mean": 0.6859375,
   "transfer_mean_preverdict": 0.6846874999999999
@@ -9075,6 +10127,12 @@
    "a->c": 0.488125,
    "a->d": 0.479375
   },
+  "within_sdm": {
+   "a": 0.8,
+   "c": 0.9925,
+   "d": 1.0
+  },
+  "heldout_sdm": {},
   "within_mean": 0.7677083333333333,
   "transfer_mean": 0.6096875,
   "transfer_mean_preverdict": 0.5748958333333333
@@ -9115,6 +10173,12 @@
    "a->c": 0.65875,
    "a->d": 0.405625
   },
+  "within_sdm": {
+   "a": 0.905,
+   "c": 0.98125,
+   "d": 1.0
+  },
+  "heldout_sdm": {},
   "within_mean": 0.7560416666666668,
   "transfer_mean": 0.451875,
   "transfer_mean_preverdict": 0.475625
@@ -9155,6 +10219,12 @@
    "a->c": 0.60375,
    "a->d": 0.254375
   },
+  "within_sdm": {
+   "a": 0.87875,
+   "c": 0.983125,
+   "d": 1.0
+  },
+  "heldout_sdm": {},
   "within_mean": 0.8252083333333333,
   "transfer_mean": 0.42197916666666674,
   "transfer_mean_preverdict": 0.42500000000000004
@@ -9195,6 +10265,12 @@
    "a->c": 0.660625,
    "a->d": 0.27625
   },
+  "within_sdm": {
+   "a": 0.891875,
+   "c": 0.970625,
+   "d": 1.0
+  },
+  "heldout_sdm": {},
   "within_mean": 0.8122916666666667,
   "transfer_mean": 0.44312499999999994,
   "transfer_mean_preverdict": 0.44052083333333325
@@ -9234,6 +10310,14 @@
   "transfer_boundary": {
    "a->c": 0.56875,
    "a->d": 0.381875
+  },
+  "within_sdm": {
+   "a": 0.821875,
+   "c": 0.963125,
+   "d": 0.99375
+  },
+  "heldout_sdm": {
+   "c": 0.6648
   },
   "within_mean": 0.7225,
   "transfer_mean": 0.4821875,
@@ -9275,6 +10359,14 @@
    "a->c": 0.524375,
    "a->d": 0.219375
   },
+  "within_sdm": {
+   "a": 0.925,
+   "c": 0.93125,
+   "d": 0.996875
+  },
+  "heldout_sdm": {
+   "c": 0.4452
+  },
   "within_mean": 0.736875,
   "transfer_mean": 0.3779166666666666,
   "transfer_mean_preverdict": 0.3792708333333333
@@ -9315,6 +10407,14 @@
    "a->c": 0.455,
    "a->d": 0.75625
   },
+  "within_sdm": {
+   "a": 0.915625,
+   "c": 0.926875,
+   "d": 0.995625
+  },
+  "heldout_sdm": {
+   "c": 0.4708
+  },
   "within_mean": 0.8016666666666667,
   "transfer_mean": 0.41604166666666664,
   "transfer_mean_preverdict": 0.49343750000000003
@@ -9354,6 +10454,14 @@
   "transfer_boundary": {
    "a->c": 0.45375,
    "a->d": 0.771875
+  },
+  "within_sdm": {
+   "a": 0.91,
+   "c": 0.925,
+   "d": 0.9925
+  },
+  "heldout_sdm": {
+   "c": 0.498
   },
   "within_mean": 0.8258333333333333,
   "transfer_mean": 0.4222916666666667,
@@ -9409,6 +10517,8 @@
    "b->c": 0.47534516765285995,
    "b->d": 0.5029585798816568
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6722550953320184,
   "transfer_mean": 0.5195595003287311,
   "transfer_mean_preverdict": 0.5180254218715757
@@ -9463,6 +10573,8 @@
    "b->c": 0.6581196581196581,
    "b->d": 0.5364891518737672
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8234714003944772,
   "transfer_mean": 0.6074402805172036,
   "transfer_mean_preverdict": 0.6018518518518517
@@ -9517,6 +10629,8 @@
    "b->c": 0.621301775147929,
    "b->d": 0.43261012491781725
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9281722550953321,
   "transfer_mean": 0.6522572868726716,
   "transfer_mean_preverdict": 0.5731426692965155
@@ -9571,6 +10685,8 @@
    "b->c": 0.1755424063116371,
    "b->d": 0.2412886259040105
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9478961209730441,
   "transfer_mean": 0.7375082182774491,
   "transfer_mean_preverdict": 0.5864014902476441
@@ -9625,6 +10741,8 @@
    "b->c": 0.358974358974359,
    "b->d": 0.43063773833004604
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7095660749506905,
   "transfer_mean": 0.559500328731098,
   "transfer_mean_preverdict": 0.5184637300021916
@@ -9679,6 +10797,8 @@
    "b->c": 0.5936883629191322,
    "b->d": 0.7462195923734385
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8972715318869164,
   "transfer_mean": 0.7966798159105851,
   "transfer_mean_preverdict": 0.7346592154284463
@@ -9733,6 +10853,8 @@
    "b->c": 0.3576594345825115,
    "b->d": 0.2406311637080868
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.967784352399737,
   "transfer_mean": 0.851468332237563,
   "transfer_mean_preverdict": 0.6103988603988604
@@ -9787,6 +10909,8 @@
    "b->c": 0.3399079552925707,
    "b->d": 0.36028928336620647
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9894806048652203,
   "transfer_mean": 0.8733837387683544,
   "transfer_mean_preverdict": 0.7386587771203157
@@ -9816,6 +10940,8 @@
    "d->d": 0.9022222222222223
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9118518518518519,
   "transfer_mean": 0.8995061728395062,
   "transfer_mean_preverdict": 0.8995061728395062
@@ -9845,6 +10971,8 @@
    "d->d": 0.9935802469135803
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9175308641975308,
   "transfer_mean": 0.3506172839506173,
   "transfer_mean_preverdict": 0.3506172839506173
@@ -9874,6 +11002,8 @@
    "d->d": 0.9644444444444444
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9244444444444444,
   "transfer_mean": 0.7839506172839507,
   "transfer_mean_preverdict": 0.7839506172839507
@@ -9903,6 +11033,8 @@
    "d->d": 0.9940740740740741
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9054320987654321,
   "transfer_mean": 0.882716049382716,
   "transfer_mean_preverdict": 0.882716049382716
@@ -9934,6 +11066,8 @@
   "transfer_boundary": {
    "a->c": 0.9351000540832882
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9172525689561926,
   "transfer_mean": 0.895619253650622,
   "transfer_mean_preverdict": 0.8942671714440238
@@ -9965,6 +11099,8 @@
   "transfer_boundary": {
    "a->c": 0.5678745267712277
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9759329367225528,
   "transfer_mean": 0.8217955651703623,
   "transfer_mean_preverdict": 0.7506760411032991
@@ -9996,6 +11132,8 @@
   "transfer_boundary": {
    "a->c": 0.4872904272579773
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9816116819902649,
   "transfer_mean": 0.7458085451595458,
   "transfer_mean_preverdict": 0.7295835586803677
@@ -10027,6 +11165,8 @@
   "transfer_boundary": {
    "a->c": 0.6176311519740401
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9864791779340184,
   "transfer_mean": 0.7939426717144402,
   "transfer_mean_preverdict": 0.8028664142779881
@@ -10050,6 +11190,8 @@
    "d->d": 0.6710291493158834
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6710291493158834,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10073,6 +11215,8 @@
    "d->d": 0.7858417608566329
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7858417608566329,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10096,6 +11240,8 @@
    "d->d": 0.8173706127305176
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8173706127305176,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10119,6 +11265,8 @@
    "d->d": 0.933372992266508
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.933372992266508,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10142,6 +11290,8 @@
    "d->d": 0.6265432098765432
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6265432098765432,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10165,6 +11315,8 @@
    "d->d": 0.9020061728395061
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9020061728395061,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10188,6 +11340,8 @@
    "d->d": 0.9868827160493827
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9868827160493827,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10211,6 +11365,8 @@
    "d->d": 0.9837962962962963
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9837962962962963,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10234,6 +11390,8 @@
    "c->c": 0.91017251635931
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.91017251635931,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10257,6 +11415,8 @@
    "c->c": 0.9839381320642475
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9839381320642475,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10280,6 +11440,8 @@
    "c->c": 0.9940511600237953
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9940511600237953,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10303,6 +11465,8 @@
    "c->c": 0.9071980963712076
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9071980963712076,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10326,6 +11490,8 @@
    "c->c": 0.854232684472612
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.854232684472612,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10349,6 +11515,8 @@
    "c->c": 0.9130828429153464
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9130828429153464,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10372,6 +11540,8 @@
    "c->c": 0.965142598460842
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.965142598460842,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10395,6 +11565,8 @@
    "c->c": 0.9565414214576732
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9565414214576732,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10426,6 +11598,8 @@
   "transfer_boundary": {
    "b->c": 0.49609375
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.553466796875,
   "transfer_mean": 0.511474609375,
   "transfer_mean_preverdict": 0.504150390625
@@ -10457,6 +11631,8 @@
   "transfer_boundary": {
    "b->c": 0.5146484375
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.593505859375,
   "transfer_mean": 0.526611328125,
   "transfer_mean_preverdict": 0.523681640625
@@ -10488,6 +11664,8 @@
   "transfer_boundary": {
    "b->c": 0.5380859375
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.613525390625,
   "transfer_mean": 0.507568359375,
   "transfer_mean_preverdict": 0.525146484375
@@ -10519,6 +11697,8 @@
   "transfer_boundary": {
    "b->c": 0.576171875
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.597900390625,
   "transfer_mean": 0.474853515625,
   "transfer_mean_preverdict": 0.527587890625
@@ -10561,6 +11741,8 @@
    "c->a": 0.34938775510204084,
    "c->d": 0.5330612244897959
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.612517006802721,
   "transfer_mean": 0.461904761904762,
   "transfer_mean_preverdict": 0.47265306122448975
@@ -10603,6 +11785,8 @@
    "c->a": 0.7355102040816327,
    "c->d": 0.5248979591836734
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6908843537414966,
   "transfer_mean": 0.5425850340136055,
   "transfer_mean_preverdict": 0.5319727891156463
@@ -10645,6 +11829,8 @@
    "c->a": 0.7738775510204081,
    "c->d": 0.7069387755102041
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7461224489795918,
   "transfer_mean": 0.6661224489795918,
   "transfer_mean_preverdict": 0.6563265306122449
@@ -10687,6 +11873,8 @@
    "c->a": 0.7069387755102041,
    "c->d": 0.5583673469387755
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7648979591836734,
   "transfer_mean": 0.654421768707483,
   "transfer_mean_preverdict": 0.575374149659864
@@ -10719,6 +11907,8 @@
    "a->c": 0.5626980534178361,
    "c->a": 0.6731552738795835
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6896785875961974,
   "transfer_mean": 0.5672249886826619,
   "transfer_mean_preverdict": 0.6179266636487097
@@ -10751,6 +11941,8 @@
    "a->c": 0.5215029425079222,
    "c->a": 0.5246717971933001
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.706880941602535,
   "transfer_mean": 0.6360344047080126,
   "transfer_mean_preverdict": 0.5230873698506111
@@ -10783,6 +11975,8 @@
    "a->c": 0.5350837483023992,
    "c->a": 0.5002263467632413
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6962426437301946,
   "transfer_mean": 0.612494341330919,
   "transfer_mean_preverdict": 0.5176550475328203
@@ -10815,6 +12009,8 @@
    "a->c": 0.618832050701675,
    "c->a": 0.6034404708012675
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6731552738795835,
   "transfer_mean": 0.5312358533272974,
   "transfer_mean_preverdict": 0.6111362607514712
@@ -10838,6 +12034,8 @@
    "c->c": 0.6748
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6748,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10861,6 +12059,8 @@
    "c->c": 0.9348
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9348,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10884,6 +12084,8 @@
    "c->c": 0.9332
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9332,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10907,6 +12109,8 @@
    "c->c": 0.8248
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8248,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10932,6 +12136,8 @@
    "c->c": 0.5047933884297521
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5047933884297521,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10957,6 +12163,8 @@
    "c->c": 0.5689256198347108
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5689256198347108,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -10982,6 +12190,8 @@
    "c->c": 0.5613223140495868
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5613223140495868,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11007,6 +12217,8 @@
    "c->c": 0.5709090909090909
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5709090909090909,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11030,6 +12242,8 @@
    "c->c": 0.8996539792387543
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8996539792387543,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11053,6 +12267,8 @@
    "c->c": 0.9457900807381776
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9457900807381776,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11076,6 +12292,8 @@
    "c->c": 0.972318339100346
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.972318339100346,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11099,6 +12317,8 @@
    "c->c": 0.9753940792003076
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9753940792003076,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11122,6 +12342,8 @@
    "c->c": 0.5505671077504726
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.5505671077504726,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11145,6 +12367,8 @@
    "c->c": 0.7613421550094518
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7613421550094518,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11168,6 +12392,8 @@
    "c->c": 0.8804347826086957
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8804347826086957,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11191,6 +12417,8 @@
    "c->c": 0.8719281663516069
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8719281663516069,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11214,6 +12442,8 @@
    "c->c": 0.8388318009734992
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8388318009734992,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11237,6 +12467,8 @@
    "c->c": 0.9935100054083288
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9935100054083288,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11260,6 +12492,8 @@
    "c->c": 0.9578150351541374
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9578150351541374,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11283,6 +12517,8 @@
    "c->c": 0.9670091941590049
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9670091941590049,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11306,6 +12542,8 @@
    "c->c": 0.6592752839372634
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6592752839372634,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11329,6 +12567,8 @@
    "c->c": 0.9718766901027582
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9718766901027582,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11352,6 +12592,8 @@
    "c->c": 0.971335857220119
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.971335857220119,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11375,6 +12617,8 @@
    "c->c": 0.9859383450513791
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9859383450513791,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11398,6 +12642,8 @@
    "c->c": 0.7252568956192537
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7252568956192537,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11421,6 +12667,8 @@
    "c->c": 0.914007571660357
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.914007571660357,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11444,6 +12692,8 @@
    "c->c": 0.9172525689561926
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9172525689561926,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11467,6 +12717,8 @@
    "c->c": 0.9291508923742564
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9291508923742564,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11490,6 +12742,8 @@
    "c->c": 0.7488662131519275
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7488662131519275,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11513,6 +12767,8 @@
    "c->c": 0.8236961451247166
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8236961451247166,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11536,6 +12792,8 @@
    "c->c": 0.8304988662131519
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8304988662131519,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11559,6 +12817,8 @@
    "c->c": 0.8503401360544217
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8503401360544217,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -11590,6 +12850,8 @@
   "transfer_boundary": {
    "b->c": 0.5741417092768444
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6775018261504748,
   "transfer_mean": 0.4185536888239591,
   "transfer_mean_preverdict": 0.48904309715120525
@@ -11621,6 +12883,8 @@
   "transfer_boundary": {
    "b->c": 0.36888239590942296
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6592403214024836,
   "transfer_mean": 0.4156318480642805,
   "transfer_mean_preverdict": 0.41197954711468227
@@ -11652,6 +12916,8 @@
   "transfer_boundary": {
    "b->c": 0.5164353542731921
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7027027027027026,
   "transfer_mean": 0.5566106647187727,
   "transfer_mean_preverdict": 0.5613586559532505
@@ -11683,6 +12949,8 @@
   "transfer_boundary": {
    "b->c": 0.5200876552227903
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7315558802045288,
   "transfer_mean": 0.5113221329437546,
   "transfer_mean_preverdict": 0.5241051862673485
@@ -11714,6 +12982,8 @@
   "transfer_boundary": {
    "b->c": 0.43842950624628196
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.761451516954194,
   "transfer_mean": 0.583283759666865,
   "transfer_mean_preverdict": 0.5190362879238548
@@ -11745,6 +13015,8 @@
   "transfer_boundary": {
    "b->c": 0.5788221296847115
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8146936347412255,
   "transfer_mean": 0.6421772754312909,
   "transfer_mean_preverdict": 0.6234384295062463
@@ -11776,6 +13048,8 @@
   "transfer_boundary": {
    "b->c": 0.4182034503271862
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7816775728732896,
   "transfer_mean": 0.6002379535990482,
   "transfer_mean_preverdict": 0.4759071980963712
@@ -11807,6 +13081,8 @@
   "transfer_boundary": {
    "b->c": 0.49851279000594884
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8093396787626412,
   "transfer_mean": 0.5788221296847116,
   "transfer_mean_preverdict": 0.5205234979179061
@@ -11838,6 +13114,8 @@
   "transfer_boundary": {
    "b->c": 0.43005671077504726
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8830340264650284,
   "transfer_mean": 0.32325141776937616,
   "transfer_mean_preverdict": 0.32206994328922495
@@ -11869,6 +13147,8 @@
   "transfer_boundary": {
    "b->c": 0.7892249527410208
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9383270321361059,
   "transfer_mean": 0.3289224952741021,
   "transfer_mean_preverdict": 0.5704158790170133
@@ -11900,6 +13180,8 @@
   "transfer_boundary": {
    "b->c": 0.8213610586011342
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9931474480151229,
   "transfer_mean": 0.2386578449905482,
   "transfer_mean_preverdict": 0.5590737240075614
@@ -11931,6 +13213,8 @@
   "transfer_boundary": {
    "b->c": 0.9546313799621928
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9952741020793952,
   "transfer_mean": 0.6467391304347826,
   "transfer_mean_preverdict": 0.8015122873345936
@@ -11962,6 +13246,8 @@
   "transfer_boundary": {
    "b->c": 0.5200617283950617
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6060956790123457,
   "transfer_mean": 0.5416666666666666,
   "transfer_mean_preverdict": 0.5192901234567902
@@ -11993,6 +13279,8 @@
   "transfer_boundary": {
    "b->c": 0.37037037037037035
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8360339506172839,
   "transfer_mean": 0.5825617283950617,
   "transfer_mean_preverdict": 0.5343364197530864
@@ -12024,6 +13312,8 @@
   "transfer_boundary": {
    "b->c": 0.5162037037037037
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8472222222222222,
   "transfer_mean": 0.6311728395061729,
   "transfer_mean_preverdict": 0.6087962962962963
@@ -12055,6 +13345,8 @@
   "transfer_boundary": {
    "b->c": 0.4243827160493827
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8306327160493827,
   "transfer_mean": 0.6847993827160493,
   "transfer_mean_preverdict": 0.5381944444444444
@@ -12086,6 +13378,8 @@
   "transfer_boundary": {
    "b->c": 0.572265625
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.611328125,
   "transfer_mean": 0.43505859375,
   "transfer_mean_preverdict": 0.50244140625
@@ -12117,6 +13411,8 @@
   "transfer_boundary": {
    "b->c": 0.603515625
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7265625,
   "transfer_mean": 0.4296875,
   "transfer_mean_preverdict": 0.51513671875
@@ -12148,6 +13444,8 @@
   "transfer_boundary": {
    "b->c": 0.6171875
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7236328125,
   "transfer_mean": 0.42431640625,
   "transfer_mean_preverdict": 0.52685546875
@@ -12179,6 +13477,8 @@
   "transfer_boundary": {
    "b->c": 0.4462890625
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.72802734375,
   "transfer_mean": 0.59619140625,
   "transfer_mean_preverdict": 0.47265625
@@ -12232,6 +13532,15 @@
    "b->a": 0.6993801652892562,
    "b->c": 0.5506198347107438,
    "b->d": 0.6131198347107438
+  },
+  "within_sdm": {
+   "a": 0.8703512396694215,
+   "b": 0.815599173553719,
+   "c": 1.0,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "a": 0.5632
   },
   "within_mean": 0.7858987603305785,
   "transfer_mean": 0.6676136363636364,
@@ -12287,6 +13596,15 @@
    "b->c": 0.5423553719008265,
    "b->d": 0.5666322314049587
   },
+  "within_sdm": {
+   "a": 0.8868801652892562,
+   "b": 0.8672520661157025,
+   "c": 0.9958677685950413,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "a": 0.5424
+  },
   "within_mean": 0.7742768595041323,
   "transfer_mean": 0.652419077134986,
   "transfer_mean_preverdict": 0.6382145316804406
@@ -12340,6 +13658,15 @@
    "b->a": 0.7076446280991735,
    "b->c": 0.581095041322314,
    "b->d": 0.65599173553719
+  },
+  "within_sdm": {
+   "a": 0.8703512396694215,
+   "b": 0.8388429752066116,
+   "c": 0.9989669421487604,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "a": 0.6448
   },
   "within_mean": 0.7896435950413223,
   "transfer_mean": 0.6854769283746557,
@@ -12395,6 +13722,15 @@
    "b->c": 0.6668388429752066,
    "b->d": 0.8357438016528925
   },
+  "within_sdm": {
+   "a": 0.9085743801652892,
+   "b": 0.8305785123966942,
+   "c": 0.993801652892562,
+   "d": 1.0
+  },
+  "heldout_sdm": {
+   "a": 0.6612
+  },
   "within_mean": 0.799845041322314,
   "transfer_mean": 0.6871126033057852,
   "transfer_mean_preverdict": 0.6935692148760331
@@ -12426,6 +13762,8 @@
   "transfer_boundary": {
    "a->c": 0.6033057851239669
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7915518824609733,
   "transfer_mean": 0.45179063360881544,
   "transfer_mean_preverdict": 0.5045913682277319
@@ -12457,6 +13795,8 @@
   "transfer_boundary": {
    "a->c": 0.660238751147842
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.8292011019283747,
   "transfer_mean": 0.7470156106519743,
   "transfer_mean_preverdict": 0.7125803489439853
@@ -12488,6 +13828,8 @@
   "transfer_boundary": {
    "a->c": 0.8328741965105602
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.879247015610652,
   "transfer_mean": 0.8314967860422406,
   "transfer_mean_preverdict": 0.8282828282828283
@@ -12519,6 +13861,8 @@
   "transfer_boundary": {
    "a->c": 0.5344352617079889
   },
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.9141414141414141,
   "transfer_mean": 0.8751147842056933,
   "transfer_mean_preverdict": 0.6749311294765841
@@ -12542,6 +13886,8 @@
    "c->c": 0.619140625
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.619140625,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -12565,6 +13911,8 @@
    "c->c": 0.6181640625
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.6181640625,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -12588,6 +13936,8 @@
    "c->c": 0.71484375
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.71484375,
   "transfer_mean": null,
   "transfer_mean_preverdict": null
@@ -12611,6 +13961,8 @@
    "c->c": 0.7197265625
   },
   "transfer_boundary": {},
+  "within_sdm": {},
+  "heldout_sdm": {},
   "within_mean": 0.7197265625,
   "transfer_mean": null,
   "transfer_mean_preverdict": null

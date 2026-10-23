@@ -1,0 +1,263 @@
+{
+ "model": "gemma-3-4b-it",
+ "n_known": 28,
+ "n_questions": 100,
+ "cells": [
+  {
+   "frame": "a",
+   "readout": "reply32",
+   "layer": 9,
+   "all": 0.58375,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.71,
+   "unknown": 0.5488888888888889
+  },
+  {
+   "frame": "a",
+   "readout": "reply32",
+   "layer": 17,
+   "all": 0.729375,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.81,
+   "unknown": 0.7
+  },
+  {
+   "frame": "a",
+   "readout": "reply32",
+   "layer": 22,
+   "all": 0.77375,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.88,
+   "unknown": 0.7422222222222222
+  },
+  {
+   "frame": "a",
+   "readout": "reply32",
+   "layer": 29,
+   "all": 0.82,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.93,
+   "unknown": 0.7855555555555556
+  },
+  {
+   "frame": "a",
+   "readout": "boundary",
+   "layer": 9,
+   "all": 0.61875,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.58,
+   "unknown": 0.6322222222222222
+  },
+  {
+   "frame": "a",
+   "readout": "boundary",
+   "layer": 17,
+   "all": 0.675,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.68,
+   "unknown": 0.6788888888888889
+  },
+  {
+   "frame": "a",
+   "readout": "boundary",
+   "layer": 22,
+   "all": 0.74375,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.73,
+   "unknown": 0.75
+  },
+  {
+   "frame": "a",
+   "readout": "boundary",
+   "layer": 29,
+   "all": 0.838125,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.86,
+   "unknown": 0.84
+  },
+  {
+   "frame": "b",
+   "readout": "reply32",
+   "layer": 9,
+   "all": 0.77375,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.74,
+   "unknown": 0.7922222222222223
+  },
+  {
+   "frame": "b",
+   "readout": "reply32",
+   "layer": 17,
+   "all": 0.80625,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.74,
+   "unknown": 0.82
+  },
+  {
+   "frame": "b",
+   "readout": "reply32",
+   "layer": 22,
+   "all": 0.8,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.78,
+   "unknown": 0.8044444444444444
+  },
+  {
+   "frame": "b",
+   "readout": "reply32",
+   "layer": 29,
+   "all": 0.799375,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.74,
+   "unknown": 0.8155555555555556
+  },
+  {
+   "frame": "b",
+   "readout": "boundary",
+   "layer": 9,
+   "all": 0.574375,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.63,
+   "unknown": 0.5611111111111111
+  },
+  {
+   "frame": "b",
+   "readout": "boundary",
+   "layer": 17,
+   "all": 0.954375,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.98,
+   "unknown": 0.9455555555555556
+  },
+  {
+   "frame": "b",
+   "readout": "boundary",
+   "layer": 22,
+   "all": 0.921875,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.93,
+   "unknown": 0.9244444444444444
+  },
+  {
+   "frame": "b",
+   "readout": "boundary",
+   "layer": 29,
+   "all": 0.9225,
+   "n_known": [
+    10,
+    10
+   ],
+   "n_unknown": [
+    30,
+    30
+   ],
+   "known": 0.92,
+   "unknown": 0.9244444444444444
+  }
+ ]
+}
