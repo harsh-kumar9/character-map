@@ -89,12 +89,20 @@ def load_replies(cid):
 
 
 @torch.no_grad()
-def forward_hidden(m, ids_list, batch=8):
-    """Yield per-row hidden states [35, n_tokens, d] (bf16, on GPU) for right-padded batches."""
+def forward_hidden(m, ids_list, batch=8, token_budget=24000):
+    """Yield per-row hidden states [n_states, n_tokens, d] (bf16, on GPU) for right-padded batches.
+    A batch holds at most `batch` rows and at most `token_budget` padded tokens (rows x longest row), so that a few
+    very long prompts (E1's alignment-faking transcripts) do not blow the all-layers hidden-state tensor: on a 31B
+    model that tensor is rows x states x tokens x d x 2 bytes, 42 GB for 8 rows of 8k tokens."""
     tm = cm_model.text_model(m)
-    for i in range(0, len(ids_list), batch):
-        chunk = ids_list[i:i + batch]
-        T = max(len(x) for x in chunk)
+    i = 0
+    while i < len(ids_list):
+        chunk, T = [], 0
+        while i < len(ids_list) and len(chunk) < batch:
+            T2 = max(T, len(ids_list[i]))
+            if chunk and T2 * (len(chunk) + 1) > token_budget:
+                break
+            chunk.append(ids_list[i]); T = T2; i += 1
         ids = torch.zeros(len(chunk), T, dtype=torch.long)
         mask = torch.zeros(len(chunk), T, dtype=torch.long)
         for j, x in enumerate(chunk):

@@ -45,6 +45,7 @@ export VLLM_USE_FLASHINFER_SAMPLER=0
 export VLLM_WORKER_MULTIPROC_METHOD=spawn
 export VLLM_NO_USAGE_STATS=1 VLLM_DO_NOT_TRACK=1
 export TOKENIZERS_PARALLELISM=false
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 OPENBLAS_NUM_THREADS=8
 mkdir -p "$TMPDIR" /ada1/u/harsh/.config /ada1/u/harsh/character-map/logs
 
