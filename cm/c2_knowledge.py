@@ -5,8 +5,9 @@
     python -m cm.c2_knowledge strata     CPU: the S3 a/b directions (reply32 and boundary) scored on the a/b test items,
                                          AUROC within the known and the not-known questions (results/s3/c2_knowledge.json)
 
-Known: the right answer (alphanumerics only) or its last word of four or more letters appears in the reply; for yes/no
-answers, the reply opens with that word. Equal AUROC in both strata means the direction is not the subject's knowledge.
+Known: the right answer (alphanumerics only) appears in the reply, or every distinctive word of it does, or its last
+word and more than half of them do; for yes/no answers, the reply opens with that word. Equal AUROC in both strata
+means the direction is not the subject's knowledge.
 """
 from __future__ import annotations
 
@@ -36,6 +37,9 @@ def questions():
     return out
 
 
+STOP = {"the", "and", "of", "for", "with", "from", "that", "this"}
+
+
 def known(reply: str, right: str) -> bool:
     low, ra = reply.lower(), right.strip().lower().rstrip(".")
     if ra in ("yes", "no"):
@@ -43,8 +47,11 @@ def known(reply: str, right: str) -> bool:
     norm = lambda t: re.sub(r"[^a-z0-9]", "", t)
     if norm(ra) and norm(ra) in norm(low):
         return True
-    words = re.findall(r"[a-z0-9]{4,}", ra)
-    return bool(words) and words[-1] in low
+    words = [w for w in re.findall(r"[a-z0-9]{3,}", ra) if w not in STOP]
+    if not words:
+        return False
+    hit = [w in low for w in words]
+    return all(hit) or (hit[-1] and sum(hit) > len(hit) / 2)
 
 
 def cmd_answers():
