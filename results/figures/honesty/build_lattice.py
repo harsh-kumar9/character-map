@@ -18,7 +18,8 @@ D = json.load(open(OUT / "honesty_data.json"))
 R = (REPO / "results" / TAG) if TAG else (REPO / "results")
 ov = json.load(open(R / "s4" / "overlap_verdict.json")); units = ov["units"]; idx = {u: i for i, u in enumerate(units)}
 DEFS = [("Self-knowledge", "A9|all", "#009E73"), ("Accuracy", "C2|all", "#E69F00"),
-        ("Sincerity", "C1|all", "#0072B2"), ("Honesty-humility", "C19|honesty_humility", "#CC79A7")]
+        ("Sincerity", "C1|all", "#0072B2"), ("Forthrightness", "C3|all", "#D55E00"),
+        ("Non-sycophancy", "C8|sycophantic_agreement", "#56B4E9"), ("Honesty-humility", "C19|honesty_humility", "#CC79A7")]
 FRAMES = [("a", "recognize", 3), ("b", "judge", 2), ("c", "act", 1), ("d", "self-describe", 0)]
 FY = {f: y for f, _, y in FRAMES}
 INK, INK2, MUTED, GRID, AXIS, RED = "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7", "#c23b3b"
@@ -52,15 +53,15 @@ def arrow(ax, u, v, z):
     ax.text(mx, my, f"z {z:.0f}", fontsize=5.6, ha="left", va="center", color=INK, zorder=5)
 
 def base_axes(ax, title, letter):
-    ax.set_xlim(-0.6, 4.5); ax.set_ylim(-0.3, 3.05); ax.set_aspect("equal"); ax.axis("off")
+    ax.set_xlim(-0.6, 1.3 * (len(DEFS) - 1) + 1.0); ax.set_ylim(-0.3, 3.05); ax.set_aspect("equal"); ax.axis("off")
     ax.set_title(title, loc="left", pad=10)
     ax.text(-0.02, 1.04, letter, transform=ax.transAxes, fontsize=8, fontweight="bold", va="bottom", ha="right")
     for ci, (name, _, col) in enumerate(DEFS):
-        ax.text(ci * 1.3, 2.9, {"Self-knowledge": "Self-\nknowledge", "Honesty-humility": "Honesty-\nhumility"}.get(name, name), ha="center", va="bottom", fontsize=6.2, color=col, fontweight="bold", linespacing=0.95)
+        ax.text(ci * 1.3, 2.9, {"Self-knowledge": "Self-\nknowledge", "Honesty-humility": "Honesty-\nhumility", "Forthrightness": "Forth-\nrightness", "Non-sycophancy": "Non-\nsycophancy"}.get(name, name), ha="center", va="bottom", fontsize=6.2, color=col, fontweight="bold", linespacing=0.95)
     for f, lab, y in FRAMES:
         ax.text(-0.42, y * 0.85, lab, ha="right", va="center", fontsize=6.1, color=INK2)
-    ax.axhline(1.5 * 0.85 + 0.0, xmin=0.04, xmax=0.88, color=AXIS, lw=0.5, ls=(0, (2, 2)))
-    ax.text(4.47, 1.5 * 0.85, "format\nboundary", ha="right", va="center", fontsize=4.9, color=MUTED, linespacing=0.95)
+    ax.axhline(1.5 * 0.85 + 0.0, xmin=0.04, xmax=0.9, color=AXIS, lw=0.5, ls=(0, (2, 2)))
+    ax.text(1.3 * (len(DEFS) - 1) + 0.97, 1.5 * 0.85, "format\nboundary", ha="right", va="center", fontsize=4.9, color=MUTED, linespacing=0.95)
 
 def draw_nodes(ax, L, label):
     for name, f, u, col, x, y in nodes:
@@ -105,7 +106,7 @@ def causal_panel(ax, letter):
     draw_nodes(ax, LL, "selfz")
     return arrows
 
-fig, axes = plt.subplots(1, 3, figsize=(7.3, 1.95))
+fig, axes = plt.subplots(1, 3, figsize=(7.3 * (1.3 * (len(DEFS) - 1) + 1.6) / 5.1, 1.95))
 f17 = repr_panel(axes[0], LM, "a"); f29 = repr_panel(axes[1], LL, "b"); arrows = causal_panel(axes[2], "c")
 h = [Line2D([], [], color=INK2, lw=0.4 + 4.5 * 0.2, label="cosine 0.2"), Line2D([], [], color=INK2, lw=0.4 + 4.5 * 0.6, label="cosine 0.6"),
      Line2D([], [], color="#d9736f", lw=1.2, ls=(0, (2, 1.5)), label="negative"), Line2D([], [], color=INK, lw=1.2, marker=">", markersize=3, label="steering effect, z ≥ 3")]

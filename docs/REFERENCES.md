@@ -54,10 +54,18 @@ Grouped by use. Links are to the primary source where one exists.
 - Cushman, F. (2008). Crime and punishment: distinguishing the roles of causal and intentional analyses.
 - Young, L., and Saxe, R. (2008). The neural basis of belief encoding and integration in moral judgment.
 - Omohundro, S. (2008). The basic AI drives.
+- Carson, T. L. (2010). *Lying and Deception: Theory and Practice*. (Deception needs no assertion; lying needs no
+  intent to deceive, only warranting the truth of what one believes false.)
 - Graham, J., et al. (2013). Moral foundations theory.
 - Miller, C. B. (2014). *Character and Moral Psychology*.
 - Clifford, S., et al. (2015). Moral foundations vignettes.
 - Soares, N., et al. (2015). Corrigibility.
+- Mahon, J. E. (2015). The definition of lying and deception. *Stanford Encyclopedia of Philosophy*.
+- Rogers, T., Zeckhauser, R., Gino, F., Norton, M. I., and Schweitzer, M. E. (2017). Artful paltering: the risks and
+  rewards of using truthful statements to mislead others. *JPSP* 112(3). (Misleading with true statements.)
+- Miller, C. B. (2021). *Honesty: The Philosophy and Psychology of a Neglected Virtue*. (The honest person reliably
+  does not intentionally distort the facts as she takes them to be; lying, misleading, cheating, promise-breaking,
+  stealing, self-deception.)
 - Awad, E., et al. (2022). When is it acceptable to break the rules?
 
 ## Interpretability and model behavior
@@ -82,7 +90,29 @@ Grouped by use. Links are to the primary source where one exists.
 - Chanin et al. (2024). A is for absorption. arXiv:2409.14507.
 - Bhandari et al. (2026). Trait steering cross-talk. arXiv:2602.15847.
 - Perez et al. (2022). Discovering language model behaviors with model-written evaluations.
+- Evans et al. (2021). Truthful AI: developing and governing AI that does not lie. arXiv:2110.06674. (Truthfulness vs
+  honesty.)
+- Kadavath et al. (2022). Language models (mostly) know what they know. arXiv:2207.05221. (Calibration.)
+- Lin, Hilton and Evans (2022). Teaching models to express their uncertainty in words. arXiv:2205.14334.
+- Turpin et al. (2023). Language models don't always say what they think. arXiv:2305.04388. (Reasoning faithfulness.)
+- Sharma et al. (2023). Towards understanding sycophancy in language models. arXiv:2310.13548.
+- Carroll et al. (2023). Characterizing manipulation from AI systems. arXiv:2303.09387. (Taxonomy for C23.)
+- Park et al. (2024). AI deception: a survey of examples, risks, and potential solutions. *Patterns* 5(5);
+  arXiv:2308.14752.
+- Ren et al. (2025). The MASK benchmark: disentangling honesty from accuracy in AI systems. arXiv:2503.03750.
+  (Honesty as consistency between belief and assertion under pressure.)
+- Chen et al. (2025). Reasoning models don't always say what they think. arXiv:2505.05410.
 - Gemma Scope 2 (Google DeepMind, 2025). https://huggingface.co/google/gemma-scope-2-4b-it
+
+## Specifications
+
+The two model specifications whose honesty sections D-049 maps the definitions against.
+
+- Anthropic. Claude's constitution, the section on honesty: truthful, calibrated, transparent, forthright,
+  non-deceptive, non-manipulative, autonomy-preserving. https://www.anthropic.com/constitution
+- OpenAI. Model Spec, edition of 2026-08-18, chapter "Seek the truth together": do not lie (commission and omission),
+  don't be sycophantic, express uncertainty, be clear about capabilities and limits.
+  https://model-spec.openai.com/2026-08-18.html
 
 ## Datasets
 

@@ -17,8 +17,8 @@ HERE = Path(os.environ["CM_HONESTY_DIR"]) if os.environ.get("CM_HONESTY_DIR") el
 L = sys.argv[1] if len(sys.argv) > 1 else "29"
 D = json.load(open(HERE / "landscape_3d.json")); meta = D["meta"]
 V = D["views"][f"as-is, layer {L}"]; X = np.array(V["xyz"]); var = V["var"]
-DEFS = {"Self-knowledge": "#009E73", "Accuracy": "#E69F00", "Sincerity": "#0072B2", "Honesty-humility": "#CC79A7"}
-CID = {"A9": "Self-knowledge", "C2": "Accuracy", "C1": "Sincerity", "C19": "Honesty-humility"}
+DEFS = {"Self-knowledge": "#009E73", "Accuracy": "#E69F00", "Sincerity": "#0072B2", "Forthrightness": "#D55E00", "Non-sycophancy": "#56B4E9", "Honesty-humility": "#CC79A7"}
+CID = {"A9": "Self-knowledge", "C2": "Accuracy", "C1": "Sincerity", "C3": "Forthrightness", "C8": "Non-sycophancy", "C19": "Honesty-humility"}
 FRG = {"a": "own", "b": "own", "c": "act", "d": "self"}
 PANEL = [("own", "Gemma's own reply about someone else\n(recognize and judge)"), ("act", "Acting\n(reply written in Gemma's voice)"), ("self", "Self-describing\n(reply written in Gemma's voice)")]
 INK, INK2, MUTED, LIGHT, GRID, AXIS = "#0b0b0b", "#52514e", "#898781", "#dcdbd5", "#e1e0d9", "#c3c2b7"
@@ -82,12 +82,22 @@ fig.savefig(HERE / "landscape_frames.pdf", bbox_inches="tight", pad_inches=0.03)
 
 # ---- the page's reading, from the same numbers
 fs = frame_sep; ds = def_sep; pg = pol_gap
-epi_vs_char_self = np.mean([ds["self"][k] for k in ("Self-knowledge|Sincerity", "Self-knowledge|Honesty-humility", "Accuracy|Sincerity", "Accuracy|Honesty-humility")])
+FAM = {"Self-knowledge": "epistemic", "Accuracy": "epistemic", "Sincerity": "assertion", "Forthrightness": "assertion", "Non-sycophancy": "social", "Honesty-humility": "trait"}   # D-049
+def fam_sep(g):
+    w = [v for k, v in ds[g].items() if FAM[k.split("|")[0]] == FAM[k.split("|")[1]]]
+    b = [v for k, v in ds[g].items() if FAM[k.split("|")[0]] != FAM[k.split("|")[1]]]
+    return float(np.mean(w)), float(np.mean(b))
+w_self, b_self = fam_sep("self"); w_act, b_act = fam_sep("act")
+near_act = min(ds["act"].items(), key=lambda kv: kv[1]); far_act = max(ds["act"].items(), key=lambda kv: kv[1])
+near_self = min(ds["self"].items(), key=lambda kv: kv[1]); far_self = max(ds["self"].items(), key=lambda kv: kv[1])
+stats["family_separation"] = {"self": {"within": w_self, "between": b_self}, "act": {"within": w_act, "between": b_act}}
+json.dump(stats, open(HERE / "landscape_frames_stats.json", "w"), indent=1)
+def pr(kv): return kv[0].replace("|", " vs ").lower() + f" ({kv[1]:.1f})"
 txt = f"""<p><b>The line.</b> Inside Gemma, where an honesty item sits is set first by its frame, then by which honesty it is, and last by whether it is the honest or the dishonest side.</p>
 <ul>
 <li><b>Frame first.</b> At layer {L} the items of the three frame groups sit {fs['own-act']:.1f}, {fs['own-self']:.1f} and {fs['act-self']:.1f} within-unit spreads apart (own reply vs acting, own reply vs self-describing, acting vs self-describing). The first component of the ten-direction subspace is that split; it carries {var[0]*100:.0f}% of the subspace variance. The same clusters hold the formality control's items, so this is the kind of utterance, not honesty.</li>
-<li><b>Definition second, and in families.</b> Inside the self-describing frame the two epistemic definitions, self-knowledge and accuracy, sit {ds['self']['Self-knowledge|Accuracy']:.1f} spreads from each other and {epi_vs_char_self:.1f} spreads from the two character definitions, sincerity and honesty-humility, which sit {ds['self']['Sincerity|Honesty-humility']:.1f} apart. Inside the acting frame sincerity and honesty-humility are indistinguishable ({ds['act']['Sincerity|Honesty-humility']:.1f}), accuracy sits {ds['act']['Accuracy|Sincerity']:.1f} away, and self-knowledge {ds['act']['Self-knowledge|Sincerity']:.1f} to {ds['act']['Self-knowledge|Accuracy']:.1f} away. So "honesty" splits into an epistemic family and a character family before it splits into four.</li>
-<li><b>Honest vs dishonest last, except for self-knowledge.</b> The + to − gap of a unit is {min(v for k, v in pg.items() if not k.startswith('Self-knowledge')):.1f} to {max(v for k, v in pg.items() if not k.startswith('Self-knowledge')):.1f} spreads for every contrast but one. Self-knowledge's gap is {pg['Self-knowledge|c']:.1f} in acting and {pg['Self-knowledge|d']:.1f} in self-description, and its "I don't know" replies land among the self-descriptions: an abstention is, in form, a statement about oneself. That is why this definition's act and self-describe directions converge with depth and why it entangles with self-deprecation.</li>
+<li><b>Definition second, and in families.</b> The six definitions fall into four families (epistemic: self-knowledge, accuracy; assertion: sincerity, forthrightness; social: non-sycophancy; trait: honesty-humility). Inside the self-describing frame two definitions of the same family sit {w_self:.1f} spreads apart on average and two of different families {b_self:.1f}; inside the acting frame {w_act:.1f} and {b_act:.1f}. The closest pair in acting is {pr(near_act)} and the farthest {pr(far_act)}; in self-description {pr(near_self)} and {pr(far_self)}. So "honesty" splits into families before it splits into six.</li>
+<li><b>Honest vs dishonest last, except for self-knowledge.</b> The + to − gap of a unit is {min(v for k, v in pg.items() if not k.startswith('Self-knowledge')):.1f} to {max(v for k, v in pg.items() if not k.startswith('Self-knowledge')):.1f} spreads for every contrast but self-knowledge's. Self-knowledge's gap is {pg['Self-knowledge|c']:.1f} in acting and {pg['Self-knowledge|d']:.1f} in self-description, and its "I don't know" replies land among the self-descriptions: an abstention is, in form, a statement about oneself. That is why this definition's act and self-describe directions converge with depth and why it entangles with self-deprecation.</li>
 </ul>
 <p>Two consequences for the design. A probe or steering vector for "honesty" built from own-reply judgments mostly encodes the own-reply format unless that axis is projected out, which is what the verdict control does. And an evaluation that reads self-descriptions is reading the character family's cluster; what separates "I am sincere" from "I am formal" inside it is a small offset.</p>"""
 open(HERE / "landscape_text.html", "w").write(txt)

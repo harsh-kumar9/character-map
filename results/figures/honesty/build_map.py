@@ -16,9 +16,10 @@ LM, LL = int(os.environ.get("CM_LMID", 17)), int(os.environ.get("CM_LLATE", 29))
 ov = json.load(open((REPO / "results" / TAG if TAG else REPO / "results") / "s4" / "overlap_verdict.json"))
 units = ov["units"]; idx = {u: i for i, u in enumerate(units)}
 
-# the trimmed block (Occam): four definitions, frames where they exist
+# the honesty block (D-043, six definitions since D-049), frames where they exist
 DEFS = [("Self-knowledge", "A9|all", "#009E73"), ("Accuracy", "C2|all", "#E69F00"),
-        ("Sincerity", "C1|all", "#0072B2"), ("Honesty-humility", "C19|honesty_humility", "#CC79A7")]
+        ("Sincerity", "C1|all", "#0072B2"), ("Forthrightness", "C3|all", "#D55E00"),
+        ("Non-sycophancy", "C8|sycophantic_agreement", "#56B4E9"), ("Honesty-humility", "C19|honesty_humility", "#CC79A7")]
 CTRL = ("Formality (control)", "K1|all", "#898781")
 FR = {"a": ("recognize", "^"), "b": ("judge", "D"), "c": ("act", "o"), "d": ("self-describe", "s")}
 INK, INK2, MUTED, GRID, AXIS = "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"

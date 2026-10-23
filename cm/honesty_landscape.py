@@ -1,5 +1,6 @@
-"""Item-level landscape of the honesty block (D-043): every + and - item of the four honesty definitions in every frame,
-projected into the subspace spanned by the ten (definition, frame) directions, then shown in the top two principal
+"""Item-level landscape of the honesty block (D-043, six definitions since D-049): every + and - item of the honesty
+definitions in every frame, projected into the subspace spanned by the (definition, frame) directions (one per frame
+with at least 10 train items per pole), then shown in the top two principal
 components of that subspace. Companion to the lattice figure (results/figures/honesty/build_lattice.py).
 
 Directions follow S4 (cm/s4_overlap.py): reply32 readout, Gemma's verdict direction projected out of frame a/b rows,
@@ -22,7 +23,8 @@ from .s4_overlap import DEPTHS, LIDX, concept_data, unit_vec
 RESULTS = cfg.results_dir()
 OUT = RESULTS / "figures" / "honesty"
 DEFS = [("Self-knowledge", "A9", "all", "#009E73"), ("Accuracy", "C2", "all", "#E69F00"),
-        ("Sincerity", "C1", "all", "#0072B2"), ("Honesty-humility", "C19", "honesty_humility", "#CC79A7")]
+        ("Sincerity", "C1", "all", "#0072B2"), ("Forthrightness", "C3", "all", "#D55E00"),
+        ("Non-sycophancy", "C8", "sycophantic_agreement", "#56B4E9"), ("Honesty-humility", "C19", "honesty_humility", "#CC79A7")]
 CTRL = ("Formality (control)", "K1", "all", "#898781")
 FRAMES = {"a": ("recognize", "^"), "b": ("judge", "D"), "c": ("act", "o"), "d": ("self-describe", "s")}
 LAYERS = tuple(cfg.L_LAND)
@@ -70,7 +72,7 @@ def main():
                 d = unit_vec(Zs[pos].mean(0) - Zs[neg].mean(0))
                 units.append({"id": f"{cid}|{sub}|{f}", "def": name, "frame": f, "d": d, "ctrl": name == CTRL[0]})
         hon = [u for u in units if not u["ctrl"]]
-        D = np.stack([u["d"] for u in hon])                # [10, d]
+        D = np.stack([u["d"] for u in hon])                # [n_units, d]
         # consistency with S4: cosines between these directions and S4's for the same unit pairs
         cos_here = D @ D.T
         cos_s4 = np.array([[s4["layers"][str(L)]["cos"][s4_idx[a["id"]]][s4_idx[b["id"]]] for b in hon] for a in hon])
@@ -78,7 +80,7 @@ def main():
         consist = {"max_abs_diff": float(np.abs(cos_here - cos_s4)[off].max()),
                    "spearman": float(np.corrcoef(cos_here[off], cos_s4[off])[0, 1])}
         # orthonormal basis of the ten directions, items projected into it, PCA of the projections
-        Q, _ = np.linalg.qr(D.T)                           # [d, 10]
+        Q, _ = np.linalg.qr(D.T)                           # [d, n_units]
         mu = Zs.mean(0)
         P = (Zs - mu) @ Q                                  # [N, 10]
         Pc = P - P.mean(0)

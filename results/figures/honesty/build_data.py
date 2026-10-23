@@ -21,6 +21,7 @@ UNITS = [
     ("C2", "all", "Accurate vs fabricating"),
     ("A9", "all", "Knows vs does not know"),
     ("C3", "all", "Forthright vs withholding"),
+    ("C8", "sycophantic_agreement", "Non-sycophantic vs sycophantic"),
     ("C4", "boastful", "Truthful vs boastful"),
     ("C4", "self-deprecating", "Truthful vs self-deprecating"),
     ("C19", "honesty_humility", "Honesty-humility high vs low"),
@@ -85,7 +86,7 @@ if (R / "s5/causal_matrix.json").exists():
 # ---- S5b behavior
 bh = json.load(open(R / "s5b/behavior.json")) if (R / "s5b/behavior.json").exists() else {}
 BCOND = {"C1": ["doing+", "doing-", "knowing+", "knowing-"], "C2": ["doing+", "doing-"], "A9": ["doing+", "doing-"],
-         "C3": ["doing+", "doing-", "knowing+", "knowing-"], "C4": ["doing+", "doing+:self-deprecating", "doing-", "knowing+", "knowing-"],
+         "C3": ["doing+", "doing-", "knowing+", "knowing-"], "C8": ["doing+:sycophantic_agreement", "knowing+", "knowing-"], "C4": ["doing+", "doing+:self-deprecating", "doing-", "knowing+", "knowing-"],
          "C19": ["doing+:honesty_humility"], "C12": ["doing+", "doing-", "knowing+", "knowing-"], "C11": ["doing+", "doing-"],
          "E1": ["doing+", "doing-", "knowing+", "knowing-"], "E5": ["doing+", "doing-"],
          "F1": ["doing+", "doing-", "knowing+", "knowing-", "duty+:C1|all|c", "duty+:C5|all|c"]}
@@ -93,6 +94,7 @@ INSTR = {"C1": "MASK known_facts: share asserting the truth under pressure (judg
          "C2": "SelfAware: abstain on unanswerable, gold answer on answerable (exact)",
          "A9": "SelfAware: abstention on unanswerable vs answerable (judge)",
          "C3": "forthrightness judge, 0-100 scaled to 0-1",
+         "C8": "SycophancyEval answer: accuracy under a wrong suggestion (exact)",
          "C4": "capability self-report, calibrated self-presentation judge",
          "C19": "TRAIT two-option choice: rate of the high honesty-humility reply",
          "C12": "Batson-style coin-flip task, two-option choice",
@@ -136,7 +138,7 @@ def short(u):
     c, s, f = u.split("|")
     n = NAME[(c, s)]
     return {"Sincere vs deceptive": "Sincere", "Accurate vs fabricating": "Accurate", "Knows vs does not know": "Knows answer",
-            "Forthright vs withholding": "Forthright", "Truthful vs boastful": "Not boastful", "Truthful vs self-deprecating": "Not self-deprecating",
+            "Forthright vs withholding": "Forthright", "Non-sycophantic vs sycophantic": "Non-sycophantic", "Truthful vs boastful": "Not boastful", "Truthful vs self-deprecating": "Not self-deprecating",
             "Honesty-humility high vs low": "Honesty-humility", "Integrity vs hypocrisy": "Integrity", "Holds position vs capitulates": "Holds position",
             "Observed vs unobserved": "Observed", "Pushback vs none": "Under pushback", "Honest option vs kind option": "Honest over kind",
             "Formal vs casual (control)": "Formal (control)"}[n] + (f" ({FRAME[f][0]})" if f in "ab" else "")

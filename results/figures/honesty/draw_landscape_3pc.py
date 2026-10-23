@@ -15,8 +15,8 @@ HERE = Path(os.environ["CM_HONESTY_DIR"]) if os.environ.get("CM_HONESTY_DIR") el
 LM, LL = os.environ.get("CM_LMID", "17"), os.environ.get("CM_LLATE", "29")
 pts = np.load(HERE / "landscape_points.npz"); meta = json.loads(str(pts["meta"]))
 J = json.load(open(HERE / "landscape.json"))["layers"]
-DEFS = {"Self-knowledge": "#009E73", "Accuracy": "#E69F00", "Sincerity": "#0072B2", "Honesty-humility": "#CC79A7", "Formality (control)": "#898781"}
-CID = {"A9": "Self-knowledge", "C2": "Accuracy", "C1": "Sincerity", "C19": "Honesty-humility", "K1": "Formality (control)"}
+DEFS = {"Self-knowledge": "#009E73", "Accuracy": "#E69F00", "Sincerity": "#0072B2", "Forthrightness": "#D55E00", "Non-sycophancy": "#56B4E9", "Honesty-humility": "#CC79A7", "Formality (control)": "#898781"}
+CID = {"A9": "Self-knowledge", "C2": "Accuracy", "C1": "Sincerity", "C3": "Forthrightness", "C8": "Non-sycophancy", "C19": "Honesty-humility", "K1": "Formality (control)"}
 FR = {"a": ("recognize", "^"), "b": ("judge", "D"), "c": ("act", "o"), "d": ("self-describe", "s")}
 INK, INK2, MUTED, GRID, AXIS = "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
 plt.rcParams.update({"font.family": "Arial", "font.size": 7, "axes.titlesize": 7.5, "axes.labelsize": 6.8, "xtick.labelsize": 6,
