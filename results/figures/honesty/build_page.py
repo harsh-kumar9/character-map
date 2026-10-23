@@ -4,22 +4,23 @@ from pathlib import Path
 OUT = Path(sys.argv[1])
 D = json.load(open(OUT / "honesty_data.json")); MP = json.load(open(OUT / "honesty_map.json")); LT = json.load(open(OUT / "honesty_lattice.json"))
 img = base64.b64encode(open(OUT / "honesty_lattice.png", "rb").read()).decode()
-LAND = (OUT / "landscape_3pc.png").exists() and (OUT / "landscape_3d.json").exists()
+LAND = (OUT / "landscape_frames.png").exists() and (OUT / "landscape_3d.json").exists()
 if LAND:
-    land_img = base64.b64encode(open(OUT / "landscape_3pc.png", "rb").read()).decode()
+    land_img = base64.b64encode(open(OUT / "landscape_frames.png", "rb").read()).decode()
+    LS = json.load(open(OUT / "landscape_frames_stats.json"))
     LJ = json.load(open(OUT / "landscape.json"))
     L3D = open(OUT / "landscape_3d.json").read()
     LAND_TEXT = open(OUT / "landscape_text.html").read() if (OUT / "landscape_text.html").exists() else ""
-    L3D_IMG = base64.b64encode(open(OUT / "landscape_3d.png", "rb").read()).decode() if (OUT / "landscape_3d.png").exists() else ""
+    L3D_IMG = ""
 def land_section():
     if not LAND: return ""
     v17 = LJ["layers"]["17"]["variance_all"]; v29 = LJ["layers"]["29"]["variance_all"]
     c17 = LJ["layers"]["17"]["consistency_with_s4"]; c29 = LJ["layers"]["29"]["consistency_with_s4"]
     return f"""<h3>The same block, item by item</h3>
-<figure><img src="data:image/png;base64,{land_img}" alt="Items of the four honesty definitions projected into the honesty subspace, three principal components">
-<figcaption><b>Figure 2. Every item of the four definitions in the subspace the ten directions span, three components.</b> Each small mark is one scenario in one frame, filled for the + version and hollow for the −, colored by definition and shaped by frame; at most 120 per unit and polarity are drawn, from {LJ["n_items"]} items in all. Large marks are the + and − centroids of each unit, joined by an arrow from − to +. Axes are the first three principal components of the items' coordinates in the ten-direction subspace: {v17[0]*100:.0f}%, {v17[1]*100:.0f}% and {v17[2]*100:.0f}% of that subspace's variance at layer 17 (a–c), {v29[0]*100:.0f}%, {v29[1]*100:.0f}% and {v29[2]*100:.0f}% at layer 29 (d–f). The formality control's items are drawn in grey. Directions here are rebuilt from the same items with the standardizing SD taken over this pool rather than S4's probe pool; their cosines agree with the S4 values used in Figure 1 to within {max(c17["max_abs_diff"], c29["max_abs_diff"]):.2f}.</figcaption></figure>
+<figure><img src="data:image/png;base64,{land_img}" alt="Items of the four honesty definitions in the honesty subspace, one panel per frame group">
+<figcaption><b>Figure 2. Inside Gemma, where an honesty item sits is set first by its frame, then by which honesty it is, and last by whether it is the honest or the dishonest side.</b> Layer {LS["layer"]}. Each mark is one scenario in one frame, projected into the subspace spanned by the ten (definition, frame) directions and shown on its first two principal components; all three panels share the axes, and the grey marks in each panel are the other frames' items. Color is the definition; filled marks are the honest side of a contrast and hollow marks the other side; the large marks are each unit's two centroids, with an arrow from the dishonest side to the honest one. At most 150 items per unit and side are drawn, from {LJ["n_items"]} in all. Frame groups sit {LS["frame_separation"]["own-act"]:.1f} to {LS["frame_separation"]["act-self"]:.1f} within-unit spreads apart; inside a frame the epistemic definitions sit apart from the character definitions; the honest-vs-dishonest gap is the smallest effect for every contrast except self-knowledge.</figcaption></figure>
 <div class="box"><h3>Rotate it</h3>
-<p class="note">The same points on the three components. Drag to rotate, scroll to zoom, hover for the item's definition, frame and polarity. Shapes are frames: circle act, square self-describe, diamond judge, x recognize; open marks are the − version. The thick segments run from each unit's − centroid (white) to its + centroid. The buttons switch layer, and between the space as is and each unit centred on its own mean. The legend hides or shows a definition.</p>
+<p class="note">The same points on the first three components. Drag to rotate, scroll to zoom, hover for an item's definition, frame and side. Open marks are the dishonest side of a contrast. The thick segments run from each unit's dishonest-side centroid (white) to its honest-side centroid. "Color by frame" recolors the same points by frame instead of definition, which is the easiest way to see the three plates; the other buttons switch layer and between the space as is and each unit centred on its own mean. Click a legend entry to hide or show it.</p>
 <div id="land3d" style="width:100%;height:560px"></div>
 <div class="viewbar" id="viewbar"></div>
 </div>
@@ -29,30 +30,32 @@ def land_section():
   var D = {L3D};
   var COL = {{"Self-knowledge":"#009E73","Accuracy":"#E69F00","Sincerity":"#0072B2","Honesty-humility":"#CC79A7","Formality (control)":"#898781"}};
   var SYM = {{"a":"x","b":"diamond","c":"circle","d":"square"}};
+  var FCOL = {{"a":"#6a5acd","b":"#1f78b4","c":"#d95f02","e":"","d":"#1b9e77"}};
+  var colorBy = "definition";
   var FRN = {{"a":"recognize","b":"judge","c":"act","d":"self-describe"}};
   var CIDN = {{"A9":"Self-knowledge","C2":"Accuracy","C1":"Sincerity","C19":"Honesty-humility","K1":"Formality (control)"}};
-  var views = Object.keys(D.views);
+  var views = Object.keys(D.views).sort(function(a,b){{ return (b.indexOf("29")>=0) - (a.indexOf("29")>=0) || (a.indexOf("as-is")>=0 ? -1 : 1); }});
   function tokens(){{ var cs = getComputedStyle(document.documentElement); return {{bg: cs.getPropertyValue("--surface").trim()||"#fff", ink: cs.getPropertyValue("--ink").trim()||"#111", ink2: cs.getPropertyValue("--ink2").trim()||"#555", rule: cs.getPropertyValue("--rule").trim()||"#ddd"}}; }}
   function build(viewName){{
     var V = D.views[viewName]; var xyz = V.xyz; var traces = [];
     var groups = {{}};
-    D.meta.forEach(function(m, i){{ var k = m.def+"|"+m.frame+"|"+m.pol; (groups[k] = groups[k] || []).push(i); }});
+    D.meta.forEach(function(m, i){{ if (m.def.indexOf("Formality")===0) return; var k = (colorBy==="frame" ? FRN[m.frame] : m.def)+"|"+m.frame+"|"+m.pol; (groups[k] = groups[k] || []).push(i); }});
     var seen = {{}};
     Object.keys(groups).sort().forEach(function(k){{
-      var p = k.split("|"); var idx = groups[k]; var ctrl = p[0].indexOf("Formality")===0;
-      var first = !seen[p[0]]; seen[p[0]] = true;
+      var p = k.split("|"); var idx = groups[k]; var ctrl = false;
+      var first = !seen[p[0]]; seen[p[0]] = true; var col = colorBy==="frame" ? FCOL[p[1]] : COL[p[0]];
       var sym = SYM[p[1]] + (p[2]==="neg" && SYM[p[1]]!=="x" ? "-open" : ""); if (p[2]==="neg" && SYM[p[1]]==="x") sym = "cross";
       traces.push({{type:"scatter3d", mode:"markers", name: p[0], legendgroup: p[0], showlegend: first,
         x: idx.map(function(i){{return xyz[i][0];}}), y: idx.map(function(i){{return xyz[i][1];}}), z: idx.map(function(i){{return xyz[i][2];}}),
-        marker: {{size: ctrl?2:2.6, color: COL[p[0]], symbol: sym, opacity: ctrl?0.35:0.55, line:{{width:0}}}},
-        hovertemplate: p[0]+", "+FRN[p[1]]+", "+(p[2]==="pos"?"+":"−")+"<extra></extra>"}});
+        marker: {{size: 2.6, color: col, symbol: sym, opacity: 0.55, line:{{width:0}}}},
+        hovertemplate: (colorBy==="frame" ? D.meta[idx[0]].def : p[0])+", "+FRN[p[1]]+", "+(p[2]==="pos"?"honest side":"other side")+"<extra></extra>"}});
     }});
     Object.keys(V.centroids).forEach(function(u){{
-      var c = V.centroids[u]; var q = u.split("|"); var name = CIDN[q[0]]; var col = COL[name];
-      traces.push({{type:"scatter3d", mode:"lines+markers", name: name+", "+FRN[q[2]], legendgroup: name, showlegend:false,
+      var c = V.centroids[u]; var q = u.split("|"); if (q[0]==="K1") return; var name = CIDN[q[0]]; var col = colorBy==="frame" ? FCOL[q[2]] : COL[name];
+      traces.push({{type:"scatter3d", mode:"lines+markers", name: name+", "+FRN[q[2]], legendgroup: colorBy==="frame" ? FRN[q[2]] : name, showlegend:false,
         x:[c[0][0],c[1][0]], y:[c[0][1],c[1][1]], z:[c[0][2],c[1][2]], line:{{color:col, width:5}},
         marker:{{size:[5,6], color:[ "#ffffff", col], symbol: SYM[q[2]]==="x"?"circle":SYM[q[2]], line:{{color:col, width:2}}}},
-        hovertemplate: name+", "+FRN[q[2]]+": %{{text}}<extra></extra>", text:["− centroid","+ centroid"]}});
+        hovertemplate: name+", "+FRN[q[2]]+": %{{text}}<extra></extra>", text:["centroid, other side","centroid, honest side"]}});
     }});
     var t = tokens(); var ax = function(n, i){{ return {{title:{{text:n+" ("+Math.round(V.var[i]*100)+"%)", font:{{size:11, color:t.ink2}}}}, gridcolor:t.rule, zerolinecolor:t.rule, backgroundcolor:t.bg, showbackground:true, tickfont:{{size:9, color:t.ink2}}}}; }};
     var layout = {{paper_bgcolor:t.bg, plot_bgcolor:t.bg, font:{{color:t.ink, family:"Source Sans 3, Helvetica, Arial, sans-serif"}}, margin:{{l:0,r:0,t:10,b:0}},
@@ -61,8 +64,11 @@ def land_section():
     Plotly.newPlot("land3d", traces, layout, {{responsive:true, displaylogo:false, modeBarButtonsToRemove:["toImage"]}});
   }}
   var bar = document.getElementById("viewbar"); var current = views[0];
+  var cb = document.createElement("button"); cb.type="button"; cb.id="view-colour"; cb.className="viewbtn"; cb.textContent="color by frame";
+  cb.addEventListener("click", function(){{ colorBy = colorBy==="definition" ? "frame" : "definition"; cb.textContent = colorBy==="definition" ? "color by frame" : "color by definition"; build(current); }});
   views.forEach(function(v){{ var b = document.createElement("button"); b.type="button"; b.id="view-"+v.replace(/[^a-z0-9]+/gi,"-"); b.textContent = v; b.className = "viewbtn"+(v===current?" on":"");
     b.addEventListener("click", function(){{ current = v; build(v); Array.prototype.forEach.call(bar.children, function(x){{ x.classList.toggle("on", x===b); }}); }}); bar.appendChild(b); }});
+  bar.appendChild(cb);
   build(current);
   if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function(){{ build(current); }});
 }})();
