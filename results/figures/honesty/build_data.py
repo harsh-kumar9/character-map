@@ -46,7 +46,7 @@ for r in frames:
     if k in NAME and r["layer"] in (LM, LL):
         fid.setdefault(k, {})[r["layer"]] = {
             "frames": r["frames"], "within": r["within"], "heldout": r["heldout"], "heldout_far": r["heldout_far"],
-            "transfer": r["transfer"]}
+            "within_sdm": r.get("within_sdm", {}), "heldout_sdm": r.get("heldout_sdm", {}), "transfer": r["transfer"]}
 claims = json.load(open(R / "s3/claims.json"))
 tr = []
 for r in claims:

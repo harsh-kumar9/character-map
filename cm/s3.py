@@ -4,6 +4,8 @@ Inputs: outputs/acts/stimuli/<ID>.npz from cm.stimx acts (readouts boundary, rep
 Per concept, sub-contrast (meta.contrast, or "all"), frame, readout and hidden-state index:
   - diff-of-means direction on the train split (D-011), scored by AUROC of the projection on the test split, with a
     permutation p-value (label shuffles on test) and Benjamini-Hochberg across all tests of this run;
+  - the same diff of means on standardized dimensions (auroc_sdm; the direction S4 and the landscape use, D-050),
+    scored on the test split and on the held-out sets;
   - a logistic-probe baseline (standardized, L2) at the same split;
   - cross-frame transfer: the frame-i direction scored on frame-j test items (the knowing-vs-doing table), on reply32;
     for frames read at the boundary also from the boundary direction (transfer_boundary), since their reply32 is
@@ -123,16 +125,24 @@ def directions_from(cid, z, meta, resp, out):
                     dirs[(sub, f, ro, L)] = u
                     s_te = Xte @ u
                     a = auroc(s_te, yte)
+                    # standardized diff of means (D-050): the direction S4 and the landscape use, scored the same way
+                    sd = Xtr.std(0) + 1e-6
+                    us = v / sd
+                    us = us / (np.linalg.norm(us) + 1e-12)
                     cell = {"sub": sub or "all", "frame": f, "readout": ro, "layer": L, "n_train": len(tr),
-                            "n_test": len(te), "auroc_dm": a, "norm": float(nv)}
+                            "n_test": len(te), "auroc_dm": a, "auroc_sdm": auroc((Xte / sd) @ us, yte), "norm": float(nv)}
                     if L in SAE_INDEX.values() or L % 4 == 2:
                         cell["p_perm"] = perm_p(s_te, yte, a, rng)
                         cell["auroc_probe"] = probe_auc(Xtr, ytr, Xte, yte)
                     if len(ho) and len(set(yho)) == 2:
-                        cell["auroc_heldout"] = auroc(readout_matrix(z, resp, ro, ho, L) @ u, yho)
+                        Xho = readout_matrix(z, resp, ro, ho, L)
+                        cell["auroc_heldout"] = auroc(Xho @ u, yho)
+                        cell["auroc_sdm_heldout"] = auroc((Xho / sd) @ us, yho)
                         cell["n_heldout"] = len(ho)
                     if len(hf) and len(set(yhf)) == 2:
-                        cell["auroc_heldout_far"] = auroc(readout_matrix(z, resp, ro, hf, L) @ u, yhf)
+                        Xhf = readout_matrix(z, resp, ro, hf, L)
+                        cell["auroc_heldout_far"] = auroc(Xhf @ u, yhf)
+                        cell["auroc_sdm_heldout_far"] = auroc((Xhf / sd) @ us, yhf)
                         cell["n_heldout_far"] = len(hf)
                     res["cells"].append(cell)
         # cross-frame transfer on the common readout (reply32), at every layer
@@ -209,8 +219,10 @@ def cmd_table():
                            and x["layer"] == idx), None) for L, idx in SAE_INDEX.items()}
             summary.append({"concept": r["concept"], "sub": sub, "frame": f, "readout": ro,
                             "best_layer_index": c["layer"], "best_auroc": c["auroc_dm"],
-                            "heldout_at_best": c.get("auroc_heldout"),
+                            "heldout_at_best": c.get("auroc_heldout"), "sdm_at_best": c.get("auroc_sdm"),
+                            "sdm_heldout_at_best": c.get("auroc_sdm_heldout"),
                             **{f"auroc_L{L}": (x or {}).get("auroc_dm") for L, x in at.items()},
+                            **{f"sdm_L{L}": (x or {}).get("auroc_sdm") for L, x in at.items()},
                             **{f"q_L{L}": (x or {}).get("q_bh") for L, x in at.items()}})
     (OUT / "summary.json").write_text(json.dumps(summary, indent=1, default=float))
     tr = []

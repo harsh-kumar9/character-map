@@ -110,16 +110,21 @@ def fid_rows(lst):
                 rows.append((name, c, FR[f], L, r["within"][f], htxt))
     return rows
 def fid_table(lst):
-    out = [f'<table><thead><tr><th>Definition</th><th>Frame</th><th>Within-frame AUROC, layer {LM}</th><th>layer {LL}</th><th>Held-out benchmark AUROC (layer {LM} / {LL})</th></tr></thead><tbody>']
+    out = [f'<table><thead><tr><th>Definition</th><th>Frame</th><th>Within-frame AUROC, layer {LM}</th><th>layer {LL}</th><th>Standardized direction, layer {LM} / {LL}</th><th>Held-out benchmark AUROC (layer {LM} / {LL})</th></tr></thead><tbody>']
     rows = fid_rows(lst)
     seen = {}
     for name, c, fr, L, w, htxt in rows:
         seen.setdefault((name, c, fr), {})[L] = (w, htxt)
+    FRK = {v: k for k, v in FR.items()}
     for (name, c, fr), d in seen.items():
         w17, h17 = d.get(LMs, (None, "")); w29, h29 = d.get(LLs, (None, ""))
         hcell = h17 if h17 == h29 else f"{h17} / {h29}"
+        s_ = next((sub for n_, c_, sub in lst if c_ == c and n_ == name), None)
+        sd17 = fid[key(c, s_)][LMs].get("within_sdm", {}).get(FRK[fr]); sd29 = fid[key(c, s_)][LLs].get("within_sdm", {}).get(FRK[fr])
+        sh17 = fid[key(c, s_)][LMs].get("heldout_sdm", {}).get(FRK[fr]); sh29 = fid[key(c, s_)][LLs].get("heldout_sdm", {}).get(FRK[fr])
+        scell = (f"{f2(sd17)} / {f2(sd29)}" if sd17 is not None else "–") + (f"; held-out {f2(sh17)} / {f2(sh29)}" if sh17 is not None else "")
         cls = ' class="weak"' if (w17 is not None and w17 < 0.7) else ""
-        out.append(f'<tr><td>{esc(name)} <span class="id">{c}</span></td><td>{fr}</td><td{cls}>{f2(w17)}</td><td{" class=weak" if (w29 is not None and w29 < 0.7) else ""}>{f2(w29)}</td><td>{esc(hcell)}</td></tr>')
+        out.append(f'<tr><td>{esc(name)} <span class="id">{c}</span></td><td>{fr}</td><td{cls}>{f2(w17)}</td><td{" class=weak" if (w29 is not None and w29 < 0.7) else ""}>{f2(w29)}</td><td>{scell}</td><td>{esc(hcell)}</td></tr>')
     out.append('</tbody></table>'); return "\n".join(out)
 
 # ---- transfer table (four)

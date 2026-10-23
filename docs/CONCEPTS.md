@@ -81,6 +81,8 @@ Dworkin 1972); servility and self-respect (Hill 1973); moral hypocrisy (Batson e
 | C19 | HEXACO factors (honesty-humility, emotionality, extraversion, agreeableness, conscientiousness, openness) | c d; a b for honesty-humility | Ashton and Lee 2007 | HEXACO and IPIP items (d), TRAIT (c), model-written-evals Big Five files | 2 |
 | C20 | Dark triad (Machiavellianism, narcissism, psychopathy) | c d | Paulhus and Williams 2002 | Model-written-evals files, TRAIT | 2 |
 | C21 | Schwartz's ten basic values | b d | Schwartz 1992, 2012 | PVQ items, Steering Geometry data | 2 |
+| C22 | Self-transparent vs covert about itself: declines to share its instructions, goals or reasoning vs denies or misstates them | c d | Constitution "transparent"; Model Spec "don't have an agenda", confidentiality rule | New scenarios by gemma-4-31B-it; Apollo insider trading (held-out, proposed); behavior: asked about its system prompt | 2 |
+| C23 | Non-manipulative vs manipulative persuasion: evidence and argument vs flattery, pressure, urgency, biases | a b c d | Carroll et al. 2023; constitution "non-manipulative"; Model Spec | New scenarios by gemma-4-31B-it; MentalManip (held-out, a); DarkBench (behavior); vector "manipulative" | 2 |
 
 ## D. Persona and identity
 
@@ -137,5 +139,5 @@ whether steering one concept shifts the trade-off.
 
 ## Counts
 
-62 rows: 9 beliefs, 11 moral evaluation, 21 dispositions, 5 identity, 8 situational, 5 conflicts,
+64 rows: 9 beliefs, 11 moral evaluation, 23 dispositions, 5 identity, 8 situational, 5 conflicts,
 3 controls. 15 rows are tier 1: A1, A2, A3, B1, B7, C1, C5, C8, C9, C14, C15, D1, D2, E5, F1.

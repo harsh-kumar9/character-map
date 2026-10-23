@@ -31,11 +31,17 @@ def main():
         r = json.loads(p.read_text())
         cid = r["concept"]
         within = defaultdict(dict)   # (sub, frame) -> layer index -> auroc (reply32)
+        within_sdm = defaultdict(dict)   # the standardized diff of means (D-050), where S3 computed it
+        held_sdm = defaultdict(dict)
         held = defaultdict(dict)
         far = defaultdict(dict)
         for c in r["cells"]:
             if c["readout"] == "reply32":
                 within[(c["sub"], c["frame"])][c["layer"]] = c["auroc_dm"]
+                if c.get("auroc_sdm") is not None:
+                    within_sdm[(c["sub"], c["frame"])][c["layer"]] = c["auroc_sdm"]
+                if c.get("auroc_sdm_heldout") is not None:
+                    held_sdm[(c["sub"], c["frame"])][c["layer"]] = c["auroc_sdm_heldout"]
                 if c.get("auroc_heldout") is not None:
                     held[(c["sub"], c["frame"])][c["layer"]] = c["auroc_heldout"]
                 if c.get("auroc_heldout_far") is not None:
@@ -62,6 +68,8 @@ def main():
                 off_b = [x for x in off_b if x is not None]
                 rows.append({"concept": cid, "group": GROUP[cid[0]], "sub": sub, "layer": L, "frames": frames,
                              "within": w, "heldout": h, "heldout_far": hfar, "transfer": mat, "transfer_boundary": mat_b,
+                             "within_sdm": {f: within_sdm[(sub, f)].get(idx) for f in frames if within_sdm[(sub, f)].get(idx) is not None},
+                             "heldout_sdm": {f: held_sdm[(sub, f)].get(idx) for f in frames if held_sdm[(sub, f)].get(idx) is not None},
                              "within_mean": float(np.nanmean([x for x in w.values() if x is not None])) if w else None,
                              "transfer_mean": float(np.mean(off)) if off else None,
                              "transfer_mean_preverdict": float(np.mean(off_b)) if off_b else None})

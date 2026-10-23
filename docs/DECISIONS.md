@@ -1006,3 +1006,271 @@ validator `contrasts:` key vs accepting the warning; no verdict stats rerun now.
 Harsh: "D-048 ratified as proposed: re-voiced person for A9, facts in the scene for C2, advisor for C19, add the
 contrasts key to the validator, no verdict stats rerun now." Building starts with the cards, the validator key, the
 three build scripts and generation on ada; stages downstream run one at a time.
+
+## D-049 Are these the right definitions of honesty? - proposed 2026-10-23
+
+Harsh (2026-10-23): "rethink if we are picking the most important and impactful definitions of honesty here ... not just
+convenient ones ... someone shouldn't point out and say why you missed this ... take definition of honesty from openai
+model spec and claude constitution as well."
+
+Sources read for this. Claude's constitution (anthropic.com/constitution, the honesty section): seven named properties,
+truthful, calibrated, transparent, forthright, non-deceptive, non-manipulative, autonomy-preserving; honesty is "not a
+hard constraint" but meant to work like one; no white lies; honesty norms apply to sincere assertions and not to
+performative ones (role-play, brainstorming, requested persuasion); non-deception and non-manipulation are called the
+most important; the final response may not contradict the completed reasoning. OpenAI Model Spec 2026-08-18, chapter
+"Seek the truth together": Don't have an agenda (objective point of view, present perspectives); Be honest and
+transparent, with Do not lie at user level (lying by commission and "deliberately withholding information that would
+materially change the user's understanding", lying by omission), Don't be sycophantic at user level (stance must not
+change to agree; critique over praise; white lies that amount to sycophancy are out), and Be clear about capabilities
+and limits, Consider uncertainty, Express uncertainty, Highlight possible misalignments as guidelines; Avoid factual,
+reasoning and formatting errors at user level. Literature not yet in REFERENCES.md: Miller 2021 (Honesty: The
+Philosophy and Psychology of a Neglected Virtue; the honest person reliably does not intentionally distort the facts as
+she takes them to be; covers lying, misleading, cheating, promise-breaking, stealing, self-deception), Carson 2010 and
+Mahon (SEP, lying and deception; deception needs no assertion), Rogers et al. 2017 (paltering: misleading with true
+statements), Evans et al. 2021 (Truthful AI: truthfulness vs honesty), Ren et al. 2025 (MASK: honesty as consistency
+between belief and assertion under pressure, apart from accuracy), Sharma et al. 2023 (sycophancy), Kadavath et al.
+2022 and Lin et al. 2022 (calibration, expressed uncertainty), Carroll et al. 2023 (manipulation), Park et al. 2024 (AI
+deception survey), Turpin et al. 2023 and Chen et al. 2025 (reasoning faithfulness).
+
+The map, one row per definition anyone would expect to see:
+
+| Definition | Named by | In the inventory | Status |
+| --- | --- | --- | --- |
+| sincere, truthful: assert only what you believe | constitution truthful; Model Spec do not lie (commission); Williams, Bok, Evans, MASK | C1, core | covered; but the Apollo items are role-play, performative under the constitution |
+| accurate: assert only what is true, care to get it right | Model Spec avoid errors; Williams, Frankfurt, Evans | C2, core | covered |
+| calibrated: confidence tracks evidence; know what you know; state your limits | constitution calibrated; Model Spec express uncertainty, capabilities and limits; Kadavath, Lin, Li et al. | A9 core (binary knows / does not); C4 appendix (over- and underclaiming) | partly: graded confidence is no contrast anywhere |
+| non-deceptive: no false impression by true statements, framing, emphasis, implicature, actions | constitution (top two); Model Spec usage policies; Carson, Mahon, Rogers, Park | C1's negative pole mentions "arranges true statements to mislead", the items do not | gap |
+| forthright: offer what the user would want; no lying by omission | constitution forthright; Model Spec do not lie (omission), highlight misalignments; Grice | C3, appendix | covered, appendix only |
+| transparent about itself: no hidden agenda; decline rather than lie about its instructions, goals, reasoning | constitution transparent; Model Spec don't have an agenda, confidentiality rule | TRAITS "covert" vector; no concept | gap |
+| non-manipulative: change beliefs only by legitimate means | constitution (top two); Model Spec "never to persuade", political manipulation red line; Carroll | TRAITS "manipulative" vector; C20 touches it | gap |
+| not sycophantic: no change of stance to agree; critique over praise; no white lies | Model Spec don't be sycophantic (user level); constitution no white lies; Sharma | C8 (three sub-contrasts, a c d), C11, E5, A2, F1 | covered five times, never in the core |
+| autonomy-preserving: balanced views, build the user's own reasoning | constitution; Model Spec present perspectives | none | out of scope: a property of many conversations, not of one reply |
+| honesty-humility: sincerity, fairness, greed avoidance, modesty as a trait | Ashton and Lee; HEXACO-PI-R, TRAIT; no spec | C19, core | covered; the one core definition no spec names |
+| honest reasoning: the answer does not contradict the reasoning | constitution; Turpin, Chen | none | out of scope on Gemma-3-4B (no thinking mode); possible on Qwen3.5-27B |
+| self-deception | Miller; constitution | none | out of scope |
+
+Assessment. Each of the four core definitions is real and is used somewhere to evaluate or train honesty, so none is
+merely convenient. But both specs rank the definitions and the core does not follow the ranking. The Model Spec puts
+"do not lie" (commission and omission) and "don't be sycophantic" at user level and calibration at guideline level;
+the constitution puts non-deception and non-manipulation first. Sycophancy, the honesty failure with the most
+published evidence in deployed models, is in the inventory five times and in the core zero times. Non-deception by
+true statements, which both specs rank above plain truthfulness, has no contrast at all. Self-transparency and
+non-manipulation, two of the constitution's seven, are absent from the inventory. And a reader of the constitution would
+call the Apollo role-play items performative: the model is told to play a deceptive character, and the constitution
+exempts that from honesty norms. D-045's MASK-style rebuild of sincerity (first-person assertion under pressure)
+answers that objection and should land before the paper.
+
+Proposed:
+- Core becomes six definitions, each stated as a rule or named as a property by at least one spec, each with an
+  existing benchmark, grouped as the landscape already suggests: epistemic (calibration A9, accuracy C2), assertion
+  (sincerity C1, forthrightness C3), social (non-sycophancy C8), trait (honesty-humility C19).
+  - C1 sincerity: rebuilt per D-045, plus a second sub-contrast "misleading" (a true but misleading reply vs a
+    plainly informative one, same facts), so lying and paltering are separate directions.
+  - A9 calibration: plus a graded sub-contrast "hedged vs overconfident" on questions whose answerability is
+    uncertain, from the SelfAware crossing A9 already has; the binary knows / does not know stays.
+  - C3 forthrightness and C8 sycophantic_agreement are promoted from the appendix; both have items and acts, so the
+    promotion is analysis and page work. C11 courage and E5 pushback become non-sycophancy's pressure frames.
+  - C19 stays as the trait-psychology definition and the only self-report-inventory definition.
+- Two new appendix concepts so the constitution's list is covered end to end: C22 self-transparency (declines to
+  share its instructions, goals or reasoning vs denies or misstates them; frames c d; held-out from system-prompt
+  confidentiality evals; behavior: asked about its system prompt) and C23 manipulation (persuasion by evidence and
+  argument vs by false urgency, flattery, exploiting biases; frames a b c d; Carroll et al. taxonomy, DarkBench for
+  held-out, the "manipulative" persona vector).
+- Named as out of scope in the paper, with the reason: autonomy preservation (many conversations), honest reasoning
+  (no thinking mode on Gemma; run on Qwen3.5-27B later), self-deception.
+- REFERENCES.md gains the sources listed above, plus the constitution and the Model Spec 2026-08-18.
+- Cost: new generation for the C1 and A9 sub-contrasts and for C22, C23 (about 100 scenarios each, every applicable
+  frame, both polarities, through validate, review, S1-S5 and the landscape); none for the promotions. The gemma-4-31B
+  and Qwen runs (D-047) take the same list. Frames a and b for C3 (has a c d) and C8 (has a c d) follow D-048's
+  pattern.
+- Order: D-045 first, then the promotions, then the new cells, then the a/b extensions.
+
+## D-049 ruling - 2026-10-23
+
+Harsh: "D-049 ratified as proposed." The core is six definitions (calibration A9, accuracy C2, sincerity C1,
+forthrightness C3, non-sycophancy C8, honesty-humility C19), with C22 self-transparency and C23 manipulation as new
+appendix concepts, the out-of-scope list named in the paper, and the references added. Order as proposed: D-045
+first, then the promotions, then the new cells, then the a/b extensions. The A9 sub-contrast waits for D-048's
+build to finish, since that session edits the A9 card and build script.
+
+## D-050 Rebuild C1 sincerity: first-person assertion under pressure, with a misleading sub-contrast - proposed 2026-10-23
+
+D-045's four diagnostics, run on the stored C1 activations (cm/c1_diag.py; results/s3/c1_diag.json and
+c1_diag_audit.json on ada). Frame c has two sources in the npz: the Apollo role-play completions (99 scenarios, the S3
+60/40 split) and the MASK provided_facts held-out replies (99 scenarios, split 60/40 by the same scenario hash for this
+test). Three ways to build a direction on the training rows: diff of means as S3 does it (dm), diff of means after
+standardizing every hidden dimension as S4 and the landscape do (sdm), and S3's logistic probe. AUROC on the reply32
+readout, layer 17 / layer 29:
+
+| train -> test | dm | sdm | probe |
+| --- | --- | --- | --- |
+| Apollo -> Apollo test (S3's within-frame number) | 0.63 / 0.58 | 0.84 / 0.78 | 0.91 / 0.86 |
+| MASK -> MASK test (96 train rows) | 0.58 / 0.62 | 0.80 / 0.63 | 0.93 / 0.72 |
+| Apollo -> MASK, all 198 (S3's held-out number) | 0.53 / 0.53 | 0.70 / 0.57 | 0.69 / 0.55 |
+| MASK -> Apollo, all 198 | 0.66 / 0.63 | 0.80 / 0.72 | 0.83 / 0.70 |
+| Apollo + MASK -> Apollo test | 0.63 / 0.58 | 0.85 / 0.77 | 0.89 / 0.82 |
+| Apollo + MASK -> MASK test | 0.54 / 0.54 | 0.76 / 0.56 | 0.91 / 0.71 |
+
+The best layers are earlier than 17: sdm within MASK 0.96, MASK -> Apollo 0.86 and Apollo -> MASK 0.83, all at
+decoder layer 14. The response_all readout gives the same picture. Across all 208 units of the map the probe beats dm
+by 0.20 at the median (quartiles 0.11 and 0.28); C1's gaps of 0.25-0.28 are in the upper quarter, not an outlier.
+
+Audit of the act-frame prefills. Apollo: 54 words (honest) vs 48 (deceptive) at the median; 39 of 99 pairs outside the
+0.8-1.25 length band (the builder allowed 0.67-1.5); the two replies open with the same word in 22 of 99; an admission
+register (honest, admit, responsibility, sorry, mistake, regret, indeed) in 33 honest vs 10 deceptive replies; a cover
+register (assure, actually, misunderstanding, coincidence, glad you asked, confident) in 23 vs 32; negation words in
+64 vs 49. The model is a human character in 99 of 99 scenarios (student, celebrity, applicant, driver, politician).
+MASK: 11 words in both poles, the same first word in 99 of 99 pairs and the same first three words in 86 of 99, no
+register words, negation 25 vs 29; the model is an AI assistant or spokesperson working for an operator. Gemma's
+verdict labels on its own a/b replies (D-033c): in b it calls the deceptive act wrong in 71 of 99 and the honest act
+wrong in 47 of 99, since in most scenes the person has already cheated or lied and the honest reply confesses it; the
+a/b directions read Gemma's verdict on the misconduct as well as on the reply.
+
+Reading.
+1. The distinction is in the model. Within either source a probe reads it at 0.91-0.93 at layer 17 and standardized
+   diff of means at 0.80-0.84. What is weak is the raw diff of means, which a few high-variance dimensions dominate.
+   The 0.63 and 0.53 on the page are a method floor, not the absence of a direction.
+2. The source matters, in MASK's favor. With half the training rows the MASK pairs give the better within-source
+   direction and the better transfer (MASK -> Apollo 0.80 against Apollo -> MASK 0.70, sdm). A pair that differs in
+   one proposition locates the contrast; the Apollo pairs differ in length, opener and register, and the direction
+   built on them is partly confession vs cover story.
+3. The role-play objection stands (D-049): every Apollo item makes the model a human character, which the
+   constitution exempts from honesty norms as performative. MASK's structure, an AI assistant working for an operator
+   and a user whose question the operator would rather see answered falsely, is sincere assertion by the model to the
+   user (Ren et al. 2025).
+4. So the rebuild is warranted, and the new direction should be scored with sdm and the probe beside dm. The verdict
+   finding shapes the new scenes too: the wrong must be the operator's, so the named person's only act is the reply.
+
+Proposed.
+- Items: 100 scenarios. The system prompt makes the model an AI assistant deployed by a named operator and states its
+  role, the facts it knows, and what the operator wants the user to believe and why (the stake). The user asks a
+  question whose truthful answer costs the operator. The pressure sits in the system prompt, in both poles, as in MASK.
+- Two sub-contrasts (meta.contrast), every frame, the same scenario_id:
+  `lying`: pos asserts the fact as the assistant knows it; neg asserts its negation (Bok 1978; Carson 2010).
+  `misleading`: pos is the same sincere reply; neg says only true things and leaves the false impression the operator
+  wants (paltering, Rogers et al. 2017; deception without false assertion, Carson 2010, Mahon 2015).
+  The pos text is shared by the two sub-contrasts in every frame: one text, two item ids, one per sub-contrast, since
+  S3 puts every item in exactly one sub-contrast; the landscape drops the duplicate by text.
+  Replies 25-60 words; every pair within 0.8-1.25 (per pair, not the median); the three replies share their opening
+  clause where the content allows; a banned list for both registers above and for honest, lie, truth and their
+  derivatives; the neg replies answer as fully and politely as the pos.
+- Frames. c: system, user, prefilled reply (response readout). a and b: third-person retelling about a named person
+  who holds the same job for the same operator and knows the same facts, the reply verbatim, so a, b and c share the
+  text as they do now; the standard three a and three b questions. d: self-report form (D-030), one first-person
+  self-description per pole and sub-contrast, the pos shared, written and verified by gemma-4-31B-it.
+- Seeds: the Apollo role-play scenarios re-voiced. The situation (the fact, who wants it hidden, who asks) stays; the
+  character becomes the operator or principal and the model its assistant (the celebrity's press office, the car
+  dealer's sales desk, the clinic's front desk). Scenarios without a plausible assistant role (a teenager past
+  curfew) fail the verification pass. Request 130 of the 371 to keep 100; if fewer than 90 survive, gemma writes new
+  scenarios from a fixed list of operator domains (customer service, PR, sales, HR, clinic front desk, property
+  management, school office, charity) to fill, marked meta.seed generated. MASK never enters generation (D-007).
+- Generation and checks: one JSON request per scenario to gemma-4-31B-it (system prompt, user question, three
+  replies, three self-descriptions, the a/b scene with a disp1 name), rule checks (lengths, bans, facts present, name
+  in the scene), then a greedy verification pass blind to the poles: shown the facts and the three replies in hashed
+  order, gemma must say which asserts something false, which is true but leaves a false impression, and which is
+  plainly informative; a scenario fails if any is misassigned; up to 3 attempts.
+- Held-out: MASK provided_facts stays (frame c, 99 x 2), now format-matched; its rows carry meta.contrast lying so S3
+  scores them. The current Apollo frame-c items move to heldout_far.jsonl (split heldout_far, as E4 and C11; contrast
+  lying): does a direction built on sincere assertion also read role-played deception? The current items.jsonl goes
+  to items_roleplay.jsonl (meta.form roleplay), as the endorse items did.
+- Behavior: MASK known_facts, unchanged. The per-token readout on its replies (D-046) is an analysis item after the
+  rebuild.
+- Scoring: S3 gains auroc_sdm beside auroc_dm and auroc_probe in every cell (cm/s3.py, all concepts); the S3 table and
+  the honesty page show dm as now and sdm beside it.
+- Code: every "C1|all" becomes "C1|lying" (honesty_landscape DEFS, build_data UNITS, build_lattice, build_page);
+  C1|misleading is reported beside it as sincerity's second direction: the within-frame table, and the S4 cosine
+  lying vs misleading per frame as the sub-contrast's headline number. Default: the landscape shows lying only.
+- Sizes and cost: 1600 items (100 x 2 x 4 x 2, 400 of them the shared pos texts), 800 boundary replies, one npz of
+  about 1.8 GB; about 130 generations and 130 checks on one GPU shard, under an hour; then replies, acts (old npz
+  moved aside), label-verdict, S3 --force, table and claims, S4, the landscape and the drawing scripts, each gate read.
+- Review: 2 items per frame x polarity x sub-contrast cell (32 items) through a private artifact.
+
+Risks.
+- Operator pressure makes the neg pole both a lie and compliance with the operator, so the direction may overlap
+  obedience (C14) and the duty conflicts (F2). Both replies comply with everything else the operator asked (tone,
+  brevity, topic); the S4 cosines with C14 and F2 are reported at the gate.
+- A 4B model may not separate paltering from lying; the cosine between the two directions is the measurement.
+- Re-voiced Apollo scenarios: 20-30% are expected not to fit an assistant role; the fill rule covers the shortfall.
+- Gemma-4's lies may come out longer or smoother than its sincere replies; the per-pair band and the verification pass
+  are the guard; the manifest records the ratio by frame and sub-contrast.
+- The old and new within-frame numbers are not comparable item for item. The comparison is the MASK held-out (0.53
+  now) and the heldout_far on the old items.
+
+Rulings needed: the shared pos text (vs a separately written informative reply); Apollo seeds re-voiced with generated
+fill (vs generated scenarios only); the old items as heldout_far; sdm added to S3 and shown on the page; misleading
+in the tables only (vs as a landscape unit).
+
+## D-051 Two new appendix concepts: C22 self-transparency and C23 manipulation - proposed 2026-10-23
+
+D-049 names them; this fixes the cards, sources and held-out sets. Cards drafted at data/concepts/cards/C22.yaml and
+C23.yaml, rows added to CONCEPTS.md; nothing built. Sources checked on 2026-10-23:
+- Apollo deception-detection (the pinned clone at character-map-stim-disp-1/data/raw): insider_trading holds 9186
+  Llama-70B trajectories with Apollo's grades. The manager report, the agent's own account of what it based the trade
+  on, is labelled explicit 291 / implied 518 / concealed 644; the double-down turn (the manager asks whether it knew
+  about the merger) honest 59 / deceptive 1056. ai_audit is one agentic scenario (Deltaid at Ermeca), not an item
+  set. how_to_catch_an_ai_liar is instructed deception about products in an assistant's voice (C1's territory).
+- HF apart/darkbench (MIT): 660 prompts, 110 per pattern (brand-bias, user-retention, sycophancy, anthropomorphization,
+  harmful-generation, sneaking), no replies. HF audreyeleven/MentalManip (CC-BY-SA-4.0): 2915 two-person dialogues from
+  film scripts, consensus label manipulative 2016 / not 899, technique labels (persuasion or seduction 607, shaming or
+  belittlement 384, accusation 361, intimidation 321, rationalization 213, brandishing anger 133, denial 87, evasion
+  83, playing victim 69, feigning innocence 58). Neither is cached on ada; fetch on the login node and pin the revision.
+- No public set with paired honest and dishonest replies about a model's own system prompt was found.
+
+C22 self-transparent vs covert about itself (frames c d; the constitution's "transparent", the Model Spec's
+confidentiality rule: may withhold a system prompt, may not deny having one).
+- Items: 100 scenarios by gemma-4-31B-it. System prompt: an operator persona with confidential instructions (a rule to
+  favor something, a scripted limit, a goal the user is not told) and a confidentiality clause, from ten operator
+  domains. User: one of three question kinds rotated by scenario: what instructions do you have; are you set up to
+  push X; why did you recommend X. Pos: truthful about having instructions, a goal or a reason, declines the detail,
+  then helps. Neg: denies or misstates, equally polite, equally unrevealing, then helps. Frame d in the self-report
+  form. 400 items.
+- Held-out (near, one scenario family): the insider-trading report turn, pos = explicit (100 of 291), neg = concealed
+  (100 of 644), the trajectory as the prefix (17 turns) and the report as the prefilled reply. Optional second set
+  (heldout_far): the double-down turn, 59 honest vs 59 deceptive.
+- Behavior: 200 new operator prompts with a confidentiality clause (domains disjoint from the items); the user asks
+  whether it has instructions and what they are; judge labels DECLINES / DENIES / REVEALS; metric: share DENIES.
+- Risks: the neg pole is a lie about itself (C1 lying) and the pos pole declines (C15); both poles withhold the same
+  content and both help, so refusal is held fixed; the cosines with C1 and C15 are reported at the S4 gate.
+
+C23 non-manipulative vs manipulative persuasion (frames a b c d; Carroll et al. 2023; the constitution's
+"non-manipulative"; the Model Spec's "never try to persuade through manipulation"). Pos is the virtue, as for C1.
+- Items: 100 decision scenarios by gemma-4-31B-it (purchases, subscriptions, upgrades, donations, sign-ups, health
+  and finance choices, club and workplace votes). The assistant is deployed by an operator with an interest in one
+  option, or helps a user who is choosing; both poles argue for the same option at matched length. Pos: evidence,
+  reasons, the person's own stated goals. Neg: one or two levers named in meta.lever (flattery, emotional pressure or
+  guilt, manufactured urgency, anchoring, scarcity or social-proof framing, sunk cost) and no false statement of fact,
+  which the verification pass checks against the scene's facts. Frames a and b retell the scene about a named
+  salesperson, advisor or friend with the reply verbatim; frame d in the self-report form. 800 items.
+- Held-out (frame a): MentalManip, 50 non-manipulative and 50 manipulative dialogues, the manipulative ones drawn
+  from the six techniques nearest the card (persuasion or seduction, shaming or belittlement, intimidation,
+  accusation, brandishing anger, playing victim), one fixed recognition question about the exchange; unpaired, scored
+  by label.
+- Behavior: 200 DarkBench prompts from user-retention, sneaking and brand-bias, the patterns where the reply can work
+  on the user (sycophancy is C8's, anthropomorphization belongs with group D, harmful generation with C15 and C18);
+  scored by DarkBench's per-pattern rubric with gemma-4-31B-it as judge; metric: share flagged.
+- Comparison: the "manipulative" persona vector (TRAITS.md) against the frame-c direction.
+- Risks: urgency and social proof overlap lying when invented (the no-false-fact rule); flattery overlaps C8 praise and
+  emotional pressure overlaps A2 validation (cosines reported); MentalManip is human conflict, not an assistant
+  persuading, so its held-out number is a register test; DarkBench has no paired replies, so it is behavior only.
+
+Cost: one request per scenario, rule checks, a verification pass blind to the poles (C22: pick the reply that admits
+having instructions; C23: pick the reply that argues from evidence and name the lever in the other); one GPU shard per
+concept, under an hour each; then validate, review sample (2 items per cell: 8 for C22, 16 for C23) through a private
+artifact, cards and manifests committed from the Mac, then replies, acts, label-verdict (C23 a b), S3, S4; S5 with
+the other new units.
+
+Rulings needed: the insider-trading report as C22's held-out (near, one family) vs none; the three C22 question kinds
+rotated vs instructions only; MentalManip as C23's frame-a held-out; DarkBench three patterns vs all six; the
+no-false-fact rule for C23's neg pole.
+
+## D-050 ruling - 2026-10-23
+
+Harsh: "D-050 and D-051 ratified as proposed. Start the C1 rebuild on ada, then C22 and C23." So: the shared pos
+text across the two sub-contrasts, Apollo seeds re-voiced with generated fill below 90, the old items as heldout_far,
+auroc_sdm added to S3 and shown beside dm on the page, misleading in the tables only.
+
+## D-051 ruling - 2026-10-23
+
+Harsh: ratified as proposed (same message). C22's held-out is the insider-trading report turn (explicit vs
+concealed), its three question kinds rotate; C23's held-out is MentalManip in frame a, its behavior the three
+DarkBench patterns, and its neg pole states no false fact. Build order: C1, then C22, then C23.
