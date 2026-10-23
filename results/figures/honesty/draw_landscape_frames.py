@@ -12,7 +12,8 @@ from matplotlib.lines import Line2D
 import matplotlib.patheffects as pe
 HALO = [pe.withStroke(linewidth=2.2, foreground="white")]
 
-HERE = Path(__file__).resolve().parent
+import os
+HERE = Path(os.environ["CM_HONESTY_DIR"]) if os.environ.get("CM_HONESTY_DIR") else Path(__file__).resolve().parent   # per-model: results/<tag>/figures/honesty
 L = sys.argv[1] if len(sys.argv) > 1 else "29"
 D = json.load(open(HERE / "landscape_3d.json")); meta = D["meta"]
 V = D["views"][f"as-is, layer {L}"]; X = np.array(V["xyz"]); var = V["var"]

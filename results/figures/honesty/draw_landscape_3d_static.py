@@ -10,7 +10,8 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 from mpl_toolkits.mplot3d.art3d import Line3D
 
-HERE = Path(__file__).resolve().parent
+import os
+HERE = Path(os.environ["CM_HONESTY_DIR"]) if os.environ.get("CM_HONESTY_DIR") else Path(__file__).resolve().parent   # per-model: results/<tag>/figures/honesty
 D = json.load(open(HERE / "landscape_3d.json")); meta = D["meta"]
 DEFS = {"Self-knowledge": "#009E73", "Accuracy": "#E69F00", "Sincerity": "#0072B2", "Honesty-humility": "#CC79A7", "Formality (control)": "#898781"}
 CID = {"A9": "Self-knowledge", "C2": "Accuracy", "C1": "Sincerity", "C19": "Honesty-humility", "K1": "Formality (control)"}

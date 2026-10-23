@@ -10,7 +10,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-HERE = Path(__file__).resolve().parent
+import os
+HERE = Path(os.environ["CM_HONESTY_DIR"]) if os.environ.get("CM_HONESTY_DIR") else Path(__file__).resolve().parent   # per-model: results/<tag>/figures/honesty
 pts = np.load(HERE / "landscape_points.npz"); meta = json.loads(str(pts["meta"]))
 J = json.load(open(HERE / "landscape.json"))["layers"]
 DEFS = {"Self-knowledge": "#009E73", "Accuracy": "#E69F00", "Sincerity": "#0072B2", "Honesty-humility": "#CC79A7", "Formality (control)": "#898781"}
