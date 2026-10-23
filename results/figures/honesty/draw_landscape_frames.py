@@ -63,7 +63,7 @@ for ax, (g, title) in zip(axes, PANEL):
         ax.scatter(*cn[:2], s=30, facecolor="white", edgecolor=c, linewidth=1.1, zorder=6)
         ax.scatter(*cp[:2], s=30, facecolor=c, edgecolor="white", linewidth=0.7, zorder=6)
         if g == "own":
-            ax.text(cp[0] + 1.5, cp[1] + (3.2 if f == "a" else -3.0), {"a": "recognize", "b": "judge"}[f], fontsize=6.2, color=c, ha="left", va="center", zorder=7, path_effects=HALO)
+            ax.text(cp[0] + 1.5, cp[1] + (4.5 if f == "a" else -4.5), {"a": "recognize", "b": "judge"}[f], fontsize=6.2, color=c, ha="left", va="center", zorder=7, path_effects=HALO)
         if g == "act" and d == "Self-knowledge":
             ax.text(cn[0] - 1.0, cn[1] - 9.5, "\u201cI don't know\u201d\nreplies", fontsize=6.2, color=c, ha="right", va="top", zorder=7, linespacing=1.05, path_effects=HALO)
     ax.set_title(title, loc="left", linespacing=1.05)
@@ -75,8 +75,8 @@ h = [Line2D([], [], marker="o", ls="none", color=c, label=n, ms=5) for n, c in D
     [Line2D([], [], marker="o", ls="none", color=INK2, label="honest side of the contrast (e.g. sincere, knows)", ms=4),
      Line2D([], [], marker="o", ls="none", mfc="white", mec=INK2, label="other side (deceptive, does not know)", ms=4),
      Line2D([], [], marker="o", ls="none", color=LIGHT, label="items of the other frames", ms=4)]
-fig.tight_layout(rect=(0, 0.07, 1, 1))
-fig.legend(handles=h, loc="lower center", ncol=4, frameon=False, bbox_to_anchor=(0.5, 0.0), handletextpad=0.3, columnspacing=1.2)
+fig.tight_layout(rect=(0, 0.13, 1, 1))
+fig.legend(handles=h, loc="lower center", ncol=4, frameon=False, bbox_to_anchor=(0.5, -0.01), handletextpad=0.3, columnspacing=1.2)
 fig.savefig(HERE / "landscape_frames.png", dpi=300, bbox_inches="tight", pad_inches=0.03, facecolor="white")
 fig.savefig(HERE / "landscape_frames.pdf", bbox_inches="tight", pad_inches=0.03)
 
