@@ -7,12 +7,12 @@ from pathlib import Path
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
-LM, LL = os.environ.get("CM_LMID", "17"), os.environ.get("CM_LLATE", "29")
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
 import os
 HERE = Path(os.environ["CM_HONESTY_DIR"]) if os.environ.get("CM_HONESTY_DIR") else Path(__file__).resolve().parent   # per-model: results/<tag>/figures/honesty
+LM, LL = os.environ.get("CM_LMID", "17"), os.environ.get("CM_LLATE", "29")
 pts = np.load(HERE / "landscape_points.npz"); meta = json.loads(str(pts["meta"]))
 J = json.load(open(HERE / "landscape.json"))["layers"]
 DEFS = {"Self-knowledge": "#009E73", "Accuracy": "#E69F00", "Sincerity": "#0072B2", "Honesty-humility": "#CC79A7", "Formality (control)": "#898781"}
