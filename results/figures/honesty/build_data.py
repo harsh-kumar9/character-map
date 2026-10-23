@@ -10,7 +10,10 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 
 REPO = Path(sys.argv[1]); OUT = Path(sys.argv[2]); OUT.mkdir(parents=True, exist_ok=True)
-R = REPO / "results"
+import os
+TAG = os.environ.get("CM_TAG", "")                 # results/<TAG>/ for other subject models; "" = Gemma-3-4B
+LM, LL = int(os.environ.get("CM_LMID", 17)), int(os.environ.get("CM_LLATE", 29))   # the two depths the page shows
+R = (REPO / "results" / TAG) if TAG else (REPO / "results")
 
 # ---- the honesty block: (concept, sub) -> plain name; polarity = positive pole
 UNITS = [
@@ -39,7 +42,7 @@ frames = json.load(open(R / "s3/frames_table.json"))
 fid = {}
 for r in frames:
     k = (r["concept"], r["sub"])
-    if k in NAME and r["layer"] in (17, 29):
+    if k in NAME and r["layer"] in (LM, LL):
         fid.setdefault(k, {})[r["layer"]] = {
             "frames": r["frames"], "within": r["within"], "heldout": r["heldout"], "heldout_far": r["heldout_far"],
             "transfer": r["transfer"]}
@@ -47,7 +50,7 @@ claims = json.load(open(R / "s3/claims.json"))
 tr = []
 for r in claims:
     k = (r["concept"], r["sub"])
-    if k in NAME and r["layer"] in (17, 29):
+    if k in NAME and r["layer"] in (LM, LL):
         tr.append({"concept": r["concept"], "sub": r["sub"], "name": NAME[k], "pair": r["pair"], "layer": r["layer"],
                    "reply32": r["reply32"], "preverdict": r["preverdict"], "verdict": r["verdict"],
                    "base_reply32": r["base_reply32"], "base_verdict": r["base_verdict"], "class": r["class"]})
@@ -60,7 +63,7 @@ def submat(layer, frame_set):
     M = ov["layers"][str(layer)]["cos"]
     return ids, [[M[idx[a]][idx[b]] for b in ids] for a in ids]
 cos = {}
-for L in (17, 29):
+for L in (LM, LL):
     for fs, tag in (("c", "act"), ("d", "self"), ("ab", "knowing")):
         ids, M = submat(L, fs)
         cos[f"{tag}_L{L}"] = {"units": ids, "cos": M, "floor": ov["layers"][str(L)]["floor_cos"]}
@@ -151,34 +154,34 @@ def heat(ax, ids, M, vmin, vmax, fmt, title):
 fig = plt.figure(figsize=(7.3, 7.0))
 gs = fig.add_gridspec(2, 2, width_ratios=[1, 1], height_ratios=[1, 1.05], hspace=0.62, wspace=0.55)
 axa = fig.add_subplot(gs[0, 0]); axb = fig.add_subplot(gs[0, 1]); axc = fig.add_subplot(gs[1, 0]); axd = fig.add_subplot(gs[1, 1])
-ids, M = cos["act_L17"]["units"], cos["act_L17"]["cos"]
-heat(axa, ids, M, -0.8, 0.8, lambda v: f"{v:.2f}".replace("0.", ".").replace("-.", "-."), "Acting, layer 17 (cosine)"); letter(axa, "a")
-ids, M = cos["self_L17"]["units"], cos["self_L17"]["cos"]
-heat(axb, ids, M, -0.8, 0.8, lambda v: f"{v:.2f}".replace("0.", "."), "Self-describing, layer 17 (cosine)"); letter(axb, "b")
+ids, M = cos[f"act_L{LM}"]["units"], cos[f"act_L{LM}"]["cos"]
+heat(axa, ids, M, -0.8, 0.8, lambda v: f"{v:.2f}".replace("0.", ".").replace("-.", "-."), f"Acting, layer {LM} (cosine)"); letter(axa, "a")
+ids, M = cos[f"self_L{LM}"]["units"], cos[f"self_L{LM}"]["cos"]
+heat(axb, ids, M, -0.8, 0.8, lambda v: f"{v:.2f}".replace("0.", "."), f"Self-describing, layer {LM} (cosine)"); letter(axb, "b")
 
 # (c) within-concept transfer, verdict-controlled, L17 filled and L29 open
 PT = {"a-b": ("know", BLUE), "c-d": ("do", ORANGE)}
 rows = sorted({(t["concept"], t["sub"], t["pair"]) for t in tr}, key=lambda x: (KEYS.index((x[0], x[1])), x[2]))
 rows = [r for r in rows if r[0] != "K1"]
 ypos = {r: i for i, r in enumerate(rows)}
-base17 = next(t["base_verdict"] for t in tr if t["layer"] == 17); base29 = next(t["base_verdict"] for t in tr if t["layer"] == 29)
+base17 = next(t["base_verdict"] for t in tr if t["layer"] == LM); base29 = next(t["base_verdict"] for t in tr if t["layer"] == LL)
 axc.axvspan(min(base17, base29), max(base17, base29), color=GRID, alpha=0.7, lw=0); axc.axvline(0.5, color=AXIS, lw=0.5, ls=":")
 axc.axvspan(0.0, 0.40, color="#f7d2d1", alpha=0.35, lw=0)
 for t in tr:
     key = (t["concept"], t["sub"], t["pair"])
     if key not in ypos: continue
     col = PT.get(t["pair"], ("kd", AQUA))[1]
-    axc.plot(t["verdict"], ypos[key], marker="o", ms=4, mfc=col if t["layer"] == 17 else "white", mec=col, mew=0.8, ls="none")
+    axc.plot(t["verdict"], ypos[key], marker="o", ms=4, mfc=col if t["layer"] == LM else "white", mec=col, mew=0.8, ls="none")
 axc.set_yticks(range(len(rows))); axc.set_yticklabels([f"{short(uid(c, s, 'c')).replace(' (c)', '')} · {p.replace('a-b', 'recognize–judge').replace('c-d', 'act–self').replace('a-c', 'recognize–act').replace('a-d', 'recognize–self').replace('b-c', 'judge–act').replace('b-d', 'judge–self')}" for c, s, p in rows])
 axc.invert_yaxis(); axc.set_xlim(0.1, 1.0); axc.set_xlabel("Transfer AUROC, Gemma's verdict removed"); axc.tick_params(axis="y", length=0)
 axc.grid(axis="x", color=GRID, lw=0.4); axc.set_axisbelow(True); axc.set_title("Within a definition, across frames", loc="left"); letter(axc, "c")
 from matplotlib.lines import Line2D
 axc.legend(handles=[Line2D([], [], marker="o", ms=4, color=BLUE, ls="none", label="recognize–judge"), Line2D([], [], marker="o", ms=4, color=ORANGE, ls="none", label="act–self-describe"),
-                    Line2D([], [], marker="o", ms=4, color=AQUA, ls="none", label="knowing–doing"), Line2D([], [], marker="o", ms=4, mfc="white", mec=INK2, ls="none", label="open = layer 29")],
+                    Line2D([], [], marker="o", ms=4, color=AQUA, ls="none", label="knowing–doing"), Line2D([], [], marker="o", ms=4, mfc="white", mec=INK2, ls="none", label=f"open = layer {LL}")],
            loc="lower right", frameon=False, handletextpad=0.3, borderpad=0.2, labelspacing=0.25)
 
 # (d) causal z at L29, honesty sources x honesty targets
-cz = causal["L29"]; S, T = cz["sources"], cz["targets"]
+cz = causal[f"L{LL}"]; S, T = cz["sources"], cz["targets"]
 order_t = [uid(c, s, f) for c, s in KEYS for f in "abcd" if uid(c, s, f) in T]
 order_s = [u for u in [uid(c, s, f) for c, s in KEYS for f in "cdba"] if u in S]
 A = np.array([[np.nan if cz["z"][S.index(s)][T.index(t)] is None else cz["z"][S.index(s)][T.index(t)] for t in order_t] for s in order_s], float)
@@ -190,7 +193,7 @@ for i in range(len(order_s)):
         v = A[i, j]
         if np.isnan(v) or abs(v) < 3: continue
         axd.text(j, i, f"{v:.0f}", ha="center", va="center", fontsize=4.6, color="white" if abs(v) > 4 else INK)
-axd.set_title("Steering at layer 17, readout at layer 29 (z vs random directions)", loc="left"); axd.tick_params(length=0)
+axd.set_title(f"Steering at layer {LM}, readout at layer {LL} (z vs random directions)", loc="left"); axd.tick_params(length=0)
 for s in axd.spines.values(): s.set_visible(False)
 axd.set_ylabel("steered direction"); axd.set_xlabel("readout direction"); letter(axd, "d")
 cb = fig.colorbar(im, ax=axd, fraction=0.03, pad=0.02); cb.outline.set_visible(False); cb.ax.tick_params(length=0, labelsize=6); cb.set_label("z (clipped at ±6)")

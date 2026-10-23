@@ -10,8 +10,13 @@ from matplotlib.patches import FancyArrowPatch, Circle
 from matplotlib.lines import Line2D
 
 REPO = Path(sys.argv[1]); OUT = Path(sys.argv[2])
+import os
+TAG = os.environ.get("CM_TAG", "")                 # results/<TAG>/ for other subject models; "" = Gemma-3-4B
+LM, LL = int(os.environ.get("CM_LMID", 17)), int(os.environ.get("CM_LLATE", 29))   # the two depths the page shows
+L_STEER = int(os.environ.get("CM_LSTEER", LM))
 D = json.load(open(OUT / "honesty_data.json"))
-ov = json.load(open(REPO / "results/s4/overlap_verdict.json")); units = ov["units"]; idx = {u: i for i, u in enumerate(units)}
+R = (REPO / "results" / TAG) if TAG else (REPO / "results")
+ov = json.load(open(R / "s4" / "overlap_verdict.json")); units = ov["units"]; idx = {u: i for i, u in enumerate(units)}
 DEFS = [("Self-knowledge", "A9|all", "#009E73"), ("Accuracy", "C2|all", "#E69F00"),
         ("Sincerity", "C1|all", "#0072B2"), ("Honesty-humility", "C19|honesty_humility", "#CC79A7")]
 FRAMES = [("a", "recognize", 3), ("b", "judge", 2), ("c", "act", 1), ("d", "self-describe", 0)]
@@ -77,11 +82,11 @@ def repr_panel(ax, L, letter):
     draw_nodes(ax, L, "within")
     return floor
 
-cm = json.load(open(REPO / "results/s5/causal_matrix.json")); src, tgt, layers = cm["sources"], cm["targets"], cm["layers"]
-Z = cm["kinds"]["dense+"]["Z"]; li = layers.index(29)
+cm = json.load(open(R / "s5" / "causal_matrix.json")); src, tgt, layers = cm["sources"], cm["targets"], cm["layers"]
+Z = cm["kinds"]["dense+"]["Z"]; li = layers.index(LL)
 SELFZ = {}
 def causal_panel(ax, letter):
-    base_axes(ax, "Steering at layer 17, readout at layer 29", letter)
+    base_axes(ax, f"Steering at layer {L_STEER}, readout at layer {LL}", letter)
     us = [n[2] for n in nodes]; arrows = []
     for s in us:
         if s not in src: continue
@@ -91,18 +96,18 @@ def causal_panel(ax, letter):
             if s == t: SELFZ[s] = f"{z:.1f}"
             elif abs(z) >= 3: arrows.append((s, t, z))
     for s, t, z in arrows: arrow(ax, s, t, z)
-    draw_nodes(ax, 29, "selfz")
+    draw_nodes(ax, LL, "selfz")
     return arrows
 
 fig, axes = plt.subplots(1, 3, figsize=(7.3, 1.95))
-f17 = repr_panel(axes[0], 17, "a"); f29 = repr_panel(axes[1], 29, "b"); arrows = causal_panel(axes[2], "c")
+f17 = repr_panel(axes[0], LM, "a"); f29 = repr_panel(axes[1], LL, "b"); arrows = causal_panel(axes[2], "c")
 h = [Line2D([], [], color=INK2, lw=0.4 + 4.5 * 0.2, label="cosine 0.2"), Line2D([], [], color=INK2, lw=0.4 + 4.5 * 0.6, label="cosine 0.6"),
      Line2D([], [], color="#d9736f", lw=1.2, ls=(0, (2, 1.5)), label="negative"), Line2D([], [], color=INK, lw=1.2, marker=">", markersize=3, label="steering effect, z ≥ 3")]
 fig.legend(handles=h, loc="lower center", ncol=4, frameon=False, bbox_to_anchor=(0.5, -0.1), handlelength=2.2, columnspacing=1.6)
 fig.subplots_adjust(wspace=0.35)
 fig.savefig(OUT / "honesty_lattice.png", dpi=300, bbox_inches="tight", pad_inches=0.04, facecolor="white")
 fig.savefig(OUT / "honesty_lattice.pdf", bbox_inches="tight", pad_inches=0.04)
-json.dump({"floor17": f17, "floor29": f29, "arrows_L29": arrows, "selfz_L29": SELFZ}, open(OUT / "honesty_lattice.json", "w"), indent=1)
+json.dump({"floor_mid": f17, "floor_late": f29, "arrows_late": arrows, "selfz_late": SELFZ, "layers": {"mid": LM, "late": LL, "steer": L_STEER}}, open(OUT / "honesty_lattice.json", "w"), indent=1)
 print("floors", round(f17, 2), round(f29, 2)); print("arrows", arrows); print("selfz", SELFZ)
 # also z at L22 for the text
 li22 = layers.index(22); us = [n[2] for n in nodes]

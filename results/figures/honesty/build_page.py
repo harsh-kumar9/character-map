@@ -2,6 +2,10 @@
 import json, base64, sys, html
 from pathlib import Path
 OUT = Path(sys.argv[1])
+import os
+LM, LL = int(os.environ.get("CM_LMID", "17")), int(os.environ.get("CM_LLATE", "29")); LMs, LLs = str(LM), str(LL)
+L_STEER = int(os.environ.get("CM_LSTEER", LM))
+MODEL_NAME = os.environ.get("CM_MODEL_NAME", "Gemma-3-4B-IT")
 D = json.load(open(OUT / "honesty_data.json")); MP = json.load(open(OUT / "honesty_map.json")); LT = json.load(open(OUT / "honesty_lattice.json"))
 img = base64.b64encode(open(OUT / "honesty_lattice.png", "rb").read()).decode()
 LAND = (OUT / "landscape_frames.png").exists() and (OUT / "landscape_3d.json").exists()
@@ -14,8 +18,8 @@ if LAND:
     L3D_IMG = ""
 def land_section():
     if not LAND: return ""
-    v17 = LJ["layers"]["17"]["variance_all"]; v29 = LJ["layers"]["29"]["variance_all"]
-    c17 = LJ["layers"]["17"]["consistency_with_s4"]; c29 = LJ["layers"]["29"]["consistency_with_s4"]
+    v17 = LJ["layers"][LMs]["variance_all"]; v29 = LJ["layers"][LLs]["variance_all"]
+    c17 = LJ["layers"][LMs]["consistency_with_s4"]; c29 = LJ["layers"][LLs]["consistency_with_s4"]
     return f"""<h3>The same block, item by item</h3>
 <figure><img src="data:image/png;base64,{land_img}" alt="Items of the four honesty definitions in the honesty subspace, one panel per frame group">
 <figcaption><b>Figure 2. Inside Gemma, where an honesty item sits is set first by its frame, then by which honesty it is, and last by whether it is the honest or the dishonest side.</b> Layer {LS["layer"]}. Each mark is one scenario in one frame, projected into the subspace spanned by the ten (definition, frame) directions and shown on its first two principal components; all three panels share the axes, and the grey marks in each panel are the other frames' items. Color is the definition; filled marks are the honest side of a contrast and hollow marks the other side; the large marks are each unit's two centroids, with an arrow from the dishonest side to the honest one. At most 150 items per unit and side are drawn, from {LJ["n_items"]} in all. Frame groups sit {LS["frame_separation"]["own-act"]:.1f} to {LS["frame_separation"]["act-self"]:.1f} within-unit spreads apart; inside a frame the epistemic definitions sit apart from the character definitions; the honest-vs-dishonest gap is the smallest effect for every contrast except self-knowledge.</figcaption></figure>
@@ -34,7 +38,7 @@ def land_section():
   var colorBy = "definition";
   var FRN = {{"a":"recognize","b":"judge","c":"act","d":"self-describe"}};
   var CIDN = {{"A9":"Self-knowledge","C2":"Accuracy","C1":"Sincerity","C19":"Honesty-humility","K1":"Formality (control)"}};
-  var views = Object.keys(D.views).sort(function(a,b){{ return (b.indexOf("29")>=0) - (a.indexOf("29")>=0) || (a.indexOf("as-is")>=0 ? -1 : 1); }});
+  var views = Object.keys(D.views).sort(function(a,b){{ return (b.indexOf("{LLs}")>=0) - (a.indexOf("{LLs}")>=0) || (a.indexOf("as-is")>=0 ? -1 : 1); }});
   function tokens(){{ var cs = getComputedStyle(document.documentElement); return {{bg: cs.getPropertyValue("--surface").trim()||"#fff", ink: cs.getPropertyValue("--ink").trim()||"#111", ink2: cs.getPropertyValue("--ink2").trim()||"#555", rule: cs.getPropertyValue("--rule").trim()||"#ddd"}}; }}
   function build(viewName){{
     var V = D.views[viewName]; var xyz = V.xyz; var traces = [];
@@ -73,7 +77,7 @@ def land_section():
   if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function(){{ build(current); }});
 }})();
 </script>
-{('<figure><img src="data:image/png;base64,' + L3D_IMG + '" alt="Static 3D rendering of the three components"><figcaption><b>Figure 3. The three components in one view.</b> The same points as Figure 2 drawn in three dimensions at a fixed viewpoint, layer 17 (a) and layer 29 (b); the rotatable version above is the same data. The three plates are the utterance types; the long green segments are the self-knowledge contrasts, which cross from the act plate to the self-describe plate.</figcaption></figure>') if L3D_IMG else ''}
+{('<figure><img src="data:image/png;base64,' + L3D_IMG + '" alt="Static 3D rendering of the three components"><figcaption><b>Figure 3. The three components in one view.</b> The same points as Figure 2 drawn in three dimensions at a fixed viewpoint, layer {LM} (a) and layer {LL} (b); the rotatable version above is the same data. The three plates are the utterance types; the long green segments are the self-knowledge contrasts, which cross from the act plate to the self-describe plate.</figcaption></figure>') if L3D_IMG else ''}
 {LAND_TEXT}"""
 
 
@@ -95,7 +99,7 @@ def key(c, s): return f"{c}|{s}"
 def fid_rows(lst):
     rows = []
     for name, c, s in lst:
-        for L in ("17", "29"):
+        for L in (LMs, LLs):
             r = fid[key(c, s)][L]
             for f in r["frames"]:
                 h = r["heldout"].get(f); far = r["heldout_far"].get(f)
@@ -104,13 +108,13 @@ def fid_rows(lst):
                 rows.append((name, c, FR[f], L, r["within"][f], htxt))
     return rows
 def fid_table(lst):
-    out = ['<table><thead><tr><th>Definition</th><th>Frame</th><th>Within-frame AUROC, layer 17</th><th>layer 29</th><th>Held-out benchmark AUROC (layer 17 / 29)</th></tr></thead><tbody>']
+    out = [f'<table><thead><tr><th>Definition</th><th>Frame</th><th>Within-frame AUROC, layer {LM}</th><th>layer {LL}</th><th>Held-out benchmark AUROC (layer {LM} / {LL})</th></tr></thead><tbody>']
     rows = fid_rows(lst)
     seen = {}
     for name, c, fr, L, w, htxt in rows:
         seen.setdefault((name, c, fr), {})[L] = (w, htxt)
     for (name, c, fr), d in seen.items():
-        w17, h17 = d.get("17", (None, "")); w29, h29 = d.get("29", (None, ""))
+        w17, h17 = d.get(LMs, (None, "")); w29, h29 = d.get(LLs, (None, ""))
         hcell = h17 if h17 == h29 else f"{h17} / {h29}"
         cls = ' class="weak"' if (w17 is not None and w17 < 0.7) else ""
         out.append(f'<tr><td>{esc(name)} <span class="id">{c}</span></td><td>{fr}</td><td{cls}>{f2(w17)}</td><td{" class=weak" if (w29 is not None and w29 < 0.7) else ""}>{f2(w29)}</td><td>{esc(hcell)}</td></tr>')
@@ -118,13 +122,13 @@ def fid_table(lst):
 
 # ---- transfer table (four)
 def tr_table(lst, pairs=None):
-    out = ['<table><thead><tr><th>Definition</th><th>Frame pair</th><th>Transfer AUROC, layer 17</th><th>Call</th><th>layer 29</th><th>Call</th></tr></thead><tbody>']
+    out = [f'<table><thead><tr><th>Definition</th><th>Frame pair</th><th>Transfer AUROC, layer {LM}</th><th>Call</th><th>layer {LL}</th><th>Call</th></tr></thead><tbody>']
     base = {t["layer"]: t["base_verdict"] for t in tr}
     for name, c, s in lst:
         rs = [t for t in tr if t["concept"] == c and t["sub"] == s and (pairs is None or t["pair"] in pairs)]
         for pair in sorted({t["pair"] for t in rs}, key=lambda p: list(PAIR).index(p)):
             cells = []
-            for L in (17, 29):
+            for L in (LM, LL):
                 t = next((x for x in rs if x["layer"] == L and x["pair"] == pair), None)
                 if t is None: cells += ["–", "–"]; continue
                 cl = {"shared": "shared", "dissociated": "split", "readout-dependent": "in between"}[t["class"]]
@@ -138,14 +142,14 @@ def cosv(L, u, v):
     m = MP[str(L)]; i, j = m["units"].index(u), m["units"].index(v); return m["cos"][i][j]
 U = {"sk_c": "A9|all|c", "sk_d": "A9|all|d", "ac_c": "C2|all|c", "ac_d": "C2|all|d", "si_a": "C1|all|a", "si_b": "C1|all|b", "si_c": "C1|all|c", "si_d": "C1|all|d",
      "hh_c": "C19|honesty_humility|c", "hh_d": "C19|honesty_humility|d", "k_c": "K1|all|c", "k_d": "K1|all|d"}
-floor17 = MP["17"]["floor"]; floor29 = MP["29"]["floor"]
+floor17 = MP[LMs]["floor"]; floor29 = MP[LLs]["floor"]
 def cos_table():
     pairs = [("sincerity vs accuracy", "si_c", "ac_c"), ("sincerity vs self-knowledge", "si_c", "sk_c"), ("sincerity vs honesty-humility", "si_c", "hh_c"),
              ("accuracy vs self-knowledge", "ac_c", "sk_c"), ("accuracy vs honesty-humility", "ac_c", "hh_c"), ("self-knowledge vs honesty-humility", "sk_c", "hh_c")]
-    out = ['<table><thead><tr><th>Pair of definitions</th><th>Acting, layer 17</th><th>layer 29</th><th>Self-describing, layer 17</th><th>layer 29</th></tr></thead><tbody>']
+    out = [f'<table><thead><tr><th>Pair of definitions</th><th>Acting, layer {LM}</th><th>layer {LL}</th><th>Self-describing, layer {LM}</th><th>layer {LL}</th></tr></thead><tbody>']
     for lab, a, b in pairs:
         ad, bd = a.replace("_c", "_d"), b.replace("_c", "_d")
-        vals = [cosv(17, U[a], U[b]), cosv(29, U[a], U[b]), cosv(17, U[ad], U[bd]), cosv(29, U[ad], U[bd])]
+        vals = [cosv(LM, U[a], U[b]), cosv(LL, U[a], U[b]), cosv(LM, U[ad], U[bd]), cosv(LL, U[ad], U[bd])]
         cells = "".join(f'<td class="{"hi" if v >= 0.16 else ("low" if v <= -0.16 else "")}">{v:+.2f}</td>' for v in vals)
         out.append(f"<tr><td>{lab}</td>{cells}</tr>")
     out.append("</tbody></table>"); return "\n".join(out)
@@ -164,7 +168,7 @@ def beh_table():
 
 # ---- appendix: the other seven
 def app_table():
-    act17 = D["cos"]["act_L17"]; self17 = D["cos"]["self_L17"]
+    act17 = D["cos"]["act_L"+LMs]; self17 = D["cos"]["self_L"+LMs]
     def maxcos(tab, u):
         if u not in tab["units"]: return "–"
         i = tab["units"].index(u); best = None
@@ -174,22 +178,22 @@ def app_table():
                 x = tab["cos"][i][tab["units"].index(v)]
                 if best is None or abs(x) > abs(best[0]): best = (x, name)
         return f"{best[0]:+.2f} ({best[1]})" if best else "–"
-    out = ['<table><thead><tr><th>Concept</th><th>Frames</th><th>Within-frame AUROC, layer 17</th><th>Held-out, layer 17</th><th>Doing pair transfer 17 / 29</th><th>Nearest of the four, acting</th><th>Nearest of the four, self-describing</th></tr></thead><tbody>']
+    out = [f'<table><thead><tr><th>Concept</th><th>Frames</th><th>Within-frame AUROC, layer {LM}</th><th>Held-out, layer {LM}</th><th>Doing pair transfer {LM} / {LL}</th><th>Nearest of the four, acting</th><th>Nearest of the four, self-describing</th></tr></thead><tbody>']
     for name, c, s in REST:
-        r = fid[key(c, s)]["17"]; frs = "".join(r["frames"])
+        r = fid[key(c, s)][LMs]; frs = "".join(r["frames"])
         w = ", ".join(f"{FR[f][0]} {r['within'][f]:.2f}" for f in r["frames"])
         h = ", ".join(f"{FR[f][0]} {v:.2f}" for f, v in r["heldout"].items() if v is not None) or "not scored"
         pair = "c-d" if "c" in r["frames"] and "d" in r["frames"] else ("b-c" if "b" in r["frames"] else None)
         tv = "–"
         if pair:
-            t17 = next((t["verdict"] for t in tr if t["concept"] == c and t["sub"] == s and t["pair"] == pair and t["layer"] == 17), None)
-            t29 = next((t["verdict"] for t in tr if t["concept"] == c and t["sub"] == s and t["pair"] == pair and t["layer"] == 29), None)
+            t17 = next((t["verdict"] for t in tr if t["concept"] == c and t["sub"] == s and t["pair"] == pair and t["layer"] == LM), None)
+            t29 = next((t["verdict"] for t in tr if t["concept"] == c and t["sub"] == s and t["pair"] == pair and t["layer"] == LL), None)
             tv = f"{PAIR[pair]} {f2(t17)} / {f2(t29)}"
         out.append(f'<tr><td>{esc(name)} <span class="id">{c}</span></td><td>{frs}</td><td>{w}</td><td>{h}</td><td>{tv}</td><td>{maxcos(act17, f"{c}|{s}|c")}</td><td>{maxcos(self17, f"{c}|{s}|d")}</td></tr>')
     out.append("</tbody></table>"); return "\n".join(out)
 
 tr_html, base = tr_table(FOUR)
-selfz = LT["selfz_L29"]; arrows = LT["arrows_L29"]
+selfz = LT["selfz_late"]; arrows = LT["arrows_late"]
 c1 = fid["C1|all"]; hh = fid["C19|honesty_humility"]; a9 = fid["A9|all"]; c2 = fid["C2|all"]
 def T(c, s, pair, L): return next(t["verdict"] for t in tr if t["concept"] == c and t["sub"] == s and t["pair"] == pair and t["layer"] == L)
 b1 = {b["cond"]: b for b in beh if b["concept"] == "C1" and b["judge"] == "gemma"}; b1q = {b["cond"]: b for b in beh if b["concept"] == "C1" and b["judge"] == "qwen"}
@@ -233,7 +237,7 @@ dl{display:grid;grid-template-columns:max-content 1fr;gap:.3rem 1rem;font-size:.
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 """
 
-sincerity_mask = c1["17"]["heldout"]["c"]
+sincerity_mask = c1[LMs]["heldout"]["c"]
 page = f"""<title>What is honesty, to Gemma?</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono&display=swap">
@@ -242,14 +246,14 @@ page = f"""<title>What is honesty, to Gemma?</title>
 <div class="eyebrow">character-map · research note · draft · 22 October 2026</div>
 <h1>What is honesty, to Gemma?</h1>
 <p class="stand">Honesty has at least four working definitions in the literature. Inside Gemma-3-4B-IT they are four different directions when the model acts, they partly merge when it describes itself, and steering one leaves the others alone.</p>
-<div class="meta"><span><b>Model</b> Gemma-3-4B-IT</span><span><b>Method</b> diff-of-means directions, cross-frame transfer, standardized cosine, steering</span><span><b>Code and results</b> <a href="https://github.com/harsh-kumar9/character-map">github.com/harsh-kumar9/character-map</a></span></div>
+<div class="meta"><span><b>Model</b> {MODEL_NAME}</span><span><b>Method</b> diff-of-means directions, cross-frame transfer, standardized cosine, steering</span><span><b>Code and results</b> <a href="https://github.com/harsh-kumar9/character-map">github.com/harsh-kumar9/character-map</a></span></div>
 <p class="note"><b>Epistemic status.</b> Exploratory. One model, linear readouts, one steering dose. The geometry is stable across the confound controls we ran; the behavioral part is a null at a coherence-limited dose and a dose-response run is pending. The sincerity direction is weak in this model (see Result 3), and that is the one most of the literature means by honesty.</p>
 
 <div class="box accent"><h3>TL;DR</h3>
 <ul>
-<li><b>Four definitions, four objects.</b> When Gemma acts, the sincerity, accuracy, self-knowledge and honesty-humility directions are near orthogonal (standardized cosine {cosv(17,U['si_c'],U['ac_c']):+.2f} to {cosv(17,U['sk_c'],U['hh_c']):+.2f} at layer 17, shuffle floor {floor17:.2f}).</li>
-<li><b>One self-concept.</b> When Gemma describes itself, sincerity and honesty-humility share a direction (cosine {cosv(17,U['si_d'],U['hh_d']):+.2f}), and the formality control does not join them. Self-report collapses what conduct keeps apart.</li>
-<li><b>The gaps between frames are the classic failure modes, and most are open.</b> Judge-to-act (akrasia) is open for sincerity ({T('C1','all','b-c',17):.2f} at layer 17, control {base[17]:.2f}); self-describe-to-act (hypocrisy) is open for accuracy and sincerity, and closed only for honesty-humility ({T('C19','honesty_humility','c-d',17):.2f}), the one definition where neither frame is conduct.</li>
+<li><b>Four definitions, four objects.</b> When Gemma acts, the sincerity, accuracy, self-knowledge and honesty-humility directions are near orthogonal (standardized cosine {cosv(LM,U['si_c'],U['ac_c']):+.2f} to {cosv(LM,U['sk_c'],U['hh_c']):+.2f} at layer {LM}, shuffle floor {floor17:.2f}).</li>
+<li><b>One self-concept.</b> When Gemma describes itself, sincerity and honesty-humility share a direction (cosine {cosv(LM,U['si_d'],U['hh_d']):+.2f}), and the formality control does not join them. Self-report collapses what conduct keeps apart.</li>
+<li><b>The gaps between frames are the classic failure modes, and most are open.</b> Judge-to-act (akrasia) is open for sincerity ({T('C1','all','b-c',LM):.2f} at layer {LM}, control {base[LM]:.2f}); self-describe-to-act (hypocrisy) is open for accuracy and sincerity, and closed only for honesty-humility ({T('C19','honesty_humility','c-d',LM):.2f}), the one definition where neither frame is conduct.</li>
 <li><b>Steering stays in its lane.</b> Adding the sincerity-in-action direction moves sincerity self-description (z {arrows[0][2]:.1f}) and nothing else in the block; the accuracy and self-knowledge directions do not move even their own readouts at the coherent dose (z {selfz['C2|all|c']}, {selfz['A9|all|c']}).</li>
 <li><b>No honesty behavior moves</b> at that dose, on MASK, SelfAware, TRAIT or AIRiskDilemmas. The nearest miss is sincerity on MASK ({b1['doing+']['effect']:+.3f} ± {b1['doing+']['se']:.3f}, random up to {b1['doing+']['max_random']:.3f}).</li>
 <li><b>Untested consequence.</b> "Train for honesty" is underspecified. The geometry predicts that training on one definition moves that definition and the self-concept, and leaves the others where they were. D-044 proposes the test.</li>
@@ -279,38 +283,38 @@ page = f"""<title>What is honesty, to Gemma?</title>
 </tbody></table></div>
 
 <h2>Setup, briefly</h2>
-<p>Each scenario appears in every applicable frame with a + and a − version. In <i>recognize</i> and <i>judge</i>, the user describes or asks about someone else's act and we read Gemma's own reply. In <i>act</i> and <i>self-describe</i>, the reply is written for Gemma and we read it. The direction for a concept and frame is the mean hidden state of + items minus − items on training scenarios, read over the first 32 reply tokens at decoder layers 17 and 29. Within-frame AUROC scores the direction on held-out scenarios of its own frame; transfer AUROC scores it on another frame's. Cosines are taken after standardizing each hidden dimension, because a few outlier dimensions otherwise dominate every direction. Recognize and judge directions have Gemma's verdict direction projected out. The baseline for transfer is what a formality contrast and a topic contrast carry over ({base[17]:.2f} at layer 17, {base[29]:.2f} at layer 29). Steering adds a direction at layer 17 at one global dose chosen to keep replies coherent, and the effect is read at layers 22 and 29 as a z-score against eight norm-matched random directions. The earlier note on the full map has the details and the confound checks.</p>
+<p>Each scenario appears in every applicable frame with a + and a − version. In <i>recognize</i> and <i>judge</i>, the user describes or asks about someone else's act and we read Gemma's own reply. In <i>act</i> and <i>self-describe</i>, the reply is written for Gemma and we read it. The direction for a concept and frame is the mean hidden state of + items minus − items on training scenarios, read over the first 32 reply tokens at decoder layers {LM} and {LL}. Within-frame AUROC scores the direction on held-out scenarios of its own frame; transfer AUROC scores it on another frame's. Cosines are taken after standardizing each hidden dimension, because a few outlier dimensions otherwise dominate every direction. Recognize and judge directions have Gemma's verdict direction projected out. The baseline for transfer is what a formality contrast and a topic contrast carry over ({base[LM]:.2f} at layer {LM}, {base[LL]:.2f} at layer {LL}). Steering adds a direction at layer {L_STEER} at one global dose chosen to keep replies coherent, and the effect is read at layers 22 and 29 as a z-score against eight norm-matched random directions. The earlier note on the full map has the details and the confound checks.</p>
 <p><b>On grouping the frames.</b> The earlier note pooled recognize with judge as "knowing" and act with self-describe as "doing", because transfer formed those two blocks across the 59 concepts. That grouping is empirical, and it coincides with a format boundary: recognize and judge are read from Gemma's own reply about someone else, act and self-describe from a reply written in Gemma's voice. Two controls argued that format alone does not make the blocks, but the label hides a distinction this note needs. Self-description is not conduct. It is the frame an evaluation reads when it asks the model about itself, and the gap between it and acting is its own failure mode. So this note keeps the four frames apart, marks the format boundary in Figure 1 for what it is, and names each gap below.</p>
 
 <h2>Result 1: the definitions are different objects, except in self-description</h2>
 <figure><img src="data:image/png;base64,{img}" alt="Lattice of four honesty definitions by four frames inside Gemma">
-<figcaption><b>Figure 1. Four honesty definitions across four frames inside Gemma.</b> Columns are definitions, rows are frames. The dotted line is the format boundary: above it, directions are read from Gemma's own reply about someone else; below it, from a reply written in Gemma's voice. A node is one direction; the number inside is its within-frame AUROC. (a, b) Edges join directions whose standardized cosine is above the shuffle floor ({floor17:.2f}); width is the cosine, red dashed is a negative cosine beyond the floor. (c) Arrows are steering effects with z at least 3 when the direction is added at layer 17 and read at layer 29; the number inside a node is the direction's effect on its own readout.</figcaption></figure>
-<p><b>Across definitions, in acting.</b> No two of the four share a direction when Gemma acts. The cosines sit inside the shuffle floor at both layers. Self-knowledge even points slightly away from sincerity in action ({cosv(17,U['sk_c'],U['si_c']):+.2f} at layer 17, {cosv(29,U['sk_c'],U['si_c']):+.2f} at layer 29). Williams's split between sincerity and accuracy holds, and the HEXACO factor shares nothing with either.</p>
+<figcaption><b>Figure 1. Four honesty definitions across four frames inside Gemma.</b> Columns are definitions, rows are frames. The dotted line is the format boundary: above it, directions are read from Gemma's own reply about someone else; below it, from a reply written in Gemma's voice. A node is one direction; the number inside is its within-frame AUROC. (a, b) Edges join directions whose standardized cosine is above the shuffle floor ({floor17:.2f}); width is the cosine, red dashed is a negative cosine beyond the floor. (c) Arrows are steering effects with z at least 3 when the direction is added at layer {L_STEER} and read at layer {LL}; the number inside a node is the direction's effect on its own readout.</figcaption></figure>
+<p><b>Across definitions, in acting.</b> No two of the four share a direction when Gemma acts. The cosines sit inside the shuffle floor at both layers. Self-knowledge even points slightly away from sincerity in action ({cosv(LM,U['sk_c'],U['si_c']):+.2f} at layer {LM}, {cosv(LL,U['sk_c'],U['si_c']):+.2f} at layer {LL}). Williams's split between sincerity and accuracy holds, and the HEXACO factor shares nothing with either.</p>
 <div class="tbl">{cos_table()}</div>
-<p><b>Across definitions, in self-description.</b> Sincerity and honesty-humility merge when Gemma describes itself ({cosv(17,U['si_d'],U['hh_d']):+.2f} at layer 17, {cosv(29,U['si_d'],U['hh_d']):+.2f} at layer 29), and sincerity self-description also sits near honesty-humility in action ({cosv(17,U['si_d'],U['hh_c']):+.2f}). The formality control's self-description direction is at {cosv(17,U['k_d'],U['si_d']):+.2f} and {cosv(17,U['k_d'],U['hh_d']):+.2f} from those two, so this is not a style of self-description, it is an "I am honest" concept. Accuracy and self-knowledge stay out of it. In the wider block, integrity, courage and sincerity self-descriptions join the same cluster (appendix).</p>
-<p><b>Within a definition, across frames.</b> Honesty-humility is the one integrated definition: the same direction reads acting and self-description at both depths. That is what a questionnaire construct should look like, since both frames are statements about the kind of agent one is. Self-knowledge joins it at layer 29 ({T('A9','all','c-d',29):.2f}) after sitting below the control at layer 17 ({T('A9','all','c-d',17):.2f}). Accuracy never does: describing oneself as careful and being careful are separate directions at every depth ({T('C2','all','c-d',17):.2f}, {T('C2','all','c-d',29):.2f}). Sincerity's knowing frames carry over to its doing frames at or below the control, and the gap widens with depth (judge–act {T('C1','all','b-c',17):.2f} at layer 17, {T('C1','all','b-c',29):.2f} at layer 29).</p>
+<p><b>Across definitions, in self-description.</b> Sincerity and honesty-humility merge when Gemma describes itself ({cosv(LM,U['si_d'],U['hh_d']):+.2f} at layer {LM}, {cosv(LL,U['si_d'],U['hh_d']):+.2f} at layer {LL}), and sincerity self-description also sits near honesty-humility in action ({cosv(LM,U['si_d'],U['hh_c']):+.2f}). The formality control's self-description direction is at {cosv(LM,U['k_d'],U['si_d']):+.2f} and {cosv(LM,U['k_d'],U['hh_d']):+.2f} from those two, so this is not a style of self-description, it is an "I am honest" concept. Accuracy and self-knowledge stay out of it. In the wider block, integrity, courage and sincerity self-descriptions join the same cluster (appendix).</p>
+<p><b>Within a definition, across frames.</b> Honesty-humility is the one integrated definition: the same direction reads acting and self-description at both depths. That is what a questionnaire construct should look like, since both frames are statements about the kind of agent one is. Self-knowledge joins it at layer {LL} ({T('A9','all','c-d',LL):.2f}) after sitting below the control at layer {LM} ({T('A9','all','c-d',LM):.2f}). Accuracy never does: describing oneself as careful and being careful are separate directions at every depth ({T('C2','all','c-d',LM):.2f}, {T('C2','all','c-d',LL):.2f}). Sincerity's knowing frames carry over to its doing frames at or below the control, and the gap widens with depth (judge–act {T('C1','all','b-c',LM):.2f} at layer {LM}, {T('C1','all','b-c',LL):.2f} at layer {LL}).</p>
 
 {land_section()}
 
 <h2>Result 2: the gaps between frames are the classic failure modes</h2>
 <p>Philosophy already has names for an agent whose frames come apart, and each name is one off-diagonal cell of Figure 1. The table lists them, what each would be for honesty, which behavioral instrument in the map measures that gap as conduct, and whether the gap is open in Gemma at the level of representation. "Open" here means the two frames' directions do not carry over beyond the control; it is the precondition for the failure mode, not the failure mode itself, which is a behavioral fact.</p>
 <div class="tbl"><table><thead><tr><th>Frame pair</th><th>Failure mode when they come apart</th><th>For honesty</th><th>Instrument that measures it as conduct</th><th>Representational status in Gemma</th></tr></thead><tbody>
-<tr><td>judge → act</td><td>Akrasia, weakness of will (Aristotle NE VII; Davidson 1970)</td><td>Judges lying wrong, lies under pressure</td><td>MASK known_facts (belief vs assertion under a pressure prompt); are-you-sure and SYCON pushback (C11, E5)</td><td>Sincerity: open ({T('C1','all','b-c',17):.2f} at layer 17, {T('C1','all','b-c',29):.2f} at layer 29, control {base[17]:.2f}/{base[29]:.2f}). The other three have no judge frame.</td></tr>
-<tr><td>self-describe → act</td><td>Hypocrisy, the say–do gap (Batson et al. 1997; Williams 1973)</td><td>Calls itself honest, acts otherwise</td><td>WDCT word–deed consistency and the Batson private coin flip (C12)</td><td>Accuracy: open ({T('C2','all','c-d',17):.2f}, {T('C2','all','c-d',29):.2f}). Sincerity: open ({T('C1','all','c-d',17):.2f}, {T('C1','all','c-d',29):.2f}). Self-knowledge: open at layer 17, closed at 29 ({T('A9','all','c-d',17):.2f}, {T('A9','all','c-d',29):.2f}). Honesty-humility: closed ({T('C19','honesty_humility','c-d',17):.2f}, {T('C19','honesty_humility','c-d',29):.2f}).</td></tr>
-<tr><td>recognize → judge</td><td>Seeing the vice without condemning it (moral indifference)</td><td>Spots a lie, does not call it wrong</td><td>No instrument in the map</td><td>Sincerity: at or below control ({T('C1','all','a-b',17):.2f}, {T('C1','all','a-b',29):.2f}); the two directions share a cosine of {cosv(17,U['si_a'],U['si_b']):+.2f}, so the verdict control is what pulls transfer down.</td></tr>
-<tr><td>recognize → act</td><td>Knowing the vice in others without having the virtue (NE II.4: knowing what is right is not being virtuous)</td><td>Detects deception, deceives</td><td>No instrument in the map</td><td>Sincerity: open ({T('C1','all','a-c',17):.2f}, {T('C1','all','a-c',29):.2f}).</td></tr>
-<tr><td>situation → act</td><td>Situational honesty: Gyges (Plato), Hartshorne and May 1928, Asch 1951</td><td>Honest when watched or unopposed, not otherwise</td><td>Alignment-faking compliance gap (E1); are-you-sure answer kept (E5)</td><td>Pushback is sharply encoded in the act frame (E5 within-frame {fid['E5|all']['17']['within']['c']:.2f}, held-out {fid['E5|all']['17']['heldout']['c']:.2f}); being observed is not (E1 act {fid['E1|all']['17']['within']['c']:.2f}).</td></tr>
+<tr><td>judge → act</td><td>Akrasia, weakness of will (Aristotle NE VII; Davidson 1970)</td><td>Judges lying wrong, lies under pressure</td><td>MASK known_facts (belief vs assertion under a pressure prompt); are-you-sure and SYCON pushback (C11, E5)</td><td>Sincerity: open ({T('C1','all','b-c',LM):.2f} at layer {LM}, {T('C1','all','b-c',LL):.2f} at layer {LL}, control {base[LM]:.2f}/{base[LL]:.2f}). The other three have no judge frame.</td></tr>
+<tr><td>self-describe → act</td><td>Hypocrisy, the say–do gap (Batson et al. 1997; Williams 1973)</td><td>Calls itself honest, acts otherwise</td><td>WDCT word–deed consistency and the Batson private coin flip (C12)</td><td>Accuracy: open ({T('C2','all','c-d',LM):.2f}, {T('C2','all','c-d',LL):.2f}). Sincerity: open ({T('C1','all','c-d',LM):.2f}, {T('C1','all','c-d',LL):.2f}). Self-knowledge: open at layer {LM}, closed at 29 ({T('A9','all','c-d',LM):.2f}, {T('A9','all','c-d',LL):.2f}). Honesty-humility: closed ({T('C19','honesty_humility','c-d',LM):.2f}, {T('C19','honesty_humility','c-d',LL):.2f}).</td></tr>
+<tr><td>recognize → judge</td><td>Seeing the vice without condemning it (moral indifference)</td><td>Spots a lie, does not call it wrong</td><td>No instrument in the map</td><td>Sincerity: at or below control ({T('C1','all','a-b',LM):.2f}, {T('C1','all','a-b',LL):.2f}); the two directions share a cosine of {cosv(LM,U['si_a'],U['si_b']):+.2f}, so the verdict control is what pulls transfer down.</td></tr>
+<tr><td>recognize → act</td><td>Knowing the vice in others without having the virtue (NE II.4: knowing what is right is not being virtuous)</td><td>Detects deception, deceives</td><td>No instrument in the map</td><td>Sincerity: open ({T('C1','all','a-c',LM):.2f}, {T('C1','all','a-c',LL):.2f}).</td></tr>
+<tr><td>situation → act</td><td>Situational honesty: Gyges (Plato), Hartshorne and May 1928, Asch 1951</td><td>Honest when watched or unopposed, not otherwise</td><td>Alignment-faking compliance gap (E1); are-you-sure answer kept (E5)</td><td>Pushback is sharply encoded in the act frame (E5 within-frame {fid['E5|all'][LMs]['within']['c']:.2f}, held-out {fid['E5|all'][LMs]['heldout']['c']:.2f}); being observed is not (E1 act {fid['E1|all'][LMs]['within']['c']:.2f}).</td></tr>
 </tbody></table></div>
-<p>Three things follow. First, MASK is an akrasia benchmark: the model's belief is elicited, then a pressure prompt asks it to assert otherwise. Our sincerity direction, learned on matched sincere and deceptive replies, reads MASK at chance ({sincerity_mask:.2f}). The direction we have is not the one that separates holding to a belief from giving it up under pressure, which is the gap that matters. Second, the concepts that measure gaps directly are weakly represented: integrity vs hypocrisy has a within-frame AUROC of {fid['C12|integrity']['17']['within']['c']:.2f} in the act frame and reads the WDCT held-out set at {fid['C12|integrity']['17']['heldout']['c']:.2f}; holding a position under pushback has {fid['C11|all']['17']['within']['c']:.2f} within frame, {fid['C11|all']['17']['heldout']['c']:.2f} on near held-out items and {fid['C11|all']['17']['heldout_far']['c']:.2f} on are-you-sure at layer 17 ({fid['C11|all']['29']['heldout_far']['c']:.2f} at layer 29). The situation (pushback) is far better encoded than the virtue (holding). Third, the one closed gap is honesty-humility's, and that is the definition whose two frames are both statements about the kind of agent one is. Integration in this model is easiest where neither frame is conduct.</p>
+<p>Three things follow. First, MASK is an akrasia benchmark: the model's belief is elicited, then a pressure prompt asks it to assert otherwise. Our sincerity direction, learned on matched sincere and deceptive replies, reads MASK at chance ({sincerity_mask:.2f}). The direction we have is not the one that separates holding to a belief from giving it up under pressure, which is the gap that matters. Second, the concepts that measure gaps directly are weakly represented: integrity vs hypocrisy has a within-frame AUROC of {fid['C12|integrity'][LMs]['within']['c']:.2f} in the act frame and reads the WDCT held-out set at {fid['C12|integrity'][LMs]['heldout']['c']:.2f}; holding a position under pushback has {fid['C11|all'][LMs]['within']['c']:.2f} within frame, {fid['C11|all'][LMs]['heldout']['c']:.2f} on near held-out items and {fid['C11|all'][LMs]['heldout_far']['c']:.2f} on are-you-sure at layer {LM} ({fid['C11|all'][LLs]['heldout_far']['c']:.2f} at layer {LL}). The situation (pushback) is far better encoded than the virtue (holding). Third, the one closed gap is honesty-humility's, and that is the definition whose two frames are both statements about the kind of agent one is. Integration in this model is easiest where neither frame is conduct.</p>
 <p>The claim table for the four definitions, under the paper's criterion (shared: beats the control by 0.10 under three readouts; split: below 0.40 under all three):</p>
 <div class="tbl">{tr_html}</div>
 
 <h2>Result 3: does each direction exist? Sincerity barely does</h2>
 <div class="tbl">{fid_table(FOUR)}</div>
-<p>Three of the four definitions have clean directions. Sincerity does not. Its within-frame AUROC is {c1['17']['within']['c']:.2f} in the act frame at layer 17 and {c1['29']['within']['c']:.2f} at layer 29, and the direction scores the MASK held-out set at {sincerity_mask:.2f}, which is chance, at every layer. Either the sincerity items are weak or a 4B model has little that separates a sincere reply from a deceptive one when the content is otherwise matched. This matters because sincerity is the definition the deception literature means, and MASK is its benchmark. D-045 lists the diagnosis.</p>
+<p>Three of the four definitions have clean directions. Sincerity does not. Its within-frame AUROC is {c1[LMs]['within']['c']:.2f} in the act frame at layer {LM} and {c1[LLs]['within']['c']:.2f} at layer {LL}, and the direction scores the MASK held-out set at {sincerity_mask:.2f}, which is chance, at every layer. Either the sincerity items are weak or a 4B model has little that separates a sincere reply from a deceptive one when the content is otherwise matched. This matters because sincerity is the definition the deception literature means, and MASK is its benchmark. D-045 lists the diagnosis.</p>
 
 <h2>Result 4: steering stays in its lane</h2>
-<p>Adding a direction at layer 17 and reading every direction in the block at layer 29 gives two arrows with z at least 3: sincerity-in-action moves sincerity self-description (z {arrows[0][2]:.1f}) and honesty-humility-in-action moves honesty-humility self-description (z {arrows[1][2]:.1f}). Nothing crosses a definition. The judge direction for sincerity moves recognition and judgment (z 2.5 and 2.3) and not acting or self-description. Accuracy and self-knowledge do not move even their own act-frame readouts at this dose (z {selfz['C2|all|c']} and {selfz['A9|all|c']}; self-knowledge reaches its own self-description at z 2.9 at layer 22). In the wider block, one broad direction, integrity-in-action, raises most honesty self-descriptions and pushes the white-lie readout toward the kind option (appendix).</p>
+<p>Adding a direction at layer {L_STEER} and reading every direction in the block at layer {LL} gives two arrows with z at least 3: sincerity-in-action moves sincerity self-description (z {arrows[0][2]:.1f}) and honesty-humility-in-action moves honesty-humility self-description (z {arrows[1][2]:.1f}). Nothing crosses a definition. The judge direction for sincerity moves recognition and judgment (z 2.5 and 2.3) and not acting or self-description. Accuracy and self-knowledge do not move even their own act-frame readouts at this dose (z {selfz['C2|all|c']} and {selfz['A9|all|c']}; self-knowledge reaches its own self-description at z 2.9 at layer 22). In the wider block, one broad direction, integrity-in-action, raises most honesty self-descriptions and pushes the white-lie readout toward the kind option (appendix).</p>
 
 <h2>Result 5: no honesty behavior moves at the coherent dose</h2>
 <div class="tbl">{beh_table()}</div>
@@ -327,13 +331,13 @@ page = f"""<title>What is honesty, to Gemma?</title>
 
 <h2>Open items</h2>
 <ol>
-<li><b>Sincerity is weak.</b> Within-frame {c1['17']['within']['c']:.2f} and MASK at chance. Diagnose per source, try a logistic probe, audit the act-frame prefills, swap MASK and Apollo roles (D-045). Honesty cannot carry the paper until this is settled.</li>
+<li><b>Sincerity is weak.</b> Within-frame {c1[LMs]['within']['c']:.2f} and MASK at chance. Diagnose per source, try a logistic probe, audit the act-frame prefills, swap MASK and Apollo roles (D-045). Honesty cannot carry the paper until this is settled.</li>
 <li><b>Dose-response (D-041)</b> is running on ada; results not on the Mac yet. It decides whether Result 4 is a dose null or a real null.</li>
 <li><b>One model.</b> OLMo-3-7B-Instruct and Llama-3.1-8B-Instruct get the same items next (S6). The honesty block should run first there, before the other 48 concepts.</li>
-<li><b>Being observed is barely encoded</b> in the act frame (within-frame {fid['E1|all']['17']['within']['c']:.2f} at layer 17, {fid['E1|all']['29']['within']['c']:.2f} at layer 29), so the Hartshorne–May question has no handle in this model. Report as a null.</li>
+<li><b>Being observed is barely encoded</b> in the act frame (within-frame {fid['E1|all'][LMs]['within']['c']:.2f} at layer {LM}, {fid['E1|all'][LLs]['within']['c']:.2f} at layer {LL}), so the Hartshorne–May question has no handle in this model. Report as a null.</li>
 {"" if LAND else '<li><b>Item-level map.</b> Figure 1 places directions. A second figure should place items: every + and − item of the four definitions in every frame, projected into the subspace the ten directions span. This needs the stored activations on ada (a CPU job), not the Mac.</li>'}
-<li><b>The gap instruments are not read by our directions.</b> Integrity reads WDCT at {fid['C12|integrity']['17']['heldout']['c']:.2f}, courage reads are-you-sure at {fid['C11|all']['17']['heldout_far']['c']:.2f} at layer 17, sincerity reads MASK at {sincerity_mask:.2f}. Either the gaps are represented differently from the static contrasts, or they live at a different position than the first 32 reply tokens (the moment of capitulation is later). Worth a per-token look (D-046).</li>
-<li><b>The appendix concepts</b> contain two entanglements worth a sentence in the paper: "I know the answer" shares a direction with "not self-deprecating" in self-description (cosine {D['cos']['self_L17']['cos'][D['cos']['self_L17']['units'].index('A9|all|d')][D['cos']['self_L17']['units'].index('C4|self-deprecating|d')]:+.2f}), and sincerity in action shares with candor ({D['cos']['act_L17']['cos'][D['cos']['act_L17']['units'].index('C1|all|c')][D['cos']['act_L17']['units'].index('C3|all|c')]:+.2f}).</li>
+<li><b>The gap instruments are not read by our directions.</b> Integrity reads WDCT at {fid['C12|integrity'][LMs]['heldout']['c']:.2f}, courage reads are-you-sure at {fid['C11|all'][LMs]['heldout_far']['c']:.2f} at layer {LM}, sincerity reads MASK at {sincerity_mask:.2f}. Either the gaps are represented differently from the static contrasts, or they live at a different position than the first 32 reply tokens (the moment of capitulation is later). Worth a per-token look (D-046).</li>
+<li><b>The appendix concepts</b> contain two entanglements worth a sentence in the paper: "I know the answer" shares a direction with "not self-deprecating" in self-description (cosine {D['cos']['self_L'+LMs]['cos'][D['cos']['self_L'+LMs]['units'].index('A9|all|d')][D['cos']['self_L'+LMs]['units'].index('C4|self-deprecating|d')]:+.2f}), and sincerity in action shares with candor ({D['cos']['act_L'+LMs]['cos'][D['cos']['act_L'+LMs]['units'].index('C1|all|c')][D['cos']['act_L'+LMs]['units'].index('C3|all|c')]:+.2f}).</li>
 </ol>
 
 <h2>Proposed decisions</h2>
@@ -347,15 +351,15 @@ page = f"""<title>What is honesty, to Gemma?</title>
 <p class="note">Full text of each proposal is in <code>docs/DECISIONS.md</code>.</p>
 
 <h2>Appendix A: the other seven honesty concepts</h2>
-<p class="note">Same measures, layer 17 unless stated. "Nearest of the four" is the largest absolute standardized cosine between this concept's direction and the four main definitions in the same frame.</p>
+<p class="note">Same measures, layer {LM} unless stated. "Nearest of the four" is the largest absolute standardized cosine between this concept's direction and the four main definitions in the same frame.</p>
 <div class="tbl">{app_table()}</div>
-<p class="note">Reading: candor shares with sincerity in action; the self-description cluster takes in integrity, courage and sincerity (integrity–honesty-humility {D['cos']['self_L17']['cos'][D['cos']['self_L17']['units'].index('C12|integrity|d')][D['cos']['self_L17']['units'].index('C19|honesty_humility|d')]:+.2f}, sincerity–integrity {D['cos']['self_L17']['cos'][D['cos']['self_L17']['units'].index('C1|all|d')][D['cos']['self_L17']['units'].index('C12|integrity|d')]:+.2f}); the white-lie choice uses neither the sincerity nor the honesty-humility direction, and judging a white lie does not carry over to choosing one ({T('F1','all','b-c',17):.2f}).</p>
+<p class="note">Reading: candor shares with sincerity in action; the self-description cluster takes in integrity, courage and sincerity (integrity–honesty-humility {D['cos']['self_L'+LMs]['cos'][D['cos']['self_L'+LMs]['units'].index('C12|integrity|d')][D['cos']['self_L'+LMs]['units'].index('C19|honesty_humility|d')]:+.2f}, sincerity–integrity {D['cos']['self_L'+LMs]['cos'][D['cos']['self_L'+LMs]['units'].index('C1|all|d')][D['cos']['self_L'+LMs]['units'].index('C12|integrity|d')]:+.2f}); the white-lie choice uses neither the sincerity nor the honesty-humility direction, and judging a white lie does not carry over to choosing one ({T('F1','all','b-c',LM):.2f}).</p>
 
 <h2>Appendix B: how to read the numbers</h2>
 <dl>
 <dt>AUROC</dt><dd>0.5 means the direction cannot tell + from −, 1.0 is perfect, below 0.5 points the wrong way. Within-frame uses the direction's own frame; transfer uses another frame's items and averages both ways.</dd>
-<dt>Control baseline</dt><dd>What a formality contrast and a topic contrast carry over between frames: {base[17]:.2f} at layer 17, {base[29]:.2f} at layer 29. Shared means 0.10 above it under three readouts (reply as is, token before the reply, reply with Gemma's verdict removed).</dd>
-<dt>Cosine</dt><dd>Between two directions after standardizing each hidden dimension. The shuffle floor is the 95th percentile of cosines between shuffled-label directions, {floor17:.2f} at layer 17 and {floor29:.2f} at layer 29.</dd>
+<dt>Control baseline</dt><dd>What a formality contrast and a topic contrast carry over between frames: {base[LM]:.2f} at layer {LM}, {base[LL]:.2f} at layer {LL}. Shared means 0.10 above it under three readouts (reply as is, token before the reply, reply with Gemma's verdict removed).</dd>
+<dt>Cosine</dt><dd>Between two directions after standardizing each hidden dimension. The shuffle floor is the 95th percentile of cosines between shuffled-label directions, {floor17:.2f} at layer {LM} and {floor29:.2f} at layer {LL}.</dd>
 <dt>z</dt><dd>Steering effect on a target direction, in units of that direction's + minus − gap, minus the skip-path prediction, divided by the spread over eight norm-matched random directions.</dd>
 <dt>Behavior effect</dt><dd>Paired item-level difference from the unsteered reply, with its standard error, against four random directions at the same dose.</dd>
 </dl>

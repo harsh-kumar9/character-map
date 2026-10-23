@@ -10,7 +10,10 @@ from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.lines import Line2D
 
 REPO = Path(sys.argv[1]); OUT = Path(sys.argv[2])
-ov = json.load(open(REPO / "results/s4/overlap_verdict.json"))
+import os
+TAG = os.environ.get("CM_TAG", "")                 # results/<TAG>/ for other subject models; "" = Gemma-3-4B
+LM, LL = int(os.environ.get("CM_LMID", 17)), int(os.environ.get("CM_LLATE", 29))   # the two depths the page shows
+ov = json.load(open((REPO / "results" / TAG if TAG else REPO / "results") / "s4" / "overlap_verdict.json"))
 units = ov["units"]; idx = {u: i for i, u in enumerate(units)}
 
 # the trimmed block (Occam): four definitions, frames where they exist
@@ -93,9 +96,9 @@ def draw_grid(ax, layer, title):
 fig = plt.figure(figsize=(7.3, 3.1))
 gs = fig.add_gridspec(1, 3, width_ratios=[1, 1, 1.25], wspace=0.35)
 ax1 = fig.add_subplot(gs[0, 0]); ax2 = fig.add_subplot(gs[0, 1]); ax3 = fig.add_subplot(gs[0, 2])
-rows17, X17 = draw_map(ax1, 17, "Layer 17"); letter(ax1, "a")
-rows29, X29 = draw_map(ax2, 29, "Layer 29"); letter(ax2, "b")
-floor = draw_grid(ax3, 17, "Cosine, layer 17"); letter(ax3, "c")
+rows17, X17 = draw_map(ax1, LM, f"Layer {LM}"); letter(ax1, "a")
+rows29, X29 = draw_map(ax2, LL, f"Layer {LL}"); letter(ax2, "b")
+floor = draw_grid(ax3, LM, f"Cosine, layer {LM}"); letter(ax3, "c")
 h = [Line2D([], [], marker="o", ls="none", color=col, label=name, ms=5) for name, _, col in DEFS] + \
     [Line2D([], [], marker="o", ls="none", mfc="white", mec=MUTED, label=CTRL[0], ms=4)] + \
     [Line2D([], [], marker=m, ls="none", color=INK2, mfc="white", label=n, ms=5) for f, (n, m) in FR.items()]
@@ -104,12 +107,12 @@ fig.savefig(OUT / "honesty_map.png", dpi=300, bbox_inches="tight", pad_inches=0.
 fig.savefig(OUT / "honesty_map.pdf", bbox_inches="tight", pad_inches=0.03)
 # numbers for the text
 out = {}
-for L, rows, X in ((17, rows17, X17), (29, rows29, X29)):
+for L, rows, X in ((LM, rows17, X17), (LL, rows29, X29)):
     r, C = block(L, True)
     out[L] = {"floor": ov["layers"][str(L)]["floor_cos"], "units": [x[2] for x in r], "cos": C.round(3).tolist(), "mds": X.round(3).tolist()}
 json.dump(out, open(OUT / "honesty_map.json", "w"), indent=1)
 # print the pairwise table in words
-for L in (17, 29):
+for L in (LM, LL):
     r, C = block(L, False)
     print(f"layer {L} floor {ov['layers'][str(L)]['floor_cos']:.2f}")
     for i in range(len(r)):
