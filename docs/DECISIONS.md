@@ -1274,3 +1274,10 @@ auroc_sdm added to S3 and shown beside dm on the page, misleading in the tables 
 Harsh: ratified as proposed (same message). C22's held-out is the insider-trading report turn (explicit vs
 concealed), its three question kinds rotate; C23's held-out is MentalManip in frame a, its behavior the three
 DarkBench patterns, and its neg pole states no false fact. Build order: C1, then C22, then C23.
+
+## D-047 ruling (2) - 2026-10-23
+
+Harsh: "Continue the steering and behavior stages on the four-definition block for both models as queued; the
+six-definition rerun can come later." The gemma-4-31b-it and Qwen3.5-27B runs stay on the 13-concept block and the
+stimuli as of commit 5e38d22 (A9, C2, C19 without recognize/judge frames; no C8). Their pages are separate artifacts
+(Gemma-4 6zqTm4T2…, Qwen GAJM15LM…). The D-049 six-definition rerun on these models is a later stage.
