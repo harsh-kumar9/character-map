@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
+LM, LL = os.environ.get("CM_LMID", "17"), os.environ.get("CM_LLATE", "29")
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
@@ -38,7 +39,7 @@ def coords(L, within):
 
 export = {"meta": [{"def": d, "frame": f, "pol": p} for d, f, p in zip(defn, frame, pol)], "views": {}}
 fig, axes = plt.subplots(2, 3, figsize=(7.3, 5.0))
-for r, L in enumerate(("17", "29")):
+for r, L in enumerate((LM, LL)):
     C = coords(L, False); var = J[L]["variance_all"]
     centro = {}
     for u in np.unique(unit):
@@ -76,7 +77,7 @@ fig.savefig(HERE / "landscape_3pc.png", dpi=300, bbox_inches="tight", pad_inches
 fig.savefig(HERE / "landscape_3pc.pdf", bbox_inches="tight", pad_inches=0.03)
 json.dump(export, open(HERE / "landscape_3d.json", "w"), separators=(",", ":"))
 # what the third component carries, for the text
-for L in ("17", "29"):
+for L in (LM, LL):
     C = coords(L, False); print(f"layer {L} variance PC1-4 {[round(v, 2) for v in J[L]['variance_all'][:4]]}")
     for u in sorted(set(unit)):
         gap = C[(unit == u) & (pol == "pos")][:, :3].mean(0) - C[(unit == u) & (pol == "neg")][:, :3].mean(0)

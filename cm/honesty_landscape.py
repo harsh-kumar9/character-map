@@ -144,7 +144,7 @@ def draw(meta, points, summary, rng):
                          "axes.spines.top": False, "axes.spines.right": False, "pdf.fonttype": 42, "text.color": INK})
     col = {name: c for name, _, _, c in DEFS}; col[CTRL[0]] = CTRL[3]
     fig, axes = plt.subplots(2, 2, figsize=(7.3, 6.6))
-    panels = [(axes[0, 0], 17, "a", False), (axes[0, 1], 29, "b", False), (axes[1, 0], 17, "c", True), (axes[1, 1], 29, "d", True)]
+    panels = [(axes[0, 0], LAYERS[0], "a", False), (axes[0, 1], LAYERS[1], "b", False), (axes[1, 0], LAYERS[0], "c", True), (axes[1, 1], LAYERS[1], "d", True)]
     for ax, L, letter, within in panels:
         Y = points[f"w{L}" if within else str(L)]
         var = summary["layers"][str(L)]["variance_within" if within else "variance_explained"]
