@@ -4,18 +4,70 @@ from pathlib import Path
 OUT = Path(sys.argv[1])
 D = json.load(open(OUT / "honesty_data.json")); MP = json.load(open(OUT / "honesty_map.json")); LT = json.load(open(OUT / "honesty_lattice.json"))
 img = base64.b64encode(open(OUT / "honesty_lattice.png", "rb").read()).decode()
-LAND = (OUT / "landscape.png").exists()
+LAND = (OUT / "landscape_3pc.png").exists() and (OUT / "landscape_3d.json").exists()
 if LAND:
-    land_img = base64.b64encode(open(OUT / "landscape.png", "rb").read()).decode()
+    land_img = base64.b64encode(open(OUT / "landscape_3pc.png", "rb").read()).decode()
     LJ = json.load(open(OUT / "landscape.json"))
+    L3D = open(OUT / "landscape_3d.json").read()
     LAND_TEXT = open(OUT / "landscape_text.html").read() if (OUT / "landscape_text.html").exists() else ""
+    L3D_IMG = base64.b64encode(open(OUT / "landscape_3d.png", "rb").read()).decode() if (OUT / "landscape_3d.png").exists() else ""
 def land_section():
     if not LAND: return ""
-    v17 = LJ["layers"]["17"]["variance_explained"]; v29 = LJ["layers"]["29"]["variance_explained"]
+    v17 = LJ["layers"]["17"]["variance_all"]; v29 = LJ["layers"]["29"]["variance_all"]
     c17 = LJ["layers"]["17"]["consistency_with_s4"]; c29 = LJ["layers"]["29"]["consistency_with_s4"]
     return f"""<h3>The same block, item by item</h3>
-<figure><img src="data:image/png;base64,{land_img}" alt="Items of the four honesty definitions projected into the honesty subspace">
-<figcaption><b>Figure 2. Every item of the four definitions, in the subspace the ten directions span.</b> Each small mark is one scenario in one frame, filled for the + version and hollow for the −, colored by definition and shaped by frame; at most {120} per unit and polarity are drawn, from {LJ["n_items"]} items in all. Large marks are the + and − centroids of each unit, joined by an arrow from − to +. The axes are the first two principal components of the items' coordinates in the ten-direction subspace ({v17[0]*100:.0f}% and {v17[1]*100:.0f}% of that subspace's variance at layer 17, {v29[0]*100:.0f}% and {v29[1]*100:.0f}% at layer 29). The formality control's items are drawn in grey for reference. Directions here are rebuilt from the same items with the standardizing SD taken over this pool rather than S4's probe pool; their cosines agree with the S4 values used in Figure 1 to within {max(c17["max_abs_diff"], c29["max_abs_diff"]):.2f}.</figcaption></figure>
+<figure><img src="data:image/png;base64,{land_img}" alt="Items of the four honesty definitions projected into the honesty subspace, three principal components">
+<figcaption><b>Figure 2. Every item of the four definitions in the subspace the ten directions span, three components.</b> Each small mark is one scenario in one frame, filled for the + version and hollow for the −, colored by definition and shaped by frame; at most 120 per unit and polarity are drawn, from {LJ["n_items"]} items in all. Large marks are the + and − centroids of each unit, joined by an arrow from − to +. Axes are the first three principal components of the items' coordinates in the ten-direction subspace: {v17[0]*100:.0f}%, {v17[1]*100:.0f}% and {v17[2]*100:.0f}% of that subspace's variance at layer 17 (a–c), {v29[0]*100:.0f}%, {v29[1]*100:.0f}% and {v29[2]*100:.0f}% at layer 29 (d–f). The formality control's items are drawn in grey. Directions here are rebuilt from the same items with the standardizing SD taken over this pool rather than S4's probe pool; their cosines agree with the S4 values used in Figure 1 to within {max(c17["max_abs_diff"], c29["max_abs_diff"]):.2f}.</figcaption></figure>
+<div class="box"><h3>Rotate it</h3>
+<p class="note">The same points on the three components. Drag to rotate, scroll to zoom, hover for the item's definition, frame and polarity. Shapes are frames: circle act, square self-describe, diamond judge, x recognize; open marks are the − version. The thick segments run from each unit's − centroid (white) to its + centroid. The buttons switch layer, and between the space as is and each unit centred on its own mean. The legend hides or shows a definition.</p>
+<div id="land3d" style="width:100%;height:560px"></div>
+<div class="viewbar" id="viewbar"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.1/plotly.min.js"></script>
+<script>
+(function(){{
+  var D = {L3D};
+  var COL = {{"Self-knowledge":"#009E73","Accuracy":"#E69F00","Sincerity":"#0072B2","Honesty-humility":"#CC79A7","Formality (control)":"#898781"}};
+  var SYM = {{"a":"x","b":"diamond","c":"circle","d":"square"}};
+  var FRN = {{"a":"recognize","b":"judge","c":"act","d":"self-describe"}};
+  var CIDN = {{"A9":"Self-knowledge","C2":"Accuracy","C1":"Sincerity","C19":"Honesty-humility","K1":"Formality (control)"}};
+  var views = Object.keys(D.views);
+  function tokens(){{ var cs = getComputedStyle(document.documentElement); return {{bg: cs.getPropertyValue("--surface").trim()||"#fff", ink: cs.getPropertyValue("--ink").trim()||"#111", ink2: cs.getPropertyValue("--ink2").trim()||"#555", rule: cs.getPropertyValue("--rule").trim()||"#ddd"}}; }}
+  function build(viewName){{
+    var V = D.views[viewName]; var xyz = V.xyz; var traces = [];
+    var groups = {{}};
+    D.meta.forEach(function(m, i){{ var k = m.def+"|"+m.frame+"|"+m.pol; (groups[k] = groups[k] || []).push(i); }});
+    var seen = {{}};
+    Object.keys(groups).sort().forEach(function(k){{
+      var p = k.split("|"); var idx = groups[k]; var ctrl = p[0].indexOf("Formality")===0;
+      var first = !seen[p[0]]; seen[p[0]] = true;
+      var sym = SYM[p[1]] + (p[2]==="neg" && SYM[p[1]]!=="x" ? "-open" : ""); if (p[2]==="neg" && SYM[p[1]]==="x") sym = "cross";
+      traces.push({{type:"scatter3d", mode:"markers", name: p[0], legendgroup: p[0], showlegend: first,
+        x: idx.map(function(i){{return xyz[i][0];}}), y: idx.map(function(i){{return xyz[i][1];}}), z: idx.map(function(i){{return xyz[i][2];}}),
+        marker: {{size: ctrl?2:2.6, color: COL[p[0]], symbol: sym, opacity: ctrl?0.35:0.55, line:{{width:0}}}},
+        hovertemplate: p[0]+", "+FRN[p[1]]+", "+(p[2]==="pos"?"+":"−")+"<extra></extra>"}});
+    }});
+    Object.keys(V.centroids).forEach(function(u){{
+      var c = V.centroids[u]; var q = u.split("|"); var name = CIDN[q[0]]; var col = COL[name];
+      traces.push({{type:"scatter3d", mode:"lines+markers", name: name+", "+FRN[q[2]], legendgroup: name, showlegend:false,
+        x:[c[0][0],c[1][0]], y:[c[0][1],c[1][1]], z:[c[0][2],c[1][2]], line:{{color:col, width:5}},
+        marker:{{size:[5,6], color:[ "#ffffff", col], symbol: SYM[q[2]]==="x"?"circle":SYM[q[2]], line:{{color:col, width:2}}}},
+        hovertemplate: name+", "+FRN[q[2]]+": %{{text}}<extra></extra>", text:["− centroid","+ centroid"]}});
+    }});
+    var t = tokens(); var ax = function(n, i){{ return {{title:{{text:n+" ("+Math.round(V.var[i]*100)+"%)", font:{{size:11, color:t.ink2}}}}, gridcolor:t.rule, zerolinecolor:t.rule, backgroundcolor:t.bg, showbackground:true, tickfont:{{size:9, color:t.ink2}}}}; }};
+    var layout = {{paper_bgcolor:t.bg, plot_bgcolor:t.bg, font:{{color:t.ink, family:"Source Sans 3, Helvetica, Arial, sans-serif"}}, margin:{{l:0,r:0,t:10,b:0}},
+      scene:{{xaxis:ax("PC1",0), yaxis:ax("PC2",1), zaxis:ax("PC3",2), aspectmode:"data", camera:{{eye:{{x:1.5,y:1.3,z:0.9}}}}}},
+      legend:{{font:{{size:11, color:t.ink}}, itemsizing:"constant", bgcolor:"rgba(0,0,0,0)", x:1, y:1, title:{{text:"click to hide or show", font:{{size:10, color:t.ink2}}}}}}, showlegend:true}};
+    Plotly.newPlot("land3d", traces, layout, {{responsive:true, displaylogo:false, modeBarButtonsToRemove:["toImage"]}});
+  }}
+  var bar = document.getElementById("viewbar"); var current = views[0];
+  views.forEach(function(v){{ var b = document.createElement("button"); b.type="button"; b.id="view-"+v.replace(/[^a-z0-9]+/gi,"-"); b.textContent = v; b.className = "viewbtn"+(v===current?" on":"");
+    b.addEventListener("click", function(){{ current = v; build(v); Array.prototype.forEach.call(bar.children, function(x){{ x.classList.toggle("on", x===b); }}); }}); bar.appendChild(b); }});
+  build(current);
+  if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function(){{ build(current); }});
+}})();
+</script>
+{('<figure><img src="data:image/png;base64,' + L3D_IMG + '" alt="Static 3D rendering of the three components"><figcaption><b>Figure 3. The three components in one view.</b> The same points as Figure 2 drawn in three dimensions at a fixed viewpoint, layer 17 (a) and layer 29 (b); the rotatable version above is the same data. The three plates are the utterance types; the long green segments are the self-knowledge contrasts, which cross from the act plate to the self-describe plate.</figcaption></figure>') if L3D_IMG else ''}
 {LAND_TEXT}"""
 
 
@@ -163,6 +215,10 @@ td.hi{background:var(--ok-soft)}td.low,td.weak{background:var(--warn-soft)}
 figure{margin:1.4rem 0}figure img{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--rule);border-radius:4px}
 figcaption{font-size:.88rem;color:var(--ink2);margin-top:.5rem}
 .note{font-size:.9rem;color:var(--ink2)}
+.viewbar{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
+.viewbtn{font:inherit;font-size:.85rem;padding:.3rem .7rem;border:1px solid var(--rule);border-radius:4px;background:var(--surface);color:var(--ink);cursor:pointer}
+.viewbtn.on{border-color:var(--accent);background:var(--accent-soft)}
+.viewbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 a{color:var(--accent)}
 code{font-family:var(--mono);font-size:.84em;background:var(--accent-soft);padding:0 .25em;border-radius:3px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}@media (max-width:640px){.two{grid-template-columns:1fr}}
