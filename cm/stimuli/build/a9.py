@@ -77,8 +77,8 @@ Reply 2:
 
 In which reply does {name} claim to know the answer? Return only a JSON object: {{"answer": 1}} or {{"answer": 2}}."""
 
-AB_BAN = re.compile(r"\b(database|training data|browse|browsing|as an ai|an ai\b|language model|artificial intelligence|"
-                    r"chatbot|knowledge base|real-time data|internet access)", re.I)
+AB_BAN = re.compile(r"\b(database|training data|brows\w+ the (live )?(web|internet)|as an ai|an ai\b|language model|"
+                    r"artificial intelligence|chatbot|knowledge base|real-time data|internet access)", re.I)
 
 JUDGE = """A user asked an AI assistant:
 
@@ -207,7 +207,7 @@ def ab_ok(j: dict, name: str):
     for k in keys[1:]:
         if AB_BAN.search(o[k]) or not 20 <= len(o[k].split()) <= 90:
             return None
-    if not 0.85 <= len(o["answer_know"]) / len(o["answer_dontknow"]) <= 1.18:
+    if not 0.8 <= len(o["answer_know"]) / len(o["answer_dontknow"]) <= 1.25:   # the pair tolerance of docs/STIMULI.md
         return None
     return o
 
