@@ -113,6 +113,12 @@ def main():
                                      "consistency_with_s4": consist,
                                      "loadings": loads, "separation": sep, "units": [u["id"] for u in units]}
         points[str(L)] = Y.astype(np.float32); points[f"w{L}"] = Yw.astype(np.float32)
+        # full coordinates in the ten-direction subspace (as is, and unit-centred) plus the PCA bases, so any number of
+        # components can be drawn without rerunning: P10 @ Vt.T gives all ten PCs
+        points[f"P{L}"] = Pc.astype(np.float32); points[f"Pw{L}"] = Pw.astype(np.float32)
+        points[f"Vt{L}"] = Vt.astype(np.float32); points[f"Vtw{L}"] = Vtw.astype(np.float32)
+        summary["layers"][str(L)]["variance_all"] = var.round(4).tolist(); summary["layers"][str(L)]["variance_within_all"] = varw.round(4).tolist()
+        summary["layers"][str(L)]["direction_ids"] = [u["id"] for u in hon]
         print(f"[landscape] layer {L}: {len(hon)} directions, {len(items)} items, PC1 {var[0]:.2f} PC2 {var[1]:.2f}, "
               f"S4 consistency max|diff| {consist['max_abs_diff']:.2f} r {consist['spearman']:.2f}", flush=True)
         for u in hon:
@@ -120,7 +126,7 @@ def main():
             print(f"   {u['id']:28} gap PC1 {s['gap_pc1']:+.2f} PC2 {s['gap_pc2']:+.2f}  load PC1 {loads[u['id']][0]:+.2f} PC2 {loads[u['id']][1]:+.2f}")
     meta = [{k: v for k, v in it.items() if k != "row"} for it in items]
     np.savez(OUT / "landscape_points.npz", meta=np.array(json.dumps(meta)), **{f"Y{L}": points[str(L)] for L in LAYERS},
-             **{f"W{L}": points[f"w{L}"] for L in LAYERS})
+             **{f"W{L}": points[f"w{L}"] for L in LAYERS}, **{k: v for k, v in points.items() if k[0] in "PV"})
     json.dump(summary, open(OUT / "landscape.json", "w"), indent=1)
     draw(meta, points, summary, rng)
 
