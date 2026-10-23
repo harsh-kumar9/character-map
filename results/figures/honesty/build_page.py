@@ -285,13 +285,13 @@ if not (IS_DEFAULT and HAVE_CAUSAL):
 if not (IS_DEFAULT and HAVE_BEH):
     BEH_BULLET = "<li><b>Behavior.</b> " + beh_generic()[3:-4] + "</li>"
     R5_BLOCK = "<h2>Result 5: behavior under steering</h2>\n" + (('<div class="tbl">' + beh_table() + "</div>\n") if HAVE_BEH else "") + beh_generic() + "\n"
-page = f"""<title>What is honesty, to Gemma?</title>
+page = f"""<title>{"What is honesty, to Gemma?" if IS_DEFAULT else "What is honesty, to " + MODEL_NAME + "?"}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono&display=swap">
 <style>{CSS}</style>
 <article>
 <div class="eyebrow">character-map · research note · draft · 22 October 2026</div>
-<h1>What is honesty, to Gemma?</h1>
+<h1>{"What is honesty, to Gemma?" if IS_DEFAULT else "What is honesty, to " + MODEL_NAME + "?"}</h1>
 <p class="stand">Honesty has at least four working definitions in the literature. Inside Gemma-3-4B-IT they are four different directions when the model acts, they partly merge when it describes itself, and steering one leaves the others alone.</p>
 <div class="meta"><span><b>Model</b> {MODEL_NAME}</span><span><b>Method</b> diff-of-means directions, cross-frame transfer, standardized cosine, steering</span><span><b>Code and results</b> <a href="https://github.com/harsh-kumar9/character-map">github.com/harsh-kumar9/character-map</a></span></div>
 {banner}<p class="note"><b>Epistemic status.</b> Exploratory. One model, linear readouts, one steering dose. The geometry is stable across the confound controls we ran; the behavioral part is a null at a coherence-limited dose and a dose-response run is pending. The sincerity direction is weak in this model (see Result 3), and that is the one most of the literature means by honesty.</p>

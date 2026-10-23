@@ -115,8 +115,10 @@ fig.savefig(OUT / "honesty_lattice.png", dpi=300, bbox_inches="tight", pad_inche
 fig.savefig(OUT / "honesty_lattice.pdf", bbox_inches="tight", pad_inches=0.04)
 json.dump({"floor_mid": f17, "floor_late": f29, "arrows_late": arrows, "selfz_late": SELFZ, "layers": {"mid": LM, "late": LL, "steer": L_STEER}}, open(OUT / "honesty_lattice.json", "w"), indent=1)
 print("floors", round(f17, 2), round(f29, 2)); print("arrows", arrows); print("selfz", SELFZ)
-# also z at L22 for the text
-li22 = layers.index(22); us = [n[2] for n in nodes]
-for s in us:
-    if s in src:
-        print("L22", s, {t: round(Z[src.index(s)][li22][tgt.index(t)], 1) for t in us if Z[src.index(s)][li22][tgt.index(t)] is not None and abs(Z[src.index(s)][li22][tgt.index(t)]) >= 2})
+# also z at the first causal readout depth, for the text
+if HAVE_CAUSAL:
+    li0 = 0; us = [n[2] for n in nodes]
+    for s_ in us:
+        if s_ in src:
+            print(f"L{layers[0]}", s_, {t: round(Z[src.index(s_)][li0][tgt.index(t)], 1) for t in us
+                                        if Z[src.index(s_)][li0][tgt.index(t)] is not None and abs(Z[src.index(s_)][li0][tgt.index(t)]) >= 2})
