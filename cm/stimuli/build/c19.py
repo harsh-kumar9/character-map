@@ -129,6 +129,15 @@ In which reply does {name} show higher honesty-humility? Answer with only the nu
 AB_ATTEMPTS = 3
 
 
+def clean_scene(s) -> str:
+    """Whitespace-normalized; surrounding quotes removed only when the whole text is one quoted string. A scene ends
+    with the quoted question, which the group helper's clean() would truncate by stripping the closing quote."""
+    s = re.sub(r"\s+", " ", str(s)).strip()
+    if len(s) >= 2 and s[0] == s[-1] == '"' and s.count('"') == 2:
+        s = s[1:-1].strip()
+    return s
+
+
 def ab_scene(gen: H.Gen, key: str, o: dict):
     """Frames a/b scene for one honesty-humility scenario: {scene, name, _gen_id, verify_id} once generated and
     verified, else None (pending, or failed every attempt)."""
@@ -138,9 +147,9 @@ def ab_scene(gen: H.Gen, key: str, o: dict):
     prompt = AB_PROMPT.format(name=name, question=o["question"], a1=a1, a2=a2)
 
     def check(j):
-        s_ = H.need(["scene"])(j)
-        if not s_:
+        if not isinstance(j, dict) or not str(j.get("scene") or "").strip():
             return None
+        s_ = {"scene": clean_scene(j["scene"])}
         sc, low = s_["scene"], s_["scene"].lower()
         ok = (name in sc and 35 <= len(sc.split()) <= 160 and "?" in sc
               and o["response_high"].lower() not in low and o["response_low"].lower() not in low)

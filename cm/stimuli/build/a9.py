@@ -77,6 +77,15 @@ Reply 2:
 
 In which reply does {name} claim to know the answer? Return only a JSON object: {{"answer": 1}} or {{"answer": 2}}."""
 
+def clean_scene(s) -> str:
+    """Whitespace-normalized; surrounding quotes removed only when the whole text is one quoted string. A scene ends
+    with the quoted question, which the group helper's clean() would truncate by stripping the closing quote."""
+    s = re.sub(r"\s+", " ", str(s)).strip()
+    if len(s) >= 2 and s[0] == s[-1] == '"' and s.count('"') == 2:
+        s = s[1:-1].strip()
+    return s
+
+
 AB_BAN = re.compile(r"\b(database|training data|brows\w+ the (live )?(web|internet)|as an ai|an ai\b|language model|"
                     r"artificial intelligence|chatbot|knowledge base|real-time data|internet access)", re.I)
 
@@ -200,7 +209,7 @@ def ab_ok(j: dict, name: str):
     keys = ["scene", "answer_know", "answer_dontknow"]
     if not fields_ok(j, keys):
         return None
-    o = {k: clean(j[k]) for k in keys}
+    o = {k: clean_scene(j[k]) for k in keys}
     sc = o["scene"]
     if name not in sc or not 15 <= len(sc.split()) <= 90 or "?" not in sc:
         return None
