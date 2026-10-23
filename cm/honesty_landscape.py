@@ -16,15 +16,16 @@ import json
 
 import numpy as np
 
-from .paths import RESULTS
+from . import cfg
 from .s4_overlap import DEPTHS, LIDX, concept_data, unit_vec
 
+RESULTS = cfg.results_dir()
 OUT = RESULTS / "figures" / "honesty"
 DEFS = [("Self-knowledge", "A9", "all", "#009E73"), ("Accuracy", "C2", "all", "#E69F00"),
         ("Sincerity", "C1", "all", "#0072B2"), ("Honesty-humility", "C19", "honesty_humility", "#CC79A7")]
 CTRL = ("Formality (control)", "K1", "all", "#898781")
 FRAMES = {"a": ("recognize", "^"), "b": ("judge", "D"), "c": ("act", "o"), "d": ("self-describe", "s")}
-LAYERS = (17, 29)
+LAYERS = tuple(cfg.L_LAND)
 MAX_PLOT = 120          # points per unit and polarity in the figure; PCA uses every item
 SEED = 0
 

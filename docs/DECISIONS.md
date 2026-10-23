@@ -834,3 +834,27 @@ Proposed:
   capitulation is later than the first 32 tokens).
 - Score any training method (D-044) by which gap it closes: act toward judge (akrasia) vs act toward self-description
   (hypocrisy), with the gap instruments as the behavioral side.
+
+## D-047 Two larger subjects for the honesty block - proposed 2026-10-23
+
+Harsh (2026-10-23): "can we run this end to end on Gemma4-31B and Qwen3.6-27B ... do we need SAEs or not?" No: the
+honesty story uses dense directions only (S3 transfer, S4 standardized cosines, S5 steering, the landscape); SAEs
+enter only the S0/S1 fidelity gates, the S4 Jaccard check and the bottom-up pass, none of which the block uses.
+Cache check: google/gemma-4-31b-it is cached (5376-dim, 60 layers). Qwen/Qwen3.6-27B is a config-only stub (13 MB);
+Qwen/Qwen3.5-27B and Qwen/Qwen3.8-27B are cached in full (5120-dim, 64 layers, both Qwen3_5ForConditionalGeneration,
+so the same code path). Proposed:
+- Subjects: gemma-4-31b-it now; the Qwen subject is Qwen3.8-27B (cached, newest) unless Harsh prefers to download
+  Qwen3.6-27B (about 55 GB; /ada1 has 3 TB free). cm/cfg.py carries entries for 3.5, 3.6 and 3.8.
+- Scope: the honesty block and its controls, 13 concepts: A9, C1, C2, C19 (spine), C3, C4, C11, C12, E1, E5, F1
+  (appendix), K1, K2 (transfer baselines). The other 49 concepts wait for a decision on the full replication.
+- Stages: replies (own-reply frames, greedy 32 tokens, the subject's own chat template, thinking off for Qwen), acts
+  (all hidden states, float32), verdict labels (judge stays gemma-4-31B-it; for the gemma-4 subject that is the model
+  judging its own openings, which D-014 allows for a label this coarse), S3 directions and controls, claims, S4
+  cosines, S5a with per-model dose calibration, S5b with the same two judges, the landscape, a page per model.
+  No SAE stages. Stimuli and behavior items are shared across subjects.
+- Depths: the same fractions of depth as Gemma-3-4B's 9/17/22/29 of 34: gemma-4-31b 16/30/39/51 of 60, Qwen 27B
+  17/32/42/54 of 64. Steering at the second depth, causal readouts at the third and fourth, landscape at the second
+  and fourth. One global dose per model, calibrated as in D-039.
+- Paths: CM_MODEL selects the subject; gemma-3-4b-it keeps the unprefixed paths, others write outputs/<tag>/ and
+  results/<tag>/ (cm/cfg.py). Storage per subject for the block: about 30 GB of activations.
+- Order: smoke test (A9 replies and acts, then S3 on it) before any full stage; stages one at a time, gate read.

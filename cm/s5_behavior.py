@@ -30,15 +30,17 @@ import re
 
 import numpy as np
 
-from .paths import OUTPUTS, RESULTS
+from . import cfg
+from .paths import OUTPUTS as STIM_ROOT          # stimuli are shared across models
 from .stimuli.schema import item_dir, read_jsonl, write_jsonl
 
+OUTPUTS, RESULTS = cfg.outputs_dir(), cfg.results_dir()
 OUT = OUTPUTS / "s5b"
 RES = RESULTS / "s5b"
 X1_OUT = OUTPUTS / "s5b"
 MULT = 1          # dose multiple of the S5a dose; set by --dose-mult (dose-response check, D-041)
 N_RAND_DOSE = 3
-L_IN = 17
+L_IN = cfg.L_STEER
 N_RAND = 4
 CONFLICT = {"F1": ["C1|all|c", "C5|all|c"], "F2": ["C14|defer|c", "B1|all|b"], "F3": ["C15|refuse|c", "A1|all|c"],
             "F4": ["B2|all|b", "B3|all|b"], "F5": ["C6|all|c", "C5|all|c"]}
@@ -46,14 +48,14 @@ JUDGES = {"gemma": "google/gemma-4-31B-it", "qwen": "Qwen/Qwen3.5-27B"}
 
 
 def concepts():
-    return sorted(p.parent.name for p in (OUTPUTS / "stimuli").glob("*/behavior.jsonl"))
+    return sorted(p.parent.name for p in (STIM_ROOT / "stimuli").glob("*/behavior.jsonl"))
 
 
 def setup():
     S = json.loads((RESULTS / "s5" / "setup.json").read_text())
     A = np.load(OUTPUTS / "s5" / "setup.npz")
     cal = json.loads((RESULTS / "s5" / "calibration.json").read_text())
-    norm = json.loads((RESULTS / "s5" / "residual_norm_L17.json").read_text())["median_token_norm"]
+    norm = json.loads((RESULTS / "s5" / f"residual_norm_L{L_IN}.json").read_text())["median_token_norm"]
     return S, A, cal["chosen_c"] * norm * MULT
 
 
@@ -115,7 +117,7 @@ def cmd_gen(shard, nshards, only=None):
     import torch
     from . import model as cm_model
     S, A, dose = setup()
-    m, tok = cm_model.load("gemma-3-4b-it")
+    m, tok = cm_model.load(cfg.MODEL)
     tok.padding_side = "left"
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "replies").mkdir(exist_ok=True)
@@ -136,7 +138,8 @@ def cmd_gen(shard, nshards, only=None):
             for mt, its in groups.items():
                 for b in range(0, len(its), 32):
                     batch = its[b:b + 32]
-                    chats = [tok.apply_chat_template(it["messages"], tokenize=False, add_generation_prompt=True) for it in batch]
+                    chats = [tok.apply_chat_template(it["messages"], tokenize=False, add_generation_prompt=True, **cfg.chat_kwargs())
+                             for it in batch]
                     enc = tok(chats, return_tensors="pt", padding=True, add_special_tokens=False).to("cuda")
                     with torch.no_grad():
                         if vec is not None:

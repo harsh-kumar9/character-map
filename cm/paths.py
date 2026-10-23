@@ -12,6 +12,10 @@ HF_ROOT = Path(os.environ.get("HF_HUB_CACHE", "/ada1/u/harsh/.cache/huggingface"
 
 MODELS = {
     "gemma-3-4b-it": "google/gemma-3-4b-it",
+    "gemma-4-31b-it": "google/gemma-4-31b-it",
+    "qwen3.5-27b": "Qwen/Qwen3.5-27B",
+    "qwen3.6-27b": "Qwen/Qwen3.6-27B",
+    "qwen3.8-27b": "Qwen/Qwen3.8-27B",
 }
 SAE_REPOS = {
     "gemma-3-4b-it": "google/gemma-scope-2-4b-it",

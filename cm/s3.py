@@ -26,13 +26,14 @@ from concurrent.futures import ProcessPoolExecutor
 
 import numpy as np
 
+from . import cfg
 from .paths import OUTPUTS, RESULTS
 from .stimuli.schema import CARDS, item_dir
 
-ACTS = OUTPUTS / "acts" / "stimuli"
-OUT = RESULTS / "s3"
-LAYERS = list(range(35))
-SAE_INDEX = {9: 10, 17: 18, 22: 23, 29: 30}   # decoder layer -> hidden-state index
+ACTS = cfg.acts_dir()
+OUT = cfg.results_dir() / "s3"
+LAYERS = list(range(cfg.N_STATES))
+SAE_INDEX = dict(cfg.DEPTHS)   # decoder layer -> hidden-state index (the four readout depths; SAE layers on Gemma-3)
 N_PERM = 1000
 
 
@@ -161,7 +162,7 @@ def directions_from(cid, z, meta, resp, out):
                         res["cosine"].append({"sub": sub or "all", "a": frames[a_], "b": frames[b_], "layer": L,
                                               "cos": float(ua @ ub)})
     np.savez(out / "directions" / f"{cid}.npz",
-             **{f"{s or 'all'}|{f}|{ro}": np.stack([dirs.get((s, f, ro, L), np.zeros(2560)) for L in LAYERS])
+             **{f"{s or 'all'}|{f}|{ro}": np.stack([dirs.get((s, f, ro, L), np.zeros(cfg.D)) for L in LAYERS])
                 for (s, f, ro) in sorted({k[:3] for k in dirs}, key=str)})
     (out / "concepts" / f"{cid}.json").write_text(json.dumps(res, default=float))
     return cid

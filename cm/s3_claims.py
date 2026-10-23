@@ -25,9 +25,10 @@ from collections import defaultdict
 
 import numpy as np
 
-from .paths import RESULTS
+from . import cfg
 
-DEPTHS = {9: 10, 17: 18, 22: 23, 29: 30}
+RESULTS = cfg.results_dir()
+DEPTHS = dict(cfg.DEPTHS)
 SOURCES = {"reply32": ("s3", "transfer"), "preverdict": ("s3", "transfer_boundary"),
            "verdict": ("s3_ctrl_verdict", "transfer"), "negation": ("s3_ctrl_negation", "transfer")}
 MARGIN, LOW, Q = 0.10, 0.40, 0.05

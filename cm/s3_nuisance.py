@@ -30,6 +30,7 @@ from functools import partial
 
 import numpy as np
 
+from . import cfg
 from .paths import MODELS, OUTPUTS, RESULTS, snapshot
 from .s3 import ACTS, LAYERS, auroc, directions_from, load
 from .stimuli.audit_lexical import NEG
@@ -59,7 +60,7 @@ Answer with one letter: P, N or X."""
 
 
 def out_dir(nuisance):
-    return RESULTS / f"s3_ctrl_{nuisance}"
+    return cfg.results_dir() / f"s3_ctrl_{nuisance}"
 
 
 def all_concepts():
@@ -128,7 +129,7 @@ def first_tokens(text, n=32):
     global _TOK
     if _TOK is None:
         from transformers import AutoTokenizer
-        _TOK = AutoTokenizer.from_pretrained(str(snapshot(MODELS["gemma-3-4b-it"])))
+        _TOK = AutoTokenizer.from_pretrained(str(snapshot(MODELS[cfg.MODEL])))
     ids = _TOK(text, add_special_tokens=False)["input_ids"][:n]
     return _TOK.decode(ids)
 
@@ -238,7 +239,7 @@ def run_one(cid, nuisance):
         y = lab[ro][rows]
         sel = y >= 0
         if sel.sum() > 3 and len(set(y[sel])) == 2:
-            sep[ro] = {str(L): auroc(proj[sel, L], y[sel]) for L in (10, 18, 23, 30)}
+            sep[ro] = {str(L): auroc(proj[sel, L], y[sel]) for L in cfg.DEPTHS.values()}
         z[ro][idx] = (X - proj[..., None] * u[None]).astype(z[ro].dtype)
     out = out_dir(nuisance)
     directions_from(cid, z, meta, resp, out)

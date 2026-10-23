@@ -19,14 +19,14 @@ import random
 import numpy as np
 import torch
 
-from . import model as cm_model
+from . import cfg, model as cm_model
 from .paths import MODELS, OUTPUTS, RESULTS, sae_dir, snapshot
 from .sae import JumpReLUSAE
 from .stimuli.schema import CARDS, item_dir, read_jsonl, write_jsonl
 
-MODEL = "gemma-3-4b-it"
+MODEL = cfg.MODEL
 SAE_LAYERS = [9, 17, 22, 29]
-ACTS = OUTPUTS / "acts" / "stimuli"
+ACTS = cfg.acts_dir()
 REPLY_N = 32
 BOS, PAD = 2, 0
 TEMPLATE_IDS = {2, 105, 106}  # <bos>, <start_of_turn>, <end_of_turn>
@@ -48,9 +48,9 @@ def prompt_and_reply(tok, it, replies):
     """Prompt string ending where the model's reply starts, and the reply text (prefilled or generated)."""
     msgs = it["messages"]
     if it["readout"] == "response":
-        prompt = tok.apply_chat_template(msgs[:-1], tokenize=False, add_generation_prompt=True)
+        prompt = tok.apply_chat_template(msgs[:-1], tokenize=False, add_generation_prompt=True, **cfg.chat_kwargs())
         return prompt, msgs[-1]["content"]
-    prompt = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+    prompt = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True, **cfg.chat_kwargs())
     return prompt, replies.get(it["item_id"], "")
 
 
@@ -63,13 +63,22 @@ def cmd_replies(cids):
     todo = [c for c in cids if not replies_path(c).exists()]
     if not todo:
         return
-    llm = LLM(model=str(snapshot(MODELS[MODEL])), dtype="bfloat16", max_model_len=8192, gpu_memory_utilization=0.85,
-              enable_prefix_caching=True, limit_mm_per_prompt={"image": 0})
+    kw = dict(model=str(snapshot(MODELS[MODEL])), dtype="bfloat16", max_model_len=8192, gpu_memory_utilization=0.85,
+              enable_prefix_caching=True, **cfg.vllm_kwargs())
+    try:
+        llm = LLM(**kw, limit_mm_per_prompt={"image": 0, "audio": 0})
+    except TypeError:
+        llm = LLM(**kw, limit_mm_per_prompt={"image": 0})
     tok = llm.get_tokenizer()
-    sp = SamplingParams(temperature=0.0, max_tokens=REPLY_N, stop_token_ids=[1, 106], skip_special_tokens=True)
+    # stop at the end of the assistant turn, whatever the template calls it (Gemma <end_of_turn>, Qwen <|im_end|>)
+    stops = {tok.eos_token_id} | {tok.convert_tokens_to_ids(t) for t in ("<end_of_turn>", "<|im_end|>", "<|endoftext|>")
+                                   if t in tok.get_vocab()}
+    sp = SamplingParams(temperature=0.0, max_tokens=REPLY_N, stop_token_ids=sorted(i for i in stops if i is not None),
+                        skip_special_tokens=True)
     for c in todo:
         items = [it for it in load_items(c) if it["readout"] == "boundary"]
-        prompts = [tok.apply_chat_template(it["messages"], tokenize=False, add_generation_prompt=True) for it in items]
+        prompts = [tok.apply_chat_template(it["messages"], tokenize=False, add_generation_prompt=True, **cfg.chat_kwargs())
+                   for it in items]
         outs = llm.generate(prompts, sp, use_tqdm=False) if prompts else []
         write_jsonl(replies_path(c), [{"item_id": it["item_id"], "reply": o.outputs[0].text} for it, o in zip(items, outs)])
         print(f"[replies] {c}: {len(items)} boundary items", flush=True)
@@ -113,7 +122,7 @@ def cmd_acts(cids):
             continue
         items, rep = load_items(c), load_replies(c)
         rows = [(it,) + tokenize(tok, *prompt_and_reply(tok, it, rep)) for it in items]
-        n, L1, d = len(rows), 35, 2560
+        n, L1, d = len(rows), cfg.N_STATES, cfg.D
         # float32: Gemma's residual dim 443 exceeds the fp16 range at layers 27-32
         bnd = np.zeros((n, L1, d), np.float32)
         r32 = np.zeros((n, L1, d), np.float32)
@@ -320,6 +329,7 @@ def cmd_fidelity(cids, per_cell, traits_per_side, tag, indist=0):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("stage", choices=["replies", "acts", "fidelity", "saecodes"])
+    print(f"[stimx] model {cfg.MODEL} ({cfg.HF_ID}), acts -> {ACTS}", flush=True)
     ap.add_argument("--concepts", default="all")
     ap.add_argument("--per_cell", type=int, default=8)
     ap.add_argument("--traits_per_side", type=int, default=0)

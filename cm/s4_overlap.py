@@ -45,11 +45,12 @@ from functools import partial
 import numpy as np
 from scipy.stats import spearmanr
 
-from .paths import RESULTS
+from . import cfg
 from .s3 import ACTS, load
 from .s3_nuisance import nuisance_dirs, row_labels
 
-DEPTHS = {9: 10, 17: 18, 22: 23, 29: 30}
+RESULTS = cfg.results_dir()
+DEPTHS = dict(cfg.DEPTHS)
 LIDX = list(DEPTHS.values())
 R_SPLIT, R_RAND, PROBE, MIN_TRAIN, MIN_TEST = 10, 10, 20, 10, 3
 OUT = RESULTS / "s4"

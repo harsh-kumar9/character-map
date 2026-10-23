@@ -30,16 +30,19 @@ import json
 
 import numpy as np
 
-from .paths import OUTPUTS, RESULTS
+from . import cfg
+from .paths import OUTPUTS
 
-OUT = OUTPUTS / "s5"
+RESULTS = cfg.results_dir()
+OUT = cfg.outputs_dir() / "s5"
 RES = RESULTS / "s5"
-L_IN, L_OUT = 17, (22, 29)
+L_IN, L_OUT = cfg.L_STEER, tuple(cfg.L_OUT)
 H_IN, H_OUT = L_IN + 1, tuple(L + 1 for L in L_OUT)
 GRID = [1 / 256, 1 / 128, 1 / 64, 1 / 32, 1 / 16]
 N_RAND, PROBE, TOPF = 8, 6, 16
 CALIB = ["A1|all|c", "B1|all|b", "C1|all|c", "C6|all|c", "C9|quarrelsome|c", "C15|refuse|c", "C19|honesty_humility|c",
-         "C20|psychopathy|c", "C21|power|d", "D1|all|c", "E1|all|c", "F3|all|c"]
+         "C20|psychopathy|c", "C21|power|d", "D1|all|c", "E1|all|c", "F3|all|c",
+         "A9|all|c", "C2|all|c", "C1|all|b", "K1|all|c"]   # the last four cover a run of the honesty block alone
 
 
 def units():
@@ -109,12 +112,15 @@ def cmd_setup():
         if kn:
             sources.append(f"{cid}|{sub}|{kn}")
     rng = np.random.default_rng(0)
-    rand = rng.standard_normal((N_RAND, 2560))
+    rand = rng.standard_normal((N_RAND, cfg.D))
     rand /= np.linalg.norm(rand, axis=1, keepdims=True)
     dense = np.stack([direction(s, H_IN) for s in sources])
     sae, tops = [], {}
     for s in sources:
-        v, t = sae_vector(s)
+        if cfg.HAS_SAE:
+            v, t = sae_vector(s)
+        else:                      # no SAE for this model: the sae condition is skipped (conditions() checks HAS_SAE)
+            v, t = np.zeros(cfg.D), []
         sae.append(v)
         tops[s] = t
     tgt = {h: np.stack([direction(u, h) for u in U]) for h in H_OUT}
@@ -130,7 +136,7 @@ def cmd_setup():
             for i in r.choice(c, min(PROBE, len(c)), replace=False):
                 probe.append({"unit": u, "item_id": str(i), "polarity": p})
     OUT.mkdir(parents=True, exist_ok=True)
-    np.savez(OUT / "setup.npz", dense=dense, sae=np.stack(sae), rand=rand, tgt23=tgt[H_OUT[0]], tgt30=tgt[H_OUT[1]])
+    np.savez(OUT / "setup.npz", dense=dense, sae=np.stack(sae), rand=rand, tgt_out0=tgt[H_OUT[0]], tgt_out1=tgt[H_OUT[1]])
     RES.mkdir(parents=True, exist_ok=True)
     (RES / "setup.json").write_text(json.dumps({"sources": sources, "targets": U, "probe": probe, "sae_top_features": tops,
                                                 "cos_dense_sae": [float(a @ b) for a, b in zip(dense, sae)]}, indent=1))
@@ -140,7 +146,10 @@ def cmd_setup():
 
 def load_setup():
     S = json.loads((RES / "setup.json").read_text())
-    A = np.load(OUT / "setup.npz")
+    f = np.load(OUT / "setup.npz")
+    A = {k: f[k] for k in f.files}
+    if "tgt_out0" not in A:        # the original Gemma-3 run named the target arrays by hidden index
+        A["tgt_out0"], A["tgt_out1"] = A["tgt23"], A["tgt30"]
     return S, A
 
 
@@ -155,10 +164,11 @@ def cmd_calib_gen():
     from . import model as cm_model
     from .stimuli.schema import write_jsonl
     S, A = load_setup()
-    m, tok = cm_model.load("gemma-3-4b-it")
+    m, tok = cm_model.load(cfg.MODEL)
     tok.padding_side = "left"
     prompts = calib_prompts()
-    chats = [tok.apply_chat_template([{"role": "user", "content": p}], tokenize=False, add_generation_prompt=True) for p in prompts]
+    chats = [tok.apply_chat_template([{"role": "user", "content": p}], tokenize=False, add_generation_prompt=True, **cfg.chat_kwargs())
+             for p in prompts]
     enc = tok(chats, return_tensors="pt", padding=True, add_special_tokens=False).to("cuda")
     with torch.no_grad(), cm_model.capture_resid(m, [L_IN]) as st:
         m(**enc)
@@ -186,7 +196,7 @@ def cmd_calib_gen():
         texts = tok.batch_decode(out[:, enc["input_ids"].shape[1]:], skip_special_tokens=True)
         rows += [{"cond": name, "c": c, "prompt_i": i, "prompt": p, "text": t} for i, (p, t) in enumerate(zip(prompts, texts))]
     write_jsonl(OUT / "calib_gen.jsonl", rows)
-    (RES / "residual_norm_L17.json").write_text(json.dumps({"median_token_norm": norm}))
+    (RES / f"residual_norm_L{L_IN}.json").write_text(json.dumps({"median_token_norm": norm}))
     print(f"[s5] {len(conds)} calibration conditions, median residual norm at layer {L_IN}: {norm:.1f}", flush=True)
 
 
@@ -224,7 +234,7 @@ def cmd_calib_judge():
 def conditions(S):
     conds = [("baseline", "none", 0, 0)]
     for k, s in enumerate(S["sources"]):
-        conds += [(s, "dense", k, 1), (s, "dense", k, -1), (s, "sae", k, 1)]
+        conds += [(s, "dense", k, 1), (s, "dense", k, -1)] + ([(s, "sae", k, 1)] if cfg.HAS_SAE else [])
     for k in range(N_RAND):
         conds += [(f"random{k}", "rand", k, 1), (f"random{k}", "rand", k, -1)]
     return conds
@@ -237,8 +247,8 @@ def cmd_run(shard, nshards):
     S, A = load_setup()
     cal = json.loads((RES / "calibration.json").read_text())
     c = cal["chosen_c"]
-    norm = json.loads((RES / "residual_norm_L17.json").read_text())["median_token_norm"]
-    m, tok = cm_model.load("gemma-3-4b-it")
+    norm = json.loads((RES / f"residual_norm_L{L_IN}.json").read_text())["median_token_norm"]
+    m, tok = cm_model.load(cfg.MODEL)
     items, cache = [], {}
     for p in S["probe"]:
         cid = p["unit"].split("|")[0]
@@ -246,7 +256,7 @@ def cmd_run(shard, nshards):
             cache[cid] = ({it["item_id"]: it for it in load_items(cid)}, load_replies(cid))
         its, rep = cache[cid]
         items.append(tokenize(tok, *prompt_and_reply(tok, its[p["item_id"]], rep)))
-    T = [torch.tensor(A["tgt23"], device="cuda", dtype=torch.float32), torch.tensor(A["tgt30"], device="cuda", dtype=torch.float32)]
+    T = [torch.tensor(A["tgt_out0"], device="cuda", dtype=torch.float32), torch.tensor(A["tgt_out1"], device="cuda", dtype=torch.float32)]
     conds = conditions(S)
     mine = [k for k in range(len(conds)) if k % nshards == shard]
     proj = np.zeros((len(mine), len(items), 2, T[0].shape[0]), np.float32)
@@ -274,7 +284,7 @@ def cmd_matrix(nshards):
     S, A = load_setup()
     cal = json.loads((RES / "calibration.json").read_text())
     c = cal["chosen_c"]
-    norm = json.loads((RES / "residual_norm_L17.json").read_text())["median_token_norm"]
+    norm = json.loads((RES / f"residual_norm_L{L_IN}.json").read_text())["median_token_norm"]
     conds = conditions(S)
     P = {}
     for k in range(nshards):
@@ -287,7 +297,7 @@ def cmd_matrix(nshards):
     neg_of = {u: [n for n, p in enumerate(S["probe"]) if p["unit"] == u and p["polarity"] == "neg"] for u in U}
     base = P[0]
     dose = c * norm
-    tg = [A["tgt23"], A["tgt30"]]
+    tg = [A["tgt_out0"], A["tgt_out1"]]
     gap = np.array([[base[pos_of[u], li, t].mean() - base[neg_of[u], li, t].mean() for t, u in enumerate(U)] for li in range(2)])
     gap[gap <= 0] = np.nan   # a target whose probe items do not separate at baseline gets no effect estimate
     print(f"[s5] targets without a positive baseline gap: layer {L_OUT[0]} {int(np.isnan(gap[0]).sum())}, "
@@ -310,14 +320,14 @@ def cmd_matrix(nshards):
     mu, sd = np.nanmean(rand, 0), np.nanstd(rand, 0) + 1e-9
     res = {"dose_c": c, "dose_norm": dose, "sources": S["sources"], "targets": U, "layers": list(L_OUT),
            "target_gap": gap.round(4).tolist(), "random_sd": sd.round(4).tolist(), "kinds": {}}
-    for kind, sg in (("dense", 1), ("dense", -1), ("sae", 1)):
+    for kind, sg in [("dense", 1), ("dense", -1)] + ([("sae", 1)] if cfg.HAS_SAE else []):
         E = np.stack([eff[k] for k, cd in enumerate(conds) if cd[1] == kind and cd[3] == sg])  # [S, 2, U]
         Z = (E - mu) / sd
         res["kinds"][f"{kind}{'+' if sg > 0 else '-'}"] = {"E": E.round(4).tolist(), "Z": Z.round(2).tolist()}
     RES.mkdir(parents=True, exist_ok=True)
     (RES / "causal_matrix.json").write_text(json.dumps(res))
     Ed = np.array(res["kinds"]["dense+"]["E"]); Zd = np.array(res["kinds"]["dense+"]["Z"])
-    Em = np.array(res["kinds"]["dense-"]["E"]); Es = np.array(res["kinds"]["sae+"]["E"])
+    Em = np.array(res["kinds"]["dense-"]["E"]); Es = np.array(res["kinds"]["sae+"]["E"]) if cfg.HAS_SAE else None
     src = S["sources"]
     tix = {u: t for t, u in enumerate(U)}
     for li, L in enumerate(L_OUT):
@@ -329,7 +339,7 @@ def cmd_matrix(nshards):
         print(f"[s5] layer {L}: self effect median {np.nanmedian(selfE):.2f} gap units (z {np.nanmedian(selfZ):.1f}); "
               f"off-concept cells |z|>3: {np.nanmean(np.abs(off) > 3):.3f}; sign symmetry r(E+, -E-) "
               f"{np.corrcoef(Ed[:, li].ravel()[ok], -Em[:, li].ravel()[ok])[0, 1]:.2f}; dense vs sae Spearman "
-              f"{spearmanr(Ed[:, li].ravel()[ok], Es[:, li].ravel()[ok]).correlation:.2f}", flush=True)
+              + (f"{spearmanr(Ed[:, li].ravel()[ok], Es[:, li].ravel()[ok]).correlation:.2f}" if Es is not None else "n/a"), flush=True)
 
 
 def main():
