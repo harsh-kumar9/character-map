@@ -16,10 +16,11 @@ from collections import defaultdict
 
 import numpy as np
 
-from .paths import RESULTS
+from . import cfg
 
+RESULTS = cfg.results_dir()
 S3 = RESULTS / "s3"
-DEPTHS = {9: 10, 17: 18, 22: 23, 29: 30}
+DEPTHS = dict(cfg.DEPTHS)
 GROUP = {"A": "beliefs", "B": "moral", "C": "dispositions", "D": "identity", "E": "situations", "F": "conflicts",
          "K": "controls"}
 

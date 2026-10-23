@@ -22,7 +22,8 @@ import json
 import numpy as np
 from scipy.stats import spearmanr
 
-from .paths import RESULTS
+from . import cfg
+RESULTS = cfg.results_dir()
 from .s4_overlap import SCHWARTZ
 
 KNOW, DO = set("ab"), set("cd")
