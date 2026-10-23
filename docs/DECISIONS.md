@@ -744,3 +744,93 @@ and their judgments reused from the 1x run. Same scoring and the same criterion 
 directions, both judges. Coherence measured on the instruments themselves: gemma-4-31B-it rates 40 sampled replies
 per condition on every free-text instrument (1x included); the unparsed share tracks degradation for choice items.
 Outputs in outputs/s5b_dose/xM and results/s5b_dose/xM (cm/s5_behavior.py --dose-mult).
+
+## D-042 Reframe the research question - proposed 2026-10-22
+
+Harsh's vision check (2026-10-22): the story he wants is definition-first, and it is not in the repo. PLAN.md asks a
+mapping question, README.md says "map the parts of character", and the post's headline is the knowing-doing split.
+Nowhere do we ask what character is as a question with competing answers, and nothing touches training (D-005
+deferred it). Proposed new research question: a trait named in a model spec, such as honesty, has several definitions
+in philosophy and psychology. Are they one thing inside the model? If not, which definition do evaluations and training
+reach? The knowing-doing split (S3) becomes the frame axis of this question; the sub-definitions are the second axis.
+If ratified: rewrite the research question in PLAN.md and the first paragraph of README.md; the 59-concept map stays
+as the replication base and appendix.
+
+## D-043 Honesty block as the spine - proposed 2026-10-22
+
+Eleven concepts are honesty under some definition: A9, C1, C2, C3, C4, C11, C12, C19 honesty-humility, E1, E5, F1.
+By Occam's razor the main story uses four, chosen so that each is a definition someone already uses to evaluate or train
+honesty, and so that the four span the knowing-doing and the self-report-vs-conduct contrasts:
+- self-knowledge (A9, knows vs does not know; Li et al.'s first half; SelfAware, KUQ), frames c d;
+- accuracy (C2, accurate vs fabricating; Williams 2002; Li et al.'s second half; TruthfulQA, SelfAware), frames c d;
+- sincerity (C1, sincere vs deceptive; Williams 2002, Bok 1978; MASK, Apollo), frames a b c d;
+- honesty-humility (C19; Ashton and Lee 2007; HEXACO-PI-R, TRAIT), frames c d.
+Candor (C3), truthful self-presentation (C4), integrity (C12), courage (C11), observed (E1), pushback (E5) and honesty
+vs care (F1) go to the appendix with the same tables.
+Position against Li et al. 2024, "A Survey on the Honesty of Large Language Models" (arXiv 2409.18786, TMLR 2025;
+github.com/SihengLi99/LLM-Honesty-Survey). They define honesty as self-knowledge plus self-expression, organize
+evaluation by output benchmarks (known/unknown recognition, calibration, selective prediction; identification-based and
+identification-free consistency) and catalogue improvement methods (training-free and training-based). We differ in
+four ways: (1) we take the definitions from philosophy and personality psychology as well, so sincerity and
+honesty-humility sit beside their two; (2) we ask whether the definitions are one thing inside the model (direction
+geometry and causal transfer), not how outputs score; (3) we add the frame axis, recognizing and judging dishonesty
+and describing oneself as honest, which their output benchmarks do not have; (4) on improvement we ask which definition
+a training method reaches, with internal readouts as the measure (D-044). Their taxonomy is the reference point for
+the "accuracy" and "self-knowledge" rows, and their benchmark list is where our held-out sets come from.
+
+## D-044 Training under each definition (S7) - proposed 2026-10-22
+
+The consequence the story needs is untested: nothing in the repo trains anything. Proposed S7, after D-045 and the
+OLMo/Llama replication of the honesty block: four LoRA fine-tunes of Gemma-3-4B-IT with equal token budgets, epochs and
+steps (Harsh's equal-corpus rule), honesty as
+(i) self-description: first-person statements of being honest (frame d style, persona-vector style data);
+(ii) sincerity under pressure: replies that assert the model's belief when a system prompt or user pushes it to
+    mislead (MASK-style scenarios, not the MASK held-out items);
+(iii) accuracy and self-knowledge: replies that abstain when the answer is unknown and answer carefully when known
+     (SelfAware/KUQ-style, not the held-out items);
+(iv) all three at a third each.
+Readouts after each run, against the base model: the honesty block directions in every frame (S3 within-frame and
+transfer), the S4 cosines of the block, the S5a self-effects, and the four behaviors (MASK known_facts, SelfAware,
+TRAIT honesty-humility, AIRiskDilemmas). Prediction: each run moves its own definition's directions and the
+self-description cluster; movement across definitions is small; (i) moves self-description and honesty-humility
+readouts without moving sincerity or accuracy behavior. Reuse: persona-collapse-sft-v2 SFT and LoRA code on ada.
+Never train on S3 contrast items or held-out items.
+
+## D-045 Fix C1 sincerity first - proposed 2026-10-22
+
+C1 sincere vs deceptive is the weakest direction in the block and the one the story leans on most: within-frame AUROC
+0.63/0.62/0.63/0.74 (a/b/c/d) at layer 17 and 0.72/0.64/0.58/0.77 at layer 29; MASK provided_facts held-out 0.53 at
+every layer. Before honesty carries the paper, diagnose: (a) per-source within-frame AUROC (Apollo roleplaying vs MASK
+known_facts items) to see whether the direction is source-specific; (b) logistic probe vs diff-of-means; (c) audit the
+act-frame prefills for length and verdict matching; (d) if the direction is real but source-bound, swap roles (train on
+MASK, hold out Apollo) and report both. Also note E1 observed vs unobserved is near chance in the act frame (0.52 at
+layer 17, 0.59 at layer 29): report as a null in Gemma-3-4B, not as a finding about situations.
+
+## D-046 Frames apart, gaps named - proposed 2026-10-22
+
+Harsh (2026-10-22): "why are act and self-describe pooled together?" and "there can also be value in thinking about the
+failure modes or gaps (akrasia or weakness of will, hypocrisy, etc)". Answer to the first: the knowing/doing pooling
+came from the S3 blocks (c-d and a-b transfer high, cross pairs low) and it coincides with the format boundary (a/b
+read from Gemma's own reply about someone else; c/d from a reply written in Gemma's voice). It is a label of
+convenience. Self-description is not conduct; it is what an evaluation reads when it asks the model about itself.
+Proposed:
+- In the honesty story (D-043) keep the four frames apart. Figure 1 marks the a/b vs c/d boundary as the format
+  boundary, not as knowing vs doing.
+- Name each frame gap by its failure mode and pair it with the instrument that measures the gap as conduct:
+  judge->act = akrasia (NE VII; Davidson 1970), instruments MASK known_facts pressure, are-you-sure, SYCON (C11, E5);
+  self-describe->act = hypocrisy, the say-do gap (Batson 1997; Williams 1973), instruments WDCT, Batson coin flip (C12);
+  recognize->judge = seeing the vice without condemning it; recognize->act = knowing the vice in others without the
+  virtue (NE II.4); situation->act = Gyges / Hartshorne-May / Asch (E1, E5). A gap is "open" at the representational
+  level when transfer sits at or below the control; that is the precondition for the failure mode, not the failure
+  mode, which is behavioral.
+- Status in Gemma at layer 17 (verdict-controlled transfer, control 0.67): akrasia gap open for sincerity (judge-act
+  0.59); hypocrisy gap open for accuracy (0.44) and sincerity (0.65), open at 17 and closed at 29 for self-knowledge
+  (0.43, 0.82), closed for honesty-humility (0.86). The gap concepts themselves are weakly represented: integrity
+  within-frame act 0.67 and WDCT held-out 0.52; courage within 0.67, near held-out 0.60, are-you-sure 0.03 (0.72 at
+  layer 29); observed act 0.52. Pushback (E5, the situation) is sharply encoded (0.95; held-out 0.82).
+- MASK is an akrasia benchmark (belief elicited, then pressure to assert otherwise). Our sincerity direction reads it
+  at 0.53. So part of D-045: rebuild the sincerity act frame around holding a stated belief under pressure, so the
+  direction and the benchmark measure the same gap, and do a per-token readout on pressure items (the moment of
+  capitulation is later than the first 32 tokens).
+- Score any training method (D-044) by which gap it closes: act toward judge (akrasia) vs act toward self-description
+  (hypocrisy), with the gap instruments as the behavioral side.
