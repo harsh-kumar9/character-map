@@ -17,6 +17,7 @@ Scenarios without a verified scene keep their c and d items (OPTIONAL_FRAMES).
 from __future__ import annotations
 
 import json
+import re
 
 import pandas as pd
 
@@ -113,12 +114,25 @@ def ab_stage(gen) -> "D.Stage":
         return SCENE_PROMPT.format(question=sp["row"]["question"], knowledge=sp["row"]["knowledge"], a1=sp[o[0]],
                                    a2=sp[o[1]], name=sp["name"])
 
+    def facts_present(sp, low):
+        """The right answer is stated in the scene: skipped for yes/no answers (the scene states the facts, not the
+        word), compared on alphanumerics (quotes, punctuation), or the answer's last word of four or more letters
+        (a nickname inside a full name). The greedy verification is the real check."""
+        ra = sp["row"]["right_answer"].strip().lower().rstrip(".")
+        if ra in ("yes", "no"):
+            return True
+        norm = lambda t: re.sub(r"[^a-z0-9]", "", t)
+        if norm(ra) in norm(low):
+            return True
+        words = re.findall(r"[a-z0-9]{4,}", ra)
+        return bool(words) and words[-1] in low
+
     def gen_ok(sp, j):
         if not D.has(j, ["scene"]):
             return False
         sc = D.clean(j["scene"])
         low = sc.lower()
-        return (sp["name"] in sc and 40 <= D.words(sc) <= 200 and sp["row"]["right_answer"].lower() in low
+        return (sp["name"] in sc and 40 <= D.words(sc) <= 200 and facts_present(sp, low)
                 and sp["pos"].lower() not in low and sp["neg"].lower() not in low)
 
     def ver_prompt(sp, j):
