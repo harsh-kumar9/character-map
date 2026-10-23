@@ -163,11 +163,36 @@ def row_labels(cid, meta, nuisance):
 # ---- stats and run (CPU) ----
 
 def cmd_stats(cids, nuisance):
-    out = out_dir(nuisance)
-    out.mkdir(parents=True, exist_ok=True)
+    """Pooled per-label sums for one nuisance, or for several at once ("verdict,negation"): each concept's activations
+    are read once and every requested nuisance is accumulated from that read (the reads dominate on NFS)."""
+    nuisances = nuisance.split(",")
+    if len(nuisances) > 1:
+        acc = {n: ({}, {}) for n in nuisances}
+        for c in cids:
+            z, meta, resp = load(c)
+            for n in nuisances:
+                _stats_one(c, z, meta, resp, n, *acc[n])
+        for n in nuisances:
+            _stats_write(n, *acc[n])
+        return
     sums, counts = {}, {}
     for c in cids:
         z, meta, resp = load(c)
+        _stats_one(c, z, meta, resp, nuisance, sums, counts)
+    _stats_write(nuisance, sums, counts)
+
+
+def _stats_write(nuisance, sums, counts):
+    out = out_dir(nuisance)
+    out.mkdir(parents=True, exist_ok=True)
+    np.savez(out / "pooled_sums.npz", **sums)
+    (out / "pooled_counts.json").write_text(json.dumps(counts))
+
+
+def _stats_one(c, z, meta, resp, nuisance, sums, counts):
+    out = out_dir(nuisance)
+    out.mkdir(parents=True, exist_ok=True)
+    if True:
         lab, _ = row_labels(c, meta, nuisance)
         for ro in READOUTS:
             for pol in ("pos", "neg"):
@@ -192,8 +217,6 @@ def cmd_stats(cids, nuisance):
         prev[c] = {k: {"label0": v[0], "label1": v[1]} for k, v in sorted(summary.items())}
         (out / "labels_summary.json").write_text(json.dumps(prev, indent=1))
         print(f"[{nuisance}] stats {c}", flush=True)
-    np.savez(out / "pooled_sums.npz", **sums)
-    (out / "pooled_counts.json").write_text(json.dumps(counts))
 
 
 def nuisance_dirs(cid, nuisance):
@@ -308,7 +331,7 @@ def cmd_strata(cids, workers):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("stage", choices=["label-verdict", "stats", "run", "strata"])
-    ap.add_argument("--nuisance", choices=["verdict", "negation"], default="negation")
+    ap.add_argument("--nuisance", default="negation", help="verdict | negation | verdict,negation (stats only)")
     ap.add_argument("--concepts", default="all")
     ap.add_argument("--workers", type=int, default=12)
     args = ap.parse_args()
