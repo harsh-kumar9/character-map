@@ -858,3 +858,10 @@ so the same code path). Proposed:
 - Paths: CM_MODEL selects the subject; gemma-3-4b-it keeps the unprefixed paths, others write outputs/<tag>/ and
   results/<tag>/ (cm/cfg.py). Storage per subject for the block: about 30 GB of activations.
 - Order: smoke test (A9 replies and acts, then S3 on it) before any full stage; stages one at a time, gate read.
+
+## D-047 ruling - 2026-10-23
+
+Harsh: "We can use Qwen3.5-27B." Subjects are gemma-4-31b-it and Qwen3.5-27B (CM_MODEL=qwen3.5-27b). Qwen3.5-27B
+is also S5b's second judge; for the Qwen subject the headline judge (gemma-4-31B-it) is from another family and the
+Qwen judge's numbers are reported as self-judged, mirroring the gemma-4 subject's verdict labels. The rest of D-047
+stands as proposed.
