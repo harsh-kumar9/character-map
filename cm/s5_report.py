@@ -40,8 +40,9 @@ def main():
         E = np.array(R["kinds"]["dense+"]["E"])[:, li]
         Z = np.array(R["kinds"]["dense+"]["Z"])[:, li]
         Em = np.array(R["kinds"]["dense-"]["E"])[:, li]
-        Es = np.array(R["kinds"]["sae+"]["E"])[:, li]
-        Zs = np.array(R["kinds"]["sae+"]["Z"])[:, li]
+        has_sae = "sae+" in R["kinds"]          # no SAE condition for subjects without a dictionary (D-047)
+        Es = np.array(R["kinds"]["sae+"]["E"])[:, li] if has_sae else np.full_like(E, np.nan)
+        Zs = np.array(R["kinds"]["sae+"]["Z"])[:, li] if has_sae else np.full_like(Z, np.nan)
         o = {}
         sel = [(s, tix[u]) for s, u in enumerate(src) if u in tix]
         se = np.array([E[s, t] for s, t in sel]); sz = np.array([Z[s, t] for s, t in sel])
@@ -75,7 +76,7 @@ def main():
              if offm[s, t] and su in dix and tu in dix and not np.isnan(E[s, t])]
         o["geometry_spearman_E_vs_s4cos"] = float(spearmanr([x[0] for x in g], [x[1] for x in g]).correlation)
         ok = ~np.isnan(E)
-        o["agreement"] = {"dense_vs_sae_spearman": float(spearmanr(E[ok], Es[ok]).correlation),
+        o["agreement"] = {"dense_vs_sae_spearman": float(spearmanr(E[ok], Es[ok]).correlation) if has_sae else None,
                           "sign_symmetry_r": float(np.corrcoef(E[ok], -Em[ok])[0, 1])}
         # taxonomy
         tax = {}
@@ -116,7 +117,7 @@ def main():
             print(f"  {k}: n {v['n']}, median {v['median_E']}, z>3 {v['share_z_gt3']}, z<-3 {v['share_z_lt_-3']}")
         print(f"  spillover off-concept |z|>3: {o['spillover']['share_abs_z_gt3']:.3f}; K2 source {o['spillover'].get('K2_share_abs_z_gt3')}")
         print(f"  geometry: off-concept effect vs S4 cosine Spearman {o['geometry_spearman_E_vs_s4cos']:.2f}")
-        print(f"  agreement: dense vs SAE {o['agreement']['dense_vs_sae_spearman']:.2f}; sign symmetry {o['agreement']['sign_symmetry_r']:.2f}")
+        print(f"  agreement: dense vs SAE {o['agreement']['dense_vs_sae_spearman']}; sign symmetry {o['agreement']['sign_symmetry_r']:.2f}")
         print(f"  taxonomy: {json.dumps(tax)}")
         print("  top off-concept: " + "; ".join(f"{x['source']} -> {x['target']} z {x['z']:+.1f}" for x in o["spillover"]["top"][:8]))
     (RESULTS / "s5" / "report.json").write_text(json.dumps(out, indent=1))
