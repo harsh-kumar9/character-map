@@ -68,21 +68,22 @@ for L in (LM, LL):
         ids, M = submat(L, fs)
         cos[f"{tag}_L{L}"] = {"units": ids, "cos": M, "floor": ov["layers"][str(L)]["floor_cos"]}
 
-# ---- S5a causal
-cm = json.load(open(R / "s5/causal_matrix.json"))
-src, tgt, layers = cm["sources"], cm["targets"], cm["layers"]
-Z = cm["kinds"]["dense+"]["Z"]; E = cm["kinds"]["dense+"]["E"]
-hs = [s for s in src if (s.split("|")[0], s.split("|")[1]) in NAME and not s.startswith("K1")]
-ht = [t for t in tgt if (t.split("|")[0], t.split("|")[1]) in NAME and not t.startswith("K1")]
+# ---- S5a causal (absent until the steering stage has run for this model)
 causal = {}
-for li, L in enumerate(layers):
-    causal[f"L{L}"] = {"sources": hs, "targets": ht,
-                       "z": [[(None if Z[src.index(s)][li][tgt.index(t)] is None or math.isnan(Z[src.index(s)][li][tgt.index(t)]) else round(Z[src.index(s)][li][tgt.index(t)], 2)) for t in ht] for s in hs],
-                       "E": [[(None if E[src.index(s)][li][tgt.index(t)] is None or math.isnan(E[src.index(s)][li][tgt.index(t)]) else round(E[src.index(s)][li][tgt.index(t)], 3)) for t in ht] for s in hs]}
-causal["dose_c"] = cm["dose_c"]; causal["dose_norm"] = cm["dose_norm"]
+if (R / "s5/causal_matrix.json").exists():
+    cm = json.load(open(R / "s5/causal_matrix.json"))
+    src, tgt, layers = cm["sources"], cm["targets"], cm["layers"]
+    Z = cm["kinds"]["dense+"]["Z"]; E = cm["kinds"]["dense+"]["E"]
+    hs = [s for s in src if (s.split("|")[0], s.split("|")[1]) in NAME and not s.startswith("K1")]
+    ht = [t for t in tgt if (t.split("|")[0], t.split("|")[1]) in NAME and not t.startswith("K1")]
+    for li, L in enumerate(layers):
+        causal[f"L{L}"] = {"sources": hs, "targets": ht,
+                           "z": [[(None if Z[src.index(s)][li][tgt.index(t)] is None or math.isnan(Z[src.index(s)][li][tgt.index(t)]) else round(Z[src.index(s)][li][tgt.index(t)], 2)) for t in ht] for s in hs],
+                           "E": [[(None if E[src.index(s)][li][tgt.index(t)] is None or math.isnan(E[src.index(s)][li][tgt.index(t)]) else round(E[src.index(s)][li][tgt.index(t)], 3)) for t in ht] for s in hs]}
+    causal["dose_c"] = cm["dose_c"]; causal["dose_norm"] = cm["dose_norm"]
 
 # ---- S5b behavior
-bh = json.load(open(R / "s5b/behavior.json"))
+bh = json.load(open(R / "s5b/behavior.json")) if (R / "s5b/behavior.json").exists() else {}
 BCOND = {"C1": ["doing+", "doing-", "knowing+", "knowing-"], "C2": ["doing+", "doing-"], "A9": ["doing+", "doing-"],
          "C3": ["doing+", "doing-", "knowing+", "knowing-"], "C4": ["doing+", "doing+:self-deprecating", "doing-", "knowing+", "knowing-"],
          "C19": ["doing+:honesty_humility"], "C12": ["doing+", "doing-", "knowing+", "knowing-"], "C11": ["doing+", "doing-"],
@@ -101,6 +102,8 @@ INSTR = {"C1": "MASK known_facts: share asserting the truth under pressure (judg
          "F1": "AIRiskDilemmas: share of choices for the honest option"}
 beh = []
 for c in BCOND:
+    if c not in bh:
+        continue
     for judge in ("gemma", "qwen"):
         cc = bh[c]["conds"].get(judge)
         if not cc: continue
@@ -180,23 +183,26 @@ axc.legend(handles=[Line2D([], [], marker="o", ms=4, color=BLUE, ls="none", labe
                     Line2D([], [], marker="o", ms=4, color=AQUA, ls="none", label="knowing–doing"), Line2D([], [], marker="o", ms=4, mfc="white", mec=INK2, ls="none", label=f"open = layer {LL}")],
            loc="lower right", frameon=False, handletextpad=0.3, borderpad=0.2, labelspacing=0.25)
 
-# (d) causal z at L29, honesty sources x honesty targets
-cz = causal[f"L{LL}"]; S, T = cz["sources"], cz["targets"]
-order_t = [uid(c, s, f) for c, s in KEYS for f in "abcd" if uid(c, s, f) in T]
-order_s = [u for u in [uid(c, s, f) for c, s in KEYS for f in "cdba"] if u in S]
-A = np.array([[np.nan if cz["z"][S.index(s)][T.index(t)] is None else cz["z"][S.index(s)][T.index(t)] for t in order_t] for s in order_s], float)
-im = axd.imshow(np.clip(A, -6, 6), cmap=DIV, vmin=-6, vmax=6, aspect="auto")
-axd.set_xticks(range(len(order_t))); axd.set_xticklabels([short(t) + ("" if t.split("|")[2] in "ab" else f" ({t.split('|')[2]})") for t in order_t], rotation=60, ha="right", rotation_mode="anchor")
-axd.set_yticks(range(len(order_s))); axd.set_yticklabels([short(s) + ("" if s.split("|")[2] in "ab" else f" ({s.split('|')[2]})") for s in order_s])
-for i in range(len(order_s)):
-    for j in range(len(order_t)):
-        v = A[i, j]
-        if np.isnan(v) or abs(v) < 3: continue
-        axd.text(j, i, f"{v:.0f}", ha="center", va="center", fontsize=4.6, color="white" if abs(v) > 4 else INK)
-axd.set_title(f"Steering at layer {LM}, readout at layer {LL} (z vs random directions)", loc="left"); axd.tick_params(length=0)
-for s in axd.spines.values(): s.set_visible(False)
-axd.set_ylabel("steered direction"); axd.set_xlabel("readout direction"); letter(axd, "d")
-cb = fig.colorbar(im, ax=axd, fraction=0.03, pad=0.02); cb.outline.set_visible(False); cb.ax.tick_params(length=0, labelsize=6); cb.set_label("z (clipped at ±6)")
+# (d) causal z at the late depth, honesty sources x honesty targets (blank until S5a has run)
+if not causal:
+    axd.axis("off"); axd.text(0.5, 0.5, "steering stage pending", ha="center", va="center", color=MUTED, transform=axd.transAxes); letter(axd, "d")
+else:
+    cz = causal[f"L{LL}"]; S, T = cz["sources"], cz["targets"]
+    order_t = [uid(c, s, f) for c, s in KEYS for f in "abcd" if uid(c, s, f) in T]
+    order_s = [u for u in [uid(c, s, f) for c, s in KEYS for f in "cdba"] if u in S]
+    A = np.array([[np.nan if cz["z"][S.index(s)][T.index(t)] is None else cz["z"][S.index(s)][T.index(t)] for t in order_t] for s in order_s], float)
+    im = axd.imshow(np.clip(A, -6, 6), cmap=DIV, vmin=-6, vmax=6, aspect="auto")
+    axd.set_xticks(range(len(order_t))); axd.set_xticklabels([short(t) + ("" if t.split("|")[2] in "ab" else f" ({t.split('|')[2]})") for t in order_t], rotation=60, ha="right", rotation_mode="anchor")
+    axd.set_yticks(range(len(order_s))); axd.set_yticklabels([short(s) + ("" if s.split("|")[2] in "ab" else f" ({s.split('|')[2]})") for s in order_s])
+    for i in range(len(order_s)):
+        for j in range(len(order_t)):
+            v = A[i, j]
+            if np.isnan(v) or abs(v) < 3: continue
+            axd.text(j, i, f"{v:.0f}", ha="center", va="center", fontsize=4.6, color="white" if abs(v) > 4 else INK)
+    axd.set_title(f"Steering at layer {LM}, readout at layer {LL} (z vs random directions)", loc="left"); axd.tick_params(length=0)
+    for s in axd.spines.values(): s.set_visible(False)
+    axd.set_ylabel("steered direction"); axd.set_xlabel("readout direction"); letter(axd, "d")
+    cb = fig.colorbar(im, ax=axd, fraction=0.03, pad=0.02); cb.outline.set_visible(False); cb.ax.tick_params(length=0, labelsize=6); cb.set_label("z (clipped at ±6)")
 fig.savefig(OUT / "honesty_fig.png", dpi=300, bbox_inches="tight", pad_inches=0.03, facecolor="white")
 fig.savefig(OUT / "honesty_fig.pdf", bbox_inches="tight", pad_inches=0.03)
 print("ok", OUT)

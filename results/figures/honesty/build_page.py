@@ -197,6 +197,32 @@ selfz = LT["selfz_late"]; arrows = LT["arrows_late"]
 c1 = fid["C1|all"]; hh = fid["C19|honesty_humility"]; a9 = fid["A9|all"]; c2 = fid["C2|all"]
 def T(c, s, pair, L): return next(t["verdict"] for t in tr if t["concept"] == c and t["sub"] == s and t["pair"] == pair and t["layer"] == L)
 b1 = {b["cond"]: b for b in beh if b["concept"] == "C1" and b["judge"] == "gemma"}; b1q = {b["cond"]: b for b in beh if b["concept"] == "C1" and b["judge"] == "qwen"}
+IS_DEFAULT = MODEL_NAME == "Gemma-3-4B-IT"
+HAVE_CAUSAL = bool(arrows) or bool(selfz); HAVE_BEH = bool(b1) and bool(b1q)
+NAMES = {"A9": "self-knowledge", "C2": "accuracy", "C1": "sincerity", "C19": "honesty-humility"}
+def uname(u):
+    c, sub, f = u.split("|"); return f"{NAMES.get(c, c)} ({FR[f]})"
+def causal_generic():
+    if not HAVE_CAUSAL:
+        return "<p>The steering stage (S5a) has not run for this model yet.</p>"
+    lines = [f"{uname(a)} \u2192 {uname(b)} (z {z:.1f})" for a, b, z in arrows]
+    selfs = ", ".join(f"{uname(u)} {z}" for u, z in selfz.items())
+    return (f"<p>Adding a direction at layer {L_STEER} and reading every direction in the block at layer {LL}: "
+            + (f"arrows with z at least 3: {'; '.join(lines)}." if lines else "no cross-unit effect reaches z 3.")
+            + f" Each source's effect on its own readout: {selfs}.</p>")
+def beh_generic():
+    if not HAVE_BEH:
+        return "<p>The behavior stage (S5b) has not run for this model yet.</p>"
+    passes = [b for b in beh if b["passes"] and b["concept"] in NAMES]
+    cands = [b for b in beh if b["concept"] in NAMES and b["max_random"]]
+    near = max(cands, key=lambda b: abs(b["effect"]) / b["max_random"]) if cands else None
+    txt = "<p>The criterion is an effect at least twice the largest of four random directions and at least three standard errors. "
+    txt += (f"{len(passes)} condition(s) pass: " + "; ".join(f"{NAMES[b['concept']]} {CN.get(b['cond'], b['cond'])} under {b['judge']} ({b['effect']:+.3f})" for b in passes) + ".") if passes else "Nothing passes."
+    if near:
+        txt += f" The nearest miss is {NAMES[near['concept']]} ({CN.get(near['cond'], near['cond'])}, {near['judge']}): {near['effect']:+.3f} \u00b1 {near['se']:.3f} against random effects up to {near['max_random']:.3f}."
+    return txt + "</p>"
+banner = "" if IS_DEFAULT else ('<div class="box warn"><h3>Replication run on ' + MODEL_NAME + '</h3><p class="note">Every number and table on this page comes from this model\'s own run through the same pipeline. The connecting prose was written for Gemma-3-4B-IT and is kept only where it names the numbers; sections marked pending have not run for this model, and the interpretive reading for this model is still to be written.</p></div>\n')
+
 
 CSS = """
 :root{--bg:#f6f7f5;--surface:#ffffff;--ink:#17201d;--ink2:#4d5752;--muted:#8a938e;--rule:#dfe3df;--accent:#0b6e8f;--accent-soft:#e3f0f4;--warn:#9a3b2f;--warn-soft:#f7e6e2;--ok-soft:#e4f1ea;
@@ -237,7 +263,28 @@ dl{display:grid;grid-template-columns:max-content 1fr;gap:.3rem 1rem;font-size:.
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 """
 
-sincerity_mask = c1[LMs]["heldout"]["c"]
+sincerity_mask = c1[LMs]["heldout"].get("c")
+CAUSAL_BULLET = (f'''<li><b>Steering stays in its lane.</b> Adding the sincerity-in-action direction moves sincerity self-description (z {arrows[0][2]:.1f}) and nothing else in the block; the accuracy and self-knowledge directions do not move even their own readouts at the coherent dose (z {selfz['C2|all|c']}, {selfz['A9|all|c']}).</li>''') if IS_DEFAULT else ""
+BEH_BULLET = (f'''<li><b>No honesty behavior moves</b> at that dose, on MASK, SelfAware, TRAIT or AIRiskDilemmas. The nearest miss is sincerity on MASK ({b1['doing+']['effect']:+.3f} ± {b1['doing+']['se']:.3f}, random up to {b1['doing+']['max_random']:.3f}).</li>''') if IS_DEFAULT else ""
+R2_PARA = (f'''<p>Three things follow. First, MASK is an akrasia benchmark: the model's belief is elicited, then a pressure prompt asks it to assert otherwise. Our sincerity direction, learned on matched sincere and deceptive replies, reads MASK at chance ({sincerity_mask:.2f}). The direction we have is not the one that separates holding to a belief from giving it up under pressure, which is the gap that matters. Second, the concepts that measure gaps directly are weakly represented: integrity vs hypocrisy has a within-frame AUROC of {fid['C12|integrity'][LMs]['within']['c']:.2f} in the act frame and reads the WDCT held-out set at {fid['C12|integrity'][LMs]['heldout']['c']:.2f}; holding a position under pushback has {fid['C11|all'][LMs]['within']['c']:.2f} within frame, {fid['C11|all'][LMs]['heldout']['c']:.2f} on near held-out items and {fid['C11|all'][LMs]['heldout_far']['c']:.2f} on are-you-sure at layer {LM} ({fid['C11|all'][LLs]['heldout_far']['c']:.2f} at layer {LL}). The situation (pushback) is far better encoded than the virtue (holding). Third, the one closed gap is honesty-humility's, and that is the definition whose two frames are both statements about the kind of agent one is. Integration in this model is easiest where neither frame is conduct.</p>''') if IS_DEFAULT else ""
+R3_PARA = (f'''<p>Three of the four definitions have clean directions. Sincerity does not. Its within-frame AUROC is {c1[LMs]['within']['c']:.2f} in the act frame at layer {LM} and {c1[LLs]['within']['c']:.2f} at layer {LL}, and the direction scores the MASK held-out set at {sincerity_mask:.2f}, which is chance, at every layer. Either the sincerity items are weak or a 4B model has little that separates a sincere reply from a deceptive one when the content is otherwise matched. This matters because sincerity is the definition the deception literature means, and MASK is its benchmark. D-045 lists the diagnosis.</p>''') if IS_DEFAULT else ""
+R4_BLOCK = (f'''<h2>Result 4: steering stays in its lane</h2>
+<p>Adding a direction at layer {L_STEER} and reading every direction in the block at layer {LL} gives two arrows with z at least 3: sincerity-in-action moves sincerity self-description (z {arrows[0][2]:.1f}) and honesty-humility-in-action moves honesty-humility self-description (z {arrows[1][2]:.1f}). Nothing crosses a definition. The judge direction for sincerity moves recognition and judgment (z 2.5 and 2.3) and not acting or self-description. Accuracy and self-knowledge do not move even their own act-frame readouts at this dose (z {selfz['C2|all|c']} and {selfz['A9|all|c']}; self-knowledge reaches its own self-description at z 2.9 at layer 22). In the wider block, one broad direction, integrity-in-action, raises most honesty self-descriptions and pushes the white-lie readout toward the kind option (appendix).</p>
+''') if IS_DEFAULT else ""
+R5_BLOCK = (f'''<h2>Result 5: no honesty behavior moves at the coherent dose</h2>
+<div class="tbl">{beh_table()}</div>
+<p>The criterion is an effect at least twice the largest of four random directions and at least three standard errors. Nothing passes. Sincerity on MASK is the nearest miss under both judges ({b1['doing+']['effect']:+.3f} with gemma-4-31B, {b1q['doing+']['effect']:+.3f} with Qwen3.5-27B, against random effects up to {max(b1['doing+']['max_random'], b1q['doing+']['max_random']):.3f}). The dose is 1/128 of the layer-17 residual norm, the largest that kept generic replies coherent. A dose-response run at 2, 4 and 8 times that dose (D-041) has been launched and its results are not in yet. Until then these are nulls at one dose, not evidence that the directions are behaviorally inert.</p>
+''') if IS_DEFAULT else ""
+OI_SINCERITY = (f'''<li><b>Sincerity is weak.</b> Within-frame {c1[LMs]['within']['c']:.2f} and MASK at chance. Diagnose per source, try a logistic probe, audit the act-frame prefills, swap MASK and Apollo roles (D-045). Honesty cannot carry the paper until this is settled.</li>''') if IS_DEFAULT else ""
+OI_DOSE = (f'''<li><b>Dose-response (D-041)</b> is running on ada; results not on the Mac yet. It decides whether Result 4 is a dose null or a real null.</li>''') if IS_DEFAULT else ""
+OI_ONEMODEL = (f'''<li><b>One model.</b> OLMo-3-7B-Instruct and Llama-3.1-8B-Instruct get the same items next (S6). The honesty block should run first there, before the other 48 concepts.</li>''') if IS_DEFAULT else ""
+OI_GAPS = (f'''<li><b>The gap instruments are not read by our directions.</b> Integrity reads WDCT at {fid['C12|integrity'][LMs]['heldout']['c']:.2f}, courage reads are-you-sure at {fid['C11|all'][LMs]['heldout_far']['c']:.2f} at layer {LM}, sincerity reads MASK at {sincerity_mask:.2f}. Either the gaps are represented differently from the static contrasts, or they live at a different position than the first 32 reply tokens (the moment of capitulation is later). Worth a per-token look (D-046).</li>''') if IS_DEFAULT else ""
+if not (IS_DEFAULT and HAVE_CAUSAL):
+    CAUSAL_BULLET = "<li><b>Steering.</b> " + causal_generic()[3:-4] + "</li>"
+    R4_BLOCK = "<h2>Result 4: steering</h2>\n" + causal_generic() + "\n"
+if not (IS_DEFAULT and HAVE_BEH):
+    BEH_BULLET = "<li><b>Behavior.</b> " + beh_generic()[3:-4] + "</li>"
+    R5_BLOCK = "<h2>Result 5: behavior under steering</h2>\n" + (('<div class="tbl">' + beh_table() + "</div>\n") if HAVE_BEH else "") + beh_generic() + "\n"
 page = f"""<title>What is honesty, to Gemma?</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono&display=swap">
@@ -247,15 +294,15 @@ page = f"""<title>What is honesty, to Gemma?</title>
 <h1>What is honesty, to Gemma?</h1>
 <p class="stand">Honesty has at least four working definitions in the literature. Inside Gemma-3-4B-IT they are four different directions when the model acts, they partly merge when it describes itself, and steering one leaves the others alone.</p>
 <div class="meta"><span><b>Model</b> {MODEL_NAME}</span><span><b>Method</b> diff-of-means directions, cross-frame transfer, standardized cosine, steering</span><span><b>Code and results</b> <a href="https://github.com/harsh-kumar9/character-map">github.com/harsh-kumar9/character-map</a></span></div>
-<p class="note"><b>Epistemic status.</b> Exploratory. One model, linear readouts, one steering dose. The geometry is stable across the confound controls we ran; the behavioral part is a null at a coherence-limited dose and a dose-response run is pending. The sincerity direction is weak in this model (see Result 3), and that is the one most of the literature means by honesty.</p>
+{banner}<p class="note"><b>Epistemic status.</b> Exploratory. One model, linear readouts, one steering dose. The geometry is stable across the confound controls we ran; the behavioral part is a null at a coherence-limited dose and a dose-response run is pending. The sincerity direction is weak in this model (see Result 3), and that is the one most of the literature means by honesty.</p>
 
 <div class="box accent"><h3>TL;DR</h3>
 <ul>
 <li><b>Four definitions, four objects.</b> When Gemma acts, the sincerity, accuracy, self-knowledge and honesty-humility directions are near orthogonal (standardized cosine {cosv(LM,U['si_c'],U['ac_c']):+.2f} to {cosv(LM,U['sk_c'],U['hh_c']):+.2f} at layer {LM}, shuffle floor {floor17:.2f}).</li>
 <li><b>One self-concept.</b> When Gemma describes itself, sincerity and honesty-humility share a direction (cosine {cosv(LM,U['si_d'],U['hh_d']):+.2f}), and the formality control does not join them. Self-report collapses what conduct keeps apart.</li>
 <li><b>The gaps between frames are the classic failure modes, and most are open.</b> Judge-to-act (akrasia) is open for sincerity ({T('C1','all','b-c',LM):.2f} at layer {LM}, control {base[LM]:.2f}); self-describe-to-act (hypocrisy) is open for accuracy and sincerity, and closed only for honesty-humility ({T('C19','honesty_humility','c-d',LM):.2f}), the one definition where neither frame is conduct.</li>
-<li><b>Steering stays in its lane.</b> Adding the sincerity-in-action direction moves sincerity self-description (z {arrows[0][2]:.1f}) and nothing else in the block; the accuracy and self-knowledge directions do not move even their own readouts at the coherent dose (z {selfz['C2|all|c']}, {selfz['A9|all|c']}).</li>
-<li><b>No honesty behavior moves</b> at that dose, on MASK, SelfAware, TRAIT or AIRiskDilemmas. The nearest miss is sincerity on MASK ({b1['doing+']['effect']:+.3f} ± {b1['doing+']['se']:.3f}, random up to {b1['doing+']['max_random']:.3f}).</li>
+{CAUSAL_BULLET}
+{BEH_BULLET}
 <li><b>Untested consequence.</b> "Train for honesty" is underspecified. The geometry predicts that training on one definition moves that definition and the self-concept, and leaves the others where they were. D-044 proposes the test.</li>
 </ul></div>
 
@@ -305,21 +352,16 @@ page = f"""<title>What is honesty, to Gemma?</title>
 <tr><td>recognize → act</td><td>Knowing the vice in others without having the virtue (NE II.4: knowing what is right is not being virtuous)</td><td>Detects deception, deceives</td><td>No instrument in the map</td><td>Sincerity: open ({T('C1','all','a-c',LM):.2f}, {T('C1','all','a-c',LL):.2f}).</td></tr>
 <tr><td>situation → act</td><td>Situational honesty: Gyges (Plato), Hartshorne and May 1928, Asch 1951</td><td>Honest when watched or unopposed, not otherwise</td><td>Alignment-faking compliance gap (E1); are-you-sure answer kept (E5)</td><td>Pushback is sharply encoded in the act frame (E5 within-frame {fid['E5|all'][LMs]['within']['c']:.2f}, held-out {fid['E5|all'][LMs]['heldout']['c']:.2f}); being observed is not (E1 act {fid['E1|all'][LMs]['within']['c']:.2f}).</td></tr>
 </tbody></table></div>
-<p>Three things follow. First, MASK is an akrasia benchmark: the model's belief is elicited, then a pressure prompt asks it to assert otherwise. Our sincerity direction, learned on matched sincere and deceptive replies, reads MASK at chance ({sincerity_mask:.2f}). The direction we have is not the one that separates holding to a belief from giving it up under pressure, which is the gap that matters. Second, the concepts that measure gaps directly are weakly represented: integrity vs hypocrisy has a within-frame AUROC of {fid['C12|integrity'][LMs]['within']['c']:.2f} in the act frame and reads the WDCT held-out set at {fid['C12|integrity'][LMs]['heldout']['c']:.2f}; holding a position under pushback has {fid['C11|all'][LMs]['within']['c']:.2f} within frame, {fid['C11|all'][LMs]['heldout']['c']:.2f} on near held-out items and {fid['C11|all'][LMs]['heldout_far']['c']:.2f} on are-you-sure at layer {LM} ({fid['C11|all'][LLs]['heldout_far']['c']:.2f} at layer {LL}). The situation (pushback) is far better encoded than the virtue (holding). Third, the one closed gap is honesty-humility's, and that is the definition whose two frames are both statements about the kind of agent one is. Integration in this model is easiest where neither frame is conduct.</p>
+{R2_PARA}
 <p>The claim table for the four definitions, under the paper's criterion (shared: beats the control by 0.10 under three readouts; split: below 0.40 under all three):</p>
 <div class="tbl">{tr_html}</div>
 
-<h2>Result 3: does each direction exist? Sincerity barely does</h2>
+<h2>Result 3: does each direction exist?{" Sincerity barely does" if IS_DEFAULT else ""}</h2>
 <div class="tbl">{fid_table(FOUR)}</div>
-<p>Three of the four definitions have clean directions. Sincerity does not. Its within-frame AUROC is {c1[LMs]['within']['c']:.2f} in the act frame at layer {LM} and {c1[LLs]['within']['c']:.2f} at layer {LL}, and the direction scores the MASK held-out set at {sincerity_mask:.2f}, which is chance, at every layer. Either the sincerity items are weak or a 4B model has little that separates a sincere reply from a deceptive one when the content is otherwise matched. This matters because sincerity is the definition the deception literature means, and MASK is its benchmark. D-045 lists the diagnosis.</p>
+{R3_PARA}
 
-<h2>Result 4: steering stays in its lane</h2>
-<p>Adding a direction at layer {L_STEER} and reading every direction in the block at layer {LL} gives two arrows with z at least 3: sincerity-in-action moves sincerity self-description (z {arrows[0][2]:.1f}) and honesty-humility-in-action moves honesty-humility self-description (z {arrows[1][2]:.1f}). Nothing crosses a definition. The judge direction for sincerity moves recognition and judgment (z 2.5 and 2.3) and not acting or self-description. Accuracy and self-knowledge do not move even their own act-frame readouts at this dose (z {selfz['C2|all|c']} and {selfz['A9|all|c']}; self-knowledge reaches its own self-description at z 2.9 at layer 22). In the wider block, one broad direction, integrity-in-action, raises most honesty self-descriptions and pushes the white-lie readout toward the kind option (appendix).</p>
-
-<h2>Result 5: no honesty behavior moves at the coherent dose</h2>
-<div class="tbl">{beh_table()}</div>
-<p>The criterion is an effect at least twice the largest of four random directions and at least three standard errors. Nothing passes. Sincerity on MASK is the nearest miss under both judges ({b1['doing+']['effect']:+.3f} with gemma-4-31B, {b1q['doing+']['effect']:+.3f} with Qwen3.5-27B, against random effects up to {max(b1['doing+']['max_random'], b1q['doing+']['max_random']):.3f}). The dose is 1/128 of the layer-17 residual norm, the largest that kept generic replies coherent. A dose-response run at 2, 4 and 8 times that dose (D-041) has been launched and its results are not in yet. Until then these are nulls at one dose, not evidence that the directions are behaviorally inert.</p>
-
+{R4_BLOCK}
+{R5_BLOCK}
 <h2>What this would mean, if it holds</h2>
 <p>Everything in this section is a prediction from the geometry, not a result.</p>
 <ul>
@@ -331,12 +373,12 @@ page = f"""<title>What is honesty, to Gemma?</title>
 
 <h2>Open items</h2>
 <ol>
-<li><b>Sincerity is weak.</b> Within-frame {c1[LMs]['within']['c']:.2f} and MASK at chance. Diagnose per source, try a logistic probe, audit the act-frame prefills, swap MASK and Apollo roles (D-045). Honesty cannot carry the paper until this is settled.</li>
-<li><b>Dose-response (D-041)</b> is running on ada; results not on the Mac yet. It decides whether Result 4 is a dose null or a real null.</li>
-<li><b>One model.</b> OLMo-3-7B-Instruct and Llama-3.1-8B-Instruct get the same items next (S6). The honesty block should run first there, before the other 48 concepts.</li>
+{OI_SINCERITY}
+{OI_DOSE}
+{OI_ONEMODEL}
 <li><b>Being observed is barely encoded</b> in the act frame (within-frame {fid['E1|all'][LMs]['within']['c']:.2f} at layer {LM}, {fid['E1|all'][LLs]['within']['c']:.2f} at layer {LL}), so the Hartshorne–May question has no handle in this model. Report as a null.</li>
 {"" if LAND else '<li><b>Item-level map.</b> Figure 1 places directions. A second figure should place items: every + and − item of the four definitions in every frame, projected into the subspace the ten directions span. This needs the stored activations on ada (a CPU job), not the Mac.</li>'}
-<li><b>The gap instruments are not read by our directions.</b> Integrity reads WDCT at {fid['C12|integrity'][LMs]['heldout']['c']:.2f}, courage reads are-you-sure at {fid['C11|all'][LMs]['heldout_far']['c']:.2f} at layer {LM}, sincerity reads MASK at {sincerity_mask:.2f}. Either the gaps are represented differently from the static contrasts, or they live at a different position than the first 32 reply tokens (the moment of capitulation is later). Worth a per-token look (D-046).</li>
+{OI_GAPS}
 <li><b>The appendix concepts</b> contain two entanglements worth a sentence in the paper: "I know the answer" shares a direction with "not self-deprecating" in self-description (cosine {D['cos']['self_L'+LMs]['cos'][D['cos']['self_L'+LMs]['units'].index('A9|all|d')][D['cos']['self_L'+LMs]['units'].index('C4|self-deprecating|d')]:+.2f}), and sincerity in action shares with candor ({D['cos']['act_L'+LMs]['cos'][D['cos']['act_L'+LMs]['units'].index('C1|all|c')][D['cos']['act_L'+LMs]['units'].index('C3|all|c')]:+.2f}).</li>
 </ol>
 

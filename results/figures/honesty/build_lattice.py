@@ -82,12 +82,18 @@ def repr_panel(ax, L, letter):
     draw_nodes(ax, L, "within")
     return floor
 
-cm = json.load(open(R / "s5" / "causal_matrix.json")); src, tgt, layers = cm["sources"], cm["targets"], cm["layers"]
-Z = cm["kinds"]["dense+"]["Z"]; li = layers.index(LL)
+HAVE_CAUSAL = (R / "s5" / "causal_matrix.json").exists()
+if HAVE_CAUSAL:
+    cm = json.load(open(R / "s5" / "causal_matrix.json")); src, tgt, layers = cm["sources"], cm["targets"], cm["layers"]
+    Z = cm["kinds"]["dense+"]["Z"]; li = layers.index(LL)
 SELFZ = {}
 def causal_panel(ax, letter):
     base_axes(ax, f"Steering at layer {L_STEER}, readout at layer {LL}", letter)
     us = [n[2] for n in nodes]; arrows = []
+    if not HAVE_CAUSAL:
+        draw_nodes(ax, LL, "none"); ax.text(1.95, 1.275, "steering stage pending", ha="center", va="center", fontsize=6, color=MUTED, zorder=8,
+                                           bbox=dict(boxstyle="round,pad=0.3", fc="white", ec=AXIS, lw=0.5))
+        return arrows
     for s in us:
         if s not in src: continue
         for t in us:
