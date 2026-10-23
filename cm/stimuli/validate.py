@@ -33,6 +33,9 @@ def validate(cid: str) -> dict:
     card = yaml.safe_load(card_path.read_text())
     frames = card.get("frames", {})
     applicable = [f for f, v in frames.items() if v and v.get("applies", True)]
+    # a frame may apply to some sub-contrasts only (card key `contrasts`, D-048); the completeness check then asks
+    # for it only from scenarios of those sub-contrasts
+    frame_contrasts = {f: set(frames[f].get("contrasts") or []) for f in applicable}
     d = item_dir(cid)
     items, held, beh = read_jsonl(d / "items.jsonl"), read_jsonl(d / "heldout.jsonl"), read_jsonl(d / "behavior.jsonl")
     for name, rows, contrast in (("items", items, True), ("heldout", held, True), ("behavior", beh, False)):
@@ -44,12 +47,19 @@ def validate(cid: str) -> dict:
             rep["errors"].append(f"{name}: duplicate item_id")
     cells = collections.Counter((r["frame"], r["polarity"], r["split"]) for r in items)
     by_scn = collections.defaultdict(set)
+    scn_contrasts = collections.defaultdict(set)
     for r in items:
         by_scn[r["scenario_id"]].add((r["frame"], r["polarity"]))
+        scn_contrasts[r["scenario_id"]].add((r.get("meta") or {}).get("contrast"))
         if r["split"] != split_for(r["scenario_id"]):
             rep["errors"].append(f"split of {r['item_id']} does not follow its scenario")
             break
-    incomplete = [s for s, fp in by_scn.items() if any((f, p) not in fp for f in applicable for p in ("pos", "neg"))]
+
+    def needed(s, f):
+        return not frame_contrasts[f] or bool(frame_contrasts[f] & scn_contrasts[s])
+
+    incomplete = [s for s, fp in by_scn.items()
+                  if any((f, p) not in fp for f in applicable if needed(s, f) for p in ("pos", "neg"))]
     if incomplete:
         rep["warnings"].append(f"{len(incomplete)}/{len(by_scn)} scenarios miss some applicable frame x polarity")
     # length matching per (scenario, frame, sub-contrast); when pos and neg share all non-system text, the contrast
@@ -83,6 +93,8 @@ def validate(cid: str) -> dict:
     if len(beh) < 100:
         rep["warnings"].append(f"only {len(beh)} behavior items (target 200)")
     rep.update({"applicable_frames": applicable, "n_scenarios": n_scn, "n_items": len(items), "n_heldout": len(held),
+                **({"frame_contrasts": {f: sorted(c) for f, c in frame_contrasts.items() if c}}
+                   if any(frame_contrasts.values()) else {}),
                 "n_behavior": len(beh),
                 "cells": {f"{f}-{p}-{s}": n for (f, p, s), n in sorted(cells.items())},
                 "constructions": dict(collections.Counter(r["construction"] for r in items)),

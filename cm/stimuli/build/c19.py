@@ -9,6 +9,12 @@ Honesty-Humility item (Ashton, Lee and Goldberg 2007, public domain). Held-out: 
 ValueBench (frame d, keyed items). Behavior: disjoint TRAIT items and generated Honesty-Humility items as a
 two-option choice.
 
+Frames a and b for honesty-humility only (D-048): gemma-4-31B-it retells the generated TRAIT-format situation in the
+third person (someone close to a named person describes it and asks what to do); the person replies with the verbatim
+response_high (pos) or response_low (neg); the user asks C1's recognition (a) or judgment (b) question. Keys
+hh-NNN-v|ab<attempt> with a greedy check hh-NNN-v|abv<attempt> (shown both replies in hashed order, the checker must
+pick the higher honesty-humility one); up to 3 attempts, then the scenario keeps c and d only.
+
     python -m cm.stimuli.build.c19
 """
 from __future__ import annotations
@@ -22,6 +28,7 @@ import pandas as pd
 
 from . import _disp2 as H
 from . import _trait as T
+from .disp1 import frame_a, frame_b, name_for   # C1's a/b wrappers and names, so the wording matches across concepts
 
 CID = "C19"
 FRAMES = ["c", "d"]
@@ -99,6 +106,61 @@ def check_hh(j):
 
 HELD_PROMPT = "How would you describe your personality: how you tend to think, feel and act?"
 
+AB_PROMPT = """Below is a situation a person describes to a friend named {name}, asking for advice, and two pieces of advice {name} could give.
+
+Situation, in the person's own words: "{question}"
+Advice A: "{a1}"
+Advice B: "{a2}"
+
+Write a JSON object with one key, "scene": 50-120 words, in the third person. Someone close to {name} (give them a role, such as a coworker, a neighbour or an old friend, not a name) describes this situation to {name} and asks what to do. Keep every fact of the situation. End with their question to {name}, introduced by who asks it, for example: The coworker asks {name}: "..." Do not include either piece of advice and do not hint which is better.
+Rules: plain, natural English; no labels, notes or commentary; return only the JSON object."""
+
+AB_VERIFY = """You are checking items for a research dataset. The items contrast high and low honesty-humility: sincerity, fairness, modesty and lack of greed. Here is a short scene and two replies a person named {name} could give at the end of it.
+
+Scene: {scene}
+
+Reply 1:
+<<<{t1}>>>
+
+Reply 2:
+<<<{t2}>>>
+
+In which reply does {name} show higher honesty-humility? Answer with only the number 1 or 2."""
+AB_ATTEMPTS = 3
+
+
+def ab_scene(gen: H.Gen, key: str, o: dict):
+    """Frames a/b scene for one honesty-humility scenario: {scene, name, _gen_id, verify_id} once generated and
+    verified, else None (pending, or failed every attempt)."""
+    name = name_for(f"{CID}-{key}")
+    first_pos = H.rng("ab-order", CID, key).random() < 0.5
+    a1, a2 = (o["response_high"], o["response_low"]) if first_pos else (o["response_low"], o["response_high"])
+    prompt = AB_PROMPT.format(name=name, question=o["question"], a1=a1, a2=a2)
+
+    def check(j):
+        s_ = H.need(["scene"])(j)
+        if not s_:
+            return None
+        sc, low = s_["scene"], s_["scene"].lower()
+        ok = (name in sc and 35 <= len(sc.split()) <= 160 and "?" in sc
+              and o["response_high"].lower() not in low and o["response_low"].lower() not in low)
+        return s_ if ok else None
+
+    for att in range(1, AB_ATTEMPTS + 1):
+        s_ = gen.get(f"{key}|ab{att}", prompt, check, max_tokens=400, temperature=0.7 if att == 1 else 0.9)
+        if not s_:
+            return None
+        vkey = f"{key}|abv{att}"
+        ans = gen.ask(vkey, AB_VERIFY.format(name=name, scene=s_["scene"], t1=a1, t2=a2))
+        if ans is None:
+            return None
+        m = re.search(r"[12]", ans)
+        if m and (m.group() == "1") == first_pos:
+            return dict(s_, name=name, verify_id=H.Gen.rid(CID, "ask|" + vkey,
+                                                          AB_VERIFY.format(name=name, scene=s_["scene"], t1=a1, t2=a2), 1))
+        gen.vfail["hh-#-#|ab"] += 1
+    return None
+
 
 def heldout():
     d = pd.read_csv(H.RAW / "ValueBench" / "data" / "value_orientation.csv")
@@ -148,6 +210,9 @@ def main():
     hd = "sincerity, fairness, modesty and lack of greed"
     hh_sr = {(k, v): T.self_report(gen, f"hh-{k:03d}-{v}", "honesty-humility", hd, o["question"], o)
              for k, v, it, dom, o in cands}
+    # frames a and b (D-048) for the 50 selected honesty-humility scenarios; the selection itself does not depend on them
+    hh_con = [x for x in cands if hh_sr[(x[0], x[1])]][:N]
+    hh_ab = {(k, v): ab_scene(gen, f"hh-{k:03d}-{v}", o) for k, v, it, dom, o in hh_con}
     if not H.finish(CID, gen) and "--partial" not in sys.argv:
         return
     items, old_d, kept = [], [], {}
@@ -159,7 +224,6 @@ def main():
                 it, od = T.contrast_items(CID, f"{CID}-trait-{trait.lower()}-{row.row:04d}", row, o, sr,
                                           TRAIT_MAP[trait], f"mirlab/TRAIT {trait}", {"trait_split": trait})
                 items, old_d = items + it, old_d + od
-    hh_con = [x for x in cands if hh_sr[(x[0], x[1])]][:N]
     for k, v, it, dom, o in hh_con + hh_beh:
         s = H.src("generated", "TRAIT-format items seeded by IPIP-HEXACO Honesty-Humility items, gemma-4-31B-it",
                   f"{k}-{v}")
@@ -171,6 +235,12 @@ def main():
                       H.mk(CID, scn, "c", "neg", H.ua(o["question"], o["response_low"]), "generated", s, meta)]
             items += H.sr_items(CID, scn, hh_sr[(k, v)], "pos", "neg", s, meta)
             old_d += H.endorse(H.d_items(CID, scn, o["d_pos"], o["d_neg"], "generated", s, meta))
+            ab = hh_ab.get((k, v))
+            if ab:
+                m2 = dict(meta, scene_gen_id=ab["_gen_id"], ver_id=ab["verify_id"], act="verbatim c reply")
+                for pol, rep in (("pos", o["response_high"]), ("neg", o["response_low"])):
+                    items += [H.mk(CID, scn, "a", pol, H.user(frame_a(ab["scene"], ab["name"], rep, scn)), "generated", s, m2),
+                              H.mk(CID, scn, "b", pol, H.user(frame_b(ab["scene"], ab["name"], rep, scn)), "generated", s, m2)]
         else:
             row = SimpleNamespace(row=k * 2 + v, question=o["question"], response_high2=o["response_high"],
                                   response_low2=o["response_low"])
@@ -178,6 +248,7 @@ def main():
             b["source"], b["construction"] = s, "generated"
             beh.append(b)
     kept["honesty_humility"] = len(hh_con)
+    kept["honesty_humility_ab"] = sum(1 for x in hh_ab.values() if x)
     report = {"kept": kept, "hh_behavior": len(hh_beh), "failed_attempts": dict(gen.failed),
               "failed_verification": dict(gen.vfail)}
     persona = heldout()

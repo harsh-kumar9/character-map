@@ -26,7 +26,7 @@ others (theory of mind; Dennett 1987).
 | A6 | User has authority (developer, operator) vs ordinary user | a c | Practical authority (Raz 1986) | Adapted instruction-hierarchy prompts | 2 |
 | A7 | Charitable vs uncharitable reading of the user | a c d | Principle of charity (Davidson 1973) | Ambiguous items from XSTest and OR-Bench; new vector "suspicious of users" | 2 |
 | A8 | Situation safe vs unsafe | a b c | Risk perception | SafeText, CASE-Bench | 2 |
-| A9 | Own knowledge: answerable vs not | c d | Accuracy as a virtue of truth (Williams 2002) | SelfAware, KUQ, AbstentionBench | 2 |
+| A9 | Own knowledge: answerable vs not | a b c d | Accuracy as a virtue of truth (Williams 2002) | SelfAware, KUQ, AbstentionBench | 2 |
 
 ## B. Moral evaluation
 
@@ -61,7 +61,7 @@ Dworkin 1972); servility and self-respect (Hill 1973); moral hypocrisy (Batson e
 | ID | Concept and contrast | Frames | Grounding | Sources | Tier |
 | --- | --- | --- | --- | --- | --- |
 | C1 | Sincere vs deceptive | a b c d | Sincerity (Williams) | MASK, Apollo roleplaying, Liars' Bench, Moral Stories; new vector "deceptive" | 1 |
-| C2 | Accurate vs fabricating | c d | Accuracy (Williams); Frankfurt 1986 | Vector "hallucinating", SelfAware | 2 |
+| C2 | Accurate vs fabricating | a b c d | Accuracy (Williams); Frankfurt 1986 | Vector "hallucinating", SelfAware | 2 |
 | C3 | Forthright vs withholding | a c d | Candor; Grice's quantity maxim (1975) | New vector "withholding"; adapted items | 2 |
 | C4 | Self-presentation: boastful vs truthful vs self-deprecating | a c d | NE IV.7 | New vectors "overclaiming", "underclaiming" | 2 |
 | C5 | Caring vs apathetic | a c d | Noddings; Tronto | EmpatheticDialogues, vector "apathetic"; new vector "attentive" | 1 |
@@ -78,7 +78,7 @@ Dworkin 1972); servility and self-respect (Hill 1973); moral hypocrisy (Batson e
 | C16 | Restraint vs overreach (scope, power, resources) | b c d | Temperance; Omohundro 2008 | Model-written-evals power files, Machiavelli power labels; new vectors "power-seeking", "overreaching" | 2 |
 | C17 | Serves the task's intent vs games the reward | c d | Goodhart; reward seeking | School of Reward Hacks; new vector "reward-seeking" | 2 |
 | C18 | Malicious; impolite | c | Vice | Vectors "evil", "impolite" | 2 |
-| C19 | HEXACO factors (honesty-humility, emotionality, extraversion, agreeableness, conscientiousness, openness) | c d | Ashton and Lee 2007 | HEXACO and IPIP items (d), TRAIT (c), model-written-evals Big Five files | 2 |
+| C19 | HEXACO factors (honesty-humility, emotionality, extraversion, agreeableness, conscientiousness, openness) | c d; a b for honesty-humility | Ashton and Lee 2007 | HEXACO and IPIP items (d), TRAIT (c), model-written-evals Big Five files | 2 |
 | C20 | Dark triad (Machiavellianism, narcissism, psychopathy) | c d | Paulhus and Williams 2002 | Model-written-evals files, TRAIT | 2 |
 | C21 | Schwartz's ten basic values | b d | Schwartz 1992, 2012 | PVQ items, Steering Geometry data | 2 |
 

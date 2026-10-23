@@ -112,7 +112,7 @@ script so they are reviewable, ask for JSON when you need structure, and check e
 ## Checks before review
 
 `python -m cm.stimuli.validate <ID>` checks the schema, that every applicable frame has both polarities for each
-scenario, that splits follow scenarios, length matching between polarities (median ratio within 0.8-1.25), and writes the
+scenario (a frame entry with `contrasts: [...]` applies to those sub-contrasts only, D-048), that splits follow scenarios, length matching between polarities (median ratio within 0.8-1.25), and writes the
 manifest. A concept is ready for Harsh's review when it validates. Review gate (PLAN S2): Harsh reads every card and 3
 items per frame x polarity cell.
 

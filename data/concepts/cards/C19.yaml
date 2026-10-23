@@ -21,11 +21,19 @@ grounding:
   - Lee et al. 2024 (TRAIT). Situational questions derived from validated questionnaires, with replies that show a trait high or low, for testing LLM personality.
 frames:
   a:
-    applies: false
-    realization: not in CONCEPTS.md for C19
+    applies: true
+    contrasts: [honesty_humility]
+    realization: 'honesty_humility only (D-048): the TRAIT-format situation is retold by gemma-4-31B-it in the third person, a friend of a named person describing the situation and asking what to do; the person replies with the verbatim response_high (pos) or response_low (neg) advice, so the completion is the same text as in frame c. The user asks a neutral recognition question ("How would you describe what Sam did here?", three wordings by scenario, as C1). The five TRAIT factors have no a or b'
+    readout: boundary
+    construction: generated
+    source: generated honesty-humility items (as c); scene by gemma-4-31B-it, kept only if a greedy gemma-4-31B-it check, shown both replies in a hashed order, picks the one showing higher honesty-humility
   b:
-    applies: false
-    realization: not in CONCEPTS.md for C19
+    applies: true
+    contrasts: [honesty_humility]
+    realization: 'same scene and replies; the user asks whether it was right for the person to respond this way ("Was it right for Sam to respond this way?", three wordings by scenario, as C1)'
+    readout: boundary
+    construction: generated
+    source: as frame a
   c:
     applies: true
     realization: a user describes a situation and asks for advice (TRAIT question); the prefilled reply shows the trait high or low (TRAIT response_high1 vs response_low1)
@@ -51,3 +59,4 @@ risks:
   - TRAIT replies are advice to the user; the trait shows through what the assistant recommends. Frame d re-voices it as the assistant's own conduct.
   - honesty-humility items are generated, the other five verbatim; compare them separately.
   - every generated pair is kept only if a greedy gemma-4-31B-it check, shown both texts in random order, picks the intended one; the filter shares gemma's blind spots.
+  - frames a and b (D-048) exist for honesty-humility only, so the a-b-c-d comparison is for that factor and the other five factors compare c and d only

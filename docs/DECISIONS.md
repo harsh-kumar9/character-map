@@ -889,3 +889,120 @@ Pattern: knowing directions move behaviors that are judgments (blame verdicts, a
 accuracy, perceiving the user as vulnerable, the obedience choice); doing directions move what the reply does
 (compliance, refusal, validation, style). About 40 instruments do not pass at any dose; from 8x on effects are
 confounded with degradation.
+
+## D-048 Recognize and judge frames for self-knowledge, accuracy and honesty-humility - proposed 2026-10-23
+
+Why. D-043 makes four definitions the spine and D-046 keeps the four frames apart and names each frame gap as a
+failure mode. Only sincerity (C1) has frames a and b; A9, C2 and C19 have c and d (CONCEPTS.md rows; the cards mark a
+and b not applicable). So the recognize-judge, recognize-act and judge-act gaps exist for one definition, and in the
+landscape the "own reply" cluster is sincerity alone plus the formality control, which ties the first component's frame
+split to one definition. With a and b for the three, the lattice is 4 x 4 (16 directions, ten now) and every D-046 gap
+can be read for every definition.
+
+Scope. Frames a (recognize) and b (judge) for A9 self-knowledge, C2 accuracy and the honesty_humility sub-contrast of
+C19 (the five TRAIT factors stay c d). Same scenarios as the existing c and d items, so scenario_id and split are
+shared: 100 for A9 (the 50/50 answerable crossing stays, meta.answerable kept), 100 for C2, 50 for C19. Both
+polarities. 1000 new items (400, 400, 200), all boundary readout. The c and d items do not change (ids, text, splits).
+The seven appendix honesty concepts keep their frames.
+
+Realization, the C1 pattern: gemma-4-31B-it retells the scenario in the third person about a named person (disp1
+names, rotated by scenario); the scene is identical in both polarities and the named person's completion carries the
+contrast; a and b differ only in the user's question, in the three a and three b wordings C1 uses ("How would you
+describe what Sam did here?", "Was it right for Sam to respond this way?"), rotated by scenario.
+- A9. The scene says who asks the named person the SelfAware question (a coworker, a friend) and nothing about the
+  answer or whether the question can be answered, so the contrast is the stance alone, as in c and d, still crossed
+  with real answerability. Completion: pos, the person gives the same specific answer as the c reply, confidently;
+  neg, the person says they do not know and briefly why. Not verbatim: 27 of 100 c-neg replies speak as an AI ("my
+  current database", "cannot browse the live web"; 1 of 100 pos), so gemma re-voices both poles for a person, keeping
+  the c reply's answer and reason, 35-70 words, within 10% of each other. Alternative: keep the completion verbatim
+  and make the third party "an AI assistant" that a user asks; this keeps a, b and c textually identical as C1 does,
+  but the recognized party is then an assistant like Gemma, which blurs other and self. Recommend the re-voiced person.
+- C2. The scene states the question put to the named person and, as narration, the facts of the matter (HaluEval's
+  background passage in plain prose), and says the person answers from memory without checking. Completion: the c
+  reply verbatim (pos, the right answer with a true detail; neg, the wrong answer with invented specifics). Reason
+  for the facts: without them the two replies look alike to a reader (both confident, both specific), and only someone
+  who knows the fact can tell the supported reply from the invented one, so the a/b direction would read Gemma's
+  knowledge of HotpotQA trivia, not its recognition of fabrication. C1's scene likewise tells the reader the truth the
+  deceptive completion hides. The user question asks about the manner, not the fact: a "How would you describe how
+  Sam answered?" (variants "What do you notice about how Sam answered?", "What is Sam doing in this answer?"), b
+  "Was it right for Sam to answer this way?" (variants "Was it acceptable for Sam to answer the way they did?", "Did
+  Sam do the right thing in answering like this?"). Alternative: no facts in the scene; then the direction is
+  recognition in the wild, confounded with what Gemma-3-4B happens to know. Recommend facts in.
+- C19 honesty-humility. The TRAIT-format question (a user's own situation, asking for advice) is retold as the named
+  person's friend describing that situation and asking what to do; the person's reply is the verbatim
+  response_high (pos) or response_low (neg). The completion is then identical across a, b and c, as in C1, and the
+  construct is c's (the trait shown through what one recommends; the card's risk row). Alternative: the named person
+  is the one in the situation and acts, re-voiced into conduct as frame d does; a generated act, and an a/b contrast
+  of a different kind from c's. Recommend the advisor.
+
+Generation. gemma-4-31B-it through cm/stimuli/generate.py and scripts/cm_gen.sbatch (D-007), one JSON request per
+scenario for the scene (A9: plus the two re-voiced answers), rule checks as C1 (name in the scene, 40-200 words,
+A9 answers within 10%), then a greedy verification pass blind to the poles: shown the scene and both completions in a
+scenario-hashed order, gemma must pick the one that claims to know (A9), that is supported by the stated facts (C2), or
+that shows higher honesty-humility (C19). A scenario failing a rule or the check is regenerated (up to 3 attempts; the
+disp1 Stage for C2, the _disp2 Gen for C19, a second attempt as the self-report batch for A9) and otherwise left
+without a and b; c and d stay, the validator records the shortfall. Target at least 90 of 100 and 45 of 50. Builders:
+A9 adds batches A9_ab and A9_abv to ak_common's prep/assemble flow, after sr_finish so the kept scenarios do not
+change; C2 adds request ids C2-halu-NNNNN-ab-v1 with a verification Stage in the next disp1 batch (disp1-r05), the
+v2 c/d responses untouched; C19 adds gen.get keys hh-NNN-v|ab with gen.verify in the _gen/C19 flow, added to the 50
+selected scenarios without changing the selection. About 250 generations and 250 checks, one GPU shard, under an hour.
+C19's card marks a and b as applying to the honesty_humility sub-contrast; the validator's completeness check would
+then warn that the 250 TRAIT scenarios miss a and b. Proposed: a `contrasts:` key on a card frame entry that the
+validator honors (one small change in cm/stimuli/validate.py), so the manifest stays clean; else accept the warning.
+Cards, CONCEPTS.md rows (A9 and C2 "a b c d"; C19 "c d, a b for honesty-humility"), build scripts and manifests are
+committed from the Mac; item text stays on ada. Review sample for Harsh: 3 items per new cell, private artifact.
+
+Risks, named.
+- Construct shift for A9. c and d read the model's own stance on its own knowledge, the first-person construct of
+  Li et al. a and b read whether another's reply claims to know or admits not knowing: recognition of a knowledge claim
+  in someone else, closer to calibration judgment than to self-knowledge. The lattice should label A9's a and b units
+  as "self-knowledge, seen in another", and the A9 recognize-act gap reads as "sees a knowledge claim in another vs
+  makes one itself". Gemma's b verdict will also depend on whether it takes the question to be answerable, so the b
+  direction may carry Gemma's own answerability judgment; the crossing lets the gate report a/b AUROC within the
+  answerable and within the unanswerable halves.
+- C2 a/b may track Gemma's own knowledge of the fact (facts out) or its reading of the stated facts (facts in). Check
+  at the S3 gate: one greedy pass of Gemma-3-4B on the 100 bare HaluEval questions (right_answer substring match),
+  then the a/b within-frame AUROC split by whether Gemma knew the answer. Equal AUROC in both strata means the
+  direction is not Gemma's knowledge. With the facts visible the neg reply may also read as a lie rather than a
+  fabrication; the narration (answers from memory, no motive stated) and C1's a/b (motive to deceive) are the contrast.
+- Verdict confound (D-033c): a and b are read over Gemma's own reply, which opens with its verdict; the verdict control
+  applies to the new rows as to C1's, through the label-verdict stage.
+- Acts are re-extracted for c and d too (one npz per concept). Same model, same items; the gate reports the c and d
+  within-frame AUROC before and after as the reproduction check.
+- The D-047 subjects (gemma-4-31b-it, Qwen3.5-27B) read the same stimuli; their A9, C2 and C19 replies and acts, where
+  already run, lack the new rows and need a rerun after this lands.
+
+Downstream, one stage at a time, gate read before the next.
+1. Generation and verification counts per concept. 2. cm.stimuli.validate for the three; manifests; review sample.
+3. cm.stimx replies for A9, C2, C19 (their replies files are empty and the stage skips existing files: move aside
+   first); read 20 a/b replies and the P/N/X verdict counts per cell after cm.s3_nuisance label-verdict (no verdict
+   files exist for the three; the pooled verdict direction is a leave-one-out mean over the other concepts, so no
+   stats rerun now; a full stats rerun, which reads every concept's npz, waits for the next full pass).
+4. cm.stimx acts with the old npz moved aside (about 0.7, 0.7 and 1.3 GB in float32).
+5. cm.s3 directions --force for the three, cm.s3 table, cm.s3_nuisance run --nuisance verdict for the three,
+   s3_claims. Report within-frame AUROC and verdict-controlled transfer for the six new units against the K1 control.
+6. cm.s4_overlap --variant verdict (214 units; the standardization pool grows by six, so report the largest change in
+   the existing honesty cosines), then cm.honesty_landscape, which already takes every frame with at least 10 train
+   items per pole, so it writes 16 directions with no code change beyond its docstring.
+7. On the Mac draw_landscape_3pc.py, draw_landscape_clean.py and draw_landscape_frames.py (its definition separation
+   extends to a and b, and a recognize-judge separation is added), build_lattice.py, build_page.py; then the
+   collaborator page (claude.ai/artifact/52pV3htnAFExtM3tfUdrh4), whose text says ten directions.
+
+Baseline to compare against (Gemma-3-4B, reply32, results/s3 and results/s3_ctrl_verdict, layers 17 / 29).
+Within-frame AUROC: A9 c 0.70 / 0.86, d 0.86 / 1.00; C2 c 0.59 / 0.65, d 0.87 / 0.92; C1 a 0.63 / 0.72, b 0.62 / 0.64,
+c 0.63 / 0.58, d 0.74 / 0.77; C19 hh c 0.97 / 1.00, d 0.76 / 0.86; K1 a 0.71 / 0.80, b 0.84 / 0.81, c 0.56 / 0.62,
+d 0.99 / 0.97. Verdict-controlled cross-frame transfer, mean over ordered pairs: A9 0.78 / 0.82, C2 0.42 / 0.41,
+C1 0.63 / 0.54, C19 hh 0.86 / 0.86, K1 0.58 / 0.70 (K1 a-b pair 0.78, 0.71 / 0.59, 0.93). Landscape at layer 29
+(landscape_frames_stats.json, ten directions): frame separation own-act 2.68, own-self 2.40, act-self 1.27 within-unit
+spreads; definition separation in act 0.11 (sincerity vs honesty-humility) to 1.41 (self-knowledge vs accuracy), in
+self 0.42 to 2.01; polarity gaps 0.08 (accuracy c) to 2.75 (self-knowledge c), sincerity a 0.76 and b 1.20;
+variance of the first three components 0.46, 0.21, 0.11.
+
+Rulings needed: scope; A9 re-voiced person vs verbatim assistant; C2 facts in vs out; C19 advisor vs actor; the
+validator `contrasts:` key vs accepting the warning; no verdict stats rerun now.
+
+## D-048 ruling - 2026-10-23
+
+Harsh: "D-048 ratified as proposed: re-voiced person for A9, facts in the scene for C2, advisor for C19, add the
+contrasts key to the validator, no verdict stats rerun now." Building starts with the cards, the validator key, the
+three build scripts and generation on ada; stages downstream run one at a time.

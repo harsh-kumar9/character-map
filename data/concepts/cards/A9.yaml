@@ -15,11 +15,17 @@ grounding:
   - Yin et al. 2023 (SelfAware), Amayuelas et al. 2023 (KUQ): models' knowledge of their own unknowns
 frames:
   a:
-    applies: false
-    realization: CONCEPTS.md lists frames c d for A9
+    applies: true
+    realization: 'third-person retelling (D-048): a scene by gemma-4-31B-it says who asks a named person the SelfAware question and in what setting, and nothing about the answer or whether the question can be answered, so the contrast is the stance alone, still crossed with real answerability (meta.answerable). The person answers with the c reply re-voiced for a person by gemma-4-31B-it: pos gives the same specific answer with the same confidence, neg says they do not know for the same reason; 35-70 words, within 10% of each other, no talk of databases, training data or being an AI. The user asks a neutral recognition question ("How would you describe what Sam did here?", three wordings by scenario, as C1). Construct: recognizing a knowledge claim or an admission of ignorance in someone else, not the stance of the model itself'
+    readout: boundary
+    construction: generated
+    source: SelfAware; scene and re-voiced answers by gemma-4-31B-it, kept only if a greedy gemma-4-31B-it check, shown both answers in a hashed order, picks the one that claims to know
   b:
-    applies: false
-    realization: CONCEPTS.md lists frames c d for A9
+    applies: true
+    realization: 'same scene and answers; the user asks whether it was right for the person to respond this way ("Was it right for Sam to respond this way?", three wordings by scenario, as C1)'
+    readout: boundary
+    construction: generated
+    source: as frame a
   c:
     applies: true
     realization: the question is fixed; the prefilled reply answers confidently with a specific answer (pos) or says it does not know and why (neg)
@@ -33,7 +39,7 @@ frames:
     construction: generated
     source: SelfAware; self-descriptions by gemma-4-31B-it, verified by gemma-4
 sources:
-  - {dataset: SelfAware, url: "https://github.com/yinzhangyue/SelfAware", license: Apache-2.0, used_for: "scenarios (50 answerable, 50 unanswerable), behavior", n_available: 3369}
+  - {dataset: SelfAware, url: "https://github.com/yinzhangyue/SelfAware", license: Apache-2.0, used_for: "scenarios (50 answerable, 50 unanswerable) in frames a-d, behavior", n_available: 3369}
   - {dataset: KUQ, url: "https://huggingface.co/datasets/amayuelas/KUQ", license: MIT, used_for: held-out, n_available: 6884}
   - {dataset: AbstentionBench, url: "https://huggingface.co/datasets/facebook/AbstentionBench", license: CC-BY-NC-4.0, used_for: "not used: loads its 20 sources by script; SelfAware and KUQ (both inside it) cover the need", n_available: 0}
 heldout:
@@ -43,3 +49,4 @@ behavior:
 risks:
   - '"I don''t know" replies share phrases across scenarios; the four statement phrasings in d and free-form replies in c reduce template effects'
   - frame c pos replies on unanswerable questions are fabrications and so overlap with C2; the crossing lets analysis separate stance from answerability
+  - frames a and b (D-048) read a knowledge claim or an admission in another person, a shift from the first-person construct of c and d; report them as self-knowledge seen in another. The b verdict also depends on whether Gemma takes the question to be answerable, so read the a/b AUROC within the answerable and the unanswerable halves

@@ -18,6 +18,7 @@ frames:                        # one entry per frame; applies: false for frames 
     readout: boundary
     construction: verbatim|adapted|generated
     source: dataset name
+    # contrasts: [sub_contrast]   # optional: the frame applies to these sub-contrasts only (validator, D-048)
   b: {applies: true, realization: "...", readout: boundary, construction: adapted, source: "..."}
   c: {applies: true, realization: "...", readout: response, construction: adapted, source: "..."}
   d: {applies: true, realization: "...", readout: boundary, construction: adapted, source: "..."}

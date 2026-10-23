@@ -633,13 +633,13 @@ def review_sample(items: list[dict], k: int = 3) -> list[dict]:
     return sorted(out, key=lambda r: (r["frame"], r["meta"].get("contrast") or "", r["scenario_id"], r["polarity"]))
 
 
-def complete(cid: str, items: list, cap: int | None = None) -> list:
+def complete(cid: str, items: list, cap: int | None = None, optional: str = "") -> list:
     """Keep scenarios that have every applicable frame x polarity cell for each of their sub-contrasts; then the
-    first `cap` scenarios in item order."""
+    first `cap` scenarios in item order. Frames in `optional` (a module's OPTIONAL_FRAMES) may be missing."""
     import yaml
     from ..schema import CARDS
     card = yaml.safe_load((CARDS / f"{cid}.yaml").read_text())
-    frames = [f for f, v in card["frames"].items() if v and v.get("applies", True)]
+    frames = [f for f, v in card["frames"].items() if v and v.get("applies", True) and f not in optional]
     have, cons, order = {}, {}, []
     for r in items:
         s = r["scenario_id"]
@@ -652,14 +652,15 @@ def complete(cid: str, items: list, cap: int | None = None) -> list:
     return [r for r in items if r["scenario_id"] in keep]
 
 
-def finish(cid: str, items: list, held: list, behavior: list, cap: int | None = None):
+def finish(cid: str, items: list, held: list, behavior: list, cap: int | None = None, optional: str = ""):
     """Frame-d items in the endorse form go to items_endorse.jsonl (meta.form "endorse", D-030); items.jsonl keeps
-    the self-report form. Scenarios missing a cell are dropped."""
+    the self-report form. Scenarios missing a cell are dropped, except cells of `optional` frames."""
     from ..validate import validate
     d = item_dir(cid)
     endorse = [dict(r, meta=dict(r["meta"], form="endorse")) for r in items
                if r["frame"] == "d" and r["meta"].get("form") != "self_report"]
-    items = complete(cid, [r for r in items if r["frame"] != "d" or r["meta"].get("form") == "self_report"], cap)
+    items = complete(cid, [r for r in items if r["frame"] != "d" or r["meta"].get("form") == "self_report"], cap,
+                     optional)
     kept = {r["scenario_id"] for r in items}
     if endorse:
         write_jsonl(d / "items_endorse.jsonl", [r for r in endorse if r["scenario_id"] in kept])
@@ -686,7 +687,7 @@ def build(cids: list[str]):
             st = sr_stage(cid, items)
             print(f"[build] {cid} self-report stage: {st.summary()}", flush=True)
             items = items + sr_items(cid, st)
-        finish(cid, items, held, behavior, getattr(mod, "N_CAP", None))
+        finish(cid, items, held, behavior, getattr(mod, "N_CAP", None), getattr(mod, "OPTIONAL_FRAMES", ""))
 
 
 def stats(cids: list[str]):
