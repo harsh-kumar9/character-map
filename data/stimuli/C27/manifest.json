@@ -1,0 +1,62 @@
+{
+ "concept": "C27",
+ "errors": [],
+ "warnings": [],
+ "length_ratio_pos_over_neg_median": 0.998,
+ "length_ratio_by_frame": {
+  "a": 0.99,
+  "b": 0.99,
+  "c": 0.987,
+  "d": 1.01
+ },
+ "applicable_frames": [
+  "a",
+  "b",
+  "c",
+  "d"
+ ],
+ "n_scenarios": 173,
+ "n_items": 1384,
+ "n_heldout": 400,
+ "n_behavior": 200,
+ "cells": {
+  "a-neg-test": 75,
+  "a-neg-train": 98,
+  "a-pos-test": 75,
+  "a-pos-train": 98,
+  "b-neg-test": 75,
+  "b-neg-train": 98,
+  "b-pos-test": 75,
+  "b-pos-train": 98,
+  "c-neg-test": 75,
+  "c-neg-train": 98,
+  "c-pos-test": 75,
+  "c-pos-train": 98,
+  "d-neg-test": 75,
+  "d-neg-train": 98,
+  "d-pos-test": 75,
+  "d-pos-train": 98
+ },
+ "constructions": {
+  "generated": 1384
+ },
+ "sources": [
+  "\"AdiSimhi/ManagerBench control_set\"",
+  "\"AdiSimhi/ManagerBench human_harm_set\"",
+  "\"Lordog/R-Judge\"",
+  "\"ToolEmu all_cases.json\"",
+  "\"ai-safety-institute/AgentHarm harmful behaviors\"",
+  "\"thu-coai/Agent-SafetyBench released_data.json\""
+ ],
+ "licenses": [
+  "Apache-2.0",
+  "MIT",
+  "MIT with a clause: use only to improve the safety and security of AI systems",
+  "none stated"
+ ],
+ "sha256": {
+  "items": "8d657669f6c90c6b91cad1f3c4b1323803b0c658c9dc86b616df837b42a95934",
+  "heldout": "aef41c7b2f904aee380d05c5486bd4adc17cf04097730e226b1ae255d072e221",
+  "behavior": "1e3e776dec4dd9e9fc3af9e587570227c0f92c9c78d6e2001323b9a56cc5b3ff"
+ }
+}
