@@ -2223,3 +2223,37 @@ label shuffles.
   safe help point away from refusing, toward complying.
 - With C25 substance: c -0.16/-0.15 (floor 0.08/0.09); |cos| at most 0.16 and within floor in a, b and d. Small and
   negative: the helpful refusal is not read as substantive help.
+
+## HHH S5a results - 2026-10-24
+
+Steering inside and across the three blocks (cm/hhh/s5.py, jobs 421233, 421235-421238, 421241; results/hhh/s5,
+figures results/hhh/figures/<block>/steering and the lattice's panel c). Exploratory. 46 sources (doing and knowing
+direction per definition, honesty and the controls included), 88 targets, 1056 probe items, dense +-dose and 16
+random directions at the calibrated dose (c 1/128, copied from results/s5/calibration.json). The SAE condition is
+left out. z is oriented so that positive means the target moves toward its good side.
+- A first run raced the C15 safe_completion rebuild (replies rewritten 19:17-19:18 UTC while the shards loaded them),
+  and the four C15 a/b targets lost their baseline gap. The stored activations give those units large positive gaps
+  on the same probe items, so the run was redone on the final C15 (the harmlessness builder confirmed the refuse
+  rows byte-identical). The raced run is kept in outputs/hhh/s5_race. In the rerun only C26 b (22), A7 c and C24
+  overstepping b (29) have no positive gap.
+- Health: sign symmetry r(E+, -E-) 0.95 and 0.97; self effect median z 1.5 (22) and 3.4 (29); by block at 29,
+  harmlessness 3.7 (10 of 15 sources at z >= 3), honesty 2.6 (6 of 12), helpfulness 1.9 (6 of 13). C25 does not move
+  its own readout (z 0.9), so it can not be read as a source at this dose.
+- Steering does not stay in its lane here. Cells at |z| >= 3, 22 and 29: same definition, other frame 13% and 24%;
+  other definition, same block 6% and 7%; across blocks 3.5% and 3.6%; cells involving the controls 1.0% and 1.4%
+  (the false-positive rate). The honesty block's S5a had almost no cross-definition arrows.
+- Two hubs. Care in action (C5 c) and agreeableness in action (C19 c) move 34 and 26 off-definition targets at 22
+  (20 and 18 at 29). Both raise substance, autonomy and helping harmless requests, and both cross into harmlessness.
+- The tension, causally. Directions on the person side of helpfulness lower the readout for refusing a harmful
+  request: helping a harmless request (C15 harmless c) -3.7 and -6.5 on refusing in action, -7.6 and -2.2 on refusing
+  in self-description (22, 29); agreeableness in action -4.8 and -3.1 in action, -6.1 at 22 in self-description;
+  wellbeing in action -3.4 and -4.2 in action, -6.0 at 22 in self-description. Agreeableness in action also pushes
+  declining a harmful action in self-description down (-6 at 29). Care is mixed: it raises refusing in
+  self-description (+4.7, +3.7) and lowers it in judgment and action at 22 (-3.2, -2.9), and it raises helping
+  harmless requests.
+- D-055's named cells. Steering toward refusing harmful requests lowers wellbeing in action (-3.6, -2.2) and does not
+  move substance or autonomy beyond |z| 2.3. Steering C25 moves nothing (see above), so "steer substance, read
+  refusal" is untested.
+- Reading: in the representation, the helpful-to-the-person directions and the refusal direction are coupled
+  causally, not only by angle; agreeableness and wellbeing are the levers against refusal.
+  Whether this reaches behavior is S5b's question (generation running, jobs 421242-421245).

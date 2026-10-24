@@ -9,7 +9,8 @@ harmless side.
 
 Reads  results/hhh/figures/<block>/landscape.json, landscape_3d.json (cm.hhh.landscape)
        results/hhh/s4/overlap_verdict.json (cm.hhh.overlap); results/hhh/s5/causal_matrix.json when it exists
-Writes results/hhh/figures/<block>/{landscape_units_L*, landscape_frames_L*, transfer, lattice, map, cosine}.{png,pdf},
+Writes results/hhh/figures/<block>/{landscape_units_L*, landscape_frames_L*, transfer, lattice, map, cosine,
+       steering}.{png,pdf},
        <block>_data.json
 
     python3 -m cm.hhh.figs <block> [--mid 17] [--late 29]
@@ -308,7 +309,8 @@ def lattice(B, plt):
         draw_nodes(ax, L, None)
         out[str(L)] = {"floor": fl, "drawn_from": thr, "edges_above_floor": es}
     ax = axes[2]
-    base(ax, f"Steering at layer {cfg.L_STEER}, readout at layer {B.late}", "c")
+    base(ax, f"Steering at layer {cfg.L_STEER}, readout at layer {B.late}: within a definition (z in the node: its own "
+             f"readout; across definitions: the steering figure)", "c")
     arrows, selfz = [], {}
     if B.causal is None:
         draw_nodes(ax, B.late, {})
@@ -327,11 +329,11 @@ def lattice(B, plt):
                 z *= B.sign(s) * B.sign(t)
                 if s == t:
                     selfz[s] = f"{z:.1f}"
-                elif abs(z) >= 3:
+                elif abs(z) >= 3 and s.rsplit("|", 1)[0] == t.rsplit("|", 1)[0]:
                     arrows.append((s, t, round(z, 1)))
         for s, t, z in arrows:
             (x1, y1), (x2, y2) = pos[s], pos[t]
-            ax.add_patch(FancyArrowPatch((x1, y1), (x2, y2), connectionstyle="arc3,rad=0.25", arrowstyle="-|>",
+            ax.add_patch(FancyArrowPatch((x1, y1), (x2, y2), connectionstyle="arc3,rad=0.35", arrowstyle="-|>",
                                          mutation_scale=7, lw=0.6 + 0.25 * min(abs(z), 8), color=INK if z > 0 else NEG,
                                          shrinkA=8, shrinkB=8, zorder=4))
         draw_nodes(ax, B.late, selfz)
@@ -431,6 +433,54 @@ def cosmap(B, plt):
     return out
 
 
+def steering(B, plt):
+    """Oriented z (source moves target toward its good side) at the late depth: (a) this block's sources on its own
+    targets, every frame; (b) on the other HHH block's act and self-describe targets."""
+    if B.causal is None:
+        return None
+    from matplotlib.colors import LinearSegmentedColormap
+    DIV = LinearSegmentedColormap.from_list("div", ["#8f2424", "#c23b3b", "#e34948", "#ef8f8e", "#f7d2d1", "#f0efec",
+                                                    "#cde2fb", "#86b6ef", "#3987e5", "#1c5cab", "#0d366b"])
+    cm = B.causal; src, tgt = cm["sources"], cm["targets"]; li = cm["layers"].index(B.late)
+    Z = cm["kinds"]["dense+"]["Z"]
+    other = "harmlessness" if B.name == "helpfulness" else "helpfulness"
+    sign_of = {u.key: (-1.0 if u.good == "neg" else 1.0) for us in BLOCKS.values() for u in us}
+    lab_of = {u.key: u.label for us in BLOCKS.values() for u in us}
+    sg = lambda uid: sign_of.get(uid.rsplit("|", 1)[0], 1.0)
+    rows = [s for u in B.present for f in "cdba" for s in [f"{u.key}|{f}"] if s in src]
+    colsA = [t for u in B.present for f in "abcd" for t in [f"{u.key}|{f}"] if t in tgt]
+    colsB = [t for u in BLOCKS[other] for f in "cd" for t in [f"{u.key}|{f}"] if t in tgt]
+    out = {}
+    fig, axs = plt.subplots(1, 2, figsize=(7.3, 0.17 * len(rows) + 1.9), gridspec_kw={"width_ratios": [len(colsA), len(colsB)]})
+    for k, (ax, cols, title) in enumerate(zip(axs, (colsA, colsB), (f"Within {B.name}", f"On {other}, act and self-describe"))):
+        A = np.array([[np.nan if Z[src.index(s)][li][tgt.index(t)] is None else Z[src.index(s)][li][tgt.index(t)] * sg(s) * sg(t)
+                       for t in cols] for s in rows], float)
+        im = ax.imshow(np.clip(A, -6, 6), cmap=DIV, vmin=-6, vmax=6, aspect="auto")
+        ax.set_xticks(range(len(cols)))
+        ax.set_xticklabels([f"{lab_of.get(t.rsplit('|', 1)[0], t)} ({t.rsplit('|', 1)[1]})" for t in cols], rotation=60,
+                           ha="right", rotation_mode="anchor", fontsize=5)
+        ax.set_yticks(range(len(rows)))
+        ax.set_yticklabels([f"{lab_of[s.rsplit('|', 1)[0]]} ({s.rsplit('|', 1)[1]})" for s in rows] if k == 0 else [], fontsize=5.4)
+        for i in range(len(rows)):
+            for j in range(len(cols)):
+                v = A[i, j]
+                if not np.isnan(v) and abs(v) >= 3:
+                    ax.text(j, i, f"{v:.0f}", ha="center", va="center", fontsize=4.3, color="white" if abs(v) > 4.5 else INK)
+        for seq, line in ((cols, ax.axvline), (rows, ax.axhline)):
+            for i in range(1, len(seq)):
+                if seq[i].rsplit("|", 1)[0] != seq[i - 1].rsplit("|", 1)[0]:
+                    line(i - 0.5, color="white", lw=1.2)
+        ax.set_title(title, loc="left"); ax.tick_params(length=0)
+        for sp in ax.spines.values(): sp.set_visible(False)
+        letter(ax, "ab"[k])
+        out[title] = {"rows": rows, "cols": cols, "z": np.round(A, 2).tolist()}
+    cb = fig.colorbar(im, ax=axs, fraction=0.025, pad=0.01); cb.outline.set_visible(False); cb.ax.tick_params(length=0, labelsize=5.5)
+    cb.set_label("z, toward the good side (clipped at ±6)", fontsize=6)
+    save(fig, B.out, "steering")
+    plt.close(fig)
+    return out
+
+
 # ---------------------------------------------------------------- transfer and the data file
 def transfer_rows(B, L):
     lay = B.land["layers"][str(L)]
@@ -477,9 +527,20 @@ def main():
     ap.add_argument("block", choices=["helpfulness", "harmlessness"])
     ap.add_argument("--mid", type=int, default=cfg.L_STEER)
     ap.add_argument("--late", type=int, default=cfg.L_OUT[1])
+    ap.add_argument("--only", default="", help="comma list of figures to redraw (landscape, transfer, lattice, map, steering); "
+                                                "the data file is written only on a full run")
     a = ap.parse_args()
     plt = setup()
     B = Block(a.block, a.mid, a.late)
+    only = set(a.only.split(",")) - {""}
+    if only:
+        for name, fn in (("lattice", lattice), ("map", cosmap), ("steering", steering), ("transfer", transfer_fig)):
+            if name in only:
+                fn(B, plt)
+        if "landscape" in only:
+            for L in (B.mid, B.late):
+                landscape_units(B, L, plt); landscape_frames(B, L, plt)
+        return
     for L in (B.mid, B.late):
         landscape_units(B, L, plt)
         landscape_frames(B, L, plt)
@@ -495,6 +556,7 @@ def main():
     if B.s4:
         data["lattice"] = lattice(B, plt)
         data["map"] = cosmap(B, plt)
+    data["steering"] = steering(B, plt)
     (B.out / f"{B.name}_data.json").write_text(json.dumps(data, indent=1))
     print("wrote", B.out)
 

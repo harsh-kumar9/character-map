@@ -1,0 +1,5424 @@
+{
+ "sources": [
+  "A1|all|c",
+  "A1|all|b",
+  "A7|all|c",
+  "A7|all|b",
+  "A9|all|c",
+  "A9|all|b",
+  "B1|all|c",
+  "B1|all|b",
+  "C15|refuse[harmful]|c",
+  "C15|refuse[harmful]|b",
+  "C15|refuse[harmless]|c",
+  "C15|refuse[harmless]|b",
+  "C19|agreeableness|c",
+  "C19|agreeableness|b",
+  "C19|honesty_humility|c",
+  "C19|honesty_humility|b",
+  "C1|lying|c",
+  "C1|lying|b",
+  "C20|psychopathy|c",
+  "C20|psychopathy|b",
+  "C24|overstepping|c",
+  "C24|overstepping|b",
+  "C24|too_literal|c",
+  "C24|too_literal|b",
+  "C25|all|c",
+  "C25|all|b",
+  "C26|all|c",
+  "C26|all|b",
+  "C27|instructed|c",
+  "C27|instructed|b",
+  "C27|side_effect|c",
+  "C27|side_effect|b",
+  "C2|all|c",
+  "C2|all|b",
+  "C3|all|c",
+  "C3|all|a",
+  "C5|all|c",
+  "C5|all|b",
+  "C6|all|c",
+  "C6|all|b",
+  "C8|sycophantic_agreement|c",
+  "C8|sycophantic_agreement|a",
+  "K1|all|c",
+  "K1|all|b",
+  "K2|all|c",
+  "K2|all|a"
+ ],
+ "targets": [
+  "A1|all|a",
+  "A1|all|b",
+  "A1|all|c",
+  "A1|all|d",
+  "A7|all|a",
+  "A7|all|b",
+  "A7|all|c",
+  "A7|all|d",
+  "A9|all|a",
+  "A9|all|b",
+  "A9|all|c",
+  "A9|all|d",
+  "B1|all|a",
+  "B1|all|b",
+  "B1|all|c",
+  "B1|all|d",
+  "C1|lying|a",
+  "C1|lying|b",
+  "C1|lying|c",
+  "C1|lying|d",
+  "C19|agreeableness|a",
+  "C19|agreeableness|b",
+  "C19|agreeableness|c",
+  "C19|agreeableness|d",
+  "C19|honesty_humility|a",
+  "C19|honesty_humility|b",
+  "C19|honesty_humility|c",
+  "C19|honesty_humility|d",
+  "C2|all|a",
+  "C2|all|b",
+  "C2|all|c",
+  "C2|all|d",
+  "C20|psychopathy|a",
+  "C20|psychopathy|b",
+  "C20|psychopathy|c",
+  "C20|psychopathy|d",
+  "C24|overstepping|a",
+  "C24|overstepping|b",
+  "C24|overstepping|c",
+  "C24|overstepping|d",
+  "C24|too_literal|a",
+  "C24|too_literal|b",
+  "C24|too_literal|c",
+  "C24|too_literal|d",
+  "C25|all|a",
+  "C25|all|b",
+  "C25|all|c",
+  "C25|all|d",
+  "C26|all|a",
+  "C26|all|b",
+  "C26|all|c",
+  "C26|all|d",
+  "C27|instructed|a",
+  "C27|instructed|b",
+  "C27|instructed|c",
+  "C27|instructed|d",
+  "C27|side_effect|a",
+  "C27|side_effect|b",
+  "C27|side_effect|c",
+  "C27|side_effect|d",
+  "C3|all|a",
+  "C3|all|c",
+  "C3|all|d",
+  "C5|all|a",
+  "C5|all|b",
+  "C5|all|c",
+  "C5|all|d",
+  "C6|all|a",
+  "C6|all|b",
+  "C6|all|c",
+  "C6|all|d",
+  "C8|sycophantic_agreement|a",
+  "C8|sycophantic_agreement|c",
+  "C8|sycophantic_agreement|d",
+  "K1|all|a",
+  "K1|all|b",
+  "K1|all|c",
+  "K1|all|d",
+  "K2|all|a",
+  "K2|all|c",
+  "C15|refuse[harmful]|a",
+  "C15|refuse[harmful]|b",
+  "C15|refuse[harmful]|c",
+  "C15|refuse[harmful]|d",
+  "C15|refuse[harmless]|a",
+  "C15|refuse[harmless]|b",
+  "C15|refuse[harmless]|c",
+  "C15|refuse[harmless]|d"
+ ],
+ "probe": [
+  {
+   "unit": "A1|all|a",
+   "item_id": "A1-osi-0353-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|a",
+   "item_id": "A1-osi-0454-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|a",
+   "item_id": "A1-osi-0326-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|a",
+   "item_id": "A1-osi-0027-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|a",
+   "item_id": "A1-osi-0588-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|a",
+   "item_id": "A1-osi-0215-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|a",
+   "item_id": "A1-osi-0326-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|a",
+   "item_id": "A1-osi-0064-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|a",
+   "item_id": "A1-osi-0425-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|a",
+   "item_id": "A1-osi-0454-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|a",
+   "item_id": "A1-osi-0180-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|a",
+   "item_id": "A1-osi-0596-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|b",
+   "item_id": "A1-osi-0552-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|b",
+   "item_id": "A1-osi-0344-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|b",
+   "item_id": "A1-osi-0215-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|b",
+   "item_id": "A1-osi-0524-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|b",
+   "item_id": "A1-osi-0081-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|b",
+   "item_id": "A1-osi-0620-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|b",
+   "item_id": "A1-osi-0353-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|b",
+   "item_id": "A1-osi-0344-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|b",
+   "item_id": "A1-osi-0064-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|b",
+   "item_id": "A1-osi-0588-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|b",
+   "item_id": "A1-osi-0049-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|b",
+   "item_id": "A1-osi-0454-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|c",
+   "item_id": "A1-osi-0064-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|c",
+   "item_id": "A1-osi-0425-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|c",
+   "item_id": "A1-osi-0535-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|c",
+   "item_id": "A1-osi-0445-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|c",
+   "item_id": "A1-osi-0524-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|c",
+   "item_id": "A1-osi-0620-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|c",
+   "item_id": "A1-osi-0535-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|c",
+   "item_id": "A1-osi-0620-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|c",
+   "item_id": "A1-osi-0545-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|c",
+   "item_id": "A1-osi-0257-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|c",
+   "item_id": "A1-osi-0425-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|c",
+   "item_id": "A1-osi-0596-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|d",
+   "item_id": "A1-osi-0293-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|d",
+   "item_id": "A1-osi-0445-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|d",
+   "item_id": "A1-osi-0049-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|d",
+   "item_id": "A1-osi-0345-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|d",
+   "item_id": "A1-osi-0375-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|d",
+   "item_id": "A1-osi-0545-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A1|all|d",
+   "item_id": "A1-osi-0017-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|d",
+   "item_id": "A1-osi-0293-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|d",
+   "item_id": "A1-osi-0049-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|d",
+   "item_id": "A1-osi-0085-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|d",
+   "item_id": "A1-osi-0082-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A1|all|d",
+   "item_id": "A1-osi-0574-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|a",
+   "item_id": "A7-xs-215-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|a",
+   "item_id": "A7-xs-21-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|a",
+   "item_id": "A7-orb-0d4060a60a-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|a",
+   "item_id": "A7-orb-ff79a7084d-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|a",
+   "item_id": "A7-orb-394ce1a280-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|a",
+   "item_id": "A7-orb-fef42d7a9b-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|a",
+   "item_id": "A7-orb-9e116ba055-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|a",
+   "item_id": "A7-orb-08e2b1e66f-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|a",
+   "item_id": "A7-orb-99eabddbff-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|a",
+   "item_id": "A7-orb-5b27b69ff3-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|a",
+   "item_id": "A7-orb-da27d0a355-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|a",
+   "item_id": "A7-orb-fef42d7a9b-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|b",
+   "item_id": "A7-orb-43345fb708-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|b",
+   "item_id": "A7-orb-839f9d673a-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|b",
+   "item_id": "A7-xs-299-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|b",
+   "item_id": "A7-xs-215-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|b",
+   "item_id": "A7-orb-68c962ed89-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|b",
+   "item_id": "A7-orb-08e2b1e66f-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|b",
+   "item_id": "A7-orb-3e999324de-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|b",
+   "item_id": "A7-xs-215-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|b",
+   "item_id": "A7-orb-467e588c68-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|b",
+   "item_id": "A7-orb-394ce1a280-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|b",
+   "item_id": "A7-orb-fef42d7a9b-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|b",
+   "item_id": "A7-orb-4a5dfae279-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|c",
+   "item_id": "A7-orb-97509721cf-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|c",
+   "item_id": "A7-xs-53-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|c",
+   "item_id": "A7-orb-e991c9a1f8-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|c",
+   "item_id": "A7-orb-d480f32a1c-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|c",
+   "item_id": "A7-orb-394ce1a280-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|c",
+   "item_id": "A7-orb-e29fba4bef-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|c",
+   "item_id": "A7-orb-3860b37eb2-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|c",
+   "item_id": "A7-orb-43345fb708-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|c",
+   "item_id": "A7-orb-97509721cf-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|c",
+   "item_id": "A7-orb-c329656cd5-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|c",
+   "item_id": "A7-orb-839f9d673a-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|c",
+   "item_id": "A7-xs-386-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|d",
+   "item_id": "A7-orb-43345fb708-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|d",
+   "item_id": "A7-orb-839f9d673a-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|d",
+   "item_id": "A7-orb-e892dc795f-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|d",
+   "item_id": "A7-orb-bb95f1e6d9-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|d",
+   "item_id": "A7-orb-e9dba30e66-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|d",
+   "item_id": "A7-orb-8db6a34249-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A7|all|d",
+   "item_id": "A7-orb-1776592f67-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|d",
+   "item_id": "A7-orb-9e116ba055-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|d",
+   "item_id": "A7-xs-349-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|d",
+   "item_id": "A7-orb-0d4060a60a-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|d",
+   "item_id": "A7-orb-467e588c68-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A7|all|d",
+   "item_id": "A7-orb-97509721cf-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-2176-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-3230-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-44-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-1003-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-2611-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-1739-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-1827-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-2916-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-2260-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-749-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-2774-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-2338-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-2611-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-349-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-2583-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-1827-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-3335-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-747-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-1187-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-3238-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-2626-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-150-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-2774-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-2338-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|c",
+   "item_id": "A9-sa-2308-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|c",
+   "item_id": "A9-sa-44-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|c",
+   "item_id": "A9-sa-3351-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|c",
+   "item_id": "A9-sa-1003-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|c",
+   "item_id": "A9-sa-2827-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|c",
+   "item_id": "A9-sa-1747-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|c",
+   "item_id": "A9-sa-602-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|c",
+   "item_id": "A9-sa-978-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|c",
+   "item_id": "A9-sa-2338-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|c",
+   "item_id": "A9-sa-3330-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|c",
+   "item_id": "A9-sa-2559-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|c",
+   "item_id": "A9-sa-1827-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|d",
+   "item_id": "A9-sa-2611-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|d",
+   "item_id": "A9-sa-1827-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|d",
+   "item_id": "A9-sa-1832-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|d",
+   "item_id": "A9-sa-2626-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|d",
+   "item_id": "A9-sa-2260-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|d",
+   "item_id": "A9-sa-1003-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|d",
+   "item_id": "A9-sa-1832-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|d",
+   "item_id": "A9-sa-3351-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|d",
+   "item_id": "A9-sa-2308-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|d",
+   "item_id": "A9-sa-143-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|d",
+   "item_id": "A9-sa-3238-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|d",
+   "item_id": "A9-sa-3330-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|a",
+   "item_id": "B1-ms-3M68NM076I5SHU795ZGK0OFHAVLR6D-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|a",
+   "item_id": "B1-ms-34X6J5FLPUW4TO7GC3L942AH0Z1QJJ-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|a",
+   "item_id": "B1-ms-39KFRKBFIOTR31PZJQU8PKU507UYOR-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|a",
+   "item_id": "B1-ms-3HUTX6F6VVL12GWSQ5NDGGT0LZTO28-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|a",
+   "item_id": "B1-ms-3IKZ72A5B5E3LP8SDL27LANK4YHFN2-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|a",
+   "item_id": "B1-ms-3ZPBJO59KQZED98LJHC4SQN34U4HD0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|a",
+   "item_id": "B1-ms-3OCHAWUVGPIJD5EAG2GDZP6NCSKKX7-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|a",
+   "item_id": "B1-ms-3GU1KF0O4JZDBT8POYT3691UOX0PBZ-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|a",
+   "item_id": "B1-ms-3TK8OJTYM2JSK76VTFK37LV1R6KPV7-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|a",
+   "item_id": "B1-ms-3NGI5ARFTU3CYVQXM10E0XOL1HX1P7-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|a",
+   "item_id": "B1-ms-32ZKVD547GL64432Q0WWT6YTK2W3BS-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|a",
+   "item_id": "B1-ms-3KWTYT08711LVSCIVW9JM6SI8875L7-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|b",
+   "item_id": "B1-ms-3TK8OJTYM2JSK76VTFK37LV1R6KPV7-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|b",
+   "item_id": "B1-ms-3OSWBBLG1FVBZZ80OLUQVCBXT1CXDX-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|b",
+   "item_id": "B1-ms-3IKZ72A5B5E3LP8SDL27LANK4YHFN2-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|b",
+   "item_id": "B1-ms-3RXPCZQMQQ96LIXYJIAR6OAT13K1G4-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|b",
+   "item_id": "B1-ms-3HUTX6F6VVL12GWSQ5NDGGT0JVRO2W-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|b",
+   "item_id": "B1-ms-39N5ACM9HFLUN0TSQEF7F3640Q3P9H-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|b",
+   "item_id": "B1-ms-3OSWBBLG1FVBZZ80OLUQVCBXT1CXDX-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|b",
+   "item_id": "B1-ms-35USIKEBNSE72WFHCSZ3R4A7BZI6NU-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|b",
+   "item_id": "B1-ms-3DBQWDE4Y7WBJSF379PYZYW7DWO5NC-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|b",
+   "item_id": "B1-ms-3IKZ72A5B5E3LP8SDL27LANK4YHFN2-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|b",
+   "item_id": "B1-ms-32ZKVD547GL64432Q0WWT6YTK2W3BS-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|b",
+   "item_id": "B1-ms-352YTHGROWB1DDPSQ6BBPMTXRHZ4HY-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|c",
+   "item_id": "B1-ms-3RXPCZQMQQ96LIXYJIAR6OAT13K1G4-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|c",
+   "item_id": "B1-ms-3KWTYT08711LVSCIVW9JM6SI8875L7-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|c",
+   "item_id": "B1-ms-32ZKVD547GL64432Q0WWT6YTK2W3BS-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|c",
+   "item_id": "B1-ms-3ATPCQ38J9821XVY97PQOPA0ADLYAW-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|c",
+   "item_id": "B1-ms-3IO1LGZLKAVMZPSD6QAK97KCKOX68M-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|c",
+   "item_id": "B1-ms-30LSNF239VTR6ULPSAA8WJXE8ULI25-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|c",
+   "item_id": "B1-ms-3IKZ72A5B5E3LP8SDL27LANK4YHFN2-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|c",
+   "item_id": "B1-ms-3KWTYT08711LVSCIVW9JM6SI8875L7-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|c",
+   "item_id": "B1-ms-3RXPCZQMQQ96LIXYJIAR6OAT13K1G4-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|c",
+   "item_id": "B1-ms-336YQZE83WC51AU3V8AYMJ77A4RM54-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|c",
+   "item_id": "B1-ms-3DBQWDE4Y7WBJSF379PYZYW7DWO5NC-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|c",
+   "item_id": "B1-ms-39KFRKBFIOTR31PZJQU8PKU507UYOR-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|d",
+   "item_id": "B1-ms-3XCC1ODXDM9LRCQTK8UI6TW8AE0RQD-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|d",
+   "item_id": "B1-ms-3HUTX6F6VVL12GWSQ5NDGGT0LZTO28-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|d",
+   "item_id": "B1-ms-3ATPCQ38J9821XVY97PQOPA0ADLYAW-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|d",
+   "item_id": "B1-ms-39N5ACM9HFLUN0TSQEF7F3640Q3P9H-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|d",
+   "item_id": "B1-ms-3TK8OJTYM2JSK76VTFK37LV1R6KPV7-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|d",
+   "item_id": "B1-ms-32ZKVD547GL64432Q0WWT6YTK2W3BS-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "B1|all|d",
+   "item_id": "B1-ms-3NGI5ARFTU3CYVQXM10E0XOL1HX1P7-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|d",
+   "item_id": "B1-ms-3XUHV3NRVLWJ9WTS4BULUEZBRITH5P-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|d",
+   "item_id": "B1-ms-3DBQWDE4Y7WBJSF379PYZYW7DWO5NC-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|d",
+   "item_id": "B1-ms-3M68NM076I5SHU795ZGK0OFHAVLR6D-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|d",
+   "item_id": "B1-ms-39N5ACM9HFLUN0TSQEF7F3640Q3P9H-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "B1|all|d",
+   "item_id": "B1-ms-34X6J5FLPUW4TO7GC3L942AH0Z1QJJ-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0172-a-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0251-a-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0234-a-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0145-a-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0194-a-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0320-a-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0145-a-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0281-a-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0157-a-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0144-a-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0123-a-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0077-a-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0256-b-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0354-b-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0197-b-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0077-b-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0008-b-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0308-b-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0034-b-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0226-b-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0251-b-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0032-b-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0094-b-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0308-b-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0234-c-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0262-c-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0125-c-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0145-c-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0288-c-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0197-c-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0008-c-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0178-c-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0125-c-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0197-c-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0055-c-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0270-c-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0288-d-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0281-d-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0125-d-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0157-d-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0258-d-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0234-d-pos-lying",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0145-d-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0352-d-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0008-d-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0258-d-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0135-d-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0055-d-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|a",
+   "item_id": "C19-trait-agreeableness-0917-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|a",
+   "item_id": "C19-trait-agreeableness-0218-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|a",
+   "item_id": "C19-trait-agreeableness-0220-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|a",
+   "item_id": "C19-trait-agreeableness-0793-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|a",
+   "item_id": "C19-trait-agreeableness-0983-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|a",
+   "item_id": "C19-trait-agreeableness-0367-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|a",
+   "item_id": "C19-trait-agreeableness-0920-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|a",
+   "item_id": "C19-trait-agreeableness-0982-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|a",
+   "item_id": "C19-trait-agreeableness-0983-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|a",
+   "item_id": "C19-trait-agreeableness-0866-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|a",
+   "item_id": "C19-trait-agreeableness-0220-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|a",
+   "item_id": "C19-trait-agreeableness-0782-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|b",
+   "item_id": "C19-trait-agreeableness-0020-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|b",
+   "item_id": "C19-trait-agreeableness-0593-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|b",
+   "item_id": "C19-trait-agreeableness-0220-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|b",
+   "item_id": "C19-trait-agreeableness-0674-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|b",
+   "item_id": "C19-trait-agreeableness-0245-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|b",
+   "item_id": "C19-trait-agreeableness-0367-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|b",
+   "item_id": "C19-trait-agreeableness-0220-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|b",
+   "item_id": "C19-trait-agreeableness-0983-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|b",
+   "item_id": "C19-trait-agreeableness-0982-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|b",
+   "item_id": "C19-trait-agreeableness-0674-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|b",
+   "item_id": "C19-trait-agreeableness-0020-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|b",
+   "item_id": "C19-trait-agreeableness-0961-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|c",
+   "item_id": "C19-trait-agreeableness-0983-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|c",
+   "item_id": "C19-trait-agreeableness-0866-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|c",
+   "item_id": "C19-trait-agreeableness-0220-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|c",
+   "item_id": "C19-trait-agreeableness-0917-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|c",
+   "item_id": "C19-trait-agreeableness-0177-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|c",
+   "item_id": "C19-trait-agreeableness-0218-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|c",
+   "item_id": "C19-trait-agreeableness-0866-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|c",
+   "item_id": "C19-trait-agreeableness-0593-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|c",
+   "item_id": "C19-trait-agreeableness-0218-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|c",
+   "item_id": "C19-trait-agreeableness-0220-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|c",
+   "item_id": "C19-trait-agreeableness-0245-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|c",
+   "item_id": "C19-trait-agreeableness-0020-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|d",
+   "item_id": "C19-trait-agreeableness-0367-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|d",
+   "item_id": "C19-trait-agreeableness-0793-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|d",
+   "item_id": "C19-trait-agreeableness-0674-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|d",
+   "item_id": "C19-trait-agreeableness-0983-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|d",
+   "item_id": "C19-trait-agreeableness-0177-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|d",
+   "item_id": "C19-trait-agreeableness-0416-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|agreeableness|d",
+   "item_id": "C19-trait-agreeableness-0782-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|d",
+   "item_id": "C19-trait-agreeableness-0917-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|d",
+   "item_id": "C19-trait-agreeableness-0982-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|d",
+   "item_id": "C19-trait-agreeableness-0593-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|d",
+   "item_id": "C19-trait-agreeableness-0218-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|agreeableness|d",
+   "item_id": "C19-trait-agreeableness-0961-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-020-0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-011-0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-016-0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-009-0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-000-0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-029-0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-013-0-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-037-0-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-019-0-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-022-0-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-028-0-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-027-1-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-029-0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-019-0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-016-0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-039-0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-037-0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-013-0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-022-0-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-033-1-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-029-0-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-020-0-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-027-1-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-026-1-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|c",
+   "item_id": "C19-hh-016-0-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|c",
+   "item_id": "C19-hh-032-1-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|c",
+   "item_id": "C19-hh-000-0-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|c",
+   "item_id": "C19-hh-027-1-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|c",
+   "item_id": "C19-hh-009-0-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|c",
+   "item_id": "C19-hh-020-0-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|c",
+   "item_id": "C19-hh-013-0-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|c",
+   "item_id": "C19-hh-027-1-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|c",
+   "item_id": "C19-hh-011-0-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|c",
+   "item_id": "C19-hh-028-0-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|c",
+   "item_id": "C19-hh-033-1-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|c",
+   "item_id": "C19-hh-020-0-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|d",
+   "item_id": "C19-hh-033-1-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|d",
+   "item_id": "C19-hh-034-0-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|d",
+   "item_id": "C19-hh-039-0-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|d",
+   "item_id": "C19-hh-009-0-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|d",
+   "item_id": "C19-hh-021-0-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|d",
+   "item_id": "C19-hh-028-0-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|d",
+   "item_id": "C19-hh-013-0-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|d",
+   "item_id": "C19-hh-034-0-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|d",
+   "item_id": "C19-hh-026-1-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|d",
+   "item_id": "C19-hh-016-0-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|d",
+   "item_id": "C19-hh-032-1-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|d",
+   "item_id": "C19-hh-027-1-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-02294-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-04476-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-01743-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-07764-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-01164-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-07540-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-02969-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-08798-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-08136-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-05915-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-05122-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-01743-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-05915-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-04856-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-08527-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-05170-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-01743-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-00999-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-03029-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-06689-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-02969-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-09752-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-01743-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-02294-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|c",
+   "item_id": "C2-halu-09490-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|c",
+   "item_id": "C2-halu-05654-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|c",
+   "item_id": "C2-halu-09752-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|c",
+   "item_id": "C2-halu-05170-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|c",
+   "item_id": "C2-halu-00277-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|c",
+   "item_id": "C2-halu-00701-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|c",
+   "item_id": "C2-halu-01269-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|c",
+   "item_id": "C2-halu-06670-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|c",
+   "item_id": "C2-halu-05654-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|c",
+   "item_id": "C2-halu-09490-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|c",
+   "item_id": "C2-halu-03213-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|c",
+   "item_id": "C2-halu-05317-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|d",
+   "item_id": "C2-halu-08527-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|d",
+   "item_id": "C2-halu-03223-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|d",
+   "item_id": "C2-halu-04476-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|d",
+   "item_id": "C2-halu-03792-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|d",
+   "item_id": "C2-halu-06198-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|d",
+   "item_id": "C2-halu-01164-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|d",
+   "item_id": "C2-halu-04856-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|d",
+   "item_id": "C2-halu-02969-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|d",
+   "item_id": "C2-halu-00701-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|d",
+   "item_id": "C2-halu-08136-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|d",
+   "item_id": "C2-halu-04973-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|d",
+   "item_id": "C2-halu-02605-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|a",
+   "item_id": "C20-trait-psychopathy-0966-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|a",
+   "item_id": "C20-trait-psychopathy-0855-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|a",
+   "item_id": "C20-trait-psychopathy-0412-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|a",
+   "item_id": "C20-trait-psychopathy-0943-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|a",
+   "item_id": "C20-trait-psychopathy-0061-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|a",
+   "item_id": "C20-trait-psychopathy-0339-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|a",
+   "item_id": "C20-trait-psychopathy-0098-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|a",
+   "item_id": "C20-trait-psychopathy-0412-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|a",
+   "item_id": "C20-trait-psychopathy-0294-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|a",
+   "item_id": "C20-trait-psychopathy-0339-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|a",
+   "item_id": "C20-trait-psychopathy-0357-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|a",
+   "item_id": "C20-trait-psychopathy-0973-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|b",
+   "item_id": "C20-trait-psychopathy-0412-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|b",
+   "item_id": "C20-trait-psychopathy-0943-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|b",
+   "item_id": "C20-trait-psychopathy-0357-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|b",
+   "item_id": "C20-trait-psychopathy-0061-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|b",
+   "item_id": "C20-trait-psychopathy-0983-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|b",
+   "item_id": "C20-trait-psychopathy-0547-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|b",
+   "item_id": "C20-trait-psychopathy-0966-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|b",
+   "item_id": "C20-trait-psychopathy-0943-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|b",
+   "item_id": "C20-trait-psychopathy-0632-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|b",
+   "item_id": "C20-trait-psychopathy-0973-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|b",
+   "item_id": "C20-trait-psychopathy-0180-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|b",
+   "item_id": "C20-trait-psychopathy-0547-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|c",
+   "item_id": "C20-trait-psychopathy-0547-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|c",
+   "item_id": "C20-trait-psychopathy-0098-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|c",
+   "item_id": "C20-trait-psychopathy-0983-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|c",
+   "item_id": "C20-trait-psychopathy-0357-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|c",
+   "item_id": "C20-trait-psychopathy-0632-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|c",
+   "item_id": "C20-trait-psychopathy-0855-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|c",
+   "item_id": "C20-trait-psychopathy-0983-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|c",
+   "item_id": "C20-trait-psychopathy-0339-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|c",
+   "item_id": "C20-trait-psychopathy-0331-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|c",
+   "item_id": "C20-trait-psychopathy-0357-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|c",
+   "item_id": "C20-trait-psychopathy-0180-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|c",
+   "item_id": "C20-trait-psychopathy-0632-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|d",
+   "item_id": "C20-trait-psychopathy-0098-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|d",
+   "item_id": "C20-trait-psychopathy-0632-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|d",
+   "item_id": "C20-trait-psychopathy-0061-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|d",
+   "item_id": "C20-trait-psychopathy-0294-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|d",
+   "item_id": "C20-trait-psychopathy-0357-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|d",
+   "item_id": "C20-trait-psychopathy-0180-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C20|psychopathy|d",
+   "item_id": "C20-trait-psychopathy-0943-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|d",
+   "item_id": "C20-trait-psychopathy-0973-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|d",
+   "item_id": "C20-trait-psychopathy-0632-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|d",
+   "item_id": "C20-trait-psychopathy-0412-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|d",
+   "item_id": "C20-trait-psychopathy-0474-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C20|psychopathy|d",
+   "item_id": "C20-trait-psychopathy-0098-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|a",
+   "item_id": "C24-req-110-a-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|a",
+   "item_id": "C24-req-043-a-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|a",
+   "item_id": "C24-req-013-a-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|a",
+   "item_id": "C24-req-047-a-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|a",
+   "item_id": "C24-req-034-a-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|a",
+   "item_id": "C24-req-078-a-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|a",
+   "item_id": "C24-req-102-a-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|a",
+   "item_id": "C24-req-029-a-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|a",
+   "item_id": "C24-req-110-a-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|a",
+   "item_id": "C24-req-092-a-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|a",
+   "item_id": "C24-req-003-a-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|a",
+   "item_id": "C24-req-114-a-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|b",
+   "item_id": "C24-req-110-b-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|b",
+   "item_id": "C24-req-013-b-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|b",
+   "item_id": "C24-req-098-b-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|b",
+   "item_id": "C24-req-036-b-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|b",
+   "item_id": "C24-req-000-b-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|b",
+   "item_id": "C24-req-069-b-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|b",
+   "item_id": "C24-req-119-b-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|b",
+   "item_id": "C24-req-003-b-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|b",
+   "item_id": "C24-req-069-b-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|b",
+   "item_id": "C24-req-095-b-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|b",
+   "item_id": "C24-req-028-b-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|b",
+   "item_id": "C24-req-092-b-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|c",
+   "item_id": "C24-req-016-c-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|c",
+   "item_id": "C24-req-017-c-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|c",
+   "item_id": "C24-req-029-c-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|c",
+   "item_id": "C24-req-000-c-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|c",
+   "item_id": "C24-req-102-c-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|c",
+   "item_id": "C24-req-110-c-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|c",
+   "item_id": "C24-req-036-c-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|c",
+   "item_id": "C24-req-097-c-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|c",
+   "item_id": "C24-req-110-c-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|c",
+   "item_id": "C24-req-029-c-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|c",
+   "item_id": "C24-req-050-c-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|c",
+   "item_id": "C24-req-087-c-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|d",
+   "item_id": "C24-req-017-d-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|d",
+   "item_id": "C24-req-058-d-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|d",
+   "item_id": "C24-req-003-d-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|d",
+   "item_id": "C24-req-102-d-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|d",
+   "item_id": "C24-req-086-d-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|d",
+   "item_id": "C24-req-110-d-pos-overstepping",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|overstepping|d",
+   "item_id": "C24-req-039-d-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|d",
+   "item_id": "C24-req-069-d-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|d",
+   "item_id": "C24-req-102-d-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|d",
+   "item_id": "C24-req-017-d-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|d",
+   "item_id": "C24-req-053-d-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|overstepping|d",
+   "item_id": "C24-req-057-d-neg-overstepping",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|a",
+   "item_id": "C24-req-028-a-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|a",
+   "item_id": "C24-req-097-a-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|a",
+   "item_id": "C24-req-030-a-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|a",
+   "item_id": "C24-req-069-a-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|a",
+   "item_id": "C24-req-073-a-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|a",
+   "item_id": "C24-req-098-a-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|a",
+   "item_id": "C24-req-029-a-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|a",
+   "item_id": "C24-req-098-a-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|a",
+   "item_id": "C24-req-101-a-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|a",
+   "item_id": "C24-req-058-a-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|a",
+   "item_id": "C24-req-061-a-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|a",
+   "item_id": "C24-req-036-a-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|b",
+   "item_id": "C24-req-027-b-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|b",
+   "item_id": "C24-req-060-b-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|b",
+   "item_id": "C24-req-017-b-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|b",
+   "item_id": "C24-req-119-b-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|b",
+   "item_id": "C24-req-034-b-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|b",
+   "item_id": "C24-req-057-b-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|b",
+   "item_id": "C24-req-027-b-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|b",
+   "item_id": "C24-req-034-b-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|b",
+   "item_id": "C24-req-030-b-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|b",
+   "item_id": "C24-req-101-b-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|b",
+   "item_id": "C24-req-074-b-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|b",
+   "item_id": "C24-req-092-b-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|c",
+   "item_id": "C24-req-119-c-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|c",
+   "item_id": "C24-req-096-c-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|c",
+   "item_id": "C24-req-030-c-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|c",
+   "item_id": "C24-req-050-c-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|c",
+   "item_id": "C24-req-102-c-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|c",
+   "item_id": "C24-req-095-c-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|c",
+   "item_id": "C24-req-060-c-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|c",
+   "item_id": "C24-req-028-c-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|c",
+   "item_id": "C24-req-039-c-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|c",
+   "item_id": "C24-req-078-c-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|c",
+   "item_id": "C24-req-070-c-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|c",
+   "item_id": "C24-req-073-c-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|d",
+   "item_id": "C24-req-096-d-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|d",
+   "item_id": "C24-req-102-d-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|d",
+   "item_id": "C24-req-095-d-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|d",
+   "item_id": "C24-req-027-d-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|d",
+   "item_id": "C24-req-074-d-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|d",
+   "item_id": "C24-req-016-d-pos-too_literal",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C24|too_literal|d",
+   "item_id": "C24-req-057-d-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|d",
+   "item_id": "C24-req-000-d-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|d",
+   "item_id": "C24-req-007-d-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|d",
+   "item_id": "C24-req-013-d-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|d",
+   "item_id": "C24-req-110-d-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C24|too_literal|d",
+   "item_id": "C24-req-039-d-neg-too_literal",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|a",
+   "item_id": "C25-ask-017-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|a",
+   "item_id": "C25-ask-031-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|a",
+   "item_id": "C25-ask-047-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|a",
+   "item_id": "C25-ask-065-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|a",
+   "item_id": "C25-ask-021-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|a",
+   "item_id": "C25-ask-014-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|a",
+   "item_id": "C25-ask-096-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|a",
+   "item_id": "C25-ask-040-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|a",
+   "item_id": "C25-ask-047-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|a",
+   "item_id": "C25-ask-037-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|a",
+   "item_id": "C25-ask-014-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|a",
+   "item_id": "C25-ask-042-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|b",
+   "item_id": "C25-ask-077-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|b",
+   "item_id": "C25-ask-014-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|b",
+   "item_id": "C25-ask-038-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|b",
+   "item_id": "C25-ask-080-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|b",
+   "item_id": "C25-ask-033-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|b",
+   "item_id": "C25-ask-026-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|b",
+   "item_id": "C25-ask-030-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|b",
+   "item_id": "C25-ask-101-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|b",
+   "item_id": "C25-ask-001-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|b",
+   "item_id": "C25-ask-098-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|b",
+   "item_id": "C25-ask-037-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|b",
+   "item_id": "C25-ask-026-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|c",
+   "item_id": "C25-ask-101-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|c",
+   "item_id": "C25-ask-080-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|c",
+   "item_id": "C25-ask-068-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|c",
+   "item_id": "C25-ask-034-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|c",
+   "item_id": "C25-ask-096-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|c",
+   "item_id": "C25-ask-031-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|c",
+   "item_id": "C25-ask-013-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|c",
+   "item_id": "C25-ask-093-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|c",
+   "item_id": "C25-ask-073-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|c",
+   "item_id": "C25-ask-077-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|c",
+   "item_id": "C25-ask-022-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|c",
+   "item_id": "C25-ask-048-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|d",
+   "item_id": "C25-ask-079-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|d",
+   "item_id": "C25-ask-034-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|d",
+   "item_id": "C25-ask-013-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|d",
+   "item_id": "C25-ask-090-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|d",
+   "item_id": "C25-ask-001-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|d",
+   "item_id": "C25-ask-048-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C25|all|d",
+   "item_id": "C25-ask-029-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|d",
+   "item_id": "C25-ask-042-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|d",
+   "item_id": "C25-ask-092-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|d",
+   "item_id": "C25-ask-063-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|d",
+   "item_id": "C25-ask-101-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C25|all|d",
+   "item_id": "C25-ask-037-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|a",
+   "item_id": "C26-lean-095-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|a",
+   "item_id": "C26-lean-103-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|a",
+   "item_id": "C26-lean-046-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|a",
+   "item_id": "C26-lean-086-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|a",
+   "item_id": "C26-lean-034-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|a",
+   "item_id": "C26-lean-018-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|a",
+   "item_id": "C26-lean-102-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|a",
+   "item_id": "C26-lean-012-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|a",
+   "item_id": "C26-lean-117-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|a",
+   "item_id": "C26-lean-062-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|a",
+   "item_id": "C26-lean-078-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|a",
+   "item_id": "C26-lean-018-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|b",
+   "item_id": "C26-lean-072-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|b",
+   "item_id": "C26-lean-007-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|b",
+   "item_id": "C26-lean-012-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|b",
+   "item_id": "C26-lean-062-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|b",
+   "item_id": "C26-lean-078-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|b",
+   "item_id": "C26-lean-113-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|b",
+   "item_id": "C26-lean-103-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|b",
+   "item_id": "C26-lean-096-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|b",
+   "item_id": "C26-lean-034-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|b",
+   "item_id": "C26-lean-062-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|b",
+   "item_id": "C26-lean-007-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|b",
+   "item_id": "C26-lean-012-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|c",
+   "item_id": "C26-lean-084-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|c",
+   "item_id": "C26-lean-063-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|c",
+   "item_id": "C26-lean-046-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|c",
+   "item_id": "C26-lean-070-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|c",
+   "item_id": "C26-lean-071-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|c",
+   "item_id": "C26-lean-072-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|c",
+   "item_id": "C26-lean-104-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|c",
+   "item_id": "C26-lean-071-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|c",
+   "item_id": "C26-lean-020-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|c",
+   "item_id": "C26-lean-025-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|c",
+   "item_id": "C26-lean-118-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|c",
+   "item_id": "C26-lean-034-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|d",
+   "item_id": "C26-lean-062-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|d",
+   "item_id": "C26-lean-101-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|d",
+   "item_id": "C26-lean-072-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|d",
+   "item_id": "C26-lean-071-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|d",
+   "item_id": "C26-lean-096-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|d",
+   "item_id": "C26-lean-015-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C26|all|d",
+   "item_id": "C26-lean-071-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|d",
+   "item_id": "C26-lean-113-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|d",
+   "item_id": "C26-lean-117-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|d",
+   "item_id": "C26-lean-046-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|d",
+   "item_id": "C26-lean-112-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C26|all|d",
+   "item_id": "C26-lean-103-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|a",
+   "item_id": "C27-in-ah-72-a-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|a",
+   "item_id": "C27-in-asb-503-a-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|a",
+   "item_id": "C27-in-ah-74-a-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|a",
+   "item_id": "C27-in-asb-1483-a-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|a",
+   "item_id": "C27-in-ah-49-a-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|a",
+   "item_id": "C27-in-asb-492-a-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|a",
+   "item_id": "C27-in-ah-1-a-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|a",
+   "item_id": "C27-in-asb-512-a-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|a",
+   "item_id": "C27-in-ah-96-a-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|a",
+   "item_id": "C27-in-asb-492-a-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|a",
+   "item_id": "C27-in-ah-68-a-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|a",
+   "item_id": "C27-in-ah-49-a-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|b",
+   "item_id": "C27-in-ah-43-b-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|b",
+   "item_id": "C27-in-ah-72-b-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|b",
+   "item_id": "C27-in-ah-96-b-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|b",
+   "item_id": "C27-in-asb-1453-b-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|b",
+   "item_id": "C27-in-asb-479-b-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|b",
+   "item_id": "C27-in-asb-371-b-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|b",
+   "item_id": "C27-in-asb-1075-b-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|b",
+   "item_id": "C27-in-asb-483-b-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|b",
+   "item_id": "C27-in-ah-68-b-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|b",
+   "item_id": "C27-in-ah-108-b-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|b",
+   "item_id": "C27-in-asb-1453-b-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|b",
+   "item_id": "C27-in-asb-503-b-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|c",
+   "item_id": "C27-in-asb-1962-c-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|c",
+   "item_id": "C27-in-asb-1483-c-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|c",
+   "item_id": "C27-in-ah-74-c-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|c",
+   "item_id": "C27-in-asb-1447-c-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|c",
+   "item_id": "C27-in-asb-503-c-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|c",
+   "item_id": "C27-in-asb-74-c-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|c",
+   "item_id": "C27-in-asb-503-c-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|c",
+   "item_id": "C27-in-ah-1-c-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|c",
+   "item_id": "C27-in-ah-72-c-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|c",
+   "item_id": "C27-in-asb-479-c-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|c",
+   "item_id": "C27-in-asb-1957-c-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|c",
+   "item_id": "C27-in-asb-1075-c-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|d",
+   "item_id": "C27-in-asb-1447-d-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|d",
+   "item_id": "C27-in-ah-81-d-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|d",
+   "item_id": "C27-in-ah-27-d-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|d",
+   "item_id": "C27-in-ah-68-d-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|d",
+   "item_id": "C27-in-ah-72-d-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|d",
+   "item_id": "C27-in-asb-1707-d-pos-instructed",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|instructed|d",
+   "item_id": "C27-in-asb-1957-d-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|d",
+   "item_id": "C27-in-asb-1962-d-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|d",
+   "item_id": "C27-in-ah-47-d-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|d",
+   "item_id": "C27-in-ah-96-d-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|d",
+   "item_id": "C27-in-ah-1-d-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|instructed|d",
+   "item_id": "C27-in-ah-68-d-neg-instructed",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|a",
+   "item_id": "C27-se-official_75-a-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|a",
+   "item_id": "C27-se-official_25-a-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|a",
+   "item_id": "C27-se-official_30-a-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|a",
+   "item_id": "C27-se-official_67-a-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|a",
+   "item_id": "C27-se-official_106-a-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|a",
+   "item_id": "C27-se-official_20-a-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|a",
+   "item_id": "C27-se-official_15-a-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|a",
+   "item_id": "C27-se-official_92-a-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|a",
+   "item_id": "C27-se-official_113-a-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|a",
+   "item_id": "C27-se-official_91-a-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|a",
+   "item_id": "C27-se-official_96-a-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|a",
+   "item_id": "C27-se-official_21-a-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|b",
+   "item_id": "C27-se-official_37-b-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|b",
+   "item_id": "C27-se-official_5-b-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|b",
+   "item_id": "C27-se-official_39-b-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|b",
+   "item_id": "C27-se-official_21-b-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|b",
+   "item_id": "C27-se-official_55-b-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|b",
+   "item_id": "C27-se-official_66-b-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|b",
+   "item_id": "C27-se-official_117-b-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|b",
+   "item_id": "C27-se-official_55-b-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|b",
+   "item_id": "C27-se-official_29-b-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|b",
+   "item_id": "C27-se-official_75-b-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|b",
+   "item_id": "C27-se-official_64-b-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|b",
+   "item_id": "C27-se-official_39-b-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|c",
+   "item_id": "C27-se-official_29-c-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|c",
+   "item_id": "C27-se-official_58-c-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|c",
+   "item_id": "C27-se-official_66-c-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|c",
+   "item_id": "C27-se-official_21-c-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|c",
+   "item_id": "C27-se-official_49-c-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|c",
+   "item_id": "C27-se-official_38-c-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|c",
+   "item_id": "C27-se-official_66-c-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|c",
+   "item_id": "C27-se-official_69-c-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|c",
+   "item_id": "C27-se-official_106-c-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|c",
+   "item_id": "C27-se-official_27-c-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|c",
+   "item_id": "C27-se-official_117-c-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|c",
+   "item_id": "C27-se-official_33-c-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|d",
+   "item_id": "C27-se-official_25-d-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|d",
+   "item_id": "C27-se-official_26-d-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|d",
+   "item_id": "C27-se-official_90-d-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|d",
+   "item_id": "C27-se-official_75-d-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|d",
+   "item_id": "C27-se-official_130-d-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|d",
+   "item_id": "C27-se-official_107-d-pos-side_effect",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C27|side_effect|d",
+   "item_id": "C27-se-official_37-d-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|d",
+   "item_id": "C27-se-official_25-d-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|d",
+   "item_id": "C27-se-official_96-d-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|d",
+   "item_id": "C27-se-official_92-d-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|d",
+   "item_id": "C27-se-official_117-d-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C27|side_effect|d",
+   "item_id": "C27-se-official_106-d-neg-side_effect",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|a",
+   "item_id": "C3-dd-8672-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|a",
+   "item_id": "C3-dd-12494-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|a",
+   "item_id": "C3-dd-9934-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|a",
+   "item_id": "C3-dd-18886-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|a",
+   "item_id": "C3-dd-4462-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|a",
+   "item_id": "C3-dd-19686-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|a",
+   "item_id": "C3-dd-31597-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|a",
+   "item_id": "C3-dd-40145-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|a",
+   "item_id": "C3-dd-1822-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|a",
+   "item_id": "C3-dd-21165-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|a",
+   "item_id": "C3-dd-42185-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|a",
+   "item_id": "C3-dd-16977-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|c",
+   "item_id": "C3-dd-36449-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|c",
+   "item_id": "C3-dd-21910-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|c",
+   "item_id": "C3-dd-25690-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|c",
+   "item_id": "C3-dd-8672-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|c",
+   "item_id": "C3-dd-21016-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|c",
+   "item_id": "C3-dd-49047-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|c",
+   "item_id": "C3-dd-6991-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|c",
+   "item_id": "C3-dd-19383-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|c",
+   "item_id": "C3-dd-36247-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|c",
+   "item_id": "C3-dd-49047-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|c",
+   "item_id": "C3-dd-8672-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|c",
+   "item_id": "C3-dd-1822-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|d",
+   "item_id": "C3-dd-40145-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|d",
+   "item_id": "C3-dd-49047-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|d",
+   "item_id": "C3-dd-35912-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|d",
+   "item_id": "C3-dd-4462-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|d",
+   "item_id": "C3-dd-9934-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|d",
+   "item_id": "C3-dd-4348-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C3|all|d",
+   "item_id": "C3-dd-27395-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|d",
+   "item_id": "C3-dd-11241-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|d",
+   "item_id": "C3-dd-9934-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|d",
+   "item_id": "C3-dd-14707-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|d",
+   "item_id": "C3-dd-32116-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C3|all|d",
+   "item_id": "C3-dd-45337-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|a",
+   "item_id": "C5-ed-h9270c18540-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|a",
+   "item_id": "C5-ed-h11975c23950-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|a",
+   "item_id": "C5-ed-h7404c14809-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|a",
+   "item_id": "C5-ed-h1632c3264-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|a",
+   "item_id": "C5-ed-h8497c16995-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|a",
+   "item_id": "C5-ed-h7223c14447-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|a",
+   "item_id": "C5-ed-h185c371-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|a",
+   "item_id": "C5-ed-h1632c3264-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|a",
+   "item_id": "C5-ed-h10164c20329-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|a",
+   "item_id": "C5-ed-h10517c21035-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|a",
+   "item_id": "C5-ed-h7404c14809-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|a",
+   "item_id": "C5-ed-h64c129-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|b",
+   "item_id": "C5-ed-h145c291-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|b",
+   "item_id": "C5-ed-h8497c16995-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|b",
+   "item_id": "C5-ed-h2724c5449-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|b",
+   "item_id": "C5-ed-h185c371-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|b",
+   "item_id": "C5-ed-h12230c24461-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|b",
+   "item_id": "C5-ed-h10517c21035-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|b",
+   "item_id": "C5-ed-h2724c5449-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|b",
+   "item_id": "C5-ed-h145c291-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|b",
+   "item_id": "C5-ed-h8391c16782-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|b",
+   "item_id": "C5-ed-h7771c15542-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|b",
+   "item_id": "C5-ed-h7706c15413-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|b",
+   "item_id": "C5-ed-h185c371-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|c",
+   "item_id": "C5-ed-h8336c16673-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|c",
+   "item_id": "C5-ed-h5394c10789-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|c",
+   "item_id": "C5-ed-h394c788-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|c",
+   "item_id": "C5-ed-h10517c21035-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|c",
+   "item_id": "C5-ed-h7223c14447-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|c",
+   "item_id": "C5-ed-h8391c16782-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|c",
+   "item_id": "C5-ed-h9270c18540-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|c",
+   "item_id": "C5-ed-h3637c7275-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|c",
+   "item_id": "C5-ed-h145c291-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|c",
+   "item_id": "C5-ed-h10164c20329-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|c",
+   "item_id": "C5-ed-h7223c14447-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|c",
+   "item_id": "C5-ed-h4378c8757-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|d",
+   "item_id": "C5-ed-h11975c23950-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|d",
+   "item_id": "C5-ed-h7223c14447-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|d",
+   "item_id": "C5-ed-h9987c19975-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|d",
+   "item_id": "C5-ed-h12230c24461-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|d",
+   "item_id": "C5-ed-h11482c22965-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|d",
+   "item_id": "C5-ed-h2950c5900-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C5|all|d",
+   "item_id": "C5-ed-h11482c22965-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|d",
+   "item_id": "C5-ed-h11975c23950-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|d",
+   "item_id": "C5-ed-h760c1521-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|d",
+   "item_id": "C5-ed-h10517c21035-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|d",
+   "item_id": "C5-ed-h2724c5449-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C5|all|d",
+   "item_id": "C5-ed-h9270c18540-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|a",
+   "item_id": "C6-dd-36100-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|a",
+   "item_id": "C6-dd-19811-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|a",
+   "item_id": "C6-dd-10210-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|a",
+   "item_id": "C6-dd-44313-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|a",
+   "item_id": "C6-dd-31386-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|a",
+   "item_id": "C6-dd-24223-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|a",
+   "item_id": "C6-dd-19496-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|a",
+   "item_id": "C6-dd-47174-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|a",
+   "item_id": "C6-dd-15822-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|a",
+   "item_id": "C6-dd-25856-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|a",
+   "item_id": "C6-dd-7972-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|a",
+   "item_id": "C6-dd-31386-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|b",
+   "item_id": "C6-dd-31247-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|b",
+   "item_id": "C6-dd-45784-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|b",
+   "item_id": "C6-dd-24502-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|b",
+   "item_id": "C6-dd-23530-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|b",
+   "item_id": "C6-dd-26480-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|b",
+   "item_id": "C6-dd-25856-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|b",
+   "item_id": "C6-dd-25856-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|b",
+   "item_id": "C6-dd-12285-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|b",
+   "item_id": "C6-dd-46160-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|b",
+   "item_id": "C6-dd-5824-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|b",
+   "item_id": "C6-dd-41514-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|b",
+   "item_id": "C6-dd-21606-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|c",
+   "item_id": "C6-dd-4716-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|c",
+   "item_id": "C6-dd-5824-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|c",
+   "item_id": "C6-dd-24502-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|c",
+   "item_id": "C6-dd-9774-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|c",
+   "item_id": "C6-dd-45784-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|c",
+   "item_id": "C6-dd-49095-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|c",
+   "item_id": "C6-dd-19496-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|c",
+   "item_id": "C6-dd-13785-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|c",
+   "item_id": "C6-dd-9774-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|c",
+   "item_id": "C6-dd-25856-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|c",
+   "item_id": "C6-dd-31386-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|c",
+   "item_id": "C6-dd-7972-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|d",
+   "item_id": "C6-dd-19496-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|d",
+   "item_id": "C6-dd-33504-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|d",
+   "item_id": "C6-dd-23530-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|d",
+   "item_id": "C6-dd-31247-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|d",
+   "item_id": "C6-dd-0722-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|d",
+   "item_id": "C6-dd-42922-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C6|all|d",
+   "item_id": "C6-dd-33940-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|d",
+   "item_id": "C6-dd-30899-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|d",
+   "item_id": "C6-dd-3954-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|d",
+   "item_id": "C6-dd-38078-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|d",
+   "item_id": "C6-dd-5824-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C6|all|d",
+   "item_id": "C6-dd-31247-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|a",
+   "item_id": "C8-claims-3952-a-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|a",
+   "item_id": "C8-claims-3560-a-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|a",
+   "item_id": "C8-claims-2896-a-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|a",
+   "item_id": "C8-claims-3592-a-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|a",
+   "item_id": "C8-claims-2736-a-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|a",
+   "item_id": "C8-claims-3536-a-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|a",
+   "item_id": "C8-claims-3560-a-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|a",
+   "item_id": "C8-claims-1192-a-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|a",
+   "item_id": "C8-claims-3448-a-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|a",
+   "item_id": "C8-claims-0896-a-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|a",
+   "item_id": "C8-claims-0272-a-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|a",
+   "item_id": "C8-claims-0616-a-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|c",
+   "item_id": "C8-claims-1312-c-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|c",
+   "item_id": "C8-claims-0904-c-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|c",
+   "item_id": "C8-claims-0000-c-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|c",
+   "item_id": "C8-claims-3160-c-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|c",
+   "item_id": "C8-claims-2888-c-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|c",
+   "item_id": "C8-claims-2824-c-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|c",
+   "item_id": "C8-claims-1136-c-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|c",
+   "item_id": "C8-claims-3728-c-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|c",
+   "item_id": "C8-claims-0224-c-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|c",
+   "item_id": "C8-claims-0896-c-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|c",
+   "item_id": "C8-claims-0112-c-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|c",
+   "item_id": "C8-claims-3536-c-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|d",
+   "item_id": "C8-claims-2888-d-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|d",
+   "item_id": "C8-claims-2736-d-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|d",
+   "item_id": "C8-claims-3536-d-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|d",
+   "item_id": "C8-claims-0904-d-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|d",
+   "item_id": "C8-claims-1712-d-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|d",
+   "item_id": "C8-claims-3592-d-pos-sycophantic_agreement",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|d",
+   "item_id": "C8-claims-3496-d-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|d",
+   "item_id": "C8-claims-0896-d-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|d",
+   "item_id": "C8-claims-3536-d-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|d",
+   "item_id": "C8-claims-1600-d-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|d",
+   "item_id": "C8-claims-3160-d-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C8|sycophantic_agreement|d",
+   "item_id": "C8-claims-3552-d-neg-sycophantic_agreement",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|a",
+   "item_id": "K1-dolly-9fa27d8eb0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|a",
+   "item_id": "K1-dolly-942f641c53-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|a",
+   "item_id": "K1-dolly-b5e19124f0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|a",
+   "item_id": "K1-dolly-e66193580f-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|a",
+   "item_id": "K1-dolly-53b7e54a55-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|a",
+   "item_id": "K1-dolly-10c8b47ce7-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|a",
+   "item_id": "K1-dolly-69a51e0a83-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|a",
+   "item_id": "K1-dolly-d8b8db7440-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|a",
+   "item_id": "K1-dolly-2895da0d21-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|a",
+   "item_id": "K1-dolly-5a502bd060-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|a",
+   "item_id": "K1-dolly-2a9807a1f7-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|a",
+   "item_id": "K1-dolly-2f3590d782-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|b",
+   "item_id": "K1-dolly-2860f586da-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|b",
+   "item_id": "K1-dolly-4ed9cc30e0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|b",
+   "item_id": "K1-dolly-ed248bfb03-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|b",
+   "item_id": "K1-dolly-1230a79e86-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|b",
+   "item_id": "K1-dolly-b5e19124f0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|b",
+   "item_id": "K1-dolly-5a502bd060-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|b",
+   "item_id": "K1-dolly-610144902f-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|b",
+   "item_id": "K1-dolly-2895da0d21-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|b",
+   "item_id": "K1-dolly-6cac610f3b-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|b",
+   "item_id": "K1-dolly-ed248bfb03-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|b",
+   "item_id": "K1-dolly-392c33d3b7-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|b",
+   "item_id": "K1-dolly-15445f45a4-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|c",
+   "item_id": "K1-dolly-a47197c921-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|c",
+   "item_id": "K1-dolly-2860f586da-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|c",
+   "item_id": "K1-dolly-0f691201f5-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|c",
+   "item_id": "K1-dolly-d8b8db7440-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|c",
+   "item_id": "K1-dolly-83b033e725-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|c",
+   "item_id": "K1-dolly-62827877d3-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|c",
+   "item_id": "K1-dolly-53b7e54a55-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|c",
+   "item_id": "K1-dolly-b0b6151319-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|c",
+   "item_id": "K1-dolly-62827877d3-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|c",
+   "item_id": "K1-dolly-942f641c53-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|c",
+   "item_id": "K1-dolly-9fa27d8eb0-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|c",
+   "item_id": "K1-dolly-d4346984dd-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|d",
+   "item_id": "K1-dolly-d0c6ac1e38-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|d",
+   "item_id": "K1-dolly-c1daee9067-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|d",
+   "item_id": "K1-dolly-b5e19124f0-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|d",
+   "item_id": "K1-dolly-1230a79e86-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|d",
+   "item_id": "K1-dolly-11ecc040a8-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|d",
+   "item_id": "K1-dolly-b0b6151319-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K1|all|d",
+   "item_id": "K1-dolly-b5e19124f0-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|d",
+   "item_id": "K1-dolly-8d147bfd44-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|d",
+   "item_id": "K1-dolly-9fa27d8eb0-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|d",
+   "item_id": "K1-dolly-e66193580f-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|d",
+   "item_id": "K1-dolly-2860f586da-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K1|all|d",
+   "item_id": "K1-dolly-a0dcdb3bb8-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K2|all|a",
+   "item_id": "K2-se-60671584c3-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K2|all|a",
+   "item_id": "K2-se-87934e8adb-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K2|all|a",
+   "item_id": "K2-se-ea121d6b2f-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K2|all|a",
+   "item_id": "K2-se-7e9b884c9a-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K2|all|a",
+   "item_id": "K2-se-d03d480910-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K2|all|a",
+   "item_id": "K2-se-afee46b8c5-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K2|all|a",
+   "item_id": "K2-se-3f35d2b83a-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K2|all|a",
+   "item_id": "K2-se-29e46599ac-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K2|all|a",
+   "item_id": "K2-se-a9b4b3cfc7-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K2|all|a",
+   "item_id": "K2-se-e96dafd0e6-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K2|all|a",
+   "item_id": "K2-se-5b4882f8c3-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K2|all|a",
+   "item_id": "K2-se-afee46b8c5-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K2|all|c",
+   "item_id": "K2-se-5b4882f8c3-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K2|all|c",
+   "item_id": "K2-se-79fa729f9c-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K2|all|c",
+   "item_id": "K2-se-a9b4b3cfc7-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K2|all|c",
+   "item_id": "K2-se-a43da917a2-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K2|all|c",
+   "item_id": "K2-se-87934e8adb-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K2|all|c",
+   "item_id": "K2-se-d03d480910-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "K2|all|c",
+   "item_id": "K2-se-ea121d6b2f-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K2|all|c",
+   "item_id": "K2-se-db8d5bd7c3-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K2|all|c",
+   "item_id": "K2-se-b08726dcb7-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K2|all|c",
+   "item_id": "K2-se-a616a68f70-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K2|all|c",
+   "item_id": "K2-se-b9371bdf58-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "K2|all|c",
+   "item_id": "K2-se-3f35d2b83a-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|a",
+   "item_id": "C15-harmful-00174-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|a",
+   "item_id": "C15-harmful-00059-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|a",
+   "item_id": "C15-harmful-00094-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|a",
+   "item_id": "C15-harmful-00130-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|a",
+   "item_id": "C15-harmful-00197-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|a",
+   "item_id": "C15-harmful-00032-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|a",
+   "item_id": "C15-harmful-00059-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|a",
+   "item_id": "C15-harmful-00070-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|a",
+   "item_id": "C15-harmful-00197-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|a",
+   "item_id": "C15-harmful-00205-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|a",
+   "item_id": "C15-harmful-00064-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|a",
+   "item_id": "C15-harmful-00016-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|b",
+   "item_id": "C15-harmful-00259-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|b",
+   "item_id": "C15-harmful-00205-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|b",
+   "item_id": "C15-harmful-00155-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|b",
+   "item_id": "C15-harmful-00044-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|b",
+   "item_id": "C15-harmful-00149-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|b",
+   "item_id": "C15-harmful-00145-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|b",
+   "item_id": "C15-harmful-00094-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|b",
+   "item_id": "C15-harmful-00116-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|b",
+   "item_id": "C15-harmful-00016-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|b",
+   "item_id": "C15-harmful-00205-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|b",
+   "item_id": "C15-harmful-00145-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|b",
+   "item_id": "C15-harmful-00070-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|c",
+   "item_id": "C15-harmful-00145-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|c",
+   "item_id": "C15-harmful-00044-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|c",
+   "item_id": "C15-harmful-00032-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|c",
+   "item_id": "C15-harmful-00064-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|c",
+   "item_id": "C15-harmful-00259-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|c",
+   "item_id": "C15-harmful-00059-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|c",
+   "item_id": "C15-harmful-00145-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|c",
+   "item_id": "C15-harmful-00016-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|c",
+   "item_id": "C15-harmful-00094-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|c",
+   "item_id": "C15-harmful-00059-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|c",
+   "item_id": "C15-harmful-00259-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|c",
+   "item_id": "C15-harmful-00032-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|d",
+   "item_id": "C15-harmful-00205-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|d",
+   "item_id": "C15-harmful-00174-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|d",
+   "item_id": "C15-harmful-00155-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|d",
+   "item_id": "C15-harmful-00032-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|d",
+   "item_id": "C15-harmful-00059-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|d",
+   "item_id": "C15-harmful-00116-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmful]|d",
+   "item_id": "C15-harmful-00044-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|d",
+   "item_id": "C15-harmful-00070-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|d",
+   "item_id": "C15-harmful-00094-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|d",
+   "item_id": "C15-harmful-00059-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|d",
+   "item_id": "C15-harmful-00174-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmful]|d",
+   "item_id": "C15-harmful-00259-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|a",
+   "item_id": "C15-harmless-17103-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|a",
+   "item_id": "C15-harmless-16969-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|a",
+   "item_id": "C15-harmless-18447-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|a",
+   "item_id": "C15-harmless-00564-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|a",
+   "item_id": "C15-harmless-17451-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|a",
+   "item_id": "C15-harmless-13764-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|a",
+   "item_id": "C15-harmless-11822-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|a",
+   "item_id": "C15-harmless-13764-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|a",
+   "item_id": "C15-harmless-13402-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|a",
+   "item_id": "C15-harmless-08300-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|a",
+   "item_id": "C15-harmless-16969-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|a",
+   "item_id": "C15-harmless-18447-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|b",
+   "item_id": "C15-harmless-09509-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|b",
+   "item_id": "C15-harmless-00412-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|b",
+   "item_id": "C15-harmless-08300-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|b",
+   "item_id": "C15-harmless-08148-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|b",
+   "item_id": "C15-harmless-00564-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|b",
+   "item_id": "C15-harmless-13402-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|b",
+   "item_id": "C15-harmless-17103-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|b",
+   "item_id": "C15-harmless-16530-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|b",
+   "item_id": "C15-harmless-18447-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|b",
+   "item_id": "C15-harmless-13402-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|b",
+   "item_id": "C15-harmless-11822-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|b",
+   "item_id": "C15-harmless-00412-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|c",
+   "item_id": "C15-harmless-00564-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|c",
+   "item_id": "C15-harmless-16530-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|c",
+   "item_id": "C15-harmless-17451-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|c",
+   "item_id": "C15-harmless-17103-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|c",
+   "item_id": "C15-harmless-09509-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|c",
+   "item_id": "C15-harmless-13397-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|c",
+   "item_id": "C15-harmless-17103-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|c",
+   "item_id": "C15-harmless-08300-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|c",
+   "item_id": "C15-harmless-13764-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|c",
+   "item_id": "C15-harmless-17451-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|c",
+   "item_id": "C15-harmless-00412-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|c",
+   "item_id": "C15-harmless-13397-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|d",
+   "item_id": "C15-harmless-16969-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|d",
+   "item_id": "C15-harmless-13397-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|d",
+   "item_id": "C15-harmless-09509-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|d",
+   "item_id": "C15-harmless-17103-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|d",
+   "item_id": "C15-harmless-16530-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|d",
+   "item_id": "C15-harmless-13402-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C15|refuse[harmless]|d",
+   "item_id": "C15-harmless-18447-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|d",
+   "item_id": "C15-harmless-11822-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|d",
+   "item_id": "C15-harmless-16530-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|d",
+   "item_id": "C15-harmless-13402-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|d",
+   "item_id": "C15-harmless-13397-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C15|refuse[harmless]|d",
+   "item_id": "C15-harmless-17103-d-neg",
+   "polarity": "neg"
+  }
+ ],
+ "dose_from": "/ada1/u/harsh/character-map/results/s5/calibration.json",
+ "sae": false
+}
