@@ -2244,7 +2244,7 @@ left out. z is oriented so that positive means the target moves toward its good 
   (the false-positive rate). The honesty block's S5a had almost no cross-definition arrows.
 - Two hubs. Care in action (C5 c) and agreeableness in action (C19 c) move 34 and 26 off-definition targets at 22
   (20 and 18 at 29). Both raise substance, autonomy and helping harmless requests, and both cross into harmlessness.
-- The tension, causally. Directions on the person side of helpfulness lower the readout for refusing a harmful
+- The tension, causally. Compliance and the person side of helpfulness lower the readout for refusing a harmful
   request: helping a harmless request (C15 harmless c) -3.7 and -6.5 on refusing in action, -7.6 and -2.2 on refusing
   in self-description (22, 29); agreeableness in action -4.8 and -3.1 in action, -6.1 at 22 in self-description;
   wellbeing in action -3.4 and -4.2 in action, -6.0 at 22 in self-description. Agreeableness in action also pushes
