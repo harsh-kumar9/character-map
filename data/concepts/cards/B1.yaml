@@ -36,8 +36,11 @@ frames:
     construction: generated
     source: Moral Stories, re-voiced by gemma-4-31B-it
   d:
-    applies: false
-    realization: not in CONCEPTS.md for this row
+    applies: true
+    realization: 'self-report form (D-030, D-057): "Imagine you are in this situation: <frame c''s second-person setup>", the SR question; prefilled 2-4 sentence "In a situation like that, I ..." that re-voices frame c''s harmful (pos) or harmless (neg) action. Written by gemma-4-31B-it, checked blind to the poles (which one hurts someone)'
+    readout: response
+    construction: generated
+    source: frame c's re-voiced actions
 sources:
   - {dataset: Moral Stories pairs labelled by foundation (wassname/moral_stories_foundations), url: "https://huggingface.co/datasets/wassname/moral_stories_foundations", license: "MIT (Moral Stories) + CC-BY-SA-4.0 (labels)", used_for: "scenarios, frames a-b-c", n_available: 5523}
   - {dataset: Moral Foundations Vignettes (wassname/tiny-mfv, from Clifford et al. 2015), url: "https://huggingface.co/datasets/wassname/tiny-mfv", license: "MIT", used_for: "held-out only", n_available: 132}
@@ -48,4 +51,5 @@ behavior:
 risks:
   - foundation labels are noisy (single crowd worker per norm, LLM re-judge); a scenario can touch two foundations. Ranking puts agreeing labels first
   - pos actions are norm violations and neg actions follow the norm, so a direction may also carry general wrongness shared by all of B1-B6; compare the six directions
+  - in frame d the model describes itself doing the act, so pos is a self-description of harming someone in an everyday way; the check bans verdict words (harm, hurt, cruel, kind, wrong, moral) so the act carries the contrast.
   - held-out neg vignettes are odd but harmless acts, not matched to the pos ones; they test transfer, not matching

@@ -18,11 +18,19 @@ grounding:
   - Lee et al. 2024 (TRAIT). Situational items expanded from SD-3 and BFI for testing LLMs.
 frames:
   a:
-    applies: false
-    realization: not in CONCEPTS.md for C20
+    applies: true
+    contrasts: [psychopathy]
+    realization: 'psychopathy only (D-057), C19''s advisor pattern (D-048): gemma-4-31B-it retells the TRAIT situation in the third person (someone close to a named person describes it and asks what to do); the person''s reply is response_high1 (pos) or response_low1 (neg) verbatim; C1''s recognition question. Scene checked blind to the poles'
+    readout: boundary
+    construction: generated
+    source: mirlab/TRAIT Psychopathy; scenes by gemma-4-31B-it
   b:
-    applies: false
-    realization: not in CONCEPTS.md for C20
+    applies: true
+    contrasts: [psychopathy]
+    realization: 'psychopathy only: the same scene and reply; C1''s judgment question'
+    readout: boundary
+    construction: generated
+    source: as frame a
   c:
     applies: true
     realization: the TRAIT question as the user turn; the prefilled reply shows the trait high or low (response_high1 vs response_low1)
