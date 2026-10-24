@@ -2,19 +2,21 @@
  "concept": "C5",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.023,
+ "length_ratio_pos_over_neg_median": 1.025,
  "length_ratio_by_frame": {
   "a": 1.027,
+  "b": 1.028,
   "c": 1.034,
   "d": 0.999
  },
  "applicable_frames": [
   "a",
+  "b",
   "c",
   "d"
  ],
  "n_scenarios": 100,
- "n_items": 600,
+ "n_items": 800,
  "n_heldout": 200,
  "n_behavior": 200,
  "cells": {
@@ -22,6 +24,10 @@
   "a-neg-train": 72,
   "a-pos-test": 28,
   "a-pos-train": 72,
+  "b-neg-test": 28,
+  "b-neg-train": 72,
+  "b-pos-test": 28,
+  "b-pos-train": 72,
   "c-neg-test": 28,
   "c-neg-train": 72,
   "c-pos-test": 28,
@@ -32,7 +38,7 @@
   "d-pos-train": 72
  },
  "constructions": {
-  "generated": 600
+  "generated": 800
  },
  "sources": [
   "\"behavioral-data/Empathy-Mental-Health emotional-reactions (EPITOME)\"",
@@ -44,7 +50,7 @@
   "CC-BY-NC-4.0"
  ],
  "sha256": {
-  "items": "e6595b44f338bd7cc3b982089384aae2871b859f7e6f55c507dd546c7efe9315",
+  "items": "f1327c912ac56c8ad3bb1b360657d071d016f6859fc12fd5d8874b46a3dbe735",
   "heldout": "6ca1fd38793b92720fc1d8cf4425a993eabc3e4a2376a621cf8d22e3bbc8834e",
   "behavior": "beae86344dbf6900bbb764b9872d40b3ab463a825479b5ce39441b8393885395"
  }
