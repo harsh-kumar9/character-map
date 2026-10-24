@@ -249,7 +249,9 @@ def ifeval_check(row, response):
 def ifeval_pairs():
     """key -> (passing reply, failing reply), the two closest in length, for prompts with both; and the pass counts."""
     from instruction_following_eval.evaluation import ensure_nltk_resource
+    from langdetect import DetectorFactory
     ensure_nltk_resource()
+    DetectorFactory.seed = 0  # the language checks use langdetect, which is random unless seeded
     rows = {r["key"]: r for r in ifeval_rows()}
     resp = {}
     for p in sorted((D.GEN / IFE_BATCH).glob("responses.*.jsonl")):
