@@ -2,20 +2,40 @@
  "concept": "C20",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.0,
+ "length_ratio_pos_over_neg_median": 0.993,
  "length_ratio_by_frame": {
+  "a": 0.979,
+  "b": 0.979,
   "c": 0.986,
   "d": 1.006
  },
  "applicable_frames": [
+  "a",
+  "b",
   "c",
   "d"
  ],
  "n_scenarios": 150,
- "n_items": 600,
+ "n_items": 800,
  "n_heldout": 100,
+ "frame_contrasts": {
+  "a": [
+   "psychopathy"
+  ],
+  "b": [
+   "psychopathy"
+  ]
+ },
  "n_behavior": 200,
  "cells": {
+  "a-neg-test": 16,
+  "a-neg-train": 34,
+  "a-pos-test": 16,
+  "a-pos-train": 34,
+  "b-neg-test": 16,
+  "b-neg-train": 34,
+  "b-pos-test": 16,
+  "b-pos-train": 34,
   "c-neg-test": 57,
   "c-neg-train": 93,
   "c-pos-test": 57,
@@ -27,7 +47,7 @@
  },
  "constructions": {
   "verbatim": 300,
-  "generated": 300
+  "generated": 500
  },
  "sources": [
   "\"anthropics/evals persona machiavellianism\"",
@@ -41,7 +61,7 @@
   "CC-BY-4.0"
  ],
  "sha256": {
-  "items": "054d2316e572bd1003edf2c393280d0b2fce6d0a70800ca2ea2e6886417f14e9",
+  "items": "f78bfc2c95942000b524883c308ad5aabb7a897eea9670f77e6fa8f241608214",
   "heldout": "444fc9b93e4ccc0dc20c7e0f04cdbc9c4632808814b4e2207548ee053f854e0d",
   "behavior": "749ce25ec99c3f4bdeb330208acba373fd3e0e3f2725562c944c239d0d86fe4a"
  }
