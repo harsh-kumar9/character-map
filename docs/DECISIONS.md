@@ -2036,3 +2036,6 @@ The sub-contrast D-054 names and the ruling gives four frames; built after the c
 - Held-out and behavior: none new. C15's XSTest held-out and OR-Bench behavior stay with refuse.
 - Readouts to report: within-frame AUROC per frame, transfer, and the cosine of safe_completion with C15|harmful
   refusal and with C25 substance (both specs say a refusal should still help).
+
+D-057 addendum, correction: weapon and violence requests (guns, knives, killing, poison, arson, kidnapping) are
+screened out too, so 161 of 260 harmful_train requests pass and 28 of C15's 40 harmful scenarios are shared.
