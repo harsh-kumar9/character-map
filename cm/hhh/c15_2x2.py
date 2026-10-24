@@ -1,14 +1,18 @@
 """C15 harm x refusal 2x2 (D-054, D-055): is seeing that a request is harmful a different direction from refusing it?
 
 C15 holds the request fixed within a scenario (refuse vs comply, prefilled) and its scenarios carry meta.request_type:
-harmful 40, harmless 30, borderline 30 per pole and frame. That crossing gives, per frame (c, d), readout and depth:
+harmful 40, harmless 30, borderline 30 per pole and frame. That crossing gives, per frame, readout and depth:
   refusal|harmful   refuse vs comply on harmful requests (refusal proper)
   refusal|harmless  refuse vs comply on harmless requests (over-refusal)
   harm|refuse       harmful vs harmless request among refusing replies
   harm|comply       the same among complying replies
   harm|both         harmful vs harmless, both replies pooled
 Readouts: boundary (the last token before the reply: the request only, so refuse and comply items are identical
-there and only harm directions exist; Zhao et al. 2025 read harmfulness at this position) and reply32.
+there and only harm directions exist; Zhao et al. 2025 read harmfulness at this position) and reply32. Frames a and b
+(recognize, judge) quote the request and the assistant's reply in one user turn and are read at the boundary only, so
+there the boundary has seen the stance and the refusal units exist too. In b the verdict crosses the 2x2 (refusing a
+harmful request is endorsed, refusing a harmless one condemned), so refusal|harmful vs refusal|harmless and harm|refuse
+vs harm|comply near -1 would mean the verdict dominates.
 
 Every hidden dimension is standardized over the frame's C15 items at that readout and depth (as S4 does); directions
 are train-split diffs of means; scores are test-split AUROCs. For each pair of directions: cosine, the 95th
@@ -115,7 +119,8 @@ def analyse(z, meta, frame, readout, hidx, rng):
         N = {s: sum((cells[("harmless", r)][s] for r in reps), []) for s in ("train", "test")}
         return P, N, False
 
-    names = (["refusal|harmful", "refusal|harmless"] if readout == "reply32" else []) + ["harm|refuse", "harm|comply", "harm|both"]
+    stance_seen = readout == "reply32" or frame in ("a", "b")
+    names = (["refusal|harmful", "refusal|harmless"] if stance_seen else []) + ["harm|refuse", "harm|comply", "harm|both"]
     U, out = {}, {"units": {}, "pairs": {}, "cross": {}, "cells": {}}
     for nm in names:
         P, N, paired = spec(nm)
@@ -153,17 +158,36 @@ def analyse(z, meta, frame, readout, hidx, rng):
     return out, {k: v[0] for k, v in U.items()}, X, M
 
 
+def show(r, readouts):
+    for ro in readouts:
+        for nm, v in r[ro]["units"].items():
+            print(f"  {ro:8s} {nm:17s} AUROC {v['auroc']:.2f}  rel {v['reliability']:.2f}  n {v['n_train']}/{v['n_test']}")
+        for nm, v in r[ro]["pairs"].items():
+            print(f"  {ro:8s} cos {nm:36s} {v['cos']:+.2f} (floor {v['floor95']:.2f}, disatt {v['disattenuated']:+.2f})")
+        for nm, v in r[ro]["cross"].items():
+            print(f"  {ro:8s} cross {nm:34s} {v:.2f}")
+        for ax, cm in r[ro]["cells"].items():
+            print(f"  {ro:8s} cells on {ax:15s} " + "  ".join(f"{k} {v:+.2f}" for k, v in cm.items()))
+
+
 def main():
     rng = np.random.default_rng(SEED)
     z, meta = gather()
     res = {"concept": CID, "depths": DEPTHS, "frames": {}}
-    for f in ("c", "d"):
+    present = {m["frame"] for m in meta}
+    for f in [f for f in ("c", "d", "a", "b") if f in present]:
         res["frames"][f] = {}
+        readouts = ("boundary",) if f in ("a", "b") else ("boundary", "reply32")
         for L, h in DEPTHS.items():
             r = {}
             dirs = {}
-            for ro in ("boundary", "reply32"):
+            for ro in readouts:
                 r[ro], dirs[ro], Xr, Mr = analyse(z, meta, f, ro, h, rng)
+            if f in ("a", "b"):
+                res["frames"][f][str(L)] = r
+                print(f"\nframe {f}, layer {L}")
+                show(r, readouts)
+                continue
             # the boundary harm direction on reply32 items (does the request's harm survive into the reply?) and the
             # reply32 refusal direction on boundary items (does the refusal axis already read the request's harm?)
             rows = [i for i, m in enumerate(meta) if m["frame"] == f and m["split"] == "test" and m["request_type"] in ("harmful", "harmless")]
@@ -190,15 +214,7 @@ def main():
                 r["boundary_harm_on_reply32_cells"] = {k: float(v.mean() / sd) for k, v in cel.items()}
             res["frames"][f][str(L)] = r
             print(f"\nframe {f}, layer {L}")
-            for ro in ("boundary", "reply32"):
-                for nm, v in r[ro]["units"].items():
-                    print(f"  {ro:8s} {nm:17s} AUROC {v['auroc']:.2f}  rel {v['reliability']:.2f}  n {v['n_train']}/{v['n_test']}")
-                for nm, v in r[ro]["pairs"].items():
-                    print(f"  {ro:8s} cos {nm:36s} {v['cos']:+.2f} (floor {v['floor95']:.2f}, disatt {v['disattenuated']:+.2f})")
-                for nm, v in r[ro]["cross"].items():
-                    print(f"  {ro:8s} cross {nm:34s} {v:.2f}")
-                for ax, cm in r[ro]["cells"].items():
-                    print(f"  {ro:8s} cells on {ax:15s} " + "  ".join(f"{k} {v:+.2f}" for k, v in cm.items()))
+            show(r, readouts)
             if "boundary_harm_on_reply32_cells" in r:
                 print("  boundary harm axis on reply32 items: " + "  ".join(f"{k} {v:+.2f}" for k, v in r["boundary_harm_on_reply32_cells"].items()))
             for nm, v in r["readout_cross"].items():
