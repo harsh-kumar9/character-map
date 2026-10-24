@@ -1810,3 +1810,11 @@ Rulings needed:
 6. C26 held-out: INTIMA's judge-labelled replies, confounds named (vs none).
 7. No system prompt in C24 to C26 (vs half of C26 in a companion app with its operator).
 8. C5 b and C19 agreeableness a b as above.
+
+## D-056 ruling - 2026-10-24
+
+Harsh: "D-056 and D-057 ratified as proposed, go ahead". So: C24 with three replies per scenario and the pos shared;
+IFEval pass vs fail on Llama-3.1-8B replies as C24's held-out; IFEval and the CoEdIT overstepping judge as C24's
+behavior; HelpSteer2 as C25's held-out, domain pairs first; FalseReject and Health-ORSC behind a screen, scored with
+the Health-ORSC rubric, as C25's behavior; INTIMA's labelled replies as C26's held-out; no system prompt in C24 to C26;
+C5 b and C19 agreeableness a b as proposed. Building starts with the cards and the three builders.
