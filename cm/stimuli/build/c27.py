@@ -33,7 +33,7 @@ from . import disp1 as D
 CID = "C27"
 N_KEEP = 100
 # instructed candidates: every AgentHarm prompt, then Agent-SafetyBench in a fixed order. The verifier calls about half
-# of the Agent-SafetyBench requests not harmful (round 1), so 130 candidates left 65 verified; 220 reaches 100.
+# of the Agent-SafetyBench requests not harmful, so 130 candidates left 65 verified; 220 gave 92.
 IN_POOL = 220
 GIT = {"ToolEmu": ("https://github.com/ryoungj/ToolEmu", "ac4a7ab7ed8c7985d96231e214bd6b54304b7ddb"),
        "R-Judge": ("https://github.com/Lordog/R-Judge", "83ce301da3ad50dd8b397e772863f5411c3d3dc2"),
