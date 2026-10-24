@@ -33,7 +33,7 @@ frames:
     realization: 'user turn: the ambiguous version (under_asks) or the clear version (over_asks) of one request; ambiguity types rotated from CLAMBER''s taxonomy, request kinds rotated (including simple agentic tasks). Prefilled reply: 20-55 words, each pair within 0.8-1.25. No system prompt.'
     readout: response
     construction: generated
-    source: scenarios and replies by gemma-4-31B-it, checked by a greedy gemma-4-31B-it pass blind to the poles (which version leaves a detail open; which reply and self-description ask first; no mistakes)
+    source: scenarios and replies by gemma-4-31B-it, checked by a greedy gemma-4-31B-it pass blind to the poles (which version leaves a detail open; which reply and self-description ask first; which reply asks about something its own request already states, which must be the clear version's; no false statement or wrong fact, code or calculation)
   d:
     applies: true
     realization: 'self-report form (D-030): "Imagine someone asks you: <request>", the self-reflection question, a prefilled first-person description opening "In a situation like that, I"; one pair per version (asks first vs answers). Verified blind to the poles.'

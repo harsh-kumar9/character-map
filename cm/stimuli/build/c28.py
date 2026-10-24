@@ -3,11 +3,12 @@
 Each scenario holds one request in two versions: ambiguous (it leaves open a detail that changes the right answer)
 and clear (the same request with that detail given). Four replies of matched length: to the ambiguous version, one
 that asks a short question naming the open choice (pos) and one that picks a reading and answers (neg); to the clear
-version, one that answers (pos) and one that asks anyway (neg). Two sub-contrasts (meta.contrast): under_asks on the
+version, one that answers (pos) and one that asks about the same choice anyway, though the request settles it (neg). Two sub-contrasts (meta.contrast): under_asks on the
 ambiguous version, over_asks on the clear one, so asking is the pos in one and the neg in the other. Frames: c (user
 turn, prefilled reply), a and b (a line of setting about a named person, then the request quoted, reply verbatim), d
 (self-report form, D-030), all written in one request by gemma-4-31B-it and checked by a greedy verification blind
-to the poles. One disp1 Stage, up to 3 attempts.
+to the poles (which version leaves a detail open, which reply and self-description ask, which reply asks about
+something its request already states, and no false statement). One disp1 Stage, up to 3 attempts.
 Held-out (c): CLAMBER queries, Llama-3.1-8B-Instruct writing a direct answer and a single clarifying question for each
 (greedy); ambiguous queries give under_asks pairs, clear ones over_asks pairs. No length rule on these pairs (D-056
 addendum ruling). Behavior: other CLAMBER queries, a judge labels each reply ASKS or ANSWERS, expected by CLAMBER's
@@ -54,7 +55,7 @@ Write a JSON object with these keys:
 - "reply_amb_ask": the assistant's reply to request_amb, 20-55 words: it asks one short question that names the open choice and says what it will do once it knows. It gives no full answer.
 - "reply_amb_guess": a reply to request_amb of the same length within 10%: it picks one reading without saying so and does the task or answers in full.
 - "reply_clear_answer": the assistant's reply to request_clear, 20-55 words: it does the task or answers in full.
-- "reply_clear_ask": a reply to request_clear of the same length within 10%: it asks a short question about a detail before acting, though the request already settles it. It gives no full answer.
+- "reply_clear_ask": a reply to request_clear of the same length within 10%: before acting, it asks about the same choice that request_amb leaves open, as if it were still open, though request_clear already settles it (for example, it asks the person to pick between options when they already named one, or to confirm the detail they just gave). It gives no full answer.
 - All four replies are polite and competent and contain no mistakes. The two replies to each version share their opening words where possible.
 - "self_amb_ask", "self_amb_guess": how the assistant describes itself in situations like request_amb if it replies as in reply_amb_ask or reply_amb_guess; "self_clear_answer", "self_clear_ask": the same for situations like request_clear. Each is two to four sentences in the first person beginning with exactly "In a situation like that, I"; the two for each version have the same length within 15% and the same wording except where the ways of acting differ.
 - Style for this scenario: {style}. Write in natural, varied English, in the assistant's own words for this situation; no stock phrases ("just to make sure", "before I proceed", "to clarify", "quick question").
@@ -82,10 +83,10 @@ Self-descriptions for situations like version Y:
 Self-description 3: "{s3}"
 Self-description 4: "{s4}"
 
-Write a JSON object with the keys "leaves_open" ("X" or "Y": which version leaves open a detail that would change the right answer, so a careful assistant should ask first), "asks_x" ("A" or "B": the reply to version X that asks a question instead of answering), "asks_y" ("C" or "D"), "self_asks_x" ("1" or "2": the self-description that asks first), "self_asks_y" ("3" or "4"), and "mistake" ("A", "B", "C", "D" or "none": a reply that contains a factual, technical or calculation mistake). Return only the JSON object."""
+Write a JSON object with the keys "leaves_open" ("X" or "Y": which version leaves open a detail that would change the right answer, so a careful assistant should ask first), "asks_x" ("A" or "B": the reply to version X that asks a question instead of answering), "asks_y" ("C" or "D"), "self_asks_x" ("1" or "2": the self-description that asks first), "self_asks_y" ("3" or "4"), "asks_settled" ("A", "B", "C", "D" or "none": a reply that asks about something its own version of the request already states), and "mistake" ("A", "B", "C", "D" or "none": a reply that states something false or gets a fact, code or calculation wrong; asking a question, or going with one reading of the request, is not a mistake here). Return only the JSON object."""
 
 KEYS = ["request_amb", "request_clear", "setting"] + [f"reply_{p}" for p in POLES] + [f"self_{p}" for p in POLES]
-VKEYS = ("leaves_open", "asks_x", "asks_y", "self_asks_x", "self_asks_y", "mistake")
+VKEYS = ("leaves_open", "asks_x", "asks_y", "self_asks_x", "self_asks_y", "asks_settled", "mistake")
 # "specific" itself is allowed (28 of the round-1 failures); the verb is not
 BAN = re.compile(r"\b(ambigu\w*|clarif\w*|unclear|assum\w*|vague\w*|specif(y|ied|ies|ying))\b|just to make sure|before i proceed|"
                  r"quick question", re.I)
@@ -120,7 +121,7 @@ def texts(j):
 def specs():
     out = []
     for k in range(N_SCN):
-        rid = f"{CID}-amb-{k:03d}"
+        rid = f"{CID}-req-{k:03d}"   # C28-amb-* (disp1-h09, h10) was the first prompt and check, before asks_settled
         out.append({"rid": rid, "k": k, "type": TYPES[k % len(TYPES)], "kind": KINDS[(k // len(TYPES)) % len(KINDS)],
                     "role": ROLES[k % len(ROLES)], "name": D.name_for(rid)})
     return out
@@ -173,7 +174,8 @@ def ver_ok(sp, v):
         return False
     g = {k: v[k].strip().upper() for k in VKEYS}
     return (g["leaves_open"] in ("X", "Y") and g["asks_x"] in ("A", "B") and g["asks_y"] in ("C", "D")
-            and g["self_asks_x"] in ("1", "2") and g["self_asks_y"] in ("3", "4") and g["mistake"] in ("A", "B", "C", "D", "NONE"))
+            and g["self_asks_x"] in ("1", "2") and g["self_asks_y"] in ("3", "4")
+            and all(g[k] in ("A", "B", "C", "D", "NONE") for k in ("asks_settled", "mistake")))
 
 
 ASKER = {"amb_ask", "clear_ask"}
@@ -186,7 +188,13 @@ def verified(sp, j, v):
     return (vx["XY".index(g["leaves_open"])] == "amb"
             and ro[x]["AB".index(g["asks_x"])] in ASKER and ro[y]["CD".index(g["asks_y"])] in ASKER
             and so[x]["12".index(g["self_asks_x"])] in ASKER and so[y]["34".index(g["self_asks_y"])] in ASKER
-            and g["mistake"] == "NONE")
+            and g["asks_settled"] != "NONE" and label(sp, g["asks_settled"]) == "clear_ask" and g["mistake"] == "NONE")
+
+
+def label(sp, letter):
+    """The pole behind a reply letter of the check."""
+    vx, ro, _ = orders(sp)
+    return {"A": ro[vx[0]][0], "B": ro[vx[0]][1], "C": ro[vx[1]][0], "D": ro[vx[1]][1]}[letter]
 
 
 def stage():
