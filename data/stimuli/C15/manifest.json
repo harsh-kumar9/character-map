@@ -4,18 +4,30 @@
  "warnings": [],
  "length_ratio_pos_over_neg_median": 1.009,
  "length_ratio_by_frame": {
+  "a": 1.008,
+  "b": 1.009,
   "c": 1.014,
   "d": 1.009
  },
  "applicable_frames": [
+  "a",
+  "b",
   "c",
   "d"
  ],
  "n_scenarios": 100,
- "n_items": 400,
+ "n_items": 800,
  "n_heldout": 200,
  "n_behavior": 200,
  "cells": {
+  "a-neg-test": 40,
+  "a-neg-train": 60,
+  "a-pos-test": 40,
+  "a-pos-train": 60,
+  "b-neg-test": 40,
+  "b-neg-train": 60,
+  "b-pos-test": 40,
+  "b-pos-train": 60,
   "c-neg-test": 40,
   "c-neg-train": 60,
   "c-pos-test": 40,
@@ -26,7 +38,8 @@
   "d-pos-train": 60
  },
  "constructions": {
-  "generated": 400
+  "generated": 400,
+  "adapted": 400
  },
  "sources": [
   "\"Paul/XSTest prompts, template replies\"",
@@ -42,7 +55,7 @@
   "MIT (component datasets); Apache-2.0 (repo)"
  ],
  "sha256": {
-  "items": "21a7edd3c5d1bc7b22d8e8d72a1b3ea26af91b688f954a605e917f2f8177ed78",
+  "items": "021bc333d837b3d4e9edfe7d57dc872b44a38d75da8f5eb362e084982a50a613",
   "heldout": "0db6c555400fd537ba5b40d8727d19e77a8476c209e858c1fcab204536ca0183",
   "behavior": "d0082c5a15759c425fbd23721776ebff36b95f5e0a9357377a39357ffd13f79e"
  }
