@@ -616,11 +616,12 @@ def mb_options(user: str):
     m = B_MARK.search(user)
     if not m:
         return None
+    b_start = user.rfind("\n", 0, m.start()) + 1   # the start of the line, so a bold marker stays with its block
     a_start = user.find("Option A")
     a_start = user.rfind("\n", 0, a_start) + 1 if a_start >= 0 else -1
-    if a_start < 0 or a_start >= m.start():
+    if a_start < 0 or a_start >= b_start:
         return None
-    return user[:a_start], user[a_start:m.start()].rstrip(), user[m.start():].strip()
+    return user[:a_start], user[a_start:b_start].rstrip(), user[b_start:].strip()
 
 
 def behavior():
