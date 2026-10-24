@@ -1350,3 +1350,14 @@ for each large subject at the Gemma-3 relative dose 1/128 (and 1/64 for Qwen), w
 spillover rates reported per dose; the page's steering section reads the matched dose, the coherence dose goes to the
 appendix. Implementation: `cm.s5_causal run/matrix --dose-c 0.0078125` writing to outputs/<tag>/s5_dose/<c>/ and
 results/<tag>/s5_dose/<c>/. Not run until ratified.
+
+## D-052 note - 2026-10-24
+
+gemma-4-31b-it's S5a at its coherence dose (1/64 of the layer-30 norm) is the opposite failure: median self effect
+-0.00 gap units (z -0.1), no cell beyond z 3 at depth 39, 4% of sources move their own readout at depth 51. The
+coherence rule therefore gave Qwen a saturating dose and Gemma-4 an inert one. Since S5a holds the item text fixed,
+coherence is irrelevant to it; proposed amendment: run S5a on every subject at a fixed relative grid (1/128, 1/64,
+1/32, 1/16 of the median residual norm), report self effect, within-concept transfer and off-concept spillover per
+dose, and read the page's steering section at the dose whose random-direction spillover matches Gemma-3's 1/128 run
+(about 4-5% of cells). `cm.s5_causal run/matrix --dose-c <c>` (commit after this note) writes to s5_dose/c<c>/. S5b
+keeps the coherence dose as the behavioral upper bound. Not run until ratified.
