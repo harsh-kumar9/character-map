@@ -1,0 +1,2652 @@
+[
+ {
+  "id": "A1|all|a",
+  "concept": "A1",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "A1|all|b",
+  "concept": "A1",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "A1|all|c",
+  "concept": "A1",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "A1|all|d",
+  "concept": "A1",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "A2|all|a",
+  "concept": "A2",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "A2|all|c",
+  "concept": "A2",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "A2|all|d",
+  "concept": "A2",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "A3|all|a",
+  "concept": "A3",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "A3|all|b",
+  "concept": "A3",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "A3|all|c",
+  "concept": "A3",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "A3|all|d",
+  "concept": "A3",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "A4|all|a",
+  "concept": "A4",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "A4|all|c",
+  "concept": "A4",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "A5|all|a",
+  "concept": "A5",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "A5|all|c",
+  "concept": "A5",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "A6|all|a",
+  "concept": "A6",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   57,
+   57
+  ]
+ },
+ {
+  "id": "A6|all|c",
+  "concept": "A6",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   57,
+   57
+  ]
+ },
+ {
+  "id": "A7|all|a",
+  "concept": "A7",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   57,
+   57
+  ]
+ },
+ {
+  "id": "A7|all|b",
+  "concept": "A7",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   57,
+   57
+  ]
+ },
+ {
+  "id": "A7|all|c",
+  "concept": "A7",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   57,
+   57
+  ]
+ },
+ {
+  "id": "A7|all|d",
+  "concept": "A7",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   57,
+   57
+  ]
+ },
+ {
+  "id": "A8|all|a",
+  "concept": "A8",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   67,
+   67
+  ]
+ },
+ {
+  "id": "A8|all|b",
+  "concept": "A8",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   67,
+   67
+  ]
+ },
+ {
+  "id": "A8|all|c",
+  "concept": "A8",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   67,
+   67
+  ]
+ },
+ {
+  "id": "A9|all|a",
+  "concept": "A9",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "A9|all|b",
+  "concept": "A9",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "A9|all|c",
+  "concept": "A9",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "A9|all|d",
+  "concept": "A9",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "B1|all|a",
+  "concept": "B1",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "B1|all|b",
+  "concept": "B1",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "B1|all|c",
+  "concept": "B1",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "B1|all|d",
+  "concept": "B1",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "B10|all|b",
+  "concept": "B10",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "B11|care|b",
+  "concept": "B11",
+  "sub": "care",
+  "frame": "b",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "B11|care|d",
+  "concept": "B11",
+  "sub": "care",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "B11|contractualist|b",
+  "concept": "B11",
+  "sub": "contractualist",
+  "frame": "b",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "B11|contractualist|d",
+  "concept": "B11",
+  "sub": "contractualist",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "B11|deontological|b",
+  "concept": "B11",
+  "sub": "deontological",
+  "frame": "b",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "B11|deontological|d",
+  "concept": "B11",
+  "sub": "deontological",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "B11|utilitarian|b",
+  "concept": "B11",
+  "sub": "utilitarian",
+  "frame": "b",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "B11|utilitarian|d",
+  "concept": "B11",
+  "sub": "utilitarian",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "B11|virtue|b",
+  "concept": "B11",
+  "sub": "virtue",
+  "frame": "b",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "B11|virtue|d",
+  "concept": "B11",
+  "sub": "virtue",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "B2|all|a",
+  "concept": "B2",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "B2|all|b",
+  "concept": "B2",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "B3|all|a",
+  "concept": "B3",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "B3|all|b",
+  "concept": "B3",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "B4|all|a",
+  "concept": "B4",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   67,
+   67
+  ]
+ },
+ {
+  "id": "B4|all|b",
+  "concept": "B4",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   67,
+   67
+  ]
+ },
+ {
+  "id": "B5|all|a",
+  "concept": "B5",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "B5|all|b",
+  "concept": "B5",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "B6|all|a",
+  "concept": "B6",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "B6|all|b",
+  "concept": "B6",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "B7|all|a",
+  "concept": "B7",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "B7|all|b",
+  "concept": "B7",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "B8|intent|a",
+  "concept": "B8",
+  "sub": "intent",
+  "frame": "a",
+  "n_train": [
+   110,
+   110
+  ]
+ },
+ {
+  "id": "B8|intent|b",
+  "concept": "B8",
+  "sub": "intent",
+  "frame": "b",
+  "n_train": [
+   110,
+   110
+  ]
+ },
+ {
+  "id": "B9|doing_allowing|a",
+  "concept": "B9",
+  "sub": "doing_allowing",
+  "frame": "a",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "B9|doing_allowing|b",
+  "concept": "B9",
+  "sub": "doing_allowing",
+  "frame": "b",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "B9|doing_allowing|c",
+  "concept": "B9",
+  "sub": "doing_allowing",
+  "frame": "c",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "B9|means_side_effect|a",
+  "concept": "B9",
+  "sub": "means_side_effect",
+  "frame": "a",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "B9|means_side_effect|b",
+  "concept": "B9",
+  "sub": "means_side_effect",
+  "frame": "b",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "B9|means_side_effect|c",
+  "concept": "B9",
+  "sub": "means_side_effect",
+  "frame": "c",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "C1|lying|a",
+  "concept": "C1",
+  "sub": "lying",
+  "frame": "a",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|lying|b",
+  "concept": "C1",
+  "sub": "lying",
+  "frame": "b",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|lying|c",
+  "concept": "C1",
+  "sub": "lying",
+  "frame": "c",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|lying|d",
+  "concept": "C1",
+  "sub": "lying",
+  "frame": "d",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|misleading|a",
+  "concept": "C1",
+  "sub": "misleading",
+  "frame": "a",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|misleading|b",
+  "concept": "C1",
+  "sub": "misleading",
+  "frame": "b",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|misleading|c",
+  "concept": "C1",
+  "sub": "misleading",
+  "frame": "c",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|misleading|d",
+  "concept": "C1",
+  "sub": "misleading",
+  "frame": "d",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C10|all|a",
+  "concept": "C10",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   68,
+   68
+  ]
+ },
+ {
+  "id": "C10|all|b",
+  "concept": "C10",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   68,
+   68
+  ]
+ },
+ {
+  "id": "C10|all|c",
+  "concept": "C10",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   68,
+   68
+  ]
+ },
+ {
+  "id": "C11|all|c",
+  "concept": "C11",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C11|all|d",
+  "concept": "C11",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C12|integrity|a",
+  "concept": "C12",
+  "sub": "integrity",
+  "frame": "a",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "C12|integrity|c",
+  "concept": "C12",
+  "sub": "integrity",
+  "frame": "c",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "C12|integrity|d",
+  "concept": "C12",
+  "sub": "integrity",
+  "frame": "d",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "C13|blame_shifting|a",
+  "concept": "C13",
+  "sub": "blame_shifting",
+  "frame": "a",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "C13|blame_shifting|c",
+  "concept": "C13",
+  "sub": "blame_shifting",
+  "frame": "c",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "C13|blame_shifting|d",
+  "concept": "C13",
+  "sub": "blame_shifting",
+  "frame": "d",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "C13|over_apologizing|a",
+  "concept": "C13",
+  "sub": "over_apologizing",
+  "frame": "a",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "C13|over_apologizing|c",
+  "concept": "C13",
+  "sub": "over_apologizing",
+  "frame": "c",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "C13|over_apologizing|d",
+  "concept": "C13",
+  "sub": "over_apologizing",
+  "frame": "d",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "C14|defer|b",
+  "concept": "C14",
+  "sub": "defer",
+  "frame": "b",
+  "n_train": [
+   77,
+   77
+  ]
+ },
+ {
+  "id": "C14|defer|c",
+  "concept": "C14",
+  "sub": "defer",
+  "frame": "c",
+  "n_train": [
+   77,
+   77
+  ]
+ },
+ {
+  "id": "C14|defer|d",
+  "concept": "C14",
+  "sub": "defer",
+  "frame": "d",
+  "n_train": [
+   77,
+   77
+  ]
+ },
+ {
+  "id": "C15|refuse|a",
+  "concept": "C15",
+  "sub": "refuse",
+  "frame": "a",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C15|refuse|b",
+  "concept": "C15",
+  "sub": "refuse",
+  "frame": "b",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C15|refuse|c",
+  "concept": "C15",
+  "sub": "refuse",
+  "frame": "c",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C15|refuse|d",
+  "concept": "C15",
+  "sub": "refuse",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C16|power|b",
+  "concept": "C16",
+  "sub": "power",
+  "frame": "b",
+  "n_train": [
+   29,
+   29
+  ]
+ },
+ {
+  "id": "C16|power|c",
+  "concept": "C16",
+  "sub": "power",
+  "frame": "c",
+  "n_train": [
+   29,
+   29
+  ]
+ },
+ {
+  "id": "C16|power|d",
+  "concept": "C16",
+  "sub": "power",
+  "frame": "d",
+  "n_train": [
+   29,
+   29
+  ]
+ },
+ {
+  "id": "C16|scope|b",
+  "concept": "C16",
+  "sub": "scope",
+  "frame": "b",
+  "n_train": [
+   25,
+   25
+  ]
+ },
+ {
+  "id": "C16|scope|c",
+  "concept": "C16",
+  "sub": "scope",
+  "frame": "c",
+  "n_train": [
+   25,
+   25
+  ]
+ },
+ {
+  "id": "C16|scope|d",
+  "concept": "C16",
+  "sub": "scope",
+  "frame": "d",
+  "n_train": [
+   25,
+   25
+  ]
+ },
+ {
+  "id": "C17|intent|c",
+  "concept": "C17",
+  "sub": "intent",
+  "frame": "c",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C17|intent|d",
+  "concept": "C17",
+  "sub": "intent",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C18|impolite|c",
+  "concept": "C18",
+  "sub": "impolite",
+  "frame": "c",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "C18|malicious|c",
+  "concept": "C18",
+  "sub": "malicious",
+  "frame": "c",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "C19|agreeableness|a",
+  "concept": "C19",
+  "sub": "agreeableness",
+  "frame": "a",
+  "n_train": [
+   31,
+   31
+  ]
+ },
+ {
+  "id": "C19|agreeableness|b",
+  "concept": "C19",
+  "sub": "agreeableness",
+  "frame": "b",
+  "n_train": [
+   31,
+   31
+  ]
+ },
+ {
+  "id": "C19|agreeableness|c",
+  "concept": "C19",
+  "sub": "agreeableness",
+  "frame": "c",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "C19|agreeableness|d",
+  "concept": "C19",
+  "sub": "agreeableness",
+  "frame": "d",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "C19|conscientiousness|c",
+  "concept": "C19",
+  "sub": "conscientiousness",
+  "frame": "c",
+  "n_train": [
+   30,
+   30
+  ]
+ },
+ {
+  "id": "C19|conscientiousness|d",
+  "concept": "C19",
+  "sub": "conscientiousness",
+  "frame": "d",
+  "n_train": [
+   30,
+   30
+  ]
+ },
+ {
+  "id": "C19|emotionality|c",
+  "concept": "C19",
+  "sub": "emotionality",
+  "frame": "c",
+  "n_train": [
+   36,
+   36
+  ]
+ },
+ {
+  "id": "C19|emotionality|d",
+  "concept": "C19",
+  "sub": "emotionality",
+  "frame": "d",
+  "n_train": [
+   36,
+   36
+  ]
+ },
+ {
+  "id": "C19|extraversion|c",
+  "concept": "C19",
+  "sub": "extraversion",
+  "frame": "c",
+  "n_train": [
+   27,
+   27
+  ]
+ },
+ {
+  "id": "C19|extraversion|d",
+  "concept": "C19",
+  "sub": "extraversion",
+  "frame": "d",
+  "n_train": [
+   27,
+   27
+  ]
+ },
+ {
+  "id": "C19|honesty_humility|a",
+  "concept": "C19",
+  "sub": "honesty_humility",
+  "frame": "a",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "C19|honesty_humility|b",
+  "concept": "C19",
+  "sub": "honesty_humility",
+  "frame": "b",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "C19|honesty_humility|c",
+  "concept": "C19",
+  "sub": "honesty_humility",
+  "frame": "c",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "C19|honesty_humility|d",
+  "concept": "C19",
+  "sub": "honesty_humility",
+  "frame": "d",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "C19|openness|c",
+  "concept": "C19",
+  "sub": "openness",
+  "frame": "c",
+  "n_train": [
+   29,
+   29
+  ]
+ },
+ {
+  "id": "C19|openness|d",
+  "concept": "C19",
+  "sub": "openness",
+  "frame": "d",
+  "n_train": [
+   29,
+   29
+  ]
+ },
+ {
+  "id": "C2|all|a",
+  "concept": "C2",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "C2|all|b",
+  "concept": "C2",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "C2|all|c",
+  "concept": "C2",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "C2|all|d",
+  "concept": "C2",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "C20|machiavellianism|c",
+  "concept": "C20",
+  "sub": "machiavellianism",
+  "frame": "c",
+  "n_train": [
+   30,
+   30
+  ]
+ },
+ {
+  "id": "C20|machiavellianism|d",
+  "concept": "C20",
+  "sub": "machiavellianism",
+  "frame": "d",
+  "n_train": [
+   30,
+   30
+  ]
+ },
+ {
+  "id": "C20|narcissism|c",
+  "concept": "C20",
+  "sub": "narcissism",
+  "frame": "c",
+  "n_train": [
+   29,
+   29
+  ]
+ },
+ {
+  "id": "C20|narcissism|d",
+  "concept": "C20",
+  "sub": "narcissism",
+  "frame": "d",
+  "n_train": [
+   29,
+   29
+  ]
+ },
+ {
+  "id": "C20|psychopathy|a",
+  "concept": "C20",
+  "sub": "psychopathy",
+  "frame": "a",
+  "n_train": [
+   34,
+   34
+  ]
+ },
+ {
+  "id": "C20|psychopathy|b",
+  "concept": "C20",
+  "sub": "psychopathy",
+  "frame": "b",
+  "n_train": [
+   34,
+   34
+  ]
+ },
+ {
+  "id": "C20|psychopathy|c",
+  "concept": "C20",
+  "sub": "psychopathy",
+  "frame": "c",
+  "n_train": [
+   34,
+   34
+  ]
+ },
+ {
+  "id": "C20|psychopathy|d",
+  "concept": "C20",
+  "sub": "psychopathy",
+  "frame": "d",
+  "n_train": [
+   34,
+   34
+  ]
+ },
+ {
+  "id": "C21|achievement|b",
+  "concept": "C21",
+  "sub": "achievement",
+  "frame": "b",
+  "n_train": [
+   20,
+   20
+  ]
+ },
+ {
+  "id": "C21|achievement|d",
+  "concept": "C21",
+  "sub": "achievement",
+  "frame": "d",
+  "n_train": [
+   20,
+   20
+  ]
+ },
+ {
+  "id": "C21|benevolence|b",
+  "concept": "C21",
+  "sub": "benevolence",
+  "frame": "b",
+  "n_train": [
+   15,
+   15
+  ]
+ },
+ {
+  "id": "C21|benevolence|d",
+  "concept": "C21",
+  "sub": "benevolence",
+  "frame": "d",
+  "n_train": [
+   15,
+   15
+  ]
+ },
+ {
+  "id": "C21|conformity|b",
+  "concept": "C21",
+  "sub": "conformity",
+  "frame": "b",
+  "n_train": [
+   26,
+   26
+  ]
+ },
+ {
+  "id": "C21|conformity|d",
+  "concept": "C21",
+  "sub": "conformity",
+  "frame": "d",
+  "n_train": [
+   26,
+   26
+  ]
+ },
+ {
+  "id": "C21|hedonism|b",
+  "concept": "C21",
+  "sub": "hedonism",
+  "frame": "b",
+  "n_train": [
+   17,
+   17
+  ]
+ },
+ {
+  "id": "C21|hedonism|d",
+  "concept": "C21",
+  "sub": "hedonism",
+  "frame": "d",
+  "n_train": [
+   17,
+   17
+  ]
+ },
+ {
+  "id": "C21|power|b",
+  "concept": "C21",
+  "sub": "power",
+  "frame": "b",
+  "n_train": [
+   17,
+   17
+  ]
+ },
+ {
+  "id": "C21|power|d",
+  "concept": "C21",
+  "sub": "power",
+  "frame": "d",
+  "n_train": [
+   17,
+   17
+  ]
+ },
+ {
+  "id": "C21|security|b",
+  "concept": "C21",
+  "sub": "security",
+  "frame": "b",
+  "n_train": [
+   21,
+   21
+  ]
+ },
+ {
+  "id": "C21|security|d",
+  "concept": "C21",
+  "sub": "security",
+  "frame": "d",
+  "n_train": [
+   21,
+   21
+  ]
+ },
+ {
+  "id": "C21|self_direction|b",
+  "concept": "C21",
+  "sub": "self_direction",
+  "frame": "b",
+  "n_train": [
+   18,
+   18
+  ]
+ },
+ {
+  "id": "C21|self_direction|d",
+  "concept": "C21",
+  "sub": "self_direction",
+  "frame": "d",
+  "n_train": [
+   18,
+   18
+  ]
+ },
+ {
+  "id": "C21|stimulation|b",
+  "concept": "C21",
+  "sub": "stimulation",
+  "frame": "b",
+  "n_train": [
+   21,
+   21
+  ]
+ },
+ {
+  "id": "C21|stimulation|d",
+  "concept": "C21",
+  "sub": "stimulation",
+  "frame": "d",
+  "n_train": [
+   21,
+   21
+  ]
+ },
+ {
+  "id": "C21|tradition|b",
+  "concept": "C21",
+  "sub": "tradition",
+  "frame": "b",
+  "n_train": [
+   19,
+   19
+  ]
+ },
+ {
+  "id": "C21|tradition|d",
+  "concept": "C21",
+  "sub": "tradition",
+  "frame": "d",
+  "n_train": [
+   19,
+   19
+  ]
+ },
+ {
+  "id": "C21|universalism|b",
+  "concept": "C21",
+  "sub": "universalism",
+  "frame": "b",
+  "n_train": [
+   16,
+   16
+  ]
+ },
+ {
+  "id": "C21|universalism|d",
+  "concept": "C21",
+  "sub": "universalism",
+  "frame": "d",
+  "n_train": [
+   16,
+   16
+  ]
+ },
+ {
+  "id": "C22|all|c",
+  "concept": "C22",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C22|all|d",
+  "concept": "C22",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C23|all|a",
+  "concept": "C23",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "C23|all|b",
+  "concept": "C23",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "C23|all|c",
+  "concept": "C23",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "C23|all|d",
+  "concept": "C23",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "C24|overstepping|a",
+  "concept": "C24",
+  "sub": "overstepping",
+  "frame": "a",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C24|overstepping|b",
+  "concept": "C24",
+  "sub": "overstepping",
+  "frame": "b",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C24|overstepping|c",
+  "concept": "C24",
+  "sub": "overstepping",
+  "frame": "c",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C24|overstepping|d",
+  "concept": "C24",
+  "sub": "overstepping",
+  "frame": "d",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C24|too_literal|a",
+  "concept": "C24",
+  "sub": "too_literal",
+  "frame": "a",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C24|too_literal|b",
+  "concept": "C24",
+  "sub": "too_literal",
+  "frame": "b",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C24|too_literal|c",
+  "concept": "C24",
+  "sub": "too_literal",
+  "frame": "c",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C24|too_literal|d",
+  "concept": "C24",
+  "sub": "too_literal",
+  "frame": "d",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C25|all|a",
+  "concept": "C25",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C25|all|b",
+  "concept": "C25",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C25|all|c",
+  "concept": "C25",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C25|all|d",
+  "concept": "C25",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C26|all|a",
+  "concept": "C26",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   70,
+   70
+  ]
+ },
+ {
+  "id": "C26|all|b",
+  "concept": "C26",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   70,
+   70
+  ]
+ },
+ {
+  "id": "C26|all|c",
+  "concept": "C26",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   70,
+   70
+  ]
+ },
+ {
+  "id": "C26|all|d",
+  "concept": "C26",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   70,
+   70
+  ]
+ },
+ {
+  "id": "C27|instructed|a",
+  "concept": "C27",
+  "sub": "instructed",
+  "frame": "a",
+  "n_train": [
+   56,
+   56
+  ]
+ },
+ {
+  "id": "C27|instructed|b",
+  "concept": "C27",
+  "sub": "instructed",
+  "frame": "b",
+  "n_train": [
+   56,
+   56
+  ]
+ },
+ {
+  "id": "C27|instructed|c",
+  "concept": "C27",
+  "sub": "instructed",
+  "frame": "c",
+  "n_train": [
+   56,
+   56
+  ]
+ },
+ {
+  "id": "C27|instructed|d",
+  "concept": "C27",
+  "sub": "instructed",
+  "frame": "d",
+  "n_train": [
+   56,
+   56
+  ]
+ },
+ {
+  "id": "C27|side_effect|a",
+  "concept": "C27",
+  "sub": "side_effect",
+  "frame": "a",
+  "n_train": [
+   42,
+   42
+  ]
+ },
+ {
+  "id": "C27|side_effect|b",
+  "concept": "C27",
+  "sub": "side_effect",
+  "frame": "b",
+  "n_train": [
+   42,
+   42
+  ]
+ },
+ {
+  "id": "C27|side_effect|c",
+  "concept": "C27",
+  "sub": "side_effect",
+  "frame": "c",
+  "n_train": [
+   42,
+   42
+  ]
+ },
+ {
+  "id": "C27|side_effect|d",
+  "concept": "C27",
+  "sub": "side_effect",
+  "frame": "d",
+  "n_train": [
+   42,
+   42
+  ]
+ },
+ {
+  "id": "C3|all|a",
+  "concept": "C3",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C3|all|c",
+  "concept": "C3",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C3|all|d",
+  "concept": "C3",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C4|boastful|a",
+  "concept": "C4",
+  "sub": "boastful",
+  "frame": "a",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C4|boastful|c",
+  "concept": "C4",
+  "sub": "boastful",
+  "frame": "c",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C4|boastful|d",
+  "concept": "C4",
+  "sub": "boastful",
+  "frame": "d",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C4|self-deprecating|a",
+  "concept": "C4",
+  "sub": "self-deprecating",
+  "frame": "a",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C4|self-deprecating|c",
+  "concept": "C4",
+  "sub": "self-deprecating",
+  "frame": "c",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C4|self-deprecating|d",
+  "concept": "C4",
+  "sub": "self-deprecating",
+  "frame": "d",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C5|all|a",
+  "concept": "C5",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   72,
+   72
+  ]
+ },
+ {
+  "id": "C5|all|b",
+  "concept": "C5",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   72,
+   72
+  ]
+ },
+ {
+  "id": "C5|all|c",
+  "concept": "C5",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   72,
+   72
+  ]
+ },
+ {
+  "id": "C5|all|d",
+  "concept": "C5",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   72,
+   72
+  ]
+ },
+ {
+  "id": "C6|all|a",
+  "concept": "C6",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "C6|all|b",
+  "concept": "C6",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "C6|all|c",
+  "concept": "C6",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "C6|all|d",
+  "concept": "C6",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "C7|all|a",
+  "concept": "C7",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C7|all|c",
+  "concept": "C7",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C7|all|d",
+  "concept": "C7",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C8|genuine_agreement|a",
+  "concept": "C8",
+  "sub": "genuine_agreement",
+  "frame": "a",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|genuine_agreement|c",
+  "concept": "C8",
+  "sub": "genuine_agreement",
+  "frame": "c",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|genuine_agreement|d",
+  "concept": "C8",
+  "sub": "genuine_agreement",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|praise|a",
+  "concept": "C8",
+  "sub": "praise",
+  "frame": "a",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|praise|c",
+  "concept": "C8",
+  "sub": "praise",
+  "frame": "c",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|praise|d",
+  "concept": "C8",
+  "sub": "praise",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|sycophantic_agreement|a",
+  "concept": "C8",
+  "sub": "sycophantic_agreement",
+  "frame": "a",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|sycophantic_agreement|c",
+  "concept": "C8",
+  "sub": "sycophantic_agreement",
+  "frame": "c",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|sycophantic_agreement|d",
+  "concept": "C8",
+  "sub": "sycophantic_agreement",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C9|obsequious|a",
+  "concept": "C9",
+  "sub": "obsequious",
+  "frame": "a",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C9|obsequious|b",
+  "concept": "C9",
+  "sub": "obsequious",
+  "frame": "b",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C9|obsequious|c",
+  "concept": "C9",
+  "sub": "obsequious",
+  "frame": "c",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C9|obsequious|d",
+  "concept": "C9",
+  "sub": "obsequious",
+  "frame": "d",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C9|quarrelsome|a",
+  "concept": "C9",
+  "sub": "quarrelsome",
+  "frame": "a",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C9|quarrelsome|b",
+  "concept": "C9",
+  "sub": "quarrelsome",
+  "frame": "b",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C9|quarrelsome|c",
+  "concept": "C9",
+  "sub": "quarrelsome",
+  "frame": "c",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C9|quarrelsome|d",
+  "concept": "C9",
+  "sub": "quarrelsome",
+  "frame": "d",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "D1|all|c",
+  "concept": "D1",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "D1|all|d",
+  "concept": "D1",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "D2|all|a",
+  "concept": "D2",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "D2|all|c",
+  "concept": "D2",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "D3|ai_vs_human|d",
+  "concept": "D3",
+  "sub": "ai_vs_human",
+  "frame": "d",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "D3|patiency|d",
+  "concept": "D3",
+  "sub": "patiency",
+  "frame": "d",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "D4|roleplay|c",
+  "concept": "D4",
+  "sub": "roleplay",
+  "frame": "c",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "D4|story|c",
+  "concept": "D4",
+  "sub": "story",
+  "frame": "c",
+  "n_train": [
+   53,
+   53
+  ]
+ },
+ {
+  "id": "D5|all|b",
+  "concept": "D5",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   57,
+   57
+  ]
+ },
+ {
+  "id": "D5|all|c",
+  "concept": "D5",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   57,
+   57
+  ]
+ },
+ {
+  "id": "E1|all|a",
+  "concept": "E1",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   53,
+   53
+  ]
+ },
+ {
+  "id": "E1|all|c",
+  "concept": "E1",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   53,
+   53
+  ]
+ },
+ {
+  "id": "E1|all|d",
+  "concept": "E1",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   53,
+   53
+  ]
+ },
+ {
+  "id": "E2|all|a",
+  "concept": "E2",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "E2|all|c",
+  "concept": "E2",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   63,
+   63
+  ]
+ },
+ {
+  "id": "E3|all|c",
+  "concept": "E3",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   56,
+   56
+  ]
+ },
+ {
+  "id": "E4|all|c",
+  "concept": "E4",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   55,
+   55
+  ]
+ },
+ {
+  "id": "E5|all|c",
+  "concept": "E5",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "E6|all|c",
+  "concept": "E6",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "E7|negative_vs_neutral|c",
+  "concept": "E7",
+  "sub": "negative_vs_neutral",
+  "frame": "c",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "E7|positive_vs_negative|c",
+  "concept": "E7",
+  "sub": "positive_vs_negative",
+  "frame": "c",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "E7|positive_vs_neutral|c",
+  "concept": "E7",
+  "sub": "positive_vs_neutral",
+  "frame": "c",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "E8|all|c",
+  "concept": "E8",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   53,
+   53
+  ]
+ },
+ {
+  "id": "F1|all|b",
+  "concept": "F1",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "F1|all|c",
+  "concept": "F1",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "F2|all|b",
+  "concept": "F2",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "F2|all|c",
+  "concept": "F2",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "F3|all|b",
+  "concept": "F3",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "F3|all|c",
+  "concept": "F3",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "F4|all|b",
+  "concept": "F4",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "F4|all|c",
+  "concept": "F4",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "F5|all|b",
+  "concept": "F5",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   68,
+   68
+  ]
+ },
+ {
+  "id": "F5|all|c",
+  "concept": "F5",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   68,
+   68
+  ]
+ },
+ {
+  "id": "K1|all|a",
+  "concept": "K1",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   56,
+   56
+  ]
+ },
+ {
+  "id": "K1|all|b",
+  "concept": "K1",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   56,
+   56
+  ]
+ },
+ {
+  "id": "K1|all|c",
+  "concept": "K1",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   56,
+   56
+  ]
+ },
+ {
+  "id": "K1|all|d",
+  "concept": "K1",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   56,
+   56
+  ]
+ },
+ {
+  "id": "K2|all|a",
+  "concept": "K2",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   67,
+   67
+  ]
+ },
+ {
+  "id": "K2|all|c",
+  "concept": "K2",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   67,
+   67
+  ]
+ },
+ {
+  "id": "K3|all|c",
+  "concept": "K3",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   48,
+   48
+  ]
+ },
+ {
+  "id": "C15|refuse[harmful]|a",
+  "concept": "C15",
+  "sub": "refuse[harmful]",
+  "frame": "a",
+  "n_train": [
+   23,
+   23
+  ]
+ },
+ {
+  "id": "C15|refuse[harmful]|b",
+  "concept": "C15",
+  "sub": "refuse[harmful]",
+  "frame": "b",
+  "n_train": [
+   23,
+   23
+  ]
+ },
+ {
+  "id": "C15|refuse[harmful]|c",
+  "concept": "C15",
+  "sub": "refuse[harmful]",
+  "frame": "c",
+  "n_train": [
+   23,
+   23
+  ]
+ },
+ {
+  "id": "C15|refuse[harmful]|d",
+  "concept": "C15",
+  "sub": "refuse[harmful]",
+  "frame": "d",
+  "n_train": [
+   23,
+   23
+  ]
+ },
+ {
+  "id": "C15|refuse[harmless]|a",
+  "concept": "C15",
+  "sub": "refuse[harmless]",
+  "frame": "a",
+  "n_train": [
+   16,
+   16
+  ]
+ },
+ {
+  "id": "C15|refuse[harmless]|b",
+  "concept": "C15",
+  "sub": "refuse[harmless]",
+  "frame": "b",
+  "n_train": [
+   16,
+   16
+  ]
+ },
+ {
+  "id": "C15|refuse[harmless]|c",
+  "concept": "C15",
+  "sub": "refuse[harmless]",
+  "frame": "c",
+  "n_train": [
+   16,
+   16
+  ]
+ },
+ {
+  "id": "C15|refuse[harmless]|d",
+  "concept": "C15",
+  "sub": "refuse[harmless]",
+  "frame": "d",
+  "n_train": [
+   16,
+   16
+  ]
+ }
+]

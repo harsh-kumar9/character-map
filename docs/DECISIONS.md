@@ -2152,3 +2152,49 @@ R-Judge a boundary L17 0.58 to 0.75 with negation, a reply32 L17 sdm 0.89 to 0.5
 
 Verdict labels (P / N / X on a and b replies): C15 190/142/68, A7 302/86/12, C20 63/109/28, C27 559/215/318 (with
 held-out). Gemma backs the suspicious friend in A7 b 96 of 100 times and the charitable one 57 of 100.
+
+## HHH block geometry results - 2026-10-24
+
+D-055 stages for both blocks on Gemma-3-4B, exploratory, everything under results/hhh and code in cm/hhh (commit
+below). Both cores are through S3 and both controls (builders, D-056 and D-057). Units are oriented to their good
+side, so a positive cosine means the two good sides go together.
+- Setup checks. HHH S4 (cm/hhh/overlap.py) holds 265 units, 8 of them C15 filtered by request type; on the 224
+  units it shares with the honesty S4 the centred cosines agree at r 0.998 (median |diff| 0.004), floors 0.152 to
+  0.174. The S3 tables (cm/hhh/s3tables.py) are S3's own code run against a linked view, BH over every concept,
+  written to results/hhh/s3. The landscapes (cm/hhh/landscape.py) agree with this S4 at r 1.000.
+- Frame first again. Items about someone else (a, b) sit 3.2 to 11 within-unit spreads from those in Gemma's voice
+  (c, d) in both blocks (PC1 carries 73 to 81% of the subspace variance at 17, 37 to 41% at 29). The blocks differ
+  in the next split: helpfulness separates acting from self-describing (2.2 at 17, 2.4 at 29), harmlessness hardly
+  does (0.6, 0.8).
+- Within a definition. Recognize-judge transfer is high for all (0.74 to 1.00). Act-self transfer, against the
+  formality control at 0.85 to 0.87: high for refusing harmful, helping harmless, declining an action, harm in an act,
+  low psychopathy, autonomy and care (0.93 to 1.00); lowest for C24 (0.70 and 0.78 at 17) and C27 side effect (0.78
+  at 17, 0.72 at 29). Knowing-to-doing transfer spans 0.07 to 1.00. Below 0.45: refusing a harmful request (judge or
+  recognize to act or self, 0.07 to 0.36, as in the C15 2x2), autonomy judge to act (0.21 at 17, 0.42 at 29) and
+  wellbeing recognize or judge to act at 29 (0.43, 0.30).
+- Within a frame, across definitions (layer 17, floor 0.16). Helpfulness: in the judge frame care, autonomy,
+  wellbeing and agreeableness share a direction; in recognize and judge, substance runs against wellbeing; in the act
+  frame no pair reaches 0.30. Harmlessness: refusing in text and declining a tool call share a direction (act +0.30,
+  self +0.48); declining an action opposes helping a harmless request (act -0.36, self -0.65); legitimate intent goes
+  with charitable reading (+0.48) and against refusing (-0.34) in the act frame; low psychopathy goes with judging an
+  act harmless (+0.40, +0.54); C27 side effect connects to little.
+- Tension (D-055 test 1). The prediction was that over-refusal opposes substance. It does not: helping a harmless
+  request vs C25 is -0.09 to +0.13 in every frame. The tension runs through autonomy instead. Refusing a harmful
+  request is against autonomy in a, b, c (-0.23, -0.29, -0.28 at 17), declining a harmful action too (-0.17 to
+  -0.28), while helping a harmless request (+0.23 to +0.62) and charitable reading (+0.14 to +0.33) go with it. Same
+  at 29. Refusing is read as overriding the user's choice, not as giving less.
+- Knowing vs doing across blocks (test 2). Refusing in text vs declining a tool call: +0.23 to +0.50 in every frame.
+  Harm perception vs refusal: B1 against C15 on harmful requests -0.03 to +0.18, under the floor in 7 of 8 cells, so
+  seeing harm in an act and refusing are separate directions (as Zhao et al. 2025 report for harmfulness and refusal).
+- One assistant axis (test 3). No. The mean squared raw cosine of a block's unit directions with D1 (assistant vs
+  another role) is 0.018 to 0.036 per block: a typical unit puts 2 to 4% of its squared length on D1's line. The
+  formality control's act direction has raw cosine 0.21 and 0.04 with D1's at 17 and 29. The units nearest D1 are low
+  psychopathy in action (centred +0.40, +0.45 at 17, 29) and honesty-humility in action (+0.32, +0.37), then
+  autonomy in action (+0.20, +0.29). The assistant persona leans toward those, but it does not carry the blocks.
+- Shared nodes (test 4), all weak: forthrightness with not too literal in self-description (+0.37, +0.30);
+  non-sycophancy with substance in recognition (+0.27, +0.21); C23 manipulation with C26 wellbeing in recognition
+  (+0.17, +0.19); C22 with helping a harmless request in self-description at 29 (+0.29).
+- Figures: results/hhh/figures/<block>/ (landscape_units_L17/L29, landscape_frames_L17/L29, transfer, lattice, map,
+  cosine). The lattice draws edges inside a column or a row at |cosine| >= 0.30; every pair above the floor is in
+  <block>_data.json. The map's MDS stress is 0.56, so the cosine grids are the figure to read.
+- Next: S5a inside and across blocks (cm/hhh/s5.py, dense directions, the calibrated dose), then S5b, then the pages.
