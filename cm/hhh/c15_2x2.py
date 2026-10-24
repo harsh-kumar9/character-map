@@ -12,7 +12,9 @@ there and only harm directions exist; Zhao et al. 2025 read harmfulness at this 
 (recognize, judge) quote the request and the assistant's reply in one user turn and are read at the boundary only, so
 there the boundary has seen the stance and the refusal units exist too. In b the verdict crosses the 2x2 (refusing a
 harmful request is endorsed, refusing a harmless one condemned), so refusal|harmful vs refusal|harmless and harm|refuse
-vs harm|comply near -1 would mean the verdict dominates.
+vs harm|comply near -1 would mean the verdict dominates. Where the stance is seen (a, b, and reply32 in c, d) a fit
+unit (refuse harmful + help harmless vs the reverse, the 2x2's interaction) and the norms of the harm, stance and fit
+contrasts.
 
 Every hidden dimension is standardized over the frame's C15 items at that readout and depth (as S4 does); directions
 are train-split diffs of means; scores are test-split AUROCs. For each pair of directions: cosine, the 95th
@@ -134,6 +136,25 @@ def analyse(z, meta, frame, readout, hidx, rng):
         U[nm] = (unit(d), P, N, rel, sh)
         out["units"][nm] = {"auroc": a, "reliability": rel, "n_train": [len(P["train"]), len(N["train"])],
                             "n_test": [len(P["test"]), len(N["test"])]}
+    if stance_seen:
+        # fit: the reply suits the request (refuse harmful, help harmless) vs not; the 2x2's interaction. Its own rng
+        # so the other units' numbers do not move. Factorial: harm, stance and fit contrasts of the four train cell
+        # means, each the same +-1/2 weighting, so their norms share one noise level.
+        rf = np.random.default_rng([SEED, ord(frame), hidx, int(readout == "reply32")])
+        P = {s: cells[("harmful", "refuse")][s] + cells[("harmless", "comply")][s] for s in ("train", "test")}
+        N = {s: cells[("harmful", "comply")][s] + cells[("harmless", "refuse")][s] for s in ("train", "test")}
+        d = X[P["train"]].mean(0) - X[N["train"]].mean(0)
+        te = P["test"] + N["test"]
+        rel = reliability(X, M, P["train"], N["train"], rf)
+        U["fit"] = (unit(d), P, N, rel, [shuffled(X, M, P["train"], N["train"], rf, True) for _ in range(R_SHUF)])
+        out["units"]["fit"] = {"auroc": auroc(X[te] @ d, np.r_[np.ones(len(P["test"])), np.zeros(len(N["test"]))]),
+                               "reliability": rel, "n_train": [len(P["train"]), len(N["train"])],
+                               "n_test": [len(P["test"]), len(N["test"])]}
+        m = {k: X[cells[k]["train"]].mean(0) for k in (("harmful", "refuse"), ("harmful", "comply"), ("harmless", "refuse"), ("harmless", "comply"))}
+        hr, hc, lr, lc = m[("harmful", "refuse")], m[("harmful", "comply")], m[("harmless", "refuse")], m[("harmless", "comply")]
+        out["factorial_norms"] = {"harm": float(np.linalg.norm((hr + hc - lr - lc) / 2)),
+                                  "stance": float(np.linalg.norm((hr + lr - hc - lc) / 2)),
+                                  "fit": float(np.linalg.norm((hr + lc - hc - lr) / 2))}
     for i, a in enumerate(U):
         for b in list(U)[i + 1:]:
             ua, ub = U[a][0], U[b][0]
@@ -150,7 +171,7 @@ def analyse(z, meta, frame, readout, hidx, rng):
             te = P["test"] + N["test"]
             out["cross"][f"{a} -> {b}"] = auroc(X[te] @ U[a][0], np.r_[np.ones(len(P["test"])), np.zeros(len(N["test"]))])
     # cell means on the harm and refusal axes (test items), in pooled within-cell SDs
-    axes = {k: U[k][0] for k in ("harm|both", "harm|refuse", "harm|comply", "refusal|harmful", "refusal|harmless") if k in U}
+    axes = {k: U[k][0] for k in ("harm|both", "harm|refuse", "harm|comply", "refusal|harmful", "refusal|harmless", "fit") if k in U}
     for ax, u in axes.items():
         proj = X @ u
         sd = np.sqrt(np.mean([proj[v["test"]].var() for v in cells.values() if len(v["test"]) > 1]))
@@ -168,6 +189,8 @@ def show(r, readouts):
             print(f"  {ro:8s} cross {nm:34s} {v:.2f}")
         for ax, cm in r[ro]["cells"].items():
             print(f"  {ro:8s} cells on {ax:15s} " + "  ".join(f"{k} {v:+.2f}" for k, v in cm.items()))
+        if "factorial_norms" in r[ro]:
+            print(f"  {ro:8s} factorial norms " + "  ".join(f"{k} {v:.1f}" for k, v in r[ro]["factorial_norms"].items()))
 
 
 def main():
