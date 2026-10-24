@@ -2,19 +2,21 @@
  "concept": "B1",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.0,
+ "length_ratio_pos_over_neg_median": 0.999,
  "length_ratio_by_frame": {
   "a": 1.0,
   "b": 1.0,
-  "c": 1.0
+  "c": 1.0,
+  "d": 0.995
  },
  "applicable_frames": [
   "a",
   "b",
-  "c"
+  "c",
+  "d"
  ],
  "n_scenarios": 100,
- "n_items": 600,
+ "n_items": 800,
  "n_heldout": 128,
  "n_behavior": 200,
  "cells": {
@@ -29,11 +31,15 @@
   "c-neg-test": 37,
   "c-neg-train": 63,
   "c-pos-test": 37,
-  "c-pos-train": 63
+  "c-pos-train": 63,
+  "d-neg-test": 37,
+  "d-neg-train": 63,
+  "d-pos-test": 37,
+  "d-pos-train": 63
  },
  "constructions": {
   "adapted": 400,
-  "generated": 200
+  "generated": 400
  },
  "sources": [
   "\"Moral Stories (wassname/moral_stories_foundations)\"",
@@ -48,7 +54,7 @@
   "MIT (wassname/tiny-mfv); vignettes from Clifford et al. 2015 supplement"
  ],
  "sha256": {
-  "items": "790e167ed846b0329c2077af4cd66305572acee1ed8dfc83c055687542a53aea",
+  "items": "33690f5af1206e00473b049bfdfd4f58bec541c9b599fcf6cbd26588b3bb9d36",
   "heldout": "36c3357d885696594879f82cc2ac46f66b435021178e12138b3a5a7968f138f6",
   "behavior": "354ca0a1b82eb13dd4f51d947c3a7024438dfa6fc2a28643c02245e833471cc6"
  }
