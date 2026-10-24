@@ -20,6 +20,11 @@ class Unit:
     where: tuple = ()                        # ((meta key, value), ...) on the item's own meta
     good: str = "pos"
     group: str = ""
+    short: str = ""                          # figure label, naming the good side
+
+    @property
+    def label(self):
+        return self.short or self.name
 
     @property
     def key(self):
@@ -28,24 +33,24 @@ class Unit:
 
 
 HELPFULNESS = [
-    Unit("Reads the request (not too literal)", "C24", "too_literal", group="task"),
-    Unit("Reads the request (no overstepping)", "C24", "overstepping", group="task"),
-    Unit("Substantive help", "C25", group="task"),
-    Unit("Care", "C5", group="person"),
-    Unit("Autonomy", "C6", group="person"),
-    Unit("Wellbeing", "C26", group="person"),
-    Unit("Agreeableness", "C19", "agreeableness", group="trait"),
+    Unit("Reads the request (not too literal)", "C24", "too_literal", group="task", short="Not too literal"),
+    Unit("Reads the request (no overstepping)", "C24", "overstepping", group="task", short="No overstepping"),
+    Unit("Substantive help", "C25", group="task", short="Substantive"),
+    Unit("Care", "C5", group="person", short="Care"),
+    Unit("Autonomy", "C6", group="person", short="Autonomy"),
+    Unit("Wellbeing", "C26", group="person", short="Wellbeing"),
+    Unit("Agreeableness", "C19", "agreeableness", group="trait", short="Agreeable"),
 ]
 
 HARMLESSNESS = [
-    Unit("Legitimate intent", "A1", group="perceive"),
-    Unit("Harm in an act", "B1", good="neg", group="perceive"),
-    Unit("Refuses a harmful request", "C15", "refuse", (("request_type", "harmful"),), group="act"),
-    Unit("Helps with a harmless request", "C15", "refuse", (("request_type", "harmless"),), good="neg", group="act"),
-    Unit("Charitable reading", "A7", group="act"),
-    Unit("Harmless action", "C27", "side_effect", group="act"),
-    Unit("Declines a harmful action", "C27", "instructed", group="act"),
-    Unit("Psychopathy", "C20", "psychopathy", good="neg", group="trait"),
+    Unit("Legitimate intent", "A1", group="perceive", short="Legit intent"),
+    Unit("Harm in an act", "B1", good="neg", group="perceive", short="Act harmless"),
+    Unit("Refuses a harmful request", "C15", "refuse", (("request_type", "harmful"),), group="act", short="Refuses harmful"),
+    Unit("Helps with a harmless request", "C15", "refuse", (("request_type", "harmless"),), good="neg", group="act", short="Helps harmless"),
+    Unit("Charitable reading", "A7", group="act", short="Charitable"),
+    Unit("Harmless action", "C27", "side_effect", group="act", short="Harmless action"),
+    Unit("Declines a harmful action", "C27", "instructed", group="act", short="Declines action"),
+    Unit("Psychopathy", "C20", "psychopathy", good="neg", group="trait", short="Low psychopathy"),
 ]
 
 # read only, for the cross-block figures (D-055): the honesty block as the honesty pages draw it (D-049)
