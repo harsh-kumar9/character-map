@@ -47,7 +47,7 @@ from scipy.stats import spearmanr
 
 from . import cfg
 from .s3 import ACTS, load
-from .s3_nuisance import nuisance_dirs, row_labels
+from .s3_nuisance import all_concepts, nuisance_dirs, row_labels
 
 RESULTS = cfg.results_dir()
 DEPTHS = dict(cfg.DEPTHS)
@@ -143,7 +143,7 @@ def main():
     ap.add_argument("--variant", default="verdict", choices=["verdict", "verdict+negation"])
     ap.add_argument("--workers", type=int, default=12)
     args = ap.parse_args()
-    cids = sorted(p.stem for p in ACTS.glob("*.npz"))
+    cids = all_concepts()          # concepts with a card and an acts file; aside copies in the acts dir (x.pre_ab.npz) are not units
     units = []
     with ProcessPoolExecutor(args.workers) as ex:
         for us in ex.map(partial(concept_units, variant=args.variant), cids):

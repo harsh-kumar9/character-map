@@ -17,8 +17,8 @@
     0.0659
    ],
    "consistency_with_s4": {
-    "max_abs_diff": 0.0845303519428922,
-    "spearman": 0.9892300249226041
+    "max_abs_diff": 0.07635116472219573,
+    "spearman": 0.9919036094131002
    },
    "loadings": {
     "A9|all|a": [
@@ -1113,8 +1113,8 @@
     0.0676
    ],
    "consistency_with_s4": {
-    "max_abs_diff": 0.08043629109098771,
-    "spearman": 0.9893722950926827
+    "max_abs_diff": 0.06604928445371563,
+    "spearman": 0.9919728765821161
    },
    "loadings": {
     "A9|all|a": [

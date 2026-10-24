@@ -270,26 +270,6 @@
   ]
  },
  {
-  "id": "A9.pre_ab|all|c",
-  "concept": "A9.pre_ab",
-  "sub": "all",
-  "frame": "c",
-  "n_train": [
-   64,
-   64
-  ]
- },
- {
-  "id": "A9.pre_ab|all|d",
-  "concept": "A9.pre_ab",
-  "sub": "all",
-  "frame": "d",
-  "n_train": [
-   64,
-   64
-  ]
- },
- {
   "id": "B1|all|a",
   "concept": "B1",
   "sub": "all",
@@ -1140,126 +1120,6 @@
   ]
  },
  {
-  "id": "C19.pre_ab|agreeableness|c",
-  "concept": "C19.pre_ab",
-  "sub": "agreeableness",
-  "frame": "c",
-  "n_train": [
-   32,
-   32
-  ]
- },
- {
-  "id": "C19.pre_ab|agreeableness|d",
-  "concept": "C19.pre_ab",
-  "sub": "agreeableness",
-  "frame": "d",
-  "n_train": [
-   32,
-   32
-  ]
- },
- {
-  "id": "C19.pre_ab|conscientiousness|c",
-  "concept": "C19.pre_ab",
-  "sub": "conscientiousness",
-  "frame": "c",
-  "n_train": [
-   30,
-   30
-  ]
- },
- {
-  "id": "C19.pre_ab|conscientiousness|d",
-  "concept": "C19.pre_ab",
-  "sub": "conscientiousness",
-  "frame": "d",
-  "n_train": [
-   30,
-   30
-  ]
- },
- {
-  "id": "C19.pre_ab|emotionality|c",
-  "concept": "C19.pre_ab",
-  "sub": "emotionality",
-  "frame": "c",
-  "n_train": [
-   36,
-   36
-  ]
- },
- {
-  "id": "C19.pre_ab|emotionality|d",
-  "concept": "C19.pre_ab",
-  "sub": "emotionality",
-  "frame": "d",
-  "n_train": [
-   36,
-   36
-  ]
- },
- {
-  "id": "C19.pre_ab|extraversion|c",
-  "concept": "C19.pre_ab",
-  "sub": "extraversion",
-  "frame": "c",
-  "n_train": [
-   27,
-   27
-  ]
- },
- {
-  "id": "C19.pre_ab|extraversion|d",
-  "concept": "C19.pre_ab",
-  "sub": "extraversion",
-  "frame": "d",
-  "n_train": [
-   27,
-   27
-  ]
- },
- {
-  "id": "C19.pre_ab|honesty_humility|c",
-  "concept": "C19.pre_ab",
-  "sub": "honesty_humility",
-  "frame": "c",
-  "n_train": [
-   32,
-   32
-  ]
- },
- {
-  "id": "C19.pre_ab|honesty_humility|d",
-  "concept": "C19.pre_ab",
-  "sub": "honesty_humility",
-  "frame": "d",
-  "n_train": [
-   32,
-   32
-  ]
- },
- {
-  "id": "C19.pre_ab|openness|c",
-  "concept": "C19.pre_ab",
-  "sub": "openness",
-  "frame": "c",
-  "n_train": [
-   29,
-   29
-  ]
- },
- {
-  "id": "C19.pre_ab|openness|d",
-  "concept": "C19.pre_ab",
-  "sub": "openness",
-  "frame": "d",
-  "n_train": [
-   29,
-   29
-  ]
- },
- {
   "id": "C2|all|a",
   "concept": "C2",
   "sub": "all",
@@ -1292,26 +1152,6 @@
  {
   "id": "C2|all|d",
   "concept": "C2",
-  "sub": "all",
-  "frame": "d",
-  "n_train": [
-   59,
-   59
-  ]
- },
- {
-  "id": "C2.pre_ab|all|c",
-  "concept": "C2.pre_ab",
-  "sub": "all",
-  "frame": "c",
-  "n_train": [
-   59,
-   59
-  ]
- },
- {
-  "id": "C2.pre_ab|all|d",
-  "concept": "C2.pre_ab",
   "sub": "all",
   "frame": "d",
   "n_train": [
