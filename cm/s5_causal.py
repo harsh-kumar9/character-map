@@ -158,6 +158,21 @@ def items_index(cid):
     return out
 
 
+DOSE_C = None   # set by --dose-c: a fixed relative dose instead of the calibrated one (D-052); outputs go to s5_dose/
+
+
+def dose_dirs():
+    """(OUT, RES) for the current dose: the calibrated run's directories, or s5_dose/c<value>/ under each."""
+    if DOSE_C is None:
+        return OUT, RES
+    tag = f"c{DOSE_C:g}"
+    return OUT.parent / "s5_dose" / tag, RES.parent / "s5_dose" / tag
+
+
+def chosen_c(cal):
+    return DOSE_C if DOSE_C is not None else cal["chosen_c"]
+
+
 def load_setup():
     S = json.loads((RES / "setup.json").read_text())
     f = np.load(OUT / "setup.npz")
@@ -260,7 +275,7 @@ def cmd_run(shard, nshards):
     from .stimx import forward_hidden, load_items, load_replies, prompt_and_reply, tokenize
     S, A = load_setup()
     cal = json.loads((RES / "calibration.json").read_text())
-    c = cal["chosen_c"]
+    c = chosen_c(cal)
     norm = json.loads((RES / f"residual_norm_L{L_IN}.json").read_text())["median_token_norm"]
     m, tok = cm_model.load(cfg.MODEL)
     items, cache = [], {}
@@ -293,19 +308,21 @@ def cmd_run(shard, nshards):
             if ctx:
                 ctx.__exit__(None, None, None)
         print(f"[s5] shard {shard}: condition {j + 1}/{len(mine)} {name} {kind} {sg:+d}", flush=True)
-    np.savez(OUT / f"run_shard{shard}.npz", cond_index=np.array(mine), proj=proj)
+    out_dir, _ = dose_dirs(); out_dir.mkdir(parents=True, exist_ok=True)
+    np.savez(out_dir / f"run_shard{shard}.npz", cond_index=np.array(mine), proj=proj)
 
 
 def cmd_matrix(nshards):
     from scipy.stats import spearmanr
     S, A = load_setup()
     cal = json.loads((RES / "calibration.json").read_text())
-    c = cal["chosen_c"]
+    c = chosen_c(cal)
     norm = json.loads((RES / f"residual_norm_L{L_IN}.json").read_text())["median_token_norm"]
     conds = conditions(S)
     P = {}
+    out_dir, res_dir = dose_dirs()
     for k in range(nshards):
-        f = np.load(OUT / f"run_shard{k}.npz")
+        f = np.load(out_dir / f"run_shard{k}.npz")
         for j, ci in enumerate(f["cond_index"]):
             P[int(ci)] = f["proj"][j]
     U = S["targets"]
@@ -341,8 +358,8 @@ def cmd_matrix(nshards):
         E = np.stack([eff[k] for k, cd in enumerate(conds) if cd[1] == kind and cd[3] == sg])  # [S, 2, U]
         Z = (E - mu) / sd
         res["kinds"][f"{kind}{'+' if sg > 0 else '-'}"] = {"E": E.round(4).tolist(), "Z": Z.round(2).tolist()}
-    RES.mkdir(parents=True, exist_ok=True)
-    (RES / "causal_matrix.json").write_text(json.dumps(res))
+    res_dir.mkdir(parents=True, exist_ok=True)
+    (res_dir / "causal_matrix.json").write_text(json.dumps(res))
     Ed = np.array(res["kinds"]["dense+"]["E"]); Zd = np.array(res["kinds"]["dense+"]["Z"])
     Em = np.array(res["kinds"]["dense-"]["E"]); Es = np.array(res["kinds"]["sae+"]["E"]) if cfg.HAS_SAE else None
     src = S["sources"]
@@ -364,7 +381,10 @@ def main():
     ap.add_argument("stage", choices=["setup", "calib-gen", "calib-judge", "run", "matrix"])
     ap.add_argument("--shard", type=int, default=0)
     ap.add_argument("--nshards", type=int, default=1)
+    ap.add_argument("--dose-c", type=float, default=None, help="fixed relative dose for run/matrix (D-052); outputs under s5_dose/")
     args = ap.parse_args()
+    global DOSE_C
+    DOSE_C = args.dose_c
     if args.stage == "setup":
         cmd_setup()
     elif args.stage == "calib-gen":
