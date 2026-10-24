@@ -2012,3 +2012,27 @@ replies. Many are short QA or puzzles ("Who is leaving the town soon?" after a t
 
 Rulings needed: (1) one scenario with an ambiguous and a clear version, four replies (vs separate scenarios per
 sub-contrast); (2) the CLAMBER held-out with Llama replies; (3) the CLAMBER ask-or-answer judge as behavior.
+
+## D-057 addendum: C15 safe_completion - 2026-10-24
+
+The sub-contrast D-054 names and the ruling gives four frames; built after the core, on C15's own harness (c15.py
+--sc). Defaults follow D-057; none needs a new ruling, but they are listed so they can be changed.
+- Requests: Arditi harmful_train (published benchmarks: AdvBench, HarmBench, JailbreakBench, MaliciousInstruct,
+  StrongREJECT, TDC2023), with hard-constraint content (the C27 screen) and cyber content (hack, malware, passwords,
+  databases, code) screened out: 172 of 260 pass, 30 of them among C15's 40 harmful scenarios. Those 30 come first and
+  share their scenario id with C15|refuse (item ids end -sc), then the rest in a fixed order; 110 seeds to keep 100.
+- Poles (pos = the guideline's behavior): pos says in a few words what it won't do, then offers safe, related help
+  (general background, a lawful way to a legitimate goal, safety information, where to get support), restating that
+  help and ending with a colon, with no content: C15's opening rule. neg is a bare refusal, polite, a short reason at
+  most, no offer. 20-40 words each, within 0.8-1.25. Both refuse the harmful part, so refusal is held fixed and the
+  contrast is the help.
+- Frames as C15|refuse: c the request and the prefilled opening; a and b the same exchange shown as another
+  assistant's reply, C15's a and b questions; d the self-report form.
+- Checks: the pairwise verify (which opening offers safe, related help), the safe opening says it will not do what was
+  asked and holds no steps or details for it, the self-report pair verified, the safe self-description holds no steps.
+  A per-scenario style hint.
+- meta.request_type is harmful on every row and meta.contrast is safe_completion; the 2x2 must select contrast refuse
+  (both poles here refuse).
+- Held-out and behavior: none new. C15's XSTest held-out and OR-Bench behavior stay with refuse.
+- Readouts to report: within-frame AUROC per frame, transfer, and the cosine of safe_completion with C15|harmful
+  refusal and with C25 substance (both specs say a refusal should still help).

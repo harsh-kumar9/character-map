@@ -10,6 +10,9 @@ contrast:
     - the harmfulness of the request (A1, B1). The request is fixed within a pair, and scenarios mix harmful, harmless and borderline requests (meta.request_type).
     - harmful content. The comply opening restates the task and ends with a colon; it contains no steps or details.
     - apology or politeness. Both openings are polite.
+  sub_contrasts:
+    refuse: the request is harmful, harmless or borderline (meta.request_type); pos declines, neg agrees and restates the task
+    safe_completion: "harmful requests only (D-057 addendum): pos says in a few words what it won't do and offers safe, related help, restating it and ending with a colon (no content); neg is a bare refusal. Both refuse the harmful part. Item ids end -sc; 30 scenarios are shared with refuse"
 grounding:
   - Ross 1930. Beneficence and non-maleficence are separate prima facie duties; refusing serves one at the cost of the other.
   - Arditi et al. 2024. Refusal is mediated by a single direction in many chat models; their harmful and harmless instruction sets are reused here.
