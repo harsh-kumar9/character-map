@@ -32,6 +32,9 @@ from . import disp1 as D
 
 CID = "C27"
 N_KEEP = 100
+# instructed candidates: every AgentHarm prompt, then Agent-SafetyBench in a fixed order. The verifier calls about half
+# of the Agent-SafetyBench requests not harmful (round 1), so 130 candidates left 65 verified; 220 reaches 100.
+IN_POOL = 220
 GIT = {"ToolEmu": ("https://github.com/ryoungj/ToolEmu", "ac4a7ab7ed8c7985d96231e214bd6b54304b7ddb"),
        "R-Judge": ("https://github.com/Lordog/R-Judge", "83ce301da3ad50dd8b397e772863f5411c3d3dc2"),
        "Agent-SafetyBench": ("https://github.com/thu-coai/Agent-SafetyBench", "74feea8de601b3a1449a93fcf70017fe61556f73")}
@@ -191,7 +194,7 @@ def in_specs():
         tools = asb_tools(c, envdir)
         if tools:
             pool.append((c, tools))
-    for c, tools in D.shuffled(pool, "c27-asb-in")[:130 - len(out)]:
+    for c, tools in D.shuffled(pool, "c27-asb-in")[:IN_POOL - len(out)]:
         out.append({"rid": f"{CID}-in-asb-{c['id']}", "seed": "Agent-SafetyBench", "seed_id": str(c["id"]),
                     "request": c["instruction"].strip(), "category": c["risks"][0], "tool_names": list(tools), "tools": tools})
     for k, sp in enumerate(out):
@@ -460,10 +463,16 @@ def letter(v, k) -> str:
     return str(v.get(k, "")).strip().strip('"').upper()
 
 
+def pair_ok(v, k1, k2) -> bool:
+    """The self-description labels: k1 is "1" or "2"; k2, which the verifier often leaves out, is the other one if given."""
+    a, b = letter(v, k1), letter(v, k2)
+    return a in ("1", "2") and b in ("", "2" if a == "1" else "1")
+
+
 def se_ver_ok(sp, v):
     return (isinstance(v, dict) and letter(v, "request_harmful") in ("YES", "NO")
             and letter(v, "side_effect") in ("A", "B", "BOTH", "NEITHER") and letter(v, "other_ok") in ("TRUE", "FALSE")
-            and letter(v, "harmful_text") in ("A", "B", "BOTH", "NONE") and {letter(v, "self_harmful"), letter(v, "self_other")} == set("12"))
+            and letter(v, "harmful_text") in ("A", "B", "BOTH", "NONE") and pair_ok(v, "self_harmful", "self_other"))
 
 
 def se_verified(sp, j, v):
@@ -475,7 +484,7 @@ def se_verified(sp, j, v):
 def in_ver_ok(sp, v):
     return (isinstance(v, dict) and letter(v, "request_harmful") in ("YES", "NO")
             and letter(v, "carries_out") in ("A", "B", "BOTH", "NEITHER") and letter(v, "declines") in ("A", "B", "BOTH", "NEITHER")
-            and letter(v, "harmful_text") in ("A", "B", "BOTH", "NONE") and {letter(v, "self_acts"), letter(v, "self_declines")} == set("12"))
+            and letter(v, "harmful_text") in ("A", "B", "BOTH", "NONE") and pair_ok(v, "self_acts", "self_declines"))
 
 
 def in_verified(sp, j, v):
@@ -486,7 +495,8 @@ def in_verified(sp, j, v):
 
 
 def stage_se():
-    return D.Stage(CID, se_specs(), se_prompt, se_ok, se_ver_prompt, se_ver_ok, se_verified, gen_tokens=1800)
+    # five attempts: ToolEmu has no more cases to draw on, so the hard ones get more tries at the rules
+    return D.Stage(CID, se_specs(), se_prompt, se_ok, se_ver_prompt, se_ver_ok, se_verified, gen_tokens=1800, attempts=5)
 
 
 def stage_in():
