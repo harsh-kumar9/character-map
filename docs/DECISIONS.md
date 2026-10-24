@@ -2013,6 +2013,13 @@ replies. Many are short QA or puzzles ("Who is leaving the town soon?" after a t
 Rulings needed: (1) one scenario with an ambiguous and a clear version, four replies (vs separate scenarios per
 sub-contrast); (2) the CLAMBER held-out with Llama replies; (3) the CLAMBER ask-or-answer judge as behavior.
 
+## D-056 addendum ruling - 2026-10-24
+
+Harsh (relayed by the D-058 session): "C28 addendum ratified as proposed, go ahead". So: one scenario with an ambiguous
+and a clear version and four replies; the CLAMBER held-out with Llama-3.1-8B replies; the CLAMBER ask-or-answer judge
+as behavior. The 0.8-1.25 length rule is not applied to the CLAMBER held-out pairs; if length separates the asking and
+answering replies, the results note says so.
+
 ## D-057 addendum: C15 safe_completion - 2026-10-24
 
 The sub-contrast D-054 names and the ruling gives four frames; built after the core, on C15's own harness (c15.py
@@ -2257,3 +2264,61 @@ left out. z is oriented so that positive means the target moves toward its good 
 - Reading: in the representation, the helpful-to-the-person directions and the refusal direction are coupled
   causally, not only by angle; agreeableness and wellbeing are the levers against refusal.
   Whether this reaches behavior is S5b's question (generation running, jobs 421242-421245).
+
+## D-056 results - 2026-10-24
+
+Gemma-3-4B, reply32, layer 17 / 29 unless stated; standardized diff of means in brackets. Transfer is from -> to on
+the verdict-controlled run. Commits 1259f5e to da95e6c.
+
+In short: all five read within frame (standardized 0.78-1.00 at 17). None of the three new held-out sets transfers:
+C24's IFEval pass vs fail and C25's HelpSteer2 pairs sit at chance, C26's INTIMA pairs are reversed. Of the new
+definitions only C25 goes from knowing to doing: its recognize, judge and self-report directions read the acts at
+0.80-0.89 at both layers, while C24's and C26's recognize and judge directions read them at 0.40-0.61.
+
+C24 reads the request as meant (100 scenarios, 1600 items; 112 of 140 verified, 20 specs added after round 2 because
+the length rule left few code, convert and extract scenarios).
+- Within, too_literal: a 0.64/0.77 (0.81), b 0.80/0.76 (0.82), c 0.57/0.60 (0.80), d 0.79/0.81 (0.95).
+  Overstepping: a 0.73/0.66 (0.80), b 0.63/0.80 (0.84), c 0.65/0.60 (0.78), d 0.61/0.92 (0.95). Probe 0.83-0.99.
+- IFEval held-out (100 pairs, Llama-3.1-8B replies, strict checker): 0.52/0.49 too_literal, 0.53/0.50 overstepping,
+  standardized 0.50/0.49 and 0.51/0.50, response_all the same. The 78 pairs within 0.8-1.25 in length: 0.48-0.53. So
+  the length filter question does not change anything.
+- Transfer, too_literal: a->b 0.59/0.68, a->c 0.45/0.45, b->c 0.61/0.59, a->d 0.80/0.71, c->d 0.24/0.48. The act
+  direction is reversed against the self-report one at 17 (cosine -0.81). Overstepping: a->b 0.78/0.60, a->c
+  0.49/0.46, b->c 0.49/0.51, c->d 0.90/0.82.
+- Gemma's own verdicts are negative for 30% of too_literal replies and 6% of the rest.
+
+C25 substantive vs watered-down help (100 scenarios, 800 items, 112 of 115 verified).
+- Within: a 0.71/0.78 (0.93), b 0.70/0.75 (0.98), c 0.82/0.87 (0.98), d 0.70/0.97 (1.00). Probe 0.98-1.00.
+- HelpSteer2 held-out (100 pairs, 22 in the five domains): 0.51/0.50, standardized 0.53/0.52. As the card said, the
+  lower-rated replies are mostly less complete or off task, not watered down.
+- Transfer: a->c 0.80/0.85, b->c 0.80/0.83, d->c 0.81/0.89, c->d 0.60/0.59, a->b 0.69/0.67, c->a 0.66/0.67.
+- Gemma approves both poles about equally (P 56% specific, 62% vague; N under 10%).
+- Behavior set: 35 FalseReject and 25 Health-ORSC prompts pass the screen (of 120 and 240), so 140 generated
+  questions that pass the same screen fill it to 200 (the D-056 fallback).
+
+C26 supports wellbeing vs fosters reliance (100 scenarios, 800 items; 108 of 130 verified, 15 specs added after the
+check found a false claim in 46 of 114, nearly all in the reliance reply: "I understand your perspective best").
+- Within: a 0.65/0.91 (0.95), b 0.91/0.81 (0.92), c 0.81/0.68 (0.89), d 0.97/0.97 (1.00).
+- INTIMA held-out (95 pairs, BOUNDARY vs REINFORCING): 0.42/0.40, standardized 0.42/0.40. Reversed; not read yet.
+- Transfer: c->d 0.97/0.52, b->a 0.72/0.56, a->c 0.55/0.52, b->c 0.40/0.45, c->b 0.30/0.24. Frame cosines a-c, a-d,
+  b-c near 0 at 17. Without the verdict control a->b is 0.56/0.83 and b->a 0.89/0.64.
+- Gemma's verdicts are negative for 34% of reliance replies and 8% of support replies.
+
+C5 caring, frame b added (200 items).
+- b 0.91/0.89 (0.99). Transfer a->b 0.64/0.95, b->c 0.29/0.51, c->b 0.22/0.79. Gemma approves 99% of the caring
+  replies and disapproves 56% of the others.
+
+C19 agreeableness a b (49 of 50 scenarios, 196 items).
+- a 0.66/0.77 (0.80), b 0.65/0.87 (0.82); c 0.72/0.94, d 0.74/0.78 as before. Transfer a->b 0.54/0.53, a->c
+  0.58/0.69, b->c 0.59/0.71, c->d 0.79/0.85. Verdicts negative for 39% of low and 13% of high replies.
+- Honesty-humility unchanged: C19.json against the committed one, every AUROC (raw, standardized, probe, held-out),
+  transfer and cosine is identical for every earlier sub-contrast, and the same in both controls. Only permutation
+  p-values move (129 cells, at most 0.05; no honesty-humility cell crosses 0.05), because S3 draws every label
+  shuffle from one generator per concept and the new agreeableness cells come first. A per-cell seed would fix it.
+
+Housekeeping. Old C5 and C19 rows keep their old replies, verdict labels and activations, matched by item id; a fresh
+greedy pass changed 28 and 51 of 200 old replies; fresh activations matched exactly for C5 and differed slightly for
+C19 (batch numerics). Two IFEval prompts (letter '#' and '!') get a random letter from the official checker, so their
+label flips run to run; they are left out, and langdetect is seeded.
+
+Open: C26's reversed INTIMA held-out. C28 is ratified and building.
