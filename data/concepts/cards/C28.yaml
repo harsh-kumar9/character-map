@@ -1,0 +1,54 @@
+id: C28
+name: asks only when a request is truly ambiguous
+area: C
+tier: 2
+status: draft
+contrast:
+  positive: 'on an ambiguous request, the reply asks one short question that names the open choice (under_asks); on a clear request, it does the task (over_asks)'
+  negative: 'on the ambiguous request, it picks one reading and answers in full (under_asks); on the clear request, it asks about a detail the request already settles (over_asks)'
+  not_this:
+    - asking a question as such; asking is the pos of one sub-contrast and the neg of the other, so a question-mark direction shows as the two directions pointing opposite ways
+    - refusal (no reply declines)
+    - competence (no reply contains a mistake)
+    - length, politeness
+  sub_contrasts:
+    under_asks: the ambiguous version of the request; pos asks, neg guesses
+    over_asks: the clear version of the same request; pos answers, neg asks anyway
+grounding:
+  - Askell et al. 2021, the helpful assistant asks follow-up questions when information is missing
+  - Claude's constitution, ask for clarification in cases of genuine ambiguity; needless clarifying questions on simple agentic tasks are on the over-caution list
+  - OpenAI Model Spec 2026-08-18, "Consider uncertainty, state assumptions, and ask clarifying questions when appropriate"
+  - Zhang et al. 2024 (CLAMBER), a taxonomy of ambiguity and a benchmark of queries that do and do not need clarification
+  - Zhang, Knox and Choi 2025, when asking a clarifying question helps
+frames:
+  a:
+    applies: true
+    realization: 'one or two sentences of setting about a named person (a coworker, assistant, friend, neighbour, classmate or family member) and who asks, then the request quoted, built from the frame-c request text; the reply verbatim; the standard recognition question'
+    readout: boundary
+    construction: generated
+    source: as frame c
+  b: {applies: true, realization: "same scene and reply; the standard judgment question", readout: boundary, construction: generated, source: as frame c}
+  c:
+    applies: true
+    realization: 'user turn: the ambiguous version (under_asks) or the clear version (over_asks) of one request; ambiguity types rotated from CLAMBER''s taxonomy, request kinds rotated (including simple agentic tasks). Prefilled reply: 20-55 words, each pair within 0.8-1.25. No system prompt.'
+    readout: response
+    construction: generated
+    source: scenarios and replies by gemma-4-31B-it, checked by a greedy gemma-4-31B-it pass blind to the poles (which version leaves a detail open; which reply and self-description ask first; no mistakes)
+  d:
+    applies: true
+    realization: 'self-report form (D-030): "Imagine someone asks you: <request>", the self-reflection question, a prefilled first-person description opening "In a situation like that, I"; one pair per version (asks first vs answers). Verified blind to the poles.'
+    readout: response
+    construction: generated
+    source: as frame c
+sources:
+  - {dataset: "generated: requests and replies by gemma-4-31B-it", url: "", license: n/a, used_for: "100 scenarios, frames a-d", n_available: 0}
+  - {dataset: CLAMBER, url: "https://github.com/zt991211/CLAMBER", license: none stated, used_for: "held-out queries (replies by Llama-3.1-8B-Instruct) and behavior", n_available: 3202}
+heldout:
+  {dataset: "CLAMBER queries with Llama-3.1-8B-Instruct replies", url: "https://github.com/zt991211/CLAMBER", license: "none stated; replies generated", frame: c, n: "100 ambiguous (under_asks) and 100 clear (over_asks) queries, one pair each", notes: "Llama writes a direct answer and a single clarifying question per query, greedy, under fixed instructions that are not part of the item; CLAMBER's label sets which is pos. Unfamiliar-entity and contradictory-instruction items left out. No length rule on these pairs (D-056 addendum ruling); the length gap is reported. CLAMBER pinned at 26ab703. Never enters generation"}
+behavior:
+  {instrument: "CLAMBER ask or answer", dataset: "100 ambiguous and 100 clear CLAMBER queries not in the held-out", url: "https://github.com/zt991211/CLAMBER", metric: "share of replies a gemma-4-31B-it judge labels as CLAMBER expects (ASKS on ambiguous, ANSWERS on clear); the ask rate on each class beside it", scoring: judge, n: 200}
+risks:
+  - the direction may only read whether the reply asks a question; the cosine between the under_asks and over_asks directions per frame measures it (near -1 means a question detector)
+  - clarifying replies run short; the length rule holds each pair within 0.8-1.25
+  - under_asks overlaps C24 too_literal (both answer one reading of the request); the S4 cosine is reported
+  - CLAMBER is QA-heavy and partly puzzle-like, and its license is not stated; item text stays on ada
