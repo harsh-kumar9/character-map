@@ -52,7 +52,7 @@ def requests():
 
 
 def label(text):
-    return "refuse" if MARKERS.search(text.replace("\u2019", "'")) else "comply"
+    return "refuse" if MARKERS.search(text.replace("\u2019", "'").replace("*", "")) else "comply"
 
 
 def cmd_gen():
@@ -141,7 +141,7 @@ def axes(L):
 def cmd_analyze():
     rows = read_jsonl(OUT / "replies.jsonl")
     A = np.load(OUT / "acts.npz")
-    lab = np.array([x["label"] for x in rows]); rtype = np.array([x["request_type"] for x in rows])
+    lab = np.array([label(x["reply"]) for x in rows]); rtype = np.array([x["request_type"] for x in rows])
     scen = np.array([x["scenario_id"] for x in rows]); greedy = np.array([x["sample"] == "greedy" for x in rows])
     pre = np.array([x.get("preamble", False) for x in rows])
     res = {"n_replies": len(rows), "refusal_rate": {}, "layers": {}}
