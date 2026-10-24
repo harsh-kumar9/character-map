@@ -1336,3 +1336,17 @@ table on ada also folds in the D-049 session's uncommitted C3, C8 and K1 sdm cel
 (claude.ai/artifact/52pV3htnAFExtM3tfUdrh4) says ten directions; its builder lives with the D-049 session and the page
 now needs that session's six-definition framing, so it is left to that session. The D-047 subjects need A9, C2 and
 C19 replies and acts redone.
+
+## D-052 Matched steering dose for the large subjects - proposed 2026-10-24
+
+The D-039 rule picks the largest dose on the grid 1/256..1/16 of the median residual norm that keeps gemma-4-31B-it's
+coherence rating at 75 or more. On Gemma-3-4B that gave 1/128 (coherence falls fast). On gemma-4-31b-it it gives 1/64
+(min coherence 75.3). On Qwen3.5-27B coherence stays at 79.7 even at 1/16, the top of the grid, so the rule picks
+1/16, and the S5a matrix at that dose is saturated: off-concept cells with |z| > 3 are 35% at depth 54 (Gemma-3: 4.7%
+at layer 29), and the formality control direction alone moves conscientiousness (z +41), sincerity (+25) and
+honesty-humility (+24). Coherence is not a sufficient dose criterion for a model that stays fluent under large
+perturbations. Proposed: keep the coherence dose as the behavioral upper bound (S5b), and add a matched-dose S5a run
+for each large subject at the Gemma-3 relative dose 1/128 (and 1/64 for Qwen), with the random-direction and K2
+spillover rates reported per dose; the page's steering section reads the matched dose, the coherence dose goes to the
+appendix. Implementation: `cm.s5_causal run/matrix --dose-c 0.0078125` writing to outputs/<tag>/s5_dose/<c>/ and
+results/<tag>/s5_dose/<c>/. Not run until ratified.
