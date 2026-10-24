@@ -1,0 +1,321 @@
+{
+ "concept": "C1",
+ "prefills": [
+  {
+   "source": "Apollo roleplaying, frame c",
+   "n_pairs": 99,
+   "words_pos_median": 54,
+   "words_neg_median": 48,
+   "ratio_pos_over_neg": {
+    "q10": 0.75,
+    "q25": 0.88,
+    "median": 1.07,
+    "q75": 1.225,
+    "q90": 1.344
+   },
+   "pairs_outside_0.8_1.25": 39,
+   "same_first_word": 22,
+   "same_first_3_words": 3,
+   "yesno_opener": {
+    "pos": 32,
+    "neg": 26
+   },
+   "negation_word": {
+    "pos": 64,
+    "neg": 49
+   },
+   "admission_register": {
+    "pos": 33,
+    "neg": 10
+   },
+   "cover_register": {
+    "pos": 23,
+    "neg": 32
+   },
+   "first_words_pos": [
+    [
+     "yes",
+     21
+    ],
+    [
+     "i",
+     19
+    ],
+    [
+     "no",
+     11
+    ],
+    [
+     "i'm",
+     11
+    ],
+    [
+     "honestly",
+     6
+    ],
+    [
+     "while",
+     5
+    ],
+    [
+     "to",
+     4
+    ],
+    [
+     "i'd",
+     4
+    ]
+   ],
+   "first_words_neg": [
+    [
+     "i",
+     30
+    ],
+    [
+     "yes",
+     17
+    ],
+    [
+     "i'm",
+     12
+    ],
+    [
+     "no",
+     8
+    ],
+    [
+     "it's",
+     4
+    ],
+    [
+     "we've",
+     4
+    ],
+    [
+     "i've",
+     3
+    ],
+    [
+     "we're",
+     3
+    ]
+   ]
+  },
+  {
+   "source": "MASK provided_facts, frame c (held-out)",
+   "n_pairs": 99,
+   "words_pos_median": 11,
+   "words_neg_median": 11,
+   "ratio_pos_over_neg": {
+    "q10": 0.857,
+    "q25": 0.909,
+    "median": 1.0,
+    "q75": 1.091,
+    "q90": 1.167
+   },
+   "pairs_outside_0.8_1.25": 3,
+   "same_first_word": 99,
+   "same_first_3_words": 86,
+   "yesno_opener": {
+    "pos": 0,
+    "neg": 0
+   },
+   "negation_word": {
+    "pos": 25,
+    "neg": 29
+   },
+   "admission_register": {
+    "pos": 0,
+    "neg": 0
+   },
+   "cover_register": {
+    "pos": 0,
+    "neg": 0
+   },
+   "first_words_pos": [
+    [
+     "the",
+     67
+    ],
+    [
+     "a",
+     3
+    ],
+    [
+     "michael",
+     2
+    ],
+    [
+     "all",
+     2
+    ],
+    [
+     "bella",
+     1
+    ],
+    [
+     "union",
+     1
+    ],
+    [
+     "margaret's",
+     1
+    ],
+    [
+     "metabolife",
+     1
+    ]
+   ],
+   "first_words_neg": [
+    [
+     "the",
+     67
+    ],
+    [
+     "a",
+     3
+    ],
+    [
+     "michael",
+     2
+    ],
+    [
+     "all",
+     2
+    ],
+    [
+     "bella",
+     1
+    ],
+    [
+     "union",
+     1
+    ],
+    [
+     "margaret's",
+     1
+    ],
+    [
+     "metabolife",
+     1
+    ]
+   ]
+  }
+ ],
+ "apollo_roles_sample": [
+  [
+   "Chris",
+   2
+  ],
+  [
+   "well-known celebrity attending a press c",
+   1
+  ],
+  [
+   "college student who was recently caught ",
+   1
+  ],
+  [
+   "student who has not completed an importa",
+   1
+  ],
+  [
+   "meeting with a group of friends",
+   1
+  ],
+  [
+   "hiker who has accidentally wandered onto",
+   1
+  ],
+  [
+   "individual seeking help from a charity o",
+   1
+  ],
+  [
+   "teenager who broke curfew by coming home",
+   1
+  ],
+  [
+   "in a job interview for a position you ar",
+   1
+  ],
+  [
+   "politician seeking to prevent a scandal ",
+   1
+  ],
+  [
+   "employee working in a busy office",
+   1
+  ],
+  [
+   "child who accidentally broke a valuable ",
+   1
+  ],
+  [
+   "online user who recently purchased a fit",
+   1
+  ],
+  [
+   "teacher who has recently altered a stude",
+   1
+  ],
+  [
+   "shopper in a retail store",
+   1
+  ],
+  [
+   "civilian approached by the police for qu",
+   1
+  ],
+  [
+   "applicant speaking with a housing board ",
+   1
+  ],
+  [
+   "applicant seeking to secure a mortgage f",
+   1
+  ],
+  [
+   "bystander who witnessed a car accident",
+   1
+  ],
+  [
+   "17-year-old trying to buy a bottle of wi",
+   1
+  ],
+  [
+   "athlete who has recently used performanc",
+   1
+  ],
+  [
+   "car salesperson eager to finalize the sa",
+   1
+  ],
+  [
+   "resident who is unhappy with a proposed ",
+   1
+  ],
+  [
+   "patient who was recently advised by your",
+   1
+  ],
+  [
+   "farmer whose goal is to pass the agricul",
+   1
+  ]
+ ],
+ "verdicts_ab": {
+  "a-neg-N": 32,
+  "a-neg-P": 8,
+  "a-neg-X": 59,
+  "a-pos-N": 21,
+  "a-pos-P": 9,
+  "a-pos-X": 69,
+  "b-neg-N": 71,
+  "b-neg-P": 6,
+  "b-neg-X": 22,
+  "b-pos-N": 47,
+  "b-pos-P": 20,
+  "b-pos-X": 32
+ }
+}

@@ -17,7 +17,8 @@ R = (REPO / "results" / TAG) if TAG else (REPO / "results")
 
 # ---- the honesty block: (concept, sub) -> plain name; polarity = positive pole
 UNITS = [
-    ("C1", "all", "Sincere vs deceptive"),
+    ("C1", "lying", "Sincere vs lying"),
+    ("C1", "misleading", "Informative vs misleading"),
     ("C2", "all", "Accurate vs fabricating"),
     ("A9", "all", "Knows vs does not know"),
     ("C3", "all", "Forthright vs withholding"),
@@ -137,7 +138,7 @@ plt.rcParams.update({"font.family": "Arial", "font.size": 7, "axes.titlesize": 7
 def short(u):
     c, s, f = u.split("|")
     n = NAME[(c, s)]
-    return {"Sincere vs deceptive": "Sincere", "Accurate vs fabricating": "Accurate", "Knows vs does not know": "Knows answer",
+    return {"Sincere vs lying": "Sincere", "Informative vs misleading": "Not misleading", "Accurate vs fabricating": "Accurate", "Knows vs does not know": "Knows answer",
             "Forthright vs withholding": "Forthright", "Non-sycophantic vs sycophantic": "Non-sycophantic", "Truthful vs boastful": "Not boastful", "Truthful vs self-deprecating": "Not self-deprecating",
             "Honesty-humility high vs low": "Honesty-humility", "Integrity vs hypocrisy": "Integrity", "Holds position vs capitulates": "Holds position",
             "Observed vs unobserved": "Observed", "Pushback vs none": "Under pushback", "Honest option vs kind option": "Honest over kind",

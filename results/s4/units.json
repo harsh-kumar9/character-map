@@ -630,43 +630,83 @@
   ]
  },
  {
-  "id": "C1|all|a",
+  "id": "C1|lying|a",
   "concept": "C1",
-  "sub": "all",
+  "sub": "lying",
   "frame": "a",
   "n_train": [
-   54,
-   54
+   58,
+   58
   ]
  },
  {
-  "id": "C1|all|b",
+  "id": "C1|lying|b",
   "concept": "C1",
-  "sub": "all",
+  "sub": "lying",
   "frame": "b",
   "n_train": [
-   54,
-   54
+   58,
+   58
   ]
  },
  {
-  "id": "C1|all|c",
+  "id": "C1|lying|c",
   "concept": "C1",
-  "sub": "all",
+  "sub": "lying",
   "frame": "c",
   "n_train": [
-   54,
-   54
+   58,
+   58
   ]
  },
  {
-  "id": "C1|all|d",
+  "id": "C1|lying|d",
   "concept": "C1",
-  "sub": "all",
+  "sub": "lying",
   "frame": "d",
   "n_train": [
-   54,
-   54
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|misleading|a",
+  "concept": "C1",
+  "sub": "misleading",
+  "frame": "a",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|misleading|b",
+  "concept": "C1",
+  "sub": "misleading",
+  "frame": "b",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|misleading|c",
+  "concept": "C1",
+  "sub": "misleading",
+  "frame": "c",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|misleading|d",
+  "concept": "C1",
+  "sub": "misleading",
+  "frame": "d",
+  "n_train": [
+   58,
+   58
   ]
  },
  {
@@ -1537,6 +1577,66 @@
   "n_train": [
    16,
    16
+  ]
+ },
+ {
+  "id": "C22|all|c",
+  "concept": "C22",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C22|all|d",
+  "concept": "C22",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C23|all|a",
+  "concept": "C23",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "C23|all|b",
+  "concept": "C23",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "C23|all|c",
+  "concept": "C23",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   65,
+   65
+  ]
+ },
+ {
+  "id": "C23|all|d",
+  "concept": "C23",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   65,
+   65
   ]
  },
  {

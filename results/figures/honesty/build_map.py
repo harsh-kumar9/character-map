@@ -18,7 +18,7 @@ units = ov["units"]; idx = {u: i for i, u in enumerate(units)}
 
 # the honesty block (D-043, six definitions since D-049), frames where they exist
 DEFS = [("Self-knowledge", "A9|all", "#009E73"), ("Accuracy", "C2|all", "#E69F00"),
-        ("Sincerity", "C1|all", "#0072B2"), ("Forthrightness", "C3|all", "#D55E00"),
+        ("Sincerity", "C1|lying", "#0072B2"), ("Forthrightness", "C3|all", "#D55E00"),
         ("Non-sycophancy", "C8|sycophantic_agreement", "#56B4E9"), ("Honesty-humility", "C19|honesty_humility", "#CC79A7")]
 CTRL = ("Formality (control)", "K1|all", "#898781")
 FR = {"a": ("recognize", "^"), "b": ("judge", "D"), "c": ("act", "o"), "d": ("self-describe", "s")}

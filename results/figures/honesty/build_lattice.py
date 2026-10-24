@@ -18,7 +18,7 @@ D = json.load(open(OUT / "honesty_data.json"))
 R = (REPO / "results" / TAG) if TAG else (REPO / "results")
 ov = json.load(open(R / "s4" / "overlap_verdict.json")); units = ov["units"]; idx = {u: i for i, u in enumerate(units)}
 DEFS = [("Self-knowledge", "A9|all", "#009E73"), ("Accuracy", "C2|all", "#E69F00"),
-        ("Sincerity", "C1|all", "#0072B2"), ("Forthrightness", "C3|all", "#D55E00"),
+        ("Sincerity", "C1|lying", "#0072B2"), ("Forthrightness", "C3|all", "#D55E00"),
         ("Non-sycophancy", "C8|sycophantic_agreement", "#56B4E9"), ("Honesty-humility", "C19|honesty_humility", "#CC79A7")]
 FRAMES = [("a", "recognize", 3), ("b", "judge", 2), ("c", "act", 1), ("d", "self-describe", 0)]
 FY = {f: y for f, _, y in FRAMES}
@@ -98,6 +98,7 @@ def causal_panel(ax, letter):
     for s in us:
         if s not in src: continue
         for t in us:
+            if t not in tgt: continue          # units added after the steering stage (S5 rerun pending)
             z = Z[src.index(s)][li][tgt.index(t)]
             if z is None or (isinstance(z, float) and math.isnan(z)): continue
             if s == t: SELFZ[s] = f"{z:.1f}"
@@ -122,4 +123,4 @@ if HAVE_CAUSAL:
     for s_ in us:
         if s_ in src:
             print(f"L{layers[0]}", s_, {t: round(Z[src.index(s_)][li0][tgt.index(t)], 1) for t in us
-                                        if Z[src.index(s_)][li0][tgt.index(t)] is not None and abs(Z[src.index(s_)][li0][tgt.index(t)]) >= 2})
+                                        if t in tgt and Z[src.index(s_)][li0][tgt.index(t)] is not None and abs(Z[src.index(s_)][li0][tgt.index(t)]) >= 2})
