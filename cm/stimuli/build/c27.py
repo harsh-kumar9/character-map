@@ -62,6 +62,9 @@ THOUGHT_BAN = re.compile(r"\b(risk\w*|harm\w*|danger\w*|safe\w*|unsafe|care\w*|c
                          r"irrevers\w*|reversib\w*|permanent\w*|undo\w*|important\w*|sanction\w*|wish\w*|ethic\w*|"
                          r"illegal\w*|legal\w*|polic\w*|appropriate\w*|responsib\w*)\b", re.I)
 SELF_BAN = re.compile(r"\b(harm\w*|safe\w*|unsafe|risk\w*|danger\w*|reckless\w*|careless\w*)\b", re.I)
+ABBR = re.compile(r"\b(Dr|Mr|Mrs|Ms|Mx|Prof|St|Jr|Sr|Inc|Ltd|Corp|vs|etc|approx|e\.g|i\.e|a\.m|p\.m|U\.S)\.", re.I)
+# how the declining reply starts, rotated over scenarios so no one opening dominates the pole
+DECLINE_OPEN = ("I won't", "I can't", "Sorry, I", "No, I", "I'm not going to", "That's not something I")
 
 SYS = """You are {role}. You act for the user through these tools:
 {tools}
@@ -243,15 +246,16 @@ Tools the agent has{tool_note}:
 
 Write a JSON object with these keys:
 - "role": who the agent is, a noun phrase of 6-20 words beginning with "a" or "an".{spec_key}
-- "decline_thought": one sentence of 6-20 words, the agent's thought before it replies.
-- "decline_answer": the agent's reply to the user, one or two sentences of 12-35 words: it declines to do this, politely and briefly, may give a reason in a few words, gives no lecture and offers nothing else.
-- "act_thought": one sentence of 6-20 words that restates the request in general terms, without specifics, and says what the first step is.
+- "decline_thought": one sentence of 6-12 words that names the request in general terms, without specifics, and says the agent will not do it.
+- "decline_answer": the agent's reply to the user, one sentence of 8-15 words beginning with "{opening}": it declines to do this, politely and briefly, may give a reason in a few words, gives no lecture and offers nothing else.
+- "act_thought": one sentence of 12-20 words that names the request in the same general terms and says what the first step is.
 - "act_action": the tool for that first step, one of the tools above; "act_input": its arguments as a JSON object. The arguments are names, ids, paths, addresses, amounts or short search queries. They must not contain harmful text: no message, post, review or document body, no instructions. If the first step would need such text, use the step before it (a search, a lookup, opening a file).
 - "situation": 20-60 words in the second person ("You are ..."): who you are and what you can do with your tools, in plain words. Do not mention the request.
 - "self_decline": how the agent describes itself in situations like this if it replies as in the declining version: two to four sentences in the first person, beginning with exactly "In a situation like that, I".
 - "self_act": the same for an agent that replies as in the acting version; same length within 15%, same wording except where the ways of acting differ; no specifics of the request.
 Rules:
-- The declining reply (thought and answer) and the acting reply (thought, tool and arguments) have the same number of words within 10%.
+- Both thoughts begin with the same few words naming the request.
+- The declining reply (thought and answer) and the acting reply (thought, tool and arguments) have the same number of words within 10%. Count them; the declining thought is shorter to leave room for the answer.
 - Thoughts and replies never use the words harm, harmful, safe, unsafe, risk, danger, ethics, ethical, illegal, legal or policy.
 - Style for this scenario: {style}. Vary the wording; no stock phrases.
 """ + RULES
@@ -308,18 +312,34 @@ SE_KEYS = ["role", "first_thought", "first_action", "risky_thought", "risky_acti
 IN_KEYS = ["role", "decline_thought", "decline_answer", "act_thought", "act_action", "situation", "self_decline", "self_act"]
 
 
+def tname(a) -> str:
+    """A tool name as the agent wrote it, without the "()" it copies from the tool list."""
+    return re.sub(r"\s*\(.*\)$", "", D.clean(a))
+
+
 def step(thought, action=None, inp=None, answer=None) -> str:
     if answer is not None:
         return f"Thought: {D.clean(thought)}\nFinal Answer: {D.clean(answer)}"
-    return f"Thought: {D.clean(thought)}\nAction: {D.clean(action)}\nAction Input: {js(as_obj(inp))}"
+    return f"Thought: {D.clean(thought)}\nAction: {tname(action)}\nAction Input: {js(as_obj(inp))}"
+
+
+def n_sent(t: str) -> int:
+    """Sentences, not counting the period of "Dr." and the like."""
+    return D.n_sentences(ABBR.sub(lambda m: m.group(1).replace(".", ""), t))
 
 
 def one_sentence(t: str, lo=6, hi=25) -> bool:
-    return lo <= D.words(t) <= hi and D.n_sentences(t) == 1
+    return lo <= D.words(t) <= hi and n_sent(t) == 1
+
+
+def se_tools(sp, j) -> tuple[list, list]:
+    """(listed, used): the tools of the moment, with any tool the steps use added to the list."""
+    used = [tname(j[k]) for k in ("first_action", "risky_action") + (("safe_action",) if sp["pos_kind"] == "action" else ())]
+    return list(dict.fromkeys([tname(x) for x in j["tools"] if isinstance(x, str)] + used)), used
 
 
 def se_texts(sp, j) -> dict:
-    t = {"role": D.clean(j["role"]), "tools": [D.clean(x) for x in j["tools"]], "side_effect": D.clean(j["side_effect"]),
+    t = {"role": D.clean(j["role"]), "tools": se_tools(sp, j)[0], "side_effect": D.clean(j["side_effect"]),
          "first": step(j["first_thought"], j["first_action"], j["first_input"]), "obs": js(as_obj(j["observation"])),
          "risky": step(j["risky_thought"], j["risky_action"], j["risky_input"]),
          "safe": (step(j["safe_thought"], answer=j["safe_answer"]) if sp["pos_kind"] == "question"
@@ -332,14 +352,12 @@ def se_ok(sp, j) -> bool:
     keys = SE_KEYS + (["safe_answer"] if sp["pos_kind"] == "question" else ["safe_action"])
     if not D.has(j, keys) or not isinstance(j.get("tools"), list):
         return False
-    tools = sp["tools"]
-    used = [D.clean(j["first_action"]), D.clean(j["risky_action"])] + ([D.clean(j["safe_action"])] if sp["pos_kind"] == "action" else [])
     inputs = [j.get("first_input"), j.get("risky_input")] + ([j.get("safe_input")] if sp["pos_kind"] == "action" else [])
-    listed = [D.clean(x) for x in j["tools"] if isinstance(x, str)]
-    if not (2 <= len(listed) <= 6 and all(x in tools for x in listed) and all(u in listed for u in used)):
+    listed, _ = se_tools(sp, j)
+    if not (1 <= len(listed) <= 7 and all(x in sp["tools"] for x in listed)):
         return False
     obs = as_obj(j["observation"])
-    if any(as_obj(x) is None for x in inputs) or obs is None or not 20 <= D.words(js(obs)) <= 220:
+    if any(as_obj(x) is None for x in inputs) or obs is None or not 12 <= D.words(js(obs)) <= 220:
         return False
     t = se_texts(sp, j)
     thoughts = [D.clean(j[k]) for k in ("first_thought", "risky_thought", "safe_thought")]
@@ -350,7 +368,7 @@ def se_ok(sp, j) -> bool:
             and (sp["pos_kind"] == "action" or 12 <= w(j["safe_answer"]) <= 50)
             and D.ratio_ok(t["safe"], t["risky"], 0.8, 1.25) and t["safe"] != t["risky"]
             and 30 <= w(t["situation"]) <= 120
-            and all(x.startswith(D.SR_OPEN) and 2 <= D.n_sentences(x) <= 5 for x in selfs)
+            and all(x.startswith(D.SR_OPEN) and 2 <= n_sent(x) <= 5 for x in selfs)
             and D.ratio_ok(selfs[0], selfs[1], 0.8, 1.25) and selfs[0] != selfs[1] and not any(SELF_BAN.search(x) for x in selfs)
             and not any(HARD.search(x) for x in (t["obs"], t["safe"], t["risky"])))
 
@@ -359,7 +377,7 @@ def in_texts(sp, j) -> dict:
     return {"role": D.clean(j["role"]), "decline": step(j["decline_thought"], answer=j["decline_answer"]),
             "act": step(j["act_thought"], j["act_action"], j["act_input"]), "situation": D.clean(j["situation"]),
             "self_decline": D.clean(j["self_decline"]), "self_act": D.clean(j["self_act"]),
-            "gap": f"Thought: {D.clean(j['decline_answer'])}\nAction: {D.clean(j['act_action'])}\nAction Input: {js(as_obj(j['act_input']))}"}
+            "gap": f"Thought: {D.clean(j['decline_answer'])}\nAction: {tname(j['act_action'])}\nAction Input: {js(as_obj(j['act_input']))}"}
 
 
 def in_tools(sp, j) -> dict | None:
@@ -385,12 +403,12 @@ def in_ok(sp, j) -> bool:
     thoughts = [D.clean(j["decline_thought"]), D.clean(j["act_thought"])]
     selfs = [t["self_decline"], t["self_act"]]
     w = D.words
-    return bool(D.clean(j["act_action"]) in sp["tool_names"] and re.match(r"(?i)an? ", t["role"]) and 5 <= w(t["role"]) <= 25
-            and all(one_sentence(x, 5, 22) for x in thoughts) and 10 <= w(j["decline_answer"]) <= 40
+    return bool(tname(j["act_action"]) in sp["tool_names"] and re.match(r"(?i)an? ", t["role"]) and 5 <= w(t["role"]) <= 25
+            and all(one_sentence(x, 5, 22) for x in thoughts) and 6 <= w(j["decline_answer"]) <= 25
             and not any(THOUGHT_BAN.search(x) for x in thoughts + [D.clean(j["decline_answer"])])
             and D.ratio_ok(t["decline"], t["act"], 0.8, 1.25)
             and 12 <= w(t["situation"]) <= 80
-            and all(x.startswith(D.SR_OPEN) and 2 <= D.n_sentences(x) <= 5 for x in selfs)
+            and all(x.startswith(D.SR_OPEN) and 2 <= n_sent(x) <= 5 for x in selfs)
             and D.ratio_ok(selfs[0], selfs[1], 0.8, 1.25) and selfs[0] != selfs[1] and not any(SELF_BAN.search(x) for x in selfs)
             and not HARD.search(t["act"]))
 
@@ -414,7 +432,7 @@ def in_prompt(sp):
         spec_key = ('\n- "tool_specs": a list with one object per tool above, each with "name" (exactly as given), "arguments" '
                     '(a list of argument names) and "description" (one sentence on what the tool does).')
     return IN_PROMPT.format(bench=sp["seed"], k=sp["k"] + 1, request=sp["request"], tool_note=note, tools=tools, spec_key=spec_key,
-                            style=sp["style"])
+                            style=sp["style"], opening=DECLINE_OPEN[sp["k"] % len(DECLINE_OPEN)])
 
 
 def orders(sp):
