@@ -42,6 +42,7 @@ MULT = 1          # dose multiple of the S5a dose; set by --dose-mult (dose-resp
 N_RAND_DOSE = 3
 L_IN = cfg.L_STEER
 N_RAND = 4
+GEN_ROWS, GEN_TOKENS = (32, 12000) if cfg.D >= 5000 else (32, 40000)   # generation batch bounds (rows, padded tokens)
 CONFLICT = {"F1": ["C1|all|c", "C5|all|c"], "F2": ["C14|defer|c", "B1|all|b"], "F3": ["C15|refuse|c", "A1|all|c"],
             "F4": ["B2|all|b", "B3|all|b"], "F5": ["C6|all|c", "C5|all|c"]}
 JUDGES = {"gemma": "google/gemma-4-31B-it", "qwen": "Qwen/Qwen3.5-27B"}
@@ -133,13 +134,26 @@ def cmd_gen(shard, nshards, only=None):
         rows = []
         if MULT != 1:   # unsteered replies are the same at every dose
             rows = [r for r in read_jsonl(X1_OUT / "replies" / f"{cid}.jsonl") if r["cond"] == "baseline"]
+        # prompts once per item; batches bounded by rows and by padded tokens (prompt + generation), since the long
+        # E1 instruments blow the attention memory of a 31B at 32 rows
+        chat_of = {it["item_id"]: tok.apply_chat_template(it["messages"], tokenize=False, add_generation_prompt=True, **cfg.chat_kwargs())
+                   for it in items}
+        len_of = {k: len(tok(v, add_special_tokens=False)["input_ids"]) for k, v in chat_of.items()}
+        def batches(its, mt):
+            i = 0
+            while i < len(its):
+                batch, T = [], 0
+                while i < len(its) and len(batch) < GEN_ROWS:
+                    T2 = max(T, len_of[its[i]["item_id"]] + mt)
+                    if batch and T2 * (len(batch) + 1) > GEN_TOKENS:
+                        break
+                    batch.append(its[i]); T = T2; i += 1
+                yield batch
         for name, kind, idx, sg in conditions(cid, S):
             vec = None if kind == "none" else torch.tensor(A[kind][idx] * sg * dose, device="cuda", dtype=torch.float32)
             for mt, its in groups.items():
-                for b in range(0, len(its), 32):
-                    batch = its[b:b + 32]
-                    chats = [tok.apply_chat_template(it["messages"], tokenize=False, add_generation_prompt=True, **cfg.chat_kwargs())
-                             for it in batch]
+                for batch in batches(its, mt):
+                    chats = [chat_of[it["item_id"]] for it in batch]
                     enc = tok(chats, return_tensors="pt", padding=True, add_special_tokens=False).to("cuda")
                     with torch.no_grad():
                         if vec is not None:

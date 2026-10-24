@@ -40,6 +40,8 @@ L_IN, L_OUT = cfg.L_STEER, tuple(cfg.L_OUT)
 H_IN, H_OUT = L_IN + 1, tuple(L + 1 for L in L_OUT)
 GRID = [1 / 256, 1 / 128, 1 / 64, 1 / 32, 1 / 16]
 N_RAND, PROBE, TOPF = 8, 6, 16
+# forward batch for the steered readouts: a 31B with all hidden states kept needs small batches (OOM at 16 rows)
+FWD_BATCH, FWD_TOKENS = (4, 6000) if cfg.D >= 5000 else (16, 24000)
 CALIB = ["A1|all|c", "B1|all|b", "C1|all|c", "C6|all|c", "C9|quarrelsome|c", "C15|refuse|c", "C19|honesty_humility|c",
          "C20|psychopathy|c", "C21|power|d", "D1|all|c", "E1|all|c", "F3|all|c",
          "A9|all|c", "C2|all|c", "C1|all|b", "K1|all|c"]   # the last four cover a run of the honesty block alone
@@ -283,7 +285,7 @@ def cmd_run(shard, nshards):
             ctx.__enter__()
         try:
             with torch.no_grad():
-                for n, (H, (ids, p)) in enumerate(zip(forward_hidden(m, [x[0] for x in items], batch=16), items)):
+                for n, (H, (ids, p)) in enumerate(zip(forward_hidden(m, [x[0] for x in items], batch=FWD_BATCH, token_budget=FWD_TOKENS), items)):
                     for li, hidx in enumerate(H_OUT):
                         r = H[hidx, p:p + 32].float().mean(0)
                         proj[j, n, li] = (T[li] @ r).cpu().numpy()
