@@ -48,8 +48,18 @@ HARMLESSNESS = [
     Unit("Psychopathy", "C20", "psychopathy", good="neg", group="trait"),
 ]
 
+# read only, for the cross-block figures (D-055): the honesty block as the honesty pages draw it (D-049)
+HONESTY = [
+    Unit("Self-knowledge", "A9", group="epistemic"),
+    Unit("Accuracy", "C2", group="epistemic"),
+    Unit("Sincerity", "C1", "lying", group="character"),
+    Unit("Forthrightness", "C3", group="character"),
+    Unit("Non-sycophancy", "C8", "sycophantic_agreement", group="character"),
+    Unit("Honesty-humility", "C19", "honesty_humility", group="trait"),
+]
+
 CONTROL = Unit("Formality (control)", "K1", group="control")
-BLOCKS = {"helpfulness": HELPFULNESS, "harmlessness": HARMLESSNESS}
+BLOCKS = {"helpfulness": HELPFULNESS, "harmlessness": HARMLESSNESS, "honesty": HONESTY}
 FRAMES = {"a": "recognize", "b": "judge", "c": "act", "d": "self-describe"}
 
 
