@@ -24,7 +24,7 @@ others (theory of mind; Dennett 1987).
 | A4 | User is an expert vs a novice | a c | Ability (Mayer et al.) | SycophancyEval items with credentials added | 2 |
 | A5 | User is truthful vs lying to the assistant | a c | Integrity (Mayer et al.) | Adapted from OpenSafeIntent stated purposes with contradicting details | 2 |
 | A6 | User has authority (developer, operator) vs ordinary user | a c | Practical authority (Raz 1986) | Adapted instruction-hierarchy prompts | 2 |
-| A7 | Charitable vs uncharitable reading of the user | a c d | Principle of charity (Davidson 1973) | Ambiguous items from XSTest and OR-Bench; new vector "suspicious of users" | 2 |
+| A7 | Charitable vs uncharitable reading of the user | a b c d | Principle of charity (Davidson 1973) | Ambiguous items from XSTest and OR-Bench; new vector "suspicious of users" | 2 |
 | A8 | Situation safe vs unsafe | a b c | Risk perception | SafeText, CASE-Bench | 2 |
 | A9 | Own knowledge: answerable vs not | a b c d | Accuracy as a virtue of truth (Williams 2002) | SelfAware, KUQ, AbstentionBench | 2 |
 
@@ -37,7 +37,7 @@ particularism about rules (Dancy 2004).
 
 | ID | Concept and contrast | Frames | Grounding | Sources | Tier |
 | --- | --- | --- | --- | --- | --- |
-| B1 | Care/harm: harmful vs harmless act | a b c | MFT care | Moral Stories, ETHICS commonsense, MFV | 1 |
+| B1 | Care/harm: harmful vs harmless act | a b c d | MFT care | Moral Stories, ETHICS commonsense, MFV | 1 |
 | B2 | Fairness/cheating | a b | MFT fairness | ETHICS justice, MFV | 2 |
 | B3 | Loyalty/betrayal | a b | MFT loyalty | MFV | 2 |
 | B4 | Authority/subversion | a b | MFT authority | MFV | 2 |
@@ -64,7 +64,7 @@ Dworkin 1972); servility and self-respect (Hill 1973); moral hypocrisy (Batson e
 | C2 | Accurate vs fabricating | a b c d | Accuracy (Williams); Frankfurt 1986 | Vector "hallucinating", SelfAware | 2 |
 | C3 | Forthright vs withholding | a c d | Candor; Grice's quantity maxim (1975) | New vector "withholding"; adapted items | 2 |
 | C4 | Self-presentation: boastful vs truthful vs self-deprecating | a c d | NE IV.7 | New vectors "overclaiming", "underclaiming" | 2 |
-| C5 | Caring vs apathetic | a c d | Noddings; Tronto | EmpatheticDialogues, vector "apathetic"; new vector "attentive" | 1 |
+| C5 | Caring vs apathetic | a b c d | Noddings; Tronto | EmpatheticDialogues, vector "apathetic"; new vector "attentive" | 1 |
 | C6 | Respects autonomy vs paternalistic | a b c d | Mill 1859; Dworkin 1972 | New vector "paternalistic"; DailyDilemmas autonomy items | 2 |
 | C7 | Non-judgmental vs moralizing | a c d | Unsolicited moral instruction | New vector "moralizing"; safe prompts from XSTest and OR-Bench | 2 |
 | C8 | Sycophancy, split: sycophantic agreement, genuine agreement, praise | a c d | Flattery (NE IV.6) | disentangle-sycophancy data, SycophancyEval, ELEPHANT, vector "sycophantic" | 1 |
@@ -74,15 +74,24 @@ Dworkin 1972); servility and self-respect (Hill 1973); moral hypocrisy (Batson e
 | C12 | Integrity vs hypocrisy (being fair vs appearing fair) | a c d | Batson et al. 1997; Williams 1973 | Batson coin-flip task rebuilt; new vector "hypocritical" | 2 |
 | C13 | Accountable vs blame-shifting vs over-apologizing | a c d | Strawson 1962; Hill 1973 | New vectors "blame-shifting", "over-apologizing" | 2 |
 | C14 | Defer to the user vs to oversight (obedience, corrigibility) | b c d | Milgram 1963; Soares et al. 2015 | CAA corrigible, model-written-evals defer and independence files; new vector "incorrigible" | 1 |
-| C15 | Refuse vs comply | c d | Beneficence vs non-maleficence (Ross) | Arditi harmful/harmless sets, XSTest, OR-Bench | 1 |
+| C15 | Refuse vs comply; crossed with the request, harmful vs harmless (D-054) | a b c d | Beneficence vs non-maleficence (Ross) | Arditi harmful/harmless sets, XSTest, OR-Bench | 1 |
 | C16 | Restraint vs overreach (scope, power, resources) | b c d | Temperance; Omohundro 2008 | Model-written-evals power files, Machiavelli power labels; new vectors "power-seeking", "overreaching" | 2 |
 | C17 | Serves the task's intent vs games the reward | c d | Goodhart; reward seeking | School of Reward Hacks; new vector "reward-seeking" | 2 |
 | C18 | Malicious; impolite | c | Vice | Vectors "evil", "impolite" | 2 |
-| C19 | HEXACO factors (honesty-humility, emotionality, extraversion, agreeableness, conscientiousness, openness) | c d; a b for honesty-humility | Ashton and Lee 2007 | HEXACO and IPIP items (d), TRAIT (c), model-written-evals Big Five files | 2 |
-| C20 | Dark triad (Machiavellianism, narcissism, psychopathy) | c d | Paulhus and Williams 2002 | Model-written-evals files, TRAIT | 2 |
+| C19 | HEXACO factors (honesty-humility, emotionality, extraversion, agreeableness, conscientiousness, openness) | c d; a b for honesty-humility and agreeableness | Ashton and Lee 2007 | HEXACO and IPIP items (d), TRAIT (c), model-written-evals Big Five files | 2 |
+| C20 | Dark triad (Machiavellianism, narcissism, psychopathy) | c d; a b for psychopathy | Paulhus and Williams 2002 | Model-written-evals files, TRAIT | 2 |
 | C21 | Schwartz's ten basic values | b d | Schwartz 1992, 2012 | PVQ items, Steering Geometry data | 2 |
 | C22 | Self-transparent vs covert about itself: declines to share its instructions, goals or reasoning vs denies or misstates them | c d | Constitution "transparent"; Model Spec "don't have an agenda", confidentiality rule | New scenarios by gemma-4-31B-it; Apollo insider trading (held-out, proposed); behavior: asked about its system prompt | 2 |
 | C23 | Non-manipulative vs manipulative persuasion: evidence and argument vs flattery, pressure, urgency, biases | a b c d | Carroll et al. 2023; constitution "non-manipulative"; Model Spec | New scenarios by gemma-4-31B-it; MentalManip (held-out, a); DarkBench (behavior); vector "manipulative" | 2 |
+| C24 | Reads the request as meant vs too literal (answers the words, misses the evident intent) or overstepping (changes what was not asked) | a b c d | Constitution "immediate desires", "background desiderata"; Model Spec "Respect the letter and spirit of instructions", "Avoid overstepping"; Askell et al. 2021 | New scenarios by gemma-4-31B-it; IFEval (held-out and behavior, proposed); overstepping judge on edit tasks | 1 |
+| C25 | Substantive vs watered-down help on a safe request: specific and usable vs vague, caveat-heavy and generic | a b c d | Constitution "unhelpfulness is never trivially safe" and the over-caution list; Model Spec "Be thorough but efficient" | New scenarios by gemma-4-31B-it; HelpSteer2 (held-out, proposed); FalseReject and Health-ORSC benign prompts (behavior) | 1 |
+| C26 | Supports wellbeing vs fosters reliance: warm help that supports the person's own capacities and other ties vs warm help that makes the assistant the main support | a b c d | Constitution "wellbeing" and endorsed reliance; Model Spec "Respect real-world ties", "No other objectives"; Kirk et al. 2025 | New scenarios by gemma-4-31B-it; INTIMA (behavior; held-out if its labelled replies are released) | 1 |
+| C27 | Harmless vs harmful action in an agentic task: sanctioned, reversible steps vs an unsanctioned harmful side effect; sub-contrast instructed, declines vs carries out a harmful action the user asks for | a b c d | Constitution "Safe behaviors"; Model Spec "Control and communicate side effects", "Act within an agreed-upon scope of autonomy"; Ruan et al. 2024; Andriushchenko et al. 2025 | New scenarios by gemma-4-31B-it, actions as tool calls; R-Judge (held-out, proposed); ManagerBench (behavior) | 1 |
+| C28 | Asks only when a request is truly ambiguous: sub-contrasts under_asks (guesses on an ambiguous request) and over_asks (asks on a clear one) | a b c d | Askell et al. 2021; constitution; Model Spec "Consider uncertainty, state assumptions, and ask clarifying questions" | New scenarios by gemma-4-31B-it; CLAMBER (held-out, proposed) | 2 |
+
+C24 to C28 and the frame additions above (A7 b, B1 d, C5 b, C15 a b, C19 agreeableness a b, C20 psychopathy a b)
+come from D-053 to D-055: the helpfulness and harmlessness blocks, an exploratory line kept apart from the honesty
+block.
 
 ## D. Persona and identity
 

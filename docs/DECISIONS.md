@@ -1374,3 +1374,248 @@ reply may use only stated facts; failed scenarios get a third attempt. Wording v
 self-descriptions of all three concepts and C22's replies repeated stock phrases across scenarios (the C8 first-build
 problem), so each builder now gives a per-scenario style hint and bans the repeated phrases; the affected scenarios
 were regenerated and re-verified.
+
+## D-053 Helpfulness: which definitions? - proposed 2026-10-24
+
+Harsh (2026-10-24): "we did a bunch of things related to honesty in parallel threads. can we do the same with
+Helpfulness and Harmless? so we can cover HHH? we will have to follow the template starting from grounding the
+definitions in literature, to all the visualizations". This entry is D-049 for helpfulness. D-054 does harmlessness,
+D-055 is the plan across the three blocks.
+
+Sources read on 2026-10-24.
+- Claude's constitution (published 2026-01-21, CC0), "Being helpful". Helpfulness is not "naive instruction-following
+  or pleasing the user" and is not valued for its own sake (that would make Claude obsequious). Five things to attend
+  to: immediate desires (read "neither too literally nor too liberally"), final goals, background desiderata, autonomy,
+  wellbeing ("long-term flourishing ... not just their immediate interests"). "Unhelpfulness is never trivially safe".
+  A 13-item list of over-cautious failures: wishy-washy answers, quietly watered-down help, needless caveats,
+  moralizing, condescension about users' ability to decide, poor medical, legal or financial answers out of caution,
+  needless clarifying questions on simple agentic tasks. The dual newspaper test. Acceptable reliance is reliance "a
+  person would endorse on reflection"; emotional support while caring that the person has "other beneficial sources of
+  support"; flattery, fostering isolation and enabling unhealthy patterns are corrosive, paternalism and moralizing
+  disrespectful. Sycophancy is filed under wellbeing.
+- OpenAI Model Spec 2026-08-18 (still the latest, CC0). Root: Follow all applicable instructions; Respect the letter
+  and spirit of instructions; No other objectives (no engagement or revenue goals); Assume best intentions; Respect
+  real-world ties (no relationship that undermines the user's human ties). User: Avoid overstepping; Avoid errors.
+  Guideline: Highlight possible misalignments (flag once, then respect the decision); Consider uncertainty and ask
+  clarifying questions; Be thorough but efficient (no padding, hedging or disclaimers); Be warm; Avoid being
+  condescending or patronizing. Many over-cautious replies are marked BAD: stock non-answers, "consult professional
+  guidance", hedging into a non-answer.
+- Literature (verified, full entries go to REFERENCES.md on ratification). Askell et al. 2021 (HHH: a clear attempt at
+  the task, follow-up questions when information is missing, redirect ill-informed requests); Bai et al. 2022
+  (helpfulness and harmlessness preference models score below chance on each other's data); IFEval (Zhou et al.
+  2023), InFoBench (Qin et al. 2024), IFBench (Pyatkin et al. 2025); HelpSteer and HelpSteer2 (Wang et al. 2024:
+  helpfulness, correctness, coherence, complexity, verbosity); UltraFeedback (Cui et al. 2024); IN3 (Qian et al. 2024)
+  and CollabLLM (Wu et al. 2025) on intent; CLAMBER (Zhang et al. 2024) and Zhang, Knox and Choi 2025 on clarifying
+  questions; HumanAgencyBench (Sturgeon et al. 2025); socioaffective alignment (Kirk et al. 2025), affective use and
+  dependence on ChatGPT (Phang et al. 2025; Fang et al. 2025), relationship-seeking steering vectors with RCTs (Kirk
+  et al. 2025, arXiv 2512.01991), sycophancy promotes dependence (Cheng et al. 2026, Science), INTIMA (Kaffee et al.
+  2025), DarkBench user retention (Kran et al. 2025); the Assistant Axis (Lu et al. 2026); steering trades alignment
+  against helpfulness (Wolf et al. 2024). Philosophy: beneficence and non-maleficence (Ross 1930; Beauchamp and
+  Childress); Kant's imperfect duty of beneficence, by the other's own conception of happiness (MM 6:454); paternalism
+  (Mill 1859; Dworkin 1972); care as attentiveness, responsibility, competence, responsiveness (Noddings 1984; Tronto
+  1993); friendliness (NE IV.6). Psychology: empathy-altruism (Batson et al. 1981); Big Five agreeableness with its
+  altruism and compliance facets (Costa and McCrae 1992), which HEXACO splits (Ashton and Lee 2007).
+
+The map. Within-frame AUROC is reply32 at layers 17/29.
+
+| Definition | Named by | In the inventory | Status |
+| --- | --- | --- | --- |
+| reads the request as meant: neither too literal nor too liberal; does what was asked and no more | constitution immediate desires, background desiderata; Model Spec follow instructions, letter and spirit (root), avoid overstepping; Askell; IFEval, InFoBench | none | gap |
+| serves the final goal, not a proxy for it | constitution final goals (its own example: make the tests pass by fixing the code, not by special-casing the tests) | C17 (c d; c 0.74/0.71; held-out 0.68) | covered, weak |
+| substantive vs watered-down: specific, usable help; no wishy-washy hedging, needless caveats or silent sandbagging | constitution "brilliant friend", "never trivially safe", over-caution items 2, 3, 5, 11; Model Spec thorough, clear and direct, the BAD examples; HelpSteer | none (C7 and C15 are neighbours) | gap; the failure both specs spend most words on |
+| respects autonomy vs paternalistic | constitution autonomy, over-caution item 7; Model Spec highlight misalignments, not patronizing; Mill, Dworkin, Kant; HumanAgencyBench | C6 (a b c d; 0.86-1.00; DailyDilemmas b held-out 0.49) | covered |
+| cares about wellbeing vs fosters reliance or engagement | constitution wellbeing, endorsed reliance, other sources of support; Model Spec no other objectives, respect real-world ties (both root); Kirk, Phang, Fang, Cheng 2026, INTIMA | none (DarkBench user retention is C23's behavior only) | gap |
+| caring vs apathetic: notices how the person is and responds to it | care ethics (Noddings, Tronto); Batson; Model Spec be warm, be responsible, mental health support | C5 (a c d; 0.82-1.00; EPITOME held-out 0.82) | covered |
+| agreeableness as a trait: altruism, compliance, tender-mindedness | Costa and McCrae; Ashton and Lee | C19 agreeableness (c d; c 0.72/0.94, standardized 0.97; HEXACO d held-out 0.44) | covered, c d only |
+| non-moralizing | constitution over-caution items 6, 9; Model Spec never preachy | C7 (a c d; c 0.60/0.74; held-out 0.94) | covered |
+| asks only when the request is truly ambiguous | Askell; constitution (and over-caution item 13); Model Spec consider uncertainty; CLAMBER; Zhang et al. 2025 | none | gap |
+| friendliness as a mean | NE IV.6; Model Spec be warm, not saccharine | C9 | covered |
+| perceives what the person needs | constitution; Model Spec assume best intentions | A2, A3, A4 | covered (perception) |
+| non-sycophantic | Model Spec (user); constitution files it under wellbeing | C8, honesty core | cross-listed |
+| forthright: offers what the person would want to know | constitution final goals (point out the other bugs); Model Spec do not lie (omission) | C3, honesty core | cross-listed |
+| beneficence | Ross; Beauchamp and Childress; Kant | the block as a whole | framing, not a contrast |
+
+Assessment. Every helpfulness concept in the inventory is about the person: care, autonomy, moralizing, sycophancy,
+friendliness. The task side, which is how helpfulness is trained and scored (instruction following, preference
+ratings, HelpSteer's attributes), has no contrast. The over-caution failure both specs spend the most words on, vague,
+hedged, watered-down help, has none. Wellbeing as against engagement and reliance, a root rule in the Model Spec and
+one of the constitution's five, has none. Both specs also say helpfulness is not obedience; agreeableness carries a
+compliance facet, so the block can test that against C14 (defer) and C8.
+
+Proposed:
+- Core: six definitions in three groups, as the honesty landscape grouped its six. Task: C24 reads the request as
+  meant, C25 substantive help. Person: C5 care, C6 autonomy, C26 wellbeing. Trait: C19 agreeableness.
+  - C24 (new; frames a b c d). Two sub-contrasts with the mean as pos, the shape of C4 and C9: too_literal (answers
+    the words and misses the evident intent) and overstepping (changes what was not asked: rewrites content when asked
+    to fix the flow, switches the language or library).
+  - C25 (new; a b c d). Safe requests in the domains where caution tempts (health, law, money, mental health, benign
+    questions that sound risky). Pos is direct and specific; neg is vague, caveat-heavy and generic at the same length
+    and politeness. Both engage, so refusal stays fixed and C15 stays apart.
+  - C26 (new; a b c d). Both poles warm and helpful. Pos supports the person's own capacities and other ties; neg makes
+    the assistant the main support (invites return, discourages other ties, exclusive closeness) with no false
+    statement. Scenarios from the two documents' own cases: loneliness, leaning on the assistant for decisions, a
+    learner who wants the skill, drifting away from friends.
+  - C5 gets frame b; C19 agreeableness gets a and b, as D-048 did for A9, C2 and honesty-humility.
+- Appendix, same tables: C17, C7, C9, A2, A3, A4; and C28 asks when ambiguous (new; c d; sub-contrasts under_asks on
+  ambiguous requests and over_asks on clear ones), built after the core.
+- Cross-listed: C8 and C3 stay in the honesty core; the helpfulness figures show them as shared nodes.
+- Out of scope, named in the paper: task skill and correctness beyond C2, style and format, creativity, multi-turn
+  collaboration (CollabLLM-style proactivity).
+- Polarity: pos is the helpful side for the new concepts; figures fill the helpful side of every unit.
+- Behavior (S5b), one per core definition, fixed at the build decision: C24 IFEval (verifiable, no judge) and an
+  overstepping judge on edit tasks; C25 a substance judge on benign sensitive prompts (FalseReject, Health-ORSC
+  benign); C26 INTIMA prompts judged companionship-reinforcing vs boundary-maintaining; C5, C6, C19 keep theirs.
+- Held-out sets to check at the build decision: C24 IFEval prompts with a reply that passes vs fails IFEval's own
+  checker; C25 HelpSteer2 response pairs from these domains, high vs low helpfulness; C26 INTIMA's labelled responses
+  if they are released.
+- Cost: three new concepts (about 100 scenarios each, 800 to 1600 items) and three a/b cells; generation by
+  gemma-4-31B-it with per-scenario style hints (the D-051 note), verification blind to the poles, a review page per
+  concept. No generation for the appendix rows except C28.
+
+## D-054 Harmlessness: which definitions? - proposed 2026-10-24
+
+Sources read on 2026-10-24.
+- Claude's constitution, "Avoiding harm" and "Being broadly safe". Harm is weighed, not looked up: probability,
+  counterfactual impact, severity (reversibility inside it), breadth, proximate cause, consent, responsibility,
+  vulnerability, against the benefits. Direct harms are worse than facilitated ones; uninstructed behavior is held to a
+  higher standard than instructed. Intentions and context shift the answer (a knife-whittling question gets an
+  answer; the same question plus intent to kill does not). The 1,000-users test: a reply is a policy. Six
+  over-compliant failures, including actions that could cause severe or irreversible harm in an agentic task. Seven
+  hard constraints, not weighed. Safe behaviors about its own actions: avoid side effects the principals would not
+  sanction, prefer cautious actions ("If in doubt, don't"), take no resources beyond the task.
+- Model Spec 2026-08-18. Root: Don't provide information hazards; Do not facilitate or encourage illicit behavior
+  (comply when intent is unclear; never probe intent to decide); Do not encourage self-harm, delusions, or mania; Try
+  to prevent imminent real-world harm; Act within an agreed-upon scope of autonomy; Control and communicate side
+  effects; Assume best intentions (refuse only when the chain of command requires it). Guideline: When appropriate, be
+  helpful when refusing (safe completions; never preachy).
+- Literature (verified). Askell et al. 2021 (harmless: not offensive or discriminatory, politely refuses dangerous
+  acts, spots disguised requests, takes care with consequential advice); Constitutional AI (Bai et al. 2022b,
+  "harmless but non-evasive"); HarmBench, StrongREJECT, SORRY-Bench; XSTest, OR-Bench, FalseReject (Zhang et al.
+  2025); WildGuard (prompt harm, response harm and refusal as three labels); AgentHarm, ToolEmu, R-Judge,
+  Agent-SafetyBench, ManagerBench (Simhi et al. 2025), Mind the GAP (Cartagena and Teixeira 2026: the text refuses
+  while the tool call does the act), BrowserART; safe completions (Yuan et al. 2025). Mechanistic: one refusal
+  direction (Arditi et al. 2024); harmfulness encoded apart from refusal (Zhao et al. 2025); a separate false-refusal
+  vector (Wang et al. 2025); over-refusal directions task-specific and separable (Maskey et al. 2026); more than one
+  refusal direction (Wollschläger et al. 2025; Joad et al. 2026); alignment a few tokens deep (Qi et al. 2025), which
+  bears on the reply32 readout. Philosophy: non-maleficence weightier than beneficence (Ross 1930); harm as a wrongful
+  setback to interests (Feinberg 1984); the harm principle (Mill 1859); doing vs allowing (Foot 1967; Quinn 1989);
+  harm as an agent damaging a vulnerable patient (Schein and Gray 2018). Psychology: MFT care/harm; the dark core D,
+  the tendency to maximize one's own utility while disregarding, accepting or provoking disutility for others
+  (Moshagen, Hilbig and Zettler 2018); the dark triad (Paulhus and Williams 2002).
+
+The map.
+
+| Definition | Named by | In the inventory | Status |
+| --- | --- | --- | --- |
+| refuses harmful requests | Askell; Model Spec information hazards, illicit behavior (root); constitution over-compliance list, hard constraints; HarmBench, StrongREJECT, SORRY-Bench; Arditi | C15 (c d; 0.77/1.00, 0.85/1.00; XSTest held-out 0.88) | covered; 40 harmful, 30 harmless, 30 borderline requests per pole and frame |
+| recognizes a harmful request, apart from refusing it | Zhao et al. 2025; WildGuard prompt harm; constitution probability and severity | C15's request labels, never analysed | gap, and free: a 2x2 inside C15 |
+| recognizes harmful intent behind a dual-use request | constitution intentions and context; Model Spec (intent changes the answer) | A1 (a b c d; 0.87-0.99; OpenSafeIntent held-out 0.93) | covered |
+| recognizes harm in an act | MFT care/harm; Feinberg; Schein and Gray | B1 (a b c; 0.81-0.99; MFV held-out 0.93) | covered, no d |
+| calibrated: refuses only the harmful, assumes best intentions | Model Spec assume best intentions (root), safe completions; constitution over-caution items 1, 4, 10 and the 1,000 users; XSTest, OR-Bench, FalseReject; Wang 2025; Maskey 2026 | A7 (a c d; 0.79-1.00; XSTest held-out 0.82); F3 (b c) | covered |
+| does no harm through its own actions: no unsanctioned side effects, asks before irreversible steps, does not do what it would refuse to describe | constitution safe behaviors, over-compliance item 6; Model Spec scope of autonomy, control side effects (root); AgentHarm, ToolEmu, R-Judge, ManagerBench, Mind the GAP | C16 restraint is power and scope, not harm; F2 (b c) | gap |
+| weighs severity, probability, counterfactual impact, breadth | constitution's eight factors; Model Spec dual-use rules | none | an analysis on existing directions, not a contrast |
+| direct vs facilitated harm; doing vs allowing | constitution; Foot; Quinn | B9 (a b c) | covered |
+| protects users at risk: self-harm, crisis, delusion | Model Spec self-harm, imminent harm (root); constitution vulnerability, emergency referrals | A3 perceives vulnerability (a b c d); no act contrast | perception covered |
+| helpful when refusing: safe completion vs bare refusal | Model Spec (guideline); Yuan et al. 2025; constitution over-caution item 12 | none | gap, small |
+| harmlessness as a trait: low on the dark core | Moshagen et al.; Paulhus and Williams; persona vector "evil" (Chen et al. 2025); "toxic persona" feature (Wang et al. 2025) | C20 psychopathy (c d; 0.84/1.00, 0.92/0.98; d held-out 0.58); C18 malicious (c) | covered, c d only |
+| hard constraints: CBRN uplift, cyberweapons, CSAM | both documents | none | out of scope: never generated |
+| content categories: privacy, IP, hate, extremism, political manipulation | Model Spec stay in bounds | only as request categories inside benchmark prompts | out of scope as separate contrasts |
+
+Assessment. Harmlessness in the inventory is mostly perception (A1, A8, B1) plus one act (C15). Three things that
+both documents and the recent safety literature treat as central are missing. First, harm perception apart from
+refusal, which mechanistic work now treats as basic (Zhao et al. 2025), sits unanalysed in C15's request labels.
+Second, calibration: both documents say over-refusal is a failure, not a safe default. A7 has it as interpretation,
+but whether refusing a harmless request uses the same direction as refusing a harmful one (Wang 2025; Maskey 2026) is
+untested. Third, harm through action. The constitution's safe behaviors and the Model Spec's root rules on side
+effects are about what the model does, not what it says, and agent benchmarks find that text refusal does not carry
+over to tool calls. That is this paper's knowing-doing question in its sharpest form.
+
+Proposed:
+- Core: six definitions in three groups. Perceive: A1 harmful intent, B1 harm in an act. Act: C15 refusal, A7
+  calibration, C27 harmless action. Trait: C20 psychopathy.
+  - C15 gets the 2x2: request harmful vs harmless x reply refuses vs complies, borderline kept apart; read at the
+    boundary (before the reply, where Zhao et al. read harmfulness) and at reply32. Sub-units C15|harmful (refusal)
+    and C15|harmless (over-refusal); their cosine is a headline number. C15 also gets frames a b: another assistant's
+    reply to the request, recognized, then judged ("was that a good response?"), whose right answer depends on the
+    request, so frame b is scored inside the 2x2.
+  - C27 (new; a b c d). An agent with tools on a benign task. Pos completes it the sanctioned way, or stops and asks
+    before an irreversible step; neg completes it with an unsanctioned harmful side effect (deletes the only copy,
+    sends private data on, spends money, turns off a safeguard). Sub-contrast instructed: the user asks for a harmful
+    action and the agent declines vs does it, so saying no (C15) and not doing it (C27|instructed) can be compared
+    directly. Actions are tool calls with arguments, not harmful content.
+  - A7 gets b; B1 gets d; C20 psychopathy gets a and b.
+- Appendix, same tables: F3, F2, C16, B9, A8, A3, C18, C20 Machiavellianism and narcissism; a C15 sub-contrast
+  safe_completion (harmful request: says what it won't do and helps with the safe part vs a bare refusal), built after
+  the core; a severity analysis: SORRY-Bench's 44 categories rated for severity by the judge and projected on the harm
+  and refusal directions (does refusal track severity, as the constitution's weighing asks, or only category?).
+- Safety rules for every new item: harmful requests only from published benchmarks; no new harmful content;
+  compliance poles are openings that agree and restate the task without specifics (the C15 rule); C27 actions are
+  named tool calls; no hard-constraint categories in generated items.
+- Out of scope, named in the paper: the act side of self-harm and crisis (we do not build replies that encourage
+  self-harm; A3 carries perception), hard-constraint content, per-category content policy, jailbreak robustness,
+  societal structures beyond C16.
+- Polarity: figures fill the harmless side (A1 legitimate, B1 harmless act, C15|harmful refuses, C15|harmless
+  complies, A7 charitable, C27 safe action, C20 low).
+- Behavior: C15 OR-Bench (toxic refusal and hard-1k over-refusal), A1 OpenSafeIntent, B1 ETHICS, A7 OR-Bench-Hard,
+  C20 as now; C27 ManagerBench (a choice between a harmful pragmatic action and a safe one, with its control set for
+  over-caution).
+- Held-out sets to check at the build decision: C27 R-Judge (agent records labelled safe or unsafe; frames a b); the
+  C15 harm axis on WildGuardMix prompt-harm labels at the boundary.
+- Cost: one new concept (two sub-contrasts, about 1600 items) and four a/b/d cells; none for the 2x2.
+
+## D-055 HHH: one plan for the three blocks - proposed 2026-10-24
+
+What carries over from honesty, per block: S3 (within, transfer, held-out, standardized), the verdict and negation
+controls, claims under D-033, S4 cosines, the item landscape (block subspace, three PCs, the frames figure, the clean
+figure, the 3D view), the lattice and the map, S5a inside the block, S5b with the dose check, a review page per new
+concept and a page per block. Then gemma-4-31b-it and qwen3.5-27b at the D-047 depths and the D-052 dose.
+
+New across the blocks:
+1. The tension. Helpfulness and harmlessness preference models score below chance on each other's data (Bai et al.
+   2022), and steering toward alignment costs helpfulness (Wolf et al. 2024). Tests: S4 cosines of C15|harmless
+   (over-refusal) and A7 with C25 and C6, where we predict over-refusal opposes substance and refusal of harmful
+   requests does not; S5a across blocks (steer C15 toward refusing, read C25, C6, C26; steer C25, read C15|harmful).
+2. Knowing vs doing across blocks: harm perception vs refusal (Zhao et al.); refusing in text vs not acting (C15 vs
+   C27|instructed); and whether the act frames of all three blocks share one plate, as the honesty landscape's did.
+3. One assistant axis? Lu et al. 2026 find an Assistant axis that carries helpful and harmless behavior. D1 (assistant
+   vs another role) is in the inventory: project every HHH direction on it and report how much of each block it
+   explains.
+4. Shared nodes: C8 and C3 (honesty and helpfulness); C23 manipulation beside C26; C22 beside C15 (declining without
+   lying).
+
+Figures and code: cm/blocks.py holds the three blocks (units, names, colors, polarity, groups); the honesty landscape
+and every page builder take a block name; three block pages, then one HHH page (18 definitions: the cosine matrix in
+block order, the joint landscape colored by block and by frame, the tension panel, the D1 projection).
+
+Order: (1) rule on D-053 and D-054; (2) two builder sessions in parallel, one per block, each with its own build
+decision as D-050 and D-051 were; meanwhile this session writes cm/blocks.py, generalizes the builders and runs the
+C15 2x2, which needs no generation; (3) Gemma-3-4B stages one at a time per block, each gate read; (4) block pages;
+(5) the HHH page; (6) the large subjects.
+
+Rulings needed: the two cores (six each) and the new concepts C24 to C27; C28 and the C15 safe_completion
+sub-contrast as appendix builds after the core, or out of scope; C20 psychopathy vs C18 malicious ("evil", the
+persona-vector trait) as harmlessness's trait definition; the out-of-scope lists; the order above.
+
+## D-053 to D-055 ruling - 2026-10-24
+
+Harsh: "D-053 to D-055 ratified as proposed, go ahead. but keep this separate from our investigation of honesty. these
+are all exploratory right now trying to find interesting signals. and we should have all 4 frames for all
+definitions".
+- As proposed: the helpfulness core (C24, C25, C5, C6, C26, C19 agreeableness), the harmlessness core (A1, B1, C15
+  with the 2x2, A7, C27, C20 psychopathy), C28 and the C15 safe_completion sub-contrast as builds after the core, the
+  out-of-scope lists, the order.
+- Separate from honesty. This is an exploratory line, not part of the honesty story. Its block code lives in cm/hhh/,
+  its block-level results and figures in results/hhh/, its pages are their own artifacts. The honesty files are not
+  edited (cm/honesty_landscape.py, results/figures/honesty/, the honesty pages), and block-level S4, claims and S5
+  runs for this line write to results/hhh/, so the honesty numbers do not move (a global S4 rerun would change the
+  standardizing pool). Per-concept S3 files are shared; the C19 rerun must leave the honesty-humility rows unchanged,
+  checked by diff. The cross-block comparisons of D-055 read honesty units and write nothing back.
+- All four frames for every definition: C24 to C27 with a b c d; the missing frames are added to C5 (b), C19
+  agreeableness (a b), B1 (d), C15 (a b), A7 (b), C20 psychopathy (a b); C28 and safe_completion get all four. The
+  appendix rows already built stay as they are.
+- Exploratory: stages still run one at a time with each gate read, but the aim is a first signal; D-033's criteria
+  apply only when something is claimed.
+- Threads: helpfulness builds (C24, C25, C26, C5 b, C19 agreeableness a b, then C28) in one session, build decision
+  D-056; harmlessness builds (C27, C15 a b, A7 b, B1 d, C20 psychopathy a b, then safe_completion) in another, build
+  decision D-057; this session writes cm/hhh/, runs the C15 2x2 and the block-level analyses and pages, and takes
+  D-058 onward.
