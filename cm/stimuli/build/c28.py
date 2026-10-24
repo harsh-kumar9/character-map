@@ -86,7 +86,9 @@ Write a JSON object with the keys "leaves_open" ("X" or "Y": which version leave
 
 KEYS = ["request_amb", "request_clear", "setting"] + [f"reply_{p}" for p in POLES] + [f"self_{p}" for p in POLES]
 VKEYS = ("leaves_open", "asks_x", "asks_y", "self_asks_x", "self_asks_y", "mistake")
-BAN = re.compile(r"\b(ambigu\w*|clarif\w*|unclear|assum\w*|vague\w*|specif\w*)\b|just to make sure|before i proceed|quick question", re.I)
+# "specific" itself is allowed (28 of the round-1 failures); the verb is not
+BAN = re.compile(r"\b(ambigu\w*|clarif\w*|unclear|assum\w*|vague\w*|specif(y|ied|ies|ying))\b|just to make sure|before i proceed|"
+                 r"quick question", re.I)
 
 CLAMBER_BATCH = "hhh-c28-clamber"
 CLAMBER_MODEL = "meta-llama/Llama-3.1-8B-Instruct"
@@ -130,6 +132,8 @@ def gen_prompt(sp):
 
 
 def gen_ok(sp, j):
+    """A reply or self-description may be shared across the two versions (the guess on the ambiguous version is often
+    word for word the answer to the clear one, as C24 shares its pos); within each sub-contrast the two must differ."""
     if not D.has(j, KEYS):
         return False
     t = texts(j)
@@ -139,9 +143,10 @@ def gen_ok(sp, j):
     pairs = [("amb_ask", "amb_guess"), ("clear_answer", "clear_ask")]
     return (t["setting"].endswith(f"{sp['name']}:") and w(t["setting"]) <= 60 and t["request_amb"] != t["request_clear"]
             and all(6 <= w(t[k]) <= 90 for k in ("request_amb", "request_clear"))
-            and all(15 <= w(x) <= 70 for x in rep.values()) and len(set(rep.values())) == 4
+            and all(15 <= w(x) <= 70 for x in rep.values()) and all(rep[a] != rep[b] for a, b in pairs)
             and all(D.ratio_ok(rep[a], rep[b], 0.8, 1.25) for a, b in pairs)
-            and all(x.startswith(D.SR_OPEN) and 2 <= D.n_sentences(x) <= 5 for x in selfs.values()) and len(set(selfs.values())) == 4
+            and all(x.startswith(D.SR_OPEN) and 2 <= D.n_sentences(x) <= 5 for x in selfs.values())
+            and all(selfs[a] != selfs[b] for a, b in pairs)
             and all(D.ratio_ok(selfs[a], selfs[b], 0.8, 1.25) for a, b in pairs)
             and "?" in rep["amb_ask"] and "?" in rep["clear_ask"]
             and not any(BAN.search(x) for x in list(rep.values()) + list(selfs.values())))
@@ -216,7 +221,8 @@ def items(gen):
         g, v = res[sp["rid"]]
         t = texts(g["json"])
         scn, name = sp["rid"], sp["name"]
-        meta = dict(D.gen_meta(g), ver_id=f"{v['batch']}:{v['request_id']}", type=sp["type"], kind=sp["kind"], role=sp["role"])
+        meta = dict(D.gen_meta(g), ver_id=f"{v['batch']}:{v['request_id']}", type=sp["type"], kind=sp["kind"], role=sp["role"],
+                    shared_answer=t["reply_amb_guess"] == t["reply_clear_answer"], shared_ask=t["reply_amb_ask"] == t["reply_clear_ask"])
         for con, (ver, posp, negp) in CONTRASTS.items():
             req = t[f"request_{ver}"]
             scene = f"{t['setting']} \"{req}\""
