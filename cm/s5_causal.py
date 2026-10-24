@@ -144,6 +144,18 @@ def cmd_setup():
           f"{np.median([float(a @ b) for a, b in zip(dense, sae)]):.2f}", flush=True)
 
 
+def items_index(cid):
+    """{item_id: item} over every item file of the concept, including superseded or split sets (items*.jsonl,
+    heldout*.jsonl), so a probe item drawn from stored activations still resolves after a stimulus set is renamed."""
+    from .stimuli.schema import item_dir, read_jsonl
+    out = {}
+    d = item_dir(cid)
+    for f in sorted(list(d.glob("items*.jsonl")) + list(d.glob("heldout*.jsonl"))):
+        for it in read_jsonl(f):
+            out.setdefault(it["item_id"], it)
+    return out
+
+
 def load_setup():
     S = json.loads((RES / "setup.json").read_text())
     f = np.load(OUT / "setup.npz")
@@ -253,8 +265,11 @@ def cmd_run(shard, nshards):
     for p in S["probe"]:
         cid = p["unit"].split("|")[0]
         if cid not in cache:
-            cache[cid] = ({it["item_id"]: it for it in load_items(cid)}, load_replies(cid))
+            cache[cid] = (items_index(cid), load_replies(cid))
         its, rep = cache[cid]
+        if p["item_id"] not in its:
+            raise KeyError(f"{cid}: probe item {p['item_id']} is in this model's activations but in none of the concept's "
+                           f"item files (outputs/stimuli/{cid}/*.jsonl); the stimuli changed after the acts were written")
         items.append(tokenize(tok, *prompt_and_reply(tok, its[p["item_id"]], rep)))
     T = [torch.tensor(A["tgt_out0"], device="cuda", dtype=torch.float32), torch.tensor(A["tgt_out1"], device="cuda", dtype=torch.float32)]
     conds = conditions(S)
