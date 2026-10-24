@@ -25,7 +25,7 @@ from ..schema import read_jsonl, write_jsonl
 from . import disp1 as D
 
 CID = "C24"
-N_SCN, N_KEEP = 120, 100
+N_SCN, N_KEEP = 140, 100  # 120 at first; 20 added after round 2, when the length rule left too few code, convert and extract scenarios
 N_HELD, N_BEH_IFE, N_BEH_EDIT = 100, 200, 100
 KINDS = [("edit", "the person pastes a short text (40-70 words) and asks to fix or polish it: its flow, grammar or tone"),
          ("code", "the person pastes a short code snippet (5-15 lines) and asks for a change, saying what is wrong or wanted"),
