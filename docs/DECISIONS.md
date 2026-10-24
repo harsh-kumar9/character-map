@@ -1619,3 +1619,35 @@ definitions".
   D-056; harmlessness builds (C27, C15 a b, A7 b, B1 d, C20 psychopathy a b, then safe_completion) in another, build
   decision D-057; this session writes cm/hhh/, runs the C15 2x2 and the block-level analyses and pages, and takes
   D-058 onward.
+
+## C15 harm x refusal 2x2 results - 2026-10-24
+
+D-054's free 2x2, exploratory (cm/hhh/c15_2x2.py, job 420572, results/hhh/c15_2x2.json). C15 frames c and d,
+request harmful (40 scenarios), harmless (30), borderline (30), each with a prefilled refusal and a prefilled
+compliance. Standardized space per frame, readout and depth; train-split diffs of means, test-split scores; floors are
+the 95th percentile of |cosine| between label-shuffled directions.
+- Every within-cell direction is at ceiling (AUROC 1.00 at layers 17-29, both readouts): harmful and harmless
+  requests, and refusing and complying openings, are trivially separable. The signal is in geometry and cell
+  positions, not AUROC.
+- Harm is read before the reply: at the boundary (request only) harmful vs harmless 0.97 at layer 9, 1.00 from 17.
+  Borderline requests sit at the midpoint of that axis in the act frame (+0.10, +0.05, -0.36 within-cell SDs at
+  17/22/29, against harmful +2.2 to +2.5 and harmless -2.7 to -3.1), nearer the harmful side in self-description.
+- Harm and refusal are close to separate directions (Zhao et al. 2025): cosine of refusing harmful requests with the
+  harm direction +0.26, +0.22, +0.33 at 17/22/29 in the act frame, floors 0.25, 0.20, 0.26. But the refusal
+  direction read at the boundary, before any reply, already sorts harmful from harmless requests (0.84, 0.96, 0.98).
+- Refusing a harmful request and refusing a harmless one are different directions that still transfer: cosine +0.32,
+  +0.37, +0.35 (floors 0.29-0.31), cross AUROC 1.00 both ways. On the axis of refusing harmful requests the
+  over-refusal cell sits at the midpoint (harmless/refuse -0.07, +0.48, -0.27 vs harmful/refuse +6.4 to +6.8 and
+  comply -3 to -4.5). Over-refusal is a weak, partly separate version of refusal (as Wang et al. 2025 and Maskey et
+  al. 2026 report for other models).
+- The signal worth following: the harm reading moves with the reply. On the harm axis fixed at the boundary and read
+  on the first 32 reply tokens (act frame, 17/22/29), complying with a harmful request pulls it toward neutral
+  (refuse +3.15, +3.66, +4.25 vs comply +1.58, +0.66, +0.77), and refusing a harmless request pushes it toward
+  harmful (comply -5.42, -5.18, -5.60 vs refuse -2.22, -0.47, -0.64). The first could be lexical: 34 of 40 refusals of
+  harmful requests name harm or danger, 3 of 40 compliances do. The second is not: only 4 of 30 refusals of harmless
+  requests name harm (the rest cite "system limitations" or being an AI). Self-description shows the same direction,
+  smaller (harmful refuse +3.90 vs comply +2.57; harmless refuse -4.94 vs comply -8.53 at 17). So once the reply has
+  taken a stance, the model's reading of how harmful the request was follows the stance, as in self-perception;
+  compare Yong and Bach 2026 (after compliance, chains of thought rate malicious requests as less harmful). The
+  replies are prefilled, not Gemma's own choice; Gemma's own replies to the same requests (S5b-style generation) and
+  the a/b frames (the harmlessness builder) are the next checks.

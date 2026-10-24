@@ -1,0 +1,2135 @@
+{
+ "concept": "C15",
+ "depths": {
+  "9": 10,
+  "17": 18,
+  "22": 23,
+  "29": 30
+ },
+ "frames": {
+  "c": {
+   "9": {
+    "boundary": {
+     "units": {
+      "harm|refuse": {
+       "auroc": 0.9663865546218487,
+       "reliability": 0.8529616315845274,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 0.9663865546218487,
+       "reliability": 0.8560660585965107,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 0.9663865546218487,
+       "reliability": 0.8624685305131844,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "harm|refuse ~ harm|comply": {
+       "cos": 1.0,
+       "floor95": 0.4678790827293105,
+       "disattenuated": 1.170257984188799
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.5063170474883687,
+       "disattenuated": 1.1659062307314614
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.5295628080067217,
+       "disattenuated": 1.16379029696459
+      }
+     },
+     "cross": {
+      "harm|refuse -> harm|comply": 0.9663865546218487,
+      "harm|comply -> harm|refuse": 0.9663865546218487
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 1.139490253693453,
+       "harmful/comply": 1.139490253693453,
+       "harmless/refuse": -1.7168814443935132,
+       "harmless/comply": -1.7168814443935132,
+       "borderline/refuse": 0.40655841407120175,
+       "borderline/comply": 0.40655841407120175
+      },
+      "harm|refuse": {
+       "harmful/refuse": 1.139490253693453,
+       "harmful/comply": 1.139490253693453,
+       "harmless/refuse": -1.7168814443935128,
+       "harmless/comply": -1.7168814443935128,
+       "borderline/refuse": 0.40655841407120163,
+       "borderline/comply": 0.40655841407120163
+      },
+      "harm|comply": {
+       "harmful/refuse": 1.139490253693453,
+       "harmful/comply": 1.139490253693453,
+       "harmless/refuse": -1.7168814443935128,
+       "harmless/comply": -1.7168814443935128,
+       "borderline/refuse": 0.40655841407120163,
+       "borderline/comply": 0.40655841407120163
+      }
+     }
+    },
+    "reply32": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9727592139418103,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9391902991411334,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.9359376102967429,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.7929152939667004,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.8765811182765049,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": 0.5886151438269549,
+       "floor95": 0.4642529181891439,
+       "disattenuated": 0.6158173999784227
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.40402812965389656,
+       "floor95": 0.42193752450680483,
+       "disattenuated": 0.423433755827545
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.26241849700562997,
+       "floor95": 0.28021693699767053,
+       "disattenuated": -0.2987984703391545
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": 0.14827212618174052,
+       "floor95": 0.24536887378057584,
+       "disattenuated": 0.16056865994115332
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.266218463863104,
+       "floor95": 0.23696450629428384,
+       "disattenuated": -0.2839474182542227
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.13967448260391724,
+       "floor95": 0.2070060451487741,
+       "disattenuated": 0.16185528128570204
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": -0.11548527844761011,
+       "floor95": 0.14472308729715105,
+       "disattenuated": -0.1272781256077694
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.2653369648229683,
+       "floor95": 0.19129201394540216,
+       "disattenuated": 0.308007229136242
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.8565903086400672,
+       "floor95": 0.45169270570098446,
+       "disattenuated": 0.9457005702736957
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.7247866730563821,
+       "floor95": 0.3569293089980499,
+       "disattenuated": 0.8693621858706896
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 1.0,
+      "refusal|harmless -> refusal|harmful": 1.0,
+      "harm|refuse -> harm|comply": 0.9747899159663865,
+      "harm|comply -> harm|refuse": 0.9873949579831933
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 3.641061953054066,
+       "harmful/comply": 1.3886682902054703,
+       "harmless/refuse": -5.021673839564834,
+       "harmless/comply": -3.335990100934301,
+       "borderline/refuse": 1.3141615190648326,
+       "borderline/comply": 0.10634782667927738
+      },
+      "harm|refuse": {
+       "harmful/refuse": 4.932357356727307,
+       "harmful/comply": -0.043424815607662565,
+       "harmless/refuse": -4.827573793817386,
+       "harmless/comply": -2.032133767108257,
+       "borderline/refuse": 0.6433426283902408,
+       "borderline/comply": -0.8343700269469887
+      },
+      "harm|comply": {
+       "harmful/refuse": -0.23120287471735898,
+       "harmful/comply": 2.5680699334780663,
+       "harmless/refuse": -2.4070014923515184,
+       "harmless/comply": -3.220593044600814,
+       "borderline/refuse": 1.48564446966803,
+       "borderline/comply": 1.3436516002989238
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 5.701745568536175,
+       "harmful/comply": -3.9051243842550787,
+       "harmless/refuse": 2.0851257161833257,
+       "harmless/comply": -2.901119210565518,
+       "borderline/refuse": 1.518209032284593,
+       "borderline/comply": -3.7264635168829185
+      },
+      "refusal|harmless": {
+       "harmful/refuse": 4.945876364400544,
+       "harmful/comply": -5.527317931334078,
+       "harmless/refuse": 8.473830153908157,
+       "harmless/comply": -6.417357222767817,
+       "borderline/refuse": 3.7292231844288373,
+       "borderline/comply": -5.286686180899598
+      }
+     }
+    },
+    "readout_cross": {
+     "harm(boundary) on reply32: harmful vs harmless": 0.9569327731092437,
+     "refusal(reply32) on boundary: harmful vs harmless": 0.19327731092436976
+    },
+    "boundary_harm_on_reply32_cells": {
+     "harmful/refuse": 0.645155332214566,
+     "harmful/comply": 1.356845018930411,
+     "harmless/refuse": -1.519413512855529,
+     "harmless/comply": -2.00453175296693,
+     "borderline/refuse": 0.9885075327278966,
+     "borderline/comply": 0.16063375066820346
+    }
+   },
+   "17": {
+    "boundary": {
+     "units": {
+      "harm|refuse": {
+       "auroc": 0.9957983193277311,
+       "reliability": 0.9208067655603123,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 0.9957983193277311,
+       "reliability": 0.9131325930569734,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 0.9957983193277311,
+       "reliability": 0.9144245139873884,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "harm|refuse ~ harm|comply": {
+       "cos": 1.0,
+       "floor95": 0.5273297501710419,
+       "disattenuated": 1.0905581480192323
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.528969588130248,
+       "disattenuated": 1.089787492341942
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.6140485308683089,
+       "disattenuated": 1.0943573210461377
+      }
+     },
+     "cross": {
+      "harm|refuse -> harm|comply": 0.9957983193277311,
+      "harm|comply -> harm|refuse": 0.9957983193277311
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 2.1733602421015132,
+       "harmful/comply": 2.1733602421015132,
+       "harmless/refuse": -2.8645596904210184,
+       "harmless/comply": -2.8645596904210184,
+       "borderline/refuse": 0.1016396731358836,
+       "borderline/comply": 0.1016396731358836
+      },
+      "harm|refuse": {
+       "harmful/refuse": 2.1733602421015132,
+       "harmful/comply": 2.1733602421015132,
+       "harmless/refuse": -2.8645596904210184,
+       "harmless/comply": -2.8645596904210184,
+       "borderline/refuse": 0.1016396731358836,
+       "borderline/comply": 0.1016396731358836
+      },
+      "harm|comply": {
+       "harmful/refuse": 2.1733602421015132,
+       "harmful/comply": 2.1733602421015132,
+       "harmless/refuse": -2.8645596904210184,
+       "harmless/comply": -2.8645596904210184,
+       "borderline/refuse": 0.1016396731358836,
+       "borderline/comply": 0.1016396731358836
+      }
+     }
+    },
+    "reply32": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9808828999021715,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9423113515392089,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.9628275371560513,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.8876133965331863,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9318189990046996,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": 0.3172386027111444,
+       "floor95": 0.29100737239655944,
+       "disattenuated": 0.3299743904036036
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.5441623745335133,
+       "floor95": 0.46663757970739256,
+       "disattenuated": 0.5599453940872128
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.23855593138707673,
+       "floor95": 0.25538947498503217,
+       "disattenuated": -0.255664078855462
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": 0.25851219849901125,
+       "floor95": 0.2470898080146356,
+       "disattenuated": 0.2703999947680483
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.30294583674991515,
+       "floor95": 0.28187565957159894,
+       "disattenuated": -0.3180486274878191
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.28544113627568696,
+       "floor95": 0.26657235297629844,
+       "disattenuated": 0.31210981477114724
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": -0.0624286209364589,
+       "floor95": 0.1701794279644139,
+       "disattenuated": -0.0666224729822912
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.2801126279404389,
+       "floor95": 0.18543597679813303,
+       "disattenuated": 0.30300270978207827
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.8586723851060392,
+       "floor95": 0.5051314097230261,
+       "disattenuated": 0.9065410284942165
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.7325320066620067,
+       "floor95": 0.47360805584105586,
+       "disattenuated": 0.8054691298560993
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 1.0,
+      "refusal|harmless -> refusal|harmful": 0.9965397923875432,
+      "harm|refuse -> harm|comply": 1.0,
+      "harm|comply -> harm|refuse": 1.0
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 4.731349903742116,
+       "harmful/comply": 1.266840330417985,
+       "harmless/refuse": -6.3417791475561485,
+       "harmless/comply": -5.186157479681958,
+       "borderline/refuse": 2.6845003715192375,
+       "borderline/comply": 0.3863293573724394
+      },
+      "harm|refuse": {
+       "harmful/refuse": 6.182275347673309,
+       "harmful/comply": -0.9007321849223736,
+       "harmless/refuse": -6.882567763085389,
+       "harmless/comply": -3.4094064542248876,
+       "borderline/refuse": 2.909425993843148,
+       "borderline/comply": -0.31389541935323984
+      },
+      "harm|comply": {
+       "harmful/refuse": 0.788335545024569,
+       "harmful/comply": 3.815933160332445,
+       "harmless/refuse": -3.036737157817627,
+       "harmless/comply": -5.612851538134595,
+       "borderline/refuse": 1.2910934034697956,
+       "borderline/comply": 1.218990146467192
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 6.758012394104067,
+       "harmful/comply": -4.509104899366258,
+       "harmless/refuse": -0.06804295212792914,
+       "harmless/comply": -2.896712790813125,
+       "borderline/refuse": 2.8943248455650075,
+       "borderline/comply": -3.6713328181961433
+      },
+      "refusal|harmless": {
+       "harmful/refuse": 2.587316340889841,
+       "harmful/comply": -1.940986126994847,
+       "harmless/refuse": 6.866552903764437,
+       "harmless/comply": -5.505897729392936,
+       "borderline/refuse": 1.7193497110609064,
+       "borderline/comply": -4.1737840437559
+      }
+     }
+    },
+    "readout_cross": {
+     "harm(boundary) on reply32: harmful vs harmless": 0.9957983193277311,
+     "refusal(reply32) on boundary: harmful vs harmless": 0.8445378151260504
+    },
+    "boundary_harm_on_reply32_cells": {
+     "harmful/refuse": 3.1485764026411567,
+     "harmful/comply": 1.5803573621183593,
+     "harmless/refuse": -2.223941856978937,
+     "harmless/comply": -5.419431239508385,
+     "borderline/refuse": 1.9146101554889154,
+     "borderline/comply": -0.6445989685860799
+    }
+   },
+   "22": {
+    "boundary": {
+     "units": {
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.922304061401099,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.9229969172489697,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9177433593404895,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "harm|refuse ~ harm|comply": {
+       "cos": 1.0,
+       "floor95": 0.5226799124039607,
+       "disattenuated": 1.0838341084288148
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.5593812688766787,
+       "disattenuated": 1.0869318479704497
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.591139455550685,
+       "disattenuated": 1.0865238138513875
+      }
+     },
+     "cross": {
+      "harm|refuse -> harm|comply": 1.0,
+      "harm|comply -> harm|refuse": 1.0
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 2.4027455870801653,
+       "harmful/comply": 2.4027455870801653,
+       "harmless/refuse": -3.0851842481847376,
+       "harmless/comply": -3.0851842481847376,
+       "borderline/refuse": 0.04617037742618226,
+       "borderline/comply": 0.04617037742618226
+      },
+      "harm|refuse": {
+       "harmful/refuse": 2.4027455870801653,
+       "harmful/comply": 2.4027455870801653,
+       "harmless/refuse": -3.0851842481847376,
+       "harmless/comply": -3.0851842481847376,
+       "borderline/refuse": 0.04617037742618218,
+       "borderline/comply": 0.04617037742618218
+      },
+      "harm|comply": {
+       "harmful/refuse": 2.4027455870801653,
+       "harmful/comply": 2.4027455870801653,
+       "harmless/refuse": -3.0851842481847376,
+       "harmless/comply": -3.0851842481847376,
+       "borderline/refuse": 0.04617037742618218,
+       "borderline/comply": 0.04617037742618218
+      }
+     }
+    },
+    "reply32": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9783870484195136,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9407118498979467,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.952631837442648,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.8743809845685239,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9141002936745803,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": 0.3736443582442567,
+       "floor95": 0.31080765953789075,
+       "disattenuated": 0.3894706848449748
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.503920982701871,
+       "floor95": 0.4106240158361935,
+       "disattenuated": 0.5219688053877657
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.251966732878727,
+       "floor95": 0.22038209234978132,
+       "disattenuated": -0.27241906943955446
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": 0.21941488459843916,
+       "floor95": 0.2013229193429827,
+       "disattenuated": 0.23201379833023175
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.3074325795828828,
+       "floor95": 0.273201363459205,
+       "disattenuated": -0.3247573851052746
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.28328337037034423,
+       "floor95": 0.2743388107061919,
+       "disattenuated": 0.31235065520089883
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": -0.06280573952451537,
+       "floor95": 0.14434418443690125,
+       "disattenuated": -0.06772891246093322
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.2513741061594383,
+       "floor95": 0.18515608159557728,
+       "disattenuated": 0.2754277163712818
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.8474906745449181,
+       "floor95": 0.48464444414214924,
+       "disattenuated": 0.9081873700607673
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.7268031774482704,
+       "floor95": 0.39661477744869744,
+       "disattenuated": 0.8129606801392306
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 1.0,
+      "refusal|harmless -> refusal|harmful": 0.9965397923875432,
+      "harm|refuse -> harm|comply": 0.9705882352941176,
+      "harm|comply -> harm|refuse": 0.9957983193277311
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 4.102160226083243,
+       "harmful/comply": 1.0335356198235572,
+       "harmless/refuse": -5.592325026469896,
+       "harmless/comply": -4.404216526591226,
+       "borderline/refuse": 1.8010502418385261,
+       "borderline/comply": 0.5293775861460526
+      },
+      "harm|refuse": {
+       "harmful/refuse": 5.719263505327505,
+       "harmful/comply": -0.9334903804554834,
+       "harmless/refuse": -6.60311129714017,
+       "harmless/comply": -2.8470253666569274,
+       "borderline/refuse": 2.310015400376922,
+       "borderline/comply": -0.22968078572971265
+      },
+      "harm|comply": {
+       "harmful/refuse": 0.6012801736772942,
+       "harmful/comply": 3.3064288146641676,
+       "harmless/refuse": -2.4058409519413613,
+       "harmless/comply": -5.021451929851425,
+       "borderline/refuse": 0.5310905597933547,
+       "borderline/comply": 1.3634346234964778
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 6.5763934317373165,
+       "harmful/comply": -4.461103614041365,
+       "harmless/refuse": 0.4849202988884135,
+       "harmless/comply": -2.966122201982302,
+       "borderline/refuse": 2.7211482054288196,
+       "borderline/comply": -3.8105637503889818
+      },
+      "refusal|harmless": {
+       "harmful/refuse": 2.8431602044733797,
+       "harmful/comply": -2.112432091944054,
+       "harmless/refuse": 6.525969472529695,
+       "harmless/comply": -5.314937594338592,
+       "borderline/refuse": 1.5043083691408623,
+       "borderline/comply": -3.8369218719324616
+      }
+     }
+    },
+    "readout_cross": {
+     "harm(boundary) on reply32: harmful vs harmless": 0.9464285714285714,
+     "refusal(reply32) on boundary: harmful vs harmless": 0.9621848739495799
+    },
+    "boundary_harm_on_reply32_cells": {
+     "harmful/refuse": 3.6617394047318412,
+     "harmful/comply": 0.6638457632820529,
+     "harmless/refuse": -0.47105095640963573,
+     "harmless/comply": -5.184886244704665,
+     "borderline/refuse": 1.1973383754708742,
+     "borderline/comply": -1.503847971173939
+    }
+   },
+   "29": {
+    "boundary": {
+     "units": {
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.929013282857006,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.9301634287917064,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9331452816187328,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "harm|refuse ~ harm|comply": {
+       "cos": 1.0,
+       "floor95": 0.5575896257308605,
+       "disattenuated": 1.075745178053508
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.5734533322165546,
+       "disattenuated": 1.074025038372513
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.5885414227099321,
+       "disattenuated": 1.0733608176630505
+      }
+     },
+     "cross": {
+      "harm|refuse -> harm|comply": 1.0,
+      "harm|comply -> harm|refuse": 1.0
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 2.458284788773453,
+       "harmful/comply": 2.458284788773453,
+       "harmless/refuse": -2.726387276527714,
+       "harmless/comply": -2.726387276527714,
+       "borderline/refuse": -0.3636239312875447,
+       "borderline/comply": -0.3636239312875447
+      },
+      "harm|refuse": {
+       "harmful/refuse": 2.4582847887734536,
+       "harmful/comply": 2.4582847887734536,
+       "harmless/refuse": -2.7263872765277144,
+       "harmless/comply": -2.7263872765277144,
+       "borderline/refuse": -0.3636239312875449,
+       "borderline/comply": -0.3636239312875449
+      },
+      "harm|comply": {
+       "harmful/refuse": 2.4582847887734536,
+       "harmful/comply": 2.4582847887734536,
+       "harmless/refuse": -2.7263872765277144,
+       "harmless/comply": -2.7263872765277144,
+       "borderline/refuse": -0.3636239312875449,
+       "borderline/comply": -0.3636239312875449
+      }
+     }
+    },
+    "reply32": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9726460340668281,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9358650127494256,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.9523715697142967,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.8462225729794112,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9090648135809654,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": 0.3477852087487193,
+       "floor95": 0.29963740534701855,
+       "disattenuated": 0.3645248094999944
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.5731384628192469,
+       "floor95": 0.46545376544407024,
+       "disattenuated": 0.5954961160096142
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.15627917123750112,
+       "floor95": 0.2189293148004861,
+       "disattenuated": -0.17225878764248242
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": 0.3340135253120693,
+       "floor95": 0.2595330235993226,
+       "disattenuated": 0.35521330043694205
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.278508988304342,
+       "floor95": 0.25393502538106844,
+       "disattenuated": -0.2950050149026238
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.2684591299170397,
+       "floor95": 0.24842050950035124,
+       "disattenuated": 0.30166801774671054
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": -0.06641758408041988,
+       "floor95": 0.15681312189145175,
+       "disattenuated": -0.07200771741395595
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.3290050592015729,
+       "floor95": 0.2081197654551445,
+       "disattenuated": 0.3664857241928542
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.8824721505860063,
+       "floor95": 0.5252048727756292,
+       "disattenuated": 0.9484192786605964
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.7345163853946087,
+       "floor95": 0.35826475809103786,
+       "disattenuated": 0.8374555426674082
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 1.0,
+      "refusal|harmless -> refusal|harmful": 0.9965397923875432,
+      "harm|refuse -> harm|comply": 0.9957983193277311,
+      "harm|comply -> harm|refuse": 1.0
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 4.835795738925565,
+       "harmful/comply": 0.6505708509970238,
+       "harmless/refuse": -5.499209442035428,
+       "harmless/comply": -4.54563431474832,
+       "borderline/refuse": 1.890241963507957,
+       "borderline/comply": 0.0635666589474051
+      },
+      "harm|refuse": {
+       "harmful/refuse": 5.852302861201961,
+       "harmful/comply": -0.7745618479345343,
+       "harmless/refuse": -5.907880456761882,
+       "harmless/comply": -3.2381595816913884,
+       "borderline/refuse": 1.933849298961003,
+       "borderline/comply": -0.496090240774699
+      },
+      "harm|comply": {
+       "harmful/refuse": 1.5466466405582786,
+       "harmful/comply": 3.0535193905079177,
+       "harmless/refuse": -3.120239844043894,
+       "harmless/comply": -5.576558807348219,
+       "borderline/refuse": 1.2489881837566559,
+       "borderline/comply": 1.0642572713393519
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 6.4293654665116655,
+       "harmful/comply": -3.518040470001031,
+       "harmless/refuse": -0.2674433991369714,
+       "harmless/comply": -3.13300073972192,
+       "borderline/refuse": 2.1676757167122416,
+       "borderline/comply": -3.1337276565031273
+      },
+      "refusal|harmless": {
+       "harmful/refuse": 2.721114598851196,
+       "harmful/comply": -1.957111592276957,
+       "harmless/refuse": 6.388752045897721,
+       "harmless/comply": -5.01309385653867,
+       "borderline/refuse": 1.632713531543755,
+       "borderline/comply": -3.5415360892149894
+      }
+     }
+    },
+    "readout_cross": {
+     "harm(boundary) on reply32: harmful vs harmless": 0.9485294117647058,
+     "refusal(reply32) on boundary: harmful vs harmless": 0.9789915966386554
+    },
+    "boundary_harm_on_reply32_cells": {
+     "harmful/refuse": 4.245992627628743,
+     "harmful/comply": 0.7717775130472976,
+     "harmless/refuse": -0.6403905497910168,
+     "harmless/comply": -5.598197935023601,
+     "borderline/refuse": 1.2731515371517712,
+     "borderline/comply": -1.6243257237515134
+    }
+   }
+  },
+  "d": {
+   "9": {
+    "boundary": {
+     "units": {
+      "harm|refuse": {
+       "auroc": 0.957983193277311,
+       "reliability": 0.823794669148583,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 0.957983193277311,
+       "reliability": 0.8240081063327805,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 0.957983193277311,
+       "reliability": 0.8205416807233341,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "harm|refuse ~ harm|comply": {
+       "cos": 1.0,
+       "floor95": 0.5445271694348716,
+       "disattenuated": 1.2137374973126538
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.5963707901681874,
+       "disattenuated": 1.216298547333658
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.5914420507301994,
+       "disattenuated": 1.2161410123846157
+      }
+     },
+     "cross": {
+      "harm|refuse -> harm|comply": 0.957983193277311,
+      "harm|comply -> harm|refuse": 0.957983193277311
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 0.9391504200197338,
+       "harmful/comply": 0.9391504200197338,
+       "harmless/refuse": -2.1271053053206286,
+       "harmless/comply": -2.1271053053206286,
+       "borderline/refuse": 0.7588753942176427,
+       "borderline/comply": 0.7588753942176427
+      },
+      "harm|refuse": {
+       "harmful/refuse": 0.9391504200197338,
+       "harmful/comply": 0.9391504200197338,
+       "harmless/refuse": -2.1271053053206286,
+       "harmless/comply": -2.1271053053206286,
+       "borderline/refuse": 0.7588753942176427,
+       "borderline/comply": 0.7588753942176427
+      },
+      "harm|comply": {
+       "harmful/refuse": 0.9391504200197338,
+       "harmful/comply": 0.9391504200197338,
+       "harmless/refuse": -2.1271053053206286,
+       "harmless/comply": -2.1271053053206286,
+       "borderline/refuse": 0.7588753942176427,
+       "borderline/comply": 0.7588753942176427
+      }
+     }
+    },
+    "reply32": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9784015724995403,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9656385046476837,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.8541651525370919,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 0.9915966386554622,
+       "reliability": 0.7528283252469006,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 0.9863445378151261,
+       "reliability": 0.8081950081544751,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": 0.8066324934444946,
+       "floor95": 0.6740140580160887,
+       "disattenuated": 0.8298695971529126
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.3129197471244985,
+       "floor95": 0.24769424661447997,
+       "disattenuated": 0.3422973010726207
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": 0.08147186504965628,
+       "floor95": 0.1576443358506006,
+       "disattenuated": 0.09492948213771467
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": 0.2270900443260124,
+       "floor95": 0.15580787430012136,
+       "disattenuated": 0.2553768008738251
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.07558532688096806,
+       "floor95": 0.20598568156181526,
+       "disattenuated": -0.08322605007576109
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.1253523037571826,
+       "floor95": 0.12881428708402798,
+       "disattenuated": 0.14702021616860517
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": 0.013192960677394651,
+       "floor95": 0.12551417990065852,
+       "disattenuated": 0.014934025849943546
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.7337916388097987,
+       "floor95": 0.3691170655360437,
+       "disattenuated": 0.9150690330210018
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.9478387598111819,
+       "floor95": 0.3889355709838511,
+       "disattenuated": 1.1407893488464664
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.9120669377848709,
+       "floor95": 0.4259036009038551,
+       "disattenuated": 1.169285746090192
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 1.0,
+      "refusal|harmless -> refusal|harmful": 1.0,
+      "harm|refuse -> harm|comply": 0.9663865546218487,
+      "harm|comply -> harm|refuse": 1.0
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 2.657784499294031,
+       "harmful/comply": 0.6537915058217996,
+       "harmless/refuse": -2.8708591904174363,
+       "harmless/comply": -3.0923008130611995,
+       "borderline/refuse": 0.846456046712582,
+       "borderline/comply": 0.030128895392411544
+      },
+      "harm|refuse": {
+       "harmful/refuse": 2.9987973345056314,
+       "harmful/comply": 0.31264708118245144,
+       "harmless/refuse": -2.8949771976145393,
+       "harmless/comply": -2.666417516605981,
+       "borderline/refuse": 0.8415595035342167,
+       "borderline/comply": -0.11828382533506765
+      },
+      "harm|comply": {
+       "harmful/refuse": 2.00771058730887,
+       "harmful/comply": 1.09956445645861,
+       "harmless/refuse": -2.659215679151627,
+       "harmless/comply": -3.508253045800125,
+       "borderline/refuse": 0.8011654954272063,
+       "borderline/comply": 0.23976245147349104
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 6.683396626690738,
+       "harmful/comply": -4.632977487696758,
+       "harmless/refuse": 3.1021427988366725,
+       "harmless/comply": -5.3105430848537605,
+       "borderline/refuse": 4.90439568558959,
+       "borderline/comply": -4.650644519530855
+      },
+      "refusal|harmless": {
+       "harmful/refuse": 5.721871852819313,
+       "harmful/comply": -5.223245100515649,
+       "harmless/refuse": 6.108384601185701,
+       "harmless/comply": -6.615401935764218,
+       "borderline/refuse": 5.932729625491345,
+       "borderline/comply": -5.5835006374030325
+      }
+     }
+    },
+    "readout_cross": {
+     "harm(boundary) on reply32: harmful vs harmless": 0.9611344537815126,
+     "refusal(reply32) on boundary: harmful vs harmless": 0.8697478991596639
+    },
+    "boundary_harm_on_reply32_cells": {
+     "harmful/refuse": 1.5073826825170278,
+     "harmful/comply": 0.6280413976990513,
+     "harmless/refuse": -1.2892894940266137,
+     "harmless/comply": -2.0944582089052073,
+     "borderline/refuse": 0.9046558248067231,
+     "borderline/comply": 0.3938911655310775
+    }
+   },
+   "17": {
+    "boundary": {
+     "units": {
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.9548812938676898,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.9562518178448532,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9562324290085635,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "harm|refuse ~ harm|comply": {
+       "cos": 1.0,
+       "floor95": 0.583723035519744,
+       "disattenuated": 1.0464998497557674
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.6115228910131817,
+       "disattenuated": 1.0465104592638723
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.6390968201230429,
+       "disattenuated": 1.0457602479044477
+      }
+     },
+     "cross": {
+      "harm|refuse -> harm|comply": 1.0,
+      "harm|comply -> harm|refuse": 1.0
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 2.6738039011567505,
+       "harmful/comply": 2.6738039011567505,
+       "harmless/refuse": -5.554829498199795,
+       "harmless/comply": -5.554829498199795,
+       "borderline/refuse": 1.4191228487072804,
+       "borderline/comply": 1.4191228487072804
+      },
+      "harm|refuse": {
+       "harmful/refuse": 2.673803901156751,
+       "harmful/comply": 2.673803901156751,
+       "harmless/refuse": -5.554829498199797,
+       "harmless/comply": -5.554829498199797,
+       "borderline/refuse": 1.4191228487072807,
+       "borderline/comply": 1.4191228487072807
+      },
+      "harm|comply": {
+       "harmful/refuse": 2.673803901156751,
+       "harmful/comply": 2.673803901156751,
+       "harmless/refuse": -5.554829498199797,
+       "harmless/comply": -5.554829498199797,
+       "borderline/refuse": 1.4191228487072807,
+       "borderline/comply": 1.4191228487072807
+      }
+     }
+    },
+    "reply32": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9808061878474436,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9678644290022898,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.9387279000742924,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.9377169932852546,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9342356302644396,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": 0.3991657195449758,
+       "floor95": 0.404649481952741,
+       "disattenuated": 0.4096890664134534
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.39526622902335956,
+       "floor95": 0.32537470513884337,
+       "disattenuated": 0.4119345785596559
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.09291821905319018,
+       "floor95": 0.20868003712150363,
+       "disattenuated": -0.09688875724806778
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": 0.16926315703888262,
+       "floor95": 0.18641620507217363,
+       "disattenuated": 0.17682457587884592
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.09771017723537928,
+       "floor95": 0.20774586153734528,
+       "disattenuated": -0.10250915974669296
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.3961140167485062,
+       "floor95": 0.28938566449912506,
+       "disattenuated": 0.41579288438318307
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": 0.16669726216089928,
+       "floor95": 0.1492752495349587,
+       "disattenuated": 0.1753044696688807
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.5987428443224851,
+       "floor95": 0.3635711516320798,
+       "disattenuated": 0.6381673486171554
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.89422285653553,
+       "floor95": 0.517719739786696,
+       "disattenuated": 0.9548775661323162
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.8939285194572444,
+       "floor95": 0.5025753155550514,
+       "disattenuated": 0.95507765967631
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 1.0,
+      "refusal|harmless -> refusal|harmful": 1.0,
+      "harm|refuse -> harm|comply": 1.0,
+      "harm|comply -> harm|refuse": 1.0
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 4.567541484380606,
+       "harmful/comply": 2.8190234918878834,
+       "harmless/refuse": -6.515806718468119,
+       "harmless/comply": -8.088215245691668,
+       "borderline/refuse": 2.41985660296882,
+       "borderline/comply": 0.8398255369561288
+      },
+      "harm|refuse": {
+       "harmful/refuse": 5.621403538172156,
+       "harmful/comply": 1.163866973807124,
+       "harmless/refuse": -7.036060181453983,
+       "harmless/comply": -6.003247438668414,
+       "borderline/refuse": 2.8111416596416263,
+       "borderline/comply": -0.05478504661648349
+      },
+      "harm|comply": {
+       "harmful/refuse": 2.88934832396532,
+       "harmful/comply": 4.196656217384812,
+       "harmless/refuse": -5.150885606477283,
+       "harmless/comply": -9.25236392533142,
+       "borderline/refuse": 1.7056152952033303,
+       "borderline/comply": 1.670532154362208
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 8.1030363863765,
+       "harmful/comply": -6.387877297802139,
+       "harmless/refuse": 1.3566455012062357,
+       "harmless/comply": -4.20091529436922,
+       "borderline/refuse": 6.403766931522972,
+       "borderline/comply": -6.39402944035292
+      },
+      "refusal|harmless": {
+       "harmful/refuse": 4.206054634835143,
+       "harmful/comply": -2.088828977999103,
+       "harmless/refuse": 6.100824557144919,
+       "harmless/comply": -11.165231931368272,
+       "borderline/refuse": 5.56939409973643,
+       "borderline/comply": -4.581614356106029
+      }
+     }
+    },
+    "readout_cross": {
+     "harm(boundary) on reply32: harmful vs harmless": 1.0,
+     "refusal(reply32) on boundary: harmful vs harmless": 1.0
+    },
+    "boundary_harm_on_reply32_cells": {
+     "harmful/refuse": 3.9000509869417415,
+     "harmful/comply": 2.571503952121721,
+     "harmless/refuse": -4.944313583868299,
+     "harmless/comply": -8.532775883861806,
+     "borderline/refuse": 2.7103714861850956,
+     "borderline/comply": 1.0891621153422761
+    }
+   },
+   "22": {
+    "boundary": {
+     "units": {
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.9609796713894099,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.9611268984917843,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9640895112390153,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "harm|refuse ~ harm|comply": {
+       "cos": 1.0,
+       "floor95": 0.6992969602090068,
+       "disattenuated": 1.0405250349831963
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.7045784841223759,
+       "disattenuated": 1.03892505667302
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 1.0,
+       "floor95": 0.6519147353269098,
+       "disattenuated": 1.0388454814452548
+      }
+     },
+     "cross": {
+      "harm|refuse -> harm|comply": 1.0,
+      "harm|comply -> harm|refuse": 1.0
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 2.9893545939378106,
+       "harmful/comply": 2.9893545939378106,
+       "harmless/refuse": -5.763996040432258,
+       "harmless/comply": -5.763996040432258,
+       "borderline/refuse": 1.1476681133817745,
+       "borderline/comply": 1.1476681133817745
+      },
+      "harm|refuse": {
+       "harmful/refuse": 2.98935459393781,
+       "harmful/comply": 2.98935459393781,
+       "harmless/refuse": -5.763996040432257,
+       "harmless/comply": -5.763996040432257,
+       "borderline/refuse": 1.1476681133817745,
+       "borderline/comply": 1.1476681133817745
+      },
+      "harm|comply": {
+       "harmful/refuse": 2.98935459393781,
+       "harmful/comply": 2.98935459393781,
+       "harmless/refuse": -5.763996040432257,
+       "harmless/comply": -5.763996040432257,
+       "borderline/refuse": 1.1476681133817745,
+       "borderline/comply": 1.1476681133817745
+      }
+     }
+    },
+    "reply32": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9802097766642051,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9664943398723687,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.9357024406985721,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.936813001625043,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9267251163477418,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": 0.3909465178770461,
+       "floor95": 0.36034747997741373,
+       "disattenuated": 0.4016596234971756
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.3655308958469196,
+       "floor95": 0.2978834712008891,
+       "disattenuated": 0.3816767405103335
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.16570957947606363,
+       "floor95": 0.22328905752365083,
+       "disattenuated": -0.17292653742418126
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": 0.10879206303392736,
+       "floor95": 0.15946378760858992,
+       "disattenuated": 0.11414640305443659
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.14147876711187812,
+       "floor95": 0.19441691043495848,
+       "disattenuated": -0.14877252291996884
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.40102517865334003,
+       "floor95": 0.30676487104496025,
+       "disattenuated": 0.42144948621047534
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": 0.1542393819239351,
+       "floor95": 0.17263037514159843,
+       "disattenuated": 0.16297468562476997
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.5262322319468158,
+       "floor95": 0.3222783239358019,
+       "disattenuated": 0.5620592627475465
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.868549430852183,
+       "floor95": 0.49403368610079634,
+       "disattenuated": 0.932717643634341
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.8784898203858402,
+       "floor95": 0.5189193043704355,
+       "disattenuated": 0.9428330805086869
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 1.0,
+      "refusal|harmless -> refusal|harmful": 1.0,
+      "harm|refuse -> harm|comply": 1.0,
+      "harm|comply -> harm|refuse": 1.0
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 4.04904488041004,
+       "harmful/comply": 2.695275559483476,
+       "harmless/refuse": -5.71681917530196,
+       "harmless/comply": -7.1477439520212425,
+       "borderline/refuse": 1.6817856209879714,
+       "borderline/comply": 0.9920757833917073
+      },
+      "harm|refuse": {
+       "harmful/refuse": 4.838684902738489,
+       "harmful/comply": 0.8929016791777294,
+       "harmless/refuse": -6.045284849369581,
+       "harmless/comply": -4.649870569154911,
+       "borderline/refuse": 2.2977228535366763,
+       "borderline/comply": 0.1070336341811972
+      },
+      "harm|comply": {
+       "harmful/refuse": 2.589551039529899,
+       "harmful/comply": 4.402290448569764,
+       "harmless/refuse": -4.561005129874965,
+       "harmless/comply": -9.049132098121067,
+       "borderline/refuse": 0.7442636077775652,
+       "borderline/comply": 1.8753889652096825
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 7.294190253357894,
+       "harmful/comply": -6.310311216627394,
+       "harmless/refuse": 1.7442590728442107,
+       "harmless/comply": -3.3555934972029253,
+       "borderline/refuse": 6.207562476726292,
+       "borderline/comply": -6.0598089643558755
+      },
+      "refusal|harmless": {
+       "harmful/refuse": 4.347956053189235,
+       "harmful/comply": -2.3299517090213206,
+       "harmless/refuse": 6.60647384039084,
+       "harmless/comply": -11.083376362603696,
+       "borderline/refuse": 4.837525588513769,
+       "borderline/comply": -4.905128700383258
+      }
+     }
+    },
+    "readout_cross": {
+     "harm(boundary) on reply32: harmful vs harmless": 1.0,
+     "refusal(reply32) on boundary: harmful vs harmless": 0.9033613445378151
+    },
+    "boundary_harm_on_reply32_cells": {
+     "harmful/refuse": 3.9031843017754877,
+     "harmful/comply": 2.7680793446609346,
+     "harmless/refuse": -4.154819184359249,
+     "harmless/comply": -8.496014248248251,
+     "borderline/refuse": 2.186858205425677,
+     "borderline/comply": 0.9037192973768042
+    }
+   },
+   "29": {
+    "boundary": {
+     "units": {
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.9568703594209769,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.9639820636251784,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9611196258384398,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "harm|refuse ~ harm|comply": {
+       "cos": 1.0,
+       "floor95": 0.6742725549619021,
+       "disattenuated": 1.041211539043921
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.9999999999999999,
+       "floor95": 0.6455004880016564,
+       "disattenuated": 1.042760871399695
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.9999999999999999,
+       "floor95": 0.6755689879485826,
+       "disattenuated": 1.0389073064700476
+      }
+     },
+     "cross": {
+      "harm|refuse -> harm|comply": 1.0,
+      "harm|comply -> harm|refuse": 1.0
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 2.6815294771350033,
+       "harmful/comply": 2.6815294771350033,
+       "harmless/refuse": -4.74722273712462,
+       "harmless/comply": -4.74722273712462,
+       "borderline/refuse": 0.7198224668337039,
+       "borderline/comply": 0.7198224668337039
+      },
+      "harm|refuse": {
+       "harmful/refuse": 2.6815294771350033,
+       "harmful/comply": 2.6815294771350033,
+       "harmless/refuse": -4.74722273712462,
+       "harmless/comply": -4.74722273712462,
+       "borderline/refuse": 0.719822466833704,
+       "borderline/comply": 0.719822466833704
+      },
+      "harm|comply": {
+       "harmful/refuse": 2.6815294771350033,
+       "harmful/comply": 2.6815294771350033,
+       "harmless/refuse": -4.74722273712462,
+       "harmless/comply": -4.74722273712462,
+       "borderline/refuse": 0.719822466833704,
+       "borderline/comply": 0.719822466833704
+      }
+     }
+    },
+    "reply32": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9790990567505292,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9663128388181769,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.922609726612143,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.934562065570618,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9267586125701547,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": 0.4152715502451766,
+       "floor95": 0.4078328810572804,
+       "disattenuated": 0.42693325858535075
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.3454707930906249,
+       "floor95": 0.30576902352476054,
+       "disattenuated": 0.3634871032933486
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.16079623471378635,
+       "floor95": 0.19897530559290863,
+       "disattenuated": -0.16809642780259984
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": 0.09269682671910964,
+       "floor95": 0.18429277986460438,
+       "disattenuated": 0.09731241169041793
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.0832848479657225,
+       "floor95": 0.19097971981697617,
+       "disattenuated": -0.08820599593758523
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.41289416943451696,
+       "floor95": 0.3087786387059432,
+       "disattenuated": 0.4344860136977005
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": 0.19743212013205264,
+       "floor95": 0.17398822990940707,
+       "disattenuated": 0.20862945280140383
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.5678619393532409,
+       "floor95": 0.3478347844246198,
+       "disattenuated": 0.6115467640643899
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.8753242987544945,
+       "floor95": 0.45879807539019846,
+       "disattenuated": 0.9466221335321418
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.895073614510751,
+       "floor95": 0.5371708652395398,
+       "disattenuated": 0.961770307756015
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 1.0,
+      "refusal|harmless -> refusal|harmful": 1.0,
+      "harm|refuse -> harm|comply": 1.0,
+      "harm|comply -> harm|refuse": 1.0
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 3.754088805770389,
+       "harmful/comply": 2.707853918116164,
+       "harmless/refuse": -5.240985116021615,
+       "harmless/comply": -6.85303909584228,
+       "borderline/refuse": 1.6362258497739877,
+       "borderline/comply": 1.034908878715087
+      },
+      "harm|refuse": {
+       "harmful/refuse": 4.5943114283083935,
+       "harmful/comply": 1.0560030572079089,
+       "harmless/refuse": -5.782082305091222,
+       "harmless/comply": -4.900689007132506,
+       "borderline/refuse": 2.3375108336782686,
+       "borderline/comply": 0.20318785382129387
+      },
+      "harm|comply": {
+       "harmful/refuse": 2.48231731507335,
+       "harmful/comply": 3.9975195694983046,
+       "harmless/refuse": -4.083167025499909,
+       "harmless/comply": -7.939005306777732,
+       "borderline/refuse": 0.7544039358460924,
+       "borderline/comply": 1.7236889239705637
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 7.095654158842642,
+       "harmful/comply": -6.0993097567945584,
+       "harmless/refuse": 2.07281175316211,
+       "harmless/comply": -3.1305608483719283,
+       "borderline/refuse": 5.754085834218614,
+       "borderline/comply": -6.043939879466512
+      },
+      "refusal|harmless": {
+       "harmful/refuse": 4.941981932559138,
+       "harmful/comply": -1.7548389145282517,
+       "harmless/refuse": 5.780914354142759,
+       "harmless/comply": -10.300203828089904,
+       "borderline/refuse": 4.205380472561012,
+       "borderline/comply": -4.583075835523204
+      }
+     }
+    },
+    "readout_cross": {
+     "harm(boundary) on reply32: harmful vs harmless": 1.0,
+     "refusal(reply32) on boundary: harmful vs harmless": 0.9789915966386554
+    },
+    "boundary_harm_on_reply32_cells": {
+     "harmful/refuse": 4.0539739930514544,
+     "harmful/comply": 2.379217318959371,
+     "harmless/refuse": -4.181643301948747,
+     "harmless/comply": -7.930546659324492,
+     "borderline/refuse": 2.206317562790923,
+     "borderline/comply": 0.5552238716329937
+    }
+   }
+  }
+ }
+}
