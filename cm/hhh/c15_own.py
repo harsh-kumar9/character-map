@@ -43,7 +43,8 @@ def requests():
     """One prompt per frame-c scenario: the chat up to the prefilled reply."""
     seen, out = set(), []
     for it in load_items(CID):
-        if it["frame"] != "c" or it["split"] not in ("train", "test") or it["scenario_id"] in seen:
+        if (it["frame"] != "c" or it["split"] not in ("train", "test") or it["scenario_id"] in seen
+                or (it.get("meta") or {}).get("contrast", "refuse") != "refuse"):
             continue
         seen.add(it["scenario_id"])
         out.append({"scenario_id": it["scenario_id"], "split": it["split"], "request_type": it["meta"]["request_type"],
@@ -120,7 +121,8 @@ def axes(L):
     z, meta, _ = load(CID)
     rt = {it["item_id"]: (it.get("meta") or {}).get("request_type") for it in load_items(CID)}
     h = DEPTHS[L]
-    rows = [i for i, m in enumerate(meta) if m["frame"] == "c" and m["split"] in ("train", "test") and rt.get(m["item_id"])]
+    rows = [i for i, m in enumerate(meta) if m["frame"] == "c" and m["split"] in ("train", "test") and rt.get(m["item_id"])
+            and (m["contrast"] or "all") == "refuse"]
     out = {}
     for ro in ("boundary", "reply32"):
         X = z[ro][rows, h].astype(np.float64)

@@ -48,10 +48,11 @@ def unit(x):
 
 
 def gather():
+    """C15's refuse contrast only (the safe_completion rows, D-057 addendum, are another contrast)."""
     z, meta, _ = load(CID)
     rt = {it["item_id"]: (it.get("meta") or {}).get("request_type") for it in load_items(CID)}
     for m in meta:
-        m["request_type"] = rt.get(m["item_id"])
+        m["request_type"] = rt.get(m["item_id"]) if (m["contrast"] or "all") == "refuse" else None
     return z, meta
 
 
