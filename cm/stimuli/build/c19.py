@@ -14,6 +14,9 @@ third person (someone close to a named person describes it and asks what to do);
 response_high (pos) or response_low (neg); the user asks C1's recognition (a) or judgment (b) question. Keys
 hh-NNN-v|ab<attempt> with a greedy check hh-NNN-v|abv<attempt> (shown both replies in hashed order, the checker must
 pick the higher honesty-humility one); up to 3 attempts, then the scenario keeps c and d only.
+Frames a and b for agreeableness too (D-056): the same retelling of the 50 kept TRAIT Agreeableness scenarios, the
+verbatim response_high1 (pos) or response_low1 (neg) as the reply, keys agreeableness-NNNN|ab<attempt> and a check that
+picks the higher-agreeableness reply. The honesty-humility prompts and keys are unchanged, so those items are too.
 
     python -m cm.stimuli.build.c19
 """
@@ -126,6 +129,17 @@ Reply 2:
 <<<{t2}>>>
 
 In which reply does {name} show higher honesty-humility? Answer with only the number 1 or 2."""
+AB_VERIFY_AG = """You are checking items for a research dataset. The items contrast high and low agreeableness: patience, forgiveness, gentleness and willingness to compromise. Here is a short scene and two replies a person named {name} could give at the end of it.
+
+Scene: {scene}
+
+Reply 1:
+<<<{t1}>>>
+
+Reply 2:
+<<<{t2}>>>
+
+In which reply does {name} show higher agreeableness? Answer with only the number 1 or 2."""
 AB_ATTEMPTS = 3
 
 
@@ -138,9 +152,9 @@ def clean_scene(s) -> str:
     return s
 
 
-def ab_scene(gen: H.Gen, key: str, o: dict):
-    """Frames a/b scene for one honesty-humility scenario: {scene, name, _gen_id, verify_id} once generated and
-    verified, else None (pending, or failed every attempt)."""
+def ab_scene(gen: H.Gen, key: str, o: dict, verify: str = AB_VERIFY, tag: str = "hh-#-#|ab"):
+    """Frames a/b scene for one scenario (honesty-humility by default; agreeableness with AB_VERIFY_AG): {scene, name,
+    _gen_id, verify_id} once generated and verified, else None (pending, or failed every attempt)."""
     name = name_for(f"{CID}-{key}")
     first_pos = H.rng("ab-order", CID, key).random() < 0.5
     a1, a2 = (o["response_high"], o["response_low"]) if first_pos else (o["response_low"], o["response_high"])
@@ -160,14 +174,14 @@ def ab_scene(gen: H.Gen, key: str, o: dict):
         if not s_:
             return None
         vkey = f"{key}|abv{att}"
-        ans = gen.ask(vkey, AB_VERIFY.format(name=name, scene=s_["scene"], t1=a1, t2=a2))
+        ans = gen.ask(vkey, verify.format(name=name, scene=s_["scene"], t1=a1, t2=a2))
         if ans is None:
             return None
         m = re.search(r"[12]", ans)
         if m and (m.group() == "1") == first_pos:
             return dict(s_, name=name, verify_id=H.Gen.rid(CID, "ask|" + vkey,
-                                                          AB_VERIFY.format(name=name, scene=s_["scene"], t1=a1, t2=a2), 1))
-        gen.vfail["hh-#-#|ab"] += 1
+                                                          verify.format(name=name, scene=s_["scene"], t1=a1, t2=a2), 1))
+        gen.vfail[tag] += 1
     return None
 
 
@@ -222,6 +236,11 @@ def main():
     # frames a and b (D-048) for the 50 selected honesty-humility scenarios; the selection itself does not depend on them
     hh_con = [x for x in cands if hh_sr[(x[0], x[1])]][:N]
     hh_ab = {(k, v): ab_scene(gen, f"hh-{k:03d}-{v}", o) for k, v, it, dom, o in hh_con}
+    # frames a and b for the 50 kept agreeableness scenarios (D-056): the same selection as the assembly below
+    ag_con = [(row, o) for row, o, sr in got["Agreeableness"] if o and sr][:N]
+    ag_ab = {row.row: ab_scene(gen, f"agreeableness-{row.row:04d}",
+                               {"question": row.question, "response_high": row.response_high1, "response_low": row.response_low1},
+                               AB_VERIFY_AG, "agreeableness-#|ab") for row, o in ag_con}
     if not H.finish(CID, gen) and "--partial" not in sys.argv:
         return
     items, old_d, kept = [], [], {}
@@ -256,6 +275,18 @@ def main():
             b = T.behavior_item(CID, "HH", row, "honesty_humility", {"facet": it["facet"], "gen_id": o["_gen_id"]})
             b["source"], b["construction"] = s, "generated"
             beh.append(b)
+    for row, o in ag_con:   # appended after every other row, so the existing rows keep their order
+        ab = ag_ab.get(row.row)
+        if not ab:
+            continue
+        scn = f"{CID}-trait-agreeableness-{row.row:04d}"
+        s = H.src("trait", "mirlab/TRAIT Agreeableness", row.row)
+        m2 = {"trait_split": "Agreeableness", "contrast": "agreeableness", "gen_id": o["_gen_id"], "scene_gen_id": ab["_gen_id"],
+              "ver_id": ab["verify_id"], "act": "verbatim c reply"}
+        for pol, rep in (("pos", row.response_high1), ("neg", row.response_low1)):
+            items += [H.mk(CID, scn, "a", pol, H.user(frame_a(ab["scene"], ab["name"], rep, scn)), "generated", s, m2),
+                      H.mk(CID, scn, "b", pol, H.user(frame_b(ab["scene"], ab["name"], rep, scn)), "generated", s, m2)]
+    kept["agreeableness_ab"] = sum(1 for x in ag_ab.values() if x)
     kept["honesty_humility"] = len(hh_con)
     kept["honesty_humility_ab"] = sum(1 for x in hh_ab.values() if x)
     report = {"kept": kept, "hh_behavior": len(hh_beh), "failed_attempts": dict(gen.failed),

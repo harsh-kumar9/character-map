@@ -21,7 +21,7 @@ frames:
     readout: boundary
     construction: generated
     source: EmpatheticDialogues opening turn verbatim; reply by gemma-4-31B-it
-  b: {applies: false, realization: "not in CONCEPTS.md for C5", readout: boundary, construction: generated, source: none}
+  b: {applies: true, realization: "frame a's scene and reply verbatim with the standard judgment question (\"Was it right for <Name> to respond this way?\", three wordings by scenario); added by D-056", readout: boundary, construction: generated, source: as frame a}
   c:
     applies: true
     realization: the opening turn as the user's message, verbatim; the prefilled reply (same text as frame a)

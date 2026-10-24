@@ -1,9 +1,10 @@
-"""C5 caring vs apathetic. Card: data/concepts/cards/C5.yaml. Frames a, c, d.
+"""C5 caring vs apathetic. Card: data/concepts/cards/C5.yaml. Frames a, b, c, d (b from D-056).
 
 Items: EmpatheticDialogues (train split) opening turns, verbatim. gemma-4-31B-it writes a caring and an apathetic reply of
 matched length (both generated, so the contrast is not human vs model text). Frame c: the user's turn and the prefilled
-reply. Frame a: the person says the same thing to a named friend, who gives the same reply. Frame d: endorse a
-first-person statement of attending to them vs giving a detached reply.
+reply. Frame a: the person says the same thing to a named friend, who gives the same reply; frame b: the same scene
+and reply with the judgment question. Frame d: endorse a first-person statement of attending to them vs giving a
+detached reply.
 Held-out: EPITOME emotional-reactions (Reddit, Sharma et al. 2020), frame c: seeker post and a peer response rated
 strong (level 2, pos) or none (level 0, neg). Not matched pairs.
 Behavior: EmpatheticDialogues test-split opening turns; judge: the upstream persona-vectors "apathetic" prompt (0-100).
@@ -78,7 +79,9 @@ def ok(rid_, j):
 
 
 def items(gen):
-    out, n = [], 0
+    """Frame b (D-056) reuses frame a's scene and reply with the judgment question; its rows are appended, so the
+    existing rows keep their relative order."""
+    out, b_rows, n = [], [], 0
     for r in seeds():
         scn = rid(r)
         g = gen.get(f"{scn}-{GEN_V}")
@@ -95,7 +98,9 @@ def items(gen):
             out.append(D.mk(CID, scn, "c", p, [D.U(u), D.A(rep)], "generated", src, meta))
             out.append(D.mk(CID, scn, "d", p, [D.U(D.frame_d(f"Imagine someone tells you: \"{u}\"", st, scn))],
                             "generated", src, meta))
-    return out
+            b_rows.append(D.mk(CID, scn, "b", p, [D.U(D.frame_b(f"Someone tells {name}: \"{u}\"", name, rep, scn))],
+                               "generated", src, meta))
+    return out + b_rows
 
 
 def heldout():
