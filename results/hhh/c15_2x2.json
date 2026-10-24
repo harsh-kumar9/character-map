@@ -157,6 +157,18 @@
         34,
         28
        ]
+      },
+      "fit": {
+       "auroc": 0.8886576482830385,
+       "reliability": 0.873023449857169,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
       }
      },
      "pairs": {
@@ -180,6 +192,11 @@
        "floor95": 0.24536887378057584,
        "disattenuated": 0.16056865994115332
       },
+      "refusal|harmful ~ fit": {
+       "cos": 0.7885089281069853,
+       "floor95": 0.7049406791978897,
+       "disattenuated": 0.8556398126097512
+      },
       "refusal|harmless ~ harm|refuse": {
        "cos": -0.266218463863104,
        "floor95": 0.23696450629428384,
@@ -195,6 +212,11 @@
        "floor95": 0.14472308729715105,
        "disattenuated": -0.1272781256077694
       },
+      "refusal|harmless ~ fit": {
+       "cos": -0.033064783087634275,
+       "floor95": 0.6293529609704984,
+       "disattenuated": -0.03651538839001849
+      },
       "harm|refuse ~ harm|comply": {
        "cos": 0.2653369648229683,
        "floor95": 0.19129201394540216,
@@ -205,10 +227,25 @@
        "floor95": 0.45169270570098446,
        "disattenuated": 0.9457005702736957
       },
+      "harm|refuse ~ fit": {
+       "cos": 0.7020390525597751,
+       "floor95": 0.3845616421015575,
+       "disattenuated": 0.7766491424253478
+      },
       "harm|comply ~ harm|both": {
        "cos": 0.7247866730563821,
        "floor95": 0.3569293089980499,
        "disattenuated": 0.8693621858706896
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.43069310232120833,
+       "floor95": 0.24111491335598362,
+       "disattenuated": -0.5176563722767088
+      },
+      "harm|both ~ fit": {
+       "cos": 0.2711696673583813,
+       "floor95": 0.20425626659822638,
+       "disattenuated": 0.3099788751251264
       }
      },
      "cross": {
@@ -257,7 +294,20 @@
        "harmless/comply": -6.417357222767817,
        "borderline/refuse": 3.7292231844288373,
        "borderline/comply": -5.286686180899598
+      },
+      "fit": {
+       "harmful/refuse": 5.019942848277997,
+       "harmful/comply": -2.5457935103936413,
+       "harmless/refuse": -0.9436629217242269,
+       "harmless/comply": -0.9275054329089599,
+       "borderline/refuse": 0.3307090934759805,
+       "borderline/comply": -2.424216158219132
       }
+     },
+     "factorial_norms": {
+      "harm": 31.30639198934279,
+      "stance": 47.10186763114171,
+      "fit": 24.130417461050076
      }
     },
     "readout_cross": {
@@ -422,6 +472,18 @@
         34,
         28
        ]
+      },
+      "fit": {
+       "auroc": 1.0,
+       "reliability": 0.9372764937853242,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
       }
      },
      "pairs": {
@@ -445,6 +507,11 @@
        "floor95": 0.2470898080146356,
        "disattenuated": 0.2703999947680483
       },
+      "refusal|harmful ~ fit": {
+       "cos": 0.8261776767575044,
+       "floor95": 0.7619586256671346,
+       "disattenuated": 0.8616502370455725
+      },
       "refusal|harmless ~ harm|refuse": {
        "cos": -0.30294583674991515,
        "floor95": 0.28187565957159894,
@@ -460,6 +527,11 @@
        "floor95": 0.1701794279644139,
        "disattenuated": -0.0666224729822912
       },
+      "refusal|harmless ~ fit": {
+       "cos": -0.27221170822162877,
+       "floor95": 0.5922065555330486,
+       "disattenuated": -0.28965146324476476
+      },
       "harm|refuse ~ harm|comply": {
        "cos": 0.2801126279404389,
        "floor95": 0.18543597679813303,
@@ -470,10 +542,25 @@
        "floor95": 0.5051314097230261,
        "disattenuated": 0.9065410284942165
       },
+      "harm|refuse ~ fit": {
+       "cos": 0.7321127225261537,
+       "floor95": 0.42878606900244454,
+       "disattenuated": 0.7706724603915582
+      },
       "harm|comply ~ harm|both": {
        "cos": 0.7325320066620067,
        "floor95": 0.47360805584105586,
        "disattenuated": 0.8054691298560993
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.411630176012504,
+       "floor95": 0.2858941077777422,
+       "disattenuated": -0.45129593109231037
+      },
+      "harm|both ~ fit": {
+       "cos": 0.2993876326127719,
+       "floor95": 0.229786109436987,
+       "disattenuated": 0.32035699620663444
       }
      },
      "cross": {
@@ -522,7 +609,20 @@
        "harmless/comply": -5.505897729392936,
        "borderline/refuse": 1.7193497110609064,
        "borderline/comply": -4.1737840437559
+      },
+      "fit": {
+       "harmful/refuse": 6.337240542650097,
+       "harmful/comply": -4.124156225043984,
+       "harmless/refuse": -3.4094777499358266,
+       "harmless/comply": -0.5821059898466914,
+       "borderline/refuse": 2.4174143050400474,
+       "borderline/comply": -2.0990569415778566
       }
+     },
+     "factorial_norms": {
+      "harm": 40.555732643893286,
+      "stance": 42.52475471596366,
+      "fit": 30.774272997944117
      }
     },
     "readout_cross": {
@@ -687,6 +787,18 @@
         34,
         28
        ]
+      },
+      "fit": {
+       "auroc": 1.0,
+       "reliability": 0.906757491785518,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
       }
      },
      "pairs": {
@@ -710,6 +822,11 @@
        "floor95": 0.2013229193429827,
        "disattenuated": 0.23201379833023175
       },
+      "refusal|harmful ~ fit": {
+       "cos": 0.8055084481315355,
+       "floor95": 0.7238835961788065,
+       "disattenuated": 0.8552029216426441
+      },
       "refusal|harmless ~ harm|refuse": {
        "cos": -0.3074325795828828,
        "floor95": 0.273201363459205,
@@ -725,6 +842,11 @@
        "floor95": 0.14434418443690125,
        "disattenuated": -0.06772891246093322
       },
+      "refusal|harmless ~ fit": {
+       "cos": -0.24869093231485528,
+       "floor95": 0.6034196878068026,
+       "disattenuated": -0.26926881979913264
+      },
       "harm|refuse ~ harm|comply": {
        "cos": 0.2513741061594383,
        "floor95": 0.18515608159557728,
@@ -735,10 +857,25 @@
        "floor95": 0.48464444414214924,
        "disattenuated": 0.9081873700607673
       },
+      "harm|refuse ~ fit": {
+       "cos": 0.7226058239448443,
+       "floor95": 0.37405447568765215,
+       "disattenuated": 0.7774873567208095
+      },
       "harm|comply ~ harm|both": {
        "cos": 0.7268031774482704,
        "floor95": 0.39661477744869744,
        "disattenuated": 0.8129606801392306
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.44408404196398055,
+       "floor95": 0.24953289984252303,
+       "disattenuated": -0.4987343015526175
+      },
+      "harm|both ~ fit": {
+       "cos": 0.2692396782060291,
+       "floor95": 0.21417231295542022,
+       "disattenuated": 0.29573080287593706
       }
      },
      "cross": {
@@ -787,7 +924,20 @@
        "harmless/comply": -5.314937594338592,
        "borderline/refuse": 1.5043083691408623,
        "borderline/comply": -3.8369218719324616
+      },
+      "fit": {
+       "harmful/refuse": 6.412612262322822,
+       "harmful/comply": -4.237492517198051,
+       "harmless/refuse": -3.394188494203623,
+       "harmless/comply": -0.4233816305438415,
+       "borderline/refuse": 2.4526426623748865,
+       "borderline/comply": -2.3751855174498884
       }
+     },
+     "factorial_norms": {
+      "harm": 37.791186593595405,
+      "stance": 43.50812787603518,
+      "fit": 29.484015904412807
      }
     },
     "readout_cross": {
@@ -952,6 +1102,18 @@
         34,
         28
        ]
+      },
+      "fit": {
+       "auroc": 0.9958376690946931,
+       "reliability": 0.908929833497524,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
       }
      },
      "pairs": {
@@ -975,6 +1137,11 @@
        "floor95": 0.2595330235993226,
        "disattenuated": 0.35521330043694205
       },
+      "refusal|harmful ~ fit": {
+       "cos": 0.8270669542466702,
+       "floor95": 0.7458628018331642,
+       "disattenuated": 0.8796260439235905
+      },
       "refusal|harmless ~ harm|refuse": {
        "cos": -0.278508988304342,
        "floor95": 0.25393502538106844,
@@ -990,6 +1157,11 @@
        "floor95": 0.15681312189145175,
        "disattenuated": -0.07200771741395595
       },
+      "refusal|harmless ~ fit": {
+       "cos": -0.23937203007706154,
+       "floor95": 0.5543100106244041,
+       "disattenuated": -0.25953839706370485
+      },
       "harm|refuse ~ harm|comply": {
        "cos": 0.3290050592015729,
        "floor95": 0.2081197654551445,
@@ -1000,10 +1172,25 @@
        "floor95": 0.5252048727756292,
        "disattenuated": 0.9484192786605964
       },
+      "harm|refuse ~ fit": {
+       "cos": 0.7605019037350361,
+       "floor95": 0.45833740502492015,
+       "disattenuated": 0.8173948840488304
+      },
       "harm|comply ~ harm|both": {
        "cos": 0.7345163853946087,
        "floor95": 0.35826475809103786,
        "disattenuated": 0.8374555426674082
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.32278788608213754,
+       "floor95": 0.23832500404861753,
+       "disattenuated": -0.3680524775600964
+      },
+      "harm|both ~ fit": {
+       "cos": 0.3857151736610147,
+       "floor95": 0.24723698195231755,
+       "disattenuated": 0.42433037450797634
       }
      },
      "cross": {
@@ -1052,7 +1239,20 @@
        "harmless/comply": -5.01309385653867,
        "borderline/refuse": 1.632713531543755,
        "borderline/comply": -3.5415360892149894
+      },
+      "fit": {
+       "harmful/refuse": 6.4826126011427885,
+       "harmful/comply": -3.312265902609436,
+       "harmless/refuse": -3.5321393755950123,
+       "harmless/comply": -1.3088674334089878,
+       "borderline/refuse": 1.8267202578642814,
+       "borderline/comply": -2.0481385669435
       }
+     },
+     "factorial_norms": {
+      "harm": 37.85316778727,
+      "stance": 39.31666504742974,
+      "fit": 27.530425024270222
      }
     },
     "readout_cross": {
@@ -1219,6 +1419,18 @@
         34,
         28
        ]
+      },
+      "fit": {
+       "auroc": 0.6888657648283039,
+       "reliability": 0.8117191447446515,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
       }
      },
      "pairs": {
@@ -1242,6 +1454,11 @@
        "floor95": 0.15580787430012136,
        "disattenuated": 0.2553768008738251
       },
+      "refusal|harmful ~ fit": {
+       "cos": 0.7583922310695494,
+       "floor95": 0.7723277134494253,
+       "disattenuated": 0.8510055842150518
+      },
       "refusal|harmless ~ harm|refuse": {
        "cos": -0.07558532688096806,
        "floor95": 0.20598568156181526,
@@ -1257,6 +1474,11 @@
        "floor95": 0.12551417990065852,
        "disattenuated": 0.014934025849943546
       },
+      "refusal|harmless ~ fit": {
+       "cos": 0.22649618012324216,
+       "floor95": 0.7122063904671626,
+       "disattenuated": 0.2558295459387878
+      },
       "harm|refuse ~ harm|comply": {
        "cos": 0.7337916388097987,
        "floor95": 0.3691170655360437,
@@ -1267,10 +1489,25 @@
        "floor95": 0.3889355709838511,
        "disattenuated": 1.1407893488464664
       },
+      "harm|refuse ~ fit": {
+       "cos": 0.5990221118601102,
+       "floor95": 0.2591156888857344,
+       "disattenuated": 0.7193976827970331
+      },
       "harm|comply ~ harm|both": {
        "cos": 0.9120669377848709,
        "floor95": 0.4259036009038551,
        "disattenuated": 1.169285746090192
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.003975714340661966,
+       "floor95": 0.14971685487579325,
+       "disattenuated": -0.005085858842595979
+      },
+      "harm|both ~ fit": {
+       "cos": 0.3596787021486375,
+       "floor95": 0.1720526616965901,
+       "disattenuated": 0.4440723635362063
       }
      },
      "cross": {
@@ -1319,7 +1556,20 @@
        "harmless/comply": -6.615401935764218,
        "borderline/refuse": 5.932729625491345,
        "borderline/comply": -5.5835006374030325
+      },
+      "fit": {
+       "harmful/refuse": 4.994153229241102,
+       "harmful/comply": -2.5613603263272955,
+       "harmless/refuse": -0.15601117934796543,
+       "harmless/comply": -2.485741870768923,
+       "borderline/refuse": 2.4222779520821223,
+       "borderline/comply": -2.3272426222610596
       }
+     },
+     "factorial_norms": {
+      "harm": 31.480105468765707,
+      "stance": 39.46804661941845,
+      "fit": 12.934662235463676
      }
     },
     "readout_cross": {
@@ -1484,6 +1734,18 @@
         34,
         28
        ]
+      },
+      "fit": {
+       "auroc": 1.0,
+       "reliability": 0.9105066417598084,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
       }
      },
      "pairs": {
@@ -1507,6 +1769,11 @@
        "floor95": 0.18641620507217363,
        "disattenuated": 0.17682457587884592
       },
+      "refusal|harmful ~ fit": {
+       "cos": 0.7474942866875359,
+       "floor95": 0.764916799854246,
+       "disattenuated": 0.7909967879664827
+      },
       "refusal|harmless ~ harm|refuse": {
        "cos": -0.09771017723537928,
        "floor95": 0.20774586153734528,
@@ -1522,6 +1789,11 @@
        "floor95": 0.1492752495349587,
        "disattenuated": 0.1753044696688807
       },
+      "refusal|harmless ~ fit": {
+       "cos": -0.31067936767804083,
+       "floor95": 0.7357730419787165,
+       "disattenuated": -0.33095091719788267
+      },
       "harm|refuse ~ harm|comply": {
        "cos": 0.5987428443224851,
        "floor95": 0.3635711516320798,
@@ -1532,10 +1804,25 @@
        "floor95": 0.517719739786696,
        "disattenuated": 0.9548775661323162
       },
+      "harm|refuse ~ fit": {
+       "cos": 0.4805565991541629,
+       "floor95": 0.3070320630993052,
+       "disattenuated": 0.5197962278766497
+      },
       "harm|comply ~ harm|both": {
        "cos": 0.8939285194572444,
        "floor95": 0.5025753155550514,
        "disattenuated": 0.95507765967631
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.38330704195017784,
+       "floor95": 0.27737570903426395,
+       "disattenuated": -0.4148292255887652
+      },
+      "harm|both ~ fit": {
+       "cos": 0.05470236048366568,
+       "floor95": 0.1821392650987209,
+       "disattenuated": 0.05931114317599773
       }
      },
      "cross": {
@@ -1584,7 +1871,20 @@
        "harmless/comply": -11.165231931368272,
        "borderline/refuse": 5.56939409973643,
        "borderline/comply": -4.581614356106029
+      },
+      "fit": {
+       "harmful/refuse": 5.6386640522177265,
+       "harmful/comply": -5.110628000730893,
+       "harmless/refuse": -1.9830937187904403,
+       "harmless/comply": 1.950004684433817,
+       "borderline/refuse": 3.2382925622773997,
+       "borderline/comply": -3.7645489004363366
       }
+     },
+     "factorial_norms": {
+      "harm": 48.64037723771499,
+      "stance": 37.1855686996343,
+      "fit": 24.367971134064554
      }
     },
     "readout_cross": {
@@ -1749,6 +2049,18 @@
         34,
         28
        ]
+      },
+      "fit": {
+       "auroc": 1.0,
+       "reliability": 0.9047163635398767,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
       }
      },
      "pairs": {
@@ -1772,6 +2084,11 @@
        "floor95": 0.15946378760858992,
        "disattenuated": 0.11414640305443659
       },
+      "refusal|harmful ~ fit": {
+       "cos": 0.7436196284873908,
+       "floor95": 0.7478205470049879,
+       "disattenuated": 0.7896508499650516
+      },
       "refusal|harmless ~ harm|refuse": {
        "cos": -0.14147876711187812,
        "floor95": 0.19441691043495848,
@@ -1787,6 +2104,11 @@
        "floor95": 0.17263037514159843,
        "disattenuated": 0.16297468562476997
       },
+      "refusal|harmless ~ fit": {
+       "cos": -0.3246755686569732,
+       "floor95": 0.6964983321664132,
+       "disattenuated": -0.34721120308715847
+      },
       "harm|refuse ~ harm|comply": {
        "cos": 0.5262322319468158,
        "floor95": 0.3222783239358019,
@@ -1797,10 +2119,25 @@
        "floor95": 0.49403368610079634,
        "disattenuated": 0.932717643634341
       },
+      "harm|refuse ~ fit": {
+       "cos": 0.47839540315607876,
+       "floor95": 0.2709036879627627,
+       "disattenuated": 0.5199503729435031
+      },
       "harm|comply ~ harm|both": {
        "cos": 0.8784898203858402,
        "floor95": 0.5189193043704355,
        "disattenuated": 0.9428330805086869
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.46159577768804216,
+       "floor95": 0.26082502152449677,
+       "disattenuated": -0.5013940202140573
+      },
+      "harm|both ~ fit": {
+       "cos": -0.0002461911607333153,
+       "floor95": 0.16217157779740918,
+       "disattenuated": -0.0002688690213721382
       }
      },
      "cross": {
@@ -1849,7 +2186,20 @@
        "harmless/comply": -11.083376362603696,
        "borderline/refuse": 4.837525588513769,
        "borderline/comply": -4.905128700383258
+      },
+      "fit": {
+       "harmful/refuse": 5.197844383487003,
+       "harmful/comply": -5.274053582089962,
+       "harmless/refuse": -1.7797906370996568,
+       "harmless/comply": 2.5409679819276443,
+       "borderline/refuse": 3.8059619036854433,
+       "borderline/comply": -3.6161400025549133
       }
+     },
+     "factorial_norms": {
+      "harm": 46.22648915265598,
+      "stance": 38.93833171554815,
+      "fit": 25.76769737829129
      }
     },
     "readout_cross": {
@@ -2014,6 +2364,18 @@
         34,
         28
        ]
+      },
+      "fit": {
+       "auroc": 1.0,
+       "reliability": 0.8994866764024868,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
       }
      },
      "pairs": {
@@ -2037,6 +2399,11 @@
        "floor95": 0.18429277986460438,
        "disattenuated": 0.09731241169041793
       },
+      "refusal|harmful ~ fit": {
+       "cos": 0.7429227229279893,
+       "floor95": 0.7379893968504321,
+       "disattenuated": 0.7916495301574291
+      },
       "refusal|harmless ~ harm|refuse": {
        "cos": -0.0832848479657225,
        "floor95": 0.19097971981697617,
@@ -2052,6 +2419,11 @@
        "floor95": 0.17398822990940707,
        "disattenuated": 0.20862945280140383
       },
+      "refusal|harmless ~ fit": {
+       "cos": -0.30041608829778577,
+       "floor95": 0.7078787157885404,
+       "disattenuated": -0.3222307221624531
+      },
       "harm|refuse ~ harm|comply": {
        "cos": 0.5678619393532409,
        "floor95": 0.3478347844246198,
@@ -2062,10 +2434,25 @@
        "floor95": 0.45879807539019846,
        "disattenuated": 0.9466221335321418
       },
+      "harm|refuse ~ fit": {
+       "cos": 0.4235054731534897,
+       "floor95": 0.24227066074453746,
+       "disattenuated": 0.46489261305278406
+      },
       "harm|comply ~ harm|both": {
        "cos": 0.895073614510751,
        "floor95": 0.5371708652395398,
        "disattenuated": 0.961770307756015
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.4724105715862845,
+       "floor95": 0.2956294904015048,
+       "disattenuated": -0.5152501962962667
+      },
+      "harm|both ~ fit": {
+       "cos": -0.048083633001684195,
+       "floor95": 0.18935379001421246,
+       "disattenuated": -0.052664333343870835
       }
      },
      "cross": {
@@ -2114,7 +2501,20 @@
        "harmless/comply": -10.300203828089904,
        "borderline/refuse": 4.205380472561012,
        "borderline/comply": -4.583075835523204
+      },
+      "fit": {
+       "harmful/refuse": 4.420369621654301,
+       "harmful/comply": -5.182113280642528,
+       "harmless/refuse": -1.113618176494967,
+       "harmless/comply": 2.5520438929717724,
+       "borderline/refuse": 3.474952840541046,
+       "borderline/comply": -3.558035328477862
       }
+     },
+     "factorial_norms": {
+      "harm": 45.01238075592378,
+      "stance": 36.86484363526953,
+      "fit": 23.696163632439845
      }
     },
     "readout_cross": {
@@ -2128,6 +2528,1738 @@
      "harmless/comply": -7.930546659324492,
      "borderline/refuse": 2.206317562790923,
      "borderline/comply": 0.5552238716329937
+    }
+   }
+  },
+  "a": {
+   "9": {
+    "boundary": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9789160923392701,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9431199306269152,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 0.7142857142857143,
+       "reliability": 0.5938128538473636,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 0.7310924369747899,
+       "reliability": 0.5122958806333541,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 0.7016806722689075,
+       "reliability": 0.4222356265967136,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      },
+      "fit": {
+       "auroc": 0.6784599375650364,
+       "reliability": 0.7996611553821864,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": 0.8266953554480219,
+       "floor95": 0.6722775013382636,
+       "disattenuated": 0.8603780108364049
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.42451689076053956,
+       "floor95": 0.2081554235989742,
+       "disattenuated": 0.5567977141185626
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": 0.045200340443492054,
+       "floor95": 0.16966427173819157,
+       "disattenuated": 0.06382760372616972
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": 0.25405786162047006,
+       "floor95": 0.1914159506259727,
+       "disattenuated": 0.3951686352606805
+      },
+      "refusal|harmful ~ fit": {
+       "cos": 0.8574689627065927,
+       "floor95": 0.7992375739534541,
+       "disattenuated": 0.9691537378693668
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": 0.24679647679456657,
+       "floor95": 0.21879226546963285,
+       "disattenuated": 0.32978484722375
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.244054793151611,
+       "floor95": 0.25183802679991163,
+       "disattenuated": 0.35111020163285694
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": 0.2605751839305401,
+       "floor95": 0.20778727098271815,
+       "disattenuated": 0.4129259287983108
+      },
+      "refusal|harmless ~ fit": {
+       "cos": 0.4193622086342741,
+       "floor95": 0.6717450713099409,
+       "disattenuated": 0.482895134345166
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.7745461846170498,
+       "floor95": 0.7520922197799573,
+       "disattenuated": 1.4043070948101972
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.9447328280485128,
+       "floor95": 0.7610675461961921,
+       "disattenuated": 1.8867170420266541
+      },
+      "harm|refuse ~ fit": {
+       "cos": 0.4592535303103735,
+       "floor95": 0.2132030841497557,
+       "disattenuated": 0.6664609476007304
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.939104487131524,
+       "floor95": 0.6991607743674112,
+       "disattenuated": 2.0191846986041257
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.15025540753094102,
+       "floor95": 0.18417996012668736,
+       "disattenuated": -0.23475598803372696
+      },
+      "harm|both ~ fit": {
+       "cos": 0.1716224244602491,
+       "floor95": 0.18489412380291304,
+       "disattenuated": 0.29535450228887317
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 1.0,
+      "refusal|harmless -> refusal|harmful": 1.0,
+      "harm|refuse -> harm|comply": 0.634453781512605,
+      "harm|comply -> harm|refuse": 0.6890756302521008
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 0.469576619072151,
+       "harmful/comply": -0.19114215547614882,
+       "harmless/refuse": -0.49832499576990813,
+       "harmless/comply": -0.902435312622762,
+       "borderline/refuse": 1.023194923259539,
+       "borderline/comply": 0.6397702192362112
+      },
+      "harm|refuse": {
+       "harmful/refuse": 0.6774251447920627,
+       "harmful/comply": -0.2777879830014347,
+       "harmless/refuse": -0.45346062793100245,
+       "harmless/comply": -0.9028278452922673,
+       "borderline/refuse": 0.9645793142771307,
+       "borderline/comply": 0.42880417816030447
+      },
+      "harm|comply": {
+       "harmful/refuse": 0.20721145774178254,
+       "harmful/comply": -0.08185361845080236,
+       "harmless/refuse": -0.5440768629813504,
+       "harmless/comply": -0.8855831422653966,
+       "borderline/refuse": 1.076218551646699,
+       "borderline/comply": 0.8858160670974664
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 4.220136414980681,
+       "harmful/comply": -2.8460177252100367,
+       "harmless/refuse": 1.658514726701344,
+       "harmless/comply": -3.004766047567933,
+       "borderline/refuse": 1.9929888306592005,
+       "borderline/comply": -3.005951530944536
+      },
+      "refusal|harmless": {
+       "harmful/refuse": 3.2109697982706926,
+       "harmful/comply": -2.570054140631078,
+       "harmless/refuse": 1.899640336290148,
+       "harmless/comply": -2.851111460961372,
+       "borderline/refuse": 1.997094933622137,
+       "borderline/comply": -2.487409341781119
+      },
+      "fit": {
+       "harmful/refuse": 2.9369007134169007,
+       "harmful/comply": -1.6548648801880879,
+       "harmless/refuse": 0.6407654162130363,
+       "harmless/comply": -1.6363073987448036,
+       "borderline/refuse": 0.9999649535948312,
+       "borderline/comply": -1.930676461985802
+      }
+     },
+     "factorial_norms": {
+      "harm": 21.071383142386136,
+      "stance": 23.207018764905623,
+      "fit": 7.526725271968004
+     }
+    }
+   },
+   "17": {
+    "boundary": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9803833220343802,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9464898215808937,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 0.9747899159663865,
+       "reliability": 0.8323525788047477,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.8838025146096994,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 0.976890756302521,
+       "reliability": 0.7971043988484092,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      },
+      "fit": {
+       "auroc": 0.9989594172736732,
+       "reliability": 0.956416034813612,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": 0.07557852895038988,
+       "floor95": 0.31939284704019827,
+       "disattenuated": 0.07845895209301297
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.4699962009226337,
+       "floor95": 0.3656284873069926,
+       "disattenuated": 0.5202867014712397
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.5651723528694128,
+       "floor95": 0.4646753563414921,
+       "disattenuated": -0.6071630516905556
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": -0.14998257124145864,
+       "floor95": 0.23727700969484056,
+       "disattenuated": -0.1696622548256028
+      },
+      "refusal|harmful ~ fit": {
+       "cos": 0.8900328579916739,
+       "floor95": 0.7902599424917184,
+       "disattenuated": 0.9191463321451179
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.20943433238354087,
+       "floor95": 0.2535344279414503,
+       "disattenuated": -0.23595883213745447
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.4610249327456135,
+       "floor95": 0.3478951648339827,
+       "disattenuated": 0.5040676459304579
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": 0.22092059449805596,
+       "floor95": 0.20801205292675176,
+       "disattenuated": 0.2543434900809695
+      },
+      "refusal|harmless ~ fit": {
+       "cos": -0.3873250777249081,
+       "floor95": 0.6038056271108487,
+       "disattenuated": -0.4070935471008585
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.16320216752386796,
+       "floor95": 0.6931443221122353,
+       "disattenuated": 0.1902806565563737
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.6869014202714793,
+       "floor95": 0.7512523282099285,
+       "disattenuated": 0.8433020318939703
+      },
+      "harm|refuse ~ fit": {
+       "cos": 0.5303069169971555,
+       "floor95": 0.35338023212542985,
+       "disattenuated": 0.5943608604885036
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.8291106022126801,
+       "floor95": 0.7324922774601963,
+       "disattenuated": 0.9878187136350076
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.7333338556733299,
+       "floor95": 0.4970524393502063,
+       "disattenuated": -0.7976285575523541
+      },
+      "harm|both ~ fit": {
+       "cos": -0.23967782706849622,
+       "floor95": 0.26545351351490215,
+       "disattenuated": -0.27450283333115155
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 0.6632653061224489,
+      "refusal|harmless -> refusal|harmful": 0.5640138408304498,
+      "harm|refuse -> harm|comply": 0.5546218487394958,
+      "harm|comply -> harm|refuse": 0.6386554621848739
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 0.7659712549680024,
+       "harmful/comply": 1.859738702846165,
+       "harmless/refuse": -1.3449177774306094,
+       "harmless/comply": -1.9399780955049237,
+       "borderline/refuse": 0.5797938495070364,
+       "borderline/comply": -0.21139835583174685
+      },
+      "harm|refuse": {
+       "harmful/refuse": 1.8066762287166476,
+       "harmful/comply": -0.47690579707496433,
+       "harmless/refuse": -1.4002616968896726,
+       "harmless/comply": -0.6269531239693941,
+       "borderline/refuse": 1.2370372190156418,
+       "borderline/comply": -0.0501398828744998
+      },
+      "harm|comply": {
+       "harmful/refuse": -0.40287394107040986,
+       "harmful/comply": 3.8421201090838055,
+       "harmless/refuse": -1.0488612736074094,
+       "harmless/comply": -2.8934303945488504,
+       "borderline/refuse": -0.17560168639374127,
+       "borderline/comply": -0.33331311917209955
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 4.046318843462459,
+       "harmful/comply": -6.113174679900228,
+       "harmless/refuse": 0.9572822927206729,
+       "harmless/comply": 0.5729400400424207,
+       "borderline/refuse": 3.1565999297546945,
+       "borderline/comply": -1.2060785516348596
+      },
+      "refusal|harmless": {
+       "harmful/refuse": 1.5141540628238532,
+       "harmful/comply": 1.0945774413273714,
+       "harmless/refuse": 3.257468984285959,
+       "harmless/comply": -6.414070782547435,
+       "borderline/refuse": 2.227263198695397,
+       "borderline/comply": -3.619274706815752
+      },
+      "fit": {
+       "harmful/refuse": 3.0444126833756107,
+       "harmful/comply": -5.50923759564508,
+       "harmless/refuse": -0.0595968641582154,
+       "harmless/comply": 2.2140165573370356,
+       "borderline/refuse": 2.093628204226683,
+       "borderline/comply": -0.05531823323166463
+      }
+     },
+     "factorial_norms": {
+      "harm": 30.34343585631534,
+      "stance": 27.79923881065823,
+      "fit": 25.88093832385965
+     }
+    }
+   },
+   "22": {
+    "boundary": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9836135947224025,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9459176194733114,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.8055999333761398,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.9120908398297022,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 0.9915966386554622,
+       "reliability": 0.8083682860108758,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      },
+      "fit": {
+       "auroc": 1.0,
+       "reliability": 0.959711328384792,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": -0.07100371757516408,
+       "floor95": 0.3175978506733505,
+       "disattenuated": -0.07361090701699649
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.4680584867028537,
+       "floor95": 0.37321521949849645,
+       "disattenuated": 0.5258091654108341
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.6525531221909023,
+       "floor95": 0.514992215091249,
+       "disattenuated": -0.6889450174141106
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": -0.23688387448152043,
+       "floor95": 0.2810069296429451,
+       "disattenuated": -0.26565537232949954
+      },
+      "refusal|harmful ~ fit": {
+       "cos": 0.9170273027166298,
+       "floor95": 0.823377256456686,
+       "disattenuated": 0.9438428587577383
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.2799265751082052,
+       "floor95": 0.2795667793806565,
+       "disattenuated": -0.32066957946567365
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.4781008102374707,
+       "floor95": 0.35902075105108233,
+       "disattenuated": 0.5147232373953302
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": 0.20891378316959464,
+       "floor95": 0.17839488190716676,
+       "disattenuated": 0.23891081108187953
+      },
+      "refusal|harmless ~ fit": {
+       "cos": -0.46293016517829455,
+       "floor95": 0.5520644740578453,
+       "disattenuated": -0.485868241731908
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.11515585258864326,
+       "floor95": 0.6381311934312505,
+       "disattenuated": 0.1343405918297552
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.6493783128347632,
+       "floor95": 0.785677225149122,
+       "disattenuated": 0.8046989529216697
+      },
+      "harm|refuse ~ fit": {
+       "cos": 0.5278584323924563,
+       "floor95": 0.3399849383264723,
+       "disattenuated": 0.6003263998760838
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.8301861879221069,
+       "floor95": 0.7678000722222978,
+       "disattenuated": 0.9668337964305737
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.7710440241159396,
+       "floor95": 0.5055279916149567,
+       "disattenuated": -0.8241187931964168
+      },
+      "harm|both ~ fit": {
+       "cos": -0.29403467302061126,
+       "floor95": 0.2298961729999807,
+       "disattenuated": -0.33382864683178487
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 0.3520408163265306,
+      "refusal|harmless -> refusal|harmful": 0.12802768166089964,
+      "harm|refuse -> harm|comply": 0.5,
+      "harm|comply -> harm|refuse": 0.6134453781512605
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 0.7063776471343552,
+       "harmful/comply": 2.442605304176138,
+       "harmless/refuse": -1.5226283906094775,
+       "harmless/comply": -1.9705126329083729,
+       "borderline/refuse": 0.30040106975712166,
+       "borderline/comply": -0.4580713664178477
+      },
+      "harm|refuse": {
+       "harmful/refuse": 2.2480611625081477,
+       "harmful/comply": -0.6040308641574277,
+       "harmless/refuse": -1.7249849724044397,
+       "harmless/comply": -0.4703447955665647,
+       "borderline/refuse": 1.3819945504404965,
+       "borderline/comply": -0.2449659611675985
+      },
+      "harm|comply": {
+       "harmful/refuse": -0.7062328907126066,
+       "harmful/comply": 4.2884474071446546,
+       "harmless/refuse": -0.9849171494307808,
+       "harmless/comply": -2.690247341370597,
+       "borderline/refuse": -0.6425539088920577,
+       "borderline/comply": -0.5164205317470869
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 3.4522236395714687,
+       "harmful/comply": -5.3562402461178165,
+       "harmless/refuse": 0.4472808567161565,
+       "harmless/comply": 0.8926686766025622,
+       "borderline/refuse": 2.5955863990034143,
+       "borderline/comply": -0.600367587554874
+      },
+      "refusal|harmless": {
+       "harmful/refuse": 0.502566973455658,
+       "harmful/comply": 2.0802369901328834,
+       "harmless/refuse": 2.4373205527330652,
+       "harmless/comply": -5.2999142425833625,
+       "borderline/refuse": 0.8221902190108958,
+       "borderline/comply": -2.5579078103347244
+      },
+      "fit": {
+       "harmful/refuse": 2.926851923661183,
+       "harmful/comply": -5.2378947185414235,
+       "harmless/refuse": -0.1987350060897526,
+       "harmless/comply": 2.0797123458539275,
+       "borderline/refuse": 2.0923273363039674,
+       "borderline/comply": 0.09289495615539453
+      }
+     },
+     "factorial_norms": {
+      "harm": 31.379416167264583,
+      "stance": 26.338689952853965,
+      "fit": 28.10332427498896
+     }
+    }
+   },
+   "29": {
+    "boundary": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9762074116558275,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9446843228975378,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.8350895854288821,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.9172132787928144,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 0.990546218487395,
+       "reliability": 0.8397565920544481,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      },
+      "fit": {
+       "auroc": 1.0,
+       "reliability": 0.9666675778417625,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": -0.16286142874574144,
+       "floor95": 0.3430410011302052,
+       "disattenuated": -0.16959140415388776
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.4639371047851972,
+       "floor95": 0.3459214309836336,
+       "disattenuated": 0.5138324453911893
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.699795863527604,
+       "floor95": 0.5196463522083631,
+       "disattenuated": -0.7395459345206705
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": -0.30886443558387694,
+       "floor95": 0.2782154827605209,
+       "disattenuated": -0.34113017956618996
+      },
+      "refusal|harmful ~ fit": {
+       "cos": 0.9317529871103396,
+       "floor95": 0.8570752957343322,
+       "disattenuated": 0.9591602388163859
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.2730780910330542,
+       "floor95": 0.3329711723121985,
+       "disattenuated": -0.3074517506760582
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.5250416646743601,
+       "floor95": 0.39218029502942575,
+       "disattenuated": 0.5640469397726607
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": 0.2718982875445386,
+       "floor95": 0.24911764017214882,
+       "disattenuated": 0.3052716031054494
+      },
+      "refusal|harmless ~ fit": {
+       "cos": -0.5099917392863828,
+       "floor95": 0.5742743592965185,
+       "disattenuated": -0.5336803483963031
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.09266727231360156,
+       "floor95": 0.6278157136892644,
+       "disattenuated": 0.1058826199969758
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.6092902138211178,
+       "floor95": 0.7755033750145813,
+       "disattenuated": 0.7275803444120812
+      },
+      "harm|refuse ~ fit": {
+       "cos": 0.5049635709361284,
+       "floor95": 0.3518604613087893,
+       "disattenuated": 0.5620240993767256
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.8459966230604173,
+       "floor95": 0.7831867336565197,
+       "disattenuated": 0.9639549811608239
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.8033138371009939,
+       "floor95": 0.47748375828852707,
+       "disattenuated": -0.8531227134624024
+      },
+      "harm|both ~ fit": {
+       "cos": -0.3693340973904039,
+       "floor95": 0.2732655354965821,
+       "disattenuated": -0.4099247278256355
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 0.1836734693877551,
+      "refusal|harmless -> refusal|harmful": 0.01730103806228374,
+      "harm|refuse -> harm|comply": 0.5,
+      "harm|comply -> harm|refuse": 0.6638655462184874
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 0.6775376436736552,
+       "harmful/comply": 3.019305839096443,
+       "harmless/refuse": -1.7210161690471086,
+       "harmless/comply": -2.4232713780074455,
+       "borderline/refuse": 0.23331370681801827,
+       "borderline/comply": -0.465239575985943
+      },
+      "harm|refuse": {
+       "harmful/refuse": 2.24048648100929,
+       "harmful/comply": -0.6329489339816629,
+       "harmless/refuse": -1.6209964217283994,
+       "harmless/comply": -0.4767823963127847,
+       "borderline/refuse": 1.4289445544619668,
+       "borderline/comply": -0.26560102270724883
+      },
+      "harm|comply": {
+       "harmful/refuse": -0.8290364962016141,
+       "harmful/comply": 5.149326873278503,
+       "harmless/refuse": -1.2843851527715198,
+       "harmless/comply": -3.3125214310384976,
+       "borderline/refuse": -0.8330912713675862,
+       "borderline/comply": -0.4909757136542567
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 3.3447750848472366,
+       "harmful/comply": -5.862255099106864,
+       "harmless/refuse": 0.6016881740654859,
+       "harmless/comply": 1.4479919042052283,
+       "borderline/refuse": 2.6612529022714067,
+       "borderline/comply": -0.45858349864611136
+      },
+      "refusal|harmless": {
+       "harmful/refuse": 0.10953587340412901,
+       "harmful/comply": 2.625453308923949,
+       "harmless/refuse": 1.648397400852821,
+       "harmless/comply": -5.123959769271024,
+       "borderline/refuse": 0.445411463218298,
+       "borderline/comply": -1.905676883253979
+      },
+      "fit": {
+       "harmful/refuse": 2.8446568586557692,
+       "harmful/comply": -5.682237068418743,
+       "harmless/refuse": 0.1090805180560036,
+       "harmless/comply": 2.5099418097197215,
+       "borderline/refuse": 2.1747682390161778,
+       "borderline/comply": 0.07738946254777972
+      }
+     },
+     "factorial_norms": {
+      "harm": 32.3048602131898,
+      "stance": 25.628691540146853,
+      "fit": 29.64184093233632
+     }
+    }
+   }
+  },
+  "b": {
+   "9": {
+    "boundary": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9792225328093762,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9435290699422926,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.7171215300375688,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 0.9495798319327731,
+       "reliability": 0.6628122554604128,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 0.9663865546218487,
+       "reliability": 0.6904548224327367,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      },
+      "fit": {
+       "auroc": 0.7627471383975026,
+       "reliability": 0.7671065205149384,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": 0.8006051746781562,
+       "floor95": 0.6518719977951439,
+       "disattenuated": 0.8329137871630298
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.33832230995986134,
+       "floor95": 0.2747659292943031,
+       "disattenuated": 0.4037323572186758
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.012237904844921722,
+       "floor95": 0.2524540915712478,
+       "disattenuated": -0.015190466380074144
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": 0.16598332366985602,
+       "floor95": 0.2555354813393818,
+       "disattenuated": 0.20186272139364966
+      },
+      "refusal|harmful ~ fit": {
+       "cos": 0.8030719269151634,
+       "floor95": 0.7667926552739064,
+       "disattenuated": 0.9265863713325964
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": 0.21333821187231006,
+       "floor95": 0.2634091332536066,
+       "disattenuated": 0.25935500138477297
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.3004054106784441,
+       "floor95": 0.3630926670844548,
+       "disattenuated": 0.37986986549309326
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": 0.27690051602769405,
+       "floor95": 0.33866431270193587,
+       "disattenuated": 0.3430666398293368
+      },
+      "refusal|harmless ~ fit": {
+       "cos": 0.2858956016302984,
+       "floor95": 0.7145164025599104,
+       "disattenuated": 0.33604852553951764
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.7469846364915242,
+       "floor95": 0.5922868980540705,
+       "disattenuated": 1.083477816620549
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.9283788258008877,
+       "floor95": 0.6113422918996783,
+       "disattenuated": 1.3193536177681222
+      },
+      "harm|refuse ~ fit": {
+       "cos": 0.3289037446434423,
+       "floor95": 0.26195369993414175,
+       "disattenuated": 0.4434499396796978
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.9405631791822653,
+       "floor95": 0.662529314850316,
+       "disattenuated": 1.3903529879214784
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.3183173871078977,
+       "floor95": 0.3170588510158513,
+       "disattenuated": -0.4464134377965766
+      },
+      "harm|both ~ fit": {
+       "cos": -0.009921279851745905,
+       "floor95": 0.31421811472750955,
+       "disattenuated": -0.013632397132098297
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 0.9948979591836735,
+      "refusal|harmless -> refusal|harmful": 1.0,
+      "harm|refuse -> harm|comply": 0.9495798319327731,
+      "harm|comply -> harm|refuse": 0.9705882352941176
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 1.3790419501007147,
+       "harmful/comply": 0.06898806009716779,
+       "harmless/refuse": -1.4775089231984273,
+       "harmless/comply": -2.4222186717923093,
+       "borderline/refuse": 1.7032636697207142,
+       "borderline/comply": 0.8140714642432714
+      },
+      "harm|refuse": {
+       "harmful/refuse": 2.0512417096798585,
+       "harmful/comply": -0.22504314773534656,
+       "harmless/refuse": -1.521621357845134,
+       "harmless/comply": -2.3123863677766634,
+       "borderline/refuse": 1.5593450504110278,
+       "borderline/comply": 0.3104397822728234
+      },
+      "harm|comply": {
+       "harmful/refuse": 0.6215804830081236,
+       "harmful/comply": 0.33167516961557714,
+       "harmless/refuse": -1.2861730888788936,
+       "harmless/comply": -2.275640408902463,
+       "borderline/refuse": 1.6613674849807414,
+       "borderline/comply": 1.1929562301533045
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 2.7796062515365842,
+       "harmful/comply": -2.316742256610006,
+       "harmless/refuse": 1.8069320914486282,
+       "harmless/comply": -1.5814271550445504,
+       "borderline/refuse": 1.297119455007533,
+       "borderline/comply": -2.4877422278678303
+      },
+      "refusal|harmless": {
+       "harmful/refuse": 2.0203805963404466,
+       "harmful/comply": -2.0735346904673992,
+       "harmless/refuse": 2.0199334975461816,
+       "harmless/comply": -1.812230720665432,
+       "borderline/refuse": 1.565753856656419,
+       "borderline/comply": -1.975314513778898
+      },
+      "fit": {
+       "harmful/refuse": 2.901868999968271,
+       "harmful/comply": -1.9188045608646525,
+       "harmless/refuse": 0.9799152101948576,
+       "harmless/comply": -0.8006767470867656,
+       "borderline/refuse": 0.5549591587156666,
+       "borderline/comply": -2.3828080119918287
+      }
+     },
+     "factorial_norms": {
+      "harm": 27.823638243890603,
+      "stance": 31.59760152959863,
+      "fit": 10.660954631706899
+     }
+    }
+   },
+   "17": {
+    "boundary": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9885058896361081,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 1.0,
+       "reliability": 0.9680829683298311,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.9538882277037108,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.9683548290140378,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9453631338308258,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      },
+      "fit": {
+       "auroc": 0.9979188345473465,
+       "reliability": 0.9714460341839706,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": -0.1310988802276696,
+       "floor95": 0.3482097267404414,
+       "disattenuated": -0.13401489233942943
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.4906529869743661,
+       "floor95": 0.45478862532078623,
+       "disattenuated": 0.5052846114798103
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.5834647841764984,
+       "floor95": 0.5607476555071104,
+       "disattenuated": -0.5963589711065257
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": -0.1334283969282954,
+       "floor95": 0.3094503368778279,
+       "disattenuated": -0.13802549283986307
+      },
+      "refusal|harmful ~ fit": {
+       "cos": 0.8989979525871856,
+       "floor95": 0.8385335082570728,
+       "disattenuated": 0.9174021048152485
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.32890807752256485,
+       "floor95": 0.45698834907154345,
+       "disattenuated": -0.342270528135396
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.524713970622275,
+       "floor95": 0.4551501012847494,
+       "disattenuated": 0.5419373413523002
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": 0.18610907440711472,
+       "floor95": 0.24535773664616117,
+       "disattenuated": 0.19454135136375503
+      },
+      "refusal|harmless ~ fit": {
+       "cos": -0.5520306141640445,
+       "floor95": 0.7129785455459247,
+       "disattenuated": -0.5692427835035185
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": 0.1526607691448795,
+       "floor95": 0.4947213264589376,
+       "disattenuated": 0.15884057125876394
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.6990022637666066,
+       "floor95": 0.6671418073064687,
+       "disattenuated": 0.7360893031888543
+      },
+      "harm|refuse ~ fit": {
+       "cos": 0.5579801432141477,
+       "floor95": 0.4839960477008755,
+       "disattenuated": 0.5796430856256194
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.813447512850261,
+       "floor95": 0.645578910352671,
+       "disattenuated": 0.8501840306973507
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.7225428695948752,
+       "floor95": 0.5432926280808629,
+       "disattenuated": -0.7449669713413285
+      },
+      "harm|both ~ fit": {
+       "cos": -0.19444093641146454,
+       "floor95": 0.2882816758499747,
+       "disattenuated": -0.20289859187019238
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 0.16326530612244897,
+      "refusal|harmless -> refusal|harmful": 0.08304498269896193,
+      "harm|refuse -> harm|comply": 0.7016806722689075,
+      "harm|comply -> harm|refuse": 0.8697478991596639
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 1.6301754042334777,
+       "harmful/comply": 3.0603047151620237,
+       "harmless/refuse": -2.887847663024789,
+       "harmless/comply": -3.475551585318769,
+       "borderline/refuse": 0.833296828331882,
+       "borderline/comply": -0.44831426719338324
+      },
+      "harm|refuse": {
+       "harmful/refuse": 3.7274708659253064,
+       "harmful/comply": -0.20154421660712116,
+       "harmless/refuse": -3.4206169483215967,
+       "harmless/comply": -0.8163241101402748,
+       "borderline/refuse": 1.9408069099398422,
+       "borderline/comply": -1.1911257990201105
+      },
+      "harm|comply": {
+       "harmful/refuse": -0.4269873400378085,
+       "harmful/comply": 4.109076285809003,
+       "harmless/refuse": -1.4145051105295208,
+       "harmless/comply": -3.953663255409083,
+       "borderline/refuse": -0.24243449449732032,
+       "borderline/comply": 0.23068180412500283
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 3.4058660983777873,
+       "harmful/comply": -4.730089799113472,
+       "harmless/refuse": 0.26593369187269045,
+       "harmless/comply": 1.418020247708759,
+       "borderline/refuse": 2.4841067138163178,
+       "borderline/comply": -1.7490903994649454
+      },
+      "refusal|harmless": {
+       "harmful/refuse": -0.6685212760391027,
+       "harmful/comply": 1.2081760400493526,
+       "harmless/refuse": 2.5778947351939174,
+       "harmless/comply": -5.216608480989878,
+       "borderline/refuse": 0.8829315276347398,
+       "borderline/comply": -0.7580916895629394
+      },
+      "fit": {
+       "harmful/refuse": 2.859845380612196,
+       "harmful/comply": -4.056293524405155,
+       "harmless/refuse": -0.5713905528059332,
+       "harmless/comply": 2.6827995844034587,
+       "borderline/refuse": 1.6717522789914288,
+       "borderline/comply": -1.1358852882064578
+      }
+     },
+     "factorial_norms": {
+      "harm": 47.820710622026844,
+      "stance": 36.238013482110745,
+      "fit": 41.13548496471518
+     }
+    }
+   },
+   "22": {
+    "boundary": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9911147780728248,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 0.9948979591836735,
+       "reliability": 0.9622734591408754,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.9693001486608902,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.9756311640300307,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9545514051545935,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      },
+      "fit": {
+       "auroc": 0.9979188345473465,
+       "reliability": 0.9838746895392942,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": -0.5460481830584447,
+       "floor95": 0.5876408292710935,
+       "disattenuated": -0.5591389373338135
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.6304144868695454,
+       "floor95": 0.6538870503389259,
+       "disattenuated": 0.6431837583522789
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.734452274976424,
+       "floor95": 0.6829180273660838,
+       "disattenuated": -0.7468936590211467
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": -0.11956566789633943,
+       "floor95": 0.42665048874844536,
+       "disattenuated": -0.12292631353181936
+      },
+      "refusal|harmful ~ fit": {
+       "cos": 0.9556630447968336,
+       "floor95": 0.9077134372460152,
+       "disattenuated": 0.9677717091475968
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.6295120745936722,
+       "floor95": 0.644465071852179,
+       "disattenuated": -0.6518169822340043
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.5869821874550466,
+       "floor95": 0.6128208977745012,
+       "disattenuated": 0.6058049763030832
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": 0.006348075496589806,
+       "floor95": 0.36639663309398884,
+       "disattenuated": 0.006623585835089577
+      },
+      "refusal|harmless ~ fit": {
+       "cos": -0.7685251120229549,
+       "floor95": 0.7735911647904249,
+       "disattenuated": -0.7898396198290846
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": -0.09119827132918663,
+       "floor95": 0.5348415815738571,
+       "disattenuated": -0.09378095144256429
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.6394185763616551,
+       "floor95": 0.6837775977738825,
+       "disattenuated": 0.6647470962329128
+      },
+      "harm|refuse ~ fit": {
+       "cos": 0.7027354089531708,
+       "floor95": 0.6392928087306532,
+       "disattenuated": 0.7196027314639895
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.7073409272905092,
+       "floor95": 0.674589178667859,
+       "disattenuated": 0.7329701603903986
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.7672435793319369,
+       "floor95": 0.6361162636823168,
+       "disattenuated": -0.7831059728636794
+      },
+      "harm|both ~ fit": {
+       "cos": -0.09354745200649912,
+       "floor95": 0.40839856045506806,
+       "disattenuated": -0.09653002265192712
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 0.015306122448979591,
+      "refusal|harmless -> refusal|harmful": 0.0,
+      "harm|refuse -> harm|comply": 0.14705882352941177,
+      "harm|comply -> harm|refuse": 0.3319327731092437
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 1.666451901752331,
+       "harmful/comply": 2.4078674617213944,
+       "harmless/refuse": -2.3821811708460845,
+       "harmless/comply": -1.6836849449892957,
+       "borderline/refuse": 0.20173182743479728,
+       "borderline/comply": -1.1412962535936049
+      },
+      "harm|refuse": {
+       "harmful/refuse": 3.433276065892117,
+       "harmful/comply": -0.7909708945274397,
+       "harmless/refuse": -3.157172686743261,
+       "harmless/comply": 0.5587071747184708,
+       "borderline/refuse": 1.8163930996704274,
+       "borderline/comply": -1.9344819169429135
+      },
+      "harm|comply": {
+       "harmful/refuse": -0.8421670828471011,
+       "harmful/comply": 4.034930371177921,
+       "harmless/refuse": -0.3946277206196066,
+       "harmless/comply": -2.8265347385651003,
+       "borderline/refuse": -1.3809689515856458,
+       "borderline/comply": 0.19615300651144785
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 3.176383803604291,
+       "harmful/comply": -4.140832939872017,
+       "harmless/refuse": -1.2489461678883949,
+       "harmless/comply": 1.9629632013707756,
+       "borderline/refuse": 2.6300327412613895,
+       "borderline/comply": -1.5643888257805094
+      },
+      "refusal|harmless": {
+       "harmful/refuse": -2.4237933462452554,
+       "harmful/comply": 2.3054179080517114,
+       "harmless/refuse": 2.800648333842313,
+       "harmless/comply": -3.2546848424927797,
+       "borderline/refuse": -1.5002445055949407,
+       "borderline/comply": 1.2012903796792471
+      },
+      "fit": {
+       "harmful/refuse": 3.0362393861372405,
+       "harmful/comply": -3.707919938089085,
+       "harmless/refuse": -1.7349824972603982,
+       "harmless/comply": 2.3909007323230567,
+       "borderline/refuse": 2.365604348768481,
+       "borderline/comply": -1.4975801756479072
+      }
+     },
+     "factorial_norms": {
+      "harm": 46.16612415453426,
+      "stance": 29.097872013243155,
+      "fit": 50.57082045931688
+     }
+    }
+   },
+   "29": {
+    "boundary": {
+     "units": {
+      "refusal|harmful": {
+       "auroc": 1.0,
+       "reliability": 0.9894138097803141,
+       "n_train": [
+        23,
+        23
+       ],
+       "n_test": [
+        17,
+        17
+       ]
+      },
+      "refusal|harmless": {
+       "auroc": 0.9897959183673469,
+       "reliability": 0.9647832265483156,
+       "n_train": [
+        16,
+        16
+       ],
+       "n_test": [
+        14,
+        14
+       ]
+      },
+      "harm|refuse": {
+       "auroc": 1.0,
+       "reliability": 0.9751770828319698,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|comply": {
+       "auroc": 1.0,
+       "reliability": 0.9773791184898036,
+       "n_train": [
+        23,
+        16
+       ],
+       "n_test": [
+        17,
+        14
+       ]
+      },
+      "harm|both": {
+       "auroc": 1.0,
+       "reliability": 0.9666691616745863,
+       "n_train": [
+        46,
+        32
+       ],
+       "n_test": [
+        34,
+        28
+       ]
+      },
+      "fit": {
+       "auroc": 0.9979188345473465,
+       "reliability": 0.9842080384029799,
+       "n_train": [
+        39,
+        39
+       ],
+       "n_test": [
+        31,
+        31
+       ]
+      }
+     },
+     "pairs": {
+      "refusal|harmful ~ refusal|harmless": {
+       "cos": -0.5602031082182812,
+       "floor95": 0.6140299010231032,
+       "disattenuated": -0.5733788352423453
+      },
+      "refusal|harmful ~ harm|refuse": {
+       "cos": 0.5794293869303828,
+       "floor95": 0.5918093887024537,
+       "disattenuated": 0.5898883109145846
+      },
+      "refusal|harmful ~ harm|comply": {
+       "cos": -0.7510930063758554,
+       "floor95": 0.7230873510869411,
+       "disattenuated": -0.7637886601881404
+      },
+      "refusal|harmful ~ harm|both": {
+       "cos": -0.1798140459003567,
+       "floor95": 0.4592845982938834,
+       "disattenuated": -0.18386357367099354
+      },
+      "refusal|harmful ~ fit": {
+       "cos": 0.9534160853905486,
+       "floor95": 0.8930901539120731,
+       "disattenuated": 0.9661621884640932
+      },
+      "refusal|harmless ~ harm|refuse": {
+       "cos": -0.6504161264459913,
+       "floor95": 0.6469132873427106,
+       "disattenuated": -0.6705554323128557
+      },
+      "refusal|harmless ~ harm|comply": {
+       "cos": 0.5670515282580402,
+       "floor95": 0.6181541627988292,
+       "disattenuated": 0.5839506214893512
+      },
+      "refusal|harmless ~ harm|both": {
+       "cos": -0.00963348259919705,
+       "floor95": 0.42379374209304566,
+       "disattenuated": -0.009975381480104116
+      },
+      "refusal|harmless ~ fit": {
+       "cos": -0.7839869538061153,
+       "floor95": 0.7604247790796596,
+       "disattenuated": -0.8045453140008483
+      },
+      "harm|refuse ~ harm|comply": {
+       "cos": -0.050573195217995186,
+       "floor95": 0.5435758467804912,
+       "disattenuated": -0.051802070890428514
+      },
+      "harm|refuse ~ harm|both": {
+       "cos": 0.643939579128556,
+       "floor95": 0.6531852035422675,
+       "disattenuated": 0.6632304299722357
+      },
+      "harm|refuse ~ fit": {
+       "cos": 0.6710889455924012,
+       "floor95": 0.6456413459164749,
+       "disattenuated": 0.6850068081055753
+      },
+      "harm|comply ~ harm|both": {
+       "cos": 0.7315312416374002,
+       "floor95": 0.7023178108297785,
+       "disattenuated": 0.7525968880593803
+      },
+      "harm|comply ~ fit": {
+       "cos": -0.7693767835129207,
+       "floor95": 0.6904998371697754,
+       "disattenuated": -0.7844478825495451
+      },
+      "harm|both ~ fit": {
+       "cos": -0.1312461685851981,
+       "floor95": 0.43759040342876165,
+       "disattenuated": -0.1345563655800955
+      }
+     },
+     "cross": {
+      "refusal|harmful -> refusal|harmless": 0.01020408163265306,
+      "refusal|harmless -> refusal|harmful": 0.0,
+      "harm|refuse -> harm|comply": 0.22268907563025211,
+      "harm|comply -> harm|refuse": 0.4369747899159664
+     },
+     "cells": {
+      "harm|both": {
+       "harmful/refuse": 1.4853661665585556,
+       "harmful/comply": 2.5606724189087684,
+       "harmless/refuse": -2.293959068696903,
+       "harmless/comply": -1.6338531446590612,
+       "borderline/refuse": 0.05045458024773378,
+       "borderline/comply": -1.1828984461330294
+      },
+      "harm|refuse": {
+       "harmful/refuse": 3.108795607299047,
+       "harmful/comply": -0.381099857080125,
+       "harmless/refuse": -3.0284834951602724,
+       "harmless/comply": 0.549805336890987,
+       "borderline/refuse": 1.594765790388613,
+       "borderline/comply": -1.913969008001
+      },
+      "harm|comply": {
+       "harmful/refuse": -0.7021960089184688,
+       "harmful/comply": 3.9641604599425553,
+       "harmless/refuse": -0.5134973841218703,
+       "harmless/comply": -2.8057782404053646,
+       "borderline/refuse": -1.3662524958946272,
+       "borderline/comply": 0.05279606356781395
+      },
+      "refusal|harmful": {
+       "harmful/refuse": 2.994702832411658,
+       "harmful/comply": -4.147499747133816,
+       "harmless/refuse": -1.0637631496298434,
+       "harmless/comply": 2.1310291011016695,
+       "borderline/refuse": 2.4706605090415743,
+       "borderline/comply": -1.2865881759778937
+      },
+      "refusal|harmless": {
+       "harmful/refuse": -2.13002217462006,
+       "harmful/comply": 1.9324329727754497,
+       "harmless/refuse": 2.567410572227766,
+       "harmless/comply": -3.020689000306242,
+       "borderline/refuse": -1.5942420695632875,
+       "borderline/comply": 1.4229190292369944
+      },
+      "fit": {
+       "harmful/refuse": 2.8128758014278534,
+       "harmful/comply": -3.55724194081242,
+       "harmless/refuse": -1.6014572262851083,
+       "harmless/comply": 2.502202293290844,
+       "borderline/refuse": 2.2664205442208685,
+       "borderline/comply": -1.3773742293044748
+      }
+     },
+     "factorial_norms": {
+      "harm": 48.86480005896686,
+      "stance": 28.6386846229379,
+      "fit": 51.38462155075849
+     }
     }
    }
   }

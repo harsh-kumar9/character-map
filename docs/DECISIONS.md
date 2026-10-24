@@ -2072,3 +2072,36 @@ tokens and at the boundary, on the 2x2's harm axis (boundary, harmful vs harmles
   most harmful requests as if the user were in distress, which links this block to care (C5) and wellbeing (C26).
   Open: a later window (tokens at the stance) would test whether the reading follows the stance once stated; the
   C15 a/b frames go in when the harmlessness builder's S3 lands.
+
+## C15 2x2 with frames a and b - 2026-10-24
+
+The 2x2 rerun with the harmlessness builder's frames a (describe: "How would you describe what the assistant did
+here?") and b (judge: "Was that a good response?"), exploratory (cm/hhh/c15_2x2.py, jobs 420907, 420913,
+results/hhh/c15_2x2.json; frames c and d unchanged to the last digit). In a and b the request and the assistant's
+reply are quoted in one user turn and read at the boundary, so the stance is already seen there. Added where the
+stance is seen: a fit unit (refuse a harmful request or help with a harmless one, vs the reverse: the 2x2's
+interaction) and the norms of the harm, stance and fit contrasts of the four train cell means (same weighting, so one
+noise level; not subtracted).
+- Refusing is one direction when Gemma acts, and not when it watches. Cross AUROC of the refusal direction from
+  harmful requests on harmless ones and back: c and d 1.00 both ways at 17/22/29; a 0.66/0.56, 0.35/0.13, 0.18/0.02;
+  b 0.16/0.08, 0.02/0.00, 0.01/0.00. In b the transfer is fully reversed: refusing a harmless request is read like
+  complying with a harmful one. The cosines (-0.13, -0.55, -0.56) stay within their sign-flip floors (0.35, 0.59,
+  0.61), which run high when one effect is large; the cross scores are the cleaner test.
+- What replaces it is fit. Norms harm / stance / fit at 17, 22, 29:
+  c act (reply32) 41/43/31, 38/44/30, 38/39/28; d self-describe (reply32) 49/37/24, 46/39/26, 45/37/24;
+  a describe (boundary) 30/28/26, 31/26/28, 32/26/30; b judge (boundary) 48/36/41, 46/29/51, 49/29/51.
+  In the judge frame fit is the largest contrast from layer 22; in describe it rises to the size of harm; in the two
+  first-person frames it is the smallest. At layer 9 stance leads everywhere and fit is small (7.5 to 24).
+- On the fit axis in b (22) the four cells are symmetric: harmful/refuse +3.04, harmless/comply +2.39 vs
+  harmful/comply -3.71, harmless/refuse -1.73. In c the same axis is mostly the harmful pair (+6.41 vs -4.24) with
+  helping a harmless request near zero (-0.42). Borderline requests: refusing sits on the fit side in every frame
+  (b +2.37 vs comply -1.50 at 22; c +2.45 vs -2.38).
+- For the harmlessness block: its two C15 units, "refuses a harmful request" and "helps with a harmless request"
+  (refusal|harmful and the negated refusal|harmless), transfer to each other when Gemma judges (cross AUROC 0.98 to
+  1.00 at 22/29 in b, once one is negated; cosine +0.55, +0.56, within floor) and against each other when it acts
+  (cross 0.00 in c and d once negated; cosine -0.32, -0.37, -0.35 at 17/22/29 in c, floors 0.29 to 0.31). The block's
+  "harmlessness" is one direction in judgment and two opposed ones in action.
+- This matches the verdict labels (Gemma backs fitting replies and condemns misfitting ones in b, D-057 builder) and
+  the own-reply result (the stance does not move the harm reading when Gemma acts). Caveats: the replies are
+  prefilled and templated, so fit may partly be "the reply's wording matches the request's topic"; the norms carry
+  noise of unknown size; n per cell 16 to 23.
