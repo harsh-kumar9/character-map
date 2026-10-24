@@ -2105,3 +2105,50 @@ noise level; not subtracted).
   the own-reply result (the stance does not move the harm reading when Gemma acts). Caveats: the replies are
   prefilled and templated, so fit may partly be "the reply's wording matches the request's topic"; the norms carry
   noise of unknown size; n per cell 16 to 23.
+
+## D-057 results - 2026-10-24
+
+The core build is done and through S3 plus the verdict and negation controls (results/s3, s3_ctrl_verdict,
+s3_ctrl_negation; per-concept files only, `cm.s3 table` not run). AUROC on the test split, difference of means at
+layer 17 / 29, sdm in brackets. Frames a and b at the boundary unless marked reply32.
+
+Counts.
+- C27: 81 side_effect and 92 instructed scenarios, short of 100. ToolEmu has 131 usable cases and 43 never met the
+  rules in five tries. The verifier calls about half the Agent-SafetyBench requests not harmful, so the instructed
+  pool went from 130 to 220 candidates, same sources and order (e61f0ed). Only 10 of the 81 safe steps ask first; the
+  rest act on the right items.
+- New rows: C15 a b 400, A7 b 200, B1 d 200 (100/100 verified), C20 psychopathy a b 200. Old rows unchanged in all four.
+
+Within frame, new frames.
+- C27 instructed: a 0.76/0.88 [1.00/0.99], b 0.91/0.74 [1.00/0.85], c 0.95/1.00 [1.00/1.00], d 0.89/0.98 [1.00/1.00].
+- C27 side_effect: a 0.60/0.72 [0.77/0.77], b 0.67/0.70 [0.83/0.72], c 0.67/0.56 [0.72/0.66], d 0.72/0.81
+  [0.96/0.93]. Weak.
+- C15 refuse: a 0.97/0.95 [1.00/0.99], b 0.94/0.82 [1.00/0.85]; reply32 a 0.88/1.00 [1.00/1.00], b 0.91/0.99
+  [1.00/0.99].
+- A7: b 0.95/0.96 [1.00/0.97]; reply32 0.90/0.98 [1.00/1.00].
+- B1: d 0.86/0.92 [1.00/0.97].
+- C20 psychopathy: a 1.00/0.92 [1.00/1.00], b 1.00/1.00 [1.00/1.00] (32 test rows).
+
+Held-out.
+- C27 R-Judge records, frames a and b. side_effect (injection records): a 0.58/0.88 [0.96/0.94], b 0.79/0.82
+  [0.96/0.84], better than its own test split. instructed (unintended records): 0.43 to 0.69 [0.59 to 0.72] in
+  every cell.
+- C27 GAP far held-out (frame c, instructed, 36 test scenarios): 0.93/1.00 [1.00/1.00]. "Declines, then makes the
+  call" scores as acting, so the direction follows the call, not the refusal words. The Final Answer vs Action format
+  could still carry it.
+
+Cross-frame transfer (reply32 direction from one frame scored on another).
+- C27 instructed: a to c 0.85/1.00, d to c 0.82/1.00, b to c 0.52/0.99, c to d 0.89/0.68.
+- C27 side_effect: 0.32 to 0.71 for every pair. Nothing transfers.
+- C15: a to c 0.29/0.43, a to d 0.14/0.23, b to d 0.86/0.28. Pooled over request types, frame a's refusal direction
+  points away from c and d, as in the 2x2 (fit, not refusal, in the watching frames).
+- A7: a to b 0.91/1.00, b to c 0.35/0.40, b to d 0.72/0.52.
+- B1: a to d 0.86/0.63, b to d 0.86/0.62, c to d 0.86/0.95.
+- C20 psychopathy: a to c 0.93/0.88, a to d 0.92/0.82, b to c 0.21/0.39, b to d 0.52/0.63.
+
+Controls. Projecting out Gemma's verdict or negation moves within-frame dm AUROC by 0.08 at most (C27 instructed b
+reply32 L17 0.78 to 0.86 with verdict; side_effect b reply32 L17 0.72 to 0.64). Held-out moves more: C27 side_effect
+R-Judge a boundary L17 0.58 to 0.75 with negation, a reply32 L17 sdm 0.89 to 0.55 with either.
+
+Verdict labels (P / N / X on a and b replies): C15 190/142/68, A7 302/86/12, C20 63/109/28, C27 559/215/318 (with
+held-out). Gemma backs the suspicious friend in A7 b 96 of 100 times and the charitable one 57 of 100.
