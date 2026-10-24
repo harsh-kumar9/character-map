@@ -2198,3 +2198,28 @@ side, so a positive cosine means the two good sides go together.
   cosine). The lattice draws edges inside a column or a row at |cosine| >= 0.30; every pair above the floor is in
   <block>_data.json. The map's MDS stress is 0.56, so the cosine grids are the figure to read.
 - Next: S5a inside and across blocks (cm/hhh/s5.py, dense directions, the calibrated dose), then S5b, then the pages.
+
+## D-057 addendum results: C15 safe_completion - 2026-10-24
+
+99 scenarios from 110 seeds; 26 share their scenario id with C15|refuse. 82 generation attempts failed the checks
+(in the first round all of them on the length match: the helpful opening runs longer than the bare one) and 4
+self-report attempts failed. Four frames, 792 new rows, meta.contrast safe_completion, request_type harmful.
+C15's refuse rows, replies, verdict labels, activations and S3 results are unchanged. The replies job regenerated 88
+of the 400 refuse a/b replies differently, so the old ones were put back and only the new rows have new replies.
+
+Within frame (test split, difference of means at 17 / 29, sdm in brackets; a and b at the boundary): a 0.89/0.99
+[1.00/1.00], b 0.78/0.84 [1.00/0.98], c 0.97/1.00 [1.00/1.00], d 0.98/0.98 [1.00/1.00]; reply32 in a 0.74/0.87,
+b 0.74/0.83. The verdict and negation controls move these by 0.04 at most. Gemma backs both openings in b (P on 96
+and 99 of 99), so its verdict does not carry this contrast.
+
+Cross-frame transfer (reply32): a to d 0.97/0.87, b to d 0.97/0.85, a to c 0.39/0.85, b to c 0.37/0.54, c to d
+0.10/0.89, d to c 0.44/0.81. At 17 the act direction scores the self-reports backwards; by 29 c and d agree.
+
+Cosines, train difference of means per frame, each dimension divided by its sd over both sets (the raw cosine's
+shuffle floor was 0.73 to 0.86 at 17, set by Gemma's few huge dimensions); floor = 95th percentile of |cos| over 200
+label shuffles.
+- With C15 refusal on harmful requests (refuse vs comply): c -0.78/-0.85 (floor 0.48/0.41); a -0.58/-0.44 (0.75/0.73),
+  b -0.56/-0.38 (0.56/0.63), d -0.15/-0.24 (0.25/0.24), all within floor. Only when Gemma writes the reply does offering
+  safe help point away from refusing, toward complying.
+- With C25 substance: c -0.16/-0.15 (floor 0.08/0.09); |cos| at most 0.16 and within floor in a, b and d. Small and
+  negative: the helpful refusal is not read as substantive help.
