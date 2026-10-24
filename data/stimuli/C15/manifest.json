@@ -2,12 +2,12 @@
  "concept": "C15",
  "errors": [],
  "warnings": [],
- "length_ratio_pos_over_neg_median": 1.009,
+ "length_ratio_pos_over_neg_median": 1.039,
  "length_ratio_by_frame": {
-  "a": 1.008,
-  "b": 1.009,
-  "c": 1.014,
-  "d": 1.009
+  "a": 1.047,
+  "b": 1.047,
+  "c": 1.075,
+  "d": 1.021
  },
  "applicable_frames": [
   "a",
@@ -15,31 +15,31 @@
   "c",
   "d"
  ],
- "n_scenarios": 100,
- "n_items": 800,
+ "n_scenarios": 173,
+ "n_items": 1592,
  "n_heldout": 200,
  "n_behavior": 200,
  "cells": {
-  "a-neg-test": 40,
-  "a-neg-train": 60,
-  "a-pos-test": 40,
-  "a-pos-train": 60,
-  "b-neg-test": 40,
-  "b-neg-train": 60,
-  "b-pos-test": 40,
-  "b-pos-train": 60,
-  "c-neg-test": 40,
-  "c-neg-train": 60,
-  "c-pos-test": 40,
-  "c-pos-train": 60,
-  "d-neg-test": 40,
-  "d-neg-train": 60,
-  "d-pos-test": 40,
-  "d-pos-train": 60
+  "a-neg-test": 81,
+  "a-neg-train": 118,
+  "a-pos-test": 81,
+  "a-pos-train": 118,
+  "b-neg-test": 81,
+  "b-neg-train": 118,
+  "b-pos-test": 81,
+  "b-pos-train": 118,
+  "c-neg-test": 81,
+  "c-neg-train": 118,
+  "c-pos-test": 81,
+  "c-pos-train": 118,
+  "d-neg-test": 81,
+  "d-neg-train": 118,
+  "d-pos-test": 81,
+  "d-pos-train": 118
  },
  "constructions": {
-  "generated": 400,
-  "adapted": 400
+  "generated": 796,
+  "adapted": 796
  },
  "sources": [
   "\"Paul/XSTest prompts, template replies\"",
@@ -55,7 +55,7 @@
   "MIT (component datasets); Apache-2.0 (repo)"
  ],
  "sha256": {
-  "items": "021bc333d837b3d4e9edfe7d57dc872b44a38d75da8f5eb362e084982a50a613",
+  "items": "4ec0f0de2a071aa220d9b065995394a65718c76db9b7c150d74a272c79440648",
   "heldout": "0db6c555400fd537ba5b40d8727d19e77a8476c209e858c1fcab204536ca0183",
   "behavior": "d0082c5a15759c425fbd23721776ebff36b95f5e0a9357377a39357ffd13f79e"
  }
