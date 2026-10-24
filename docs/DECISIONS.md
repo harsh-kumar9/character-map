@@ -1967,3 +1967,48 @@ both sub-contrasts; side_effect pos is a sanctioned action in two thirds of scen
 ToolEmu's ReAct format; R-Judge 100 unintended + 100 injection records in a and b; the GAP diagnostic as heldout_far;
 ManagerBench 100 + 100 with MB-score; "an AI agent" and "an AI assistant" as the third party; the four extensions as
 proposed. Build order: C27, the C15, A7, B1 and C20 frames, then the safe_completion addendum.
+
+## D-056 addendum: C28 asks only when a request is truly ambiguous - proposed 2026-10-24
+
+C28 was ruled in with D-053 to D-055 as a build after the helpfulness core, frames a b c d. This fixes the build.
+Source checked on 2026-10-24: CLAMBER (Zhang et al. 2024, ACL; github zt991211/CLAMBER, no license stated, last push
+2024-06-02). 3,202 single-turn queries, 1,601 that need clarification and 1,601 that do not, by type: what, whom,
+when, where (200 each, all ambiguous), unfamiliar entity and contradictory instructions (200 + 200 each), co-reference
+and polysemy (200 + 200 each), and 801 plain queries. Each ambiguous query carries a written clarifying question. No
+replies. Many are short QA or puzzles ("Who is leaving the town soon?" after a two-person sentence).
+
+- Items: 100 scenarios by gemma-4-31B-it (115 requested). Each scenario has one request in two versions: ambiguous
+  (it leaves open a detail that changes the right answer a lot) and clear (the same request with that detail given).
+  Ambiguity types rotated from CLAMBER's taxonomy (whom, what, when, where, an unfamiliar referent, conflicting
+  constraints, which thing "it" means, a word with two senses), the taxonomy only, never its items. Request kinds
+  rotated as in C24, including simple agentic tasks, where the constitution names needless questions as a failure.
+- Four replies, 20-55 words, each pair within 0.8-1.25. Ambiguous version: pos asks one short question that names the
+  open choice and says what it will do once it knows; neg picks one reading and answers in full, without saying it
+  picked. Clear version: pos answers in full; neg asks the same kind of question though nothing is open. So the two
+  sub-contrasts are under_asks (ambiguous request, pos asks) and over_asks (clear request, pos answers), and asking
+  is the pos in one and the neg in the other. Held fixed within each sub-contrast: the user turn, politeness, length.
+- The 2x2 is the point. If the model only reads "the reply asks a question", the two sub-contrast directions point
+  opposite ways (cosine near -1). A direction for asking when it is needed would be less than opposite. The cosine
+  under_asks vs over_asks per frame is the headline number, as lying vs misleading was for C1.
+- Frames. c: user turn, prefilled reply. a and b: one or two sentences of setting about a named person and who asks,
+  then the request quoted (built from the same request text, so a, b and c match); reply verbatim. d: self-report,
+  "Imagine someone asks you: <request>", one pair of self-descriptions per version (asks first vs answers).
+- Check, blind to the poles: shown both versions in a hashed order, gemma names the one that leaves a detail open;
+  for each version, the reply and the self-description that ask first; no reply may contain a mistake.
+- Held-out (c): CLAMBER, 100 ambiguous and 100 clear queries (unfamiliar-entity and contradictory-instruction items
+  left out, as puzzles). Llama-3.1-8B-Instruct writes two replies per query, greedy: one that answers directly and
+  one that is a single clarifying question (the instruction is not in the item). Ambiguous queries give under_asks
+  pairs (pos the question), clear ones give over_asks pairs (pos the answer). Same model and instructions on both
+  sides, so only CLAMBER's label sets the polarity.
+- Behavior: 200 CLAMBER queries not in the held-out (100 ambiguous, 100 clear). A gemma-4-31B-it judge labels each
+  reply ASKS (it asks before answering) or ANSWERS; expected ASKS on ambiguous and ANSWERS on clear queries; metric:
+  share that match, with the ask rate on each class beside it.
+- Risks: the direction may be a question-mark detector (the 2x2 and the cosine test that); clarifying replies run
+  short, so the length rule matters; under_asks overlaps C24 too_literal (both answer one reading), and the
+  perception of ambiguity is not itself a frame here; CLAMBER is QA-heavy and its license is not stated (item text
+  stays on ada).
+- Cost: about 115 generations and 115 checks; 400 short Llama replies; 1600 items (100 x 2 sub-contrasts x 4 frames
+  x 2). Then the same gates as the core.
+
+Rulings needed: (1) one scenario with an ambiguous and a clear version, four replies (vs separate scenarios per
+sub-contrast); (2) the CLAMBER held-out with Llama replies; (3) the CLAMBER ask-or-answer judge as behavior.
