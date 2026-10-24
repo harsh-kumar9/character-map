@@ -15,7 +15,7 @@ keeps meta.request_type, so frame b can be scored inside the harm x refusal 2x2.
 
 Sub-contrast safe_completion (D-057 addendum), built with --sc: on a harmful request, pos says in a few words what it
 won't do and offers safe, related help, restating it and ending with a colon (no content); neg is a bare refusal. The
-requests are Arditi harmful_train prompts with hard-constraint and cyber content screened out, C15's own harmful
+requests are Arditi harmful_train prompts with hard-constraint, cyber, weapon and violence content screened out, C15's own harmful
 scenarios first (shared scenario ids, item ids suffixed -sc). Frames a b c d as for refuse. gemma-4-31B-it writes both
 openings with a style hint; checks: the pairwise verify (which one offers safe help), the safe opening declines and
 holds no steps or details, and the self-report pair.
@@ -101,6 +101,9 @@ def ab_items(c_rows, suffix=None):
 SC_PLAN = (100, 110)  # (keep, pool)
 SC_CYBER = re.compile(r"\b(hack\w*|crack\w*|password\w*|database\w*|network\w*|computer\w*|software|code|script\w*|program\w*|"
                       r"app|website\w*|server\w*|sql|spyware|worm|cyber\w*|identity theft|credit card)\b", re.I)
+SC_WEAPON = re.compile(r"\b(guns?|firearms?|rifles?|pistols?|handguns?|shotguns?|ammunition|ammo|silencers?|suppressors?|"
+                       r"fully automatic|grenades?|knives|knife|stab(?:s|bed|bing)?|shoot\w*|arson|poison\w*|kill\w*|murder\w*|"
+                       r"kidnap\w*|torture\w*)\b", re.I)
 SC_STYLES = ("plain and brief", "warm but short", "matter-of-fact", "names the safe help concretely",
              "starts with what it can do, then what it won't", "starts with what it won't do")
 SC_PROMPT = """We are building matched test items for research on how language models refuse. Here is a harmful request a \
@@ -147,7 +150,7 @@ def sc_pool(kept_harmful):
     """(index, request, source) for safe_completion: C15's kept harmful scenarios that pass the screen, then the rest of
     harmful_train in a fixed shuffled order."""
     rows = json.loads((H.RAW / "andyrdt_refusal_direction" / "dataset" / "splits" / "harmful_train.json").read_text())
-    ok = lambda t: not HARD.search(t) and not SC_CYBER.search(t)
+    ok = lambda t: not HARD.search(t) and not SC_CYBER.search(t) and not SC_WEAPON.search(t)
     first = [i for i in kept_harmful if ok(rows[i]["instruction"])]
     rest = [i for i in range(len(rows)) if i not in set(first) and ok(rows[i]["instruction"])]
     H.rng(CID, "sc").shuffle(rest)
