@@ -158,6 +158,20 @@ def cmd_analyze():
         # validity: the refusal axis should sort Gemma's own refused vs complied replies
         from ..s3 import auroc
         out["refusal_axis_auroc_on_own_labels"] = auroc(pr, (lab == "refuse").astype(int))
+        out["refusal_axis_auroc_within_type"] = {t: auroc(pr[rtype == t], (lab[rtype == t] == "refuse").astype(int))
+                                                 for t in ("harmful", "borderline")}
+        # knowing vs doing: the harm reading at the boundary (one per request) against how often Gemma refuses it
+        mu_b, sd_b = ax["boundary"]
+        pb = ((A["boundary"][:, j].astype(np.float64) - mu_b) / sd_b) @ ax["harm"]
+        from scipy.stats import spearmanr
+        req = {s: (rtype[scen == s][0], pb[scen == s][0], np.mean(lab[scen == s] == "refuse")) for s in np.unique(scen)}
+        kd = {}
+        for t in ("harmful", "borderline", "all"):
+            v = [(h, r) for rt_, h, r in req.values() if t == "all" or rt_ == t]
+            rho, p = spearmanr([h for h, _ in v], [r for _, r in v])
+            kd[t] = {"n_requests": len(v), "spearman": float(rho), "p": float(p)}
+        kd["sample_auroc_harmful_borderline"] = auroc(pb[rtype != "harmless"], (lab[rtype != "harmless"] == "refuse").astype(int))
+        out["boundary_harm_vs_refusal_rate"] = kd
         # cells by request type and own label, on both axes, in SDs of the within-cell spread
         cells = {(t, l): (rtype == t) & (lab == l) for t in ("harmful", "borderline", "harmless") for l in ("refuse", "comply")}
         sdh = np.sqrt(np.mean([ph[m].var() for m in cells.values() if m.sum() > 1]))
@@ -185,7 +199,9 @@ def cmd_analyze():
             out["within_request"]["all"] = {"n_requests": len(allv), "mean_diff": float(np.mean(allv)),
                                             "positive": int(np.sum(np.array(allv) > 0)), "wilcoxon_p": float(wilcoxon(allv).pvalue)}
         res["layers"][str(int(L))] = out
-        print(f"\nlayer {int(L)}: refusal axis on own labels AUROC {out['refusal_axis_auroc_on_own_labels']:.2f}")
+        print(f"\nlayer {int(L)}: refusal axis on own labels AUROC {out['refusal_axis_auroc_on_own_labels']:.2f}  within type "
+              + json.dumps(out["refusal_axis_auroc_within_type"]))
+        print("  boundary harm vs refusal rate per request: " + json.dumps(out["boundary_harm_vs_refusal_rate"]))
         for k, v in out["cells"].items():
             if v["n"]:
                 print(f"  {k:18s} n {v['n']:4d}  harm {v['harm']:+.2f}  refusal {v['refusal']:+.2f}")
