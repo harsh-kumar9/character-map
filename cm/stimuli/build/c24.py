@@ -222,9 +222,17 @@ def items(gen):
 
 # ---------- IFEval: held-out pairs and behavior ----------
 
-def ifeval_rows():
+def scorable(row):
+    """False when a letter_frequency instruction names a non-letter ('#', '!'): the official checker then counts a
+    random letter instead, so the label changes from run to run."""
+    return all(re.fullmatch(r"[A-Za-z]", str(kw.get("letter") or "").strip())
+               for i, kw in zip(row["instruction_id_list"], row["kwargs"]) if i == "keywords:letter_frequency")
+
+
+def ifeval_rows(all_rows=False):
     d = D.hf_dir("google/IFEval")
-    return [dict(json.loads(l), rev=d.name) for l in open(d / "ifeval_input_data.jsonl", encoding="utf-8") if l.strip()]
+    rows = [dict(json.loads(l), rev=d.name) for l in open(d / "ifeval_input_data.jsonl", encoding="utf-8") if l.strip()]
+    return rows if all_rows else [r for r in rows if scorable(r)]
 
 
 def ifeval_prep():
@@ -232,7 +240,7 @@ def ifeval_prep():
     out = D.GEN / IFE_BATCH / "requests.jsonl"
     assert not out.exists(), f"{out} exists"
     rows = [{"request_id": f"{CID}-ife-{r['key']}-s{s}", "messages": [D.U(r["prompt"])], "max_tokens": 1536,
-             "temperature": 1.0, "expect_json": False} for r in ifeval_rows() for s in range(IFE_SAMPLES)]
+             "temperature": 1.0, "expect_json": False} for r in ifeval_rows(all_rows=True) for s in range(IFE_SAMPLES)]
     write_jsonl(out, rows)
     print(f"[{CID}] wrote {len(rows)} requests to {out}; run: sbatch --exclude=grace scripts/cm.sbatch cm.stimuli.generate "
           f"{IFE_BATCH} --model {IFE_MODEL}", flush=True)
@@ -256,7 +264,7 @@ def ifeval_pairs():
     resp = {}
     for p in sorted((D.GEN / IFE_BATCH).glob("responses.*.jsonl")):
         for r in read_jsonl(p):
-            if r.get("finish_reason") == "stop" and r["text"].strip():
+            if r.get("finish_reason") == "stop" and r["text"].strip() and int(r["request_id"].split("-")[2]) in rows:
                 resp.setdefault(int(r["request_id"].split("-")[2]), []).append(r["text"].strip())
     pairs, npass = {}, {}
     for key, reps in resp.items():
