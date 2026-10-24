@@ -1361,3 +1361,16 @@ coherence is irrelevant to it; proposed amendment: run S5a on every subject at a
 dose, and read the page's steering section at the dose whose random-direction spillover matches Gemma-3's 1/128 run
 (about 4-5% of cells). `cm.s5_causal run/matrix --dose-c <c>` (commit after this note) writes to s5_dose/c<c>/. S5b
 keeps the coherence dose as the behavioral upper bound. Not run until ratified.
+
+## D-051 build note - 2026-10-24
+
+C1 and C22 built at full size (100 scenarios; C1 128 of 130 verified, C22 102 of 110). C23 verified 50 of 110: the
+checker flagged the lever reply as stating something false in 60 scenarios, since scarcity, urgency, sunk cost and
+anchoring need a factual hook and the generator invented one ("60% of the philanthropists in your circle", "slots
+are filling up this month"); flattery and guilt passed. Fix, within the ratified no-false-fact rule: the system prompt
+now states the hook as a true fact of the situation (a real deadline, the real number remaining or what most buyers
+chose, a real higher-priced alternative, what the person has already spent, a detail about the person) and the lever
+reply may use only stated facts; failed scenarios get a third attempt. Wording variety: after the first pass the
+self-descriptions of all three concepts and C22's replies repeated stock phrases across scenarios (the C8 first-build
+problem), so each builder now gives a per-scenario style hint and bans the repeated phrases; the affected scenarios
+were regenerated and re-verified.
