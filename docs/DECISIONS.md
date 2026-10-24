@@ -2039,3 +2039,36 @@ The sub-contrast D-054 names and the ruling gives four frames; built after the c
 
 D-057 addendum, correction: weapon and violence requests (guns, knives, killing, poison, arson, kidnapping) are
 screened out too, so 161 of 260 harmful_train requests pass and 28 of C15's 40 harmful scenarios are shared.
+
+## C15 own replies results - 2026-10-24
+
+Follow-up to the 2x2, exploratory (cm/hhh/c15_own.py, jobs 420677, 420864, 420885, results/hhh/c15_own.json). For
+each C15 frame-c request (40 harmful, 30 borderline, 30 harmless), Gemma writes one greedy and 10 sampled replies
+(T 1, 256 tokens), labelled refuse or comply by refusal markers anywhere in the reply. Read on the first 32 reply
+tokens and at the boundary, on the 2x2's harm axis (boundary, harmful vs harmless, train split) and refusal axis
+(reply32, prefilled refuse vs comply on harmful requests), layers 9/17/22/29. Cell values in within-cell SDs.
+- Refusal rates, greedy and sampled: harmful 0.90 and 0.85, borderline 0.37 and 0.36, harmless 0 and 0. A first run
+  at 48 tokens with the label read off the first 120 characters gave 0.05 and 0.09 on harmful requests: Gemma opens
+  most refusals with a counselling preamble ("I understand you're grappling with ...", 339 of 376 refusals of harmful
+  requests) and states the refusal 30 to 60 tokens in. Borderline refusals mostly open directly (82 of 120). The
+  labels are still a substring rule; many replies warn and then partly help.
+- Within one request the stance does not move the harm reading. For the 30 requests with both outcomes (11 harmful,
+  19 borderline), refused minus complied samples on the harm axis: +0.13, +0.05, +0.02, -0.12 at 9/17/22/29, Wilcoxon
+  p 0.18 to 0.76, about half positive. This does not repeat the 2x2's "the harm reading follows the reply". Limit: in
+  Gemma's own replies the first 32 tokens are mostly preamble or warning, so the window often ends before the stance;
+  the prefilled replies state it at once.
+- Knowing predicts doing. The harm reading at the boundary, before any reply, ranks requests by how often Gemma goes
+  on to refuse them. Spearman per request, harmful (n 40): 0.45, 0.56, 0.72, 0.65; borderline (n 30): 0.16, 0.69,
+  0.76, 0.70; per-sample AUROC refuse vs comply over harmful and borderline requests: 0.76, 0.91, 0.93, 0.92. The
+  borderline numbers are the clean ones: the axis was fit on harmful vs harmless requests and never saw a borderline
+  one, nor any refusal rate.
+- The prefilled refusal axis reads refusal wording, not the decision. On Gemma's own labels, within request type,
+  AUROC harmful 0.80, 0.69, 0.74, 0.74; borderline 0.76, 0.62, 0.62, 0.63. Refusals that open directly sit at +2.3 to
+  +2.4 on it (17-29); refusals that open with the preamble sit at -0.9 to -1.3, next to compliance (-1.4 to -1.8).
+- The preamble itself reads as harm. Among refusals of harmful requests, preamble +1.81 vs direct +0.87 at 17; among
+  compliances, preamble +1.13 vs direct -0.35. Across requests, so partly which requests get the preamble.
+- Reading: harm is read from the request and sets how often Gemma refuses; once Gemma writes, its own opening does
+  not shift that reading within the first 32 tokens. The 2x2's shift is likely the prefilled text. Gemma also answers
+  most harmful requests as if the user were in distress, which links this block to care (C5) and wellbeing (C26).
+  Open: a later window (tokens at the stance) would test whether the reading follows the stance once stated; the
+  C15 a/b frames go in when the harmlessness builder's S3 lands.

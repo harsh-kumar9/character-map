@@ -1,0 +1,567 @@
+{
+ "n_replies": 1100,
+ "refusal_rate": {
+  "harmful": {
+   "greedy": 0.9,
+   "sampled": 0.85
+  },
+  "borderline": {
+   "greedy": 0.36666666666666664,
+   "sampled": 0.36333333333333334
+  },
+  "harmless": {
+   "greedy": 0.0,
+   "sampled": 0.0
+  }
+ },
+ "layers": {
+  "9": {
+   "refusal_axis_auroc_on_own_labels": 0.9017437513351848,
+   "refusal_axis_auroc_within_type": {
+    "harmful": 0.7984125664893617,
+    "borderline": 0.755515873015873
+   },
+   "boundary_harm_vs_refusal_rate": {
+    "harmful": {
+     "n_requests": 40,
+     "spearman": 0.4525803829697932,
+     "p": 0.0033655478717570385
+    },
+    "borderline": {
+     "n_requests": 30,
+     "spearman": 0.16138408404189758,
+     "p": 0.3942239482675763
+    },
+    "all": {
+     "n_requests": 100,
+     "spearman": 0.7468870015183562,
+     "p": 4.591662746368976e-19
+    },
+    "sample_auroc_harmful_borderline": 0.7594919943489522
+   },
+   "cells": {
+    "harmful/refuse": {
+     "n": 376,
+     "harm": 0.2860717265890757,
+     "refusal": -1.3642646460824808
+    },
+    "harmful/comply": {
+     "n": 64,
+     "harm": -0.7132027035217064,
+     "refusal": -2.4503591633245385
+    },
+    "borderline/refuse": {
+     "n": 120,
+     "harm": -0.02208229718368569,
+     "refusal": -1.6694259819757065
+    },
+    "borderline/comply": {
+     "n": 210,
+     "harm": -0.22855691135339112,
+     "refusal": -2.6089934756004967
+    },
+    "harmless/refuse": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/comply": {
+     "n": 330,
+     "harm": -3.7515096783261295,
+     "refusal": -3.3751244254457315
+    }
+   },
+   "preamble_cells": {
+    "harmful/refuse/preamble": {
+     "n": 339,
+     "harm": 0.27571994127313637,
+     "refusal": -1.608043640606167
+    },
+    "harmful/refuse/direct": {
+     "n": 37,
+     "harm": 0.38091646232160153,
+     "refusal": 0.8692780334723724
+    },
+    "harmful/comply/preamble": {
+     "n": 16,
+     "harm": -0.1536309602432656,
+     "refusal": -2.011740358383063
+    },
+    "harmful/comply/direct": {
+     "n": 48,
+     "harm": -0.8997266179478534,
+     "refusal": -2.5965654316383637
+    },
+    "borderline/refuse/preamble": {
+     "n": 38,
+     "harm": -0.17045477547000926,
+     "refusal": -1.9672826564769117
+    },
+    "borderline/refuse/direct": {
+     "n": 82,
+     "harm": 0.04667568055875695,
+     "refusal": -1.5313948401336843
+    },
+    "borderline/comply/preamble": {
+     "n": 5,
+     "harm": -0.14711076557089361,
+     "refusal": -1.6756285737507213
+    },
+    "borderline/comply/direct": {
+     "n": 205,
+     "harm": -0.23054340271393983,
+     "refusal": -2.6317584732065886
+    },
+    "harmless/refuse/preamble": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/refuse/direct": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/comply/preamble": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/comply/direct": {
+     "n": 330,
+     "harm": -3.7515096783261295,
+     "refusal": -3.3751244254457315
+    }
+   },
+   "within_request": {
+    "borderline": {
+     "n_requests": 19,
+     "mean_diff": 0.168921543449346,
+     "positive": 11
+    },
+    "harmful": {
+     "n_requests": 11,
+     "mean_diff": 0.051795076682974776,
+     "positive": 5
+    },
+    "all": {
+     "n_requests": 30,
+     "mean_diff": 0.12597517230167657,
+     "positive": 16,
+     "wilcoxon_p": 0.17719271034002304
+    }
+   }
+  },
+  "17": {
+   "refusal_axis_auroc_on_own_labels": 0.7679515594958343,
+   "refusal_axis_auroc_within_type": {
+    "harmful": 0.6911153590425532,
+    "borderline": 0.6232936507936508
+   },
+   "boundary_harm_vs_refusal_rate": {
+    "harmful": {
+     "n_requests": 40,
+     "spearman": 0.5616717792059924,
+     "p": 0.00016255710163372183
+    },
+    "borderline": {
+     "n_requests": 30,
+     "spearman": 0.6924188633752925,
+     "p": 2.239180740828287e-05
+    },
+    "all": {
+     "n_requests": 100,
+     "spearman": 0.8890170249561457,
+     "p": 5.108388520883103e-35
+    },
+    "sample_auroc_harmful_borderline": 0.9107531787143867
+   },
+   "cells": {
+    "harmful/refuse": {
+     "n": 376,
+     "harm": 1.7153480837890354,
+     "refusal": -0.5793567615171785
+    },
+    "harmful/comply": {
+     "n": 64,
+     "harm": 0.01889302798849446,
+     "refusal": -1.3919463111816877
+    },
+    "borderline/refuse": {
+     "n": 120,
+     "harm": 0.7232108265822009,
+     "refusal": -0.6278230529047616
+    },
+    "borderline/comply": {
+     "n": 210,
+     "harm": -0.1940125380410606,
+     "refusal": -1.114198451377298
+    },
+    "harmless/refuse": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/comply": {
+     "n": 330,
+     "harm": -3.6975460307355634,
+     "refusal": -1.9043448098063762
+    }
+   },
+   "preamble_cells": {
+    "harmful/refuse/preamble": {
+     "n": 339,
+     "harm": 1.807999306106281,
+     "refusal": -0.9057889258126092
+    },
+    "harmful/refuse/direct": {
+     "n": 37,
+     "harm": 0.8664625603958935,
+     "refusal": 2.4114676627031186
+    },
+    "harmful/comply/preamble": {
+     "n": 16,
+     "harm": 1.1300294679290155,
+     "refusal": -1.3971877928393903
+    },
+    "harmful/comply/direct": {
+     "n": 48,
+     "harm": -0.3514857853250125,
+     "refusal": -1.3901991506291203
+    },
+    "borderline/refuse/preamble": {
+     "n": 38,
+     "harm": 0.9438012021914275,
+     "refusal": -1.187184553053403
+    },
+    "borderline/refuse/direct": {
+     "n": 82,
+     "harm": 0.6209860183730473,
+     "refusal": -0.36860674795783027
+    },
+    "borderline/comply/preamble": {
+     "n": 5,
+     "harm": 0.9410359623209305,
+     "refusal": -0.740069448762357
+    },
+    "borderline/comply/direct": {
+     "n": 205,
+     "harm": -0.22169664780598725,
+     "refusal": -1.1233235490020528
+    },
+    "harmless/refuse/preamble": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/refuse/direct": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/comply/preamble": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/comply/direct": {
+     "n": 330,
+     "harm": -3.6975460307355634,
+     "refusal": -1.9043448098063762
+    }
+   },
+   "within_request": {
+    "borderline": {
+     "n_requests": 19,
+     "mean_diff": 0.08544460792079187,
+     "positive": 11
+    },
+    "harmful": {
+     "n_requests": 11,
+     "mean_diff": -0.01961950847297731,
+     "positive": 6
+    },
+    "all": {
+     "n_requests": 30,
+     "mean_diff": 0.04692109857640984,
+     "positive": 17,
+     "wilcoxon_p": 0.5978077705949545
+    }
+   }
+  },
+  "22": {
+   "refusal_axis_auroc_on_own_labels": 0.8041183774834437,
+   "refusal_axis_auroc_within_type": {
+    "harmful": 0.7377410239361702,
+    "borderline": 0.6234920634920635
+   },
+   "boundary_harm_vs_refusal_rate": {
+    "harmful": {
+     "n_requests": 40,
+     "spearman": 0.7232682357136081,
+     "p": 1.3499093865046456e-07
+    },
+    "borderline": {
+     "n_requests": 30,
+     "spearman": 0.764320431544797,
+     "p": 8.831019986969683e-07
+    },
+    "all": {
+     "n_requests": 100,
+     "spearman": 0.9096598839192376,
+     "p": 3.5516978869737985e-39
+    },
+    "sample_auroc_harmful_borderline": 0.9282434659759831
+   },
+   "cells": {
+    "harmful/refuse": {
+     "n": 376,
+     "harm": 0.9280477365408676,
+     "refusal": -0.7095399870039971
+    },
+    "harmful/comply": {
+     "n": 64,
+     "harm": -0.41533636418596037,
+     "refusal": -1.6368270287539526
+    },
+    "borderline/refuse": {
+     "n": 120,
+     "harm": 0.214356643330644,
+     "refusal": -0.9122916098404819
+    },
+    "borderline/comply": {
+     "n": 210,
+     "harm": -0.7659006189265934,
+     "refusal": -1.4340704261881798
+    },
+    "harmless/refuse": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/comply": {
+     "n": 330,
+     "harm": -3.724789054134405,
+     "refusal": -2.117178745613381
+    }
+   },
+   "preamble_cells": {
+    "harmful/refuse/preamble": {
+     "n": 339,
+     "harm": 0.9489398993357754,
+     "refusal": -1.0378851344947073
+    },
+    "harmful/refuse/direct": {
+     "n": 37,
+     "harm": 0.7366303530956333,
+     "refusal": 2.2988114994649402
+    },
+    "harmful/comply/preamble": {
+     "n": 16,
+     "harm": 0.31060914485637364,
+     "refusal": -1.5861268085848632
+    },
+    "harmful/comply/direct": {
+     "n": 48,
+     "harm": -0.657318200533405,
+     "refusal": -1.6537271021436488
+    },
+    "borderline/refuse/preamble": {
+     "n": 38,
+     "harm": 0.10603615931490042,
+     "refusal": -1.444189347933426
+    },
+    "borderline/refuse/direct": {
+     "n": 82,
+     "harm": 0.2645539408013544,
+     "refusal": -0.6658024141388738
+    },
+    "borderline/comply/preamble": {
+     "n": 5,
+     "harm": 0.6863217333634847,
+     "refusal": -1.109575315444449
+    },
+    "borderline/comply/direct": {
+     "n": 205,
+     "harm": -0.8013206762995221,
+     "refusal": -1.4419849410843684
+    },
+    "harmless/refuse/preamble": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/refuse/direct": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/comply/preamble": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/comply/direct": {
+     "n": 330,
+     "harm": -3.724789054134405,
+     "refusal": -2.117178745613381
+    }
+   },
+   "within_request": {
+    "borderline": {
+     "n_requests": 19,
+     "mean_diff": 0.09929175460766204,
+     "positive": 11
+    },
+    "harmful": {
+     "n_requests": 11,
+     "mean_diff": -0.12363400552311042,
+     "positive": 5
+    },
+    "all": {
+     "n_requests": 30,
+     "mean_diff": 0.01755230922637881,
+     "positive": 16,
+     "wilcoxon_p": 0.761065473780036
+    }
+   }
+  },
+  "29": {
+   "refusal_axis_auroc_on_own_labels": 0.8135748237556077,
+   "refusal_axis_auroc_within_type": {
+    "harmful": 0.738779920212766,
+    "borderline": 0.6266269841269841
+   },
+   "boundary_harm_vs_refusal_rate": {
+    "harmful": {
+     "n_requests": 40,
+     "spearman": 0.6530041109386243,
+     "p": 4.9436921616507e-06
+    },
+    "borderline": {
+     "n_requests": 30,
+     "spearman": 0.7003077501650501,
+     "p": 1.6445669067868606e-05
+    },
+    "all": {
+     "n_requests": 100,
+     "spearman": 0.9034575714857468,
+     "p": 7.891299528560052e-38
+    },
+    "sample_auroc_harmful_borderline": 0.924799858723805
+   },
+   "cells": {
+    "harmful/refuse": {
+     "n": 376,
+     "harm": 1.342782513349942,
+     "refusal": -0.913152632075787
+    },
+    "harmful/comply": {
+     "n": 64,
+     "harm": 0.10461764767630537,
+     "refusal": -1.8034853361587477
+    },
+    "borderline/refuse": {
+     "n": 120,
+     "harm": 0.3843352870933937,
+     "refusal": -1.1353338126749781
+    },
+    "borderline/comply": {
+     "n": 210,
+     "harm": -0.23754730773076008,
+     "refusal": -1.654017893545957
+    },
+    "harmless/refuse": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/comply": {
+     "n": 330,
+     "harm": -3.5380513831711875,
+     "refusal": -2.3852281976241385
+    }
+   },
+   "preamble_cells": {
+    "harmful/refuse/preamble": {
+     "n": 339,
+     "harm": 1.3291323999968803,
+     "refusal": -1.2747337649737314
+    },
+    "harmful/refuse/direct": {
+     "n": 37,
+     "harm": 1.46784706542259,
+     "refusal": 2.3997123423134887
+    },
+    "harmful/comply/preamble": {
+     "n": 16,
+     "harm": 0.9370574337868822,
+     "refusal": -1.7864961949425389
+    },
+    "harmful/comply/direct": {
+     "n": 48,
+     "harm": -0.17286228102722026,
+     "refusal": -1.8091483832308175
+    },
+    "borderline/refuse/preamble": {
+     "n": 38,
+     "harm": 0.24789789807229845,
+     "refusal": -1.6023782346826823
+    },
+    "borderline/refuse/direct": {
+     "n": 82,
+     "harm": 0.4475623698104867,
+     "refusal": -0.9188985927201883
+    },
+    "borderline/comply/preamble": {
+     "n": 5,
+     "harm": 0.6447060908507924,
+     "refusal": -1.2222821549960958
+    },
+    "borderline/comply/direct": {
+     "n": 205,
+     "harm": -0.25906568330591995,
+     "refusal": -1.6645480335105876
+    },
+    "harmless/refuse/preamble": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/refuse/direct": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/comply/preamble": {
+     "n": 0,
+     "harm": null,
+     "refusal": null
+    },
+    "harmless/comply/direct": {
+     "n": 330,
+     "harm": -3.5380513831711875,
+     "refusal": -2.3852281976241385
+    }
+   },
+   "within_request": {
+    "borderline": {
+     "n_requests": 19,
+     "mean_diff": -0.0856513911927502,
+     "positive": 6
+    },
+    "harmful": {
+     "n_requests": 11,
+     "mean_diff": -0.17095216518239936,
+     "positive": 6
+    },
+    "all": {
+     "n_requests": 30,
+     "mean_diff": -0.11692834165562156,
+     "positive": 12,
+     "wilcoxon_p": 0.22855282202363014
+    }
+   }
+  }
+ }
+}
