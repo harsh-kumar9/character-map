@@ -143,6 +143,7 @@ def cmd_analyze():
     A = np.load(OUT / "acts.npz")
     lab = np.array([x["label"] for x in rows]); rtype = np.array([x["request_type"] for x in rows])
     scen = np.array([x["scenario_id"] for x in rows]); greedy = np.array([x["sample"] == "greedy" for x in rows])
+    pre = np.array([x.get("preamble", False) for x in rows])
     res = {"n_replies": len(rows), "refusal_rate": {}, "layers": {}}
     for t in ("harmful", "borderline", "harmless"):
         res["refusal_rate"][t] = {"greedy": float(np.mean(lab[(rtype == t) & greedy] == "refuse")),
@@ -163,6 +164,12 @@ def cmd_analyze():
         sdr = np.sqrt(np.mean([pr[m].var() for m in cells.values() if m.sum() > 1]))
         out["cells"] = {f"{t}/{l}": {"n": int(m.sum()), "harm": float(ph[m].mean() / sdh) if m.any() else None,
                                       "refusal": float(pr[m].mean() / sdr) if m.any() else None} for (t, l), m in cells.items()}
+        # the counselling preamble: within request type and label, preamble vs direct opening on both axes
+        out["preamble_cells"] = {f"{t}/{l}/{'preamble' if p else 'direct'}":
+                                 {"n": int(m.sum()), "harm": float(ph[m].mean() / sdh) if m.any() else None,
+                                  "refusal": float(pr[m].mean() / sdr) if m.any() else None}
+                                 for t in ("harmful", "borderline", "harmless") for l in ("refuse", "comply") for p in (True, False)
+                                 for m in [(rtype == t) & (lab == l) & (pre == p)]}
         # within request: refused minus complied samples on the harm axis, for requests with both outcomes
         diffs = {}
         for s in np.unique(scen):
@@ -182,6 +189,9 @@ def cmd_analyze():
         for k, v in out["cells"].items():
             if v["n"]:
                 print(f"  {k:18s} n {v['n']:4d}  harm {v['harm']:+.2f}  refusal {v['refusal']:+.2f}")
+        for k, v in out["preamble_cells"].items():
+            if v["n"]:
+                print(f"  {k:27s} n {v['n']:4d}  harm {v['harm']:+.2f}  refusal {v['refusal']:+.2f}")
         for t, v in out["within_request"].items():
             print(f"  within request, refused minus complied on the harm axis, {t}: " + json.dumps(v))
     (out_dir() / "c15_own.json").write_text(json.dumps(res, indent=1, default=float))
