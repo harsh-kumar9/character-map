@@ -9,7 +9,7 @@ harmless side.
 
 Reads  results/hhh/figures/<block>/landscape.json, landscape_3d.json (cm.hhh.landscape)
        results/hhh/s4/overlap_verdict.json (cm.hhh.overlap); results/hhh/s5/causal_matrix.json when it exists
-Writes results/hhh/figures/<block>/{landscape_units_L*, landscape_frames_L*, transfer, lattice, map}.{png,pdf},
+Writes results/hhh/figures/<block>/{landscape_units_L*, landscape_frames_L*, transfer, lattice, map, cosine}.{png,pdf},
        <block>_data.json
 
     python3 -m cm.hhh.figs <block> [--mid 17] [--late 29]
@@ -29,6 +29,7 @@ from .blocks import BLOCKS, CONTROL
 INK, INK2, MUTED, LIGHT, GRID, AXIS = "#0b0b0b", "#52514e", "#898781", "#dcdbd5", "#e1e0d9", "#c3c2b7"
 CAT = ["#2a78d6", "#eb6834", "#1baf7a"]            # reference palette slots 1-3, all-pairs valid
 NEG = "#d9736f"
+EDGE_MIN = 0.30                                   # lattice: edges drawn from here (all edges above the floor are in the data)
 FRAMES = {"a": "recognize", "b": "judge", "c": "act", "d": "self-describe"}
 FRG = {"a": "own", "b": "own", "c": "act", "d": "self"}
 GROUPS = [("own", "About someone else (recognize, judge)"), ("act", "Acting"), ("self", "Self-describing")]
@@ -249,27 +250,29 @@ def lattice(B, plt):
     from matplotlib.patches import FancyArrowPatch, Circle
     from matplotlib.lines import Line2D
     rowy = {"a": 3, "b": 2, "c": 1, "d": 0}
-    xs = {u.key: i * 1.3 for i, u in enumerate(B.present)}
+    xs = {u.key: i * 1.6 for i, u in enumerate(B.present)}
     nodes = B.nodes()
     pos = {uid: (xs[u.key], rowy[f] * 0.85) for u, f, uid in nodes}
-    W = 1.3 * (len(B.present) - 1)
+    W = 1.6 * (len(B.present) - 1)
 
     def edge(ax, a, b, w, color, ls="-"):
         (x1, y1), (x2, y2) = pos[a], pos[b]
         rad = 0.0
-        if x1 == x2 and abs(y1 - y2) > 0.9:
-            rad = 0.5 if x1 < W / 2 else -0.5
-        if y1 == y2 and abs(x1 - x2) > 1.4:
-            rad = -0.35 if y1 < 0.5 else 0.35
+        if x1 == x2 and abs(y1 - y2) > 0.9:          # same definition, frames not adjacent: bow sideways
+            rad = 0.45 if abs(y1 - y2) < 2 else 0.6
+        if y1 == y2 and abs(x1 - x2) > 1.7:          # same frame, definitions not adjacent: a shallow bow, the top
+            up = y1 > 2.2                            # row upward and the others downward, so each gap holds one row's
+            sag = 0.10 + 0.055 * abs(x1 - x2) / 1.6                # arcs (arc3: positive rad bends a rightward edge down)
+            rad = 2 * sag / abs(x1 - x2) * (-1 if up else 1) * (1 if x2 > x1 else -1)
         ax.add_patch(FancyArrowPatch((x1, y1), (x2, y2), connectionstyle=f"arc3,rad={rad}", arrowstyle="-", lw=w,
                                      color=color, ls=ls, shrinkA=7, shrinkB=7, zorder=2, alpha=0.9))
 
     def base(ax, title, let):
-        ax.set_xlim(-0.6, W + 1.0); ax.set_ylim(-0.3, 3.15); ax.set_aspect("equal"); ax.axis("off")
-        ax.set_title(title, loc="left", pad=12); letter(ax, let, 1.04)
+        ax.set_xlim(-1.25, W + 0.6); ax.set_ylim(-0.75, 3.4); ax.set_aspect("equal"); ax.axis("off")
+        ax.set_title(title, loc="left", pad=2); letter(ax, let, 1.0)
         for u in B.present:
-            ax.text(xs[u.key], 2.9, u.label.replace(" ", "\n", 1), ha="center", va="bottom", fontsize=5.8,
-                    color=INK, linespacing=0.95)
+            ax.text(xs[u.key], 2.9, u.label.replace(" ", "\n", 1) if " " in u.label else u.label + "\n", ha="center",
+                    va="bottom", fontsize=5.8, color=INK, linespacing=0.95)
         for f, y in rowy.items():
             ax.text(-0.42, y * 0.85, FRAMES[f], ha="right", va="center", fontsize=6, color=INK2)
         ax.axhline(1.5 * 0.85, xmin=0.04, xmax=0.92, color=AXIS, lw=0.5, ls=(0, (2, 2)))
@@ -285,19 +288,25 @@ def lattice(B, plt):
                 ax.text(x, y, t, ha="center", va="center", fontsize=5.4, color="white", fontweight="bold", zorder=7)
 
     out = {}
-    fig, axes = plt.subplots(1, 3, figsize=(7.3 * (W + 1.6) / 5.1, 2.1))
+    fig, axes = plt.subplots(3, 1, figsize=(7.3, 3 * 7.3 * 4.15 / (W + 1.85) + 0.4))
     for ax, L, let in ((axes[0], B.mid, "a"), (axes[1], B.late, "b")):
         fl = B.floor(L)
-        base(ax, f"Shared structure, layer {L}", let)
+        thr = max(fl, EDGE_MIN)
+        base(ax, f"Shared structure, layer {L}: same definition across frames, same frame across definitions "
+                 f"(|cosine| ≥ {thr:.2f}; floor {fl:.2f})", let)
         es = []
         for (ua, fa, a), (ub, fb, b) in itertools.combinations(nodes, 2):
             c = B.cos(L, a, b)
-            if c >= fl:
-                edge(ax, a, b, 0.4 + 4.5 * c, INK2); es.append((a, b, round(c, 3)))
-            elif c <= -fl:
-                edge(ax, a, b, 0.4 + 4.5 * abs(c), NEG, ls=(0, (2, 1.5))); es.append((a, b, round(c, 3)))
+            if abs(c) >= fl:
+                es.append((a, b, round(c, 3)))
+            if ua is not ub and fa != fb:
+                continue
+            if c >= thr:
+                edge(ax, a, b, 0.4 + 4.5 * c, INK2)
+            elif c <= -thr:
+                edge(ax, a, b, 0.4 + 4.5 * abs(c), NEG, ls=(0, (2, 1.5)))
         draw_nodes(ax, L, None)
-        out[str(L)] = {"floor": fl, "edges": es}
+        out[str(L)] = {"floor": fl, "drawn_from": thr, "edges_above_floor": es}
     ax = axes[2]
     base(ax, f"Steering at layer {cfg.L_STEER}, readout at layer {B.late}", "c")
     arrows, selfz = [], {}
@@ -327,12 +336,12 @@ def lattice(B, plt):
                                          shrinkA=8, shrinkB=8, zorder=4))
         draw_nodes(ax, B.late, selfz)
     out["arrows_late"], out["selfz_late"] = arrows, selfz
-    h = [Line2D([], [], color=INK2, lw=0.4 + 4.5 * 0.2, label="cosine 0.2"), Line2D([], [], color=INK2, lw=0.4 + 4.5 * 0.6, label="cosine 0.6"),
+    h = [Line2D([], [], color=INK2, lw=0.4 + 4.5 * 0.3, label="cosine 0.3"), Line2D([], [], color=INK2, lw=0.4 + 4.5 * 0.6, label="cosine 0.6"),
          Line2D([], [], color=NEG, lw=1.2, ls=(0, (2, 1.5)), label="negative"),
          Line2D([], [], color=INK, lw=1.2, marker=">", markersize=3, label="steering effect, |z| ≥ 3")] + \
         [Line2D([], [], marker="o", ls="none", color=B.gcol[g], label=g, ms=5) for g in B.groups]
-    fig.legend(handles=h, loc="lower center", ncol=7, frameon=False, bbox_to_anchor=(0.5, -0.1), handlelength=2.2, columnspacing=1.4)
-    fig.subplots_adjust(wspace=0.3)
+    fig.subplots_adjust(hspace=0.08, left=0.01, right=0.99, top=0.97, bottom=0.05)
+    fig.legend(handles=h, loc="lower center", ncol=7, frameon=False, bbox_to_anchor=(0.5, 0.0), handlelength=2.2, columnspacing=1.4)
     save(fig, B.out, "lattice")
     plt.close(fig)
     return out
@@ -357,10 +366,10 @@ def cosmap(B, plt):
     nodes = B.nodes()
     ctrl = [(CONTROL, f, f"{CONTROL.key}|{f}") for f in "abcd" if f"{CONTROL.key}|{f}" in B.idx]
     out = {}
-    fig = plt.figure(figsize=(7.3, 3.4))
-    gs = fig.add_gridspec(1, 3, width_ratios=[1, 1, 1.3], wspace=0.35)
+    fig, axs = plt.subplots(1, 2, figsize=(7.3, 3.6))
+    pending = []
     for k, L in enumerate((B.mid, B.late)):
-        ax = fig.add_subplot(gs[0, k])
+        ax = axs[k]
         rows = nodes + ctrl
         C = np.array([[1.0 if a == b else B.cos(L, a, b) for _, _, b in rows] for _, _, a in rows])
         X, stress = cmds(np.sqrt(np.clip(1 - C, 0, None)))
@@ -373,7 +382,7 @@ def cosmap(B, plt):
                 if f1 in pts and f2 in pts:
                     ax.plot([pts[f1][0], pts[f2][0]], [pts[f1][1], pts[f2][1]], ls=ls, lw=0.7, color=B.gcol[u.group], alpha=0.7, zorder=1)
             if "c" in pts:
-                ax.text(pts["c"][0], pts["c"][1], " " + u.label, fontsize=5, color=INK, ha="left", va="center", zorder=4, path_effects=halo)
+                pending.append((ax, tuple(pts["c"]), u.label))
         for i, (u, f, _) in enumerate(rows):
             isc = u is CONTROL
             ax.scatter(X[i, 0], X[i, 1], marker=MARK[f], s=26 if not isc else 18, color="white" if isc else B.gcol[u.group],
@@ -384,26 +393,40 @@ def cosmap(B, plt):
         letter(ax, "ab"[k])
         out[str(L)] = {"units": [r[2] for r in rows], "cos": C.round(3).tolist(), "mds": X.round(3).tolist(), "stress": stress,
                        "floor": B.floor(L)}
-    ax = fig.add_subplot(gs[0, 2])
-    rows = [r for r in nodes if r[1] in "cd"]
-    C = np.array([[np.nan if a == b else B.cos(B.mid, a, b) for _, _, b in rows] for _, _, a in rows])
-    ax.imshow(C, cmap=DIV, vmin=-0.8, vmax=0.8, aspect="equal")
-    lab = [f"{u.label} · {FRAMES[f]}" for u, f, _ in rows]
-    ax.set_xticks(range(len(rows))); ax.set_yticks(range(len(rows)))
-    ax.set_xticklabels(lab, rotation=60, ha="right", rotation_mode="anchor", fontsize=5.2); ax.set_yticklabels(lab, fontsize=5.2)
-    for i in range(len(rows)):
-        for j in range(len(rows)):
-            if i != j:
-                v = C[i, j]
-                ax.text(j, i, f"{v:.2f}".replace("0.", "."), ha="center", va="center", fontsize=3.9, color="white" if abs(v) > 0.45 else INK)
-    ax.set_title(f"Cosine, act and self-describe, layer {B.mid} (floor {B.floor(B.mid):.2f})", loc="left"); ax.tick_params(length=0)
-    for s in ax.spines.values(): s.set_visible(False)
-    letter(ax, "c")
     h = [Line2D([], [], marker="o", ls="none", color=B.gcol[g], label=g, ms=5) for g in B.groups] + \
         [Line2D([], [], marker="o", ls="none", mfc="white", mec=MUTED, label="formality (control)", ms=4)] + \
         [Line2D([], [], marker=MARK[f], ls="none", color=INK2, mfc="white", label=FRAMES[f], ms=4.5) for f in "abcd"]
-    fig.legend(handles=h, loc="lower center", ncol=8, frameon=False, bbox_to_anchor=(0.5, -0.04), handletextpad=0.3, columnspacing=1.0)
+    fig.tight_layout(rect=(0, 0.07, 1, 1))
+    for ax, xy, t in pending:
+        place_labels(ax, [xy], [t])
+    fig.legend(handles=h, loc="lower center", ncol=8, frameon=False, bbox_to_anchor=(0.5, 0.0), handletextpad=0.3, columnspacing=1.0)
     save(fig, B.out, "map")
+    plt.close(fig)
+    # the cosine grids behind the map: act and self-describe, recognize and judge, at the middle depth
+    fig, axs = plt.subplots(1, 2, figsize=(7.3, 4.2))
+    for k, (ax, fs, title) in enumerate(zip(axs, ("cd", "ab"), ("Act and self-describe", "Recognize and judge"))):
+        rows = [r for r in nodes if r[1] in fs]
+        rows.sort(key=lambda r: (fs.index(r[1]), B.present.index(r[0])))
+        C = np.array([[np.nan if a == b else B.cos(B.mid, a, b) for _, _, b in rows] for _, _, a in rows])
+        ax.imshow(C, cmap=DIV, vmin=-0.8, vmax=0.8, aspect="equal")
+        lab = [f"{u.label} ({f})" for u, f, _ in rows]
+        ax.set_xticks(range(len(rows))); ax.set_yticks(range(len(rows)))
+        ax.set_xticklabels(lab, rotation=60, ha="right", rotation_mode="anchor", fontsize=5.4); ax.set_yticklabels(lab, fontsize=5.4)
+        for i in range(len(rows)):
+            for j in range(len(rows)):
+                if i != j:
+                    v = C[i, j]
+                    ax.text(j, i, f"{v:.2f}".replace("0.", "."), ha="center", va="center", fontsize=4.2,
+                            color="white" if abs(v) > 0.45 else INK)
+        n1 = sum(r[1] == fs[0] for r in rows)
+        ax.axhline(n1 - 0.5, color=INK, lw=0.6); ax.axvline(n1 - 0.5, color=INK, lw=0.6)
+        ax.set_title(f"{title}, layer {B.mid}", loc="left"); ax.tick_params(length=0)
+        for sp in ax.spines.values(): sp.set_visible(False)
+        letter(ax, "ab"[k])
+    fig.text(0.5, 0.01, f"Centred cosine, each unit oriented to its good side; shuffle floor {B.floor(B.mid):.2f}",
+             ha="center", fontsize=6.3, color=INK2)
+    fig.tight_layout(rect=(0, 0.03, 1, 1))
+    save(fig, B.out, "cosine")
     plt.close(fig)
     return out
 
