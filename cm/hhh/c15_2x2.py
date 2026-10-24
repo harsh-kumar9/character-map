@@ -145,7 +145,7 @@ def analyse(z, meta, frame, readout, hidx, rng):
             te = P["test"] + N["test"]
             out["cross"][f"{a} -> {b}"] = auroc(X[te] @ U[a][0], np.r_[np.ones(len(P["test"])), np.zeros(len(N["test"]))])
     # cell means on the harm and refusal axes (test items), in pooled within-cell SDs
-    axes = {k: U[k][0] for k in ("harm|both", "refusal|harmful") if k in U}
+    axes = {k: U[k][0] for k in ("harm|both", "harm|refuse", "harm|comply", "refusal|harmful", "refusal|harmless") if k in U}
     for ax, u in axes.items():
         proj = X @ u
         sd = np.sqrt(np.mean([proj[v["test"]].var() for v in cells.values() if len(v["test"]) > 1]))
@@ -178,6 +178,16 @@ def main():
                 r["readout_cross"]["harm(boundary) on reply32: harmful vs harmless"] = auroc(((xr - mu_r) / sd_r) @ dirs["boundary"]["harm|both"], y)
             if "refusal|harmful" in dirs["reply32"]:
                 r["readout_cross"]["refusal(reply32) on boundary: harmful vs harmless"] = auroc(((xb - mu_b) / sd_b) @ dirs["reply32"]["refusal|harmful"], y)
+            # the boundary harm axis (fixed before any reply) read on the reply32 items: does a complying reply move the
+            # request's harm reading toward neutral? Cell means in pooled within-cell SDs, test items.
+            if "harm|both" in dirs["boundary"]:
+                cel = {}
+                for rt in ("harmful", "harmless", "borderline"):
+                    for pol, rep in (("pos", "refuse"), ("neg", "comply")):
+                        rr = [i for i, m in enumerate(meta) if m["frame"] == f and m["split"] == "test" and m["request_type"] == rt and m["polarity"] == pol]
+                        cel[f"{rt}/{rep}"] = ((z["reply32"][rr, h].astype(np.float64) - mu_r) / sd_r) @ dirs["boundary"]["harm|both"]
+                sd = np.sqrt(np.mean([v.var() for v in cel.values() if len(v) > 1]))
+                r["boundary_harm_on_reply32_cells"] = {k: float(v.mean() / sd) for k, v in cel.items()}
             res["frames"][f][str(L)] = r
             print(f"\nframe {f}, layer {L}")
             for ro in ("boundary", "reply32"):
@@ -189,6 +199,8 @@ def main():
                     print(f"  {ro:8s} cross {nm:34s} {v:.2f}")
                 for ax, cm in r[ro]["cells"].items():
                     print(f"  {ro:8s} cells on {ax:15s} " + "  ".join(f"{k} {v:+.2f}" for k, v in cm.items()))
+            if "boundary_harm_on_reply32_cells" in r:
+                print("  boundary harm axis on reply32 items: " + "  ".join(f"{k} {v:+.2f}" for k, v in r["boundary_harm_on_reply32_cells"].items()))
             for nm, v in r["readout_cross"].items():
                 print(f"  {nm}: {v:.2f}")
     (out_dir() / "c15_2x2.json").write_text(json.dumps(res, indent=1, default=float))
