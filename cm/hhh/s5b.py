@@ -105,7 +105,14 @@ def cmd_score():
             g = mt.get("condition", mt.get("contrast"))
             if g is not None:
                 groups.setdefault(str(g), []).append(i)
+            if "expected" in mt:                     # C15: OR-Bench hard (comply) vs toxic (refuse)
+                groups.setdefault(f"expected:{mt['expected']}", []).append(i)
             groups.setdefault(f"type:{items[i]['scoring']['type']}", []).append(i)
+        gidx = {g: [ids.index(i) for i in gi] for g, gi in groups.items()}
+
+        def pse(d):
+            ok = ~np.isnan(d)
+            return float(np.std(d[ok], ddof=1) / np.sqrt(ok.sum())) if ok.sum() > 2 else np.nan
         res = {"type": "+".join(types), "n_items": len(ids), "conds": {}}
         for j in ("gemma", "qwen") if has_judge else ("gemma",):
             base = np.array([scores[j].get((i, "baseline"), np.nan) for i in ids])
@@ -115,10 +122,11 @@ def cmd_score():
                 d = v - base
                 ok = ~np.isnan(d)
                 eff = float(np.mean(d[ok])) if ok.any() else np.nan
-                se = float(np.std(d[ok], ddof=1) / np.sqrt(ok.sum())) if ok.sum() > 2 else np.nan
+                se = pse(d)
                 per[c] = {"mean": float(np.nanmean(v)) if (~np.isnan(v)).any() else np.nan,
                           "unparsed": float(np.mean(np.isnan(v))), "effect": eff, "se": se,
-                          "by_group": {g: float(np.nanmean([scores[j].get((i, c), np.nan) for i in gi])) for g, gi in groups.items()}}
+                          "by_group": {g: float(np.nanmean([scores[j].get((i, c), np.nan) for i in gi])) for g, gi in groups.items()},
+                          "by_group_se": {g: pse(d[gi]) for g, gi in gidx.items()}}   # paired, as se
                 if c.startswith("random"):
                     rand_eff.append(eff)
             for c in per:

@@ -379,7 +379,7 @@ def beh_eff(cc, cond, grp):
     if grp:
         b = cc["baseline"]["by_group"].get(grp)
         d = lambda c: None if b is None or cc[c]["by_group"].get(grp) is None else cc[c]["by_group"][grp] - b
-        e, se = d(cond), None
+        e, se = d(cond), v.get("by_group_se", {}).get(grp)
         rnd = [abs(x) for c in cc if c.startswith("random") for x in [d(c)] if x is not None and x == x]
     else:
         e, se = v["effect"], v["se"]
@@ -387,14 +387,15 @@ def beh_eff(cc, cond, grp):
     if e is None or e != e:
         return None, False
     rmax = max(rnd) if rnd else None
-    ok = rmax is not None and abs(e) >= 2 * rmax and (se is None or se != se or abs(e) >= 3 * se)
+    ok = rmax is not None and se is not None and se == se and abs(e) > 0 and abs(e) >= 2 * rmax and abs(e) >= 3 * se
     return e, ok
 
 
 def beh_rows(block, behs):
-    """Per unit and judge: unsteered score and the oriented effect of its doing and knowing directions at each dose.
-    The concept's first sub-contrast has doing and knowing at both signs at every dose; a further sub-contrast has
-    doing at + and at 1x only, and its sign is flipped when its good side is the negative pole."""
+    """Per unit, judge and frame (doing, knowing): unsteered score and the oriented effect of steering toward the
+    unit's good side and toward its other side at each dose. The concept's first sub-contrast has doing and knowing at
+    both signs at every dose; a further sub-contrast has doing at + and at 1x only, and its sign is flipped when its
+    good side is the negative pole."""
     us = BLOCKS[block]
     out = []
     for u in us:
@@ -411,21 +412,23 @@ def beh_rows(block, behs):
                     continue
                 extra = f"doing+:{sub}" in cc1
                 name = u.name + (f", {GROUP_NAME[grp]}" if grp in GROUP_NAME else "")
-                row = {"unit": name, "concept": u.cid, "judge": judge,
-                       "baseline": cc1["baseline"]["by_group"].get(grp) if grp else cc1["baseline"]["mean"],
-                       "doing": {}, "knowing": {}}
+                base = cc1["baseline"]["by_group"].get(grp) if grp else cc1["baseline"]["mean"]
+                frames = ("doing",) if extra else ("doing", "knowing")
+                rows = [{"unit": name, "concept": u.cid, "judge": judge, "baseline": base, "frame": f, "good": {}, "away": {}}
+                        for f in frames]
                 for m in DOSES:
                     cc = behs.get(m, {}).get(u.cid, {}).get("conds", {}).get(judge)
                     if not cc:
                         continue
                     if extra:
                         e, ok = beh_eff(cc, f"doing+:{sub}", grp)
-                        row["doing"][m] = None if e is None else (pole * sg * e, ok)
+                        rows[0]["good"][m] = None if e is None else (pole * sg * e, ok)
                         continue
-                    for nm, c in (("doing", "doing+" if pole > 0 else "doing-"), ("knowing", "knowing+" if pole > 0 else "knowing-")):
-                        e, ok = beh_eff(cc, c, grp)
-                        row[nm][m] = None if e is None else (sg * e, ok)
-                out.append(row)
+                    for row in rows:
+                        for side, c in (("good", "+" if pole > 0 else "-"), ("away", "-" if pole > 0 else "+")):
+                            e, ok = beh_eff(cc, row["frame"] + c, grp)
+                            row[side][m] = None if e is None else (sg * e, ok)
+                out.extend(rows)
     return out
 
 
@@ -438,13 +441,18 @@ def beh_table(rows):
         v, ok = x
         s = f"{v:+.3f}".replace("-0.000", "+0.000")
         return f'<td class="hi">{s}</td>' if ok and v > 0 else f'<td class="low">{s}</td>' if ok else f"<td>{s}</td>"
-    body = "".join(f"<tr><td>{esc(r['unit'])} <span class=\"id\">{r['concept']}</span></td><td>{r['judge']}</td><td>{f2(r['baseline'])}</td>"
-                   + "".join(cell(r["doing"].get(m)) for m in DOSES) + "".join(cell(r["knowing"].get(m)) for m in DOSES)
-                   + "</tr>" for r in rows)
+    body = []
+    for i, r in enumerate(rows):
+        first = i == 0 or (rows[i - 1]["unit"], rows[i - 1]["judge"]) != (r["unit"], r["judge"])
+        n = sum(1 for x in rows[i:] if (x["unit"], x["judge"]) == (r["unit"], r["judge"]))
+        lead = (f"<td rowspan=\"{n}\">{esc(r['unit'])} <span class=\"id\">{r['concept']}</span></td><td rowspan=\"{n}\">{r['judge']}</td>"
+                f"<td rowspan=\"{n}\">{f2(r['baseline'])}</td>") if first else ""
+        body.append(f"<tr>{lead}<td>{r['frame']}</td>" + "".join(cell(r["good"].get(m)) for m in DOSES)
+                    + "".join(cell(r["away"].get(m)) for m in DOSES) + "</tr>")
     dose = "".join(f"<th>{m}x</th>" for m in DOSES)
-    return ("<table><thead><tr><th rowspan=\"2\">Unit</th><th rowspan=\"2\">Judge</th><th rowspan=\"2\">Unsteered</th>"
-            f"<th colspan=\"{len(DOSES)}\">Doing direction, toward the good side</th><th colspan=\"{len(DOSES)}\">Knowing direction, toward the good side</th></tr>"
-            f"<tr>{dose}{dose}</tr></thead><tbody>" + body + "</tbody></table>")
+    return ("<table><thead><tr><th rowspan=\"2\">Unit</th><th rowspan=\"2\">Judge</th><th rowspan=\"2\">Unsteered</th><th rowspan=\"2\">Direction</th>"
+            f"<th colspan=\"{len(DOSES)}\">Steered toward the good side</th><th colspan=\"{len(DOSES)}\">Steered toward the other side</th></tr>"
+            f"<tr>{dose}{dose}</tr></thead><tbody>" + "".join(body) + "</tbody></table>")
 
 
 def plot3d(out):
@@ -562,7 +570,7 @@ def build(block):
 <h2>Result 5: behavior under steering</h2>
 {rd['r5']}
 <div class="tbl">{beh_table(brows)}</div>
-<p class="note">Effects are the paired change from the unsteered replies, steering toward the unit's good side, oriented so that positive is the good side of the instrument. Doses are multiples of the calibrated dose (1x is 1/128 of the residual norm). Green: passes the criterion (at least twice the largest random-direction effect at that dose and at least three standard errors) in the good direction; red: passes in the other direction. A concept's second sub-contrast (too literal, helping a harmless request, side effects) was steered at 1x only and toward its positive pole; for helping a harmless request the sign is flipped, which assumes a symmetric effect (S5a sign symmetry r 0.95).</p>
+<p class="note">Effects are the paired change from the unsteered replies, oriented so that positive is the good side of the instrument; each direction is steered toward the unit's good side and toward its other side, so a working direction reads positive on the left and negative on the right. Doses are multiples of the calibrated dose (1x is 1/128 of the residual norm). Green: passes the criterion (at least twice the largest random-direction effect at that dose and at least three standard errors) in the good direction; red: passes in the other direction. A concept's second sub-contrast (too literal, helping a harmless request, side effects) was steered at 1x only and toward its positive pole; for helping a harmless request the sign is flipped, which assumes a symmetric effect (S5a sign symmetry r 0.95).</p>
 
 <h2>Across the blocks</h2>
 {rd['cross']}
