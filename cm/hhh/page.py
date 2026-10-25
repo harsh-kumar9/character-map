@@ -92,15 +92,18 @@ REVIEW = {"C24": "https://claude.ai/artifact/TebePUZG3YrZBjKGtD4udQ", "C25": "ht
 # behavior: does a higher instrument score mean the good side?
 GOOD_HIGH = {"A1": True, "A7": True, "B1": True, "C15": True, "C19": True, "C20": False, "C24": True, "C25": True,
              "C26": False, "C27": True, "C5": False, "C6": False}
-# the behavior group a concept's own score is read on, where the instrument mixes several (TRAIT)
-BEH_GROUP = {"C19": ["agreeableness"], "C20": ["psychopathy"], "C24": ["type:ifeval", "type:judge"]}
-GROUP_NAME = {"type:ifeval": "IFEval", "type:judge": "overstepping judge"}
+# the behavior groups a unit (by key) or concept is read on, where the instrument mixes several (TRAIT); C15 is
+# OR-Bench toxic (refusing expected) and hard (complying expected), the two measures D-054 set
+BEH_GROUP = {"C19": ["agreeableness"], "C20": ["psychopathy"], "C24": ["type:ifeval", "type:judge"],
+             "C15|refuse[harmful]": ["expected:refuse", "expected:comply"], "C15|refuse[harmless]": ["expected:comply"]}
+GROUP_NAME = {"type:ifeval": "IFEval", "type:judge": "overstepping judge", "expected:refuse": "toxic requests",
+              "expected:comply": "hard harmless requests"}
 
 STATUS = ("Exploratory. One model, synthetic scenarios written and checked by LLMs, one build per definition. The "
           "numbers are for spotting signals worth a test, not claims. Kept apart from the honesty investigation.")
 READING = {
     "helpfulness": {
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "stand": "Seven definitions of helpfulness, from the constitution, the Model Spec and personality psychology, each "
                  "in four frames, read inside Gemma-3-4B. Do they pick out one thing, and does knowing each one carry over "
                  "to doing it?",
@@ -118,7 +121,9 @@ READING = {
             "<b>Care and agreeableness in action are hubs.</b> Steered, they move most of the block's other readouts and "
             "cross into harmlessness, where agreeableness and wellbeing lower refusing a harmful request. Substance does "
             "not steer even its own readout.",
-            "BEH",
+            "<b>Steering barely reaches behavior.</b> Up to eight times the calibrated dose one cell passes: autonomy's "
+            "act direction, pushed toward paternalism, makes replies more paternalistic at four times (one judge). "
+            "Several instruments sit at floor or ceiling unsteered.",
         ],
         "question": "<p>The constitution and the Model Spec build helpfulness from several parts: read the request as it "
                     "was meant, neither too literally nor too liberally; give real, specific help instead of hedged help; "
@@ -173,7 +178,23 @@ READING = {
               "self-description (-6.1, -6.0 at 22), and agreeableness raises helping a harmless one (+5.9). Care is "
               "mixed: it raises refusing in self-description (+4.7), and care judged pushes the judged act toward "
               "harmful (-8.6 at 29), so care makes harm more visible.</p>",
-        "r5": "R5",
+        "r5": "<p>Each unit's act (doing) and judge (knowing) direction is added at layer 17 while Gemma answers its "
+              "concept's behavior benchmark, toward the good side and toward the other side, at the calibrated dose "
+              "and at two, four and eight times it (the dose check of D-041). gemma-4-31B-it and Qwen3.5-27B judge "
+              "the free-text replies. A cell counts when it is at least twice the largest of three random-direction "
+              "effects at that dose and at least three standard errors.</p><p>Nothing passes at the calibrated dose "
+              "here. Above it one cell passes: autonomy's act direction pushed toward "
+              "paternalism raises the paternalism rate on DailyDilemmas from 0.04 to 0.09 at four times (Qwen judge; "
+              "the Gemma judge moves the same way, 0.02 to 0.03). Care, substance, reading the request, wellbeing and "
+              "agreeableness stay inside their random directions at every dose. The instruments explain part of it: "
+              "unsteered, no reply is rated apathetic, almost none fully helpful, and 98 of 100 edits are judged to "
+              "overstep, so each has room on one side only. Wellbeing's act direction lowers it whichever way it is "
+              "steered (-0.05 to -0.08 at eight times), which reads as damage rather than direction.</p><p>Coherence, "
+              "rated on the instruments' own replies by gemma-4-31B-it, stays within about 10 points of unsteered at "
+              "two and four times, except on autonomy's benchmark (act direction 51 at two times, judge direction 47 "
+              "at four, against 69 unsteered). At eight times the random "
+              "directions break the replies (coherence 13 to 67) while the concept directions mostly hold (46 to 90), "
+              "so effects there are confounded with damage.</p>",
         "cross": "<p>The HHH page puts the three blocks side by side. Two things from this block go there. The tension "
                  "between helpfulness and harmlessness runs through autonomy, not substance: refusing a harmful "
                  "request is against autonomy in recognize, judge and act (-0.23 to -0.29 at layer 17) and helping a "
@@ -193,7 +214,7 @@ READING = {
         ],
     },
     "harmlessness": {
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "stand": "Eight definitions of harmlessness, from the constitution, the Model Spec, moral psychology and the "
                  "agent-safety literature, each in four frames, read inside Gemma-3-4B. Do they pick out one thing, "
                  "and does knowing each one carry over to doing it?",
@@ -212,7 +233,10 @@ READING = {
             "<b>Steering splits the block in two.</b> Directions for reading the situation as fine (legitimate intent, "
             "harmless act, low psychopathy, charitable reading) raise each other; refusing and declining raise each "
             "other; between the groups 19 of 21 cells at layer 29 are negative (down to z -9).",
-            "BEH",
+            "<b>Act directions move replies, judge directions move judgments.</b> From two to eight times the "
+            "calibrated dose the act directions for legitimate intent, charitable reading and refusing change what "
+            "Gemma's replies do, and the judge direction for harm changes its moral judgments; neither crosses over. "
+            "One refusal direction works as a dial for over- and under-refusal.",
         ],
         "question": "<p>Harmlessness has more sources than helpfulness and they disagree on what it is. The early "
                     "alignment work and the refusal benchmarks make it refusing harmful requests (HarmBench, Arditi et "
@@ -270,7 +294,35 @@ READING = {
               "other.</p><p>Harmlessness moves helpfulness little (10 and 6 cells at 22 and 29). Helping a harmless "
               "request in action raises agreeableness and autonomy (+7.3, +6.8 at 22), and refusing a harmful one, "
               "judged, lowers agreeableness (-4.7).</p>",
-        "r5": "R5",
+        "r5": "<p>Same setup as on the helpfulness page: each unit's act (doing) and judge (knowing) direction added "
+              "at layer 17 while Gemma answers its concept's behavior benchmark, toward the good side and the other "
+              "side, at one, two, four and eight times the calibrated dose; free-text replies judged by "
+              "gemma-4-31B-it and Qwen3.5-27B; a cell counts at twice the largest random-direction effect and three "
+              "standard errors.</p><p>At the calibrated dose one cell passes, on refusal (below). Above it four "
+              "units move, each through "
+              "the frame that matches its instrument. Legitimate intent's act direction changes how Gemma treats "
+              "dual-use requests (OpenSafeIntent, Qwen judge): +0.04 toward legitimate at two times, -0.08 toward "
+              "harmful intent at four; the Gemma judge moves the same way under three standard errors. At eight times "
+              "random directions break this instrument too (down to -0.54), so that dose says nothing here. "
+              "Charitable reading's act direction pushed toward suspicion lowers the direct-answer rate on "
+              "OR-Bench-Hard by 0.16 and 0.20 at eight times, with coherence where it was (82 against 82). Harm in an "
+              "act's judge direction pushed toward seeing harm lowers ETHICS commonsense accuracy from 0.82 by 0.10 at "
+              "four times and 0.17 at eight; its act direction leaves it alone (-0.01 to -0.04). No other judge "
+              "direction moves anything, and declining a harmful action, side effects and psychopathy do not move at "
+              "all.</p><p>Refusal is a dial. C15's benchmark has the two halves D-054 set: OR-Bench toxic requests, "
+              "where refusing is right, and hard but harmless ones, where complying is right. The table reads them "
+              "apart, since a shift either way helps one half and costs the other (pooled, the shift toward complying "
+              "nets +0.02 at four times). The act direction toward refusing cuts compliance on the hard half from 0.77 "
+              "and 0.78 by 0.19 and 0.25 at four times and by 0.53 and 0.56 at eight (the two judges). Toward "
+              "complying it cuts refusal on the toxic half from 0.82 and 0.84 by 0.43 and 0.36 at eight and raises "
+              "compliance on the hard half by 0.19 and 0.17. Helping a harmless request's own act direction, steered "
+              "toward refusing at the calibrated dose, already lowers compliance on the hard half by 0.12 and 0.14 "
+              "(the Qwen judge passes). The judge direction moves neither half by more than 0.10. This is result 2 in behavior: refusing does not carry over from knowing to doing, and "
+              "only the doing direction steers it.</p><p>Most effects are on the side away from good, where the "
+              "instruments have room: unsteered, intent is rated legitimate 0.92 to 0.97 and borderline requests get "
+              "a direct answer 0.80 to 0.88 of the time. Coherence behaves as in helpfulness: within about 10 points "
+              "of unsteered up to four times, broken by random directions at eight. The global dose check (D-041) "
+              "found the same frame rule across 62 concepts, and the same two effects for its C15 and B1.</p>",
         "cross": "<p>The HHH page puts the three blocks side by side. Three things from this block go there. Refusing "
                  "is read as overriding the person's choice, not as giving less: refusing a harmful request is "
                  "against autonomy in recognize, judge and act (-0.23 to -0.29 at layer 17), while helping a harmless "
@@ -405,7 +457,7 @@ def beh_rows(block, behs):
         sub = u.key.split("|")[1]
         sg = 1.0 if GOOD_HIGH[u.cid] else -1.0
         pole = 1.0 if u.good == "pos" else -1.0
-        for grp in BEH_GROUP.get(u.cid, [None]):
+        for grp in BEH_GROUP.get(u.key, BEH_GROUP.get(u.cid, [None])):
             for judge in ("gemma", "qwen") if grp != "type:ifeval" else ("gemma",):
                 cc1 = beh[u.cid]["conds"].get(judge)
                 if not cc1:
@@ -570,7 +622,7 @@ def build(block):
 <h2>Result 5: behavior under steering</h2>
 {rd['r5']}
 <div class="tbl">{beh_table(brows)}</div>
-<p class="note">Effects are the paired change from the unsteered replies, oriented so that positive is the good side of the instrument; each direction is steered toward the unit's good side and toward its other side, so a working direction reads positive on the left and negative on the right. Doses are multiples of the calibrated dose (1x is 1/128 of the residual norm). Green: passes the criterion (at least twice the largest random-direction effect at that dose and at least three standard errors) in the good direction; red: passes in the other direction. A concept's second sub-contrast (too literal, helping a harmless request, side effects) was steered at 1x only and toward its positive pole; for helping a harmless request the sign is flipped, which assumes a symmetric effect (S5a sign symmetry r 0.95).</p>
+<p class="note">Effects are the paired change from the unsteered replies, oriented so that positive is the good side of the instrument; each direction is steered toward the unit's good side and toward its other side, so a working direction reads positive on the left and negative on the right. Doses are multiples of the calibrated dose (1x is 1/128 of the residual norm). Green: passes the criterion (at least twice the largest random-direction effect at that dose and at least three standard errors) in the good direction; red: passes in the other direction. A concept's second sub-contrast (too literal, helping a harmless request, side effects) was steered at 1x only and toward its positive pole; for helping a harmless request the sign is flipped, which assumes a symmetric effect (S5a sign symmetry r 0.95).{" C15 is read on the two halves D-054 set for its instrument: toxic requests (refusing is right) and hard but harmless ones (complying is right); refusing's directions are shown on both." if block == "harmlessness" else ""}</p>
 
 <h2>Across the blocks</h2>
 {rd['cross']}

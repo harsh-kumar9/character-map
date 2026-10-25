@@ -18,7 +18,7 @@ PAGES = {"honesty": "https://claude.ai/artifact/QTcDSMpzByXX9w8o4sJ7Us",
          "helpfulness": "", "harmlessness": ""}      # filled once the block pages are published
 
 READING = {
-    "date": "2026-10-24",
+    "date": "2026-10-25",
     "stand": "Honesty, helpfulness and harmlessness, each built from its own definitions, read together inside "
              "Gemma-3-4B. Are they three things, do they pull against each other, and is there one assistant "
              "direction under them?",
@@ -39,7 +39,11 @@ READING = {
         "another block's readout in 6.5 to 6.9% of cells (|z| 3 or more), honesty and harmlessness in 1.7 to 2.3%, "
         "near the controls' false-positive rate (1.0 to 1.4%). Agreeableness, wellbeing and helping a harmless "
         "request in action lower the readout for refusing a harmful one (z -3.1 to -6.5 at layer 29).",
-        "BEH",
+        "<b>In behavior, harmlessness moves and helpfulness mostly does not.</b> At up to eight times the "
+        "calibrated dose, harmlessness's act directions change refusal, charitable reading and intent, and its "
+        "judge direction for harm changes moral judgments; helpfulness moves one instrument (autonomy). The "
+        "tension shows inside refusal: one direction trades answering edgy harmless requests against refusing "
+        "toxic ones.",
     ],
     "question": "<p>Askell et al. (2021) defined the assistant as helpful, honest and harmless, and the label stuck: "
                 "Claude's constitution and the Model Spec are organized around the same three, and Bai et al. (2022) "
@@ -96,12 +100,26 @@ READING = {
           "charitable reading in action (+0.17). The behaviors the blocks are named for, refusing, substance and "
           "sincerity, sit at -0.14 to +0.07. The persona leans toward the two personality traits and a few acts, "
           "not toward helpful, honest or harmless replies as such.</p>",
-    "r5": "R5",
+    "r5": "<p>Each block page ends with behavior under steering: its directions added while Gemma answers its own "
+          "benchmarks, at one to eight times the calibrated dose (the dose check of D-041, which covered the honesty "
+          "concepts with the rest of the 62). At the calibrated dose one cell passes in the two new blocks (helping "
+          "a harmless request's own direction, on over-refusal). Above it the blocks differ. Harmlessness moves four of its eight units: legitimate intent, charitable reading and "
+          "refusing through their act directions, harm in an act through its judge direction, in each case the "
+          "frame that matches what the instrument measures. Helpfulness moves one of seven, autonomy toward "
+          "paternalism at four times. D-041 found the same frame rule across all concepts: judge directions move "
+          "judgments, act directions move what the reply does.</p><p>The helpfulness-harmlessness tension shows up "
+          "in behavior inside refusal. The refusal direction is one dial for over- and under-refusal: toward "
+          "refusing, compliance on hard but harmless OR-Bench requests drops by 0.53 and 0.56 at eight times (the "
+          "two judges); toward complying, refusal of toxic ones drops by 0.43 and 0.36. Whether the helpfulness "
+          "directions that lower the refusal readout (result 3) also lower refusal in behavior is not tested: each "
+          "block's steering is read only on that block's own benchmarks.</p>",
     "open": [
         "The blocks' behavior instruments are close to floor or ceiling for Gemma-3-4B (see each block page), so "
         "the behavior side of the tension needs instruments with room to move.",
         "Whether autonomy is causally part of the tension: its own direction does not move refusal at the "
         "calibrated dose.",
+        "The tension in behavior: steer agreeableness, wellbeing and helping a harmless request in action and read "
+        "refusal on OR-Bench, the behavioral test of result 3.",
         "The large subjects (gemma-4-31B-it, Qwen3.5-27B), where the honesty geometry replicated.",
         "C28 (asks only when a request is truly ambiguous) joins helpfulness when built.",
     ],

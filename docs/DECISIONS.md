@@ -2322,3 +2322,37 @@ C19 (batch numerics). Two IFEval prompts (letter '#' and '!') get a random lette
 label flips run to run; they are left out, and langdetect is seeded.
 
 Open: C26's reversed INTIMA held-out. C28 is ratified and building.
+
+## HHH S5b results - 2026-10-25
+
+Behavior under steering for the helpfulness and harmlessness units (cm/hhh/s5b.py, D-055, with D-041's dose check).
+Exploratory. Each concept's doing and knowing direction at +-dose on its own behavior instrument at 1x (gen 421242-
+421245, score 421594) and, core conditions only, at 2x, 4x, 8x (gen 421598-421603; judges 421671-2, 422528-9,
+422569-70; scores 422733, 422793, 422955). Judges gemma-4-31B-it and Qwen3.5-27B; criterion twice the largest of 3
+random effects at that dose and 3 SE. Coherence: gemma-4-31B-it on 40 free-text replies per condition (421604,
+422571-3). results/hhh/s5b and results/hhh/s5b_dose/xM; result 5 on the three pages.
+- Gate: at 2x and 4x reply length stays within a few % of 1x with no repetition (C19 and C20 choice rationales get
+  shorter or longer with the sign, the choice does not). At 8x random directions make 6-64% of replies repetitive,
+  concept directions 0-31% (C24 doing).
+- Coherence: within about 10 points of unsteered up to 4x except C6 (51 at 2x doing+, 47 at 4x knowing+, unsteered
+  69). At 8x random 13-67, concept 46-90.
+- 1x: one cell passes, the C15 helping-harmless act direction, toward refusing, lowers compliance on OR-Bench hard by 0.14 (Qwen;
+  Gemma 0.12, under twice random).
+- Above 1x, oriented to the instrument's good side ("toward" = steered toward the unit's good side):
+  - A1 legitimate intent, doing, Qwen: toward +0.041 at 2x, away -0.075 at 4x; Gemma same signs under 3 SE. 8x
+    uninformative (random effects down to -0.54).
+  - B1 harm in an act, knowing toward harmful: ETHICS accuracy -0.100 at 4x, -0.165 at 8x. Doing -0.01 to -0.04.
+  - A7 charitable reading, doing toward suspicion: direct-answer rate -0.155, -0.202 at 8x, coherence 82 (unsteered 82).
+  - C15, read on the two halves D-054 set (meta.expected): doing toward refusing, compliance on hard -0.19, -0.25
+    at 4x (Qwen passes) and -0.53, -0.56 at 8x; doing toward complying, refusal on toxic -0.43, -0.36 and
+    compliance on hard +0.19, +0.17 at 8x. Knowing |0.10| or less. S5b first scored C15 pooled (share answered as
+    expected), which cancels the halves (+0.02 at 4x toward complying); the pages now read the halves.
+  - C6 autonomy, doing toward paternalism, Qwen: +0.046 at 4x (0.040 to 0.086).
+  - Nothing else at any dose: C5, C24, C25, C26, C19 in helpfulness; C27 and C20 in harmlessness.
+- Pattern, as in D-041: act directions move what the reply does, the judge direction moves the judgment instrument
+  (B1). D-041 had C15 doing and B1 knowing already; new here are A1, A7 and C6. Most effects are on the away side,
+  where the instruments have room.
+- Page-code fixes found while reading: group cells (C24 IFEval and overstepping, C19, C20) had no SE test and showed
+  two false passes (C24 knowing at 1x and 2x); the scorer now writes paired by_group_se and expected groups, and the
+  page needs both tests (d60a424). A 0 against 0 cell (C25 knowing- 2x, Qwen) counted as a pass; now excluded.
+  Rescored 1x-8x (422957-60), pooled numbers unchanged. The table shows both signs per direction.

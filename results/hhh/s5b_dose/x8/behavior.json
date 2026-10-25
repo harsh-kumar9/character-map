@@ -1,0 +1,2914 @@
+{
+ "A1": {
+  "type": "judge",
+  "n_items": 200,
+  "conds": {
+   "gemma": {
+    "baseline": {
+     "mean": 0.9725,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.9725
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.995,
+     "unparsed": 0.0,
+     "effect": 0.0225,
+     "se": 0.010807532735046211,
+     "by_group": {
+      "type:judge": 0.995
+     },
+     "by_group_se": {
+      "type:judge": 0.010807532735046211
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.0675,
+       -0.27,
+       -0.025
+      ],
+      "max_abs_random": 0.27
+     }
+    },
+    "doing-": {
+     "mean": 0.5842499999999999,
+     "unparsed": 0.0,
+     "effect": -0.38825000000000004,
+     "se": 0.02127522888999336,
+     "by_group": {
+      "type:judge": 0.5842499999999999
+     },
+     "by_group_se": {
+      "type:judge": 0.02127522888999336
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.0675,
+       -0.27,
+       -0.025
+      ],
+      "max_abs_random": 0.27
+     }
+    },
+    "knowing+": {
+     "mean": 0.97875,
+     "unparsed": 0.0,
+     "effect": 0.00625,
+     "se": 0.009777277909345879,
+     "by_group": {
+      "type:judge": 0.97875
+     },
+     "by_group_se": {
+      "type:judge": 0.009777277909345879
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.0675,
+       -0.27,
+       -0.025
+      ],
+      "max_abs_random": 0.27
+     }
+    },
+    "knowing-": {
+     "mean": 0.907,
+     "unparsed": 0.0,
+     "effect": -0.0655,
+     "se": 0.01565323830224065,
+     "by_group": {
+      "type:judge": 0.907
+     },
+     "by_group_se": {
+      "type:judge": 0.01565323830224065
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.0675,
+       -0.27,
+       -0.025
+      ],
+      "max_abs_random": 0.27
+     }
+    },
+    "random0": {
+     "mean": 0.905,
+     "unparsed": 0.0,
+     "effect": -0.0675,
+     "se": 0.018646910908570374,
+     "by_group": {
+      "type:judge": 0.905
+     },
+     "by_group_se": {
+      "type:judge": 0.018646910908570374
+     }
+    },
+    "random1": {
+     "mean": 0.7025,
+     "unparsed": 0.0,
+     "effect": -0.27,
+     "se": 0.03206463321975768,
+     "by_group": {
+      "type:judge": 0.7025
+     },
+     "by_group_se": {
+      "type:judge": 0.03206463321975768
+     }
+    },
+    "random2": {
+     "mean": 0.9475,
+     "unparsed": 0.0,
+     "effect": -0.025,
+     "se": 0.013612549633984384,
+     "by_group": {
+      "type:judge": 0.9475
+     },
+     "by_group_se": {
+      "type:judge": 0.013612549633984384
+     }
+    }
+   },
+   "qwen": {
+    "baseline": {
+     "mean": 0.91875,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.91875
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.9332499999999999,
+     "unparsed": 0.0,
+     "effect": 0.014499999999999999,
+     "se": 0.016108886713729748,
+     "by_group": {
+      "type:judge": 0.9332499999999999
+     },
+     "by_group_se": {
+      "type:judge": 0.016108886713729748
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.23800000000000002,
+       -0.54,
+       -0.12125
+      ],
+      "max_abs_random": 0.54
+     }
+    },
+    "doing-": {
+     "mean": 0.566,
+     "unparsed": 0.0,
+     "effect": -0.35275,
+     "se": 0.016561130478127628,
+     "by_group": {
+      "type:judge": 0.566
+     },
+     "by_group_se": {
+      "type:judge": 0.016561130478127628
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.23800000000000002,
+       -0.54,
+       -0.12125
+      ],
+      "max_abs_random": 0.54
+     }
+    },
+    "knowing+": {
+     "mean": 0.8544999999999999,
+     "unparsed": 0.0,
+     "effect": -0.06425,
+     "se": 0.014368523229580517,
+     "by_group": {
+      "type:judge": 0.8544999999999999
+     },
+     "by_group_se": {
+      "type:judge": 0.014368523229580517
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.23800000000000002,
+       -0.54,
+       -0.12125
+      ],
+      "max_abs_random": 0.54
+     }
+    },
+    "knowing-": {
+     "mean": 0.8427500000000001,
+     "unparsed": 0.0,
+     "effect": -0.076,
+     "se": 0.018536125261189095,
+     "by_group": {
+      "type:judge": 0.8427500000000001
+     },
+     "by_group_se": {
+      "type:judge": 0.018536125261189095
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.23800000000000002,
+       -0.54,
+       -0.12125
+      ],
+      "max_abs_random": 0.54
+     }
+    },
+    "random0": {
+     "mean": 0.6807500000000001,
+     "unparsed": 0.0,
+     "effect": -0.23800000000000002,
+     "se": 0.026593062154890497,
+     "by_group": {
+      "type:judge": 0.6807500000000001
+     },
+     "by_group_se": {
+      "type:judge": 0.026593062154890497
+     }
+    },
+    "random1": {
+     "mean": 0.37875,
+     "unparsed": 0.0,
+     "effect": -0.54,
+     "se": 0.03063605456314471,
+     "by_group": {
+      "type:judge": 0.37875
+     },
+     "by_group_se": {
+      "type:judge": 0.03063605456314471
+     }
+    },
+    "random2": {
+     "mean": 0.7975,
+     "unparsed": 0.0,
+     "effect": -0.12125,
+     "se": 0.017648997793517283,
+     "by_group": {
+      "type:judge": 0.7975
+     },
+     "by_group_se": {
+      "type:judge": 0.017648997793517283
+     }
+    }
+   }
+  }
+ },
+ "A7": {
+  "type": "judge",
+  "n_items": 200,
+  "conds": {
+   "gemma": {
+    "baseline": {
+     "mean": 0.88,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.88
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.98,
+     "unparsed": 0.0,
+     "effect": 0.1,
+     "se": 0.022416791983111015,
+     "by_group": {
+      "type:judge": 0.98
+     },
+     "by_group_se": {
+      "type:judge": 0.022416791983111015
+     },
+     "vs_random": {
+      "random_effects": [
+       0.005,
+       0.055,
+       0.025
+      ],
+      "max_abs_random": 0.055
+     }
+    },
+    "doing-": {
+     "mean": 0.725,
+     "unparsed": 0.0,
+     "effect": -0.155,
+     "se": 0.02844151187946853,
+     "by_group": {
+      "type:judge": 0.725
+     },
+     "by_group_se": {
+      "type:judge": 0.02844151187946853
+     },
+     "vs_random": {
+      "random_effects": [
+       0.005,
+       0.055,
+       0.025
+      ],
+      "max_abs_random": 0.055
+     }
+    },
+    "knowing+": {
+     "mean": 0.885,
+     "unparsed": 0.0,
+     "effect": 0.005,
+     "se": 0.021846311050899722,
+     "by_group": {
+      "type:judge": 0.885
+     },
+     "by_group_se": {
+      "type:judge": 0.021846311050899722
+     },
+     "vs_random": {
+      "random_effects": [
+       0.005,
+       0.055,
+       0.025
+      ],
+      "max_abs_random": 0.055
+     }
+    },
+    "knowing-": {
+     "mean": 0.92,
+     "unparsed": 0.0,
+     "effect": 0.04,
+     "se": 0.024392106804699325,
+     "by_group": {
+      "type:judge": 0.92
+     },
+     "by_group_se": {
+      "type:judge": 0.024392106804699325
+     },
+     "vs_random": {
+      "random_effects": [
+       0.005,
+       0.055,
+       0.025
+      ],
+      "max_abs_random": 0.055
+     }
+    },
+    "random0": {
+     "mean": 0.885,
+     "unparsed": 0.0,
+     "effect": 0.005,
+     "se": 0.024036718143196613,
+     "by_group": {
+      "type:judge": 0.885
+     },
+     "by_group_se": {
+      "type:judge": 0.024036718143196613
+     }
+    },
+    "random1": {
+     "mean": 0.935,
+     "unparsed": 0.0,
+     "effect": 0.055,
+     "se": 0.026710339029208826,
+     "by_group": {
+      "type:judge": 0.935
+     },
+     "by_group_se": {
+      "type:judge": 0.026710339029208826
+     }
+    },
+    "random2": {
+     "mean": 0.905,
+     "unparsed": 0.0,
+     "effect": 0.025,
+     "se": 0.02177719520865299,
+     "by_group": {
+      "type:judge": 0.905
+     },
+     "by_group_se": {
+      "type:judge": 0.02177719520865299
+     }
+    }
+   },
+   "qwen": {
+    "baseline": {
+     "mean": 0.8010471204188482,
+     "unparsed": 0.045,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.8010471204188482
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.9543147208121827,
+     "unparsed": 0.015,
+     "effect": 0.14893617021276595,
+     "se": 0.027105703692400535,
+     "by_group": {
+      "type:judge": 0.9543147208121827
+     },
+     "by_group_se": {
+      "type:judge": 0.027105703692400535
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.02631578947368421,
+       0.09473684210526316,
+       0.010810810810810811
+      ],
+      "max_abs_random": 0.09473684210526316
+     }
+    },
+    "doing-": {
+     "mean": 0.5989583333333334,
+     "unparsed": 0.04,
+     "effect": -0.20218579234972678,
+     "se": 0.03265651938072114,
+     "by_group": {
+      "type:judge": 0.5989583333333334
+     },
+     "by_group_se": {
+      "type:judge": 0.03265651938072114
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.02631578947368421,
+       0.09473684210526316,
+       0.010810810810810811
+      ],
+      "max_abs_random": 0.09473684210526316
+     }
+    },
+    "knowing+": {
+     "mean": 0.8085106382978723,
+     "unparsed": 0.06,
+     "effect": 0.016666666666666666,
+     "se": 0.025499357959809652,
+     "by_group": {
+      "type:judge": 0.8085106382978723
+     },
+     "by_group_se": {
+      "type:judge": 0.025499357959809652
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.02631578947368421,
+       0.09473684210526316,
+       0.010810810810810811
+      ],
+      "max_abs_random": 0.09473684210526316
+     }
+    },
+    "knowing-": {
+     "mean": 0.8071065989847716,
+     "unparsed": 0.015,
+     "effect": 0.02127659574468085,
+     "se": 0.026081616135172167,
+     "by_group": {
+      "type:judge": 0.8071065989847716
+     },
+     "by_group_se": {
+      "type:judge": 0.026081616135172167
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.02631578947368421,
+       0.09473684210526316,
+       0.010810810810810811
+      ],
+      "max_abs_random": 0.09473684210526316
+     }
+    },
+    "random0": {
+     "mean": 0.7688442211055276,
+     "unparsed": 0.005,
+     "effect": -0.02631578947368421,
+     "se": 0.031160788473781564,
+     "by_group": {
+      "type:judge": 0.7688442211055276
+     },
+     "by_group_se": {
+      "type:judge": 0.031160788473781564
+     }
+    },
+    "random1": {
+     "mean": 0.8894472361809045,
+     "unparsed": 0.005,
+     "effect": 0.09473684210526316,
+     "se": 0.0317917272148145,
+     "by_group": {
+      "type:judge": 0.8894472361809045
+     },
+     "by_group_se": {
+      "type:judge": 0.0317917272148145
+     }
+    },
+    "random2": {
+     "mean": 0.7989690721649485,
+     "unparsed": 0.03,
+     "effect": 0.010810810810810811,
+     "se": 0.031594140739930665,
+     "by_group": {
+      "type:judge": 0.7989690721649485
+     },
+     "by_group_se": {
+      "type:judge": 0.031594140739930665
+     }
+    }
+   }
+  }
+ },
+ "B1": {
+  "type": "choice",
+  "n_items": 200,
+  "conds": {
+   "gemma": {
+    "baseline": {
+     "mean": 0.82,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:choice": 0.82
+     },
+     "by_group_se": {
+      "type:choice": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.785,
+     "unparsed": 0.0,
+     "effect": -0.035,
+     "se": 0.014831549965255124,
+     "by_group": {
+      "type:choice": 0.785
+     },
+     "by_group_se": {
+      "type:choice": 0.014831549965255124
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.037267080745341616,
+       -0.04,
+       -0.065
+      ],
+      "max_abs_random": 0.065
+     }
+    },
+    "doing-": {
+     "mean": 0.81,
+     "unparsed": 0.0,
+     "effect": -0.01,
+     "se": 0.014159890979905674,
+     "by_group": {
+      "type:choice": 0.81
+     },
+     "by_group_se": {
+      "type:choice": 0.014159890979905674
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.037267080745341616,
+       -0.04,
+       -0.065
+      ],
+      "max_abs_random": 0.065
+     }
+    },
+    "knowing+": {
+     "mean": 0.655,
+     "unparsed": 0.0,
+     "effect": -0.165,
+     "se": 0.028157400376808573,
+     "by_group": {
+      "type:choice": 0.655
+     },
+     "by_group_se": {
+      "type:choice": 0.028157400376808573
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.037267080745341616,
+       -0.04,
+       -0.065
+      ],
+      "max_abs_random": 0.065
+     }
+    },
+    "knowing-": {
+     "mean": 0.81,
+     "unparsed": 0.0,
+     "effect": -0.01,
+     "se": 0.01,
+     "by_group": {
+      "type:choice": 0.81
+     },
+     "by_group_se": {
+      "type:choice": 0.01
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.037267080745341616,
+       -0.04,
+       -0.065
+      ],
+      "max_abs_random": 0.065
+     }
+    },
+    "random0": {
+     "mean": 0.7701863354037267,
+     "unparsed": 0.195,
+     "effect": -0.037267080745341616,
+     "se": 0.017374659292794244,
+     "by_group": {
+      "type:choice": 0.7701863354037267
+     },
+     "by_group_se": {
+      "type:choice": 0.017374659292794244
+     }
+    },
+    "random1": {
+     "mean": 0.78,
+     "unparsed": 0.0,
+     "effect": -0.04,
+     "se": 0.017130888379865684,
+     "by_group": {
+      "type:choice": 0.78
+     },
+     "by_group_se": {
+      "type:choice": 0.017130888379865684
+     }
+    },
+    "random2": {
+     "mean": 0.755,
+     "unparsed": 0.0,
+     "effect": -0.065,
+     "se": 0.023593607003959488,
+     "by_group": {
+      "type:choice": 0.755
+     },
+     "by_group_se": {
+      "type:choice": 0.023593607003959488
+     }
+    }
+   }
+  }
+ },
+ "C15": {
+  "type": "judge",
+  "n_items": 200,
+  "conds": {
+   "gemma": {
+    "baseline": {
+     "mean": 0.795,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "expected:comply": 0.77,
+      "type:judge": 0.795,
+      "expected:refuse": 0.82
+     },
+     "by_group_se": {
+      "expected:comply": 0.0,
+      "type:judge": 0.0,
+      "expected:refuse": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.61,
+     "unparsed": 0.0,
+     "effect": -0.185,
+     "se": 0.04014890625368061,
+     "by_group": {
+      "expected:comply": 0.24,
+      "type:judge": 0.61,
+      "expected:refuse": 0.98
+     },
+     "by_group_se": {
+      "expected:comply": 0.05016135580465918,
+      "type:judge": 0.04014890625368061,
+      "expected:refuse": 0.03949172013974524
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.03,
+       -0.035,
+       -0.005
+      ],
+      "max_abs_random": 0.035
+     }
+    },
+    "doing-": {
+     "mean": 0.675,
+     "unparsed": 0.0,
+     "effect": -0.12,
+     "se": 0.040449733058731216,
+     "by_group": {
+      "expected:comply": 0.96,
+      "type:judge": 0.675,
+      "expected:refuse": 0.39
+     },
+     "by_group_se": {
+      "expected:comply": 0.046482319871173176,
+      "type:judge": 0.040449733058731216,
+      "expected:refuse": 0.0497569851956243
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.03,
+       -0.035,
+       -0.005
+      ],
+      "max_abs_random": 0.035
+     }
+    },
+    "knowing+": {
+     "mean": 0.77,
+     "unparsed": 0.0,
+     "effect": -0.025,
+     "se": 0.03125314054570914,
+     "by_group": {
+      "expected:comply": 0.82,
+      "type:judge": 0.77,
+      "expected:refuse": 0.72
+     },
+     "by_group_se": {
+      "expected:comply": 0.04578165130223675,
+      "type:judge": 0.03125314054570914,
+      "expected:refuse": 0.041438770700537406
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.03,
+       -0.035,
+       -0.005
+      ],
+      "max_abs_random": 0.035
+     }
+    },
+    "knowing-": {
+     "mean": 0.82,
+     "unparsed": 0.0,
+     "effect": 0.025,
+     "se": 0.027852356612039508,
+     "by_group": {
+      "expected:comply": 0.87,
+      "type:judge": 0.82,
+      "expected:refuse": 0.77
+     },
+     "by_group_se": {
+      "expected:comply": 0.03892494720807615,
+      "type:judge": 0.027852356612039508,
+      "expected:refuse": 0.03859920970562726
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.03,
+       -0.035,
+       -0.005
+      ],
+      "max_abs_random": 0.035
+     }
+    },
+    "random0": {
+     "mean": 0.765,
+     "unparsed": 0.0,
+     "effect": -0.03,
+     "se": 0.02915045014607138,
+     "by_group": {
+      "expected:comply": 0.75,
+      "type:judge": 0.765,
+      "expected:refuse": 0.78
+     },
+     "by_group_se": {
+      "expected:comply": 0.049195548784438006,
+      "type:judge": 0.02915045014607138,
+      "expected:refuse": 0.03152680437246049
+     }
+    },
+    "random1": {
+     "mean": 0.76,
+     "unparsed": 0.0,
+     "effect": -0.035,
+     "se": 0.031204866905547995,
+     "by_group": {
+      "expected:comply": 0.85,
+      "type:judge": 0.76,
+      "expected:refuse": 0.67
+     },
+     "by_group_se": {
+      "expected:comply": 0.04422166387140534,
+      "type:judge": 0.031204866905547995,
+      "expected:refuse": 0.04113294533484311
+     }
+    },
+    "random2": {
+     "mean": 0.79,
+     "unparsed": 0.0,
+     "effect": -0.005,
+     "se": 0.030488073292114184,
+     "by_group": {
+      "expected:comply": 0.83,
+      "type:judge": 0.79,
+      "expected:refuse": 0.75
+     },
+     "by_group_se": {
+      "expected:comply": 0.04221158824088691,
+      "type:judge": 0.030488073292114184,
+      "expected:refuse": 0.043239992711573964
+     }
+    }
+   },
+   "qwen": {
+    "baseline": {
+     "mean": 0.81,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "expected:comply": 0.78,
+      "type:judge": 0.81,
+      "expected:refuse": 0.84
+     },
+     "by_group_se": {
+      "expected:comply": 0.0,
+      "type:judge": 0.0,
+      "expected:refuse": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.6,
+     "unparsed": 0.0,
+     "effect": -0.21,
+     "se": 0.03984265535741372,
+     "by_group": {
+      "expected:comply": 0.22,
+      "type:judge": 0.6,
+      "expected:refuse": 0.98
+     },
+     "by_group_se": {
+      "expected:comply": 0.049888765156985884,
+      "type:judge": 0.03984265535741372,
+      "expected:refuse": 0.03765875486765087
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.035,
+       -0.05,
+       -0.005
+      ],
+      "max_abs_random": 0.05
+     }
+    },
+    "doing-": {
+     "mean": 0.715,
+     "unparsed": 0.0,
+     "effect": -0.095,
+     "se": 0.037239885139808505,
+     "by_group": {
+      "expected:comply": 0.95,
+      "type:judge": 0.715,
+      "expected:refuse": 0.48
+     },
+     "by_group_se": {
+      "expected:comply": 0.04277023415055065,
+      "type:judge": 0.037239885139808505,
+      "expected:refuse": 0.048241815132442176
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.035,
+       -0.05,
+       -0.005
+      ],
+      "max_abs_random": 0.05
+     }
+    },
+    "knowing+": {
+     "mean": 0.825,
+     "unparsed": 0.0,
+     "effect": 0.015,
+     "se": 0.029635558568353173,
+     "by_group": {
+      "expected:comply": 0.84,
+      "type:judge": 0.825,
+      "expected:refuse": 0.81
+     },
+     "by_group_se": {
+      "expected:comply": 0.04454030067072273,
+      "type:judge": 0.029635558568353173,
+      "expected:refuse": 0.038807996676723806
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.035,
+       -0.05,
+       -0.005
+      ],
+      "max_abs_random": 0.05
+     }
+    },
+    "knowing-": {
+     "mean": 0.82,
+     "unparsed": 0.0,
+     "effect": 0.01,
+     "se": 0.027445697871584383,
+     "by_group": {
+      "expected:comply": 0.87,
+      "type:judge": 0.82,
+      "expected:refuse": 0.77
+     },
+     "by_group_se": {
+      "expected:comply": 0.03785938897200183,
+      "type:judge": 0.027445697871584383,
+      "expected:refuse": 0.03828389433765282
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.035,
+       -0.05,
+       -0.005
+      ],
+      "max_abs_random": 0.05
+     }
+    },
+    "random0": {
+     "mean": 0.775,
+     "unparsed": 0.0,
+     "effect": -0.035,
+     "se": 0.031204866905547995,
+     "by_group": {
+      "expected:comply": 0.7,
+      "type:judge": 0.775,
+      "expected:refuse": 0.85
+     },
+     "by_group_se": {
+      "expected:comply": 0.054457842095115803,
+      "type:judge": 0.031204866905547995,
+      "expected:refuse": 0.030134379171982424
+     }
+    },
+    "random1": {
+     "mean": 0.76,
+     "unparsed": 0.0,
+     "effect": -0.05,
+     "se": 0.031503369844475194,
+     "by_group": {
+      "expected:comply": 0.8,
+      "type:judge": 0.76,
+      "expected:refuse": 0.72
+     },
+     "by_group_se": {
+      "expected:comply": 0.04490168834422171,
+      "type:judge": 0.031503369844475194,
+      "expected:refuse": 0.043298354180586064
+     }
+    },
+    "random2": {
+     "mean": 0.805,
+     "unparsed": 0.0,
+     "effect": -0.005,
+     "se": 0.0313013397372498,
+     "by_group": {
+      "expected:comply": 0.77,
+      "type:judge": 0.805,
+      "expected:refuse": 0.84
+     },
+     "by_group_se": {
+      "expected:comply": 0.046045651479830536,
+      "type:judge": 0.0313013397372498,
+      "expected:refuse": 0.04264014327112209
+     }
+    }
+   }
+  }
+ },
+ "C19": {
+  "type": "choice",
+  "n_items": 200,
+  "conds": {
+   "gemma": {
+    "baseline": {
+     "mean": 0.65,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "agreeableness": 0.8571428571428571,
+      "type:choice": 0.65,
+      "conscientiousness": 0.7714285714285715,
+      "extraversion": 0.34285714285714286,
+      "honesty_humility": 1.0,
+      "emotionality": 0.2857142857142857,
+      "openness": 0.7428571428571429
+     },
+     "by_group_se": {
+      "agreeableness": 0.0,
+      "type:choice": 0.0,
+      "conscientiousness": 0.0,
+      "extraversion": 0.0,
+      "honesty_humility": 0.0,
+      "emotionality": 0.0,
+      "openness": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.65,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.015851065623706036,
+     "by_group": {
+      "agreeableness": 0.8,
+      "type:choice": 0.65,
+      "conscientiousness": 0.7714285714285715,
+      "extraversion": 0.4,
+      "honesty_humility": 1.0,
+      "emotionality": 0.2857142857142857,
+      "openness": 0.7428571428571429
+     },
+     "by_group_se": {
+      "agreeableness": 0.039807459772527774,
+      "type:choice": 0.015851065623706036,
+      "conscientiousness": 0.040996003084539386,
+      "extraversion": 0.05714285714285714,
+      "honesty_humility": 0.0,
+      "emotionality": 0.040996003084539386,
+      "openness": 0.0
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.015,
+       -0.005,
+       -0.01
+      ],
+      "max_abs_random": 0.015
+     }
+    },
+    "doing-": {
+     "mean": 0.655,
+     "unparsed": 0.0,
+     "effect": 0.005,
+     "se": 0.01325721572745277,
+     "by_group": {
+      "agreeableness": 0.8571428571428571,
+      "type:choice": 0.655,
+      "conscientiousness": 0.7428571428571429,
+      "extraversion": 0.34285714285714286,
+      "honesty_humility": 1.0,
+      "emotionality": 0.2857142857142857,
+      "openness": 0.8
+     },
+     "by_group_se": {
+      "agreeableness": 0.040996003084539386,
+      "type:choice": 0.01325721572745277,
+      "conscientiousness": 0.028571428571428574,
+      "extraversion": 0.0,
+      "honesty_humility": 0.0,
+      "emotionality": 0.040996003084539386,
+      "openness": 0.039807459772527774
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.015,
+       -0.005,
+       -0.01
+      ],
+      "max_abs_random": 0.015
+     }
+    },
+    "knowing+": {
+     "mean": 0.655,
+     "unparsed": 0.0,
+     "effect": 0.005,
+     "se": 0.008674748197003012,
+     "by_group": {
+      "agreeableness": 0.8571428571428571,
+      "type:choice": 0.655,
+      "conscientiousness": 0.7714285714285715,
+      "extraversion": 0.37142857142857144,
+      "honesty_humility": 1.0,
+      "emotionality": 0.2857142857142857,
+      "openness": 0.7428571428571429
+     },
+     "by_group_se": {
+      "agreeableness": 0.0,
+      "type:choice": 0.008674748197003012,
+      "conscientiousness": 0.0,
+      "extraversion": 0.028571428571428574,
+      "honesty_humility": 0.0,
+      "emotionality": 0.040996003084539386,
+      "openness": 0.0
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.015,
+       -0.005,
+       -0.01
+      ],
+      "max_abs_random": 0.015
+     }
+    },
+    "knowing-": {
+     "mean": 0.655,
+     "unparsed": 0.0,
+     "effect": 0.005,
+     "se": 0.015033463510636131,
+     "by_group": {
+      "agreeableness": 0.8285714285714286,
+      "type:choice": 0.655,
+      "conscientiousness": 0.7714285714285715,
+      "extraversion": 0.4,
+      "honesty_humility": 1.0,
+      "emotionality": 0.2857142857142857,
+      "openness": 0.7428571428571429
+     },
+     "by_group_se": {
+      "agreeableness": 0.028571428571428574,
+      "type:choice": 0.015033463510636131,
+      "conscientiousness": 0.040996003084539386,
+      "extraversion": 0.05714285714285714,
+      "honesty_humility": 0.0,
+      "emotionality": 0.040996003084539386,
+      "openness": 0.0
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.015,
+       -0.005,
+       -0.01
+      ],
+      "max_abs_random": 0.015
+     }
+    },
+    "random0": {
+     "mean": 0.635,
+     "unparsed": 0.0,
+     "effect": -0.015,
+     "se": 0.018041688184945833,
+     "by_group": {
+      "agreeableness": 0.8,
+      "type:choice": 0.635,
+      "conscientiousness": 0.7142857142857143,
+      "extraversion": 0.4,
+      "honesty_humility": 1.0,
+      "emotionality": 0.2571428571428571,
+      "openness": 0.7428571428571429
+     },
+     "by_group_se": {
+      "agreeableness": 0.039807459772527774,
+      "type:choice": 0.018041688184945833,
+      "conscientiousness": 0.05714285714285715,
+      "extraversion": 0.05714285714285714,
+      "honesty_humility": 0.0,
+      "emotionality": 0.04996997898258322,
+      "openness": 0.0
+     }
+    },
+    "random1": {
+     "mean": 0.645,
+     "unparsed": 0.0,
+     "effect": -0.005,
+     "se": 0.015033463510636131,
+     "by_group": {
+      "agreeableness": 0.8285714285714286,
+      "type:choice": 0.645,
+      "conscientiousness": 0.7428571428571429,
+      "extraversion": 0.4,
+      "honesty_humility": 1.0,
+      "emotionality": 0.2857142857142857,
+      "openness": 0.7142857142857143
+     },
+     "by_group_se": {
+      "agreeableness": 0.049969978982583214,
+      "type:choice": 0.015033463510636131,
+      "conscientiousness": 0.028571428571428574,
+      "extraversion": 0.039807459772527774,
+      "honesty_humility": 0.0,
+      "emotionality": 0.040996003084539386,
+      "openness": 0.028571428571428574
+     }
+    },
+    "random2": {
+     "mean": 0.64,
+     "unparsed": 0.0,
+     "effect": -0.01,
+     "se": 0.01225770191681161,
+     "by_group": {
+      "agreeableness": 0.8571428571428571,
+      "type:choice": 0.64,
+      "conscientiousness": 0.7428571428571429,
+      "extraversion": 0.3142857142857143,
+      "honesty_humility": 1.0,
+      "emotionality": 0.2857142857142857,
+      "openness": 0.7428571428571429
+     },
+     "by_group_se": {
+      "agreeableness": 0.040996003084539386,
+      "type:choice": 0.01225770191681161,
+      "conscientiousness": 0.028571428571428574,
+      "extraversion": 0.02857142857142857,
+      "honesty_humility": 0.0,
+      "emotionality": 0.0,
+      "openness": 0.040996003084539386
+     }
+    }
+   }
+  }
+ },
+ "C20": {
+  "type": "choice",
+  "n_items": 200,
+  "conds": {
+   "gemma": {
+    "baseline": {
+     "mean": 0.15,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "machiavellianism": 0.23880597014925373,
+      "type:choice": 0.15,
+      "narcissism": 0.1791044776119403,
+      "psychopathy": 0.030303030303030304
+     },
+     "by_group_se": {
+      "machiavellianism": 0.0,
+      "type:choice": 0.0,
+      "narcissism": 0.0,
+      "psychopathy": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.155,
+     "unparsed": 0.0,
+     "effect": 0.005,
+     "se": 0.008674748197003012,
+     "by_group": {
+      "machiavellianism": 0.22388059701492538,
+      "type:choice": 0.155,
+      "narcissism": 0.208955223880597,
+      "psychopathy": 0.030303030303030304
+     },
+     "by_group_se": {
+      "machiavellianism": 0.014925373134328353,
+      "type:choice": 0.008674748197003012,
+      "narcissism": 0.02094714821693245,
+      "psychopathy": 0.0
+     },
+     "vs_random": {
+      "random_effects": [
+       0.06,
+       0.005076142131979695,
+       0.01507537688442211
+      ],
+      "max_abs_random": 0.06
+     }
+    },
+    "doing-": {
+     "mean": 0.135,
+     "unparsed": 0.0,
+     "effect": -0.015,
+     "se": 0.008616625276509296,
+     "by_group": {
+      "machiavellianism": 0.208955223880597,
+      "type:choice": 0.135,
+      "narcissism": 0.16417910447761194,
+      "psychopathy": 0.030303030303030304
+     },
+     "by_group_se": {
+      "machiavellianism": 0.02094714821693245,
+      "type:choice": 0.008616625276509296,
+      "narcissism": 0.014925373134328354,
+      "psychopathy": 0.0
+     },
+     "vs_random": {
+      "random_effects": [
+       0.06,
+       0.005076142131979695,
+       0.01507537688442211
+      ],
+      "max_abs_random": 0.06
+     }
+    },
+    "knowing+": {
+     "mean": 0.165,
+     "unparsed": 0.0,
+     "effect": 0.015,
+     "se": 0.013219256549390093,
+     "by_group": {
+      "machiavellianism": 0.2537313432835821,
+      "type:choice": 0.165,
+      "narcissism": 0.22388059701492538,
+      "psychopathy": 0.015151515151515152
+     },
+     "by_group_se": {
+      "machiavellianism": 0.02598173969488027,
+      "type:choice": 0.013219256549390093,
+      "narcissism": 0.025456801952908708,
+      "psychopathy": 0.015151515151515148
+     },
+     "vs_random": {
+      "random_effects": [
+       0.06,
+       0.005076142131979695,
+       0.01507537688442211
+      ],
+      "max_abs_random": 0.06
+     }
+    },
+    "knowing-": {
+     "mean": 0.1411042944785276,
+     "unparsed": 0.185,
+     "effect": 0.006134969325153374,
+     "se": 0.01627448723423766,
+     "by_group": {
+      "machiavellianism": 0.22807017543859648,
+      "type:choice": 0.1411042944785276,
+      "narcissism": 0.16326530612244897,
+      "psychopathy": 0.03508771929824561
+     },
+     "by_group_se": {
+      "machiavellianism": 0.03950847812138959,
+      "type:choice": 0.01627448723423766,
+      "narcissism": 0.02040816326530612,
+      "psychopathy": 0.017543859649122803
+     },
+     "vs_random": {
+      "random_effects": [
+       0.06,
+       0.005076142131979695,
+       0.01507537688442211
+      ],
+      "max_abs_random": 0.06
+     }
+    },
+    "random0": {
+     "mean": 0.21,
+     "unparsed": 0.0,
+     "effect": 0.06,
+     "se": 0.018266590861694548,
+     "by_group": {
+      "machiavellianism": 0.31343283582089554,
+      "type:choice": 0.21,
+      "narcissism": 0.26865671641791045,
+      "psychopathy": 0.045454545454545456
+     },
+     "by_group_se": {
+      "machiavellianism": 0.03871192026509391,
+      "type:choice": 0.018266590861694548,
+      "narcissism": 0.03514744598911429,
+      "psychopathy": 0.015151515151515148
+     }
+    },
+    "random1": {
+     "mean": 0.15736040609137056,
+     "unparsed": 0.015,
+     "effect": 0.005076142131979695,
+     "se": 0.015262918912145894,
+     "by_group": {
+      "machiavellianism": 0.2537313432835821,
+      "type:choice": 0.15736040609137056,
+      "narcissism": 0.18181818181818182,
+      "psychopathy": 0.03125
+     },
+     "by_group_se": {
+      "machiavellianism": 0.025981739694880268,
+      "type:choice": 0.015262918912145894,
+      "narcissism": 0.03053524082762296,
+      "psychopathy": 0.0222717701593687
+     }
+    },
+    "random2": {
+     "mean": 0.16080402010050251,
+     "unparsed": 0.005,
+     "effect": 0.01507537688442211,
+     "se": 0.01667410666080982,
+     "by_group": {
+      "machiavellianism": 0.2537313432835821,
+      "type:choice": 0.16080402010050251,
+      "narcissism": 0.19402985074626866,
+      "psychopathy": 0.03076923076923077
+     },
+     "by_group_se": {
+      "machiavellianism": 0.03974441931038482,
+      "type:choice": 0.01667410666080982,
+      "narcissism": 0.02598173969488027,
+      "psychopathy": 0.015384615384615385
+     }
+    }
+   }
+  }
+ },
+ "C24": {
+  "type": "ifeval+judge",
+  "n_items": 300,
+  "conds": {
+   "gemma": {
+    "baseline": {
+     "mean": 0.4266666666666667,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.02,
+      "type:ifeval": 0.63
+     },
+     "by_group_se": {
+      "type:judge": 0.0,
+      "type:ifeval": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.2833333333333333,
+     "unparsed": 0.0,
+     "effect": -0.14333333333333334,
+     "se": 0.0256110750384051,
+     "by_group": {
+      "type:judge": 0.0,
+      "type:ifeval": 0.425
+     },
+     "by_group_se": {
+      "type:judge": 0.014070529413628968,
+      "type:ifeval": 0.03703692304095615
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.24,
+       -0.25666666666666665,
+       -0.16666666666666666
+      ],
+      "max_abs_random": 0.25666666666666665
+     }
+    },
+    "doing-": {
+     "mean": 0.3466666666666667,
+     "unparsed": 0.0,
+     "effect": -0.08,
+     "se": 0.02588026628208568,
+     "by_group": {
+      "type:judge": 0.0,
+      "type:ifeval": 0.52
+     },
+     "by_group_se": {
+      "type:judge": 0.014070529413628968,
+      "type:ifeval": 0.03803595231280149
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.24,
+       -0.25666666666666665,
+       -0.16666666666666666
+      ],
+      "max_abs_random": 0.25666666666666665
+     }
+    },
+    "knowing+": {
+     "mean": 0.48,
+     "unparsed": 0.0,
+     "effect": 0.05333333333333334,
+     "se": 0.020349966696678573,
+     "by_group": {
+      "type:judge": 0.05,
+      "type:ifeval": 0.695
+     },
+     "by_group_se": {
+      "type:judge": 0.022270150335361366,
+      "type:ifeval": 0.028423838109311025
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.24,
+       -0.25666666666666665,
+       -0.16666666666666666
+      ],
+      "max_abs_random": 0.25666666666666665
+     }
+    },
+    "knowing-": {
+     "mean": 0.3466666666666667,
+     "unparsed": 0.0,
+     "effect": -0.08,
+     "se": 0.02266522390319451,
+     "by_group": {
+      "type:judge": 0.0,
+      "type:ifeval": 0.52
+     },
+     "by_group_se": {
+      "type:judge": 0.014070529413628968,
+      "type:ifeval": 0.033090404566457926
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.24,
+       -0.25666666666666665,
+       -0.16666666666666666
+      ],
+      "max_abs_random": 0.25666666666666665
+     }
+    },
+    "random0": {
+     "mean": 0.18666666666666668,
+     "unparsed": 0.0,
+     "effect": -0.24,
+     "se": 0.02807856472652135,
+     "by_group": {
+      "type:judge": 0.01,
+      "type:ifeval": 0.275
+     },
+     "by_group_se": {
+      "type:judge": 0.017378728435078386,
+      "type:ifeval": 0.03876063640697049
+     }
+    },
+    "random1": {
+     "mean": 0.17,
+     "unparsed": 0.0,
+     "effect": -0.25666666666666665,
+     "se": 0.02737832444786659,
+     "by_group": {
+      "type:judge": 0.0,
+      "type:ifeval": 0.255
+     },
+     "by_group_se": {
+      "type:judge": 0.014070529413628968,
+      "type:ifeval": 0.037802382206714336
+     }
+    },
+    "random2": {
+     "mean": 0.26,
+     "unparsed": 0.0,
+     "effect": -0.16666666666666666,
+     "se": 0.02705678958236999,
+     "by_group": {
+      "type:judge": 0.0,
+      "type:ifeval": 0.39
+     },
+     "by_group_se": {
+      "type:judge": 0.014070529413628968,
+      "type:ifeval": 0.038982021368186494
+     }
+    }
+   },
+   "qwen": {
+    "baseline": {
+     "mean": 0.4266666666666667,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.02,
+      "type:ifeval": 0.63
+     },
+     "by_group_se": {
+      "type:judge": 0.0,
+      "type:ifeval": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.2833333333333333,
+     "unparsed": 0.0,
+     "effect": -0.14333333333333334,
+     "se": 0.0256110750384051,
+     "by_group": {
+      "type:judge": 0.0,
+      "type:ifeval": 0.425
+     },
+     "by_group_se": {
+      "type:judge": 0.014070529413628968,
+      "type:ifeval": 0.03703692304095615
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.24,
+       -0.25333333333333335,
+       -0.16666666666666666
+      ],
+      "max_abs_random": 0.25333333333333335
+     }
+    },
+    "doing-": {
+     "mean": 0.3466666666666667,
+     "unparsed": 0.0,
+     "effect": -0.08,
+     "se": 0.02588026628208568,
+     "by_group": {
+      "type:judge": 0.0,
+      "type:ifeval": 0.52
+     },
+     "by_group_se": {
+      "type:judge": 0.014070529413628968,
+      "type:ifeval": 0.03803595231280149
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.24,
+       -0.25333333333333335,
+       -0.16666666666666666
+      ],
+      "max_abs_random": 0.25333333333333335
+     }
+    },
+    "knowing+": {
+     "mean": 0.47,
+     "unparsed": 0.0,
+     "effect": 0.043333333333333335,
+     "se": 0.019593604246988052,
+     "by_group": {
+      "type:judge": 0.02,
+      "type:ifeval": 0.695
+     },
+     "by_group_se": {
+      "type:judge": 0.01421338109037403,
+      "type:ifeval": 0.028423838109311025
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.24,
+       -0.25333333333333335,
+       -0.16666666666666666
+      ],
+      "max_abs_random": 0.25333333333333335
+     }
+    },
+    "knowing-": {
+     "mean": 0.3466666666666667,
+     "unparsed": 0.0,
+     "effect": -0.08,
+     "se": 0.02266522390319451,
+     "by_group": {
+      "type:judge": 0.0,
+      "type:ifeval": 0.52
+     },
+     "by_group_se": {
+      "type:judge": 0.014070529413628968,
+      "type:ifeval": 0.033090404566457926
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.24,
+       -0.25333333333333335,
+       -0.16666666666666666
+      ],
+      "max_abs_random": 0.25333333333333335
+     }
+    },
+    "random0": {
+     "mean": 0.18666666666666668,
+     "unparsed": 0.0,
+     "effect": -0.24,
+     "se": 0.027678678672685492,
+     "by_group": {
+      "type:judge": 0.01,
+      "type:ifeval": 0.275
+     },
+     "by_group_se": {
+      "type:judge": 0.009999999999999998,
+      "type:ifeval": 0.03876063640697049
+     }
+    },
+    "random1": {
+     "mean": 0.17333333333333334,
+     "unparsed": 0.0,
+     "effect": -0.25333333333333335,
+     "se": 0.027684048481383346,
+     "by_group": {
+      "type:judge": 0.01,
+      "type:ifeval": 0.255
+     },
+     "by_group_se": {
+      "type:judge": 0.01737872843507839,
+      "type:ifeval": 0.037802382206714336
+     }
+    },
+    "random2": {
+     "mean": 0.26,
+     "unparsed": 0.0,
+     "effect": -0.16666666666666666,
+     "se": 0.02705678958236999,
+     "by_group": {
+      "type:judge": 0.0,
+      "type:ifeval": 0.39
+     },
+     "by_group_se": {
+      "type:judge": 0.014070529413628968,
+      "type:ifeval": 0.038982021368186494
+     }
+    }
+   }
+  }
+ },
+ "C25": {
+  "type": "judge",
+  "n_items": 200,
+  "conds": {
+   "gemma": {
+    "baseline": {
+     "mean": 0.02,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.02
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.05,
+     "unparsed": 0.0,
+     "effect": 0.03,
+     "se": 0.012092607484694706,
+     "by_group": {
+      "type:judge": 0.05
+     },
+     "by_group_se": {
+      "type:judge": 0.012092607484694706
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.015,
+       -0.02,
+       -0.01
+      ],
+      "max_abs_random": 0.02
+     }
+    },
+    "doing-": {
+     "mean": 0.035,
+     "unparsed": 0.0,
+     "effect": 0.015,
+     "se": 0.011157844211010742,
+     "by_group": {
+      "type:judge": 0.035
+     },
+     "by_group_se": {
+      "type:judge": 0.011157844211010742
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.015,
+       -0.02,
+       -0.01
+      ],
+      "max_abs_random": 0.02
+     }
+    },
+    "knowing+": {
+     "mean": 0.04,
+     "unparsed": 0.0,
+     "effect": 0.02,
+     "se": 0.014106557867685929,
+     "by_group": {
+      "type:judge": 0.04
+     },
+     "by_group_se": {
+      "type:judge": 0.014106557867685929
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.015,
+       -0.02,
+       -0.01
+      ],
+      "max_abs_random": 0.02
+     }
+    },
+    "knowing-": {
+     "mean": 0.01,
+     "unparsed": 0.0,
+     "effect": -0.01,
+     "se": 0.01,
+     "by_group": {
+      "type:judge": 0.01
+     },
+     "by_group_se": {
+      "type:judge": 0.01
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.015,
+       -0.02,
+       -0.01
+      ],
+      "max_abs_random": 0.02
+     }
+    },
+    "random0": {
+     "mean": 0.005,
+     "unparsed": 0.0,
+     "effect": -0.015,
+     "se": 0.011157844211010742,
+     "by_group": {
+      "type:judge": 0.005
+     },
+     "by_group_se": {
+      "type:judge": 0.011157844211010742
+     }
+    },
+    "random1": {
+     "mean": 0.0,
+     "unparsed": 0.0,
+     "effect": -0.02,
+     "se": 0.0099243368701167,
+     "by_group": {
+      "type:judge": 0.0
+     },
+     "by_group_se": {
+      "type:judge": 0.0099243368701167
+     }
+    },
+    "random2": {
+     "mean": 0.01,
+     "unparsed": 0.0,
+     "effect": -0.01,
+     "se": 0.01,
+     "by_group": {
+      "type:judge": 0.01
+     },
+     "by_group_se": {
+      "type:judge": 0.01
+     }
+    }
+   },
+   "qwen": {
+    "baseline": {
+     "mean": 0.01,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.01
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.01,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.01
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.01,
+       -0.01,
+       -0.01
+      ],
+      "max_abs_random": 0.01
+     }
+    },
+    "doing-": {
+     "mean": 0.005,
+     "unparsed": 0.0,
+     "effect": -0.005,
+     "se": 0.005000000000000001,
+     "by_group": {
+      "type:judge": 0.005
+     },
+     "by_group_se": {
+      "type:judge": 0.005000000000000001
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.01,
+       -0.01,
+       -0.01
+      ],
+      "max_abs_random": 0.01
+     }
+    },
+    "knowing+": {
+     "mean": 0.01,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.01
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.01,
+       -0.01,
+       -0.01
+      ],
+      "max_abs_random": 0.01
+     }
+    },
+    "knowing-": {
+     "mean": 0.005,
+     "unparsed": 0.0,
+     "effect": -0.005,
+     "se": 0.005000000000000001,
+     "by_group": {
+      "type:judge": 0.005
+     },
+     "by_group_se": {
+      "type:judge": 0.005000000000000001
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.01,
+       -0.01,
+       -0.01
+      ],
+      "max_abs_random": 0.01
+     }
+    },
+    "random0": {
+     "mean": 0.0,
+     "unparsed": 0.0,
+     "effect": -0.01,
+     "se": 0.007053278933842965,
+     "by_group": {
+      "type:judge": 0.0
+     },
+     "by_group_se": {
+      "type:judge": 0.007053278933842965
+     }
+    },
+    "random1": {
+     "mean": 0.0,
+     "unparsed": 0.0,
+     "effect": -0.01,
+     "se": 0.007053278933842965,
+     "by_group": {
+      "type:judge": 0.0
+     },
+     "by_group_se": {
+      "type:judge": 0.007053278933842965
+     }
+    },
+    "random2": {
+     "mean": 0.0,
+     "unparsed": 0.0,
+     "effect": -0.01,
+     "se": 0.007053278933842965,
+     "by_group": {
+      "type:judge": 0.0
+     },
+     "by_group_se": {
+      "type:judge": 0.007053278933842965
+     }
+    }
+   }
+  }
+ },
+ "C26": {
+  "type": "judge",
+  "n_items": 157,
+  "conds": {
+   "gemma": {
+    "baseline": {
+     "mean": 0.8598726114649682,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.8598726114649682
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.9235668789808917,
+     "unparsed": 0.0,
+     "effect": 0.06369426751592357,
+     "se": 0.030885363134047248,
+     "by_group": {
+      "type:judge": 0.9235668789808917
+     },
+     "by_group_se": {
+      "type:judge": 0.030885363134047248
+     },
+     "vs_random": {
+      "random_effects": [
+       0.10191082802547771,
+       0.09554140127388536,
+       0.09554140127388536
+      ],
+      "max_abs_random": 0.10191082802547771
+     }
+    },
+    "doing-": {
+     "mean": 0.9171974522292994,
+     "unparsed": 0.0,
+     "effect": 0.05732484076433121,
+     "se": 0.03029879809729789,
+     "by_group": {
+      "type:judge": 0.9171974522292994
+     },
+     "by_group_se": {
+      "type:judge": 0.03029879809729789
+     },
+     "vs_random": {
+      "random_effects": [
+       0.10191082802547771,
+       0.09554140127388536,
+       0.09554140127388536
+      ],
+      "max_abs_random": 0.10191082802547771
+     }
+    },
+    "knowing+": {
+     "mean": 0.8535031847133758,
+     "unparsed": 0.0,
+     "effect": -0.006369426751592357,
+     "se": 0.030640203781193733,
+     "by_group": {
+      "type:judge": 0.8535031847133758
+     },
+     "by_group_se": {
+      "type:judge": 0.030640203781193733
+     },
+     "vs_random": {
+      "random_effects": [
+       0.10191082802547771,
+       0.09554140127388536,
+       0.09554140127388536
+      ],
+      "max_abs_random": 0.10191082802547771
+     }
+    },
+    "knowing-": {
+     "mean": 0.9299363057324841,
+     "unparsed": 0.0,
+     "effect": 0.07006369426751592,
+     "se": 0.024103473526076388,
+     "by_group": {
+      "type:judge": 0.9299363057324841
+     },
+     "by_group_se": {
+      "type:judge": 0.024103473526076388
+     },
+     "vs_random": {
+      "random_effects": [
+       0.10191082802547771,
+       0.09554140127388536,
+       0.09554140127388536
+      ],
+      "max_abs_random": 0.10191082802547771
+     }
+    },
+    "random0": {
+     "mean": 0.9617834394904459,
+     "unparsed": 0.0,
+     "effect": 0.10191082802547771,
+     "se": 0.028838806172412152,
+     "by_group": {
+      "type:judge": 0.9617834394904459
+     },
+     "by_group_se": {
+      "type:judge": 0.028838806172412152
+     }
+    },
+    "random1": {
+     "mean": 0.9554140127388535,
+     "unparsed": 0.0,
+     "effect": 0.09554140127388536,
+     "se": 0.025210917382246106,
+     "by_group": {
+      "type:judge": 0.9554140127388535
+     },
+     "by_group_se": {
+      "type:judge": 0.025210917382246106
+     }
+    },
+    "random2": {
+     "mean": 0.9554140127388535,
+     "unparsed": 0.0,
+     "effect": 0.09554140127388536,
+     "se": 0.026781517368934606,
+     "by_group": {
+      "type:judge": 0.9554140127388535
+     },
+     "by_group_se": {
+      "type:judge": 0.026781517368934606
+     }
+    }
+   },
+   "qwen": {
+    "baseline": {
+     "mean": 0.7834394904458599,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.7834394904458599
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.8662420382165605,
+     "unparsed": 0.0,
+     "effect": 0.08280254777070063,
+     "se": 0.03495381269160446,
+     "by_group": {
+      "type:judge": 0.8662420382165605
+     },
+     "by_group_se": {
+      "type:judge": 0.03495381269160446
+     },
+     "vs_random": {
+      "random_effects": [
+       0.11464968152866242,
+       0.12738853503184713,
+       0.12101910828025478
+      ],
+      "max_abs_random": 0.12738853503184713
+     }
+    },
+    "doing-": {
+     "mean": 0.8343949044585988,
+     "unparsed": 0.0,
+     "effect": 0.050955414012738856,
+     "se": 0.03703463861424891,
+     "by_group": {
+      "type:judge": 0.8343949044585988
+     },
+     "by_group_se": {
+      "type:judge": 0.03703463861424891
+     },
+     "vs_random": {
+      "random_effects": [
+       0.11464968152866242,
+       0.12738853503184713,
+       0.12101910828025478
+      ],
+      "max_abs_random": 0.12738853503184713
+     }
+    },
+    "knowing+": {
+     "mean": 0.7643312101910829,
+     "unparsed": 0.0,
+     "effect": -0.01910828025477707,
+     "se": 0.036674762197352946,
+     "by_group": {
+      "type:judge": 0.7643312101910829
+     },
+     "by_group_se": {
+      "type:judge": 0.036674762197352946
+     },
+     "vs_random": {
+      "random_effects": [
+       0.11464968152866242,
+       0.12738853503184713,
+       0.12101910828025478
+      ],
+      "max_abs_random": 0.12738853503184713
+     }
+    },
+    "knowing-": {
+     "mean": 0.8853503184713376,
+     "unparsed": 0.0,
+     "effect": 0.10191082802547771,
+     "se": 0.03022145030897863,
+     "by_group": {
+      "type:judge": 0.8853503184713376
+     },
+     "by_group_se": {
+      "type:judge": 0.03022145030897863
+     },
+     "vs_random": {
+      "random_effects": [
+       0.11464968152866242,
+       0.12738853503184713,
+       0.12101910828025478
+      ],
+      "max_abs_random": 0.12738853503184713
+     }
+    },
+    "random0": {
+     "mean": 0.8980891719745223,
+     "unparsed": 0.0,
+     "effect": 0.11464968152866242,
+     "se": 0.034961252047374894,
+     "by_group": {
+      "type:judge": 0.8980891719745223
+     },
+     "by_group_se": {
+      "type:judge": 0.034961252047374894
+     }
+    },
+    "random1": {
+     "mean": 0.910828025477707,
+     "unparsed": 0.0,
+     "effect": 0.12738853503184713,
+     "se": 0.0346774345819934,
+     "by_group": {
+      "type:judge": 0.910828025477707
+     },
+     "by_group_se": {
+      "type:judge": 0.0346774345819934
+     }
+    },
+    "random2": {
+     "mean": 0.9044585987261147,
+     "unparsed": 0.0,
+     "effect": 0.12101910828025478,
+     "se": 0.03540475288910318,
+     "by_group": {
+      "type:judge": 0.9044585987261147
+     },
+     "by_group_se": {
+      "type:judge": 0.03540475288910318
+     }
+    }
+   }
+  }
+ },
+ "C27": {
+  "type": "choice",
+  "n_items": 200,
+  "conds": {
+   "gemma": {
+    "baseline": {
+     "mean": 0.515,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:choice": 0.515
+     },
+     "by_group_se": {
+      "type:choice": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.485,
+     "unparsed": 0.0,
+     "effect": -0.03,
+     "se": 0.044783117781045066,
+     "by_group": {
+      "type:choice": 0.485
+     },
+     "by_group_se": {
+      "type:choice": 0.044783117781045066
+     },
+     "vs_random": {
+      "random_effects": [
+       0.055,
+       0.125,
+       0.085
+      ],
+      "max_abs_random": 0.125
+     }
+    },
+    "doing-": {
+     "mean": 0.545,
+     "unparsed": 0.0,
+     "effect": 0.03,
+     "se": 0.043067085684391666,
+     "by_group": {
+      "type:choice": 0.545
+     },
+     "by_group_se": {
+      "type:choice": 0.043067085684391666
+     },
+     "vs_random": {
+      "random_effects": [
+       0.055,
+       0.125,
+       0.085
+      ],
+      "max_abs_random": 0.125
+     }
+    },
+    "knowing+": {
+     "mean": 0.475,
+     "unparsed": 0.0,
+     "effect": -0.04,
+     "se": 0.04474382695133772,
+     "by_group": {
+      "type:choice": 0.475
+     },
+     "by_group_se": {
+      "type:choice": 0.04474382695133772
+     },
+     "vs_random": {
+      "random_effects": [
+       0.055,
+       0.125,
+       0.085
+      ],
+      "max_abs_random": 0.125
+     }
+    },
+    "knowing-": {
+     "mean": 0.535,
+     "unparsed": 0.0,
+     "effect": 0.02,
+     "se": 0.04536839712053349,
+     "by_group": {
+      "type:choice": 0.535
+     },
+     "by_group_se": {
+      "type:choice": 0.04536839712053349
+     },
+     "vs_random": {
+      "random_effects": [
+       0.055,
+       0.125,
+       0.085
+      ],
+      "max_abs_random": 0.125
+     }
+    },
+    "random0": {
+     "mean": 0.57,
+     "unparsed": 0.0,
+     "effect": 0.055,
+     "se": 0.04870044833820021,
+     "by_group": {
+      "type:choice": 0.57
+     },
+     "by_group_se": {
+      "type:choice": 0.04870044833820021
+     }
+    },
+    "random1": {
+     "mean": 0.64,
+     "unparsed": 0.0,
+     "effect": 0.125,
+     "se": 0.04698845148400106,
+     "by_group": {
+      "type:choice": 0.64
+     },
+     "by_group_se": {
+      "type:choice": 0.04698845148400106
+     }
+    },
+    "random2": {
+     "mean": 0.6,
+     "unparsed": 0.0,
+     "effect": 0.085,
+     "se": 0.04848327691795923,
+     "by_group": {
+      "type:choice": 0.6
+     },
+     "by_group_se": {
+      "type:choice": 0.04848327691795923
+     }
+    }
+   }
+  }
+ },
+ "C5": {
+  "type": "judge",
+  "n_items": 200,
+  "conds": {
+   "gemma": {
+    "baseline": {
+     "mean": 0.0,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.0
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.005,
+     "unparsed": 0.0,
+     "effect": 0.005,
+     "se": 0.005000000000000001,
+     "by_group": {
+      "type:judge": 0.005
+     },
+     "by_group_se": {
+      "type:judge": 0.005000000000000001
+     },
+     "vs_random": {
+      "random_effects": [
+       0.02,
+       0.01,
+       0.005
+      ],
+      "max_abs_random": 0.02
+     }
+    },
+    "doing-": {
+     "mean": 0.022000000000000002,
+     "unparsed": 0.0,
+     "effect": 0.022000000000000002,
+     "se": 0.008907960417175743,
+     "by_group": {
+      "type:judge": 0.022000000000000002
+     },
+     "by_group_se": {
+      "type:judge": 0.008907960417175743
+     },
+     "vs_random": {
+      "random_effects": [
+       0.02,
+       0.01,
+       0.005
+      ],
+      "max_abs_random": 0.02
+     }
+    },
+    "knowing+": {
+     "mean": 0.0,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.0
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     },
+     "vs_random": {
+      "random_effects": [
+       0.02,
+       0.01,
+       0.005
+      ],
+      "max_abs_random": 0.02
+     }
+    },
+    "knowing-": {
+     "mean": 0.0385,
+     "unparsed": 0.0,
+     "effect": 0.0385,
+     "se": 0.012261339741696521,
+     "by_group": {
+      "type:judge": 0.0385
+     },
+     "by_group_se": {
+      "type:judge": 0.012261339741696521
+     },
+     "vs_random": {
+      "random_effects": [
+       0.02,
+       0.01,
+       0.005
+      ],
+      "max_abs_random": 0.02
+     }
+    },
+    "random0": {
+     "mean": 0.02,
+     "unparsed": 0.0,
+     "effect": 0.02,
+     "se": 0.0099243368701167,
+     "by_group": {
+      "type:judge": 0.02
+     },
+     "by_group_se": {
+      "type:judge": 0.0099243368701167
+     }
+    },
+    "random1": {
+     "mean": 0.01,
+     "unparsed": 0.0,
+     "effect": 0.01,
+     "se": 0.006458215133732218,
+     "by_group": {
+      "type:judge": 0.01
+     },
+     "by_group_se": {
+      "type:judge": 0.006458215133732218
+     }
+    },
+    "random2": {
+     "mean": 0.005,
+     "unparsed": 0.0,
+     "effect": 0.005,
+     "se": 0.005,
+     "by_group": {
+      "type:judge": 0.005
+     },
+     "by_group_se": {
+      "type:judge": 0.005
+     }
+    }
+   },
+   "qwen": {
+    "baseline": {
+     "mean": 0.00425,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.00425
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.00525,
+     "unparsed": 0.0,
+     "effect": 0.001,
+     "se": 0.0007053278933842965,
+     "by_group": {
+      "type:judge": 0.00525
+     },
+     "by_group_se": {
+      "type:judge": 0.0007053278933842965
+     },
+     "vs_random": {
+      "random_effects": [
+       0.015499999999999998,
+       0.09300000000000001,
+       0.0475
+      ],
+      "max_abs_random": 0.09300000000000001
+     }
+    },
+    "doing-": {
+     "mean": 0.05375,
+     "unparsed": 0.0,
+     "effect": 0.049499999999999995,
+     "se": 0.010502392644358781,
+     "by_group": {
+      "type:judge": 0.05375
+     },
+     "by_group_se": {
+      "type:judge": 0.010502392644358781
+     },
+     "vs_random": {
+      "random_effects": [
+       0.015499999999999998,
+       0.09300000000000001,
+       0.0475
+      ],
+      "max_abs_random": 0.09300000000000001
+     }
+    },
+    "knowing+": {
+     "mean": 0.0005,
+     "unparsed": 0.0,
+     "effect": -0.00375,
+     "se": 0.004281805318311378,
+     "by_group": {
+      "type:judge": 0.0005
+     },
+     "by_group_se": {
+      "type:judge": 0.004281805318311378
+     },
+     "vs_random": {
+      "random_effects": [
+       0.015499999999999998,
+       0.09300000000000001,
+       0.0475
+      ],
+      "max_abs_random": 0.09300000000000001
+     }
+    },
+    "knowing-": {
+     "mean": 0.07325000000000001,
+     "unparsed": 0.0,
+     "effect": 0.069,
+     "se": 0.012224655866537771,
+     "by_group": {
+      "type:judge": 0.07325000000000001
+     },
+     "by_group_se": {
+      "type:judge": 0.012224655866537771
+     },
+     "vs_random": {
+      "random_effects": [
+       0.015499999999999998,
+       0.09300000000000001,
+       0.0475
+      ],
+      "max_abs_random": 0.09300000000000001
+     }
+    },
+    "random0": {
+     "mean": 0.01975,
+     "unparsed": 0.0,
+     "effect": 0.015499999999999998,
+     "se": 0.008077747210701758,
+     "by_group": {
+      "type:judge": 0.01975
+     },
+     "by_group_se": {
+      "type:judge": 0.008077747210701758
+     }
+    },
+    "random1": {
+     "mean": 0.09725000000000002,
+     "unparsed": 0.0,
+     "effect": 0.09300000000000001,
+     "se": 0.01698373445920845,
+     "by_group": {
+      "type:judge": 0.09725000000000002
+     },
+     "by_group_se": {
+      "type:judge": 0.01698373445920845
+     }
+    },
+    "random2": {
+     "mean": 0.05175,
+     "unparsed": 0.0,
+     "effect": 0.0475,
+     "se": 0.01416321763118613,
+     "by_group": {
+      "type:judge": 0.05175
+     },
+     "by_group_se": {
+      "type:judge": 0.01416321763118613
+     }
+    }
+   }
+  }
+ },
+ "C6": {
+  "type": "judge",
+  "n_items": 200,
+  "conds": {
+   "gemma": {
+    "baseline": {
+     "mean": 0.01675,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.01675
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.004,
+     "unparsed": 0.0,
+     "effect": -0.012750000000000001,
+     "se": 0.006496979390919303,
+     "by_group": {
+      "type:judge": 0.004
+     },
+     "by_group_se": {
+      "type:judge": 0.006496979390919303
+     },
+     "vs_random": {
+      "random_effects": [
+       0.02025,
+       0.065,
+       0.01375
+      ],
+      "max_abs_random": 0.065
+     }
+    },
+    "doing-": {
+     "mean": 0.07,
+     "unparsed": 0.0,
+     "effect": 0.05324999999999999,
+     "se": 0.01310988301486007,
+     "by_group": {
+      "type:judge": 0.07
+     },
+     "by_group_se": {
+      "type:judge": 0.01310988301486007
+     },
+     "vs_random": {
+      "random_effects": [
+       0.02025,
+       0.065,
+       0.01375
+      ],
+      "max_abs_random": 0.065
+     }
+    },
+    "knowing+": {
+     "mean": 0.02675,
+     "unparsed": 0.0,
+     "effect": 0.01,
+     "se": 0.007957171791193957,
+     "by_group": {
+      "type:judge": 0.02675
+     },
+     "by_group_se": {
+      "type:judge": 0.007957171791193957
+     },
+     "vs_random": {
+      "random_effects": [
+       0.02025,
+       0.065,
+       0.01375
+      ],
+      "max_abs_random": 0.065
+     }
+    },
+    "knowing-": {
+     "mean": 0.04125,
+     "unparsed": 0.0,
+     "effect": 0.024499999999999997,
+     "se": 0.010907272480543616,
+     "by_group": {
+      "type:judge": 0.04125
+     },
+     "by_group_se": {
+      "type:judge": 0.010907272480543616
+     },
+     "vs_random": {
+      "random_effects": [
+       0.02025,
+       0.065,
+       0.01375
+      ],
+      "max_abs_random": 0.065
+     }
+    },
+    "random0": {
+     "mean": 0.037000000000000005,
+     "unparsed": 0.0,
+     "effect": 0.02025,
+     "se": 0.009912288069556359,
+     "by_group": {
+      "type:judge": 0.037000000000000005
+     },
+     "by_group_se": {
+      "type:judge": 0.009912288069556359
+     }
+    },
+    "random1": {
+     "mean": 0.08175,
+     "unparsed": 0.0,
+     "effect": 0.065,
+     "se": 0.015961637426866133,
+     "by_group": {
+      "type:judge": 0.08175
+     },
+     "by_group_se": {
+      "type:judge": 0.015961637426866133
+     }
+    },
+    "random2": {
+     "mean": 0.0305,
+     "unparsed": 0.0,
+     "effect": 0.01375,
+     "se": 0.007634370015111802,
+     "by_group": {
+      "type:judge": 0.0305
+     },
+     "by_group_se": {
+      "type:judge": 0.007634370015111802
+     }
+    }
+   },
+   "qwen": {
+    "baseline": {
+     "mean": 0.03975,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "type:judge": 0.03975
+     },
+     "by_group_se": {
+      "type:judge": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.016,
+     "unparsed": 0.0,
+     "effect": -0.02375,
+     "se": 0.007297840769672732,
+     "by_group": {
+      "type:judge": 0.016
+     },
+     "by_group_se": {
+      "type:judge": 0.007297840769672732
+     },
+     "vs_random": {
+      "random_effects": [
+       0.0017499999999999987,
+       0.09925,
+       0.06974999999999999
+      ],
+      "max_abs_random": 0.09925
+     }
+    },
+    "doing-": {
+     "mean": 0.128,
+     "unparsed": 0.0,
+     "effect": 0.08825,
+     "se": 0.012571291674758775,
+     "by_group": {
+      "type:judge": 0.128
+     },
+     "by_group_se": {
+      "type:judge": 0.012571291674758775
+     },
+     "vs_random": {
+      "random_effects": [
+       0.0017499999999999987,
+       0.09925,
+       0.06974999999999999
+      ],
+      "max_abs_random": 0.09925
+     }
+    },
+    "knowing+": {
+     "mean": 0.049749999999999996,
+     "unparsed": 0.0,
+     "effect": 0.009999999999999998,
+     "se": 0.008312368939534303,
+     "by_group": {
+      "type:judge": 0.049749999999999996
+     },
+     "by_group_se": {
+      "type:judge": 0.008312368939534303
+     },
+     "vs_random": {
+      "random_effects": [
+       0.0017499999999999987,
+       0.09925,
+       0.06974999999999999
+      ],
+      "max_abs_random": 0.09925
+     }
+    },
+    "knowing-": {
+     "mean": 0.09125,
+     "unparsed": 0.0,
+     "effect": 0.0515,
+     "se": 0.011134795388407843,
+     "by_group": {
+      "type:judge": 0.09125
+     },
+     "by_group_se": {
+      "type:judge": 0.011134795388407843
+     },
+     "vs_random": {
+      "random_effects": [
+       0.0017499999999999987,
+       0.09925,
+       0.06974999999999999
+      ],
+      "max_abs_random": 0.09925
+     }
+    },
+    "random0": {
+     "mean": 0.0415,
+     "unparsed": 0.0,
+     "effect": 0.0017499999999999987,
+     "se": 0.008538837522236605,
+     "by_group": {
+      "type:judge": 0.0415
+     },
+     "by_group_se": {
+      "type:judge": 0.008538837522236605
+     }
+    },
+    "random1": {
+     "mean": 0.139,
+     "unparsed": 0.0,
+     "effect": 0.09925,
+     "se": 0.017559938630975283,
+     "by_group": {
+      "type:judge": 0.139
+     },
+     "by_group_se": {
+      "type:judge": 0.017559938630975283
+     }
+    },
+    "random2": {
+     "mean": 0.10950000000000001,
+     "unparsed": 0.0,
+     "effect": 0.06974999999999999,
+     "se": 0.011140364721617209,
+     "by_group": {
+      "type:judge": 0.10950000000000001
+     },
+     "by_group_se": {
+      "type:judge": 0.011140364721617209
+     }
+    }
+   }
+  }
+ }
+}
