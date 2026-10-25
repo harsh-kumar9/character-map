@@ -15,7 +15,8 @@ from .blocks import BLOCKS
 
 OUT = R / "figures" / "hhh"
 PAGES = {"honesty": "https://claude.ai/artifact/QTcDSMpzByXX9w8o4sJ7Us",
-         "helpfulness": "", "harmlessness": ""}      # filled once the block pages are published
+         "helpfulness": "https://claude.ai/artifact/DPwDswQC3AguaB72tTwmq6",
+         "harmlessness": "https://claude.ai/artifact/3j5PfgHEgy8SgtU4i7wQeJ"}
 
 READING = {
     "date": "2026-10-25",
