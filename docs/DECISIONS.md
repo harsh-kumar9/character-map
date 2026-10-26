@@ -2356,3 +2356,59 @@ random effects at that dose and 3 SE. Coherence: gemma-4-31B-it on 40 free-text 
   two false passes (C24 knowing at 1x and 2x); the scorer now writes paired by_group_se and expected groups, and the
   page needs both tests (d60a424). A 0 against 0 cell (C25 knowing- 2x, Qwen) counted as a pass; now excluded.
   Rescored 1x-8x (422957-60), pooled numbers unchanged. The table shows both signs per direction.
+
+## D-056 addendum results: C28 asks when needed - 2026-10-25
+
+Gemma-3-4B, reply32, layer 17 / 29; standardized diff of means in brackets (layer 17). Commits a7ca8bd to f65d037.
+
+In short: C28 reads at ceiling in every frame, but what it reads is "the reply asks", not "the reply asks when asking
+is needed". In frames a, b and c the under_asks and over_asks directions point opposite ways (cosine -0.91 to -0.97),
+and each sub-contrast's direction scored on the other's items is reversed (0.00-0.34). Frame d at 17 is the one
+partial exception. Gemma's own verdicts do the same: it approves asking replies whether or not asking is needed.
+Without the 2x2, C28 would look like the cleanest concept in the block.
+
+Build (100 scenarios, 1600 items; 103 of 115 passed the blind check, first 100 kept). Changes from the addendum:
+- The first prompt verified 69 of 115. The mistake check flagged the designed guess and needless question, and the
+  clear version's question often asked about a detail still open. So the clear version's asking reply now asks about
+  the choice the clear request already settles, the check must name that reply (asks_settled), and a mistake is a
+  false statement or a wrong fact, code or calculation (3fc7012). The check still drops guesses that state things the
+  request does not support ("as requested", "I have booked it for tomorrow").
+- Replies may repeat across the two versions (37 scenarios share the answer reply, 34 the asking reply); within a
+  sub-contrast they differ. The ban takes the verb "specify", not the word "specific" (cfde507).
+- Replies 19-34 words, median 25-27 (the prompt asks 20-55); frame c pairs within 0.83-1.23.
+- Spot-check of the review sample (3 scenarios): one clean, one where the open detail barely changes the answer, one
+  where the asking reply offers a place that does not exist and the mistake check missed it.
+
+Within, under_asks: a 0.91/0.99 (1.00), b 0.99/0.99 (1.00), c 0.79/0.86 (1.00), d 0.84/0.99 (1.00). over_asks: a
+0.91/0.99 (0.99), b 0.99/0.99 (1.00), c 0.77/0.90 (1.00), d 0.79/1.00 (1.00). Probe 1.00 throughout.
+
+The 2x2, per frame, 17/29:
+- cos(under_asks, over_asks): a -0.94/-0.96, b -0.97/-0.95, c -0.91/-0.96, d -0.26/-0.77 (standardized: -0.97,
+  -0.96, -0.95, -0.73 at 17). Split halves of the scenarios agree within a sub-contrast at 0.76-0.98 and across at
+  -0.81 to -0.91 (d -0.25/-0.75), so the -0.9s are as close to -1 as the noise allows.
+- One sub-contrast's direction on the other's test items (under on over, over on under): at 17 a 0.17, 0.04; b 0.01,
+  0.01; c 0.34, 0.14; d 0.42, 0.40. At 29 all 0.00-0.19.
+- The difference of the two directions reads whether the reply asks at 0.77-0.99. Their sum is the 2x2 interaction
+  (needed question and needed answer against guess and needless question), the part that would track need. It reads
+  pos vs neg at a 0.54/0.55, b 0.58/0.56, c 0.60/0.63, d 0.62/0.75; a label shuffle at this n (68 + 68 test items)
+  has SD about 0.05.
+
+CLAMBER held-out (frame c, 100 ambiguous and 100 clear queries, Llama-3.1-8B replies, greedy): under_asks 0.67/0.80
+(0.98), over_asks 0.68/0.85 (1.00). Length separates these pairs: asking replies have a median of 13 words, answers 64
+(ambiguous) and 43 (clear), and reply length alone reads them at 0.96 and 0.94. The raw projection correlates with
+length only weakly (|r| 0.15-0.31). Every held-out pair is a question against an answer, so a question detector reads
+it too: the held-out shows the asking read carries to another model's replies, not that it tracks need.
+
+Transfer, under_asks: a->b 0.78/0.99, b->a 0.99/0.97, a->c 0.75/0.66, c->a 0.74/0.73, c->d 0.58/0.35, d->c 0.80/0.47.
+over_asks: a->b 0.81/0.99, b->a 0.98/0.97, a->c 0.66/0.74, c->a 0.71/0.69, c->d 0.46/0.61, d->c 0.47/0.58. Frame
+cosines: a-b 0.60-0.77; the rest are near 0 at 29.
+
+Controls: the verdict control moves no number by more than 0.03. The negation control moves within and held-out by
+0.02 at most and transfer by 0.07, except the boundary b->a transfer at 17 (under_asks 0.66 to 0.88, over_asks 0.79
+to 0.94).
+
+Gemma's verdicts (frames a b, 800 items) approve the asking reply more than the answer in both versions: approve 64%
+needed question, 59% needless question, 44% needed answer, 42% guess; disapprove 5%, 10%, 16%, 20%.
+
+Open: whether the small need signal (the interaction, 0.54-0.63 in a-c, 0.75 in d at 29) is real; it needs a
+permutation test that keeps the scenario pairs together, and S4 against C24 too_literal, which overlaps under_asks.
