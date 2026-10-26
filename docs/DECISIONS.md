@@ -2412,3 +2412,32 @@ needed question, 59% needless question, 44% needed answer, 42% guess; disapprove
 
 Open: whether the small need signal (the interaction, 0.54-0.63 in a-c, 0.75 in d at 29) is real; it needs a
 permutation test that keeps the scenario pairs together, and S4 against C24 too_literal, which overlaps under_asks.
+
+## C28 in the helpfulness block - 2026-10-26
+
+C28 joins helpfulness as two units, as C24 does: asks when a request is ambiguous (under_asks) and answers when it is
+clear (over_asks), both in the task group (3b81647). Every block stage was rerun with them: S3 tables (job 423086), S4
+with C28 in the pool (423087), S5a setup, run and matrix (423113, 423115-8, 423244), landscapes (423120-2), tests
+(423123), figures, and S5b for C28 at 1x-8x (gen 423119, 423247-9; judges 423245-6, 423317-22; coherence 423323-6;
+scores 423327, 423490-2). Pre-C28 copies in /ada1/u/harsh/tmp/hhh_pre_c28.
+- Old numbers: S4 centred cosines on the old units move by at most 0.007 (median 0.001), floors unchanged (0.16); S5a
+  vectors, random directions and old cells are identical; transfer moves in the third decimal. Page values that
+  changed at two decimals: legitimate intent vs refusing in act -0.34 to -0.33, substance vs wellbeing judged -0.33 to
+  -0.32, care judge to act 0.75 to 0.74, recognize to judge minimum 0.77 to 0.76. Block-level counts and medians that
+  include helpfulness are recomputed (helpfulness self effect at 29: median 2.8, 8 of 17 sources; HHH cross-block
+  shares: helpfulness 5.8-7.2%, honesty and harmlessness 1.5-2.0%, controls 0.9-1.3%; act-frame pairs above the floor
+  within vs between blocks 29% vs 18%, self 29% vs 23%; D1 mean square for helpfulness 0.016).
+- Geometry: under_asks and over_asks are opposite in a b c (-0.95 at 17, -0.94 to -0.95 at 29) and less in d (-0.74,
+  -0.75): the direction reads whether the reply asks. Recognize to judge 0.99-1.00, act to self 0.98-0.99 at 17,
+  judge to act 0.60 and 0.67. C28 shares little with C24 too_literal (|cos| 0.14 or less at 17; +0.30 in act at 29),
+  the S4 check the builder left open. Across blocks, asking goes with avoiding side effects (+0.30 act, +0.33 self)
+  and answering with self-knowledge (+0.28 act).
+- Steering: the judge directions steer themselves (z 5.2 and 6.7 at 29). Answering in action is a hub at layer 22: 32
+  readouts outside C28 (12 helpfulness, 12 harmlessness, 8 honesty), raising autonomy (+6.3), substance, legitimate
+  intent, charitable reading and helping a harmless request, and lowering refusing a harmful request (-4.4),
+  declining and side effects, low psychopathy and sincerity. At 29 it moves four.
+- Behavior (CLAMBER, read on the two halves by scoring.expected): unsteered Gemma asks on 1 of 100 ambiguous queries
+  and answers 99 of 100 clear ones. Nothing moves up to 4x. At 8x the act direction toward asking raises asking on
+  ambiguous queries by 0.45 and 0.65 and lowers answering clear ones by 0.43 and 0.59 (both judges), with coherence
+  64 against 89: asking regardless of need, confounded with damage.
+- figs.py panel letters ran out at nine units (fixed). The three pages are rebuilt and republished.

@@ -108,26 +108,30 @@ STATUS = ("Exploratory. One model, synthetic scenarios written and checked by LL
 READING = {
     "helpfulness": {
         "date": "2026-10-25",
-        "stand": "Seven definitions of helpfulness, from the constitution, the Model Spec and personality psychology, each "
+        "stand": "Nine definitions of helpfulness, from the constitution, the Model Spec and personality psychology, each "
                  "in four frames, read inside Gemma-3-4B. Do they pick out one thing, and does knowing each one carry over "
                  "to doing it?",
         "status": STATUS,
         "tldr": [
             "<b>Frame first, again.</b> Items about someone else's reply sit about 11 within-unit spreads from items in "
-            "Gemma's voice at layer 17. Unlike harmlessness, acting and self-describing also come apart (2.2 spreads at "
-            "17, 2.4 at 29).",
+            "Gemma's voice at layer 17. Unlike harmlessness, acting and self-describing also come apart (2.1 spreads at "
+            "17, 2.5 at 29).",
             "<b>One cluster when Gemma watches, none when it acts.</b> In the judge frame care, autonomy, wellbeing and "
             "agreeableness share a direction (cosines +0.31 to +0.44, floor 0.16) and substance runs against wellbeing "
-            "(-0.33). In the act frame no two definitions pass 0.21.",
+            "(-0.32). In the act frame no two definitions pass 0.21, apart from C28's two halves.",
+            "<b>Asking when needed reads as asking.</b> Asking on an ambiguous request and answering a clear one point "
+            "opposite ways in recognize, judge and act (-0.95): the direction reads whether the reply asks, not whether "
+            "asking was needed.",
             "<b>Knowing rarely becomes doing.</b> Judge-to-act transfer at layer 17 is 0.21 for autonomy, 0.47 for "
-            "wellbeing and 0.54 to 0.59 for the task definitions; only care (0.75) and agreeableness (0.72) get "
-            "anywhere. None of the three new held-out sets transfers.",
-            "<b>Care and agreeableness in action are hubs.</b> Steered, they move most of the block's other readouts and "
-            "cross into harmlessness, where agreeableness and wellbeing lower refusing a harmful request. Substance does "
-            "not steer even its own readout.",
-            "<b>Steering barely reaches behavior.</b> Up to eight times the calibrated dose one cell passes: autonomy's "
-            "act direction, pushed toward paternalism, makes replies more paternalistic at four times (one judge). "
-            "Several instruments sit at floor or ceiling unsteered.",
+            "wellbeing and 0.54 to 0.67 for the task definitions; only care (0.74) and agreeableness (0.72) get "
+            "anywhere. None of the four new held-out sets transfers beyond a length baseline.",
+            "<b>Care, agreeableness and answering in action are hubs.</b> Steered, they move most of the block's other "
+            "readouts and cross into harmlessness, where agreeableness, wellbeing and answering lower refusing a harmful "
+            "request. Substance does not steer even its own readout.",
+            "<b>Steering barely reaches behavior.</b> Up to four times the calibrated dose one cell passes: autonomy's "
+            "act direction, pushed toward paternalism, makes replies more paternalistic (one judge). At eight times "
+            "the asking direction makes Gemma ask on clear requests as often as on ambiguous ones. Several instruments "
+            "sit at floor or ceiling unsteered.",
         ],
         "question": "<p>The constitution and the Model Spec build helpfulness from several parts: read the request as it "
                     "was meant, neither too literally nor too liberally; give real, specific help instead of hedged help; "
@@ -138,47 +142,68 @@ READING = {
                     "pick out one thing inside Gemma, or several? And does knowing each one, recognizing it in another "
                     "assistant's reply or judging that reply, carry over to doing it, writing the reply or describing "
                     "itself?</p>",
-        "defs_intro": "Seven units from five concepts, in three groups: the task (reads the request, as two "
-                      "sub-contrasts, and substantive help), the person (care, autonomy, wellbeing) and the trait "
-                      "(agreeableness). Every unit has all four frames. The grounding is in the concept cards (D-053, "
-                      "D-056); the review links open each concept's item review.",
+        "defs_intro": "Nine units from seven concepts, in three groups: the task (reads the request, and asks only when "
+                      "a request is ambiguous, each as two sub-contrasts, and substantive help), the person (care, "
+                      "autonomy, wellbeing) and the trait (agreeableness). Every unit has all four frames. The grounding "
+                      "is in the concept cards (D-053, D-056 and its C28 addendum); the review links open each concept's "
+                      "item review.",
         "r1": "<p>As for honesty, frame comes before definition. At layer 17 the first principal component of the "
-              "block's subspace carries 81% of its variance and splits items about someone else's reply (recognize, "
-              "judge) from items in Gemma's voice (act, self-describe), 10.6 to 11.0 within-unit spreads apart. At 29 "
-              "the split is 3.2 to 3.8 spreads and the first component carries 37%. What is new is the second split: "
-              "acting and self-describing sit 2.2 spreads apart at 17 and 2.4 at 29, while recognize and judge sit 1.0 "
-              "and 0.7 apart. In the harmlessness block acting and self-describing nearly coincide (0.6, 0.8).</p>"
-              "<p>Inside a frame group the task definitions sit apart from the person ones (mean 1.8 to 2.2 spreads "
-              "when Gemma watches, 1.0 to 1.3 when it acts or describes itself). The person definitions sit close to "
-              "each other and to agreeableness when Gemma watches (0.3 to 1.0).</p>",
-        "r2": "<p>Recognize to judge transfers for every definition (0.77 to 1.00 at both layers). Act to self-describe "
+              "block's subspace carries 80% of its variance and splits items about someone else's reply (recognize, "
+              "judge) from items in Gemma's voice (act, self-describe), 10.8 to 11.2 within-unit spreads apart. At 29 "
+              "the split is 3.3 to 3.8 spreads and the first component carries 33%. What is new is the second split: "
+              "acting and self-describing sit 2.1 spreads apart at 17 and 2.5 at 29, while recognize and judge sit 0.9 "
+              "and 0.6 apart. In the harmlessness block acting and self-describing nearly coincide (0.6, 0.8).</p>"
+              "<p>Inside a frame group the task definitions sit apart from the person ones (mean 1.7 to 2.1 spreads "
+              "when Gemma watches, 0.9 to 1.4 when it acts or describes itself). The person definitions sit close to "
+              "each other and to agreeableness when Gemma watches (0.1 to 1.3). C28's two units are built on the two "
+              "versions of the same requests, so their items sit together (0.0 to 0.3 apart).</p>",
+        "r2": "<p>Recognize to judge transfers for every definition (0.76 to 1.00 at both layers). Act to self-describe "
               "transfers for care, autonomy, agreeableness and wellbeing (0.85 to 0.99; the formality control 0.86 and "
-              "0.85) and less for the task definitions: not too literal 0.70 and 0.77, no overstepping 0.78 and 0.76, "
-              "substance 0.87 and 0.84.</p><p>Knowing to doing is where the block comes apart. Judge to act at layer "
-              "17: autonomy 0.21 (the judge direction reads the acts backwards), wellbeing 0.47, substance 0.54, the "
-              "two C24 units 0.56 and 0.59, agreeableness 0.72, care 0.75. Recognize to act is about the same, except "
-              "for autonomy (0.75 at 17, 0.93 at 29). None of the three new held-out sets transfers: IFEval pass vs "
-              "fail sits at 0.49 to 0.53, HelpSteer2 pairs at 0.50 to 0.53, and INTIMA is reversed (0.40 to 0.42), "
-              "not read yet.</p>",
+              "0.85) and less for the reading-the-request definitions: not too literal 0.70 and 0.77, no overstepping "
+              "0.78 and 0.76, substance 0.87 and 0.84. The two C28 units transfer from act to self-describe at layer 17 "
+              "(0.98, 0.99) and less at 29 (0.82, 0.86).</p><p>Knowing to doing is where the block comes apart. Judge "
+              "to act at layer 17: autonomy 0.21 (the judge direction reads the acts backwards), wellbeing 0.47, "
+              "substance 0.54, the two C24 units 0.56 and 0.59, the two C28 units 0.60 and 0.67, agreeableness 0.72, "
+              "care 0.74. Recognize to act is about the same, except for autonomy (0.75 at 17, 0.93 at 29). None of "
+              "the four new held-out sets transfers beyond a baseline: IFEval pass vs fail sits at 0.49 to 0.53, "
+              "HelpSteer2 pairs at 0.50 to 0.53, INTIMA is reversed (0.40 to 0.42), not read yet, and C28's CLAMBER "
+              "set reads at 0.98 and 1.00 but reply length alone reads it at 0.94 to 0.96, since every pair there is a "
+              "question against an answer.</p>",
         "r3": "<p>The lattice has more edges when Gemma watches than when it acts. In the judge frame at layer 17 "
               "(floor 0.16) autonomy goes with agreeableness (+0.44), wellbeing (+0.42) and care (+0.39), and "
               "wellbeing and care go with agreeableness (+0.32, +0.31). Substance runs against wellbeing in recognize "
-              "and judge (-0.31, -0.33): a reply judged substantive is judged less supportive of the person's own "
-              "capacities and ties. In the act frame no two definitions pass 0.21 (overstepping with autonomy), and in "
-              "self-description the largest is not too literal with agreeableness (+0.28).</p><p>So the person side "
-              "of helpfulness is one cluster when Gemma evaluates someone else's reply and separate directions in its "
-              "own. The task side never clusters.</p>",
-        "r4": "<p>Helpfulness steers weakly on its own readouts: the median self effect is z 1.9 at layer 29, 6 of 13 "
-              "sources reach 3, and substance moves nothing (0.9). What does steer, steers widely. Care in action and "
-              "agreeableness in action (z 5.8 and 15.9 on themselves at 29) carry 24 of the 40 off-definition cells "
-              "at |z| 3 or more at layer 22 and 13 of the 18 at 29: they raise autonomy, substance and each other. Of "
-              "the 10 negative cells at 22, 7 fall on overstepping when Gemma watches. Care, agreeableness, wellbeing "
-              "and not-too-literal in action move the judged reply toward overstepping (-4.3 to -5.9): warmth added "
-              "to a reply reads as doing more than was asked. The other 3 fall on wellbeing in action (-3.1 to "
-              "-3.9): care and agreeableness move Gemma's own reply toward fostering reliance.</p><p>Across blocks "
-              "helpfulness "
-              "pushes more than it receives: 34 and 35 cells on harmlessness readouts at 22 and 29, against 10 and 6 "
-              "the other way. Agreeableness and wellbeing in action lower refusing a harmful request in "
+              "and judge (-0.31, -0.32): a reply judged substantive is judged less supportive of the person's own "
+              "capacities and ties. In the act frame no two definitions pass 0.21 (overstepping with autonomy) apart "
+              "from C28's two halves, and in self-description the largest is not too literal with agreeableness "
+              "(+0.28).</p><p>So the person side of helpfulness is one cluster when Gemma evaluates someone else's reply "
+              "and separate directions in its own. The task side never clusters.</p><p>C28 is the 2x2 its addendum set "
+              "up. Asking on an ambiguous request and answering a clear one point opposite ways in recognize, judge and "
+              "act (-0.95 at layer 17, -0.94 to -0.95 at 29) and less in self-description (-0.74, -0.75). A direction "
+              "for asking when it is needed would be less than opposite; this one reads whether the reply asks. In the "
+              "build's 2x2, each half's direction scores the other half's items backwards (0.00 to 0.34), the part that "
+              "would track need reads 0.54 to 0.63 in recognize, judge and act, and Gemma's own verdicts approve a "
+              "needed question and a needless one about equally (64% and 59%). C28 shares little with reading the "
+              "request too literally (|cosine| 0.14 or less at layer 17, +0.30 in action at 29), and answering goes "
+              "with substance when Gemma watches (+0.25, +0.23).</p>",
+        "r4": "<p>Helpfulness steers less well than harmlessness on its own readouts: the median self effect is z 2.8 "
+              "at layer 29 and 8 of 17 sources reach 3 (without C28's four, 1.9 and 6 of 13), and substance moves "
+              "nothing (0.9). What does steer, steers widely. Leaving out C28's two halves moving each other, there are "
+              "60 off-definition cells at |z| 3 or more at layer 22 and 24 at 29. Care in action and agreeableness in "
+              "action (z 5.8 and 15.9 on themselves at 29) together carry 30 of the 60 and 17 of the 24: they raise "
+              "autonomy, substance and each other. Of the 16 negative cells at 22, 9 fall on overstepping when Gemma watches. Care, "
+              "agreeableness, wellbeing, not-too-literal and answering in action move the judged reply toward "
+              "overstepping (-3.1 to -5.9): warmth or a direct answer added to a reply reads as doing more than was "
+              "asked. Four fall on wellbeing in action (-3.1 to -3.9): autonomy judged, care, agreeableness and "
+              "answering move Gemma's own reply toward fostering reliance. Two are care and agreeableness in action "
+              "lowering asking when ambiguous, judged (-3.0, -3.4): warmth reads as answering.</p><p>Answering a clear "
+              "request, in action, is a third hub at layer 22. It moves 32 readouts outside C28, 12 of them in "
+              "harmlessness and 8 in honesty: it raises autonomy (+6.3), substance (+3.6, +3.7), legitimate intent in "
+              "action (+4.3), charitable reading (+4.2) and helping a harmless request (+4.5), and lowers refusing a harmful "
+              "request (-4.4), declining a harmful action and avoiding side effects (-3.0 to -3.5), low psychopathy "
+              "(-4.0, -3.4) and sincerity (-3.7, -3.6). Answering instead of asking acts like going ahead in general. "
+              "At 29 it moves four readouts.</p><p>Across blocks helpfulness pushes more than it receives: 47 and 38 "
+              "cells on harmlessness readouts at 22 and 29 (13 and 3 of them from answering), against 10 and 6 the "
+              "other way. Agreeableness and wellbeing in action lower refusing a harmful request in "
               "self-description (-6.1, -6.0 at 22), and agreeableness raises helping a harmless one (+5.9). Care is "
               "mixed: it raises refusing in self-description (+4.7), and care judged pushes the judged act toward "
               "harmful (-8.6 at 29), so care makes harm more visible.</p>",
@@ -189,10 +214,15 @@ READING = {
               "effects at that dose and at least three standard errors.</p><p>Nothing passes at the calibrated dose "
               "here. Above it one cell passes: autonomy's act direction pushed toward "
               "paternalism raises the paternalism rate on DailyDilemmas from 0.04 to 0.09 at four times (Qwen judge; "
-              "the Gemma judge moves the same way, 0.02 to 0.03). Care, substance, reading the request, wellbeing and "
-              "agreeableness stay inside their random directions at every dose. The instruments explain part of it: "
-              "unsteered, no reply is rated apathetic, almost none fully helpful, and 98 of 100 edits are judged to "
-              "overstep, so each has room on one side only. Wellbeing's act direction lowers it whichever way it is "
+              "the Gemma judge moves the same way, 0.02 to 0.03). Asking moves only at eight times, and the way its "
+              "geometry says: C28's act direction pushed toward asking raises the share of ambiguous CLAMBER queries "
+              "Gemma asks about from 0.01 by 0.45 and 0.65 (the two judges) and lowers the share of clear ones it "
+              "answers from 0.99 by 0.43 and 0.59. It asks more, whether or not asking is needed, and coherence on "
+              "those replies drops (64 against 89). At two and four times the judged ask rate does not move, though "
+              "more replies contain a question. Care, substance, reading the request, wellbeing and agreeableness stay "
+              "inside their random directions at every dose. The instruments explain part of it: unsteered, no reply "
+              "is rated apathetic, almost none fully helpful, 98 of 100 edits are judged to overstep, and Gemma asks "
+              "about 1 in 100 ambiguous queries, so each has room on one side only. Wellbeing's act direction lowers it whichever way it is "
               "steered (-0.05 to -0.08 at eight times), which reads as damage rather than direction.</p><p>Coherence, "
               "rated on the instruments' own replies by gemma-4-31B-it, stays within about 10 points of unsteered at "
               "two and four times, except on autonomy's benchmark (act direction 51 at two times, judge direction 47 "
@@ -204,7 +234,8 @@ READING = {
                  "request is against autonomy in recognize, judge and act (-0.23 to -0.29 at layer 17) and helping a "
                  "harmless one goes with it (+0.23 to +0.62), while substance and helping a harmless request are -0.09 "
                  "to +0.13 in every frame. And the steering that couples the blocks starts on the person side: "
-                 "agreeableness, wellbeing and care in action are the directions that move refusal.</p>",
+                 "agreeableness, wellbeing and care in action are the directions that move refusal, with answering a "
+                 "clear request in action at layer 22.</p>",
         "open": [
             "C26's INTIMA held-out is reversed (0.40 to 0.42); the labels or the pairing may run the other way from "
             "the card's good side.",
@@ -212,8 +243,9 @@ READING = {
             "tension is untested.",
             "Several behavior instruments sit at floor or ceiling unsteered: no reply rated apathetic (C5, 200 of "
             "200 at 0), almost none paternalistic (C6, 194 of 200 at 0), almost none fully helpful (C25, 4 of 200), "
-            "and 98 of 100 edits judged to change more than the errors (C24).",
-            "C28 (asks only when a request is truly ambiguous) is being built and joins the block when done.",
+            "98 of 100 edits judged to change more than the errors (C24), and 1 of 100 ambiguous CLAMBER queries "
+            "met with a question (C28).",
+            "C28's need signal (0.54 to 0.63 in the build's 2x2) has no permutation test yet.",
             "The large subjects (gemma-4-31B-it, Qwen3.5-27B).",
         ],
     },
@@ -274,14 +306,14 @@ READING = {
               "weakly. Held-out: R-Judge's injection cases read side effects in recognize and judge (0.58 to 0.88), "
               "the GAP far set reads declining (0.93, 1.00), and R-Judge's unintended-action cases do not (0.43 to "
               "0.69).</p>",
-        "r3": "<p>At layer 17 (floor 0.16) the block has more pairs above the floor than helpfulness (149 against "
-              "76, with one more unit), and unlike helpfulness about as many between definitions in Gemma's own voice "
-              "as when it watches (28 in act and self-describe, against 7 for helpfulness). Refusing in text and declining a tool call share a direction (+0.30 act, "
+        "r3": "<p>At layer 17 (floor 0.16) the block has more pairs above the floor than helpfulness (150 against "
+              "114, with one unit fewer), and unlike helpfulness about as many between definitions in Gemma's own voice "
+              "as when it watches (29 in act and self-describe, against 15 for helpfulness). Refusing in text and declining a tool call share a direction (+0.30 act, "
               "+0.48 self-describe). Declining a harmful action opposes helping a harmless request (-0.36 act, -0.65 "
               "self-describe), and refusing a harmful request opposes it in every frame (-0.22 to -0.48 at 17 and "
               "29). Legitimate intent goes "
               "with charitable reading (+0.48 act, +0.57 self-describe), with helping a harmless request (+0.35 act) "
-              "and against refusing (-0.34 act). Low psychopathy goes with harmless acts (+0.40 act, +0.54 "
+              "and against refusing (-0.33 act). Low psychopathy goes with harmless acts (+0.40 act, +0.54 "
               "self-describe). Side effects connect to little.</p><p>Seeing harm and refusing are separate: harm in an "
               "act against refusing a harmful request is -0.03 to +0.18, under the floor in 7 of 8 cells, as Zhao et "
               "al. (2025) report for harmfulness and refusal.</p>",
@@ -332,8 +364,8 @@ READING = {
                  "against autonomy in recognize, judge and act (-0.23 to -0.29 at layer 17), while helping a harmless "
                  "request and substance are -0.09 to +0.13. A refusal that offers safe help (C15 safe completion) "
                  "points toward complying in Gemma's own reply (cosine with refusing -0.78, -0.85) and not toward "
-                 "substance (-0.16). And the directions that lower refusal causally come from helpfulness's person "
-                 "side: agreeableness and wellbeing in action.</p>",
+                 "substance (-0.16). And the directions that lower refusal causally come from helpfulness: "
+                 "agreeableness and wellbeing in action, and at layer 22 answering a clear request in action.</p>",
         "open": [
             "Whether the harm reading in Gemma's own replies follows its stance once stated (a window at the stance, "
             "not the first 32 tokens, which are mostly a counselling preamble).",

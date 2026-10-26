@@ -175,7 +175,7 @@ def landscape_units(B, L, plt):
                         zorder=7, path_effects=halo)
         ax.set_title(u.label, loc="left")
         ax.grid(color=GRID, lw=0.4); ax.set_axisbelow(True)
-        letter(ax, "abcdefgh"[k], 1.04)
+        letter(ax, "abcdefghijkl"[k], 1.04)
     for k in range(n, rows * cols):
         axes[k // cols, k % cols].axis("off")
     for ax in axes[-1]:

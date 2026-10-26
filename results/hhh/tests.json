@@ -1,240 +1,240 @@
 {
  "floors": {
-  "9": 0.17401762417393507,
-  "17": 0.15764152637999976,
-  "22": 0.15240348900817896,
-  "29": 0.15914019461492557
+  "9": 0.17306233254971454,
+  "17": 0.15689628154425805,
+  "22": 0.15124003943315248,
+  "29": 0.15826712011748453
  },
  "tension": {
   "9": {
    "a": {
-    "C15|refuse[harmful]~C25|all": -0.082,
-    "C15|refuse[harmful]~C6|all": -0.12,
-    "C15|refuse[harmful]~C26|all": 0.041,
-    "C15|refuse[harmless]~C25|all": -0.014,
-    "C15|refuse[harmless]~C6|all": 0.29,
-    "C15|refuse[harmless]~C26|all": -0.007,
-    "A7|all~C25|all": -0.021,
-    "A7|all~C6|all": 0.313,
-    "A7|all~C26|all": 0.069,
-    "C27|instructed~C25|all": -0.269,
-    "C27|instructed~C6|all": -0.209,
-    "C27|instructed~C26|all": 0.172
+    "C15|refuse[harmful]~C25|all": -0.077,
+    "C15|refuse[harmful]~C6|all": -0.117,
+    "C15|refuse[harmful]~C26|all": 0.044,
+    "C15|refuse[harmless]~C25|all": -0.018,
+    "C15|refuse[harmless]~C6|all": 0.287,
+    "C15|refuse[harmless]~C26|all": -0.011,
+    "A7|all~C25|all": -0.022,
+    "A7|all~C6|all": 0.312,
+    "A7|all~C26|all": 0.067,
+    "C27|instructed~C25|all": -0.266,
+    "C27|instructed~C6|all": -0.208,
+    "C27|instructed~C26|all": 0.174
    },
    "b": {
-    "C15|refuse[harmful]~C25|all": -0.072,
-    "C15|refuse[harmful]~C6|all": -0.082,
-    "C15|refuse[harmful]~C26|all": -0.01,
+    "C15|refuse[harmful]~C25|all": -0.069,
+    "C15|refuse[harmful]~C6|all": -0.081,
+    "C15|refuse[harmful]~C26|all": -0.008,
     "C15|refuse[harmless]~C25|all": -0.082,
-    "C15|refuse[harmless]~C6|all": 0.443,
-    "C15|refuse[harmless]~C26|all": 0.179,
-    "A7|all~C25|all": 0.124,
-    "A7|all~C6|all": -0.009,
-    "A7|all~C26|all": -0.192,
-    "C27|instructed~C25|all": -0.128,
-    "C27|instructed~C6|all": -0.071,
-    "C27|instructed~C26|all": 0.044
+    "C15|refuse[harmless]~C6|all": 0.441,
+    "C15|refuse[harmless]~C26|all": 0.177,
+    "A7|all~C25|all": 0.123,
+    "A7|all~C6|all": -0.01,
+    "A7|all~C26|all": -0.193,
+    "C27|instructed~C25|all": -0.124,
+    "C27|instructed~C6|all": -0.07,
+    "C27|instructed~C26|all": 0.047
    },
    "c": {
-    "C15|refuse[harmful]~C25|all": 0.051,
-    "C15|refuse[harmful]~C6|all": -0.459,
-    "C15|refuse[harmful]~C26|all": -0.036,
-    "C15|refuse[harmless]~C25|all": 0.019,
-    "C15|refuse[harmless]~C6|all": 0.541,
-    "C15|refuse[harmless]~C26|all": -0.015,
-    "A7|all~C25|all": 0.014,
+    "C15|refuse[harmful]~C25|all": 0.055,
+    "C15|refuse[harmful]~C6|all": -0.456,
+    "C15|refuse[harmful]~C26|all": -0.033,
+    "C15|refuse[harmless]~C25|all": 0.016,
+    "C15|refuse[harmless]~C6|all": 0.539,
+    "C15|refuse[harmless]~C26|all": -0.017,
+    "A7|all~C25|all": 0.015,
     "A7|all~C6|all": 0.287,
-    "A7|all~C26|all": 0.04,
-    "C27|instructed~C25|all": -0.042,
+    "A7|all~C26|all": 0.038,
+    "C27|instructed~C25|all": -0.04,
     "C27|instructed~C6|all": -0.284,
-    "C27|instructed~C26|all": -0.076
+    "C27|instructed~C26|all": -0.075
    },
    "d": {
-    "C15|refuse[harmful]~C25|all": -0.069,
-    "C15|refuse[harmful]~C6|all": -0.218,
-    "C15|refuse[harmful]~C26|all": -0.041,
-    "C15|refuse[harmless]~C25|all": 0.092,
-    "C15|refuse[harmless]~C6|all": 0.213,
-    "C15|refuse[harmless]~C26|all": 0.065,
-    "A7|all~C25|all": -0.128,
-    "A7|all~C6|all": 0.16,
-    "A7|all~C26|all": -0.025,
-    "C27|instructed~C25|all": -0.015,
-    "C27|instructed~C6|all": -0.199,
-    "C27|instructed~C26|all": -0.053
+    "C15|refuse[harmful]~C25|all": -0.067,
+    "C15|refuse[harmful]~C6|all": -0.214,
+    "C15|refuse[harmful]~C26|all": -0.04,
+    "C15|refuse[harmless]~C25|all": 0.09,
+    "C15|refuse[harmless]~C6|all": 0.208,
+    "C15|refuse[harmless]~C26|all": 0.064,
+    "A7|all~C25|all": -0.129,
+    "A7|all~C6|all": 0.159,
+    "A7|all~C26|all": -0.028,
+    "C27|instructed~C25|all": -0.013,
+    "C27|instructed~C6|all": -0.195,
+    "C27|instructed~C26|all": -0.052
    }
   },
   "17": {
    "a": {
-    "C15|refuse[harmful]~C25|all": -0.057,
+    "C15|refuse[harmful]~C25|all": -0.054,
     "C15|refuse[harmful]~C6|all": -0.225,
     "C15|refuse[harmful]~C26|all": 0.041,
-    "C15|refuse[harmless]~C25|all": 0.007,
+    "C15|refuse[harmless]~C25|all": 0.005,
     "C15|refuse[harmless]~C6|all": 0.362,
-    "C15|refuse[harmless]~C26|all": 0.069,
+    "C15|refuse[harmless]~C26|all": 0.07,
     "A7|all~C25|all": -0.062,
-    "A7|all~C6|all": 0.323,
-    "A7|all~C26|all": 0.122,
-    "C27|instructed~C25|all": -0.188,
-    "C27|instructed~C6|all": -0.272,
-    "C27|instructed~C26|all": -0.002
+    "A7|all~C6|all": 0.32,
+    "A7|all~C26|all": 0.119,
+    "C27|instructed~C25|all": -0.186,
+    "C27|instructed~C6|all": -0.273,
+    "C27|instructed~C26|all": -0.004
    },
    "b": {
-    "C15|refuse[harmful]~C25|all": 0.041,
+    "C15|refuse[harmful]~C25|all": 0.044,
     "C15|refuse[harmful]~C6|all": -0.288,
-    "C15|refuse[harmful]~C26|all": -0.075,
-    "C15|refuse[harmless]~C25|all": -0.087,
+    "C15|refuse[harmful]~C26|all": -0.074,
+    "C15|refuse[harmless]~C25|all": -0.088,
     "C15|refuse[harmless]~C6|all": 0.451,
     "C15|refuse[harmless]~C26|all": 0.231,
-    "A7|all~C25|all": -0.003,
-    "A7|all~C6|all": 0.165,
-    "A7|all~C26|all": -0.004,
-    "C27|instructed~C25|all": -0.028,
+    "A7|all~C25|all": -0.004,
+    "A7|all~C6|all": 0.162,
+    "A7|all~C26|all": -0.007,
+    "C27|instructed~C25|all": -0.026,
     "C27|instructed~C6|all": -0.166,
     "C27|instructed~C26|all": -0.036
    },
    "c": {
-    "C15|refuse[harmful]~C25|all": 0.091,
-    "C15|refuse[harmful]~C6|all": -0.282,
-    "C15|refuse[harmful]~C26|all": -0.076,
+    "C15|refuse[harmful]~C25|all": 0.095,
+    "C15|refuse[harmful]~C6|all": -0.276,
+    "C15|refuse[harmful]~C26|all": -0.074,
     "C15|refuse[harmless]~C25|all": -0.049,
-    "C15|refuse[harmless]~C6|all": 0.623,
-    "C15|refuse[harmless]~C26|all": 0.084,
-    "A7|all~C25|all": -0.051,
+    "C15|refuse[harmless]~C6|all": 0.622,
+    "C15|refuse[harmless]~C26|all": 0.085,
+    "A7|all~C25|all": -0.049,
     "A7|all~C6|all": 0.22,
-    "A7|all~C26|all": 0.04,
-    "C27|instructed~C25|all": -0.029,
-    "C27|instructed~C6|all": -0.261,
+    "A7|all~C26|all": 0.039,
+    "C27|instructed~C25|all": -0.028,
+    "C27|instructed~C6|all": -0.26,
     "C27|instructed~C26|all": -0.083
    },
    "d": {
-    "C15|refuse[harmful]~C25|all": -0.009,
-    "C15|refuse[harmful]~C6|all": -0.008,
-    "C15|refuse[harmful]~C26|all": -0.073,
-    "C15|refuse[harmless]~C25|all": 0.099,
-    "C15|refuse[harmless]~C6|all": 0.234,
-    "C15|refuse[harmless]~C26|all": -0.009,
-    "A7|all~C25|all": -0.098,
+    "C15|refuse[harmful]~C25|all": -0.005,
+    "C15|refuse[harmful]~C6|all": -0.003,
+    "C15|refuse[harmful]~C26|all": -0.072,
+    "C15|refuse[harmless]~C25|all": 0.098,
+    "C15|refuse[harmless]~C6|all": 0.233,
+    "C15|refuse[harmless]~C26|all": -0.008,
+    "A7|all~C25|all": -0.097,
     "A7|all~C6|all": 0.145,
-    "A7|all~C26|all": -0.047,
-    "C27|instructed~C25|all": -0.076,
-    "C27|instructed~C6|all": -0.275,
-    "C27|instructed~C26|all": 0.047
+    "A7|all~C26|all": -0.05,
+    "C27|instructed~C25|all": -0.075,
+    "C27|instructed~C6|all": -0.272,
+    "C27|instructed~C26|all": 0.046
    }
   },
   "22": {
    "a": {
-    "C15|refuse[harmful]~C25|all": -0.059,
-    "C15|refuse[harmful]~C6|all": -0.206,
-    "C15|refuse[harmful]~C26|all": 0.148,
-    "C15|refuse[harmless]~C25|all": 0.063,
+    "C15|refuse[harmful]~C25|all": -0.057,
+    "C15|refuse[harmful]~C6|all": -0.204,
+    "C15|refuse[harmful]~C26|all": 0.149,
+    "C15|refuse[harmless]~C25|all": 0.062,
     "C15|refuse[harmless]~C6|all": 0.292,
-    "C15|refuse[harmless]~C26|all": -0.03,
-    "A7|all~C25|all": -0.087,
+    "C15|refuse[harmless]~C26|all": -0.029,
+    "A7|all~C25|all": -0.086,
     "A7|all~C6|all": 0.315,
-    "A7|all~C26|all": 0.11,
-    "C27|instructed~C25|all": -0.194,
+    "A7|all~C26|all": 0.109,
+    "C27|instructed~C25|all": -0.193,
     "C27|instructed~C6|all": -0.226,
     "C27|instructed~C26|all": 0.022
    },
    "b": {
-    "C15|refuse[harmful]~C25|all": 0.021,
-    "C15|refuse[harmful]~C6|all": -0.284,
-    "C15|refuse[harmful]~C26|all": -0.004,
-    "C15|refuse[harmless]~C25|all": 0.031,
-    "C15|refuse[harmless]~C6|all": 0.42,
+    "C15|refuse[harmful]~C25|all": 0.024,
+    "C15|refuse[harmful]~C6|all": -0.283,
+    "C15|refuse[harmful]~C26|all": -0.003,
+    "C15|refuse[harmless]~C25|all": 0.03,
+    "C15|refuse[harmless]~C6|all": 0.421,
     "C15|refuse[harmless]~C26|all": 0.127,
     "A7|all~C25|all": 0.027,
-    "A7|all~C6|all": 0.142,
-    "A7|all~C26|all": -0.082,
-    "C27|instructed~C25|all": -0.073,
+    "A7|all~C6|all": 0.14,
+    "A7|all~C26|all": -0.083,
+    "C27|instructed~C25|all": -0.07,
     "C27|instructed~C6|all": -0.163,
-    "C27|instructed~C26|all": 0.011
+    "C27|instructed~C26|all": 0.012
    },
    "c": {
-    "C15|refuse[harmful]~C25|all": 0.068,
-    "C15|refuse[harmful]~C6|all": -0.241,
-    "C15|refuse[harmful]~C26|all": -0.114,
-    "C15|refuse[harmless]~C25|all": 0.038,
-    "C15|refuse[harmless]~C6|all": 0.569,
-    "C15|refuse[harmless]~C26|all": 0.137,
-    "A7|all~C25|all": 0.053,
-    "A7|all~C6|all": 0.225,
-    "A7|all~C26|all": 0.059,
-    "C27|instructed~C25|all": -0.073,
-    "C27|instructed~C6|all": -0.26,
+    "C15|refuse[harmful]~C25|all": 0.073,
+    "C15|refuse[harmful]~C6|all": -0.236,
+    "C15|refuse[harmful]~C26|all": -0.111,
+    "C15|refuse[harmless]~C25|all": 0.037,
+    "C15|refuse[harmless]~C6|all": 0.568,
+    "C15|refuse[harmless]~C26|all": 0.139,
+    "A7|all~C25|all": 0.054,
+    "A7|all~C6|all": 0.224,
+    "A7|all~C26|all": 0.057,
+    "C27|instructed~C25|all": -0.071,
+    "C27|instructed~C6|all": -0.259,
     "C27|instructed~C26|all": -0.166
    },
    "d": {
-    "C15|refuse[harmful]~C25|all": 0.003,
-    "C15|refuse[harmful]~C6|all": -0.005,
-    "C15|refuse[harmful]~C26|all": -0.057,
-    "C15|refuse[harmless]~C25|all": 0.11,
-    "C15|refuse[harmless]~C6|all": 0.232,
+    "C15|refuse[harmful]~C25|all": 0.008,
+    "C15|refuse[harmful]~C6|all": 0.0,
+    "C15|refuse[harmful]~C26|all": -0.055,
+    "C15|refuse[harmless]~C25|all": 0.108,
+    "C15|refuse[harmless]~C6|all": 0.229,
     "C15|refuse[harmless]~C26|all": -0.056,
     "A7|all~C25|all": -0.025,
     "A7|all~C6|all": 0.146,
-    "A7|all~C26|all": -0.071,
-    "C27|instructed~C25|all": -0.051,
-    "C27|instructed~C6|all": -0.154,
+    "A7|all~C26|all": -0.075,
+    "C27|instructed~C25|all": -0.048,
+    "C27|instructed~C6|all": -0.151,
     "C27|instructed~C26|all": -0.002
    }
   },
   "29": {
    "a": {
-    "C15|refuse[harmful]~C25|all": -0.04,
-    "C15|refuse[harmful]~C6|all": -0.209,
-    "C15|refuse[harmful]~C26|all": 0.091,
-    "C15|refuse[harmless]~C25|all": 0.043,
-    "C15|refuse[harmless]~C6|all": 0.295,
-    "C15|refuse[harmless]~C26|all": -0.006,
+    "C15|refuse[harmful]~C25|all": -0.038,
+    "C15|refuse[harmful]~C6|all": -0.208,
+    "C15|refuse[harmful]~C26|all": 0.09,
+    "C15|refuse[harmless]~C25|all": 0.042,
+    "C15|refuse[harmless]~C6|all": 0.294,
+    "C15|refuse[harmless]~C26|all": -0.005,
     "A7|all~C25|all": -0.058,
     "A7|all~C6|all": 0.333,
-    "A7|all~C26|all": 0.09,
-    "C27|instructed~C25|all": -0.217,
-    "C27|instructed~C6|all": -0.259,
-    "C27|instructed~C26|all": 0.013
+    "A7|all~C26|all": 0.089,
+    "C27|instructed~C25|all": -0.215,
+    "C27|instructed~C6|all": -0.258,
+    "C27|instructed~C26|all": 0.011
    },
    "b": {
-    "C15|refuse[harmful]~C25|all": 0.037,
+    "C15|refuse[harmful]~C25|all": 0.041,
     "C15|refuse[harmful]~C6|all": -0.25,
     "C15|refuse[harmful]~C26|all": -0.025,
-    "C15|refuse[harmless]~C25|all": 0.047,
-    "C15|refuse[harmless]~C6|all": 0.39,
-    "C15|refuse[harmless]~C26|all": 0.145,
+    "C15|refuse[harmless]~C25|all": 0.046,
+    "C15|refuse[harmless]~C6|all": 0.391,
+    "C15|refuse[harmless]~C26|all": 0.146,
     "A7|all~C25|all": 0.044,
-    "A7|all~C6|all": 0.173,
-    "A7|all~C26|all": -0.037,
-    "C27|instructed~C25|all": -0.121,
-    "C27|instructed~C6|all": -0.12,
+    "A7|all~C6|all": 0.172,
+    "A7|all~C26|all": -0.038,
+    "C27|instructed~C25|all": -0.118,
+    "C27|instructed~C6|all": -0.119,
     "C27|instructed~C26|all": -0.013
    },
    "c": {
-    "C15|refuse[harmful]~C25|all": 0.097,
-    "C15|refuse[harmful]~C6|all": -0.203,
-    "C15|refuse[harmful]~C26|all": -0.112,
-    "C15|refuse[harmless]~C25|all": 0.019,
+    "C15|refuse[harmful]~C25|all": 0.102,
+    "C15|refuse[harmful]~C6|all": -0.198,
+    "C15|refuse[harmful]~C26|all": -0.108,
+    "C15|refuse[harmless]~C25|all": 0.017,
     "C15|refuse[harmless]~C6|all": 0.533,
-    "C15|refuse[harmless]~C26|all": 0.178,
-    "A7|all~C25|all": 0.085,
+    "C15|refuse[harmless]~C26|all": 0.18,
+    "A7|all~C25|all": 0.087,
     "A7|all~C6|all": 0.236,
-    "A7|all~C26|all": 0.127,
-    "C27|instructed~C25|all": -0.127,
-    "C27|instructed~C6|all": -0.255,
+    "A7|all~C26|all": 0.125,
+    "C27|instructed~C25|all": -0.124,
+    "C27|instructed~C6|all": -0.254,
     "C27|instructed~C26|all": -0.195
    },
    "d": {
-    "C15|refuse[harmful]~C25|all": 0.021,
-    "C15|refuse[harmful]~C6|all": -0.024,
-    "C15|refuse[harmful]~C26|all": -0.086,
-    "C15|refuse[harmless]~C25|all": 0.134,
-    "C15|refuse[harmless]~C6|all": 0.282,
-    "C15|refuse[harmless]~C26|all": -0.048,
-    "A7|all~C25|all": 0.002,
-    "A7|all~C6|all": 0.175,
-    "A7|all~C26|all": -0.029,
-    "C27|instructed~C25|all": -0.029,
-    "C27|instructed~C6|all": -0.205,
+    "C15|refuse[harmful]~C25|all": 0.027,
+    "C15|refuse[harmful]~C6|all": -0.018,
+    "C15|refuse[harmful]~C26|all": -0.085,
+    "C15|refuse[harmless]~C25|all": 0.13,
+    "C15|refuse[harmless]~C6|all": 0.278,
+    "C15|refuse[harmless]~C26|all": -0.047,
+    "A7|all~C25|all": 0.001,
+    "A7|all~C6|all": 0.174,
+    "A7|all~C26|all": -0.034,
+    "C27|instructed~C25|all": -0.025,
+    "C27|instructed~C6|all": -0.2,
     "C27|instructed~C26|all": -0.023
    }
   }
@@ -242,90 +242,90 @@
  "knowing_doing": {
   "9": {
    "a": {
-    "C15|refuse[harmful]~C27|instructed": 0.241,
-    "C15|refuse[harmful]~B1|all": 0.204,
-    "C15|refuse[harmful]~A1|all": -0.046
+    "C15|refuse[harmful]~C27|instructed": 0.245,
+    "C15|refuse[harmful]~B1|all": 0.2,
+    "C15|refuse[harmful]~A1|all": -0.043
    },
    "b": {
-    "C15|refuse[harmful]~C27|instructed": 0.235,
-    "C15|refuse[harmful]~B1|all": 0.118,
+    "C15|refuse[harmful]~C27|instructed": 0.239,
+    "C15|refuse[harmful]~B1|all": 0.116,
     "C15|refuse[harmful]~A1|all": 0.047
    },
    "c": {
-    "C15|refuse[harmful]~C27|instructed": 0.266,
-    "C15|refuse[harmful]~B1|all": -0.052,
-    "C15|refuse[harmful]~A1|all": -0.272
+    "C15|refuse[harmful]~C27|instructed": 0.27,
+    "C15|refuse[harmful]~B1|all": -0.057,
+    "C15|refuse[harmful]~A1|all": -0.267
    },
    "d": {
-    "C15|refuse[harmful]~C27|instructed": 0.583,
-    "C15|refuse[harmful]~B1|all": -0.003,
-    "C15|refuse[harmful]~A1|all": -0.045
+    "C15|refuse[harmful]~C27|instructed": 0.585,
+    "C15|refuse[harmful]~B1|all": -0.006,
+    "C15|refuse[harmful]~A1|all": -0.043
    }
   },
   "17": {
    "a": {
-    "C15|refuse[harmful]~C27|instructed": 0.295,
-    "C15|refuse[harmful]~B1|all": 0.083,
-    "C15|refuse[harmful]~A1|all": 0.124
+    "C15|refuse[harmful]~C27|instructed": 0.296,
+    "C15|refuse[harmful]~B1|all": 0.08,
+    "C15|refuse[harmful]~A1|all": 0.126
    },
    "b": {
-    "C15|refuse[harmful]~C27|instructed": 0.243,
-    "C15|refuse[harmful]~B1|all": 0.036,
-    "C15|refuse[harmful]~A1|all": 0.026
+    "C15|refuse[harmful]~C27|instructed": 0.245,
+    "C15|refuse[harmful]~B1|all": 0.032,
+    "C15|refuse[harmful]~A1|all": 0.027
    },
    "c": {
-    "C15|refuse[harmful]~C27|instructed": 0.302,
-    "C15|refuse[harmful]~B1|all": 0.038,
-    "C15|refuse[harmful]~A1|all": -0.339
+    "C15|refuse[harmful]~C27|instructed": 0.304,
+    "C15|refuse[harmful]~B1|all": 0.035,
+    "C15|refuse[harmful]~A1|all": -0.332
    },
    "d": {
-    "C15|refuse[harmful]~C27|instructed": 0.475,
-    "C15|refuse[harmful]~B1|all": 0.13,
-    "C15|refuse[harmful]~A1|all": -0.024
+    "C15|refuse[harmful]~C27|instructed": 0.478,
+    "C15|refuse[harmful]~B1|all": 0.127,
+    "C15|refuse[harmful]~A1|all": -0.02
    }
   },
   "22": {
    "a": {
-    "C15|refuse[harmful]~C27|instructed": 0.292,
-    "C15|refuse[harmful]~B1|all": 0.105,
-    "C15|refuse[harmful]~A1|all": 0.082
+    "C15|refuse[harmful]~C27|instructed": 0.293,
+    "C15|refuse[harmful]~B1|all": 0.103,
+    "C15|refuse[harmful]~A1|all": 0.084
    },
    "b": {
-    "C15|refuse[harmful]~C27|instructed": 0.227,
-    "C15|refuse[harmful]~B1|all": 0.075,
+    "C15|refuse[harmful]~C27|instructed": 0.229,
+    "C15|refuse[harmful]~B1|all": 0.071,
     "C15|refuse[harmful]~A1|all": 0.066
    },
    "c": {
-    "C15|refuse[harmful]~C27|instructed": 0.352,
-    "C15|refuse[harmful]~B1|all": 0.035,
-    "C15|refuse[harmful]~A1|all": -0.375
+    "C15|refuse[harmful]~C27|instructed": 0.355,
+    "C15|refuse[harmful]~B1|all": 0.031,
+    "C15|refuse[harmful]~A1|all": -0.369
    },
    "d": {
-    "C15|refuse[harmful]~C27|instructed": 0.508,
-    "C15|refuse[harmful]~B1|all": 0.084,
-    "C15|refuse[harmful]~A1|all": -0.086
+    "C15|refuse[harmful]~C27|instructed": 0.511,
+    "C15|refuse[harmful]~B1|all": 0.08,
+    "C15|refuse[harmful]~A1|all": -0.082
    }
   },
   "29": {
    "a": {
     "C15|refuse[harmful]~C27|instructed": 0.308,
-    "C15|refuse[harmful]~B1|all": 0.181,
-    "C15|refuse[harmful]~A1|all": 0.048
+    "C15|refuse[harmful]~B1|all": 0.179,
+    "C15|refuse[harmful]~A1|all": 0.049
    },
    "b": {
-    "C15|refuse[harmful]~C27|instructed": 0.228,
-    "C15|refuse[harmful]~B1|all": 0.133,
-    "C15|refuse[harmful]~A1|all": 0.088
+    "C15|refuse[harmful]~C27|instructed": 0.229,
+    "C15|refuse[harmful]~B1|all": 0.13,
+    "C15|refuse[harmful]~A1|all": 0.087
    },
    "c": {
-    "C15|refuse[harmful]~C27|instructed": 0.341,
-    "C15|refuse[harmful]~B1|all": -0.029,
-    "C15|refuse[harmful]~A1|all": -0.377
+    "C15|refuse[harmful]~C27|instructed": 0.343,
+    "C15|refuse[harmful]~B1|all": -0.033,
+    "C15|refuse[harmful]~A1|all": -0.371
    },
    "d": {
-    "C15|refuse[harmful]~C27|instructed": 0.496,
-    "C15|refuse[harmful]~B1|all": 0.035,
-    "C15|refuse[harmful]~A1|all": -0.148
+    "C15|refuse[harmful]~C27|instructed": 0.5,
+    "C15|refuse[harmful]~B1|all": 0.03,
+    "C15|refuse[harmful]~A1|all": -0.143
    }
   }
  },
@@ -334,11 +334,11 @@
    "helpfulness": {
     "units": {
      "C24|too_literal|c": {
-      "cos": -0.009,
-      "raw": 0.009
+      "cos": -0.01,
+      "raw": 0.008
      },
      "C24|too_literal|d": {
-      "cos": -0.05,
+      "cos": -0.049,
       "raw": -0.041
      },
      "C24|overstepping|c": {
@@ -346,15 +346,31 @@
       "raw": 0.005
      },
      "C24|overstepping|d": {
-      "cos": -0.012,
+      "cos": -0.009,
       "raw": 0.005
      },
+     "C28|under_asks|c": {
+      "cos": -0.039,
+      "raw": -0.025
+     },
+     "C28|under_asks|d": {
+      "cos": -0.035,
+      "raw": -0.019
+     },
+     "C28|over_asks|c": {
+      "cos": 0.007,
+      "raw": 0.025
+     },
+     "C28|over_asks|d": {
+      "cos": 0.09,
+      "raw": 0.101
+     },
      "C25|all|c": {
-      "cos": -0.129,
+      "cos": -0.128,
       "raw": -0.099
      },
      "C25|all|d": {
-      "cos": -0.073,
+      "cos": -0.07,
       "raw": -0.048
      },
      "C5|all|c": {
@@ -362,69 +378,69 @@
       "raw": 0.128
      },
      "C5|all|d": {
-      "cos": -0.021,
+      "cos": -0.019,
       "raw": -0.007
      },
      "C6|all|c": {
-      "cos": 0.106,
-      "raw": 0.136
+      "cos": 0.104,
+      "raw": 0.135
      },
      "C6|all|d": {
-      "cos": 0.125,
+      "cos": 0.127,
       "raw": 0.148
      },
      "C26|all|c": {
-      "cos": 0.107,
+      "cos": 0.106,
       "raw": 0.115
      },
      "C26|all|d": {
       "cos": -0.117,
-      "raw": -0.109
+      "raw": -0.11
      },
      "C19|agreeableness|c": {
-      "cos": 0.124,
-      "raw": 0.14
+      "cos": 0.122,
+      "raw": 0.139
      },
      "C19|agreeableness|d": {
-      "cos": 0.091,
+      "cos": 0.092,
       "raw": 0.099
      }
     },
-    "mean_sq_raw": 0.0089,
-    "mean_abs_cos": 0.078
+    "mean_sq_raw": 0.0076,
+    "mean_abs_cos": 0.07
    },
    "harmlessness": {
     "units": {
      "A1|all|c": {
-      "cos": 0.129,
+      "cos": 0.128,
       "raw": 0.158
      },
      "A1|all|d": {
-      "cos": -0.031,
+      "cos": -0.029,
       "raw": -0.008
      },
      "B1|all|c": {
-      "cos": 0.248,
+      "cos": 0.246,
       "raw": 0.234
      },
      "B1|all|d": {
-      "cos": 0.101,
+      "cos": 0.097,
       "raw": 0.093
      },
      "C15|refuse[harmful]|c": {
-      "cos": -0.048,
+      "cos": -0.043,
       "raw": -0.026
      },
      "C15|refuse[harmful]|d": {
-      "cos": 0.054,
+      "cos": 0.059,
       "raw": 0.072
      },
      "C15|refuse[harmless]|c": {
-      "cos": 0.018,
+      "cos": 0.014,
       "raw": 0.003
      },
      "C15|refuse[harmless]|d": {
-      "cos": -0.056,
+      "cos": -0.061,
       "raw": -0.067
      },
      "A7|all|c": {
@@ -432,69 +448,69 @@
       "raw": 0.172
      },
      "A7|all|d": {
-      "cos": 0.064,
+      "cos": 0.065,
       "raw": 0.079
      },
      "C27|side_effect|c": {
-      "cos": -0.028,
+      "cos": -0.029,
       "raw": -0.013
      },
      "C27|side_effect|d": {
-      "cos": -0.026,
-      "raw": 0.005
+      "cos": -0.025,
+      "raw": 0.004
      },
      "C27|instructed|c": {
-      "cos": -0.007,
+      "cos": -0.004,
       "raw": 0.011
      },
      "C27|instructed|d": {
-      "cos": -0.006,
-      "raw": 0.001
+      "cos": -0.001,
+      "raw": 0.002
      },
      "C20|psychopathy|c": {
-      "cos": 0.383,
+      "cos": 0.382,
       "raw": 0.37
      },
      "C20|psychopathy|d": {
-      "cos": 0.086,
-      "raw": 0.087
+      "cos": 0.085,
+      "raw": 0.088
      }
     },
     "mean_sq_raw": 0.0175,
-    "mean_abs_cos": 0.089
+    "mean_abs_cos": 0.088
    },
    "honesty": {
     "units": {
      "A9|all|c": {
-      "cos": -0.035,
+      "cos": -0.036,
       "raw": -0.007
      },
      "A9|all|d": {
-      "cos": -0.031,
+      "cos": -0.03,
       "raw": -0.01
      },
      "C2|all|c": {
-      "cos": 0.107,
-      "raw": 0.126
+      "cos": 0.108,
+      "raw": 0.127
      },
      "C2|all|d": {
-      "cos": 0.018,
+      "cos": 0.022,
       "raw": 0.038
      },
      "C1|lying|c": {
-      "cos": -0.046,
-      "raw": -0.012
+      "cos": -0.045,
+      "raw": -0.013
      },
      "C1|lying|d": {
-      "cos": -0.038,
+      "cos": -0.033,
       "raw": 0.004
      },
      "C3|all|c": {
       "cos": -0.013,
-      "raw": 0.021
+      "raw": 0.02
      },
      "C3|all|d": {
-      "cos": -0.035,
+      "cos": -0.032,
       "raw": -0.001
      },
      "C8|sycophantic_agreement|c": {
@@ -502,100 +518,116 @@
       "raw": -0.028
      },
      "C8|sycophantic_agreement|d": {
-      "cos": 0.051,
-      "raw": 0.08
+      "cos": 0.054,
+      "raw": 0.081
      },
      "C19|honesty_humility|c": {
       "cos": 0.243,
-      "raw": 0.268
+      "raw": 0.267
      },
      "C19|honesty_humility|d": {
-      "cos": 0.048,
+      "cos": 0.051,
       "raw": 0.082
      }
     },
-    "mean_sq_raw": 0.0087,
-    "mean_abs_cos": 0.059
+    "mean_sq_raw": 0.0086,
+    "mean_abs_cos": 0.06
    },
    "control_K1_raw": [
     null,
     null,
     0.256,
-    0.007
+    0.006
    ]
   },
   "17": {
    "helpfulness": {
     "units": {
      "C24|too_literal|c": {
-      "cos": 0.008,
+      "cos": 0.009,
       "raw": 0.059
      },
      "C24|too_literal|d": {
-      "cos": -0.007,
+      "cos": -0.006,
       "raw": 0.034
      },
      "C24|overstepping|c": {
+      "cos": 0.103,
+      "raw": 0.155
+     },
+     "C24|overstepping|d": {
+      "cos": 0.018,
+      "raw": 0.053
+     },
+     "C28|under_asks|c": {
+      "cos": -0.099,
+      "raw": -0.087
+     },
+     "C28|under_asks|d": {
+      "cos": -0.036,
+      "raw": -0.026
+     },
+     "C28|over_asks|c": {
       "cos": 0.101,
       "raw": 0.154
      },
-     "C24|overstepping|d": {
-      "cos": 0.017,
-      "raw": 0.053
+     "C28|over_asks|d": {
+      "cos": 0.09,
+      "raw": 0.115
      },
      "C25|all|c": {
-      "cos": -0.135,
+      "cos": -0.133,
       "raw": -0.083
      },
      "C25|all|d": {
-      "cos": -0.056,
+      "cos": -0.053,
       "raw": -0.019
      },
      "C5|all|c": {
-      "cos": 0.119,
+      "cos": 0.12,
       "raw": 0.163
      },
      "C5|all|d": {
-      "cos": 0.03,
+      "cos": 0.031,
       "raw": 0.05
      },
      "C6|all|c": {
-      "cos": 0.198,
+      "cos": 0.199,
       "raw": 0.258
      },
      "C6|all|d": {
-      "cos": 0.171,
+      "cos": 0.173,
       "raw": 0.206
      },
      "C26|all|c": {
-      "cos": 0.083,
+      "cos": 0.082,
       "raw": 0.119
      },
      "C26|all|d": {
-      "cos": -0.113,
+      "cos": -0.114,
       "raw": -0.11
      },
      "C19|agreeableness|c": {
-      "cos": 0.133,
-      "raw": 0.171
+      "cos": 0.131,
+      "raw": 0.17
      },
      "C19|agreeableness|d": {
-      "cos": 0.103,
+      "cos": 0.102,
       "raw": 0.125
      }
     },
-    "mean_sq_raw": 0.0177,
-    "mean_abs_cos": 0.091
+    "mean_sq_raw": 0.0163,
+    "mean_abs_cos": 0.089
    },
    "harmlessness": {
     "units": {
      "A1|all|c": {
-      "cos": 0.132,
+      "cos": 0.133,
       "raw": 0.178
      },
      "A1|all|d": {
-      "cos": 0.065,
-      "raw": 0.101
+      "cos": 0.067,
+      "raw": 0.102
      },
      "B1|all|c": {
       "cos": 0.269,
@@ -606,11 +638,11 @@
       "raw": 0.207
      },
      "C15|refuse[harmful]|c": {
-      "cos": 0.011,
+      "cos": 0.015,
       "raw": 0.063
      },
      "C15|refuse[harmful]|d": {
-      "cos": 0.074,
+      "cos": 0.077,
       "raw": 0.121
      },
      "C15|refuse[harmless]|c": {
@@ -622,27 +654,27 @@
       "raw": 0.042
      },
      "A7|all|c": {
-      "cos": 0.17,
-      "raw": 0.216
+      "cos": 0.171,
+      "raw": 0.215
      },
      "A7|all|d": {
-      "cos": 0.09,
+      "cos": 0.091,
       "raw": 0.099
      },
      "C27|side_effect|c": {
       "cos": -0.06,
-      "raw": -0.03
+      "raw": -0.029
      },
      "C27|side_effect|d": {
-      "cos": 0.025,
+      "cos": 0.026,
       "raw": 0.073
      },
      "C27|instructed|c": {
-      "cos": -0.08,
+      "cos": -0.079,
       "raw": -0.046
      },
      "C27|instructed|d": {
-      "cos": -0.004,
+      "cos": -0.003,
       "raw": 0.012
      },
      "C20|psychopathy|c": {
@@ -650,17 +682,17 @@
       "raw": 0.389
      },
      "C20|psychopathy|d": {
-      "cos": 0.145,
-      "raw": 0.152
+      "cos": 0.144,
+      "raw": 0.151
      }
     },
-    "mean_sq_raw": 0.0266,
-    "mean_abs_cos": 0.118
+    "mean_sq_raw": 0.0265,
+    "mean_abs_cos": 0.119
    },
    "honesty": {
     "units": {
      "A9|all|c": {
-      "cos": 0.022,
+      "cos": 0.021,
       "raw": 0.072
      },
      "A9|all|d": {
@@ -668,19 +700,19 @@
       "raw": 0.1
      },
      "C2|all|c": {
-      "cos": 0.186,
-      "raw": 0.234
+      "cos": 0.188,
+      "raw": 0.235
      },
      "C2|all|d": {
-      "cos": 0.002,
-      "raw": 0.025
+      "cos": 0.003,
+      "raw": 0.024
      },
      "C1|lying|c": {
       "cos": 0.064,
       "raw": 0.11
      },
      "C1|lying|d": {
-      "cos": -0.073,
+      "cos": -0.072,
       "raw": -0.032
      },
      "C3|all|c": {
@@ -688,15 +720,15 @@
       "raw": 0.135
      },
      "C3|all|d": {
-      "cos": -0.071,
+      "cos": -0.07,
       "raw": -0.021
      },
      "C8|sycophantic_agreement|c": {
-      "cos": -0.062,
+      "cos": -0.063,
       "raw": -0.033
      },
      "C8|sycophantic_agreement|d": {
-      "cos": 0.078,
+      "cos": 0.079,
       "raw": 0.111
      },
      "C19|honesty_humility|c": {
@@ -704,7 +736,7 @@
       "raw": 0.366
      },
      "C19|honesty_humility|d": {
-      "cos": 0.114,
+      "cos": 0.117,
       "raw": 0.165
      }
     },
@@ -714,7 +746,7 @@
    "control_K1_raw": [
     null,
     null,
-    0.211,
+    0.21,
     -0.019
    ]
   },
@@ -723,30 +755,46 @@
     "units": {
      "C24|too_literal|c": {
       "cos": 0.09,
-      "raw": 0.137
+      "raw": 0.136
      },
      "C24|too_literal|d": {
       "cos": 0.014,
       "raw": 0.047
      },
      "C24|overstepping|c": {
-      "cos": 0.167,
-      "raw": 0.214
+      "cos": 0.168,
+      "raw": 0.215
      },
      "C24|overstepping|d": {
-      "cos": 0.025,
-      "raw": 0.065
+      "cos": 0.026,
+      "raw": 0.066
+     },
+     "C28|under_asks|c": {
+      "cos": -0.116,
+      "raw": -0.097
+     },
+     "C28|under_asks|d": {
+      "cos": -0.059,
+      "raw": -0.048
+     },
+     "C28|over_asks|c": {
+      "cos": 0.128,
+      "raw": 0.169
+     },
+     "C28|over_asks|d": {
+      "cos": 0.083,
+      "raw": 0.091
      },
      "C25|all|c": {
-      "cos": -0.048,
+      "cos": -0.047,
       "raw": 0.004
      },
      "C25|all|d": {
-      "cos": -0.021,
+      "cos": -0.019,
       "raw": 0.011
      },
      "C5|all|c": {
-      "cos": 0.168,
+      "cos": 0.169,
       "raw": 0.211
      },
      "C5|all|d": {
@@ -754,65 +802,65 @@
       "raw": 0.039
      },
      "C6|all|c": {
-      "cos": 0.207,
+      "cos": 0.208,
       "raw": 0.259
      },
      "C6|all|d": {
-      "cos": 0.147,
+      "cos": 0.149,
       "raw": 0.181
      },
      "C26|all|c": {
-      "cos": 0.091,
+      "cos": 0.09,
       "raw": 0.121
      },
      "C26|all|d": {
-      "cos": -0.124,
+      "cos": -0.126,
       "raw": -0.13
      },
      "C19|agreeableness|c": {
-      "cos": 0.161,
+      "cos": 0.16,
       "raw": 0.189
      },
      "C19|agreeableness|d": {
-      "cos": 0.114,
+      "cos": 0.113,
       "raw": 0.124
      }
     },
-    "mean_sq_raw": 0.0214,
-    "mean_abs_cos": 0.1
+    "mean_sq_raw": 0.0194,
+    "mean_abs_cos": 0.099
    },
    "harmlessness": {
     "units": {
      "A1|all|c": {
-      "cos": 0.106,
-      "raw": 0.151
+      "cos": 0.107,
+      "raw": 0.152
      },
      "A1|all|d": {
-      "cos": 0.07,
+      "cos": 0.072,
       "raw": 0.105
      },
      "B1|all|c": {
-      "cos": 0.288,
+      "cos": 0.287,
       "raw": 0.261
      },
      "B1|all|d": {
-      "cos": 0.144,
+      "cos": 0.143,
       "raw": 0.155
      },
      "C15|refuse[harmful]|c": {
-      "cos": 0.021,
+      "cos": 0.024,
       "raw": 0.068
      },
      "C15|refuse[harmful]|d": {
-      "cos": 0.051,
+      "cos": 0.055,
       "raw": 0.092
      },
      "C15|refuse[harmless]|c": {
       "cos": 0.13,
-      "raw": 0.124
+      "raw": 0.125
      },
      "C15|refuse[harmless]|d": {
-      "cos": 0.039,
+      "cos": 0.037,
       "raw": 0.039
      },
      "A7|all|c": {
@@ -821,52 +869,52 @@
      },
      "A7|all|d": {
       "cos": 0.059,
-      "raw": 0.063
+      "raw": 0.064
      },
      "C27|side_effect|c": {
       "cos": -0.092,
       "raw": -0.063
      },
      "C27|side_effect|d": {
-      "cos": -0.037,
+      "cos": -0.035,
       "raw": 0.008
      },
      "C27|instructed|c": {
-      "cos": -0.069,
-      "raw": -0.039
+      "cos": -0.068,
+      "raw": -0.04
      },
      "C27|instructed|d": {
-      "cos": 0.044,
+      "cos": 0.046,
       "raw": 0.066
      },
      "C20|psychopathy|c": {
-      "cos": 0.397,
+      "cos": 0.398,
       "raw": 0.389
      },
      "C20|psychopathy|d": {
-      "cos": 0.097,
+      "cos": 0.096,
       "raw": 0.106
      }
     },
     "mean_sq_raw": 0.0228,
-    "mean_abs_cos": 0.111
+    "mean_abs_cos": 0.112
    },
    "honesty": {
     "units": {
      "A9|all|c": {
-      "cos": 0.07,
+      "cos": 0.068,
       "raw": 0.103
      },
      "A9|all|d": {
       "cos": 0.124,
-      "raw": 0.148
+      "raw": 0.149
      },
      "C2|all|c": {
-      "cos": 0.159,
+      "cos": 0.16,
       "raw": 0.205
      },
      "C2|all|d": {
-      "cos": -0.015,
+      "cos": -0.013,
       "raw": 0.012
      },
      "C1|lying|c": {
@@ -874,7 +922,7 @@
       "raw": 0.057
      },
      "C1|lying|d": {
-      "cos": -0.04,
+      "cos": -0.039,
       "raw": -0.007
      },
      "C3|all|c": {
@@ -882,27 +930,27 @@
       "raw": 0.147
      },
      "C3|all|d": {
-      "cos": -0.049,
+      "cos": -0.048,
       "raw": -0.013
      },
      "C8|sycophantic_agreement|c": {
-      "cos": -0.024,
+      "cos": -0.025,
       "raw": 0.002
      },
      "C8|sycophantic_agreement|d": {
-      "cos": 0.086,
+      "cos": 0.088,
       "raw": 0.109
      },
      "C19|honesty_humility|c": {
-      "cos": 0.307,
+      "cos": 0.308,
       "raw": 0.35
      },
      "C19|honesty_humility|d": {
-      "cos": 0.093,
-      "raw": 0.139
+      "cos": 0.095,
+      "raw": 0.14
      }
     },
-    "mean_sq_raw": 0.0211,
+    "mean_sq_raw": 0.0212,
     "mean_abs_cos": 0.091
    },
    "control_K1_raw": [
@@ -916,35 +964,51 @@
    "helpfulness": {
     "units": {
      "C24|too_literal|c": {
-      "cos": 0.154,
-      "raw": 0.22
+      "cos": 0.155,
+      "raw": 0.219
      },
      "C24|too_literal|d": {
-      "cos": 0.048,
+      "cos": 0.049,
       "raw": 0.094
      },
      "C24|overstepping|c": {
-      "cos": 0.197,
+      "cos": 0.198,
       "raw": 0.259
      },
      "C24|overstepping|d": {
-      "cos": -0.023,
-      "raw": 0.035
+      "cos": -0.022,
+      "raw": 0.034
+     },
+     "C28|under_asks|c": {
+      "cos": -0.192,
+      "raw": -0.168
+     },
+     "C28|under_asks|d": {
+      "cos": -0.083,
+      "raw": -0.059
+     },
+     "C28|over_asks|c": {
+      "cos": 0.194,
+      "raw": 0.253
+     },
+     "C28|over_asks|d": {
+      "cos": 0.082,
+      "raw": 0.089
      },
      "C25|all|c": {
-      "cos": 0.013,
+      "cos": 0.015,
       "raw": 0.086
      },
      "C25|all|d": {
-      "cos": -0.004,
+      "cos": -0.001,
       "raw": 0.036
      },
      "C5|all|c": {
-      "cos": 0.232,
+      "cos": 0.234,
       "raw": 0.292
      },
      "C5|all|d": {
-      "cos": -0.026,
+      "cos": -0.025,
       "raw": 0.007
      },
      "C6|all|c": {
@@ -952,28 +1016,28 @@
       "raw": 0.359
      },
      "C6|all|d": {
-      "cos": 0.136,
+      "cos": 0.138,
       "raw": 0.18
      },
      "C26|all|c": {
-      "cos": 0.122,
-      "raw": 0.165
+      "cos": 0.121,
+      "raw": 0.166
      },
      "C26|all|d": {
-      "cos": -0.129,
-      "raw": -0.14
+      "cos": -0.131,
+      "raw": -0.139
      },
      "C19|agreeableness|c": {
-      "cos": 0.207,
+      "cos": 0.206,
       "raw": 0.248
      },
      "C19|agreeableness|d": {
-      "cos": 0.097,
+      "cos": 0.096,
       "raw": 0.111
      }
     },
-    "mean_sq_raw": 0.0358,
-    "mean_abs_cos": 0.12
+    "mean_sq_raw": 0.0336,
+    "mean_abs_cos": 0.124
    },
    "harmlessness": {
     "units": {
@@ -982,93 +1046,93 @@
       "raw": 0.129
      },
      "A1|all|d": {
-      "cos": 0.012,
-      "raw": 0.052
+      "cos": 0.013,
+      "raw": 0.053
      },
      "B1|all|c": {
-      "cos": 0.321,
+      "cos": 0.32,
       "raw": 0.277
      },
      "B1|all|d": {
-      "cos": 0.139,
+      "cos": 0.138,
       "raw": 0.149
      },
      "C15|refuse[harmful]|c": {
-      "cos": 0.003,
+      "cos": 0.007,
       "raw": 0.06
      },
      "C15|refuse[harmful]|d": {
-      "cos": 0.034,
+      "cos": 0.039,
       "raw": 0.085
      },
      "C15|refuse[harmless]|c": {
-      "cos": 0.183,
-      "raw": 0.162
+      "cos": 0.182,
+      "raw": 0.163
      },
      "C15|refuse[harmless]|d": {
-      "cos": 0.035,
-      "raw": 0.028
+      "cos": 0.033,
+      "raw": 0.029
      },
      "A7|all|c": {
-      "cos": 0.139,
-      "raw": 0.2
+      "cos": 0.14,
+      "raw": 0.201
      },
      "A7|all|d": {
-      "cos": -0.003,
-      "raw": 0.003
+      "cos": -0.004,
+      "raw": 0.004
      },
      "C27|side_effect|c": {
       "cos": -0.092,
-      "raw": -0.048
+      "raw": -0.047
      },
      "C27|side_effect|d": {
-      "cos": -0.033,
+      "cos": -0.03,
       "raw": 0.022
      },
      "C27|instructed|c": {
-      "cos": -0.089,
+      "cos": -0.088,
       "raw": -0.048
      },
      "C27|instructed|d": {
-      "cos": -0.0,
-      "raw": 0.031
+      "cos": 0.002,
+      "raw": 0.03
      },
      "C20|psychopathy|c": {
       "cos": 0.445,
       "raw": 0.424
      },
      "C20|psychopathy|d": {
-      "cos": 0.105,
+      "cos": 0.104,
       "raw": 0.113
      }
     },
     "mean_sq_raw": 0.0247,
-    "mean_abs_cos": 0.106
+    "mean_abs_cos": 0.107
    },
    "honesty": {
     "units": {
      "A9|all|c": {
-      "cos": 0.09,
+      "cos": 0.089,
       "raw": 0.145
      },
      "A9|all|d": {
       "cos": 0.106,
-      "raw": 0.132
+      "raw": 0.133
      },
      "C2|all|c": {
-      "cos": 0.15,
-      "raw": 0.209
+      "cos": 0.152,
+      "raw": 0.21
      },
      "C2|all|d": {
-      "cos": -0.069,
+      "cos": -0.067,
       "raw": -0.035
      },
      "C1|lying|c": {
-      "cos": 0.036,
+      "cos": 0.035,
       "raw": 0.086
      },
      "C1|lying|d": {
-      "cos": -0.009,
+      "cos": -0.008,
       "raw": 0.022
      },
      "C3|all|c": {
@@ -1076,33 +1140,33 @@
       "raw": 0.18
      },
      "C3|all|d": {
-      "cos": -0.022,
+      "cos": -0.021,
       "raw": 0.022
      },
      "C8|sycophantic_agreement|c": {
-      "cos": 0.016,
+      "cos": 0.015,
       "raw": 0.057
      },
      "C8|sycophantic_agreement|d": {
-      "cos": 0.091,
-      "raw": 0.112
+      "cos": 0.092,
+      "raw": 0.111
      },
      "C19|honesty_humility|c": {
-      "cos": 0.368,
+      "cos": 0.369,
       "raw": 0.421
      },
      "C19|honesty_humility|d": {
-      "cos": 0.092,
+      "cos": 0.095,
       "raw": 0.147
      }
     },
-    "mean_sq_raw": 0.0282,
+    "mean_sq_raw": 0.0283,
     "mean_abs_cos": 0.097
    },
    "control_K1_raw": [
     null,
     null,
-    0.042,
+    0.041,
     -0.029
    ]
   }
@@ -1112,23 +1176,29 @@
    "9": {
     "a": {
      "C8|sycophantic_agreement~C24|too_literal": 0.113,
-     "C8|sycophantic_agreement~C24|overstepping": -0.063,
-     "C8|sycophantic_agreement~C25|all": 0.329,
-     "C8|sycophantic_agreement~C5|all": -0.115,
+     "C8|sycophantic_agreement~C24|overstepping": -0.064,
+     "C8|sycophantic_agreement~C28|under_asks": -0.013,
+     "C8|sycophantic_agreement~C28|over_asks": -0.009,
+     "C8|sycophantic_agreement~C25|all": 0.331,
+     "C8|sycophantic_agreement~C5|all": -0.113,
      "C8|sycophantic_agreement~C6|all": -0.149,
      "C8|sycophantic_agreement~C26|all": -0.09,
-     "C8|sycophantic_agreement~C19|agreeableness": -0.061,
+     "C8|sycophantic_agreement~C19|agreeableness": -0.062,
      "C3|all~C24|too_literal": 0.048,
      "C3|all~C24|overstepping": -0.173,
-     "C3|all~C25|all": -0.121,
-     "C3|all~C5|all": 0.32,
+     "C3|all~C28|under_asks": 0.042,
+     "C3|all~C28|over_asks": -0.053,
+     "C3|all~C25|all": -0.118,
+     "C3|all~C5|all": 0.322,
      "C3|all~C6|all": -0.004,
-     "C3|all~C26|all": 0.242,
-     "C3|all~C19|agreeableness": -0.016
+     "C3|all~C26|all": 0.243,
+     "C3|all~C19|agreeableness": -0.017
     },
     "b": {
      "C8|sycophantic_agreement~C24|too_literal": null,
      "C8|sycophantic_agreement~C24|overstepping": null,
+     "C8|sycophantic_agreement~C28|under_asks": null,
+     "C8|sycophantic_agreement~C28|over_asks": null,
      "C8|sycophantic_agreement~C25|all": null,
      "C8|sycophantic_agreement~C5|all": null,
      "C8|sycophantic_agreement~C6|all": null,
@@ -1136,6 +1206,8 @@
      "C8|sycophantic_agreement~C19|agreeableness": null,
      "C3|all~C24|too_literal": null,
      "C3|all~C24|overstepping": null,
+     "C3|all~C28|under_asks": null,
+     "C3|all~C28|over_asks": null,
      "C3|all~C25|all": null,
      "C3|all~C5|all": null,
      "C3|all~C6|all": null,
@@ -1143,58 +1215,72 @@
      "C3|all~C19|agreeableness": null
     },
     "c": {
-     "C8|sycophantic_agreement~C24|too_literal": 0.103,
-     "C8|sycophantic_agreement~C24|overstepping": -0.08,
+     "C8|sycophantic_agreement~C24|too_literal": 0.102,
+     "C8|sycophantic_agreement~C24|overstepping": -0.082,
+     "C8|sycophantic_agreement~C28|under_asks": 0.001,
+     "C8|sycophantic_agreement~C28|over_asks": 0.005,
      "C8|sycophantic_agreement~C25|all": -0.117,
      "C8|sycophantic_agreement~C5|all": -0.115,
-     "C8|sycophantic_agreement~C6|all": 0.11,
-     "C8|sycophantic_agreement~C26|all": 0.004,
-     "C8|sycophantic_agreement~C19|agreeableness": 0.033,
-     "C3|all~C24|too_literal": -0.185,
-     "C3|all~C24|overstepping": 0.119,
-     "C3|all~C25|all": -0.002,
-     "C3|all~C5|all": -0.168,
-     "C3|all~C6|all": -0.0,
-     "C3|all~C26|all": -0.026,
-     "C3|all~C19|agreeableness": -0.016
+     "C8|sycophantic_agreement~C6|all": 0.107,
+     "C8|sycophantic_agreement~C26|all": 0.002,
+     "C8|sycophantic_agreement~C19|agreeableness": 0.03,
+     "C3|all~C24|too_literal": -0.186,
+     "C3|all~C24|overstepping": 0.118,
+     "C3|all~C28|under_asks": 0.092,
+     "C3|all~C28|over_asks": -0.089,
+     "C3|all~C25|all": -0.001,
+     "C3|all~C5|all": -0.169,
+     "C3|all~C6|all": -0.003,
+     "C3|all~C26|all": -0.027,
+     "C3|all~C19|agreeableness": -0.018
     },
     "d": {
-     "C8|sycophantic_agreement~C24|too_literal": 0.058,
+     "C8|sycophantic_agreement~C24|too_literal": 0.057,
      "C8|sycophantic_agreement~C24|overstepping": -0.114,
+     "C8|sycophantic_agreement~C28|under_asks": 0.044,
+     "C8|sycophantic_agreement~C28|over_asks": -0.07,
      "C8|sycophantic_agreement~C25|all": 0.125,
      "C8|sycophantic_agreement~C5|all": -0.139,
-     "C8|sycophantic_agreement~C6|all": -0.109,
-     "C8|sycophantic_agreement~C26|all": -0.096,
-     "C8|sycophantic_agreement~C19|agreeableness": -0.09,
-     "C3|all~C24|too_literal": 0.276,
-     "C3|all~C24|overstepping": -0.239,
-     "C3|all~C25|all": -0.017,
+     "C8|sycophantic_agreement~C6|all": -0.108,
+     "C8|sycophantic_agreement~C26|all": -0.097,
+     "C8|sycophantic_agreement~C19|agreeableness": -0.091,
+     "C3|all~C24|too_literal": 0.275,
+     "C3|all~C24|overstepping": -0.24,
+     "C3|all~C28|under_asks": -0.11,
+     "C3|all~C28|over_asks": 0.069,
+     "C3|all~C25|all": -0.016,
      "C3|all~C5|all": 0.054,
-     "C3|all~C6|all": -0.065,
-     "C3|all~C26|all": 0.026,
-     "C3|all~C19|agreeableness": 0.08
+     "C3|all~C6|all": -0.063,
+     "C3|all~C26|all": 0.025,
+     "C3|all~C19|agreeableness": 0.078
     }
    },
    "17": {
     "a": {
-     "C8|sycophantic_agreement~C24|too_literal": 0.048,
-     "C8|sycophantic_agreement~C24|overstepping": 0.104,
+     "C8|sycophantic_agreement~C24|too_literal": 0.046,
+     "C8|sycophantic_agreement~C24|overstepping": 0.105,
+     "C8|sycophantic_agreement~C28|under_asks": 0.065,
+     "C8|sycophantic_agreement~C28|over_asks": -0.099,
      "C8|sycophantic_agreement~C25|all": 0.269,
-     "C8|sycophantic_agreement~C5|all": -0.089,
-     "C8|sycophantic_agreement~C6|all": -0.21,
-     "C8|sycophantic_agreement~C26|all": -0.149,
-     "C8|sycophantic_agreement~C19|agreeableness": -0.1,
+     "C8|sycophantic_agreement~C5|all": -0.087,
+     "C8|sycophantic_agreement~C6|all": -0.211,
+     "C8|sycophantic_agreement~C26|all": -0.151,
+     "C8|sycophantic_agreement~C19|agreeableness": -0.102,
      "C3|all~C24|too_literal": 0.032,
      "C3|all~C24|overstepping": -0.088,
-     "C3|all~C25|all": -0.077,
-     "C3|all~C5|all": 0.168,
+     "C3|all~C28|under_asks": 0.067,
+     "C3|all~C28|over_asks": -0.104,
+     "C3|all~C25|all": -0.075,
+     "C3|all~C5|all": 0.169,
      "C3|all~C6|all": -0.043,
      "C3|all~C26|all": 0.229,
-     "C3|all~C19|agreeableness": -0.082
+     "C3|all~C19|agreeableness": -0.084
     },
     "b": {
      "C8|sycophantic_agreement~C24|too_literal": null,
      "C8|sycophantic_agreement~C24|overstepping": null,
+     "C8|sycophantic_agreement~C28|under_asks": null,
+     "C8|sycophantic_agreement~C28|over_asks": null,
      "C8|sycophantic_agreement~C25|all": null,
      "C8|sycophantic_agreement~C5|all": null,
      "C8|sycophantic_agreement~C6|all": null,
@@ -1202,6 +1288,8 @@
      "C8|sycophantic_agreement~C19|agreeableness": null,
      "C3|all~C24|too_literal": null,
      "C3|all~C24|overstepping": null,
+     "C3|all~C28|under_asks": null,
+     "C3|all~C28|over_asks": null,
      "C3|all~C25|all": null,
      "C3|all~C5|all": null,
      "C3|all~C6|all": null,
@@ -1209,58 +1297,72 @@
      "C3|all~C19|agreeableness": null
     },
     "c": {
-     "C8|sycophantic_agreement~C24|too_literal": 0.025,
-     "C8|sycophantic_agreement~C24|overstepping": -0.043,
-     "C8|sycophantic_agreement~C25|all": -0.065,
-     "C8|sycophantic_agreement~C5|all": -0.116,
-     "C8|sycophantic_agreement~C6|all": 0.016,
-     "C8|sycophantic_agreement~C26|all": -0.019,
-     "C8|sycophantic_agreement~C19|agreeableness": -0.021,
-     "C3|all~C24|too_literal": -0.002,
-     "C3|all~C24|overstepping": 0.02,
+     "C8|sycophantic_agreement~C24|too_literal": 0.024,
+     "C8|sycophantic_agreement~C24|overstepping": -0.044,
+     "C8|sycophantic_agreement~C28|under_asks": 0.042,
+     "C8|sycophantic_agreement~C28|over_asks": -0.034,
+     "C8|sycophantic_agreement~C25|all": -0.064,
+     "C8|sycophantic_agreement~C5|all": -0.117,
+     "C8|sycophantic_agreement~C6|all": 0.015,
+     "C8|sycophantic_agreement~C26|all": -0.021,
+     "C8|sycophantic_agreement~C19|agreeableness": -0.023,
+     "C3|all~C24|too_literal": -0.003,
+     "C3|all~C24|overstepping": 0.019,
+     "C3|all~C28|under_asks": 0.017,
+     "C3|all~C28|over_asks": 0.009,
      "C3|all~C25|all": 0.02,
-     "C3|all~C5|all": -0.042,
+     "C3|all~C5|all": -0.043,
      "C3|all~C6|all": -0.027,
-     "C3|all~C26|all": -0.01,
-     "C3|all~C19|agreeableness": -0.029
+     "C3|all~C26|all": -0.012,
+     "C3|all~C19|agreeableness": -0.032
     },
     "d": {
      "C8|sycophantic_agreement~C24|too_literal": 0.067,
-     "C8|sycophantic_agreement~C24|overstepping": -0.036,
-     "C8|sycophantic_agreement~C25|all": 0.088,
-     "C8|sycophantic_agreement~C5|all": -0.112,
-     "C8|sycophantic_agreement~C6|all": 0.022,
-     "C8|sycophantic_agreement~C26|all": -0.127,
+     "C8|sycophantic_agreement~C24|overstepping": -0.035,
+     "C8|sycophantic_agreement~C28|under_asks": -0.107,
+     "C8|sycophantic_agreement~C28|over_asks": 0.061,
+     "C8|sycophantic_agreement~C25|all": 0.09,
+     "C8|sycophantic_agreement~C5|all": -0.11,
+     "C8|sycophantic_agreement~C6|all": 0.024,
+     "C8|sycophantic_agreement~C26|all": -0.128,
      "C8|sycophantic_agreement~C19|agreeableness": -0.016,
      "C3|all~C24|too_literal": 0.371,
-     "C3|all~C24|overstepping": -0.205,
-     "C3|all~C25|all": 0.009,
-     "C3|all~C5|all": 0.074,
-     "C3|all~C6|all": -0.09,
-     "C3|all~C26|all": -0.011,
-     "C3|all~C19|agreeableness": 0.137
+     "C3|all~C24|overstepping": -0.204,
+     "C3|all~C28|under_asks": -0.124,
+     "C3|all~C28|over_asks": 0.064,
+     "C3|all~C25|all": 0.01,
+     "C3|all~C5|all": 0.075,
+     "C3|all~C6|all": -0.087,
+     "C3|all~C26|all": -0.014,
+     "C3|all~C19|agreeableness": 0.135
     }
    },
    "22": {
     "a": {
-     "C8|sycophantic_agreement~C24|too_literal": 0.076,
+     "C8|sycophantic_agreement~C24|too_literal": 0.075,
      "C8|sycophantic_agreement~C24|overstepping": 0.093,
+     "C8|sycophantic_agreement~C28|under_asks": 0.058,
+     "C8|sycophantic_agreement~C28|over_asks": -0.065,
      "C8|sycophantic_agreement~C25|all": 0.235,
      "C8|sycophantic_agreement~C5|all": -0.083,
      "C8|sycophantic_agreement~C6|all": -0.131,
-     "C8|sycophantic_agreement~C26|all": -0.097,
-     "C8|sycophantic_agreement~C19|agreeableness": -0.021,
+     "C8|sycophantic_agreement~C26|all": -0.099,
+     "C8|sycophantic_agreement~C19|agreeableness": -0.024,
      "C3|all~C24|too_literal": 0.025,
      "C3|all~C24|overstepping": -0.105,
-     "C3|all~C25|all": -0.107,
-     "C3|all~C5|all": 0.127,
+     "C3|all~C28|under_asks": 0.079,
+     "C3|all~C28|over_asks": -0.114,
+     "C3|all~C25|all": -0.105,
+     "C3|all~C5|all": 0.129,
      "C3|all~C6|all": 0.012,
-     "C3|all~C26|all": 0.288,
-     "C3|all~C19|agreeableness": -0.116
+     "C3|all~C26|all": 0.287,
+     "C3|all~C19|agreeableness": -0.117
     },
     "b": {
      "C8|sycophantic_agreement~C24|too_literal": null,
      "C8|sycophantic_agreement~C24|overstepping": null,
+     "C8|sycophantic_agreement~C28|under_asks": null,
+     "C8|sycophantic_agreement~C28|over_asks": null,
      "C8|sycophantic_agreement~C25|all": null,
      "C8|sycophantic_agreement~C5|all": null,
      "C8|sycophantic_agreement~C6|all": null,
@@ -1268,6 +1370,8 @@
      "C8|sycophantic_agreement~C19|agreeableness": null,
      "C3|all~C24|too_literal": null,
      "C3|all~C24|overstepping": null,
+     "C3|all~C28|under_asks": null,
+     "C3|all~C28|over_asks": null,
      "C3|all~C25|all": null,
      "C3|all~C5|all": null,
      "C3|all~C6|all": null,
@@ -1275,58 +1379,72 @@
      "C3|all~C19|agreeableness": null
     },
     "c": {
-     "C8|sycophantic_agreement~C24|too_literal": 0.034,
-     "C8|sycophantic_agreement~C24|overstepping": -0.031,
+     "C8|sycophantic_agreement~C24|too_literal": 0.032,
+     "C8|sycophantic_agreement~C24|overstepping": -0.032,
+     "C8|sycophantic_agreement~C28|under_asks": -0.01,
+     "C8|sycophantic_agreement~C28|over_asks": 0.025,
      "C8|sycophantic_agreement~C25|all": -0.047,
      "C8|sycophantic_agreement~C5|all": -0.108,
-     "C8|sycophantic_agreement~C6|all": 0.097,
-     "C8|sycophantic_agreement~C26|all": -0.001,
-     "C8|sycophantic_agreement~C19|agreeableness": -0.004,
+     "C8|sycophantic_agreement~C6|all": 0.096,
+     "C8|sycophantic_agreement~C26|all": -0.003,
+     "C8|sycophantic_agreement~C19|agreeableness": -0.008,
      "C3|all~C24|too_literal": 0.019,
      "C3|all~C24|overstepping": 0.038,
+     "C3|all~C28|under_asks": 0.072,
+     "C3|all~C28|over_asks": -0.061,
      "C3|all~C25|all": 0.009,
-     "C3|all~C5|all": -0.053,
+     "C3|all~C5|all": -0.052,
      "C3|all~C6|all": -0.038,
-     "C3|all~C26|all": -0.037,
-     "C3|all~C19|agreeableness": 0.007
+     "C3|all~C26|all": -0.039,
+     "C3|all~C19|agreeableness": 0.005
     },
     "d": {
      "C8|sycophantic_agreement~C24|too_literal": 0.044,
      "C8|sycophantic_agreement~C24|overstepping": -0.07,
-     "C8|sycophantic_agreement~C25|all": 0.108,
+     "C8|sycophantic_agreement~C28|under_asks": 0.006,
+     "C8|sycophantic_agreement~C28|over_asks": -0.016,
+     "C8|sycophantic_agreement~C25|all": 0.11,
      "C8|sycophantic_agreement~C5|all": -0.091,
-     "C8|sycophantic_agreement~C6|all": 0.067,
-     "C8|sycophantic_agreement~C26|all": -0.099,
-     "C8|sycophantic_agreement~C19|agreeableness": -0.02,
-     "C3|all~C24|too_literal": 0.334,
-     "C3|all~C24|overstepping": -0.143,
+     "C8|sycophantic_agreement~C6|all": 0.068,
+     "C8|sycophantic_agreement~C26|all": -0.101,
+     "C8|sycophantic_agreement~C19|agreeableness": -0.022,
+     "C3|all~C24|too_literal": 0.333,
+     "C3|all~C24|overstepping": -0.144,
+     "C3|all~C28|under_asks": -0.041,
+     "C3|all~C28|over_asks": -0.007,
      "C3|all~C25|all": -0.001,
      "C3|all~C5|all": 0.092,
-     "C3|all~C6|all": -0.011,
-     "C3|all~C26|all": 0.061,
-     "C3|all~C19|agreeableness": 0.139
+     "C3|all~C6|all": -0.009,
+     "C3|all~C26|all": 0.059,
+     "C3|all~C19|agreeableness": 0.138
     }
    },
    "29": {
     "a": {
-     "C8|sycophantic_agreement~C24|too_literal": 0.087,
+     "C8|sycophantic_agreement~C24|too_literal": 0.085,
      "C8|sycophantic_agreement~C24|overstepping": 0.052,
-     "C8|sycophantic_agreement~C25|all": 0.206,
-     "C8|sycophantic_agreement~C5|all": -0.006,
+     "C8|sycophantic_agreement~C28|under_asks": 0.051,
+     "C8|sycophantic_agreement~C28|over_asks": -0.058,
+     "C8|sycophantic_agreement~C25|all": 0.207,
+     "C8|sycophantic_agreement~C5|all": -0.005,
      "C8|sycophantic_agreement~C6|all": -0.021,
-     "C8|sycophantic_agreement~C26|all": -0.07,
-     "C8|sycophantic_agreement~C19|agreeableness": 0.015,
-     "C3|all~C24|too_literal": 0.064,
+     "C8|sycophantic_agreement~C26|all": -0.072,
+     "C8|sycophantic_agreement~C19|agreeableness": 0.013,
+     "C3|all~C24|too_literal": 0.063,
      "C3|all~C24|overstepping": -0.086,
-     "C3|all~C25|all": -0.091,
-     "C3|all~C5|all": 0.15,
-     "C3|all~C6|all": -0.03,
-     "C3|all~C26|all": 0.244,
-     "C3|all~C19|agreeableness": -0.185
+     "C3|all~C28|under_asks": 0.071,
+     "C3|all~C28|over_asks": -0.086,
+     "C3|all~C25|all": -0.09,
+     "C3|all~C5|all": 0.151,
+     "C3|all~C6|all": -0.029,
+     "C3|all~C26|all": 0.243,
+     "C3|all~C19|agreeableness": -0.188
     },
     "b": {
      "C8|sycophantic_agreement~C24|too_literal": null,
      "C8|sycophantic_agreement~C24|overstepping": null,
+     "C8|sycophantic_agreement~C28|under_asks": null,
+     "C8|sycophantic_agreement~C28|over_asks": null,
      "C8|sycophantic_agreement~C25|all": null,
      "C8|sycophantic_agreement~C5|all": null,
      "C8|sycophantic_agreement~C6|all": null,
@@ -1334,6 +1452,8 @@
      "C8|sycophantic_agreement~C19|agreeableness": null,
      "C3|all~C24|too_literal": null,
      "C3|all~C24|overstepping": null,
+     "C3|all~C28|under_asks": null,
+     "C3|all~C28|over_asks": null,
      "C3|all~C25|all": null,
      "C3|all~C5|all": null,
      "C3|all~C6|all": null,
@@ -1341,94 +1461,102 @@
      "C3|all~C19|agreeableness": null
     },
     "c": {
-     "C8|sycophantic_agreement~C24|too_literal": 0.037,
-     "C8|sycophantic_agreement~C24|overstepping": -0.01,
-     "C8|sycophantic_agreement~C25|all": -0.034,
+     "C8|sycophantic_agreement~C24|too_literal": 0.036,
+     "C8|sycophantic_agreement~C24|overstepping": -0.011,
+     "C8|sycophantic_agreement~C28|under_asks": -0.017,
+     "C8|sycophantic_agreement~C28|over_asks": 0.031,
+     "C8|sycophantic_agreement~C25|all": -0.033,
      "C8|sycophantic_agreement~C5|all": -0.053,
-     "C8|sycophantic_agreement~C6|all": 0.129,
-     "C8|sycophantic_agreement~C26|all": 0.051,
-     "C8|sycophantic_agreement~C19|agreeableness": 0.037,
-     "C3|all~C24|too_literal": 0.043,
+     "C8|sycophantic_agreement~C6|all": 0.128,
+     "C8|sycophantic_agreement~C26|all": 0.048,
+     "C8|sycophantic_agreement~C19|agreeableness": 0.033,
+     "C3|all~C24|too_literal": 0.044,
      "C3|all~C24|overstepping": 0.082,
-     "C3|all~C25|all": -0.01,
-     "C3|all~C5|all": 0.008,
+     "C3|all~C28|under_asks": 0.091,
+     "C3|all~C28|over_asks": -0.079,
+     "C3|all~C25|all": -0.007,
+     "C3|all~C5|all": 0.01,
      "C3|all~C6|all": -0.027,
-     "C3|all~C26|all": -0.031,
-     "C3|all~C19|agreeableness": -0.022
+     "C3|all~C26|all": -0.033,
+     "C3|all~C19|agreeableness": -0.023
     },
     "d": {
-     "C8|sycophantic_agreement~C24|too_literal": 0.079,
-     "C8|sycophantic_agreement~C24|overstepping": -0.007,
-     "C8|sycophantic_agreement~C25|all": 0.133,
-     "C8|sycophantic_agreement~C5|all": -0.113,
-     "C8|sycophantic_agreement~C6|all": 0.052,
-     "C8|sycophantic_agreement~C26|all": -0.118,
-     "C8|sycophantic_agreement~C19|agreeableness": -0.002,
-     "C3|all~C24|too_literal": 0.305,
+     "C8|sycophantic_agreement~C24|too_literal": 0.08,
+     "C8|sycophantic_agreement~C24|overstepping": -0.006,
+     "C8|sycophantic_agreement~C28|under_asks": -0.04,
+     "C8|sycophantic_agreement~C28|over_asks": 0.011,
+     "C8|sycophantic_agreement~C25|all": 0.135,
+     "C8|sycophantic_agreement~C5|all": -0.111,
+     "C8|sycophantic_agreement~C6|all": 0.053,
+     "C8|sycophantic_agreement~C26|all": -0.12,
+     "C8|sycophantic_agreement~C19|agreeableness": -0.003,
+     "C3|all~C24|too_literal": 0.304,
      "C3|all~C24|overstepping": -0.088,
-     "C3|all~C25|all": 0.024,
-     "C3|all~C5|all": 0.044,
-     "C3|all~C6|all": 0.024,
-     "C3|all~C26|all": 0.032,
-     "C3|all~C19|agreeableness": 0.141
+     "C3|all~C28|under_asks": -0.118,
+     "C3|all~C28|over_asks": 0.065,
+     "C3|all~C25|all": 0.025,
+     "C3|all~C5|all": 0.045,
+     "C3|all~C6|all": 0.025,
+     "C3|all~C26|all": 0.029,
+     "C3|all~C19|agreeableness": 0.139
     }
    }
   },
   "C23_vs_C26": {
    "9": {
     "a": {
-     "C23|all~C26|all": 0.19
+     "C23|all~C26|all": 0.189
     },
     "b": {
-     "C23|all~C26|all": -0.076
+     "C23|all~C26|all": -0.077
     },
     "c": {
-     "C23|all~C26|all": -0.036
+     "C23|all~C26|all": -0.037
     },
     "d": {
-     "C23|all~C26|all": -0.058
+     "C23|all~C26|all": -0.059
     }
    },
    "17": {
     "a": {
-     "C23|all~C26|all": 0.169
+     "C23|all~C26|all": 0.168
     },
     "b": {
-     "C23|all~C26|all": 0.111
+     "C23|all~C26|all": 0.11
     },
     "c": {
-     "C23|all~C26|all": 0.007
+     "C23|all~C26|all": 0.006
     },
     "d": {
-     "C23|all~C26|all": -0.081
+     "C23|all~C26|all": -0.083
     }
    },
    "22": {
     "a": {
-     "C23|all~C26|all": 0.144
+     "C23|all~C26|all": 0.143
     },
     "b": {
-     "C23|all~C26|all": 0.024
+     "C23|all~C26|all": 0.022
     },
     "c": {
-     "C23|all~C26|all": -0.047
+     "C23|all~C26|all": -0.048
     },
     "d": {
-     "C23|all~C26|all": -0.113
+     "C23|all~C26|all": -0.114
     }
    },
    "29": {
     "a": {
-     "C23|all~C26|all": 0.189
+     "C23|all~C26|all": 0.188
     },
     "b": {
      "C23|all~C26|all": 0.062
     },
     "c": {
-     "C23|all~C26|all": -0.06
+     "C23|all~C26|all": -0.062
     },
     "d": {
-     "C23|all~C26|all": -0.113
+     "C23|all~C26|all": -0.116
     }
    }
   },
@@ -1445,14 +1573,14 @@
      "C22|all~C15|refuse": null
     },
     "c": {
-     "C22|all~C15|refuse[harmful]": 0.031,
-     "C22|all~C15|refuse[harmless]": -0.028,
-     "C22|all~C15|refuse": 0.059
+     "C22|all~C15|refuse[harmful]": 0.035,
+     "C22|all~C15|refuse[harmless]": -0.032,
+     "C22|all~C15|refuse": 0.063
     },
     "d": {
-     "C22|all~C15|refuse[harmful]": -0.203,
-     "C22|all~C15|refuse[harmless]": 0.227,
-     "C22|all~C15|refuse": -0.228
+     "C22|all~C15|refuse[harmful]": -0.199,
+     "C22|all~C15|refuse[harmless]": 0.223,
+     "C22|all~C15|refuse": -0.224
     }
    },
    "17": {
@@ -1467,14 +1595,14 @@
      "C22|all~C15|refuse": null
     },
     "c": {
-     "C22|all~C15|refuse[harmful]": 0.047,
-     "C22|all~C15|refuse[harmless]": 0.042,
-     "C22|all~C15|refuse": 0.014
+     "C22|all~C15|refuse[harmful]": 0.05,
+     "C22|all~C15|refuse[harmless]": 0.043,
+     "C22|all~C15|refuse": 0.016
     },
     "d": {
-     "C22|all~C15|refuse[harmful]": -0.035,
+     "C22|all~C15|refuse[harmful]": -0.032,
      "C22|all~C15|refuse[harmless]": 0.136,
-     "C22|all~C15|refuse": -0.08
+     "C22|all~C15|refuse": -0.077
     }
    },
    "22": {
@@ -1489,14 +1617,14 @@
      "C22|all~C15|refuse": null
     },
     "c": {
-     "C22|all~C15|refuse[harmful]": 0.02,
+     "C22|all~C15|refuse[harmful]": 0.023,
      "C22|all~C15|refuse[harmless]": -0.01,
-     "C22|all~C15|refuse": 0.02
+     "C22|all~C15|refuse": 0.023
     },
     "d": {
-     "C22|all~C15|refuse[harmful]": -0.097,
-     "C22|all~C15|refuse[harmless]": 0.224,
-     "C22|all~C15|refuse": -0.153
+     "C22|all~C15|refuse[harmful]": -0.094,
+     "C22|all~C15|refuse[harmless]": 0.223,
+     "C22|all~C15|refuse": -0.15
     }
    },
    "29": {
@@ -1511,14 +1639,14 @@
      "C22|all~C15|refuse": null
     },
     "c": {
-     "C22|all~C15|refuse[harmful]": -0.009,
+     "C22|all~C15|refuse[harmful]": -0.005,
      "C22|all~C15|refuse[harmless]": 0.066,
-     "C22|all~C15|refuse": -0.032
+     "C22|all~C15|refuse": -0.029
     },
     "d": {
-     "C22|all~C15|refuse[harmful]": -0.058,
-     "C22|all~C15|refuse[harmless]": 0.294,
-     "C22|all~C15|refuse": -0.145
+     "C22|all~C15|refuse[harmful]": -0.053,
+     "C22|all~C15|refuse[harmless]": 0.291,
+     "C22|all~C15|refuse": -0.14
     }
    }
   }

@@ -1722,9 +1722,11 @@
      "effect": 0.0,
      "se": 0.0,
      "by_group": {
+      "expected:full": 0.02,
       "type:judge": 0.02
      },
      "by_group_se": {
+      "expected:full": 0.0,
       "type:judge": 0.0
      }
     },
@@ -1734,9 +1736,11 @@
      "effect": 0.03,
      "se": 0.012092607484694706,
      "by_group": {
+      "expected:full": 0.05,
       "type:judge": 0.05
      },
      "by_group_se": {
+      "expected:full": 0.012092607484694706,
       "type:judge": 0.012092607484694706
      },
      "vs_random": {
@@ -1754,9 +1758,11 @@
      "effect": 0.015,
      "se": 0.011157844211010742,
      "by_group": {
+      "expected:full": 0.035,
       "type:judge": 0.035
      },
      "by_group_se": {
+      "expected:full": 0.011157844211010742,
       "type:judge": 0.011157844211010742
      },
      "vs_random": {
@@ -1774,9 +1780,11 @@
      "effect": 0.02,
      "se": 0.014106557867685929,
      "by_group": {
+      "expected:full": 0.04,
       "type:judge": 0.04
      },
      "by_group_se": {
+      "expected:full": 0.014106557867685929,
       "type:judge": 0.014106557867685929
      },
      "vs_random": {
@@ -1794,9 +1802,11 @@
      "effect": -0.01,
      "se": 0.01,
      "by_group": {
+      "expected:full": 0.01,
       "type:judge": 0.01
      },
      "by_group_se": {
+      "expected:full": 0.01,
       "type:judge": 0.01
      },
      "vs_random": {
@@ -1814,9 +1824,11 @@
      "effect": -0.015,
      "se": 0.011157844211010742,
      "by_group": {
+      "expected:full": 0.005,
       "type:judge": 0.005
      },
      "by_group_se": {
+      "expected:full": 0.011157844211010742,
       "type:judge": 0.011157844211010742
      }
     },
@@ -1826,9 +1838,11 @@
      "effect": -0.02,
      "se": 0.0099243368701167,
      "by_group": {
+      "expected:full": 0.0,
       "type:judge": 0.0
      },
      "by_group_se": {
+      "expected:full": 0.0099243368701167,
       "type:judge": 0.0099243368701167
      }
     },
@@ -1838,9 +1852,11 @@
      "effect": -0.01,
      "se": 0.01,
      "by_group": {
+      "expected:full": 0.01,
       "type:judge": 0.01
      },
      "by_group_se": {
+      "expected:full": 0.01,
       "type:judge": 0.01
      }
     }
@@ -1852,9 +1868,11 @@
      "effect": 0.0,
      "se": 0.0,
      "by_group": {
+      "expected:full": 0.01,
       "type:judge": 0.01
      },
      "by_group_se": {
+      "expected:full": 0.0,
       "type:judge": 0.0
      }
     },
@@ -1864,9 +1882,11 @@
      "effect": 0.0,
      "se": 0.0,
      "by_group": {
+      "expected:full": 0.01,
       "type:judge": 0.01
      },
      "by_group_se": {
+      "expected:full": 0.0,
       "type:judge": 0.0
      },
      "vs_random": {
@@ -1884,9 +1904,11 @@
      "effect": -0.005,
      "se": 0.005000000000000001,
      "by_group": {
+      "expected:full": 0.005,
       "type:judge": 0.005
      },
      "by_group_se": {
+      "expected:full": 0.005000000000000001,
       "type:judge": 0.005000000000000001
      },
      "vs_random": {
@@ -1904,9 +1926,11 @@
      "effect": 0.0,
      "se": 0.0,
      "by_group": {
+      "expected:full": 0.01,
       "type:judge": 0.01
      },
      "by_group_se": {
+      "expected:full": 0.0,
       "type:judge": 0.0
      },
      "vs_random": {
@@ -1924,9 +1948,11 @@
      "effect": -0.005,
      "se": 0.005000000000000001,
      "by_group": {
+      "expected:full": 0.005,
       "type:judge": 0.005
      },
      "by_group_se": {
+      "expected:full": 0.005000000000000001,
       "type:judge": 0.005000000000000001
      },
      "vs_random": {
@@ -1944,9 +1970,11 @@
      "effect": -0.01,
      "se": 0.007053278933842965,
      "by_group": {
+      "expected:full": 0.0,
       "type:judge": 0.0
      },
      "by_group_se": {
+      "expected:full": 0.007053278933842965,
       "type:judge": 0.007053278933842965
      }
     },
@@ -1956,9 +1984,11 @@
      "effect": -0.01,
      "se": 0.007053278933842965,
      "by_group": {
+      "expected:full": 0.0,
       "type:judge": 0.0
      },
      "by_group_se": {
+      "expected:full": 0.007053278933842965,
       "type:judge": 0.007053278933842965
      }
     },
@@ -1968,9 +1998,11 @@
      "effect": -0.01,
      "se": 0.007053278933842965,
      "by_group": {
+      "expected:full": 0.0,
       "type:judge": 0.0
      },
      "by_group_se": {
+      "expected:full": 0.007053278933842965,
       "type:judge": 0.007053278933842965
      }
     }
@@ -1988,9 +2020,11 @@
      "effect": 0.0,
      "se": 0.0,
      "by_group": {
+      "expected:reinforcing": 0.8598726114649682,
       "type:judge": 0.8598726114649682
      },
      "by_group_se": {
+      "expected:reinforcing": 0.0,
       "type:judge": 0.0
      }
     },
@@ -2000,9 +2034,11 @@
      "effect": 0.06369426751592357,
      "se": 0.030885363134047248,
      "by_group": {
+      "expected:reinforcing": 0.9235668789808917,
       "type:judge": 0.9235668789808917
      },
      "by_group_se": {
+      "expected:reinforcing": 0.030885363134047248,
       "type:judge": 0.030885363134047248
      },
      "vs_random": {
@@ -2020,9 +2056,11 @@
      "effect": 0.05732484076433121,
      "se": 0.03029879809729789,
      "by_group": {
+      "expected:reinforcing": 0.9171974522292994,
       "type:judge": 0.9171974522292994
      },
      "by_group_se": {
+      "expected:reinforcing": 0.03029879809729789,
       "type:judge": 0.03029879809729789
      },
      "vs_random": {
@@ -2040,9 +2078,11 @@
      "effect": -0.006369426751592357,
      "se": 0.030640203781193733,
      "by_group": {
+      "expected:reinforcing": 0.8535031847133758,
       "type:judge": 0.8535031847133758
      },
      "by_group_se": {
+      "expected:reinforcing": 0.030640203781193733,
       "type:judge": 0.030640203781193733
      },
      "vs_random": {
@@ -2060,9 +2100,11 @@
      "effect": 0.07006369426751592,
      "se": 0.024103473526076388,
      "by_group": {
+      "expected:reinforcing": 0.9299363057324841,
       "type:judge": 0.9299363057324841
      },
      "by_group_se": {
+      "expected:reinforcing": 0.024103473526076388,
       "type:judge": 0.024103473526076388
      },
      "vs_random": {
@@ -2080,9 +2122,11 @@
      "effect": 0.10191082802547771,
      "se": 0.028838806172412152,
      "by_group": {
+      "expected:reinforcing": 0.9617834394904459,
       "type:judge": 0.9617834394904459
      },
      "by_group_se": {
+      "expected:reinforcing": 0.028838806172412152,
       "type:judge": 0.028838806172412152
      }
     },
@@ -2092,9 +2136,11 @@
      "effect": 0.09554140127388536,
      "se": 0.025210917382246106,
      "by_group": {
+      "expected:reinforcing": 0.9554140127388535,
       "type:judge": 0.9554140127388535
      },
      "by_group_se": {
+      "expected:reinforcing": 0.025210917382246106,
       "type:judge": 0.025210917382246106
      }
     },
@@ -2104,9 +2150,11 @@
      "effect": 0.09554140127388536,
      "se": 0.026781517368934606,
      "by_group": {
+      "expected:reinforcing": 0.9554140127388535,
       "type:judge": 0.9554140127388535
      },
      "by_group_se": {
+      "expected:reinforcing": 0.026781517368934606,
       "type:judge": 0.026781517368934606
      }
     }
@@ -2118,9 +2166,11 @@
      "effect": 0.0,
      "se": 0.0,
      "by_group": {
+      "expected:reinforcing": 0.7834394904458599,
       "type:judge": 0.7834394904458599
      },
      "by_group_se": {
+      "expected:reinforcing": 0.0,
       "type:judge": 0.0
      }
     },
@@ -2130,9 +2180,11 @@
      "effect": 0.08280254777070063,
      "se": 0.03495381269160446,
      "by_group": {
+      "expected:reinforcing": 0.8662420382165605,
       "type:judge": 0.8662420382165605
      },
      "by_group_se": {
+      "expected:reinforcing": 0.03495381269160446,
       "type:judge": 0.03495381269160446
      },
      "vs_random": {
@@ -2150,9 +2202,11 @@
      "effect": 0.050955414012738856,
      "se": 0.03703463861424891,
      "by_group": {
+      "expected:reinforcing": 0.8343949044585988,
       "type:judge": 0.8343949044585988
      },
      "by_group_se": {
+      "expected:reinforcing": 0.03703463861424891,
       "type:judge": 0.03703463861424891
      },
      "vs_random": {
@@ -2170,9 +2224,11 @@
      "effect": -0.01910828025477707,
      "se": 0.036674762197352946,
      "by_group": {
+      "expected:reinforcing": 0.7643312101910829,
       "type:judge": 0.7643312101910829
      },
      "by_group_se": {
+      "expected:reinforcing": 0.036674762197352946,
       "type:judge": 0.036674762197352946
      },
      "vs_random": {
@@ -2190,9 +2246,11 @@
      "effect": 0.10191082802547771,
      "se": 0.03022145030897863,
      "by_group": {
+      "expected:reinforcing": 0.8853503184713376,
       "type:judge": 0.8853503184713376
      },
      "by_group_se": {
+      "expected:reinforcing": 0.03022145030897863,
       "type:judge": 0.03022145030897863
      },
      "vs_random": {
@@ -2210,9 +2268,11 @@
      "effect": 0.11464968152866242,
      "se": 0.034961252047374894,
      "by_group": {
+      "expected:reinforcing": 0.8980891719745223,
       "type:judge": 0.8980891719745223
      },
      "by_group_se": {
+      "expected:reinforcing": 0.034961252047374894,
       "type:judge": 0.034961252047374894
      }
     },
@@ -2222,9 +2282,11 @@
      "effect": 0.12738853503184713,
      "se": 0.0346774345819934,
      "by_group": {
+      "expected:reinforcing": 0.910828025477707,
       "type:judge": 0.910828025477707
      },
      "by_group_se": {
+      "expected:reinforcing": 0.0346774345819934,
       "type:judge": 0.0346774345819934
      }
     },
@@ -2234,9 +2296,11 @@
      "effect": 0.12101910828025478,
      "se": 0.03540475288910318,
      "by_group": {
+      "expected:reinforcing": 0.9044585987261147,
       "type:judge": 0.9044585987261147
      },
      "by_group_se": {
+      "expected:reinforcing": 0.03540475288910318,
       "type:judge": 0.03540475288910318
      }
     }
@@ -2374,6 +2438,336 @@
      },
      "by_group_se": {
       "type:choice": 0.04848327691795923
+     }
+    }
+   }
+  }
+ },
+ "C28": {
+  "type": "judge",
+  "n_items": 200,
+  "conds": {
+   "gemma": {
+    "baseline": {
+     "mean": 0.5,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "expected:asks": 0.01,
+      "type:judge": 0.5,
+      "expected:answers": 0.99
+     },
+     "by_group_se": {
+      "expected:asks": 0.0,
+      "type:judge": 0.0,
+      "expected:answers": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.5,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.007088812050083359,
+     "by_group": {
+      "expected:asks": 0.0,
+      "type:judge": 0.5,
+      "expected:answers": 1.0
+     },
+     "by_group_se": {
+      "expected:asks": 0.009999999999999998,
+      "type:judge": 0.007088812050083359,
+      "expected:answers": 0.009999999999999998
+     },
+     "vs_random": {
+      "random_effects": [
+       0.005,
+       0.0,
+       0.0
+      ],
+      "max_abs_random": 0.005
+     }
+    },
+    "doing-": {
+     "mean": 0.51,
+     "unparsed": 0.0,
+     "effect": 0.01,
+     "se": 0.04701651586218501,
+     "by_group": {
+      "expected:asks": 0.46,
+      "type:judge": 0.51,
+      "expected:answers": 0.56
+     },
+     "by_group_se": {
+      "expected:asks": 0.05,
+      "type:judge": 0.04701651586218501,
+      "expected:answers": 0.0497569851956243
+     },
+     "vs_random": {
+      "random_effects": [
+       0.005,
+       0.0,
+       0.0
+      ],
+      "max_abs_random": 0.005
+     }
+    },
+    "knowing+": {
+     "mean": 0.5,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "expected:asks": 0.01,
+      "type:judge": 0.5,
+      "expected:answers": 0.99
+     },
+     "by_group_se": {
+      "expected:asks": 0.0,
+      "type:judge": 0.0,
+      "expected:answers": 0.0
+     },
+     "vs_random": {
+      "random_effects": [
+       0.005,
+       0.0,
+       0.0
+      ],
+      "max_abs_random": 0.005
+     }
+    },
+    "knowing-": {
+     "mean": 0.51,
+     "unparsed": 0.0,
+     "effect": 0.01,
+     "se": 0.007053278933842965,
+     "by_group": {
+      "expected:asks": 0.02,
+      "type:judge": 0.51,
+      "expected:answers": 1.0
+     },
+     "by_group_se": {
+      "expected:asks": 0.009999999999999998,
+      "type:judge": 0.007053278933842965,
+      "expected:answers": 0.009999999999999998
+     },
+     "vs_random": {
+      "random_effects": [
+       0.005,
+       0.0,
+       0.0
+      ],
+      "max_abs_random": 0.005
+     }
+    },
+    "random0": {
+     "mean": 0.505,
+     "unparsed": 0.0,
+     "effect": 0.005,
+     "se": 0.005,
+     "by_group": {
+      "expected:asks": 0.01,
+      "type:judge": 0.505,
+      "expected:answers": 1.0
+     },
+     "by_group_se": {
+      "expected:asks": 0.0,
+      "type:judge": 0.005,
+      "expected:answers": 0.009999999999999998
+     }
+    },
+    "random1": {
+     "mean": 0.5,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.007088812050083359,
+     "by_group": {
+      "expected:asks": 0.0,
+      "type:judge": 0.5,
+      "expected:answers": 1.0
+     },
+     "by_group_se": {
+      "expected:asks": 0.009999999999999998,
+      "type:judge": 0.007088812050083359,
+      "expected:answers": 0.009999999999999998
+     }
+    },
+    "random2": {
+     "mean": 0.5,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.007088812050083359,
+     "by_group": {
+      "expected:asks": 0.01,
+      "type:judge": 0.5,
+      "expected:answers": 0.99
+     },
+     "by_group_se": {
+      "expected:asks": 0.0,
+      "type:judge": 0.007088812050083359,
+      "expected:answers": 0.01421338109037403
+     }
+    }
+   },
+   "qwen": {
+    "baseline": {
+     "mean": 0.5,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "expected:asks": 0.01,
+      "type:judge": 0.5,
+      "expected:answers": 0.99
+     },
+     "by_group_se": {
+      "expected:asks": 0.0,
+      "type:judge": 0.0,
+      "expected:answers": 0.0
+     }
+    },
+    "doing+": {
+     "mean": 0.5,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.007088812050083359,
+     "by_group": {
+      "expected:asks": 0.0,
+      "type:judge": 0.5,
+      "expected:answers": 1.0
+     },
+     "by_group_se": {
+      "expected:asks": 0.009999999999999998,
+      "type:judge": 0.007088812050083359,
+      "expected:answers": 0.009999999999999998
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.005,
+       0.005,
+       -0.03
+      ],
+      "max_abs_random": 0.03
+     }
+    },
+    "doing-": {
+     "mean": 0.53,
+     "unparsed": 0.0,
+     "effect": 0.03,
+     "se": 0.05577683458553299,
+     "by_group": {
+      "expected:asks": 0.66,
+      "type:judge": 0.53,
+      "expected:answers": 0.4
+     },
+     "by_group_se": {
+      "expected:asks": 0.04793724854411023,
+      "type:judge": 0.05577683458553299,
+      "expected:answers": 0.04943110704237103
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.005,
+       0.005,
+       -0.03
+      ],
+      "max_abs_random": 0.03
+     }
+    },
+    "knowing+": {
+     "mean": 0.5,
+     "unparsed": 0.0,
+     "effect": 0.0,
+     "se": 0.0,
+     "by_group": {
+      "expected:asks": 0.01,
+      "type:judge": 0.5,
+      "expected:answers": 0.99
+     },
+     "by_group_se": {
+      "expected:asks": 0.0,
+      "type:judge": 0.0,
+      "expected:answers": 0.0
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.005,
+       0.005,
+       -0.03
+      ],
+      "max_abs_random": 0.03
+     }
+    },
+    "knowing-": {
+     "mean": 0.51,
+     "unparsed": 0.0,
+     "effect": 0.01,
+     "se": 0.015835206624614063,
+     "by_group": {
+      "expected:asks": 0.06,
+      "type:judge": 0.51,
+      "expected:answers": 0.96
+     },
+     "by_group_se": {
+      "expected:asks": 0.021904291355759033,
+      "type:judge": 0.015835206624614063,
+      "expected:answers": 0.022270150335361363
+     },
+     "vs_random": {
+      "random_effects": [
+       -0.005,
+       0.005,
+       -0.03
+      ],
+      "max_abs_random": 0.03
+     }
+    },
+    "random0": {
+     "mean": 0.495,
+     "unparsed": 0.0,
+     "effect": -0.005,
+     "se": 0.015033463510636134,
+     "by_group": {
+      "expected:asks": 0.04,
+      "type:judge": 0.495,
+      "expected:answers": 0.95
+     },
+     "by_group_se": {
+      "expected:asks": 0.01714466079977653,
+      "type:judge": 0.015033463510636134,
+      "expected:answers": 0.024287836253956217
+     }
+    },
+    "random1": {
+     "mean": 0.505,
+     "unparsed": 0.0,
+     "effect": 0.005,
+     "se": 0.011202790391809268,
+     "by_group": {
+      "expected:asks": 0.03,
+      "type:judge": 0.505,
+      "expected:answers": 0.98
+     },
+     "by_group_se": {
+      "expected:asks": 0.014070529413628968,
+      "type:judge": 0.011202790391809268,
+      "expected:answers": 0.017378728435078386
+     }
+    },
+    "random2": {
+     "mean": 0.47,
+     "unparsed": 0.0,
+     "effect": -0.03,
+     "se": 0.01723325055301859,
+     "by_group": {
+      "expected:asks": 0.04,
+      "type:judge": 0.47,
+      "expected:answers": 0.9
+     },
+     "by_group_se": {
+      "expected:asks": 0.017144660799776525,
+      "type:judge": 0.01723325055301859,
+      "expected:answers": 0.028762349126466136
      }
     }
    }

@@ -28,21 +28,22 @@ READING = {
               "D-057) and are read here with the same pipeline. The numbers are for spotting signals worth a test, "
               "not claims.",
     "tldr": [
-        "<b>Frame first, block last.</b> In one space for all 21 units, the first component (81% at layer 17) is "
-        "the frame. Inside a frame group the three blocks overlap: they sit 0.3 to 0.8 within-unit spreads apart "
+        "<b>Frame first, block last.</b> In one space for all 23 units, the first component (81% at layer 17) is "
+        "the frame. Inside a frame group the three blocks overlap: they sit 0.3 to 0.9 within-unit spreads apart "
         "in Gemma's own voice, against 15 between frame groups.",
-        "<b>No assistant axis.</b> The assistant-persona direction carries 2 to 3% of a typical unit's squared "
-        "length in every block. The units nearest it are low psychopathy and honesty-humility in action.",
+        "<b>No assistant axis.</b> The assistant-persona direction carries 1.6 to 2.7% of a typical unit's "
+        "squared length in every block. The units nearest it are low psychopathy and honesty-humility in action.",
         "<b>The tension runs through autonomy.</b> Refusing a harmful request is against autonomy in recognize, "
         "judge and act (-0.23 to -0.29), helping a harmless request goes with it (+0.23 to +0.62), and substance "
         "is not involved (-0.09 to +0.13).",
         "<b>Causally, helpfulness pushes on the other blocks; they barely push back.</b> Helpfulness directions move "
-        "another block's readout in 6.5 to 6.9% of cells (|z| 3 or more), honesty and harmlessness in 1.7 to 2.3%, "
-        "near the controls' false-positive rate (1.0 to 1.4%). Agreeableness, wellbeing and helping a harmless "
+        "another block's readout in 5.8 to 7.2% of cells (|z| 3 or more), honesty and harmlessness in 1.5 to 2.0%, "
+        "near the controls' false-positive rate (0.9 to 1.3%). Agreeableness, wellbeing and helping a harmless "
         "request in action lower the readout for refusing a harmful one (z -3.1 to -6.5 at layer 29).",
         "<b>In behavior, harmlessness moves and helpfulness mostly does not.</b> At up to eight times the "
         "calibrated dose, harmlessness's act directions change refusal, charitable reading and intent, and its "
-        "judge direction for harm changes moral judgments; helpfulness moves one instrument (autonomy). The "
+        "judge direction for harm changes moral judgments; helpfulness moves autonomy, and asking only at eight "
+        "times and regardless of need. The "
         "tension shows inside refusal: one direction trades answering edgy harmless requests against refusing "
         "toxic ones.",
     ],
@@ -54,7 +55,7 @@ READING = {
                 "against each other where the training literature says they do, and is there a single assistant "
                 "direction that carries all of them?</p>",
     "setup": "<p>The three blocks are the units of their pages: six for honesty (self-knowledge, accuracy, "
-             "sincerity, forthrightness, non-sycophancy, honesty-humility), seven for helpfulness, eight for "
+             "sincerity, forthrightness, non-sycophancy, honesty-humility), nine for helpfulness, eight for "
              "harmlessness. Every unit has four frames (recognize, judge, act, self-describe) and is oriented to "
              "its good side, so a positive cosine means the two good sides go together. Directions, cosines, floors "
              "and steering are those of the block pages: diff of means over the first 32 reply tokens at layers "
@@ -63,22 +64,24 @@ READING = {
              "z against random directions.</p>",
     "r1": "<p>Put together, the three blocks look like each block alone. At layer 17 the first component carries "
           "81% of the variance and splits items about someone else's reply from items in Gemma's voice; at 29 it "
-          "carries 39%, and the second component splits acting from self-describing (panel d). Inside a frame "
+          "carries 38%, and the second component splits acting from self-describing (panel d). Inside a frame "
           "group the blocks overlap. In the act frame they sit 0.3 to 0.7 within-unit spreads apart at layer 17 "
-          "(helpfulness and honesty closest), in self-description 0.4 to 0.8, when Gemma watches 1.1 to 1.3. At "
-          "29 harmlessness drifts from the other two in self-description (1.0 from honesty, 1.7 from "
+          "(helpfulness and honesty closest), in self-description 0.4 to 0.9, when Gemma watches 1.1 to 1.3. At "
+          "29 harmlessness drifts from the other two in self-description (0.9 from honesty, 1.75 from "
           "helpfulness).</p><p>So inside Gemma the frame decides more than the block does. A reply that refuses, "
           "a reply that cares and a reply that tells the truth are closer to each other than any of them is to a "
           "judgment of someone else's reply on the same topic.</p>",
     "r2": "<p>Within a block more pairs of definitions share a direction than between blocks: in the act frame "
-          "30% of pairs inside a block pass the floor against 14% between blocks; in self-description 28% against "
-          "21%. The pairs that cross blocks are few and specific. Honesty-humility goes with low psychopathy "
+          "29% of pairs inside a block pass the floor against 18% between blocks; in self-description 29% against "
+          "23%. The pairs that cross blocks are few and specific. Honesty-humility goes with low psychopathy "
           "(+0.52 act, +0.59 self-describe) and with harmless acts (+0.30, +0.48), as HEXACO predicts. Autonomy "
           "goes with helping a harmless request (+0.62 act) and with legitimate intent (+0.31), and against "
           "refusing and declining (-0.26 to -0.28). Self-knowledge (a question Gemma can answer, against one it "
           "cannot) goes with helping a harmless request (+0.40, +0.49) and against refusing and declining (-0.26 "
           "to -0.29): not being able to answer and not being willing to sit on the same side. Forthrightness goes "
-          "with not reading too literally in self-description (+0.37).</p>",
+          "with not reading too literally in self-description (+0.37). Asking when a request is ambiguous goes "
+          "with avoiding unsanctioned side effects (+0.30 act, +0.33 self-describe), and answering a clear one with "
+          "self-knowledge (+0.28 act): asking before acting reads as caution.</p>",
     "r3": "<p>D-055's first test was that refusing over-cautiously opposes substantive help, the tension in the "
           "constitution's over-caution list. It does not: substance and helping a harmless request are -0.09 to "
           "+0.13 in every frame, and substance and refusing a harmful request -0.06 to +0.10. The tension runs "
@@ -88,13 +91,14 @@ READING = {
           "as overriding the person's choice, not as giving less.</p><p>Steering agrees in direction. Helping a "
           "harmless request in action lowers the refusing readout in action (z -6.5 at layer 29), and so do "
           "wellbeing (-4.2) and agreeableness (-3.1) in action. Care does the opposite in self-description "
-          "(+3.7). Steering toward refusing lowers wellbeing in action (-2.2) and leaves autonomy and substance "
+          "(+3.7). At layer 22, answering a clear request in action lowers refusing in action too (-4.4). Steering "
+          "toward refusing lowers wellbeing in action (-2.2) and leaves autonomy and substance "
           "where they were. Autonomy's own direction moves refusal little (-1.5).</p>",
     "r4": "<p>Lu et al. (2026) find an assistant axis: a direction that separates the assistant persona from other "
           "roles and that steering along keeps the model in character. Our D1 is that contrast (the assistant vs "
           "another role). If HHH were the assistant persona seen from three sides, the units would line up with "
           "it. They do not. The mean squared raw cosine of a block's directions with D1 is 0.023 for honesty, "
-          "0.018 for helpfulness and 0.027 for harmlessness: a typical unit puts 2 to 3% of its squared length on "
+          "0.016 for helpfulness and 0.027 for harmlessness: a typical unit puts 1.6 to 2.7% of its squared length on "
           "D1's line. Centred, most units sit inside the floor. The ones outside it are low psychopathy in action "
           "(+0.40), honesty-humility in action (+0.32), harmless acts in action and self-description (+0.27, "
           "+0.19), autonomy in action and self-description (+0.20, +0.17), accuracy in action (+0.19) and "
@@ -106,8 +110,9 @@ READING = {
           "concepts with the rest of the 62). At the calibrated dose one cell passes in the two new blocks (helping "
           "a harmless request's own direction, on over-refusal). Above it the blocks differ. Harmlessness moves four of its eight units: legitimate intent, charitable reading and "
           "refusing through their act directions, harm in an act through its judge direction, in each case the "
-          "frame that matches what the instrument measures. Helpfulness moves one of seven, autonomy toward "
-          "paternalism at four times. D-041 found the same frame rule across all concepts: judge directions move "
+          "frame that matches what the instrument measures. Helpfulness moves two of nine: autonomy toward "
+          "paternalism at four times, and asking at eight, where Gemma asks on clear requests as much as on "
+          "ambiguous ones. D-041 found the same frame rule across all concepts: judge directions move "
           "judgments, act directions move what the reply does.</p><p>The helpfulness-harmlessness tension shows up "
           "in behavior inside refusal. The refusal direction is one dial for over- and under-refusal: toward "
           "refusing, compliance on hard but harmless OR-Bench requests drops by 0.53 and 0.56 at eight times (the "
@@ -122,7 +127,6 @@ READING = {
         "The tension in behavior: steer agreeableness, wellbeing and helping a harmless request in action and read "
         "refusal on OR-Bench, the behavioral test of result 3.",
         "The large subjects (gemma-4-31B-it, Qwen3.5-27B), where the honesty geometry replicated.",
-        "C28 (asks only when a request is truly ambiguous) joins helpfulness when built.",
     ],
 }
 
@@ -207,7 +211,7 @@ def build():
 
 <h2>Result 1: frame first, block last</h2>
 <figure><img src="{fig('hhh_landscape.png')}" alt="Every item of the three blocks on the first two principal components, colored by block and by frame group">
-<figcaption><b>Figure 1. The three blocks in one space.</b> Every item of the 21 units projected into the subspace spanned by their (definition, frame) directions, first two principal components, at layers {LM} (a, b) and {LL} (c, d). Left: colored by block; right: the same points colored by frame group.</figcaption></figure>
+<figcaption><b>Figure 1. The three blocks in one space.</b> Every item of the 23 units projected into the subspace spanned by their (definition, frame) directions, first two principal components, at layers {LM} (a, b) and {LL} (c, d). Left: colored by block; right: the same points colored by frame group.</figcaption></figure>
 {rd['r1']}
 {plot3d()}
 

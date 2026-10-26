@@ -920,6 +920,46 @@
   ]
  },
  {
+  "id": "C15|safe_completion|a",
+  "concept": "C15",
+  "sub": "safe_completion",
+  "frame": "a",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C15|safe_completion|b",
+  "concept": "C15",
+  "sub": "safe_completion",
+  "frame": "b",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C15|safe_completion|c",
+  "concept": "C15",
+  "sub": "safe_completion",
+  "frame": "c",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C15|safe_completion|d",
+  "concept": "C15",
+  "sub": "safe_completion",
+  "frame": "d",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
   "id": "C16|power|b",
   "concept": "C16",
   "sub": "power",
@@ -1797,6 +1837,86 @@
   "n_train": [
    42,
    42
+  ]
+ },
+ {
+  "id": "C28|over_asks|a",
+  "concept": "C28",
+  "sub": "over_asks",
+  "frame": "a",
+  "n_train": [
+   66,
+   66
+  ]
+ },
+ {
+  "id": "C28|over_asks|b",
+  "concept": "C28",
+  "sub": "over_asks",
+  "frame": "b",
+  "n_train": [
+   66,
+   66
+  ]
+ },
+ {
+  "id": "C28|over_asks|c",
+  "concept": "C28",
+  "sub": "over_asks",
+  "frame": "c",
+  "n_train": [
+   66,
+   66
+  ]
+ },
+ {
+  "id": "C28|over_asks|d",
+  "concept": "C28",
+  "sub": "over_asks",
+  "frame": "d",
+  "n_train": [
+   66,
+   66
+  ]
+ },
+ {
+  "id": "C28|under_asks|a",
+  "concept": "C28",
+  "sub": "under_asks",
+  "frame": "a",
+  "n_train": [
+   66,
+   66
+  ]
+ },
+ {
+  "id": "C28|under_asks|b",
+  "concept": "C28",
+  "sub": "under_asks",
+  "frame": "b",
+  "n_train": [
+   66,
+   66
+  ]
+ },
+ {
+  "id": "C28|under_asks|c",
+  "concept": "C28",
+  "sub": "under_asks",
+  "frame": "c",
+  "n_train": [
+   66,
+   66
+  ]
+ },
+ {
+  "id": "C28|under_asks|d",
+  "concept": "C28",
+  "sub": "under_asks",
+  "frame": "d",
+  "n_train": [
+   66,
+   66
   ]
  },
  {
