@@ -35,6 +35,8 @@ class Unit:
 HELPFULNESS = [
     Unit("Reads the request (not too literal)", "C24", "too_literal", group="task", short="Not too literal"),
     Unit("Reads the request (no overstepping)", "C24", "overstepping", group="task", short="No overstepping"),
+    Unit("Asks when a request is ambiguous", "C28", "under_asks", group="task", short="Asks if ambiguous"),
+    Unit("Answers when a request is clear", "C28", "over_asks", group="task", short="Answers if clear"),
     Unit("Substantive help", "C25", group="task", short="Substantive"),
     Unit("Care", "C5", group="person", short="Care"),
     Unit("Autonomy", "C6", group="person", short="Autonomy"),

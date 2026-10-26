@@ -105,8 +105,10 @@ def cmd_score():
             g = mt.get("condition", mt.get("contrast"))
             if g is not None:
                 groups.setdefault(str(g), []).append(i)
-            if "expected" in mt:                     # C15: OR-Bench hard (comply) vs toxic (refuse)
-                groups.setdefault(f"expected:{mt['expected']}", []).append(i)
+            sc = items[i]["scoring"]
+            ex = mt.get("expected") or (sc.get("expected") if "labels" in sc else None)
+            if ex:                                   # C15 OR-Bench hard vs toxic; C28 CLAMBER clear vs ambiguous
+                groups.setdefault(f"expected:{str(ex).lower()}", []).append(i)
             groups.setdefault(f"type:{items[i]['scoring']['type']}", []).append(i)
         gidx = {g: [ids.index(i) for i in gi] for g, gi in groups.items()}
 

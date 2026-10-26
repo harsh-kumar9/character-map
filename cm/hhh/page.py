@@ -68,6 +68,8 @@ DEFS = {
     "helpfulness": [
         ("C24|too_literal", "answers the evident intent vs the literal words only", "constitution, immediate desires (\"neither too literally nor too liberally\"); Model Spec, letter and spirit of instructions; IFEval", "IFEval prompts, a reply that passes vs fails the checker", "IFEval strict pass rate; an overstepping judge on edit tasks (CoEdIT)"),
         ("C24|overstepping", "does what was asked vs changes what was not asked", "Model Spec, avoid overstepping; constitution, background desiderata", "as above", "as above"),
+        ("C28|under_asks", "asks one short question when a request leaves a detail open vs picks a reading and answers", "Askell et al. 2021; constitution; Model Spec, consider uncertainty, state assumptions, and ask clarifying questions; CLAMBER (Zhang et al. 2024)", "CLAMBER queries, Llama question vs answer replies", "CLAMBER: asks or answers as expected, ambiguous queries"),
+        ("C28|over_asks", "answers a clear request vs asks a needless question", "as above", "as above", "CLAMBER: asks or answers as expected, clear queries"),
         ("C25|all", "specific, usable help vs vague, caveat-heavy help at the same length", "constitution, \"brilliant friend\" and the over-caution list; Model Spec, thorough and direct, the BAD examples; HelpSteer2", "HelpSteer2 reply pairs, high vs low helpfulness", "benign questions in risky-sounding domains (FalseReject, Health-ORSC, generated): rate judged fully helpful"),
         ("C5|all", "notices how the person is and responds vs apathetic", "care ethics (Noddings 1984; Tronto 1993); Batson 1981; Model Spec, be warm", "EPITOME", "EmpatheticDialogues: apathy judge (lower is better)"),
         ("C6|all", "respects the person's own decision vs paternalistic", "constitution, autonomy; Model Spec, not condescending; Mill 1859; Dworkin 1972", "DailyDilemmas", "DailyDilemmas: paternalism judge (lower is better)"),
@@ -88,16 +90,18 @@ DEFS = {
 REVIEW = {"C24": "https://claude.ai/artifact/TebePUZG3YrZBjKGtD4udQ", "C25": "https://claude.ai/artifact/8pHeXsvD7ppXnWMrRG6R7b",
           "C26": "https://claude.ai/artifact/8VM3sxhdniSUbj75p4ZPbW", "C19": "https://claude.ai/artifact/DtMkF2eEENHgZBqn74DRRA",
           "C27": "https://claude.ai/artifact/J57PqFuQQgwGpMiV8cJzNx", "B1": "https://claude.ai/artifact/AhBgN1324CXPKamzdWKw4Z",
-          "C20": "https://claude.ai/artifact/K9YRV4qoYeUaZavqHWtz2C"}
+          "C20": "https://claude.ai/artifact/K9YRV4qoYeUaZavqHWtz2C", "C28": "https://claude.ai/artifact/5ntKNsZJJPH5hKF485UAih"}
 # behavior: does a higher instrument score mean the good side?
 GOOD_HIGH = {"A1": True, "A7": True, "B1": True, "C15": True, "C19": True, "C20": False, "C24": True, "C25": True,
-             "C26": False, "C27": True, "C5": False, "C6": False}
+             "C26": False, "C27": True, "C28": True, "C5": False, "C6": False}
 # the behavior groups a unit (by key) or concept is read on, where the instrument mixes several (TRAIT); C15 is
 # OR-Bench toxic (refusing expected) and hard (complying expected), the two measures D-054 set
 BEH_GROUP = {"C19": ["agreeableness"], "C20": ["psychopathy"], "C24": ["type:ifeval", "type:judge"],
-             "C15|refuse[harmful]": ["expected:refuse", "expected:comply"], "C15|refuse[harmless]": ["expected:comply"]}
+             "C15|refuse[harmful]": ["expected:refuse", "expected:comply"], "C15|refuse[harmless]": ["expected:comply"],
+             "C28|over_asks": ["expected:answers", "expected:asks"], "C28|under_asks": ["expected:asks"]}
 GROUP_NAME = {"type:ifeval": "IFEval", "type:judge": "overstepping judge", "expected:refuse": "toxic requests",
-              "expected:comply": "hard harmless requests"}
+              "expected:comply": "hard harmless requests",
+              "expected:answers": "clear queries", "expected:asks": "ambiguous queries"}
 
 STATUS = ("Exploratory. One model, synthetic scenarios written and checked by LLMs, one build per definition. The "
           "numbers are for spotting signals worth a test, not claims. Kept apart from the honesty investigation.")
