@@ -619,9 +619,13 @@ def draw(table, rep, cau, beh):
                 ax.scatter(xs[r["frame"]] + dx + jit, v, marker=MARK[r["frame"]], s=22,
                            facecolor=fc, edgecolor=COLOR[r["def"]], linewidth=0.7, zorder=3)
     cv = [r[f"rep_dm_L{L4}"] for r in ctl if r[f"rep_dm_L{L4}"] is not None]
+    for r in ctl:   # the controls as grey points at their frame: the floor, cell by cell
+        for meth, dx, fc in (("dm", -0.12, COLOR[r["def"]]), ("probe", 0.12, "none")):
+            v = r[f"rep_{meth}_L{L4}"]
+            if v is not None:
+                ax.scatter(xs[r["frame"]] + dx + 0.28, v, marker=MARK[r["frame"]], s=16, facecolor=fc, edgecolor=COLOR[r["def"]], linewidth=0.7, zorder=2)
     if cv:
-        ax.axhspan(min(cv), max(cv), color="#dcdbd5", alpha=0.6, zorder=1)
-        ax.axhline(float(np.mean(cv)), color="#898781", lw=0.8, zorder=2)
+        ax.axhline(float(np.mean(cv)), color="#898781", lw=0.8, ls=":", zorder=1)
     ax.axhline(0, color="#c3c2b7", lw=0.5, zorder=1); ax.axhline(1, color="#c3c2b7", lw=0.5, ls="--", zorder=1)
     ax.set_xticks(range(4)); ax.set_xticklabels([FRAME_NAME[f] for f in "abcd"])
     ax.set_ylabel(f"Leave-one-cell-out score, layer {L4}"); ax.set_xlabel("Frame of the held-out cell")
@@ -664,7 +668,7 @@ def draw(table, rep, cau, beh):
     ax.grid(color=GRID, lw=0.4); ax.set_axisbelow(True)
     for ax, letter in zip(axes.ravel(), "abcd"):
         ax.text(-0.08, 1.04, letter, transform=ax.transAxes, fontsize=8, fontweight="bold", va="bottom", ha="right")
-    h = [Line2D([], [], marker="o", ls="none", color=c, label=n, ms=4.5) for n, c in COLOR.items() if "control" not in n] + \
+    h = [Line2D([], [], marker="o", ls="none", color=c, label=n, ms=4.5) for n, c in COLOR.items()] + \
         [Line2D([], [], marker=m, ls="none", color="#52514e", mfc="white", label=FRAME_NAME[f], ms=4.5) for f, m in MARK.items()] + \
         [Line2D([], [], marker="o", ls="none", color="#52514e", label="diff of means", ms=4.5),
          Line2D([], [], marker="o", ls="none", mfc="white", mec="#52514e", label="probe", ms=4.5)]
