@@ -270,6 +270,7 @@ def causal_from(R):
     src, tgt, layers = R["sources"], R["targets"], R["layers"]
     E = np.array(R["kinds"]["dense+"]["E"], float)      # [S, 2, T]
     Z = np.array(R["kinds"]["dense+"]["Z"], float)
+    Er = np.array(R["kinds"]["dense+"]["E_raw"], float) if "E_raw" in R["kinds"]["dense+"] else None   # raw shift, no skip-path term
     six, tix = {u: i for i, u in enumerate(src)}, {u: i for i, u in enumerate(tgt)}
     hon = [c for c in HON if c in tix]
     out = {"sources_present": [c for c in HON if c in six], "n_sources": len([c for c in HON if c in six]), "layers": layers, "by_layer": {}}
@@ -303,6 +304,12 @@ def causal_from(R):
             blocks[f"{sa}|diag"] = dg
         diag = np.array([M[i, i] for i, a in enumerate(hon) if a in six])
         offs = np.array([M[i, j] for i, a in enumerate(hon) if a in six for j in range(len(hon)) if j != i])
+        raw = None
+        if Er is not None:
+            rd = np.array([Er[six[a], li, tix[a]] for a in hon if a in six])
+            ro = np.array([Er[six[a], li, tix[b]] for a in hon if a in six for b in hon if b != a])
+            raw = {"mean_diag": float(np.nanmean(rd)), "mean_off": float(np.nanmean(ro)),
+                   "ratio": float(np.nanmean(ro) / np.nanmean(rd)) if np.nanmean(rd) > 0 else None}
         rows_src = [s for s, u in enumerate(src)]
         offc = np.array([[u.split("|")[0] != src[s].split("|")[0] for u in tgt] for s in rows_src])
         rand_spill = float(np.nanmean(np.abs(Z[:, li][offc]) > 3))
@@ -318,7 +325,8 @@ def causal_from(R):
                         "median_cell_ratio": float(np.nanmedian([v["ratio"] for v in per.values() if v["ratio"] is not None])) if per else None,
                         "share_diag_z_gt3": float(np.mean([v["z_diag"] > 3 for v in per.values()])) if per else None,
                         "mean_off_same_def": float(np.nanmean([v["off_same_def"] for v in per.values() if v["off_same_def"] is not None])),
-                        "mean_off_other_def": float(np.nanmean([v["off_other_def"] for v in per.values()]))},
+                        "mean_off_other_def": float(np.nanmean([v["off_other_def"] for v in per.values()])),
+                        "raw_shift": raw},
             "spillover": {"off_concept_share_absz_gt3": rand_spill,
                           "K2_share_absz_gt3": float(np.nanmean(np.abs(Z[k2[0], li][offc[k2[0]]]) > 3)) if k2 else None},
             "controls": ctrl, "matrix": {"ids": hon, "E": np.round(M, 4).tolist(), "Z": np.round(Mz, 2).tolist()}}

@@ -356,26 +356,29 @@ def cmd_matrix(nshards):
           f"layer {L_OUT[1]} {int(np.isnan(gap[1]).sum())}", flush=True)
 
     def effect(k, vec):
+        """(effect minus the skip-path prediction, raw shift) in units of the target's baseline gap."""
         d = P[k] - base
-        out = np.zeros((2, len(U)))
+        out, raw = np.zeros((2, len(U))), np.zeros((2, len(U)))
         for li in range(2):
             skip = dose * (tg[li] @ vec)
             for t, u in enumerate(U):
-                out[li, t] = (d[rows_of[u], li, t].mean() - skip[t]) / gap[li, t]
-        return out
+                raw[li, t] = d[rows_of[u], li, t].mean() / gap[li, t]
+                out[li, t] = raw[li, t] - skip[t] / gap[li, t]
+        return out, raw
 
-    eff = {}
+    eff, eff_raw = {}, {}
     for k, (name, kind, idx, sg) in enumerate(conds):
         if kind != "none":
-            eff[k] = effect(k, A[kind][idx] * sg)
+            eff[k], eff_raw[k] = effect(k, A[kind][idx] * sg)
     rand = np.stack([eff[k] for k, cd in enumerate(conds) if cd[1] == "rand"])     # [16, 2, U]
     mu, sd = np.nanmean(rand, 0), np.nanstd(rand, 0) + 1e-9
     res = {"dose_c": c, "dose_norm": dose, "sources": S["sources"], "targets": U, "layers": list(L_OUT),
            "target_gap": gap.round(4).tolist(), "random_sd": sd.round(4).tolist(), "kinds": {}}
     for kind, sg in [("dense", 1), ("dense", -1)] + ([("sae", 1)] if cfg.HAS_SAE else []):
         E = np.stack([eff[k] for k, cd in enumerate(conds) if cd[1] == kind and cd[3] == sg])  # [S, 2, U]
+        Er = np.stack([eff_raw[k] for k, cd in enumerate(conds) if cd[1] == kind and cd[3] == sg])
         Z = (E - mu) / sd
-        res["kinds"][f"{kind}{'+' if sg > 0 else '-'}"] = {"E": E.round(4).tolist(), "Z": Z.round(2).tolist()}
+        res["kinds"][f"{kind}{'+' if sg > 0 else '-'}"] = {"E": E.round(4).tolist(), "Z": Z.round(2).tolist(), "E_raw": Er.round(4).tolist()}
     res_dir.mkdir(parents=True, exist_ok=True)
     (res_dir / "causal_matrix.json").write_text(json.dumps(res))
     Ed = np.array(res["kinds"]["dense+"]["E"]); Zd = np.array(res["kinds"]["dense+"]["Z"])
