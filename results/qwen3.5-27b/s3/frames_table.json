@@ -1,0 +1,2694 @@
+[
+ {
+  "concept": "A9",
+  "group": "beliefs",
+  "sub": "all",
+  "layer": 17,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 1.0,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 1.0
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 1.0,
+   "c->d": 0.996141975308642,
+   "d->c": 1.0,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 1.0,
+  "transfer_mean": 0.998070987654321,
+  "transfer_mean_preverdict": 0.998070987654321
+ },
+ {
+  "concept": "A9",
+  "group": "beliefs",
+  "sub": "all",
+  "layer": 32,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 1.0,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 1.0
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 1.0,
+   "c->d": 0.9837962962962963,
+   "d->c": 0.9976851851851852,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 1.0,
+  "transfer_mean": 0.9907407407407407,
+  "transfer_mean_preverdict": 0.9907407407407407
+ },
+ {
+  "concept": "A9",
+  "group": "beliefs",
+  "sub": "all",
+  "layer": 42,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 1.0,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 1.0
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 1.0,
+   "c->d": 0.9822530864197531,
+   "d->c": 0.9969135802469136,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 1.0,
+  "transfer_mean": 0.9895833333333333,
+  "transfer_mean_preverdict": 0.9895833333333333
+ },
+ {
+  "concept": "A9",
+  "group": "beliefs",
+  "sub": "all",
+  "layer": 54,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9969135802469136,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 1.0
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9969135802469136,
+   "c->d": 0.9907407407407407,
+   "d->c": 0.9953703703703703,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9984567901234568,
+  "transfer_mean": 0.9930555555555556,
+  "transfer_mean_preverdict": 0.9930555555555556
+ },
+ {
+  "concept": "C1",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 17,
+  "frames": [
+   "a",
+   "b",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.8562962962962963,
+   "b": 0.8671604938271605,
+   "c": 0.8518518518518519,
+   "d": 1.0
+  },
+  "heldout": {
+   "a": null,
+   "b": null,
+   "c": 0.6137128864401592,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.8562962962962963,
+   "a->b": 0.6197530864197531,
+   "a->c": 0.4004938271604938,
+   "a->d": 0.934320987654321,
+   "b->a": 0.6824691358024692,
+   "b->b": 0.8671604938271605,
+   "b->c": 0.2938271604938272,
+   "b->d": 0.7911111111111111,
+   "c->a": 0.31950617283950616,
+   "c->b": 0.305679012345679,
+   "c->c": 0.8518518518518519,
+   "c->d": 0.8617283950617284,
+   "d->a": 0.7224691358024692,
+   "d->b": 0.48790123456790124,
+   "d->c": 0.7461728395061729,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {
+   "a->b": 0.7758024691358024,
+   "a->c": 0.577283950617284,
+   "a->d": 0.5901234567901235,
+   "b->a": 0.72,
+   "b->c": 0.5644444444444444,
+   "b->d": 0.465679012345679
+  },
+  "within_mean": 0.8938271604938273,
+  "transfer_mean": 0.597119341563786,
+  "transfer_mean_preverdict": 0.5947325102880657
+ },
+ {
+  "concept": "C1",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 32,
+  "frames": [
+   "a",
+   "b",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9007407407407407,
+   "b": 0.8972839506172839,
+   "c": 0.8977777777777778,
+   "d": 1.0
+  },
+  "heldout": {
+   "a": null,
+   "b": null,
+   "c": 0.8834812774206714,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9007407407407407,
+   "a->b": 0.797037037037037,
+   "a->c": 0.5698765432098766,
+   "a->d": 0.971358024691358,
+   "b->a": 0.8958024691358024,
+   "b->b": 0.8972839506172839,
+   "b->c": 0.3071604938271605,
+   "b->d": 0.9733333333333334,
+   "c->a": 0.39753086419753086,
+   "c->b": 0.25382716049382714,
+   "c->c": 0.8977777777777778,
+   "c->d": 0.8824691358024691,
+   "d->a": 0.7540740740740741,
+   "d->b": 0.6479012345679013,
+   "d->c": 0.8479012345679012,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {
+   "a->b": 0.8785185185185185,
+   "a->c": 0.4167901234567901,
+   "a->d": 0.8449382716049383,
+   "b->a": 0.914074074074074,
+   "b->c": 0.31851851851851853,
+   "b->d": 0.6814814814814815
+  },
+  "within_mean": 0.9239506172839507,
+  "transfer_mean": 0.691522633744856,
+  "transfer_mean_preverdict": 0.6531687242798353
+ },
+ {
+  "concept": "C1",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 42,
+  "frames": [
+   "a",
+   "b",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.8977777777777778,
+   "b": 0.9046913580246914,
+   "c": 0.8523456790123457,
+   "d": 0.9930864197530864
+  },
+  "heldout": {
+   "a": null,
+   "b": null,
+   "c": 0.7417610447913479,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.8977777777777778,
+   "a->b": 0.8345679012345679,
+   "a->c": 0.5841975308641976,
+   "a->d": 0.948641975308642,
+   "b->a": 0.8888888888888888,
+   "b->b": 0.9046913580246914,
+   "b->c": 0.3802469135802469,
+   "b->d": 0.8898765432098765,
+   "c->a": 0.4222222222222222,
+   "c->b": 0.2637037037037037,
+   "c->c": 0.8523456790123457,
+   "c->d": 0.88,
+   "d->a": 0.7362962962962963,
+   "d->b": 0.5891358024691358,
+   "d->c": 0.7619753086419753,
+   "d->d": 0.9930864197530864
+  },
+  "transfer_boundary": {
+   "a->b": 0.8918518518518519,
+   "a->c": 0.3358024691358025,
+   "a->d": 0.662716049382716,
+   "b->a": 0.8775308641975309,
+   "b->c": 0.2780246913580247,
+   "b->d": 0.3402469135802469
+  },
+  "within_mean": 0.9119753086419753,
+  "transfer_mean": 0.6816460905349794,
+  "transfer_mean_preverdict": 0.5866255144032921
+ },
+ {
+  "concept": "C1",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 54,
+  "frames": [
+   "a",
+   "b",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.8859259259259259,
+   "b": 0.8908641975308642,
+   "c": 0.7985185185185185,
+   "d": 0.9891358024691358
+  },
+  "heldout": {
+   "a": null,
+   "b": null,
+   "c": 0.6348331802877257,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.8859259259259259,
+   "a->b": 0.7891358024691358,
+   "a->c": 0.522962962962963,
+   "a->d": 0.9160493827160494,
+   "b->a": 0.8449382716049383,
+   "b->b": 0.8908641975308642,
+   "b->c": 0.4311111111111111,
+   "b->d": 0.7367901234567901,
+   "c->a": 0.37679012345679014,
+   "c->b": 0.2607407407407407,
+   "c->c": 0.7985185185185185,
+   "c->d": 0.8785185185185185,
+   "d->a": 0.6977777777777778,
+   "d->b": 0.508641975308642,
+   "d->c": 0.6879012345679012,
+   "d->d": 0.9891358024691358
+  },
+  "transfer_boundary": {
+   "a->b": 0.8775308641975309,
+   "a->c": 0.38074074074074077,
+   "a->d": 0.7817283950617284,
+   "b->a": 0.8128395061728395,
+   "b->c": 0.39654320987654323,
+   "b->d": 0.3190123456790123
+  },
+  "within_mean": 0.8911111111111111,
+  "transfer_mean": 0.6376131687242798,
+  "transfer_mean_preverdict": 0.5815637860082304
+ },
+ {
+  "concept": "C11",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 17,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.955625,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": 0.9681,
+   "d": null
+  },
+  "heldout_far": {
+   "c": 0.8672
+  },
+  "transfer": {
+   "c->c": 0.955625,
+   "c->d": 0.975,
+   "d->c": 0.76125,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9778125,
+  "transfer_mean": 0.868125,
+  "transfer_mean_preverdict": 0.868125
+ },
+ {
+  "concept": "C11",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 32,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.986875,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": 0.9891,
+   "d": null
+  },
+  "heldout_far": {
+   "c": 0.9996
+  },
+  "transfer": {
+   "c->c": 0.986875,
+   "c->d": 0.9975,
+   "d->c": 0.745,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9934375,
+  "transfer_mean": 0.8712500000000001,
+  "transfer_mean_preverdict": 0.8712500000000001
+ },
+ {
+  "concept": "C11",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 42,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.975,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": 0.9896,
+   "d": null
+  },
+  "heldout_far": {
+   "c": 0.9392
+  },
+  "transfer": {
+   "c->c": 0.975,
+   "c->d": 0.983125,
+   "d->c": 0.76625,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9875,
+  "transfer_mean": 0.8746875000000001,
+  "transfer_mean_preverdict": 0.8746875000000001
+ },
+ {
+  "concept": "C11",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 54,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.988125,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": 0.9954,
+   "d": null
+  },
+  "heldout_far": {
+   "c": 0.9654
+  },
+  "transfer": {
+   "c->c": 0.988125,
+   "c->d": 0.995,
+   "d->c": 0.7375,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9940625000000001,
+  "transfer_mean": 0.86625,
+  "transfer_mean_preverdict": 0.86625
+ },
+ {
+  "concept": "C12",
+  "group": "dispositions",
+  "sub": "integrity",
+  "layer": 17,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 1.0,
+   "c": 0.9320987654320988,
+   "d": 1.0
+  },
+  "heldout": {
+   "a": null,
+   "c": 0.5408,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 1.0,
+   "a->c": 0.6026234567901234,
+   "a->d": 0.9351851851851852,
+   "c->a": 0.5972222222222222,
+   "c->c": 0.9320987654320988,
+   "c->d": 0.845679012345679,
+   "d->a": 0.9521604938271605,
+   "d->c": 0.8564814814814815,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {
+   "a->c": 0.47685185185185186,
+   "a->d": 0.7986111111111112
+  },
+  "within_mean": 0.977366255144033,
+  "transfer_mean": 0.7982253086419754,
+  "transfer_mean_preverdict": 0.7545010288065844
+ },
+ {
+  "concept": "C12",
+  "group": "dispositions",
+  "sub": "integrity",
+  "layer": 32,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 1.0,
+   "c": 0.9922839506172839,
+   "d": 1.0
+  },
+  "heldout": {
+   "a": null,
+   "c": 0.7,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 1.0,
+   "a->c": 0.7114197530864198,
+   "a->d": 1.0,
+   "c->a": 0.8179012345679012,
+   "c->c": 0.9922839506172839,
+   "c->d": 0.9853395061728395,
+   "d->a": 0.9976851851851852,
+   "d->c": 0.9845679012345679,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {
+   "a->c": 0.5401234567901234,
+   "a->d": 0.7631172839506173
+  },
+  "within_mean": 0.9974279835390947,
+  "transfer_mean": 0.9161522633744856,
+  "transfer_mean_preverdict": 0.8481224279835392
+ },
+ {
+  "concept": "C12",
+  "group": "dispositions",
+  "sub": "integrity",
+  "layer": 42,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 1.0,
+   "c": 0.9953703703703703,
+   "d": 0.9984567901234568
+  },
+  "heldout": {
+   "a": null,
+   "c": 0.7016,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 1.0,
+   "a->c": 0.7137345679012346,
+   "a->d": 0.9992283950617284,
+   "c->a": 0.816358024691358,
+   "c->c": 0.9953703703703703,
+   "c->d": 0.996141975308642,
+   "d->a": 0.9953703703703703,
+   "d->c": 0.9760802469135802,
+   "d->d": 0.9984567901234568
+  },
+  "transfer_boundary": {
+   "a->c": 0.5524691358024691,
+   "a->d": 0.6195987654320988
+  },
+  "within_mean": 0.9979423868312757,
+  "transfer_mean": 0.9161522633744856,
+  "transfer_mean_preverdict": 0.8260030864197531
+ },
+ {
+  "concept": "C12",
+  "group": "dispositions",
+  "sub": "integrity",
+  "layer": 54,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 1.0,
+   "c": 0.9884259259259259,
+   "d": 1.0
+  },
+  "heldout": {
+   "a": null,
+   "c": 0.716,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 1.0,
+   "a->c": 0.5740740740740741,
+   "a->d": 0.9652777777777778,
+   "c->a": 0.6558641975308642,
+   "c->c": 0.9884259259259259,
+   "c->d": 0.9876543209876543,
+   "d->a": 0.9876543209876543,
+   "d->c": 0.9799382716049383,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {
+   "a->c": 0.4112654320987654,
+   "a->d": 0.6458333333333334
+  },
+  "within_mean": 0.996141975308642,
+  "transfer_mean": 0.8584104938271605,
+  "transfer_mean_preverdict": 0.7780349794238685
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "agreeableness",
+  "layer": 17,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9845679012345679,
+   "d": 0.9907407407407407
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.703125
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9845679012345679,
+   "c->d": 0.9876543209876543,
+   "d->c": 0.9691358024691358,
+   "d->d": 0.9907407407407407
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9876543209876543,
+  "transfer_mean": 0.978395061728395,
+  "transfer_mean_preverdict": 0.978395061728395
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "agreeableness",
+  "layer": 32,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9722222222222222,
+   "d": 0.9907407407407407
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.6875
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9722222222222222,
+   "c->d": 0.9660493827160493,
+   "d->c": 0.9814814814814815,
+   "d->d": 0.9907407407407407
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9814814814814814,
+  "transfer_mean": 0.9737654320987654,
+  "transfer_mean_preverdict": 0.9737654320987654
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "agreeableness",
+  "layer": 42,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9660493827160493,
+   "d": 0.9783950617283951
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.5625
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9660493827160493,
+   "c->d": 0.9598765432098766,
+   "d->c": 0.9722222222222222,
+   "d->d": 0.9783950617283951
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9722222222222222,
+  "transfer_mean": 0.9660493827160495,
+  "transfer_mean_preverdict": 0.9660493827160495
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "agreeableness",
+  "layer": 54,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9475308641975309,
+   "d": 0.9691358024691358
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.46875
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9475308641975309,
+   "c->d": 0.9290123456790124,
+   "d->c": 0.9506172839506173,
+   "d->d": 0.9691358024691358
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9583333333333333,
+  "transfer_mean": 0.9398148148148149,
+  "transfer_mean_preverdict": 0.9398148148148149
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "altruism_interstitial",
+  "layer": 17,
+  "frames": [],
+  "within": {},
+  "heldout": {},
+  "heldout_far": {},
+  "transfer": {},
+  "transfer_boundary": {},
+  "within_mean": null,
+  "transfer_mean": null,
+  "transfer_mean_preverdict": null
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "altruism_interstitial",
+  "layer": 32,
+  "frames": [],
+  "within": {},
+  "heldout": {},
+  "heldout_far": {},
+  "transfer": {},
+  "transfer_boundary": {},
+  "within_mean": null,
+  "transfer_mean": null,
+  "transfer_mean_preverdict": null
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "altruism_interstitial",
+  "layer": 42,
+  "frames": [],
+  "within": {},
+  "heldout": {},
+  "heldout_far": {},
+  "transfer": {},
+  "transfer_boundary": {},
+  "within_mean": null,
+  "transfer_mean": null,
+  "transfer_mean_preverdict": null
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "altruism_interstitial",
+  "layer": 54,
+  "frames": [],
+  "within": {},
+  "heldout": {},
+  "heldout_far": {},
+  "transfer": {},
+  "transfer_boundary": {},
+  "within_mean": null,
+  "transfer_mean": null,
+  "transfer_mean_preverdict": null
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "conscientiousness",
+  "layer": 17,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.98,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.9375
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.98,
+   "c->d": 1.0,
+   "d->c": 1.0,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.99,
+  "transfer_mean": 1.0,
+  "transfer_mean_preverdict": 1.0
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "conscientiousness",
+  "layer": 32,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.975,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 1.0
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.975,
+   "c->d": 1.0,
+   "d->c": 0.9825,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9875,
+  "transfer_mean": 0.99125,
+  "transfer_mean_preverdict": 0.99125
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "conscientiousness",
+  "layer": 42,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9725,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.953125
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9725,
+   "c->d": 1.0,
+   "d->c": 0.9775,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9862500000000001,
+  "transfer_mean": 0.98875,
+  "transfer_mean_preverdict": 0.98875
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "conscientiousness",
+  "layer": 54,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9525,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.796875
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9525,
+   "c->d": 0.9825,
+   "d->c": 0.965,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9762500000000001,
+  "transfer_mean": 0.97375,
+  "transfer_mean_preverdict": 0.97375
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "emotionality",
+  "layer": 17,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 1.0,
+   "d": 0.9846938775510204
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.8253968253968254
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 1.0,
+   "c->d": 0.9744897959183674,
+   "d->c": 1.0,
+   "d->d": 0.9846938775510204
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9923469387755102,
+  "transfer_mean": 0.9872448979591837,
+  "transfer_mean_preverdict": 0.9872448979591837
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "emotionality",
+  "layer": 32,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 1.0,
+   "d": 0.9744897959183674
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.873015873015873
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 1.0,
+   "c->d": 0.9591836734693877,
+   "d->c": 1.0,
+   "d->d": 0.9744897959183674
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9872448979591837,
+  "transfer_mean": 0.9795918367346939,
+  "transfer_mean_preverdict": 0.9795918367346939
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "emotionality",
+  "layer": 42,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 1.0,
+   "d": 0.9795918367346939
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.7777777777777778
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 1.0,
+   "c->d": 0.9744897959183674,
+   "d->c": 1.0,
+   "d->d": 0.9795918367346939
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9897959183673469,
+  "transfer_mean": 0.9872448979591837,
+  "transfer_mean_preverdict": 0.9872448979591837
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "emotionality",
+  "layer": 54,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 1.0,
+   "d": 0.9693877551020408
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.746031746031746
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 1.0,
+   "c->d": 0.9642857142857143,
+   "d->c": 0.9897959183673469,
+   "d->d": 0.9693877551020408
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9846938775510203,
+  "transfer_mean": 0.9770408163265306,
+  "transfer_mean_preverdict": 0.9770408163265306
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "extraversion",
+  "layer": 17,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9848771266540642,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.7936507936507936
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9848771266540642,
+   "c->d": 1.0,
+   "d->c": 0.9546313799621928,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9924385633270321,
+  "transfer_mean": 0.9773156899810964,
+  "transfer_mean_preverdict": 0.9773156899810964
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "extraversion",
+  "layer": 32,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9829867674858223,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.7936507936507936
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9829867674858223,
+   "c->d": 0.994328922495274,
+   "d->c": 0.9565217391304348,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9914933837429112,
+  "transfer_mean": 0.9754253308128544,
+  "transfer_mean_preverdict": 0.9754253308128544
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "extraversion",
+  "layer": 42,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9338374291115312,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.746031746031746
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9338374291115312,
+   "c->d": 0.9905482041587902,
+   "d->c": 0.9243856332703214,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9669187145557656,
+  "transfer_mean": 0.9574669187145558,
+  "transfer_mean_preverdict": 0.9574669187145558
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "extraversion",
+  "layer": 54,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9243856332703214,
+   "d": 0.9886578449905482
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.6666666666666666
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9243856332703214,
+   "c->d": 0.9905482041587902,
+   "d->c": 0.9206049149338374,
+   "d->d": 0.9886578449905482
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9565217391304348,
+  "transfer_mean": 0.9555765595463138,
+  "transfer_mean_preverdict": 0.9555765595463138
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "honesty_humility",
+  "layer": 17,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 1.0,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 1.0
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 1.0,
+   "c->d": 0.9660493827160493,
+   "d->c": 1.0,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 1.0,
+  "transfer_mean": 0.9830246913580247,
+  "transfer_mean_preverdict": 0.9830246913580247
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "honesty_humility",
+  "layer": 32,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 1.0,
+   "d": 0.9938271604938271
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.9833333333333333
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 1.0,
+   "c->d": 0.9969135802469136,
+   "d->c": 1.0,
+   "d->d": 0.9938271604938271
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9969135802469136,
+  "transfer_mean": 0.9984567901234568,
+  "transfer_mean_preverdict": 0.9984567901234568
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "honesty_humility",
+  "layer": 42,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 1.0,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.8833333333333333
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 1.0,
+   "c->d": 0.9969135802469136,
+   "d->c": 1.0,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 1.0,
+  "transfer_mean": 0.9984567901234568,
+  "transfer_mean_preverdict": 0.9984567901234568
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "honesty_humility",
+  "layer": 54,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 1.0,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.6833333333333333
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 1.0,
+   "c->d": 0.9876543209876543,
+   "d->c": 1.0,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 1.0,
+  "transfer_mean": 0.9938271604938271,
+  "transfer_mean_preverdict": 0.9938271604938271
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "openness",
+  "layer": 17,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9614512471655329,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.90625
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9614512471655329,
+   "c->d": 1.0,
+   "d->c": 0.9455782312925171,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9807256235827664,
+  "transfer_mean": 0.9727891156462585,
+  "transfer_mean_preverdict": 0.9727891156462585
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "openness",
+  "layer": 32,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9455782312925171,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.96875
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9455782312925171,
+   "c->d": 1.0,
+   "d->c": 0.9365079365079365,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9727891156462585,
+  "transfer_mean": 0.9682539682539683,
+  "transfer_mean_preverdict": 0.9682539682539683
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "openness",
+  "layer": 42,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9387755102040817,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 1.0
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9387755102040817,
+   "c->d": 1.0,
+   "d->c": 0.9410430839002267,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9693877551020409,
+  "transfer_mean": 0.9705215419501134,
+  "transfer_mean_preverdict": 0.9705215419501134
+ },
+ {
+  "concept": "C19",
+  "group": "dispositions",
+  "sub": "openness",
+  "layer": 54,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.9206349206349206,
+   "d": 1.0
+  },
+  "heldout": {
+   "c": null,
+   "d": 0.96875
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9206349206349206,
+   "c->d": 1.0,
+   "d->c": 0.9342403628117913,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9603174603174602,
+  "transfer_mean": 0.9671201814058956,
+  "transfer_mean_preverdict": 0.9671201814058956
+ },
+ {
+  "concept": "C2",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 17,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.7757287328970851,
+   "d": 0.9994051160023796
+  },
+  "heldout": {
+   "c": 0.4201,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.7757287328970851,
+   "c->d": 0.36109458655562165,
+   "d->c": 0.4479476502082094,
+   "d->d": 0.9994051160023796
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.8875669244497324,
+  "transfer_mean": 0.4045211183819155,
+  "transfer_mean_preverdict": 0.4045211183819155
+ },
+ {
+  "concept": "C2",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 32,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.8471148126115408,
+   "d": 0.998810232004759
+  },
+  "heldout": {
+   "c": 0.6112,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.8471148126115408,
+   "c->d": 0.8822129684711482,
+   "d->c": 0.7204045211183819,
+   "d->d": 0.998810232004759
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9229625223081499,
+  "transfer_mean": 0.8013087447947651,
+  "transfer_mean_preverdict": 0.8013087447947651
+ },
+ {
+  "concept": "C2",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 42,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.8429506246281975,
+   "d": 0.9994051160023796
+  },
+  "heldout": {
+   "c": 0.635,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.8429506246281975,
+   "c->d": 0.8893515764425937,
+   "d->c": 0.6728138013087448,
+   "d->d": 0.9994051160023796
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9211778703152885,
+  "transfer_mean": 0.7810826888756692,
+  "transfer_mean_preverdict": 0.7810826888756692
+ },
+ {
+  "concept": "C2",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 54,
+  "frames": [
+   "c",
+   "d"
+  ],
+  "within": {
+   "c": 0.8251041046995836,
+   "d": 0.9946460440214159
+  },
+  "heldout": {
+   "c": 0.6286,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.8251041046995836,
+   "c->d": 0.8804283164782868,
+   "d->c": 0.637120761451517,
+   "d->d": 0.9946460440214159
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9098750743604997,
+  "transfer_mean": 0.7587745389649019,
+  "transfer_mean_preverdict": 0.7587745389649019
+ },
+ {
+  "concept": "C3",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 17,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9007232084155161,
+   "c": 0.9829059829059829,
+   "d": 1.0
+  },
+  "heldout": {
+   "a": null,
+   "c": null,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9007232084155161,
+   "a->c": 0.14792899408284024,
+   "a->d": 0.6324786324786325,
+   "c->a": 0.21564760026298488,
+   "c->c": 0.9829059829059829,
+   "c->d": 0.8809993425378041,
+   "d->a": 0.5404339250493096,
+   "d->c": 0.8573307034845496,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {
+   "a->c": 0.7258382642998028,
+   "a->d": 0.5193951347797502
+  },
+  "within_mean": 0.9612097304404997,
+  "transfer_mean": 0.5458031996493534,
+  "transfer_mean_preverdict": 0.6232741617357003
+ },
+ {
+  "concept": "C3",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 32,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9224194608809994,
+   "c": 0.9829059829059829,
+   "d": 1.0
+  },
+  "heldout": {
+   "a": null,
+   "c": null,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9224194608809994,
+   "a->c": 0.13675213675213677,
+   "a->d": 0.7527942143326759,
+   "c->a": 0.21367521367521367,
+   "c->c": 0.9829059829059829,
+   "c->d": 0.9526627218934911,
+   "d->a": 0.6673241288625904,
+   "d->c": 0.9105851413543721,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {
+   "a->c": 0.4181459566074951,
+   "a->d": 0.6495726495726496
+  },
+  "within_mean": 0.9684418145956607,
+  "transfer_mean": 0.6056322594784134,
+  "transfer_mean_preverdict": 0.6353276353276353
+ },
+ {
+  "concept": "C3",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 42,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9211045364891519,
+   "c": 0.9428007889546351,
+   "d": 0.9993425378040762
+  },
+  "heldout": {
+   "a": null,
+   "c": null,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9211045364891519,
+   "a->c": 0.14069690992767916,
+   "a->d": 0.6344510190664037,
+   "c->a": 0.18408941485864563,
+   "c->c": 0.9428007889546351,
+   "c->d": 0.9493754109138725,
+   "d->a": 0.621301775147929,
+   "d->c": 0.8593030900723209,
+   "d->d": 0.9993425378040762
+  },
+  "transfer_boundary": {
+   "a->c": 0.18080210387902695,
+   "a->d": 0.2603550295857988
+  },
+  "within_mean": 0.9544159544159544,
+  "transfer_mean": 0.5648696033311418,
+  "transfer_mean_preverdict": 0.5092044707429323
+ },
+ {
+  "concept": "C3",
+  "group": "dispositions",
+  "sub": "all",
+  "layer": 54,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9243918474687706,
+   "c": 0.9316239316239316,
+   "d": 0.9993425378040762
+  },
+  "heldout": {
+   "a": null,
+   "c": null,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9243918474687706,
+   "a->c": 0.20775805391190005,
+   "a->d": 0.6081525312294543,
+   "c->a": 0.17685733070348456,
+   "c->c": 0.9316239316239316,
+   "c->d": 0.9329388560157791,
+   "d->a": 0.6035502958579881,
+   "d->c": 0.8251150558842867,
+   "d->d": 0.9993425378040762
+  },
+  "transfer_boundary": {
+   "a->c": 0.20184089414858647,
+   "a->d": 0.26364234056541747
+  },
+  "within_mean": 0.9517861056322595,
+  "transfer_mean": 0.5590620206004822,
+  "transfer_mean_preverdict": 0.5006574621959238
+ },
+ {
+  "concept": "C4",
+  "group": "dispositions",
+  "sub": "boastful",
+  "layer": 17,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 1.0,
+   "c": 0.9923822714681441,
+   "d": 0.9875346260387812
+  },
+  "heldout": {
+   "a": null,
+   "c": 0.9898,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 1.0,
+   "a->c": 0.24722991689750692,
+   "a->d": 0.603185595567867,
+   "c->a": 0.1371191135734072,
+   "c->c": 0.9923822714681441,
+   "c->d": 0.981994459833795,
+   "d->a": 0.6800554016620498,
+   "d->c": 0.9944598337950139,
+   "d->d": 0.9875346260387812
+  },
+  "transfer_boundary": {
+   "a->c": 0.6897506925207756,
+   "a->d": 0.7368421052631579
+  },
+  "within_mean": 0.9933056325023083,
+  "transfer_mean": 0.6073407202216067,
+  "transfer_mean_preverdict": 0.7033702677746998
+ },
+ {
+  "concept": "C4",
+  "group": "dispositions",
+  "sub": "boastful",
+  "layer": 32,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 1.0,
+   "c": 0.997229916897507,
+   "d": 0.9854570637119113
+  },
+  "heldout": {
+   "a": null,
+   "c": 0.9616,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 1.0,
+   "a->c": 0.36149584487534625,
+   "a->d": 0.7451523545706371,
+   "c->a": 0.38365650969529086,
+   "c->c": 0.997229916897507,
+   "c->d": 0.9806094182825484,
+   "d->a": 0.9425207756232687,
+   "d->c": 0.9944598337950139,
+   "d->d": 0.9854570637119113
+  },
+  "transfer_boundary": {
+   "a->c": 0.43005540166204986,
+   "a->d": 0.5408587257617729
+  },
+  "within_mean": 0.9942289935364728,
+  "transfer_mean": 0.7346491228070176,
+  "transfer_mean_preverdict": 0.7120267774699908
+ },
+ {
+  "concept": "C4",
+  "group": "dispositions",
+  "sub": "boastful",
+  "layer": 42,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 1.0,
+   "c": 0.9916897506925207,
+   "d": 0.9660664819944599
+  },
+  "heldout": {
+   "a": null,
+   "c": 0.9849,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 1.0,
+   "a->c": 0.3975069252077562,
+   "a->d": 0.7548476454293629,
+   "c->a": 0.3573407202216066,
+   "c->c": 0.9916897506925207,
+   "c->d": 0.9404432132963989,
+   "d->a": 0.9826869806094183,
+   "d->c": 0.989612188365651,
+   "d->d": 0.9660664819944599
+  },
+  "transfer_boundary": {
+   "a->c": 0.5415512465373962,
+   "a->d": 0.6502770083102493
+  },
+  "within_mean": 0.9859187442289935,
+  "transfer_mean": 0.737072945521699,
+  "transfer_mean_preverdict": 0.74365189289012
+ },
+ {
+  "concept": "C4",
+  "group": "dispositions",
+  "sub": "boastful",
+  "layer": 54,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 1.0,
+   "c": 0.9771468144044322,
+   "d": 0.9397506925207756
+  },
+  "heldout": {
+   "a": null,
+   "c": 0.9485,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 1.0,
+   "a->c": 0.3206371191135734,
+   "a->d": 0.6620498614958449,
+   "c->a": 0.16689750692520774,
+   "c->c": 0.9771468144044322,
+   "c->d": 0.8704986149584487,
+   "d->a": 0.9556786703601108,
+   "d->c": 0.9806094182825484,
+   "d->d": 0.9397506925207756
+  },
+  "transfer_boundary": {
+   "a->c": 0.4930747922437673,
+   "a->d": 0.6329639889196675
+  },
+  "within_mean": 0.9722991689750692,
+  "transfer_mean": 0.6593951985226223,
+  "transfer_mean_preverdict": 0.6832871652816251
+ },
+ {
+  "concept": "C4",
+  "group": "dispositions",
+  "sub": "self-deprecating",
+  "layer": 17,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9439058171745153,
+   "c": 0.9729916897506925,
+   "d": 0.9771468144044322
+  },
+  "heldout": {
+   "a": null,
+   "c": null,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9439058171745153,
+   "a->c": 0.8573407202216067,
+   "a->d": 0.9452908587257618,
+   "c->a": 0.8718836565096952,
+   "c->c": 0.9729916897506925,
+   "c->d": 0.9598337950138505,
+   "d->a": 0.9522160664819944,
+   "d->c": 0.9300554016620498,
+   "d->d": 0.9771468144044322
+  },
+  "transfer_boundary": {
+   "a->c": 0.7257617728531855,
+   "a->d": 0.7950138504155124
+  },
+  "within_mean": 0.9646814404432132,
+  "transfer_mean": 0.9194367497691598,
+  "transfer_mean_preverdict": 0.872460757156048
+ },
+ {
+  "concept": "C4",
+  "group": "dispositions",
+  "sub": "self-deprecating",
+  "layer": 32,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9778393351800554,
+   "c": 0.9854570637119113,
+   "d": 0.9930747922437673
+  },
+  "heldout": {
+   "a": null,
+   "c": null,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9778393351800554,
+   "a->c": 0.8691135734072022,
+   "a->d": 0.9903047091412742,
+   "c->a": 0.9667590027700831,
+   "c->c": 0.9854570637119113,
+   "c->d": 0.981994459833795,
+   "d->a": 0.96398891966759,
+   "d->c": 0.9577562326869806,
+   "d->d": 0.9930747922437673
+  },
+  "transfer_boundary": {
+   "a->c": 0.731994459833795,
+   "a->d": 0.7714681440443213
+  },
+  "within_mean": 0.9854570637119112,
+  "transfer_mean": 0.9549861495844875,
+  "transfer_mean_preverdict": 0.8956602031394274
+ },
+ {
+  "concept": "C4",
+  "group": "dispositions",
+  "sub": "self-deprecating",
+  "layer": 42,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9667590027700831,
+   "c": 0.9882271468144044,
+   "d": 0.9875346260387812
+  },
+  "heldout": {
+   "a": null,
+   "c": null,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9667590027700831,
+   "a->c": 0.8483379501385041,
+   "a->d": 0.8836565096952909,
+   "c->a": 0.9736842105263158,
+   "c->c": 0.9882271468144044,
+   "c->d": 0.9660664819944599,
+   "d->a": 0.9806094182825484,
+   "d->c": 0.9709141274238227,
+   "d->d": 0.9875346260387812
+  },
+  "transfer_boundary": {
+   "a->c": 0.7777008310249307,
+   "a->d": 0.7825484764542936
+  },
+  "within_mean": 0.9808402585410896,
+  "transfer_mean": 0.9372114496768237,
+  "transfer_mean_preverdict": 0.9085872576177284
+ },
+ {
+  "concept": "C4",
+  "group": "dispositions",
+  "sub": "self-deprecating",
+  "layer": 54,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9709141274238227,
+   "c": 0.9813019390581718,
+   "d": 0.9944598337950139
+  },
+  "heldout": {
+   "a": null,
+   "c": null,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9709141274238227,
+   "a->c": 0.7700831024930748,
+   "a->d": 0.878808864265928,
+   "c->a": 0.9383656509695291,
+   "c->c": 0.9813019390581718,
+   "c->d": 0.9383656509695291,
+   "d->a": 0.9750692520775623,
+   "d->c": 0.9875346260387812,
+   "d->d": 0.9944598337950139
+  },
+  "transfer_boundary": {
+   "a->c": 0.8254847645429363,
+   "a->d": 0.8878116343490304
+  },
+  "within_mean": 0.9822253000923361,
+  "transfer_mean": 0.9147045244690672,
+  "transfer_mean_preverdict": 0.9254385964912281
+ },
+ {
+  "concept": "E1",
+  "group": "situations",
+  "sub": "all",
+  "layer": 17,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.7918367346938775,
+   "c": 0.6057142857142858,
+   "d": 0.9779591836734693
+  },
+  "heldout": {
+   "a": null,
+   "c": 0.506,
+   "d": 0.7455555555555555
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.7918367346938775,
+   "a->c": 0.5804081632653061,
+   "a->d": 0.9257142857142857,
+   "c->a": 0.48489795918367345,
+   "c->c": 0.6057142857142858,
+   "c->d": 0.6824489795918367,
+   "d->a": 0.7428571428571429,
+   "d->c": 0.5975510204081632,
+   "d->d": 0.9779591836734693
+  },
+  "transfer_boundary": {
+   "a->c": 0.6204081632653061,
+   "a->d": 0.8946938775510204,
+   "c->a": 0.7755102040816326,
+   "c->d": 0.9004081632653061
+  },
+  "within_mean": 0.7918367346938776,
+  "transfer_mean": 0.6689795918367346,
+  "transfer_mean_preverdict": 0.7552380952380952
+ },
+ {
+  "concept": "E1",
+  "group": "situations",
+  "sub": "all",
+  "layer": 32,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9477551020408164,
+   "c": 0.6473469387755102,
+   "d": 0.9640816326530612
+  },
+  "heldout": {
+   "a": null,
+   "c": 0.5072,
+   "d": 0.6222222222222222
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9477551020408164,
+   "a->c": 0.6195918367346939,
+   "a->d": 0.9820408163265306,
+   "c->a": 0.5926530612244898,
+   "c->c": 0.6473469387755102,
+   "c->d": 0.7828571428571428,
+   "d->a": 0.92,
+   "d->c": 0.6024489795918367,
+   "d->d": 0.9640816326530612
+  },
+  "transfer_boundary": {
+   "a->c": 0.6661224489795918,
+   "a->d": 0.9281632653061225,
+   "c->a": 0.9102040816326531,
+   "c->d": 0.9567346938775511
+  },
+  "within_mean": 0.8530612244897959,
+  "transfer_mean": 0.7499319727891156,
+  "transfer_mean_preverdict": 0.8306122448979592
+ },
+ {
+  "concept": "E1",
+  "group": "situations",
+  "sub": "all",
+  "layer": 42,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.96,
+   "c": 0.6693877551020408,
+   "d": 0.9567346938775511
+  },
+  "heldout": {
+   "a": null,
+   "c": 0.4924,
+   "d": 0.5836111111111111
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.96,
+   "a->c": 0.6,
+   "a->d": 0.9640816326530612,
+   "c->a": 0.6,
+   "c->c": 0.6693877551020408,
+   "c->d": 0.8693877551020408,
+   "d->a": 0.8938775510204081,
+   "d->c": 0.5967346938775511,
+   "d->d": 0.9567346938775511
+  },
+  "transfer_boundary": {
+   "a->c": 0.5787755102040816,
+   "a->d": 0.8555102040816327,
+   "c->a": 0.8546938775510204,
+   "c->d": 0.9159183673469388
+  },
+  "within_mean": 0.8620408163265306,
+  "transfer_mean": 0.7540136054421769,
+  "transfer_mean_preverdict": 0.7825850340136054
+ },
+ {
+  "concept": "E1",
+  "group": "situations",
+  "sub": "all",
+  "layer": 54,
+  "frames": [
+   "a",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9444897959183673,
+   "c": 0.7248979591836735,
+   "d": 0.9681632653061224
+  },
+  "heldout": {
+   "a": null,
+   "c": 0.5064,
+   "d": 0.6369444444444444
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9444897959183673,
+   "a->c": 0.6334693877551021,
+   "a->d": 0.9306122448979591,
+   "c->a": 0.6889795918367347,
+   "c->c": 0.7248979591836735,
+   "c->d": 0.8702040816326531,
+   "d->a": 0.8579591836734693,
+   "d->c": 0.6302040816326531,
+   "d->d": 0.9681632653061224
+  },
+  "transfer_boundary": {
+   "a->c": 0.563265306122449,
+   "a->d": 0.673469387755102,
+   "c->a": 0.7159183673469388,
+   "c->d": 0.9085714285714286
+  },
+  "within_mean": 0.8791836734693877,
+  "transfer_mean": 0.7685714285714287,
+  "transfer_mean_preverdict": 0.7248979591836736
+ },
+ {
+  "concept": "E5",
+  "group": "situations",
+  "sub": "all",
+  "layer": 17,
+  "frames": [
+   "c"
+  ],
+  "within": {
+   "c": 0.9534794309880815
+  },
+  "heldout": {
+   "c": 0.9003
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9534794309880815
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9534794309880815,
+  "transfer_mean": null,
+  "transfer_mean_preverdict": null
+ },
+ {
+  "concept": "E5",
+  "group": "situations",
+  "sub": "all",
+  "layer": 32,
+  "frames": [
+   "c"
+  ],
+  "within": {
+   "c": 0.9534794309880815
+  },
+  "heldout": {
+   "c": 0.7828
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9534794309880815
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9534794309880815,
+  "transfer_mean": null,
+  "transfer_mean_preverdict": null
+ },
+ {
+  "concept": "E5",
+  "group": "situations",
+  "sub": "all",
+  "layer": 42,
+  "frames": [
+   "c"
+  ],
+  "within": {
+   "c": 0.9469434832756632
+  },
+  "heldout": {
+   "c": 0.8038
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9469434832756632
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9469434832756632,
+  "transfer_mean": null,
+  "transfer_mean_preverdict": null
+ },
+ {
+  "concept": "E5",
+  "group": "situations",
+  "sub": "all",
+  "layer": 54,
+  "frames": [
+   "c"
+  ],
+  "within": {
+   "c": 0.9588619761630143
+  },
+  "heldout": {
+   "c": 0.859
+  },
+  "heldout_far": {},
+  "transfer": {
+   "c->c": 0.9588619761630143
+  },
+  "transfer_boundary": {},
+  "within_mean": 0.9588619761630143,
+  "transfer_mean": null,
+  "transfer_mean_preverdict": null
+ },
+ {
+  "concept": "F1",
+  "group": "conflicts",
+  "sub": "all",
+  "layer": 17,
+  "frames": [
+   "b",
+   "c"
+  ],
+  "within": {
+   "b": 0.760409057706355,
+   "c": 0.914536157779401
+  },
+  "heldout": {
+   "b": 0.4844,
+   "c": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "b->b": 0.760409057706355,
+   "b->c": 0.8144631117604091,
+   "c->b": 0.6990504017531045,
+   "c->c": 0.914536157779401
+  },
+  "transfer_boundary": {
+   "b->c": 0.8473338203067933
+  },
+  "within_mean": 0.837472607742878,
+  "transfer_mean": 0.7567567567567568,
+  "transfer_mean_preverdict": 0.7731921110299489
+ },
+ {
+  "concept": "F1",
+  "group": "conflicts",
+  "sub": "all",
+  "layer": 32,
+  "frames": [
+   "b",
+   "c"
+  ],
+  "within": {
+   "b": 0.7954711468224982,
+   "c": 0.9196493791088386
+  },
+  "heldout": {
+   "b": 0.5124,
+   "c": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "b->b": 0.7954711468224982,
+   "b->c": 0.8466033601168736,
+   "c->b": 0.6895544192841491,
+   "c->c": 0.9196493791088386
+  },
+  "transfer_boundary": {
+   "b->c": 0.6552227903579255
+  },
+  "within_mean": 0.8575602629656685,
+  "transfer_mean": 0.7680788897005113,
+  "transfer_mean_preverdict": 0.6723886048210372
+ },
+ {
+  "concept": "F1",
+  "group": "conflicts",
+  "sub": "all",
+  "layer": 42,
+  "frames": [
+   "b",
+   "c"
+  ],
+  "within": {
+   "b": 0.7786705624543463,
+   "c": 0.9057706355003652
+  },
+  "heldout": {
+   "b": 0.4948,
+   "c": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "b->b": 0.7786705624543463,
+   "b->c": 0.8049671292914536,
+   "c->b": 0.6939371804236669,
+   "c->c": 0.9057706355003652
+  },
+  "transfer_boundary": {
+   "b->c": 0.5230094959824689
+  },
+  "within_mean": 0.8422205989773557,
+  "transfer_mean": 0.7494521548575603,
+  "transfer_mean_preverdict": 0.6084733382030679
+ },
+ {
+  "concept": "F1",
+  "group": "conflicts",
+  "sub": "all",
+  "layer": 54,
+  "frames": [
+   "b",
+   "c"
+  ],
+  "within": {
+   "b": 0.7779401022644266,
+   "c": 0.8816654492330168
+  },
+  "heldout": {
+   "b": 0.4636,
+   "c": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "b->b": 0.7779401022644266,
+   "b->c": 0.6661796932067202,
+   "c->b": 0.6610664718772827,
+   "c->c": 0.8816654492330168
+  },
+  "transfer_boundary": {
+   "b->c": 0.4127100073046019
+  },
+  "within_mean": 0.8298027757487216,
+  "transfer_mean": 0.6636230825420015,
+  "transfer_mean_preverdict": 0.5368882395909423
+ },
+ {
+  "concept": "K1",
+  "group": "controls",
+  "sub": "all",
+  "layer": 17,
+  "frames": [
+   "a",
+   "b",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9798553719008265,
+   "b": 0.7706611570247934,
+   "c": 1.0,
+   "d": 1.0
+  },
+  "heldout": {
+   "a": 0.4488,
+   "b": null,
+   "c": null,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9798553719008265,
+   "a->b": 0.5573347107438017,
+   "a->c": 0.8021694214876033,
+   "a->d": 0.9225206611570248,
+   "b->a": 0.6714876033057852,
+   "b->b": 0.7706611570247934,
+   "b->c": 0.7298553719008265,
+   "b->d": 0.8119834710743802,
+   "c->a": 0.7603305785123967,
+   "c->b": 0.7179752066115702,
+   "c->c": 1.0,
+   "c->d": 0.9230371900826446,
+   "d->a": 0.7195247933884298,
+   "d->b": 0.6198347107438017,
+   "d->c": 0.8316115702479339,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {
+   "a->b": 0.9628099173553719,
+   "a->c": 0.9731404958677686,
+   "a->d": 0.9974173553719008,
+   "b->a": 0.9121900826446281,
+   "b->c": 0.9855371900826446,
+   "b->d": 0.9994834710743802
+  },
+  "within_mean": 0.937629132231405,
+  "transfer_mean": 0.7556387741046832,
+  "transfer_mean_preverdict": 0.8669077134986226
+ },
+ {
+  "concept": "K1",
+  "group": "controls",
+  "sub": "all",
+  "layer": 32,
+  "frames": [
+   "a",
+   "b",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9963842975206612,
+   "b": 0.9478305785123967,
+   "c": 1.0,
+   "d": 1.0
+  },
+  "heldout": {
+   "a": 0.41,
+   "b": null,
+   "c": null,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9963842975206612,
+   "a->b": 0.9726239669421488,
+   "a->c": 0.7195247933884298,
+   "a->d": 0.9457644628099173,
+   "b->a": 0.9907024793388429,
+   "b->b": 0.9478305785123967,
+   "b->c": 0.6818181818181818,
+   "b->d": 0.9333677685950413,
+   "c->a": 0.8450413223140496,
+   "c->b": 0.8119834710743802,
+   "c->c": 1.0,
+   "c->d": 0.9767561983471075,
+   "d->a": 0.8977272727272727,
+   "d->b": 0.9080578512396694,
+   "d->c": 0.8739669421487604,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {
+   "a->b": 0.9989669421487604,
+   "a->c": 0.9121900826446281,
+   "a->d": 0.9953512396694215,
+   "b->a": 1.0,
+   "b->c": 0.8579545454545454,
+   "b->d": 0.9948347107438017
+  },
+  "within_mean": 0.9860537190082644,
+  "transfer_mean": 0.8797778925619836,
+  "transfer_mean_preverdict": 0.9227358815426999
+ },
+ {
+  "concept": "K1",
+  "group": "controls",
+  "sub": "all",
+  "layer": 42,
+  "frames": [
+   "a",
+   "b",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9979338842975206,
+   "b": 0.9478305785123967,
+   "c": 0.9989669421487604,
+   "d": 1.0
+  },
+  "heldout": {
+   "a": 0.374,
+   "b": null,
+   "c": null,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9979338842975206,
+   "a->b": 0.9974173553719008,
+   "a->c": 0.7195247933884298,
+   "a->d": 0.8331611570247934,
+   "b->a": 0.9994834710743802,
+   "b->b": 0.9478305785123967,
+   "b->c": 0.6771694214876033,
+   "b->d": 0.8507231404958677,
+   "c->a": 0.8455578512396694,
+   "c->b": 0.8212809917355371,
+   "c->c": 0.9989669421487604,
+   "c->d": 0.9948347107438017,
+   "d->a": 0.7722107438016529,
+   "d->b": 0.7541322314049587,
+   "d->c": 0.9318181818181818,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {
+   "a->b": 1.0,
+   "a->c": 0.9741735537190083,
+   "a->d": 0.984504132231405,
+   "b->a": 1.0,
+   "b->c": 0.9576446280991735,
+   "b->d": 0.9839876033057852
+  },
+  "within_mean": 0.9861828512396694,
+  "transfer_mean": 0.8497761707988981,
+  "transfer_mean_preverdict": 0.9183453856749312
+ },
+ {
+  "concept": "K1",
+  "group": "controls",
+  "sub": "all",
+  "layer": 54,
+  "frames": [
+   "a",
+   "b",
+   "c",
+   "d"
+  ],
+  "within": {
+   "a": 0.9984504132231405,
+   "b": 0.9209710743801653,
+   "c": 0.9989669421487604,
+   "d": 1.0
+  },
+  "heldout": {
+   "a": 0.4236,
+   "b": null,
+   "c": null,
+   "d": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.9984504132231405,
+   "a->b": 0.9829545454545454,
+   "a->c": 0.9085743801652892,
+   "a->d": 0.9271694214876033,
+   "b->a": 0.9824380165289256,
+   "b->b": 0.9209710743801653,
+   "b->c": 0.8403925619834711,
+   "b->d": 0.9318181818181818,
+   "c->a": 0.9483471074380165,
+   "c->b": 0.8507231404958677,
+   "c->c": 0.9989669421487604,
+   "c->d": 0.9752066115702479,
+   "d->a": 0.9400826446280992,
+   "d->b": 0.8584710743801653,
+   "d->c": 0.9834710743801653,
+   "d->d": 1.0
+  },
+  "transfer_boundary": {
+   "a->b": 0.9994834710743802,
+   "a->c": 0.9891528925619835,
+   "a->d": 0.9679752066115702,
+   "b->a": 0.9989669421487604,
+   "b->c": 0.9793388429752066,
+   "b->d": 0.8992768595041323
+  },
+  "within_mean": 0.9795971074380165,
+  "transfer_mean": 0.9274707300275482,
+  "transfer_mean_preverdict": 0.9492079889807163
+ },
+ {
+  "concept": "K2",
+  "group": "controls",
+  "sub": "all",
+  "layer": 17,
+  "frames": [
+   "a",
+   "c"
+  ],
+  "within": {
+   "a": 0.797979797979798,
+   "c": 0.9990817263544536
+  },
+  "heldout": {
+   "a": 0.9068,
+   "c": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.797979797979798,
+   "a->c": 1.0,
+   "c->a": 0.7373737373737373,
+   "c->c": 0.9990817263544536
+  },
+  "transfer_boundary": {
+   "a->c": 1.0
+  },
+  "within_mean": 0.8985307621671258,
+  "transfer_mean": 0.8686868686868687,
+  "transfer_mean_preverdict": 0.8686868686868687
+ },
+ {
+  "concept": "K2",
+  "group": "controls",
+  "sub": "all",
+  "layer": 32,
+  "frames": [
+   "a",
+   "c"
+  ],
+  "within": {
+   "a": 0.8512396694214877,
+   "c": 1.0
+  },
+  "heldout": {
+   "a": 0.9444,
+   "c": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.8512396694214877,
+   "a->c": 1.0,
+   "c->a": 0.9403122130394858,
+   "c->c": 1.0
+  },
+  "transfer_boundary": {
+   "a->c": 1.0
+  },
+  "within_mean": 0.9256198347107438,
+  "transfer_mean": 0.9701561065197428,
+  "transfer_mean_preverdict": 0.9701561065197428
+ },
+ {
+  "concept": "K2",
+  "group": "controls",
+  "sub": "all",
+  "layer": 42,
+  "frames": [
+   "a",
+   "c"
+  ],
+  "within": {
+   "a": 0.8714416896235078,
+   "c": 1.0
+  },
+  "heldout": {
+   "a": 0.9868,
+   "c": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.8714416896235078,
+   "a->c": 1.0,
+   "c->a": 0.9825528007346189,
+   "c->c": 1.0
+  },
+  "transfer_boundary": {
+   "a->c": 1.0
+  },
+  "within_mean": 0.9357208448117539,
+  "transfer_mean": 0.9912764003673095,
+  "transfer_mean_preverdict": 0.9912764003673095
+ },
+ {
+  "concept": "K2",
+  "group": "controls",
+  "sub": "all",
+  "layer": 54,
+  "frames": [
+   "a",
+   "c"
+  ],
+  "within": {
+   "a": 0.8962350780532599,
+   "c": 1.0
+  },
+  "heldout": {
+   "a": 0.9988,
+   "c": null
+  },
+  "heldout_far": {},
+  "transfer": {
+   "a->a": 0.8962350780532599,
+   "a->c": 1.0,
+   "c->a": 0.9917355371900827,
+   "c->c": 1.0
+  },
+  "transfer_boundary": {
+   "a->c": 0.9990817263544536
+  },
+  "within_mean": 0.9481175390266299,
+  "transfer_mean": 0.9958677685950413,
+  "transfer_mean_preverdict": 0.9954086317722681
+ }
+]

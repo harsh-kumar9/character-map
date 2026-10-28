@@ -1,0 +1,280 @@
+{
+ "42": {
+  "self": {
+   "median_E": -0.0473,
+   "median_z": -4.255,
+   "share_z_gt3": 0.10714285714285714,
+   "sae_median_E": NaN,
+   "sae_share_z_gt3": 0.0
+  },
+  "within": {
+   "knowing_to_doing": {
+    "n": 15,
+    "median_E": -0.001,
+    "share_z_gt3": 0.13333333333333333,
+    "share_z_lt_-3": 0.06666666666666667
+   },
+   "doing_to_knowing": {
+    "n": 11,
+    "median_E": 0.0165,
+    "share_z_gt3": 0.36363636363636365,
+    "share_z_lt_-3": 0.09090909090909091
+   },
+   "doing_to_doing": {
+    "n": 15,
+    "median_E": 0.0086,
+    "share_z_gt3": 0.3333333333333333,
+    "share_z_lt_-3": 0.26666666666666666
+   },
+   "knowing_to_knowing": {
+    "n": 2,
+    "median_E": -0.0234,
+    "share_z_gt3": 0.0,
+    "share_z_lt_-3": 0.0
+   }
+  },
+  "spillover": {
+   "share_abs_z_gt3": 0.15310586176727908,
+   "K2_share_abs_z_gt3": 0.022727272727272728,
+   "top": [
+    {
+     "source": "C1|all|b",
+     "target": "C12|integrity|a",
+     "E": -0.0319,
+     "z": -12.28
+    },
+    {
+     "source": "C19|extraversion|c",
+     "target": "K1|all|c",
+     "E": -0.0593,
+     "z": -10.22
+    },
+    {
+     "source": "C2|all|c",
+     "target": "C19|honesty_humility|d",
+     "E": 0.0921,
+     "z": 9.37
+    },
+    {
+     "source": "C19|conscientiousness|c",
+     "target": "K1|all|c",
+     "E": 0.0559,
+     "z": 9.29
+    },
+    {
+     "source": "C4|self-deprecating|c",
+     "target": "C19|honesty_humility|d",
+     "E": 0.0809,
+     "z": 8.25
+    },
+    {
+     "source": "K1|all|c",
+     "target": "C19|extraversion|c",
+     "E": -0.0939,
+     "z": -7.12
+    },
+    {
+     "source": "C4|self-deprecating|c",
+     "target": "C19|extraversion|d",
+     "E": -0.0698,
+     "z": -7.05
+    },
+    {
+     "source": "C4|boastful|c",
+     "target": "C12|integrity|a",
+     "E": 0.0207,
+     "z": 7.02
+    },
+    {
+     "source": "C3|all|c",
+     "target": "C12|integrity|a",
+     "E": 0.0199,
+     "z": 6.73
+    },
+    {
+     "source": "C12|integrity|c",
+     "target": "C19|honesty_humility|d",
+     "E": 0.065,
+     "z": 6.66
+    },
+    {
+     "source": "K1|all|c",
+     "target": "C19|emotionality|d",
+     "E": -0.0574,
+     "z": -6.55
+    },
+    {
+     "source": "C12|integrity|c",
+     "target": "C19|extraversion|d",
+     "E": -0.065,
+     "z": -6.54
+    },
+    {
+     "source": "K2|all|a",
+     "target": "C12|integrity|a",
+     "E": 0.0192,
+     "z": 6.5
+    },
+    {
+     "source": "C2|all|c",
+     "target": "C12|integrity|a",
+     "E": 0.019,
+     "z": 6.41
+    },
+    {
+     "source": "C12|integrity|c",
+     "target": "C11|all|c",
+     "E": -0.1109,
+     "z": -6.17
+    }
+   ]
+  },
+  "geometry_spearman_E_vs_s4cos": -0.0028252435806812755,
+  "agreement": {
+   "dense_vs_sae_spearman": null,
+   "sign_symmetry_r": 0.8701063405957105
+  },
+  "taxonomy": {
+   "hh_to_dark_triad": {}
+  }
+ },
+ "54": {
+  "self": {
+   "median_E": 0.074,
+   "median_z": 10.149999999999999,
+   "share_z_gt3": 0.8571428571428571,
+   "sae_median_E": NaN,
+   "sae_share_z_gt3": 0.0
+  },
+  "within": {
+   "knowing_to_doing": {
+    "n": 15,
+    "median_E": 0.0474,
+    "share_z_gt3": 0.4,
+    "share_z_lt_-3": 0.0
+   },
+   "doing_to_knowing": {
+    "n": 11,
+    "median_E": 0.0199,
+    "share_z_gt3": 0.45454545454545453,
+    "share_z_lt_-3": 0.0
+   },
+   "doing_to_doing": {
+    "n": 15,
+    "median_E": 0.1284,
+    "share_z_gt3": 0.8666666666666667,
+    "share_z_lt_-3": 0.0
+   },
+   "knowing_to_knowing": {
+    "n": 2,
+    "median_E": 0.07744999999999999,
+    "share_z_gt3": 1.0,
+    "share_z_lt_-3": 0.0
+   }
+  },
+  "spillover": {
+   "share_abs_z_gt3": 0.347331583552056,
+   "K2_share_abs_z_gt3": 0.06818181818181818,
+   "top": [
+    {
+     "source": "K1|all|c",
+     "target": "C19|conscientiousness|d",
+     "E": 0.1454,
+     "z": 40.83
+    },
+    {
+     "source": "K1|all|c",
+     "target": "C19|conscientiousness|c",
+     "E": 0.2102,
+     "z": 37.57
+    },
+    {
+     "source": "C19|conscientiousness|c",
+     "target": "K1|all|d",
+     "E": 0.1745,
+     "z": 27.96
+    },
+    {
+     "source": "C19|conscientiousness|c",
+     "target": "K1|all|c",
+     "E": 0.0876,
+     "z": 26.24
+    },
+    {
+     "source": "K1|all|c",
+     "target": "C1|all|c",
+     "E": 0.3124,
+     "z": 25.22
+    },
+    {
+     "source": "C19|extraversion|c",
+     "target": "K1|all|d",
+     "E": -0.1504,
+     "z": -24.3
+    },
+    {
+     "source": "K1|all|c",
+     "target": "C19|extraversion|c",
+     "E": -0.5035,
+     "z": -24.16
+    },
+    {
+     "source": "K1|all|c",
+     "target": "C19|honesty_humility|c",
+     "E": 0.1122,
+     "z": 23.53
+    },
+    {
+     "source": "C19|extraversion|c",
+     "target": "K1|all|c",
+     "E": -0.073,
+     "z": -22.15
+    },
+    {
+     "source": "C19|extraversion|c",
+     "target": "C1|all|c",
+     "E": -0.2682,
+     "z": -21.49
+    },
+    {
+     "source": "K1|all|c",
+     "target": "C19|extraversion|d",
+     "E": -0.2279,
+     "z": -21.01
+    },
+    {
+     "source": "K1|all|c",
+     "target": "E1|all|c",
+     "E": 0.2792,
+     "z": 17.57
+    },
+    {
+     "source": "C19|conscientiousness|c",
+     "target": "C1|all|c",
+     "E": 0.2141,
+     "z": 17.31
+    },
+    {
+     "source": "K1|all|c",
+     "target": "C11|all|c",
+     "E": 0.1389,
+     "z": 14.62
+    },
+    {
+     "source": "C19|honesty_humility|c",
+     "target": "C1|all|c",
+     "E": 0.1676,
+     "z": 13.56
+    }
+   ]
+  },
+  "geometry_spearman_E_vs_s4cos": 0.47252462891589336,
+  "agreement": {
+   "dense_vs_sae_spearman": null,
+   "sign_symmetry_r": 0.977012625054018
+  },
+  "taxonomy": {
+   "hh_to_dark_triad": {}
+  }
+ }
+}

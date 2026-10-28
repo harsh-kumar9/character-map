@@ -1,0 +1,111 @@
+{
+ "A9": {},
+ "C1": {
+  "reply32|a|neg": {
+   "label0": 39,
+   "label1": 3
+  },
+  "reply32|a|pos": {
+   "label0": 6,
+   "label1": 27
+  },
+  "reply32|b|neg": {
+   "label0": 72,
+   "label1": 0
+  },
+  "reply32|b|pos": {
+   "label0": 24,
+   "label1": 41
+  }
+ },
+ "C11": {},
+ "C12": {
+  "reply32|a|neg": {
+   "label0": 100,
+   "label1": 0
+  },
+  "reply32|a|pos": {
+   "label0": 0,
+   "label1": 100
+  }
+ },
+ "C19": {},
+ "C2": {},
+ "C3": {
+  "reply32|a|neg": {
+   "label0": 43,
+   "label1": 7
+  },
+  "reply32|a|pos": {
+   "label0": 5,
+   "label1": 51
+  },
+  "reply32|b|neg": {
+   "label0": 27,
+   "label1": 39
+  },
+  "reply32|b|pos": {
+   "label0": 26,
+   "label1": 41
+  }
+ },
+ "C4": {
+  "reply32|a|neg": {
+   "label0": 149,
+   "label1": 12
+  },
+  "reply32|a|pos": {
+   "label0": 0,
+   "label1": 71
+  }
+ },
+ "E1": {
+  "reply32|a|neg": {
+   "label0": 18,
+   "label1": 0
+  },
+  "reply32|a|pos": {
+   "label0": 10,
+   "label1": 0
+  }
+ },
+ "E5": {},
+ "F1": {
+  "reply32|b|neg": {
+   "label0": 48,
+   "label1": 43
+  },
+  "reply32|b|pos": {
+   "label0": 56,
+   "label1": 40
+  }
+ },
+ "K1": {
+  "reply32|a|neg": {
+   "label0": 6,
+   "label1": 24
+  },
+  "reply32|a|pos": {
+   "label0": 11,
+   "label1": 6
+  },
+  "reply32|b|neg": {
+   "label0": 4,
+   "label1": 45
+  },
+  "reply32|b|pos": {
+   "label0": 9,
+   "label1": 2
+  }
+ },
+ "K2": {
+  "reply32|a|neg": {
+   "label0": 19,
+   "label1": 27
+  },
+  "reply32|a|pos": {
+   "label0": 20,
+   "label1": 51
+  }
+ }
+}

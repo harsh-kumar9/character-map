@@ -1,0 +1,462 @@
+[
+ {
+  "id": "A9|all|c",
+  "concept": "A9",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "A9|all|d",
+  "concept": "A9",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "C1|all|a",
+  "concept": "C1",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "C1|all|b",
+  "concept": "C1",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "C1|all|c",
+  "concept": "C1",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "C1|all|d",
+  "concept": "C1",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "C11|all|c",
+  "concept": "C11",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C11|all|d",
+  "concept": "C11",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C12|integrity|a",
+  "concept": "C12",
+  "sub": "integrity",
+  "frame": "a",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "C12|integrity|c",
+  "concept": "C12",
+  "sub": "integrity",
+  "frame": "c",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "C12|integrity|d",
+  "concept": "C12",
+  "sub": "integrity",
+  "frame": "d",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "C19|agreeableness|c",
+  "concept": "C19",
+  "sub": "agreeableness",
+  "frame": "c",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "C19|agreeableness|d",
+  "concept": "C19",
+  "sub": "agreeableness",
+  "frame": "d",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "C19|conscientiousness|c",
+  "concept": "C19",
+  "sub": "conscientiousness",
+  "frame": "c",
+  "n_train": [
+   30,
+   30
+  ]
+ },
+ {
+  "id": "C19|conscientiousness|d",
+  "concept": "C19",
+  "sub": "conscientiousness",
+  "frame": "d",
+  "n_train": [
+   30,
+   30
+  ]
+ },
+ {
+  "id": "C19|emotionality|c",
+  "concept": "C19",
+  "sub": "emotionality",
+  "frame": "c",
+  "n_train": [
+   36,
+   36
+  ]
+ },
+ {
+  "id": "C19|emotionality|d",
+  "concept": "C19",
+  "sub": "emotionality",
+  "frame": "d",
+  "n_train": [
+   36,
+   36
+  ]
+ },
+ {
+  "id": "C19|extraversion|c",
+  "concept": "C19",
+  "sub": "extraversion",
+  "frame": "c",
+  "n_train": [
+   27,
+   27
+  ]
+ },
+ {
+  "id": "C19|extraversion|d",
+  "concept": "C19",
+  "sub": "extraversion",
+  "frame": "d",
+  "n_train": [
+   27,
+   27
+  ]
+ },
+ {
+  "id": "C19|honesty_humility|c",
+  "concept": "C19",
+  "sub": "honesty_humility",
+  "frame": "c",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "C19|honesty_humility|d",
+  "concept": "C19",
+  "sub": "honesty_humility",
+  "frame": "d",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "C19|openness|c",
+  "concept": "C19",
+  "sub": "openness",
+  "frame": "c",
+  "n_train": [
+   29,
+   29
+  ]
+ },
+ {
+  "id": "C19|openness|d",
+  "concept": "C19",
+  "sub": "openness",
+  "frame": "d",
+  "n_train": [
+   29,
+   29
+  ]
+ },
+ {
+  "id": "C2|all|c",
+  "concept": "C2",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "C2|all|d",
+  "concept": "C2",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "C3|all|a",
+  "concept": "C3",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C3|all|c",
+  "concept": "C3",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C3|all|d",
+  "concept": "C3",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   61,
+   61
+  ]
+ },
+ {
+  "id": "C4|boastful|a",
+  "concept": "C4",
+  "sub": "boastful",
+  "frame": "a",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C4|boastful|c",
+  "concept": "C4",
+  "sub": "boastful",
+  "frame": "c",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C4|boastful|d",
+  "concept": "C4",
+  "sub": "boastful",
+  "frame": "d",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C4|self-deprecating|a",
+  "concept": "C4",
+  "sub": "self-deprecating",
+  "frame": "a",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C4|self-deprecating|c",
+  "concept": "C4",
+  "sub": "self-deprecating",
+  "frame": "c",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "C4|self-deprecating|d",
+  "concept": "C4",
+  "sub": "self-deprecating",
+  "frame": "d",
+  "n_train": [
+   62,
+   62
+  ]
+ },
+ {
+  "id": "E1|all|a",
+  "concept": "E1",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   53,
+   53
+  ]
+ },
+ {
+  "id": "E1|all|c",
+  "concept": "E1",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   53,
+   53
+  ]
+ },
+ {
+  "id": "E1|all|d",
+  "concept": "E1",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   53,
+   53
+  ]
+ },
+ {
+  "id": "E5|all|c",
+  "concept": "E5",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "F1|all|b",
+  "concept": "F1",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "F1|all|c",
+  "concept": "F1",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "K1|all|a",
+  "concept": "K1",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   56,
+   56
+  ]
+ },
+ {
+  "id": "K1|all|b",
+  "concept": "K1",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   56,
+   56
+  ]
+ },
+ {
+  "id": "K1|all|c",
+  "concept": "K1",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   56,
+   56
+  ]
+ },
+ {
+  "id": "K1|all|d",
+  "concept": "K1",
+  "sub": "all",
+  "frame": "d",
+  "n_train": [
+   56,
+   56
+  ]
+ },
+ {
+  "id": "K2|all|a",
+  "concept": "K2",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   67,
+   67
+  ]
+ },
+ {
+  "id": "K2|all|c",
+  "concept": "K2",
+  "sub": "all",
+  "frame": "c",
+  "n_train": [
+   67,
+   67
+  ]
+ }
+]

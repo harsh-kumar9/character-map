@@ -1,0 +1,44 @@
+{
+ "layer": "54",
+ "within_unit_spread": 12.45210835033348,
+ "frame_separation": {
+  "own-act": 1.3619182645716361,
+  "own-self": 1.560116683833514,
+  "act-self": 1.298074286498936
+ },
+ "definition_separation": {
+  "act": {
+   "Self-knowledge|Accuracy": 1.5794177334213746,
+   "Self-knowledge|Sincerity": 0.9724585143045994,
+   "Self-knowledge|Honesty-humility": 1.1127781304221511,
+   "Accuracy|Sincerity": 0.6269115540387081,
+   "Accuracy|Honesty-humility": 0.486454051608694,
+   "Sincerity|Honesty-humility": 0.20070569216435785
+  },
+  "self": {
+   "Self-knowledge|Accuracy": 0.9211783129373561,
+   "Self-knowledge|Sincerity": 2.0890916385433442,
+   "Self-knowledge|Honesty-humility": 1.807321427736355,
+   "Accuracy|Sincerity": 1.469942832559853,
+   "Accuracy|Honesty-humility": 1.241295678949124,
+   "Sincerity|Honesty-humility": 0.8868890417349713
+  }
+ },
+ "polarity_gap": {
+  "Accuracy|c": 0.22698185879136615,
+  "Accuracy|d": 1.1132463550173437,
+  "Honesty-humility|c": 1.830306622131851,
+  "Honesty-humility|d": 0.8208967094121201,
+  "Self-knowledge|c": 3.1026054155556566,
+  "Self-knowledge|d": 2.6328748897883023,
+  "Sincerity|a": 0.37644170010390826,
+  "Sincerity|b": 0.8482933994458951,
+  "Sincerity|c": 0.865159117091777,
+  "Sincerity|d": 1.529876829956553
+ },
+ "variance": [
+  0.3279,
+  0.1897,
+  0.1254
+ ]
+}

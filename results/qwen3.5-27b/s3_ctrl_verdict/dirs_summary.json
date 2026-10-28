@@ -1,0 +1,155 @@
+{
+ "A9": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 6,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {}
+ },
+ "C1": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 5,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "18": 0.9797223054639896,
+    "33": 0.9721306562780941,
+    "43": 0.9668364798721406,
+    "55": 0.9446608730396564
+   }
+  }
+ },
+ "C11": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 6,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {}
+ },
+ "C12": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 6,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "18": 1.0,
+    "33": 1.0,
+    "43": 1.0,
+    "55": 1.0
+   }
+  }
+ },
+ "C19": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 6,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {}
+ },
+ "C2": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 6,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {}
+ },
+ "C3": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 6,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "18": 0.9883053522743579,
+    "33": 0.9924666379681446,
+    "43": 0.985865977902138,
+    "55": 0.972449418854929
+   }
+  }
+ },
+ "C4": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 5,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "18": 1.0,
+    "33": 1.0,
+    "43": 0.9982210722082963,
+    "55": 0.9916713835206599
+   }
+  }
+ },
+ "E1": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 6,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {}
+ },
+ "E5": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 6,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {}
+ },
+ "F1": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 4,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "18": 0.9793790546802595,
+    "33": 0.9718489341983317,
+    "43": 0.9443929564411492,
+    "55": 0.9772937905468025
+   }
+  }
+ },
+ "K1": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 6,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "18": 0.9848484848484849,
+    "33": 0.9922077922077922,
+    "43": 0.983982683982684,
+    "55": 0.9510822510822511
+   }
+  }
+ },
+ "K2": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 4,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "18": 0.9184746877054569,
+    "33": 0.9266929651545036,
+    "43": 0.8833004602235371,
+    "55": 0.8494411571334648
+   }
+  }
+ }
+}

@@ -1,0 +1,155 @@
+{
+ "A9": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 3,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {}
+ },
+ "C1": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 2,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "17": 0.4618181818181818,
+    "31": 0.6951515151515152,
+    "40": 0.9393939393939394,
+    "52": 0.7648484848484849
+   }
+  }
+ },
+ "C11": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 3,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {}
+ },
+ "C12": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 3,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "17": 0.8480046948356808,
+    "31": 1.0,
+    "40": 1.0,
+    "52": 1.0
+   }
+  }
+ },
+ "C19": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 3,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {}
+ },
+ "C2": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 3,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {}
+ },
+ "C3": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 3,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "17": 0.8,
+    "31": 0.9687782805429864,
+    "40": 0.9814479638009049,
+    "52": 0.934841628959276
+   }
+  }
+ },
+ "C4": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 3,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "17": 0.9522727272727273,
+    "31": 0.9993506493506493,
+    "40": 0.9996753246753247,
+    "52": 0.9915584415584415
+   }
+  }
+ },
+ "E1": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 3,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {}
+ },
+ "E5": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 3,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {}
+ },
+ "F1": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 1,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "17": 0.38300653594771245,
+    "31": 0.642483660130719,
+    "40": 0.8143790849673203,
+    "52": 0.7124183006535948
+   }
+  }
+ },
+ "K1": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 3,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "17": 0.846830985915493,
+    "31": 0.9709507042253521,
+    "40": 0.9586267605633803,
+    "52": 0.9242957746478874
+   }
+  }
+ },
+ "K2": {
+  "cells_used": {
+   "boundary": 0,
+   "reply32": 3,
+   "response_all": 0
+  },
+  "label_auroc_of_dir": {
+   "reply32": {
+    "17": 0.512280701754386,
+    "31": 0.887719298245614,
+    "40": 0.6982456140350877,
+    "52": 0.6473684210526316
+   }
+  }
+ }
+}
