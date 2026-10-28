@@ -728,6 +728,10 @@ def cmd_compare(tags):
             ax.grid(color="#e1e0d9", lw=0.4); ax.set_axisbelow(True)
         for ax, letter in zip(axes, "abc"):
             ax.text(-0.16, 1.06, letter, transform=ax.transAxes, fontsize=8, fontweight="bold", va="bottom", ha="right")
+        from matplotlib.lines import Line2D
+        h = [Line2D([], [], marker="o", ls="none", color=c, label=n, ms=4.5) for n, c in COLOR.items() if "control" not in n] + \
+            [Line2D([], [], marker=m, ls="none", color="#52514e", mfc="white", label=FRAME_NAME[f], ms=4.5) for f, m in MARK.items()]
+        fig.legend(handles=h, loc="lower center", ncol=5, frameon=False, bbox_to_anchor=(0.5, -0.16), handletextpad=0.3, columnspacing=1.0)
     fig.tight_layout()
     figd = ROOT_RESULTS / "figures" / "honesty"; figd.mkdir(parents=True, exist_ok=True)
     fig.savefig(figd / "coherence_compare.png", dpi=300, bbox_inches="tight", pad_inches=0.03, facecolor="white")
