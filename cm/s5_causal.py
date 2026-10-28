@@ -21,6 +21,9 @@ both signs, on the WildChat prompts (of 64) whose unsteered reply it rates at le
     python -m cm.s5_causal calib-judge        GPU   coherence (gemma-4-31B-it) and the chosen dose
     python -m cm.s5_causal run --shard K --nshards N   GPU
     python -m cm.s5_causal matrix             CPU   results/s5/causal_matrix.json and summary
+  --block honesty (D-059 1): every cell of the honesty block (22 cells plus K1 a b c d and K2 a c) is a source,
+  targets are every S4 unit, outputs go to outputs/<tag>/s5_hon/ and results/<tag>/s5_hon/ (with --dose-c C nested
+  as c<C>/); the calibration and residual norm are read from the base run (results/<tag>/s5/).
 """
 from __future__ import annotations
 
@@ -45,6 +48,12 @@ FWD_BATCH, FWD_TOKENS = (4, 6000) if cfg.D >= 5000 else (16, 24000)
 CALIB = ["A1|all|c", "B1|all|b", "C1|all|c", "C6|all|c", "C9|quarrelsome|c", "C15|refuse|c", "C19|honesty_humility|c",
          "C20|psychopathy|c", "C21|power|d", "D1|all|c", "E1|all|c", "F3|all|c",
          "A9|all|c", "C2|all|c", "C1|all|b", "K1|all|c"]   # the last four cover a run of the honesty block alone
+HON_SOURCES = [f"{c}|{s}|{f}" for c, s, fr in (("A9", "all", "abcd"), ("C2", "all", "abcd"), ("C1", "lying", "abcd"),
+                                             ("C3", "all", "acd"), ("C8", "sycophantic_agreement", "acd"),
+                                             ("C19", "honesty_humility", "abcd"), ("K1", "all", "abcd"), ("K2", "all", "ac"))
+               for f in fr]
+BLOCK = None      # set by --block: "honesty" makes every HON_SOURCES cell a source and writes under s5_hon/ (D-059 1)
+CAL_RES = RES     # calibration.json and residual_norm_L*.json always come from the base run
 
 
 def units():
@@ -106,13 +115,19 @@ def cmd_setup():
         cid, sub, f = u.split("|")
         by_c.setdefault((cid, sub), []).append(f)
     sources = []
-    for (cid, sub), frames in sorted(by_c.items()):
-        do = next((f for f in "cd" if f in frames), None)
-        kn = next((f for f in "ba" if f in frames), None)
-        if do:
-            sources.append(f"{cid}|{sub}|{do}")
-        if kn:
-            sources.append(f"{cid}|{sub}|{kn}")
+    if BLOCK == "honesty":
+        missing = [s for s in HON_SOURCES if s not in U]
+        if missing:
+            raise SystemExit(f"honesty block: these cells are not S4 units of this model: {missing}")
+        sources = list(HON_SOURCES)
+    else:
+        for (cid, sub), frames in sorted(by_c.items()):
+            do = next((f for f in "cd" if f in frames), None)
+            kn = next((f for f in "ba" if f in frames), None)
+            if do:
+                sources.append(f"{cid}|{sub}|{do}")
+            if kn:
+                sources.append(f"{cid}|{sub}|{kn}")
     rng = np.random.default_rng(0)
     rand = rng.standard_normal((N_RAND, cfg.D))
     rand /= np.linalg.norm(rand, axis=1, keepdims=True)
@@ -162,10 +177,13 @@ DOSE_C = None   # set by --dose-c: a fixed relative dose instead of the calibrat
 
 
 def dose_dirs():
-    """(OUT, RES) for the current dose: the calibrated run's directories, or s5_dose/c<value>/ under each."""
+    """(OUT, RES) for the current dose: the calibrated run's directories, or s5_dose/c<value>/ under each (for a
+    --block run, c<value>/ inside the block's own directories)."""
     if DOSE_C is None:
         return OUT, RES
     tag = f"c{DOSE_C:g}"
+    if BLOCK:
+        return OUT / tag, RES / tag
     return OUT.parent / "s5_dose" / tag, RES.parent / "s5_dose" / tag
 
 
@@ -274,9 +292,9 @@ def cmd_run(shard, nshards):
     from . import model as cm_model
     from .stimx import forward_hidden, load_items, load_replies, prompt_and_reply, tokenize
     S, A = load_setup()
-    cal = json.loads((RES / "calibration.json").read_text())
+    cal = json.loads((CAL_RES / "calibration.json").read_text())
     c = chosen_c(cal)
-    norm = json.loads((RES / f"residual_norm_L{L_IN}.json").read_text())["median_token_norm"]
+    norm = json.loads((CAL_RES / f"residual_norm_L{L_IN}.json").read_text())["median_token_norm"]
     m, tok = cm_model.load(cfg.MODEL)
     items, cache = [], {}
     for p in S["probe"]:
@@ -315,9 +333,9 @@ def cmd_run(shard, nshards):
 def cmd_matrix(nshards):
     from scipy.stats import spearmanr
     S, A = load_setup()
-    cal = json.loads((RES / "calibration.json").read_text())
+    cal = json.loads((CAL_RES / "calibration.json").read_text())
     c = chosen_c(cal)
-    norm = json.loads((RES / f"residual_norm_L{L_IN}.json").read_text())["median_token_norm"]
+    norm = json.loads((CAL_RES / f"residual_norm_L{L_IN}.json").read_text())["median_token_norm"]
     conds = conditions(S)
     P = {}
     out_dir, res_dir = dose_dirs()
@@ -382,9 +400,13 @@ def main():
     ap.add_argument("--shard", type=int, default=0)
     ap.add_argument("--nshards", type=int, default=1)
     ap.add_argument("--dose-c", type=float, default=None, help="fixed relative dose for run/matrix (D-052); outputs under s5_dose/")
+    ap.add_argument("--block", default=None, choices=[None, "honesty"], help="honesty: every honesty cell a source, outputs under s5_hon/")
     args = ap.parse_args()
-    global DOSE_C
+    global DOSE_C, BLOCK, OUT, RES
     DOSE_C = args.dose_c
+    if args.block:
+        BLOCK = args.block
+        OUT, RES = OUT.parent / "s5_hon", RES.parent / "s5_hon"
     if args.stage == "setup":
         cmd_setup()
     elif args.stage == "calib-gen":
