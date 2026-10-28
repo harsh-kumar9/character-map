@@ -292,6 +292,10 @@ def causal_from(R):
                       "off_same_def": float(np.nanmean(same_def)) if same_def else None,
                       "off_other_def": float(np.nanmean([M[i, j] for j, b in enumerate(hon) if j != i and b.split("|")[0] != a.split("|")[0]])),
                       "ratio": float(off / d) if d > 0 else None, "z_off_mean": float(np.nanmean(Mz[i, off_mask[i]]))}
+            if Er is not None:   # the raw shift (skip path included): defined even where later layers add nothing
+                dr = Er[six[a], li, tix[a]]
+                orr = np.nanmean([Er[six[a], li, tix[b]] for b in hon if b != a])
+                per[a].update({"diag_raw": float(dr), "off_raw": float(orr), "ratio_raw": float(orr / dr) if dr > 0 else None})
         blocks = {}
         for sa in BLOCKS:
             ii = [i for i, a in enumerate(hon) if BLOCK[a[-1]] == sa and a in six]
@@ -530,8 +534,9 @@ def build_table(rep, cau, beh, dose=None):
         if run and c in run["by_layer"][Lc]["per_cell"]:
             pc = run["by_layer"][Lc]["per_cell"][c]
             r["causal_ratio"], r["causal_diag"], r["causal_off"], r["causal_z_diag"] = pc["ratio"], pc["diag"], pc["off"], pc["z_diag"]
+            r["causal_raw_ratio"], r["causal_raw_diag"] = pc.get("ratio_raw"), pc.get("diag_raw")
         else:
-            r["causal_ratio"] = r["causal_diag"] = r["causal_off"] = r["causal_z_diag"] = None
+            r["causal_ratio"] = r["causal_diag"] = r["causal_off"] = r["causal_z_diag"] = r["causal_raw_ratio"] = r["causal_raw_diag"] = None
         inst = BEH_MAP.get(info["def"])
         if beh and inst:
             b = beh["instruments"].get(inst) or beh["instruments"].get("MASK known_facts (vs the true version)" if inst.startswith("MASK") else inst)
@@ -558,6 +563,8 @@ def cmd_report(dose):
     agree = {"rep_dm_L4_vs_causal": spearman(f(f"rep_dm_L{L4}"), f("causal_ratio")),
              "rep_probe_L4_vs_causal": spearman(f(f"rep_probe_L{L4}"), f("causal_ratio")),
              "rep_dm_L2_vs_causal": spearman(f(f"rep_dm_L{L2}"), f("causal_ratio")),
+             "rep_dm_L4_vs_causal_raw": spearman(f(f"rep_dm_L{L4}"), f("causal_raw_ratio")),
+             "rep_probe_L4_vs_causal_raw": spearman(f(f"rep_probe_L{L4}"), f("causal_raw_ratio")),
              "rep_dm_vs_probe_L4": spearman(f(f"rep_dm_L{L4}"), f(f"rep_probe_L{L4}")),
              "rep_dm_L2_vs_L4": spearman(f(f"rep_dm_L{L2}"), f(f"rep_dm_L{L4}"))}
     by_def = {}
@@ -580,10 +587,10 @@ def cmd_report(dose):
 
 def print_table(rows, L2, L4):
     fmt = lambda v: "   -  " if v is None else f"{v:+.2f}".rjust(6)
-    print(f"{'cell':30} {'rep dm L'+L2:>9} {'rep dm L'+L4:>9} {'probe L'+L4:>9} {'causal':>8} {'beh':>6}")
+    print(f"{'cell':30} {'rep dm L'+L2:>9} {'rep dm L'+L4:>9} {'probe L'+L4:>9} {'causal':>8} {'c.raw':>7} {'z diag':>7} {'beh':>6}")
     for r in rows:
         print(f"{r['id']:30} {fmt(r[f'rep_dm_L{L2}']):>9} {fmt(r[f'rep_dm_L{L4}']):>9} {fmt(r[f'rep_probe_L{L4}']):>9} {fmt(r['causal_ratio']):>8} "
-              f"{fmt(r['behavioral']):>6}")
+              f"{fmt(r.get('causal_raw_ratio')):>7} {fmt(r['causal_z_diag']):>7} {fmt(r['behavioral']):>6}")
 
 
 def style():
@@ -655,14 +662,17 @@ def draw(table, rep, cau, beh):
         ax.set_xlim(0, 1); ax.invert_yaxis()
         ax.set_xlabel("1 - gap rate at baseline")
     ax.grid(color=GRID, lw=0.4, axis="x"); ax.set_axisbelow(True)
-    # d: representational vs causal per cell
+    # d: representational vs causal per cell; the raw-shift ratio when the skip-subtracted one is undefined for most cells
     ax = axes[1, 1]
+    n_def = sum(r["causal_ratio"] is not None for r in hon)
+    ck, clab, akey = ("causal_ratio", "Causal (off-diagonal over diagonal)", "rep_dm_L4_vs_causal") if n_def >= 10 else \
+        ("causal_raw_ratio", "Causal, raw shift (off-diagonal over diagonal)", "rep_dm_L4_vs_causal_raw")
     for r in hon:
-        if r["causal_ratio"] is not None and r[f"rep_dm_L{L4}"] is not None:
-            ax.scatter(r[f"rep_dm_L{L4}"], r["causal_ratio"], marker=MARK[r["frame"]], s=22, facecolor=COLOR[r["def"]],
+        if r.get(ck) is not None and r[f"rep_dm_L{L4}"] is not None:
+            ax.scatter(r[f"rep_dm_L{L4}"], r[ck], marker=MARK[r["frame"]], s=22, facecolor=COLOR[r["def"]],
                        edgecolor="white", linewidth=0.5, zorder=3)
-    ax.set_xlabel(f"Representational (leave-one-cell-out, layer {L4})"); ax.set_ylabel("Causal (off-diagonal over diagonal)")
-    ag = table["agreement_over_cells"]["rep_dm_L4_vs_causal"]
+    ax.set_xlabel(f"Representational (leave-one-cell-out, layer {L4})"); ax.set_ylabel(clab)
+    ag = table["agreement_over_cells"][akey]
     if ag[0] is not None:
         ax.text(0.02, 0.97, f"Spearman {ag[0]:+.2f} (n {ag[1]})", transform=ax.transAxes, va="top", fontsize=6.3, color="#52514e")
     ax.grid(color=GRID, lw=0.4); ax.set_axisbelow(True)
@@ -690,7 +700,7 @@ def cmd_compare(tags):
     names = list(tabs)
     L4 = str(L_HEAD[1]) if cfg.TAG else None
     out = {"tags": names, "pairs": {}}
-    keys = ["rep_dm_L2", "rep_dm_L4", "rep_probe_L4", "causal_ratio", "behavioral"]
+    keys = ["rep_dm_L2", "rep_dm_L4", "rep_probe_L4", "causal_ratio", "causal_raw_ratio", "behavioral"]
     for i in range(len(names)):
         for j in range(i + 1, len(names)):
             a, b = tabs[names[i]], tabs[names[j]]

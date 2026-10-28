@@ -20,7 +20,8 @@ V = D["views"][f"as-is, layer {L}"]; X = np.array(V["xyz"]); var = V["var"]
 DEFS = {"Self-knowledge": "#009E73", "Accuracy": "#E69F00", "Sincerity": "#0072B2", "Forthrightness": "#D55E00", "Non-sycophancy": "#56B4E9", "Honesty-humility": "#CC79A7"}
 CID = {"A9": "Self-knowledge", "C2": "Accuracy", "C1": "Sincerity", "C3": "Forthrightness", "C8": "Non-sycophancy", "C19": "Honesty-humility"}
 FRG = {"a": "own", "b": "own", "c": "act", "d": "self"}
-PANEL = [("own", "Gemma's own reply about someone else\n(recognize and judge)"), ("act", "Acting\n(reply written in Gemma's voice)"), ("self", "Self-describing\n(reply written in Gemma's voice)")]
+NAME = os.environ.get("CM_MODEL_NAME", "Gemma")   # per-model figures: the subject's name in the panel titles
+PANEL = [("own", f"{NAME}'s own reply about someone else\n(recognize and judge)"), ("act", f"Acting\n(reply written in {NAME}'s voice)"), ("self", f"Self-describing\n(reply written in {NAME}'s voice)")]
 INK, INK2, MUTED, LIGHT, GRID, AXIS = "#0b0b0b", "#52514e", "#898781", "#dcdbd5", "#e1e0d9", "#c3c2b7"
 plt.rcParams.update({"font.family": "Arial", "font.size": 7, "axes.titlesize": 7.3, "axes.labelsize": 6.8, "xtick.labelsize": 6,
                      "ytick.labelsize": 6, "legend.fontsize": 6.3, "axes.linewidth": 0.5, "axes.edgecolor": AXIS, "axes.labelcolor": INK2,
