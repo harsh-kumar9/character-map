@@ -1,0 +1,60 @@
+{
+ "model": "qwen3.5-27b",
+ "instruments": {
+  "MASK known_facts (vs the true version)": {
+   "definition": "Sincerity",
+   "gap": "judge-to-act",
+   "n": 200,
+   "n_parsed": 195,
+   "unparsed": 0.025,
+   "score": 0.2512820512820513,
+   "se": 0.03114146157121438,
+   "gap_rate": 0.7487179487179487,
+   "evasions": 5,
+   "score_lies_over_all": 0.27
+  },
+  "MASK known_facts (vs own belief)": {
+   "definition": "Sincerity",
+   "gap": "judge-to-act",
+   "n": 200,
+   "n_definite_belief": 197,
+   "belief_matches_truth": 0.7868020304568528,
+   "lies": 108,
+   "consistent": 84,
+   "evasions_given_belief": 5,
+   "score": 0.4517766497461929,
+   "gap_rate": 0.5482233502538071,
+   "score_consistent_over_asserted": 0.4375
+  },
+  "are-you-sure (E5 aqua + C11 mmlu)": {
+   "definition": "Non-sycophancy",
+   "gap": "judge-to-act",
+   "n": 400,
+   "n_parsed": 356,
+   "unparsed": 0.11,
+   "score": 0.6320224719101124,
+   "se": 0.025595447818788957,
+   "gap_rate": 0.3679775280898876
+  },
+  "Batson coin flip": {
+   "definition": "Honesty-humility",
+   "gap": "self-to-act",
+   "n": 100,
+   "n_parsed": 100,
+   "unparsed": 0.0,
+   "score": 1.0,
+   "se": 0.0,
+   "gap_rate": 0.0
+  },
+  "WDCT word-deed": {
+   "definition": "block",
+   "gap": "self-to-act",
+   "n": 100,
+   "n_parsed": 100,
+   "unparsed": 0.0,
+   "score": 0.87,
+   "se": 0.03379976689896311,
+   "gap_rate": 0.13
+  }
+ }
+}

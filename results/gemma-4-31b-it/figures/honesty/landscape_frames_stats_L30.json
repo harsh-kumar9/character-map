@@ -1,0 +1,110 @@
+{
+ "layer": "30",
+ "within_unit_spread": 9.873614875723534,
+ "frame_separation": {
+  "own-act": 2.060124578310093,
+  "own-self": 1.9411141082044303,
+  "act-self": 1.2428074729794762,
+  "recognize-judge": 1.5007613287963324
+ },
+ "definition_separation": {
+  "act": {
+   "Self-knowledge|Accuracy": 1.6015039306348389,
+   "Self-knowledge|Sincerity": 1.1727106711796065,
+   "Self-knowledge|Forthrightness": 1.3177106812581958,
+   "Self-knowledge|Non-sycophancy": 0.7297672033868067,
+   "Self-knowledge|Honesty-humility": 1.6807834898199636,
+   "Accuracy|Sincerity": 0.5030147510784603,
+   "Accuracy|Forthrightness": 0.4710271179189774,
+   "Accuracy|Non-sycophancy": 1.1593556708263384,
+   "Accuracy|Honesty-humility": 0.6657100386893134,
+   "Sincerity|Forthrightness": 0.30260223882892834,
+   "Sincerity|Non-sycophancy": 0.6577290423481803,
+   "Sincerity|Honesty-humility": 0.7986582597271118,
+   "Forthrightness|Non-sycophancy": 0.8111899537052236,
+   "Forthrightness|Honesty-humility": 0.5063797012297911,
+   "Non-sycophancy|Honesty-humility": 1.2586426771979724
+  },
+  "self": {
+   "Self-knowledge|Accuracy": 0.8964970803406783,
+   "Self-knowledge|Sincerity": 2.3864228630726227,
+   "Self-knowledge|Forthrightness": 2.3149063812748447,
+   "Self-knowledge|Non-sycophancy": 1.7638641964496817,
+   "Self-knowledge|Honesty-humility": 2.7323995662579814,
+   "Accuracy|Sincerity": 1.5283685210046543,
+   "Accuracy|Forthrightness": 1.4804469351772145,
+   "Accuracy|Non-sycophancy": 0.9511706959122602,
+   "Accuracy|Honesty-humility": 1.8959686480308344,
+   "Sincerity|Forthrightness": 0.2542900293694884,
+   "Sincerity|Non-sycophancy": 0.6433315759021394,
+   "Sincerity|Honesty-humility": 0.39287029457905187,
+   "Forthrightness|Non-sycophancy": 0.5773447930161759,
+   "Forthrightness|Honesty-humility": 0.4565763707599404,
+   "Non-sycophancy|Honesty-humility": 0.9689423492391417
+  },
+  "a": {
+   "Self-knowledge|Accuracy": 3.0462415198990924,
+   "Self-knowledge|Sincerity": 1.8221096580570944,
+   "Self-knowledge|Forthrightness": 1.979818778577704,
+   "Self-knowledge|Non-sycophancy": 1.1540096230692698,
+   "Self-knowledge|Honesty-humility": 2.1911517775277454,
+   "Accuracy|Sincerity": 1.6289314934827595,
+   "Accuracy|Forthrightness": 1.4528499012337248,
+   "Accuracy|Non-sycophancy": 1.9804778658415922,
+   "Accuracy|Honesty-humility": 1.6450441746483988,
+   "Sincerity|Forthrightness": 0.19527990167046133,
+   "Sincerity|Non-sycophancy": 0.7080267447502727,
+   "Sincerity|Honesty-humility": 0.6486032881834014,
+   "Forthrightness|Non-sycophancy": 0.8398511844141144,
+   "Forthrightness|Honesty-humility": 0.5750735698173526,
+   "Non-sycophancy|Honesty-humility": 1.1251539694831885
+  },
+  "b": {
+   "Self-knowledge|Accuracy": 4.032473965561525,
+   "Self-knowledge|Sincerity": 1.7954721180612585,
+   "Self-knowledge|Honesty-humility": 2.0610985350249558,
+   "Accuracy|Sincerity": 2.6097814335967486,
+   "Accuracy|Honesty-humility": 2.5355352238776767,
+   "Sincerity|Honesty-humility": 0.6619973169805571
+  }
+ },
+ "polarity_gap": {
+  "Accuracy|a": 0.49296750129735617,
+  "Accuracy|b": 1.9886372176400222,
+  "Accuracy|c": 0.113729614536736,
+  "Accuracy|d": 0.9013721823482971,
+  "Forthrightness|a": 1.0738654956493554,
+  "Forthrightness|c": 0.6781591164119973,
+  "Forthrightness|d": 0.4856218191279492,
+  "Honesty-humility|a": 1.238873788216768,
+  "Honesty-humility|b": 0.7475556883773288,
+  "Honesty-humility|c": 0.6784088915324425,
+  "Honesty-humility|d": 0.12556742209123406,
+  "Non-sycophancy|a": 0.5171857006369772,
+  "Non-sycophancy|c": 0.21016573686798917,
+  "Non-sycophancy|d": 0.25606893897760646,
+  "Self-knowledge|a": 1.0229008934367805,
+  "Self-knowledge|b": 1.471428488042463,
+  "Self-knowledge|c": 3.406795450486808,
+  "Self-knowledge|d": 1.4026196656351184,
+  "Sincerity|a": 0.8564872198715462,
+  "Sincerity|b": 1.8131401850617979,
+  "Sincerity|c": 0.33874546382084114,
+  "Sincerity|d": 0.20344925764974556
+ },
+ "variance": [
+  0.2131,
+  0.1704,
+  0.1125
+ ],
+ "family_separation": {
+  "self": {
+   "within": 0.5753935548550834,
+   "between": 1.3917394762058883
+  },
+  "act": {
+   "within": 0.9520530847318835,
+   "between": 0.9025137891050724
+  }
+ }
+}

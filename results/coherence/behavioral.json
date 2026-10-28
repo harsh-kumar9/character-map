@@ -1,0 +1,47 @@
+{
+ "model": "gemma-3-4b-it",
+ "instruments": {
+  "MASK known_facts (vs the true version)": {
+   "definition": "Sincerity",
+   "gap": "judge-to-act",
+   "n": 200,
+   "n_parsed": 191,
+   "unparsed": 0.045,
+   "score": 0.3717277486910995,
+   "se": 0.035059815769785445,
+   "gap_rate": 0.6282722513089005,
+   "evasions": 9,
+   "score_lies_over_all": 0.4
+  },
+  "are-you-sure (E5 aqua + C11 mmlu)": {
+   "definition": "Non-sycophancy",
+   "gap": "judge-to-act",
+   "n": 400,
+   "n_parsed": 288,
+   "unparsed": 0.28,
+   "score": 0.4027777777777778,
+   "se": 0.02895074752491675,
+   "gap_rate": 0.5972222222222222
+  },
+  "Batson coin flip": {
+   "definition": "Honesty-humility",
+   "gap": "self-to-act",
+   "n": 100,
+   "n_parsed": 100,
+   "unparsed": 0.0,
+   "score": 0.95,
+   "se": 0.02190429135575904,
+   "gap_rate": 0.050000000000000044
+  },
+  "WDCT word-deed": {
+   "definition": "block",
+   "gap": "self-to-act",
+   "n": 100,
+   "n_parsed": 100,
+   "unparsed": 0.0,
+   "score": 0.79,
+   "se": 0.040936018074033236,
+   "gap_rate": 0.20999999999999996
+  }
+ }
+}

@@ -1,44 +1,110 @@
 {
  "layer": "54",
- "within_unit_spread": 12.45210835033348,
+ "within_unit_spread": 10.325776641110687,
  "frame_separation": {
-  "own-act": 1.3619182645716361,
-  "own-self": 1.560116683833514,
-  "act-self": 1.298074286498936
+  "own-act": 1.8410418889129767,
+  "own-self": 1.9912226504238504,
+  "act-self": 1.3223791453470493,
+  "recognize-judge": 0.7934942787356677
  },
  "definition_separation": {
   "act": {
-   "Self-knowledge|Accuracy": 1.5794177334213746,
-   "Self-knowledge|Sincerity": 0.9724585143045994,
-   "Self-knowledge|Honesty-humility": 1.1127781304221511,
-   "Accuracy|Sincerity": 0.6269115540387081,
-   "Accuracy|Honesty-humility": 0.486454051608694,
-   "Sincerity|Honesty-humility": 0.20070569216435785
+   "Self-knowledge|Accuracy": 1.8063934999088593,
+   "Self-knowledge|Sincerity": 0.8492451454552503,
+   "Self-knowledge|Forthrightness": 1.339541631880226,
+   "Self-knowledge|Non-sycophancy": 0.645904555884988,
+   "Self-knowledge|Honesty-humility": 1.5900911304063017,
+   "Accuracy|Sincerity": 1.0194226179233967,
+   "Accuracy|Forthrightness": 0.6860126947893073,
+   "Accuracy|Non-sycophancy": 1.858900531197495,
+   "Accuracy|Honesty-humility": 0.30190922049407737,
+   "Sincerity|Forthrightness": 0.5268523744253758,
+   "Sincerity|Non-sycophancy": 0.8549201432898414,
+   "Sincerity|Honesty-humility": 0.8165049013090391,
+   "Forthrightness|Non-sycophancy": 1.2678232973640429,
+   "Forthrightness|Honesty-humility": 0.45435603991217194,
+   "Non-sycophancy|Honesty-humility": 1.651344703528667
   },
   "self": {
-   "Self-knowledge|Accuracy": 0.9211783129373561,
-   "Self-knowledge|Sincerity": 2.0890916385433442,
-   "Self-knowledge|Honesty-humility": 1.807321427736355,
-   "Accuracy|Sincerity": 1.469942832559853,
-   "Accuracy|Honesty-humility": 1.241295678949124,
-   "Sincerity|Honesty-humility": 0.8868890417349713
+   "Self-knowledge|Accuracy": 0.8894016430501435,
+   "Self-knowledge|Sincerity": 1.9562329750020093,
+   "Self-knowledge|Forthrightness": 2.36166029715302,
+   "Self-knowledge|Non-sycophancy": 1.6089977266431628,
+   "Self-knowledge|Honesty-humility": 2.591168400760989,
+   "Accuracy|Sincerity": 1.2141721336077425,
+   "Accuracy|Forthrightness": 1.5151600771066986,
+   "Accuracy|Non-sycophancy": 0.732952808663732,
+   "Accuracy|Honesty-humility": 1.8380647174029525,
+   "Sincerity|Forthrightness": 0.6766203704308991,
+   "Sincerity|Non-sycophancy": 1.0393264556836677,
+   "Sincerity|Honesty-humility": 0.9458402379822365,
+   "Forthrightness|Non-sycophancy": 1.022251596756659,
+   "Forthrightness|Honesty-humility": 0.6058702990586682,
+   "Non-sycophancy|Honesty-humility": 1.492880283557479
+  },
+  "a": {
+   "Self-knowledge|Accuracy": 0.837975502289132,
+   "Self-knowledge|Sincerity": 1.3730891471472453,
+   "Self-knowledge|Forthrightness": 0.6609088501419061,
+   "Self-knowledge|Non-sycophancy": 0.2582989438238858,
+   "Self-knowledge|Honesty-humility": 0.8535906892810019,
+   "Accuracy|Sincerity": 1.0445612610272075,
+   "Accuracy|Forthrightness": 0.927619356053267,
+   "Accuracy|Non-sycophancy": 0.7379983730290485,
+   "Accuracy|Honesty-humility": 1.0220568696239856,
+   "Sincerity|Forthrightness": 0.8311959079179024,
+   "Sincerity|Non-sycophancy": 1.2971308012693763,
+   "Sincerity|Honesty-humility": 0.7017515705512254,
+   "Forthrightness|Non-sycophancy": 0.6639417023804912,
+   "Forthrightness|Honesty-humility": 0.20084651181447014,
+   "Non-sycophancy|Honesty-humility": 0.826396985977042
+  },
+  "b": {
+   "Self-knowledge|Accuracy": 0.9238137009307883,
+   "Self-knowledge|Sincerity": 1.0615633868041465,
+   "Self-knowledge|Honesty-humility": 0.6061485312387119,
+   "Accuracy|Sincerity": 0.7428079839358895,
+   "Accuracy|Honesty-humility": 0.8252195922064757,
+   "Sincerity|Honesty-humility": 0.5239057828476364
   }
  },
  "polarity_gap": {
-  "Accuracy|c": 0.22698185879136615,
-  "Accuracy|d": 1.1132463550173437,
-  "Honesty-humility|c": 1.830306622131851,
-  "Honesty-humility|d": 0.8208967094121201,
-  "Self-knowledge|c": 3.1026054155556566,
-  "Self-knowledge|d": 2.6328748897883023,
-  "Sincerity|a": 0.37644170010390826,
-  "Sincerity|b": 0.8482933994458951,
-  "Sincerity|c": 0.865159117091777,
-  "Sincerity|d": 1.529876829956553
+  "Accuracy|a": 1.625580698899865,
+  "Accuracy|b": 1.3538288482769771,
+  "Accuracy|c": 0.26104648100140704,
+  "Accuracy|d": 1.1667203207914363,
+  "Forthrightness|a": 1.058597564870909,
+  "Forthrightness|c": 0.46979648761594994,
+  "Forthrightness|d": 0.6704717929203506,
+  "Honesty-humility|a": 1.827400947222668,
+  "Honesty-humility|b": 0.9727624143324167,
+  "Honesty-humility|c": 1.2721635996603398,
+  "Honesty-humility|d": 0.46292165801111307,
+  "Non-sycophancy|a": 0.6491952065524373,
+  "Non-sycophancy|c": 0.321475683509172,
+  "Non-sycophancy|d": 0.8977161119442038,
+  "Self-knowledge|a": 0.9244856656482348,
+  "Self-knowledge|b": 1.0309518418297943,
+  "Self-knowledge|c": 3.5119751139040334,
+  "Self-knowledge|d": 1.598774705673587,
+  "Sincerity|a": 2.2307309505206874,
+  "Sincerity|b": 1.2039950568631832,
+  "Sincerity|c": 0.15421448114574698,
+  "Sincerity|d": 0.7431851150257042
  },
  "variance": [
-  0.3279,
-  0.1897,
-  0.1254
- ]
+  0.1909,
+  0.1365,
+  0.0952
+ ],
+ "family_separation": {
+  "self": {
+   "within": 0.7830110067405213,
+   "between": 1.4557367699522321
+  },
+  "act": {
+   "within": 1.1666229371671175,
+   "between": 1.0258443548796004
+  }
+ }
 }

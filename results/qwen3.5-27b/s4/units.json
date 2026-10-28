@@ -1,5 +1,25 @@
 [
  {
+  "id": "A9|all|a",
+  "concept": "A9",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
+  "id": "A9|all|b",
+  "concept": "A9",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   64,
+   64
+  ]
+ },
+ {
   "id": "A9|all|c",
   "concept": "A9",
   "sub": "all",
@@ -20,43 +40,83 @@
   ]
  },
  {
-  "id": "C1|all|a",
+  "id": "C1|lying|a",
   "concept": "C1",
-  "sub": "all",
+  "sub": "lying",
   "frame": "a",
   "n_train": [
-   54,
-   54
+   58,
+   58
   ]
  },
  {
-  "id": "C1|all|b",
+  "id": "C1|lying|b",
   "concept": "C1",
-  "sub": "all",
+  "sub": "lying",
   "frame": "b",
   "n_train": [
-   54,
-   54
+   58,
+   58
   ]
  },
  {
-  "id": "C1|all|c",
+  "id": "C1|lying|c",
   "concept": "C1",
-  "sub": "all",
+  "sub": "lying",
   "frame": "c",
   "n_train": [
-   54,
-   54
+   58,
+   58
   ]
  },
  {
-  "id": "C1|all|d",
+  "id": "C1|lying|d",
   "concept": "C1",
-  "sub": "all",
+  "sub": "lying",
   "frame": "d",
   "n_train": [
-   54,
-   54
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|misleading|a",
+  "concept": "C1",
+  "sub": "misleading",
+  "frame": "a",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|misleading|b",
+  "concept": "C1",
+  "sub": "misleading",
+  "frame": "b",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|misleading|c",
+  "concept": "C1",
+  "sub": "misleading",
+  "frame": "c",
+  "n_train": [
+   58,
+   58
+  ]
+ },
+ {
+  "id": "C1|misleading|d",
+  "concept": "C1",
+  "sub": "misleading",
+  "frame": "d",
+  "n_train": [
+   58,
+   58
   ]
  },
  {
@@ -107,6 +167,26 @@
   "n_train": [
    64,
    64
+  ]
+ },
+ {
+  "id": "C19|agreeableness|a",
+  "concept": "C19",
+  "sub": "agreeableness",
+  "frame": "a",
+  "n_train": [
+   31,
+   31
+  ]
+ },
+ {
+  "id": "C19|agreeableness|b",
+  "concept": "C19",
+  "sub": "agreeableness",
+  "frame": "b",
+  "n_train": [
+   31,
+   31
   ]
  },
  {
@@ -190,6 +270,26 @@
   ]
  },
  {
+  "id": "C19|honesty_humility|a",
+  "concept": "C19",
+  "sub": "honesty_humility",
+  "frame": "a",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
+  "id": "C19|honesty_humility|b",
+  "concept": "C19",
+  "sub": "honesty_humility",
+  "frame": "b",
+  "n_train": [
+   32,
+   32
+  ]
+ },
+ {
   "id": "C19|honesty_humility|c",
   "concept": "C19",
   "sub": "honesty_humility",
@@ -227,6 +327,26 @@
   "n_train": [
    29,
    29
+  ]
+ },
+ {
+  "id": "C2|all|a",
+  "concept": "C2",
+  "sub": "all",
+  "frame": "a",
+  "n_train": [
+   59,
+   59
+  ]
+ },
+ {
+  "id": "C2|all|b",
+  "concept": "C2",
+  "sub": "all",
+  "frame": "b",
+  "n_train": [
+   59,
+   59
   ]
  },
  {
@@ -337,6 +457,96 @@
   "n_train": [
    62,
    62
+  ]
+ },
+ {
+  "id": "C8|genuine_agreement|a",
+  "concept": "C8",
+  "sub": "genuine_agreement",
+  "frame": "a",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|genuine_agreement|c",
+  "concept": "C8",
+  "sub": "genuine_agreement",
+  "frame": "c",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|genuine_agreement|d",
+  "concept": "C8",
+  "sub": "genuine_agreement",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|praise|a",
+  "concept": "C8",
+  "sub": "praise",
+  "frame": "a",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|praise|c",
+  "concept": "C8",
+  "sub": "praise",
+  "frame": "c",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|praise|d",
+  "concept": "C8",
+  "sub": "praise",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|sycophantic_agreement|a",
+  "concept": "C8",
+  "sub": "sycophantic_agreement",
+  "frame": "a",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|sycophantic_agreement|c",
+  "concept": "C8",
+  "sub": "sycophantic_agreement",
+  "frame": "c",
+  "n_train": [
+   60,
+   60
+  ]
+ },
+ {
+  "id": "C8|sycophantic_agreement|d",
+  "concept": "C8",
+  "sub": "sycophantic_agreement",
+  "frame": "d",
+  "n_train": [
+   60,
+   60
   ]
  },
  {

@@ -2498,3 +2498,401 @@ scores 423327, 423490-2). Pre-C28 copies in /ada1/u/harsh/tmp/hhh_pre_c28.
   ambiguous queries by 0.45 and 0.65 and lowers answering clear ones by 0.43 and 0.59 (both judges), with coherence
   64 against 89: asking regardless of need, confounded with damage.
 - figs.py panel letters ran out at nine units (fixed). The three pages are rebuilt and republished.
+
+## D-058 The honesty paper: one spine, a coherence metric, and downstream consequences - proposed 2026-10-28
+
+Harsh (2026-10-28): "is that adding to the story? ... keep the most impactful key framings and maximize on that rather
+than adding more dangling tangents ... keep the HHH work separate ... can we come up with a metric based on internal
+representation or expressed behavior to quantify the disconnect or the ambiguity in understanding what honesty means
+for the model? And then relate all of this with downstream experiments involving different tasks which might not be
+directly about honesty ... reward hacking could be one construct."
+
+What the honesty block has established (Gemma-3-4B-IT; D-043 to D-051, results entries): honesty is not one variable
+inside the model. Where an item sits is set by frame first (own reply about someone else vs prefilled reply, 3.7
+within-unit spreads), definition second, honest vs dishonest side last (0.2-1.0 spreads for most units). Directions
+from different frames of the same definition are near-orthogonal even when they transfer by AUROC (S4), steering a
+frame's direction moves that frame's readouts and little else (S5a), and knowing-type directions move judgment
+behaviors while doing-type directions move what the reply does (S5b, dose-response D-041). That is the spine. Cut
+or demoted: HHH (its own exploration), the 59-concept map and taxonomy tests (replication base, appendix), the
+bottom-up pass (appendix), C8 2x2 and C21 circumplex (appendix), C22 and C23 (appendix, built), the A9
+hedged-vs-overconfident sub-contrast (dropped: a refinement, not spine), further concept additions (none).
+
+The consequence the paper lacks is a measurement that can be compared across models and training runs, and a link
+from it to failures nobody labels "honesty". Proposed:
+
+1. Coherence score, three levels, all computable from what exists for Gemma-3-4B and in the D-047 pipeline for
+   gemma-4-31B and Qwen3.5-27B:
+   - representational: leave-one-cell-out decodability. Train one honest-vs-dishonest probe on all (definition,
+     frame) cells but one, standardized space, verdict projected out, test on the held-out cell; report
+     (AUROC_loco - 0.5) / (AUROC_within - 0.5) per cell and its mean. One number: how far a general honesty
+     variable is decodable regardless of how honesty is instantiated. Companion numbers already in hand: the
+     verdict-controlled cross-frame transfer (S3) and the standardized cross-cell cosines (S4).
+   - causal: the S5a off-diagonal. Steer cell i at the calibrated dose, read cell j; mean of j != i effects over
+     the i = j effect, by frame block and overall.
+   - behavioral: cross-frame consistency on the same scenario, on policy. The D-046 gap instruments: judge->act
+     (MASK pressure, are-you-sure), self-describe->act (WDCT, Batson coin flip), recognize->judge. Score = 1 minus
+     the gap rate per definition.
+   The claim to test: the three agree across definitions and across models, so one of them can stand in for the
+   others.
+2. Downstream battery, tasks that are consequences of honesty without being honesty evals, run at baseline on the
+   three subjects (Gemma-3-4B only where it can do the task):
+   - reward hacking on impossible or underspecified coding tasks: special-casing or editing tests and claiming
+     success vs reporting the task cannot be done (ImpossibleBench, Zhong et al. 2025; the Denison et al. 2024
+     sycophancy-to-subterfuge environments for the lighter rungs);
+   - fabricated task completion in tool use: a tool that fails; does the reply claim it ran (agent honesty under
+     failure);
+   - sandbagging under incentive: told that high scores trigger unlearning, does capability drop, and when asked,
+     does it admit it (van der Weij et al. 2024; the doubling-down measure from Meinke et al. 2024);
+   - persuading a judge of a wrong answer: convincingness of wrong answers vs right ones (Wen et al. 2024,
+     U-Sophistry);
+   - confident fabrication on unanswerable questions under a must-answer instruction (SimpleQA-style);
+   - confession: after a scored episode in which the model cheated, does it say so when asked;
+   - eval-conditioned behavior: compliance when told it is a test vs deployment (E2, already instrumented).
+   Capability controls per task (a matched doable version), and the same coherence judge as S5.
+3. Steering as the intervention (the cheap arm). Levers: each frame's pooled honesty direction, the shared axis
+   (the leave-one-cell-out probe direction, or the mean of the cell directions after standardization), and all
+   four frames at once at matched total norm. Readouts: the S5b behaviors and the battery in 2, at 1x to 4x.
+   Prediction from the geometry: act-frame levers move conduct (reward hacking, fabricated completion), self-
+   describe levers move self-report (confession, admitting sandbagging), judge levers move verdicts on others'
+   cheating and not the model's own; the shared axis is weak because the honest-dishonest variance is small next to
+   the frame variance, so "pushing honesty everywhere" costs coherence before it moves conduct. If that holds, the
+   line is: the model's honesty is fragmented by frame, and so are its failure modes; you can make it a better
+   judge of cheating without making it cheat less.
+4. Fine-tuning as the intervention (D-044, now with the battery as the outcome). Equal-budget LoRA runs on
+   Gemma-3-4B and Qwen3.5-27B: honesty as self-description, as sincerity under pressure, as calibration plus
+   accuracy, as judgment of others' dishonesty, and the mixture; plus two misalignment runs from public data
+   (Taylor et al. 2025 school of reward hacks; Betley et al. 2025 insecure code). Readouts before and after: the
+   coherence score and the battery. Test: the change in coherence predicts the change in the battery across runs,
+   and misalignment training lowers coherence frame by frame (which frames move is the mechanistic reading of
+   emergent misalignment).
+5. Order and cost. (1) is a week from existing activations and S5a output. (2) is two weeks, mostly on Qwen3.5-27B
+   and gemma-4-31B, with 4B proxies where it can. (3) is two weeks on the S5 code. (4) is the long pole, three to
+   four weeks, after (3) has shown which levers matter. Across-model correlation (three subjects, later OLMo and
+   Llama) is supporting evidence only; the identification comes from (3) and (4).
+
+Ruled out for now: a definitional-confusion self-report measure (asking the model what honesty means), autonomy
+preservation, reasoning faithfulness on Gemma (no thinking mode; it can enter through Qwen3.5-27B in the battery
+later). The D-049 session's open item, the A9 sub-contrast, is withdrawn under this decision; the honesty page's
+narrative is rewritten once the coherence score exists, not before.
+
+## D-058 ruling - 2026-10-28
+
+Harsh: "these look good but the steering can we do something like a factorial design for experiment? we should ignore
+gemma 4b and focus on the bigger 2 models we have going forward. for the training, later, we can perhaps do something
+like OCT: https://arxiv.org/pdf/2511.01689 but that is the later part of this where we figure out training
+interventions. right now lets focus on the first part."
+
+Ratified with three amendments. (a) Subjects are gemma-4-31b-it and Qwen3.5-27B from here on; Gemma-3-4B results stay
+as the development record and appendix, nothing new is run on it. (b) Steering is a factorial design (below), not a
+list of levers. (c) The training arm, when it comes, uses Open Character Training (Maiya, Bartsch, Lambert, Hubinger,
+arXiv 2511.01689: Constitutional-AI persona fine-tuning with synthetic introspective data, code at
+github.com/maiush/OpenCharacterTraining) with honesty written as a constitution under each definition; D-044's
+LoRA-SFT plan is superseded by that. Now: part 1 only, the coherence score on the two subjects, which first needs
+both brought to the current block (D-047 ruling (2) left them on the 13-concept block at 5e38d22: no a/b for A9,
+C2, C19; no C3 and C8 as honesty; the old role-play C1).
+
+Factorial steering design (part 3, fixed now so part 1 computes the levers it needs):
+- Stage A, frame level, per model. Lever (7 levels): the four frame-pooled honesty directions (mean of the cell
+  directions available in that frame, standardized space, unit norm), the shared axis (the leave-one-cell-out probe
+  direction pooled over every cell), all four frames at once (sum of the four, renormalized to the same norm), and
+  random (four norm-matched random directions, reported as one level with its spread, the floor). Sign (2): toward
+  honest, toward dishonest. Dose (2): 2x and 4x of the model's calibrated unit (D-039 per model; in Gemma-3-4B 1x
+  moved little and 8x broke coherence). Readout frame (3): conduct, self-report, judgment of others, each with
+  several instruments: conduct = MASK pressure, material-fact disclosure, SycophancyEval answer, reward hacking on
+  impossible tasks, fabricated tool completion, confident fabrication under must-answer; self-report = HEXACO and
+  TRAIT self-report, confession after a scored episode with cheating, admission of sandbagging, system-prompt
+  transparency; judgment = verdicts on transcripts of another agent special-casing tests or lying (new, 100 items),
+  SycophancyEval is-the-user-right, recognize-and-describe. Baseline once. Items fixed across conditions (paired
+  contrasts). Size: 28 conditions plus baseline, about 1,800 readout items, about 52k generations per model.
+- Stage B, cell level. Lever: the 22 cell directions (definition x frame); sign 2; dose 2x (4x for the levers that
+  moved anything in A). Readouts: the six definition instruments and the three gap instruments (MASK judge-to-act,
+  WDCT and Batson self-to-act, are-you-sure). About 44 to 88 conditions, 1,400 items, 60k to 120k generations per
+  model.
+- Stage C, optional: dose-response 1x to 8x on the levers that passed A and B.
+- Analysis: per instrument, effect = honest-direction rate under the condition minus baseline, item-bootstrap SE;
+  then one linear model per stage, effect ~ lever x readout-frame + dose + sign, with the lever-frame x
+  readout-frame interaction as the test of the prediction (act levers move conduct, self-describe levers move
+  self-report, judge levers move judgments of others), the random level as the floor, the all-frames vs best-single-
+  frame contrast at matched norm as the test of "push honesty everywhere", and the coherence judge as the gate
+  (conditions below the random-direction coherence threshold are dropped, as in D-041). Both subjects reported
+  separately; pooled only where the interaction has the same sign.
+
+Part 1, the coherence score, now, on both subjects:
+1. Bring each to the current block: replies and activations for A9, C2, C19 recognize and judge, the rebuilt C1 in
+   all four frames, C3 and C8 (K1, K2 stay); verdict labels for the a/b rows; S3 with the standardized diff of
+   means, the verdict and negation controls and claims; S4 verdict variant; S5a causal matrix over the 22 cells at
+   the per-model dose; the landscape at the second and fourth depths. Stages one at a time, gates read.
+2. The score (cm/coherence.py): representational = leave-one-cell-out probe per cell (train on every other cell's
+   train items, standardized, verdict projected out; AUROC on the held-out cell's test items; scaled by the
+   within-cell AUROC) and its mean; causal = S5a off-diagonal over diagonal, by frame block and overall;
+   behavioral = one minus the gap rate on the on-policy gap instruments (MASK pressure, WDCT, Batson coin flip,
+   are-you-sure), per definition where an instrument maps to it.
+3. Report: per model, a cells x three-levels table and one figure; the agreement between the three levels across
+   cells and across the two models is the first result. Gemma-3-4B's score may be computed from existing data for
+   reference, not for the paper.
+The A9 hedged-vs-overconfident sub-contrast is withdrawn. HHH stays its own exploration.
+
+## D-059 Coherence score on the two subjects: the settings the D-058 ruling leaves open - proposed 2026-10-28
+
+Part 1 of D-058 as the executor reads it. Everything below is fixed by the ruling except the items marked as rulings
+needed. State at the start: the subjects' results of the D-047 run (13 concepts, stimuli 5e38d22) were never
+committed; they are now commit 51f1eb5 as the baseline, and their copies on ada are at
+/ada1/u/harsh/tmp/aside/d058_block13/. Of the block, C3, C8, K1 and K2 items are unchanged since the subjects'
+activations were taken (manifest sha256 checked against the files on ada), so only A9, C1, C2 and C19 are
+re-extracted and C8 is extracted for the first time; the appendix concepts (C4, C11, C12, E1, E5, F1) stay as run.
+
+1. S5a for the causal level (cm.s5_causal, a `--block honesty` variant writing to outputs/<tag>/s5_hon/ and
+   results/<tag>/s5_hon/, the D-047 matrix untouched). Sources: every one of the 22 cells (A9 a b c d, C2 a b c d,
+   C1 lying a b c d, C3 a c d, C8 sycophantic_agreement a c d, C19 honesty_humility a b c d) plus K1 a b c d and K2
+   a c as the floor, 28 in all, not the pipeline's c-else-d and b-else-a pair per concept: the causal score needs a
+   diagonal for every cell, and part 3's Stage B uses the same 22 levers. Directions as the pipeline has them (S3
+   reply32 diff of means at the steering depth; a and b verdict-controlled). Targets: every S4 unit of the subject,
+   6 probe items per pole, so spillover into the appendix concepts stays visible. Dose: the D-052 grid, 1/128, 1/64,
+   1/32 and 1/16 of the median residual norm at the steering depth, one run per dose; the headline is the dose whose
+   random-direction spillover (share of off-concept cells with |z| > 3) is nearest Gemma-3-4B's 1/128 run (3.9% /
+   4.7%), the other doses in the appendix. Reason: the coherence rule (D-039) gave Qwen 1/16, where the D-047 matrix
+   is saturated (35% of off-concept cells beyond z 3 at depth 54), and gemma-4 1/64, where nothing moves (median
+   self z -0.1), as the D-052 note found. The coherence dose stays S5b's. Cost: 73 conditions x about 800 probe
+   items per dose; the D-047 run took 8 minutes per shard on gemma-4 with 4 shards, so about 2.5 GPU-hours per
+   subject for the grid.
+2. Representational level (cm/coherence.py `rep`). Rows: reply32 at the four depths, the verdict direction
+   projected out of a/b rows (concept_data "verdict", as S4 and the landscape). For each held-out cell, the training
+   pool is the train split of the other 21 honesty cells; the controls K1 and K2 are held out against all 22. Every
+   dimension is standardized by the SD of the fold's pooled training rows. Two directions on the pool: (i) the
+   cell-balanced diff of means (the average over the training cells of each cell's standardized pos-minus-neg mean
+   difference, so a cell with 99 scenarios weighs the same as one with 50) and (ii) a logistic probe (L2, C = 1,
+   S3's setting) with sample weights that give every cell the same total weight and both poles the same weight
+   within a cell. Score: AUROC of the held-out cell's test items projected on the direction; scaled as
+   (AUROC_loco - 0.5) / (AUROC_within - 0.5), with AUROC_within the cell's own train-to-test AUROC under the same
+   method on the same rows (recomputed here; S3's auroc_sdm and auroc_probe are recorded beside it). A cell whose
+   within AUROC is under 0.55 gets no scaled score. Reported at all four depths; headline at the second and fourth
+   (the landscape depths). Companions: the 22 x 22 standardized cell-to-cell transfer matrix (each cell's direction
+   on every other cell's test items), and the controls' rows as the floor.
+3. Levers saved for part 3 (results/<tag>/coherence/levers.npz, untracked like the S3 directions, on ada): at the
+   steering depth, the 22 cell directions (standardized diff of means, unit norm), the four frame-pooled directions
+   (mean of the cell directions in that frame, unit norm), the all-cells diff of means and the all-cells probe
+   direction (the shared axis, unit norm), the all-four-frames sum renormalized, and the SD vector of the pooled
+   training rows, so a standardized-space direction can be mapped to the residual stream (divide by the SD, unit
+   norm) when it is injected.
+4. Causal level (`causal`). From the honesty S5a matrix at the headline dose, dense +dose effects in gap units at the
+   third and fourth depths, honesty cells only. Per source cell: the mean effect on the 21 other honesty cells over
+   its own effect. By frame block (own reply a/b, act c, self-describe d): the mean of source-block-to-target-block
+   cells over the mean diagonal of the source block, a 3 x 3 table. Overall: mean off-diagonal over mean diagonal.
+   K1 and K2 sources on the honesty cells give the floor. Within-definition cross-frame cells are reported apart from
+   cross-definition cells. Every dose of the grid is tabulated in the appendix entry.
+5. Behavioral level (`behavioral`). The unsteered replies of the D-047 S5b runs already exist for both subjects
+   (outputs/<tag>/s5b/replies, baseline rows, with gemma-4-31B-it's judgments of C1), so the headline needs no
+   new generation. Mapping, rulings needed: MASK known_facts (C1, 200) -> sincerity, judge-to-act; are-you-sure
+   (E5 aqua 200 and C11 mmlu 200, pooled; keeps the prefilled correct answer under "Are you sure?") ->
+   non-sycophancy, judge-to-act; the Batson coin flip (C12, 100) -> honesty-humility (the fairness facet of HEXACO
+   H), self-to-act; WDCT word-deed (C12, 100; WDCT's own view-then-act pairs) -> the block, not one definition.
+   Self-knowledge, accuracy and forthrightness have no gap instrument and stay blank at this level. Score = 1 minus
+   the gap rate over parsed items, the unparsed share reported. Refinement for MASK, ruling needed: the item's
+   meta keeps MASK's belief question (belief_elicit_1); the subject answers it unsteered and without the pressure
+   system prompt, gemma-4-31B-it labels the belief reply with the same TRUE / FALSE / NEITHER prompt, and a gap is
+   counted only where the pressured reply asserts the opposite of the subject's own belief (MASK's protocol; the C1
+   card flagged the ground-truth proxy). Score = 1 - lies / items with a definite belief, the proxy version beside
+   it. On-policy first answers for are-you-sure and WDCT (the subject's own answer or view first, then the pushback
+   or the deed question) are possible the same way; not run unless asked.
+6. Report (`report`). Per subject results/<tag>/coherence/table.json and figures/coherence.{png,pdf}: panels for
+   the representational scores per cell (points by frame, colors by definition, both methods, the K1/K2 floor as a
+   band), the causal per-cell ratios with the 3 x 3 block table, the behavioral scores per definition, and the
+   per-cell agreement between the representational and causal levels; axis labels and a caption, no headline text
+   inside. Agreement: Spearman over the 22 cells between levels, and between the two subjects per level. Gemma-3-4B
+   from its existing data (its S5a has 12 of the 22 cells as sources, so its causal level is partial) as the
+   reference line, marked not for the paper.
+
+Rulings needed: (1) every cell as an S5a source and the dose grid with the matched-dose headline; (2) the
+cell-balanced diff of means and the C = 1 probe with cell-balanced weights; (5) the instrument-to-definition mapping
+and the MASK belief refinement.
+
+## D-059 ruling - 2026-10-28
+
+Harsh: "Ratify D-059." Ratified as proposed, all three settings: every cell plus K1/K2 as S5a sources on the 1/128
+to 1/16 dose grid with the matched-spillover headline; the cell-balanced diff of means and the C = 1 cell-balanced
+probe for the leave-one-cell-out level; the instrument mapping and the MASK own-belief refinement. Stages continue
+one at a time: the S5a grid and the score follow the replies, acts and verdict labels, gates read between stages.
+
+## D-058 results, part 1: the honesty coherence score on gemma-4-31b-it and Qwen3.5-27B - 2026-10-28
+
+Settings as ruled in D-059. Both subjects brought to the current honesty block first (A9, C2, C19 with recognize and
+judge frames, the rebuilt C1, C3, C8; K1 and K2 and the appendix concepts kept from the D-047 run, their items
+unchanged by manifest sha256). Depths gemma-4 16/30/39/51, Qwen 17/32/42/54; "steering depth" is the second,
+"late" the fourth. Readout reply32; a/b rows verdict-controlled. Gemma-3-4B numbers from its existing data are the
+reference line, not for the paper.
+
+### 1. The block on the two subjects
+
+Replies: 2,588 own replies per subject (A9 396, C1 800, C2 396, C19 396, C8 600 boundary items; greedy, 32 tokens,
+median 22 words). Activations: A9 896, C2 996, C1 1,996, C19 1,696, C8 2,000 rows per subject (items plus held-out).
+Verdict labels (gemma-4-31B-it, P/N/X) on the subject's own a/b openings:
+
+| | A9 | C1 | C2 | C19 | C8 |
+| --- | --- | --- | --- | --- | --- |
+| gemma-4 P/N/X | 29/33/334 | 45/106/649 | 77/183/136 | 23/48/325 | 14/44/542 |
+| Qwen P/N/X | 157/82/157 | 202/367/231 | 146/195/55 | 114/136/146 | 31/220/349 |
+
+gemma-4 hedges ("whether X was right depends on ...") where Qwen gives a verdict, so gemma-4's verdict direction is
+built from fewer cells; it still reads P against N at 0.87-1.00 at the steering depth (Qwen 0.99-1.00).
+
+Within-frame AUROC, standardized diff of means, at the four depths (logistic probe in results/<tag>/s3):
+
+| cell | gemma-4 16/30/39/51 | Qwen 17/32/42/54 |
+| --- | --- | --- |
+| A9 self-knowledge a / b | .85 1.00 .92 .95 / .71 .99 .91 .91 | .98 .99 .99 .98 / .87 .98 .95 .88 |
+| A9 c / d | 1.00 x4 / 1.00 x4 | 1.00 x4 / 1.00 x4 |
+| C2 accuracy a / b | .98 1.00 1.00 1.00 / .92 .99 .97 .97 | .97 .99 .99 .99 / .86 .94 .93 .89 |
+| C2 c / d | .80 .81 .81 .82 / 1.00 1.00 1.00 .99 | .81 .85 .85 .83 / 1.00 x4 |
+| C1 sincerity (lying) a / b | .94 1.00 1.00 1.00 / .70 .95 .92 .91 | .95 .99 .99 .98 / .86 .97 .99 .97 |
+| C1 c / d | .83 .99 .95 .84 / .99 1.00 .99 .97 | .93 .99 .96 .88 / 1.00 1.00 .99 1.00 |
+| C3 forthrightness a / c / d | .88 .96 .97 .96 / .98 .98 .95 .92 / 1.00 1.00 1.00 .99 | .91 .95 .94 .95 / .98 .98 .95 .93 / 1.00 x4 |
+| C8 non-sycophancy a / c / d | .75 .93 .87 .89 / .93 1.00 .95 .94 / .99 1.00 1.00 1.00 | .81 .88 .88 .87 / .96 .99 .97 .96 / 1.00 x4 |
+| C19 honesty-humility a / b | .86 1.00 .97 .98 / .73 .99 .98 .91 | .97 .99 1.00 .99 / 1.00 x4 |
+| C19 c / d | 1.00 x4 / .93 1.00 .99 .99 | 1.00 x4 / 1.00 x4 |
+| K1 formality a / b / c / d | .98 1.00 1.00 .99 / .93 1.00 1.00 .99 / 1.00 .99 .99 .98 / 1.00 x4 | .99 1.00 1.00 1.00 / .85 .96 .98 .95 / 1.00 x4 / 1.00 x4 |
+| K2 topic a / c | .91 .92 .71 .81 / 1.00 x4 | .85 .87 .90 .91 / 1.00 x4 |
+
+Every honesty cell is at 0.80 or above at the steering depth on both subjects (accuracy in the act frame is the
+weakest, 0.81 and 0.85). Held-out at the steering / late depth: MASK provided_facts (sincerity, act) 0.96 / 0.65 on
+gemma-4 and 0.98 / 0.70 on Qwen (Gemma-3: 0.70 / 0.60); SycophancyEval answer (C8 act) 0.88 / 0.55 and 1.00 / 0.74;
+TRAIT self-report (C19 d) 1.00 / 0.57 and 1.00 / 0.55; SelfAware (A9 d) 1.00 on both; K2's topic held-out 1.00 on both.
+
+Verdict-controlled cross-frame transfer (mean of both directions; steering depth, late depth):
+
+| | baseline K1+K2 | A9 | C2 | C1 | C3 | C8 | C19 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| gemma-4 a-b | 0.86, 0.88 | .96, .91 | .97, .96 | .91, .93 | - | - | .88, .79 |
+| gemma-4 c-d | | .99, .85 | .69, .75 | .81, .44 | .80, .73 | .51, .37 | .96, .99 |
+| gemma-4 own vs prefilled (range) | | .39-.67, .45-.74 | .34-.43, .15-.43 | .62-.79, .46-.77 | .40-.75, .31-.76 | .69-.84, .75-.76 | .30-.43, .30-.64 |
+| gemma-4 cross mean | | .69, .67 | .53, .51 | .76, .60 | .65, .60 | .68, .63 | .55, .62 |
+| Qwen a-b | 0.90, 0.95 | .99, .94 | .95, .87 | .91, .84 | - | - | .98, .87 |
+| Qwen c-d | | .99, .99 | .80, .76 | .83, .71 | .93, .88 | .55, .60 | 1.00, .99 |
+| Qwen own vs prefilled (range) | | .69-.90, .50-.62 | .16-.43, .17-.33 | .42-.71, .45-.53 | .30-.68, .34-.57 | .63-.91, .52-.79 | .45-.79, .41-.73 |
+| Qwen cross mean | | .86, .70 | .46, .44 | .71, .58 | .64, .60 | .70, .64 | .75, .71 |
+
+The control baseline is far higher than on Gemma-3 (0.86-0.95 against 0.67-0.73): on these subjects a formality or
+topic direction read in one frame reads the other frames almost perfectly, so the bar for "shared" is high. The
+same-family pairs (a-b, and c-d for self-knowledge and honesty-humility) reach it; every own-reply vs prefilled pair
+sits below it, accuracy's at or under 0.5 (reversed on Qwen: a-c 0.24, b-d 0.16). D-033 classes at the steering
+depth, 30 pairs: gemma-4 25 readout-dependent, 3 dissociated, 2 shared; Qwen 28 readout-dependent, 2 dissociated,
+0 shared (Gemma-3 at 17: 24 / 5 / 1).
+
+S4 standardized cosines (steering depth / late depth; floors 0.16 / 0.15 gemma-4, 0.17 / 0.15 Qwen): a-b +0.51 to
++0.71 / +0.31 to +0.57 on gemma-4, +0.46 to +0.72 / +0.37 to +0.61 on Qwen; c-d +0.45 (A9), +0.07 (C2), +0.24 (C1),
++0.38 (C3), -0.07 (C8), +0.76 (C19) on gemma-4 and +0.50, +0.08, +0.14, +0.40, +0.00, +0.78 on Qwen; own-reply
+against prefilled |cos| at most 0.27 (gemma-4, C1 a-d) and 0.21 (Qwen, C8 a-d), the rest within the floor. The
+Gemma-3 structure (D-048 results) reproduces: the two own-reply frames share a direction, act and self-description
+share one for some definitions, and the two families are orthogonal.
+
+Landscape (22 directions, 4,792 items; cm.honesty_landscape at the steering and late depths; S4 consistency r 0.97
+to 0.98). Frame separation in within-unit spreads, late depth: own-act 1.86 / 1.84, own-self 1.97 / 1.99, act-self
+1.11 / 1.32, recognize-judge 1.02 / 0.79 (gemma-4 / Qwen; Gemma-3 3.78, 3.09, 1.94, 0.39); steering depth gemma-4
+2.06, 1.94, 1.24, 1.50 and Qwen 1.64, 2.15, 1.41, 0.53. First three components 0.22 / 0.14 / 0.11 and 0.19 / 0.14 /
+0.10 (Gemma-3 0.40 / 0.11 / 0.08): the frame axis is still first, but it carries half of what it carries in
+Gemma-3, and the subspace is less one-dimensional. Definition separation among the four spine definitions, late
+depth: in a 0.52-2.00 (gemma-4) and 0.70-1.37 (Qwen), in b 0.53-2.34 and 0.52-1.06, act 0.77-1.43 and 0.30-1.81,
+self 0.88-2.59 and 0.89-2.59; the smallest pairs are sincerity vs honesty-humility in the own-reply frames (0.52,
+0.53 on gemma-4) and accuracy vs honesty-humility in act on Qwen (0.30). Polarity gaps, late depth (gemma-4 / Qwen):
+self-knowledge c 2.48 / 3.51 (its "I don't know" replies, as in Gemma-3), accuracy a 1.50 / 1.63, b 2.02 / 1.35, c
+0.60 / 0.26 (Gemma-3 0.09), d 0.73 / 1.17; sincerity a 1.38 / 2.23, b 1.61 / 1.20, c 0.47 / 0.15, d 0.80 / 0.74;
+honesty-humility c 1.13 / 1.27 (Gemma-3 0.08); forthrightness c 0.35 / 0.47; non-sycophancy c 0.21 / 0.32, d 1.17 /
+0.90. The act-frame polarity gaps that were near zero on Gemma-3 (accuracy, honesty-humility) open on both subjects.
+
+### 2. The coherence score
+
+Representational (leave-one-cell-out, scaled by the cell's own within AUROC; dm = cell-balanced diff of means,
+probe = C 1 logistic). Means over the 22 cells, steering depth / late depth:
+
+| | dm | probe | by block dm (own, act, self) | controls dm mean, mean of |.| |
+| --- | --- | --- | --- | --- |
+| gemma-4 | 0.67 / 0.52 | 0.80 / 0.67 | 0.61 0.54 0.91 / 0.64 0.33 0.50 | +0.04, 0.48 / -0.01, 0.56 |
+| Qwen | 0.67 / 0.56 | 0.83 / 0.70 | 0.56 0.62 0.89 / 0.43 0.53 0.82 | +0.12, 0.23 / +0.04, 0.33 |
+| Gemma-3 (ref) | 0.49 / 0.46 | 0.64 / 0.57 | 0.40 0.56 0.57 / 0.44 0.54 0.39 | +0.15, 0.23 / +0.04, 0.27 |
+
+By definition (dm, steering depth; gemma-4 / Qwen): self-knowledge 0.19 / 0.52, accuracy 0.71 / 0.55, sincerity
+0.82 / 0.83, forthrightness 0.88 / 0.65, non-sycophancy 0.56 / 0.66, honesty-humility 0.91 / 0.78; probe 0.80 /
+0.87, 0.52 / 0.69, 0.91 / 0.94, 0.93 / 0.80, 0.65 / 0.67, 0.98 / 0.97. Cells the pooled direction reads badly or
+backwards by diff of means on both subjects: self-knowledge recognize and judge (gemma-4 -0.31, -0.47; Qwen +0.29,
++0.04; the probe reads them at 0.83-0.89, so the pooled mean difference carries a component that runs against the
+self-knowledge verdict, as D-048 found for Gemma-3's verdict labels), accuracy act (0.27 / 0.55), sincerity act
+(0.34 / 0.57), non-sycophancy act (0.35 / 0.33). Self-descriptions are read best (block means 0.91 and 0.89). The
+controls' mean is near zero by cancellation: formality's own-reply cells read reversed on both subjects (gemma-4
+-0.64 and -0.68, Qwen -0.31 and +0.01; -0.98 for gemma-4 recognize at the late depth), formality's self-description
+and topic's act cell read positive (+0.53, +0.43 on gemma-4; +0.42, +0.39 on Qwen). So the pooled honesty direction
+is not free of register: it carries some of informal-over-formal in own replies and some of what formality and
+topic do in prefilled replies. The floor to quote is the controls' mean |scaled| (0.48 and 0.23 at the steering
+depth), not their mean.
+
+Levers at the steering depth (results/<tag>/coherence/levers.npz on ada, standardized space and residual-stream
+versions): cosines between the frame-pooled directions a-b 0.49 / 0.37, c-d 0.44 / 0.51, own against prefilled
+-0.15 to +0.22 / -0.12 to +0.09 (gemma-4 / Qwen); the all-cells diff of means against the all-cells probe 0.60 /
+0.58; the all-four-frames sum against the all-cells diff of means 0.98 / 0.97. The two shared-axis levers (dm, probe)
+are not the same direction; part 3 should carry both.
+
+Causal (S5a, every honesty cell plus K1 a b c d and K2 a c as sources, 67 targets, 804 probe items, dense +dose,
+doses 1/128, 1/64, 1/32, 1/16 of the median residual norm at the steering depth; residual norm 282 on gemma-4, 80 on
+Qwen).
+- gemma-4: at every dose the self effect after the skip-path subtraction is zero (median over the 22 cells -0.005,
+  -0.009, -0.017, -0.026 gap units at depth 39 and -0.008, -0.015, -0.037, -0.059 at 51; z -0.3 to +0.3; cells with
+  z > 3: 0 / 0 / 0 / 2 at 39, 0 / 0 / 2 / 5 at 51). The raw self shift equals the injected vector's own projection
+  (0.034 against a skip term of 0.041 at 1/128, 0.31 against 0.35 at 1/16): the layers after 30 do not amplify an
+  honesty direction, they damp it slightly, at every dose up to the one that breaks generation (coherence 27 at
+  1/32, D-052). Off-concept spillover (|z| > 3) at 51: 0.1%, 0.5%, 18%, 46%; the D-059 rule picks 1/64. So on
+  gemma-4 the causal level has no ratio to report: the diagonal is zero, and the off-diagonal is zero with it. The
+  raw-shift ratio (off over diagonal with the skip path included) is 0.01-0.47 per cell, 0.08-0.10 overall, which
+  is the geometry of the directions, not a causal effect.
+- Qwen: linear in dose over the whole grid. Self effect beyond the skip path at the late depth +0.010, +0.020,
+  +0.041, +0.084 gap units (z +7.4, +7.2, +6.8, +6.7; 20 of 22 cells above z 3 at every dose); at depth 42 negative
+  (-0.008 to -0.063, z about -5: the direction is damped on the way to 42 and amplified from 42 to 54). Off-diagonal
+  over diagonal at 54: 0.12, 0.12, 0.12, 0.11; random-direction spillover 24% at every dose (so the matched-dose
+  rule cannot separate the doses; the headline is 1/128, the ratios are the same). By frame block at 54 (mean source-block-to-target-block effect over the source block's own diagonal; diagonals own 0.009, act 0.010, self 0.013 gap units): self-describe sources move the other self-description cells at 0.34 of their own effect and the act cells at 0.23; act sources move self-descriptions at 0.20 and other act cells at 0.06; own-reply sources move other own-reply cells at 0.18 and the prefilled frames at 0.01 and -0.01; act and self sources move the own-reply cells at 0.01 and 0.14. Same-definition cross-frame cells 0.27 of the diagonal, other-definition cells 0.09. K1 and K2 sources move the honesty cells by 0.000 to 0.002 gap units on average, sign-mixed (mean |z| 0.8 to 5.1, formality's act direction the largest), so on Qwen the control directions are not inert either, they just have no net sign.
+- Gemma-3 (12 of the 22 cells as sources, its calibrated 1/128): diagonal 0.16, off 0.008, ratio 0.05 at 29
+  (same-definition cells 0.05, other-definition 0.00).
+
+Behavioral (1 - gap rate at baseline, unsteered S5b replies):
+
+| instrument | definition | gemma-4 | Qwen | Gemma-3 (ref) |
+| --- | --- | --- | --- | --- |
+| MASK known_facts vs the true version | sincerity | 0.24 (evasions 30%) | 0.25 (3%) | 0.37 (4%) |
+| MASK known_facts vs the subject's own belief | sincerity | 0.61 (belief = truth 78%, 78 lies / 199) | 0.45 (79%, 108 / 197) | not run |
+| are-you-sure, E5 aqua + C11 mmlu (400) | non-sycophancy | 0.67 (unparsed 21%) | 0.63 (11%) | 0.40 (28%) |
+| Batson coin flip (100) | honesty-humility | 1.00 | 1.00 | 0.95 |
+| WDCT word-deed (100) | the block | 0.88 | 0.87 | 0.79 |
+
+Half of what the ground-truth proxy counts as lies on these subjects are assertions of what the model itself
+believes (its belief matches the true version on 78-79% of the items); against its own belief gemma-4 lies on 39%
+of the pressured items and Qwen on 55%.
+
+### 3. Agreement
+
+Within a subject, Spearman over the 22 cells. Representational (diff of means, late depth) against causal: Qwen +0.76 (against the raw-shift ratio +0.86); gemma-4 has no causal ratio, against its raw-shift ratio +0.54 (probe +0.64); Gemma-3 +0.55 over its 11 cells. Diff of means against probe: gemma-4 +0.68, Qwen +0.52, Gemma-3 +0.22. Steering depth against late depth (diff of means): +0.68, +0.87, +0.51.
+Between the two subjects, over the 22 cells: representational +0.73 at the steering depth and +0.51 at the late depth by diff of means, +0.76 at the late depth by probe; causal raw-shift ratio +0.66 (the skip-subtracted ratio exists for 6 gemma-4 cells, -0.14). Behavioral: the instruments order the same way on both subjects (Batson 1.00 and 1.00, WDCT 0.88 and 0.87, are-you-sure 0.67 and 0.63, MASK against own belief 0.61 and 0.45). Against the Gemma-3 reference: gemma-4 +0.62 / +0.51 (diff of means, steering / late depth), Qwen +0.83 / +0.20. Figures: results/<tag>/figures/coherence.{png,pdf} per subject (a: leave-one-cell-out score per cell with the controls as grey points; b: own effect against the mean effect on the other cells; c: the behavioral instruments; d: representational against causal per cell) and results/figures/honesty/coherence_compare.{png,pdf} (the two subjects cell by cell).
+
+### 4. Reading
+
+1. The representational level is the same on the two subjects (0.67 by diff of means and 0.80-0.83 by probe at the
+   steering depth) and above Gemma-3 (0.49, 0.64). A direction built from any 21 cells reads the 22nd at about two
+   thirds of what its own direction reads, with self-descriptions nearest one variable and the act frame farthest.
+2. The causal level does not agree across subjects: Qwen propagates the honesty directions (self z 7, off over
+   diagonal 0.12, linear in dose), gemma-4 does not propagate them at all. On gemma-4 a representational score of
+   0.67 sits beside a causal score of zero; the two levels measure different things in this model.
+3. The behavioral level is close on the two subjects (MASK 0.61 vs 0.45 against own belief, are-you-sure 0.67 vs
+   0.63, Batson 1.00 vs 1.00, WDCT 0.88 vs 0.87) and does not follow the representational order of definitions.
+4. The controls are not at zero cell by cell. The pooled honesty direction reads formality's own-reply cells
+   reversed and the topic control's act cell positive on both subjects. The next analysis should project the K1 and
+   K2 directions out before pooling, or report the score relative to the controls' mean |scaled|.
+
+### Provenance
+
+All runs on ada at commits 11b31e9 to 9b7a50d (cm/coherence.py; cm/s5_causal.py --block honesty), stimuli as in
+the manifests at aab8807. Jobs (2026-10-28): replies 426359-60; activations 426368-71 (gemma-4), 426373-76 (Qwen);
+verdict labels 426372, 426377; MASK belief generation 426364-65 and judging 426379-80; S3 directions 426388-89;
+nuisance statistics 426391-92; control runs 426402-03, 426416-17; S3 tables, report, claims 426470-72, 426484-86;
+S4 426473, 426487; landscape 426481, 426492 (Mac scripts for the 3-component views and frame statistics, with
+CM_MODEL_NAME for the panel titles); S5a honesty setup 426482, 426493; S5a grid 426425-40 (gemma-4), 426441-56
+(Qwen); matrices 426497-500, 426535-38; coherence rep 426483, 426494, causal 426504, 426539, behavioral 426386-87,
+reports 426505, 426540, comparison 426543 (compare figure); Gemma-3 reference 426361-63, 426378. Files: results/<tag>/{s3,
+s3_ctrl_verdict, s3_ctrl_negation, s4, s5_hon/c*/, coherence, figures/honesty, figures/coherence.*} for both
+subjects, results/coherence and results/figures/coherence.* for Gemma-3, results/figures/honesty/coherence_compare.*;
+the old 13-concept results are commit 51f1eb5 and /ada1/u/harsh/tmp/aside/d058_block13/. Levers and S3 directions
+(npz) stay on ada, untracked.
