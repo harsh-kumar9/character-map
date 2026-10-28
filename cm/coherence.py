@@ -672,7 +672,7 @@ def draw(table, rep, cau, beh):
         [Line2D([], [], marker=m, ls="none", color="#52514e", mfc="white", label=FRAME_NAME[f], ms=4.5) for f, m in MARK.items()] + \
         [Line2D([], [], marker="o", ls="none", color="#52514e", label="diff of means", ms=4.5),
          Line2D([], [], marker="o", ls="none", mfc="white", mec="#52514e", label="probe", ms=4.5)]
-    fig.legend(handles=h, loc="lower center", ncol=6, frameon=False, bbox_to_anchor=(0.5, -0.04), handletextpad=0.3, columnspacing=1.0)
+    fig.legend(handles=h, loc="lower center", ncol=5, frameon=False, bbox_to_anchor=(0.5, -0.1), handletextpad=0.3, columnspacing=1.0)
     fig.tight_layout()
     figd = RESULTS / "figures"; figd.mkdir(parents=True, exist_ok=True)
     fig.savefig(figd / "coherence.png", dpi=300, bbox_inches="tight", pad_inches=0.03, facecolor="white")
