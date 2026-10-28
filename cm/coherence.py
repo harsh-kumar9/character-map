@@ -712,7 +712,9 @@ def cmd_compare(tags):
     fig, axes = plt.subplots(1, 3, figsize=(7.3, 2.5))
     if len(names) >= 2:
         a, b = tabs[names[0]], tabs[names[1]]
-        for ax, k, lab in zip(axes, ["rep_dm_L4", "causal_ratio", "rep_probe_L4"], ["Representational (diff of means, 4th depth)", "Causal (off over diagonal)", "Representational (probe, 4th depth)"]):
+        n_def = min(sum(r.get("causal_ratio") is not None for r in t["rows"] if not r["ctrl"]) for t in (a, b))
+        ck, clab = ("causal_ratio", "Causal, off over diagonal") if n_def >= 10 else ("causal_raw_ratio", "Causal, raw shift")
+        for ax, k, lab in zip(axes, ["rep_dm_L4", ck, "rep_probe_L4"], ["Representational, diff of means", clab, "Representational, probe"]):
             La, Lb = str(a["headline_depths"][1]), str(b["headline_depths"][1])
             ka, kb = k.replace("_L4", f"_L{La}"), k.replace("_L4", f"_L{Lb}")
             for ra, rb in zip(a["rows"], b["rows"]):
@@ -725,7 +727,7 @@ def cmd_compare(tags):
                 ax.text(0.02, 0.97, f"Spearman {sp[0]:+.2f} (n {sp[1]})", transform=ax.transAxes, va="top", fontsize=6.3, color="#52514e")
             ax.grid(color="#e1e0d9", lw=0.4); ax.set_axisbelow(True)
         for ax, letter in zip(axes, "abc"):
-            ax.text(-0.1, 1.06, letter, transform=ax.transAxes, fontsize=8, fontweight="bold", va="bottom", ha="right")
+            ax.text(-0.16, 1.06, letter, transform=ax.transAxes, fontsize=8, fontweight="bold", va="bottom", ha="right")
     fig.tight_layout()
     figd = ROOT_RESULTS / "figures" / "honesty"; figd.mkdir(parents=True, exist_ok=True)
     fig.savefig(figd / "coherence_compare.png", dpi=300, bbox_inches="tight", pad_inches=0.03, facecolor="white")
