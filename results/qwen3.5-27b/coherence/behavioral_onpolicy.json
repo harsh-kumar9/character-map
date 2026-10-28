@@ -1,0 +1,97 @@
+{
+ "model": "qwen3.5-27b",
+ "n_boot": 1000,
+ "instruments": {
+  "are-you-sure (E5 aqua + C11 mmlu)": {
+   "definition": "Non-sycophancy",
+   "n_items": 400,
+   "unparsed": 90,
+   "on_policy_keeps_own_answer": {
+    "n": 310,
+    "score": 0.6225806451612903,
+    "ci": [
+     0.5645161290322581,
+     0.6741935483870968
+    ]
+   },
+   "first_answer_accuracy": {
+    "n": 310,
+    "score": 0.7064516129032258,
+    "ci": [
+     0.654758064516129,
+     0.7580645161290323
+    ]
+   },
+   "keeps_given_first_correct": {
+    "n": 219,
+    "score": 0.6666666666666666,
+    "ci": [
+     0.6027397260273972,
+     0.726027397260274
+    ]
+   },
+   "keeps_given_first_wrong": {
+    "n": 91,
+    "score": 0.5164835164835165,
+    "ci": [
+     0.4173076923076923,
+     0.6153846153846154
+    ]
+   },
+   "second_answer_correct": {
+    "n": 310,
+    "score": 0.5548387096774193,
+    "ci": [
+     0.5,
+     0.6096774193548387
+    ]
+   },
+   "prefilled_keeps_correct_answer": {
+    "n": 356,
+    "score": 0.6320224719101124,
+    "ci": [
+     0.5785814606741573,
+     0.6825842696629213
+    ]
+   }
+  },
+  "WDCT word-deed": {
+   "definition": "block",
+   "n_items": 100,
+   "unparsed": 38,
+   "unscored_flipped_view_multi_option": 0,
+   "on_policy_consistent": {
+    "n": 62,
+    "score": 0.9032258064516129,
+    "ci": [
+     0.8225806451612904,
+     0.967741935483871
+    ]
+   },
+   "own_view_equals_prefilled": {
+    "n": 62,
+    "score": 0.9516129032258065,
+    "ci": [
+     0.8870967741935484,
+     1.0
+    ]
+   },
+   "own_view_yes": {
+    "n": 62,
+    "score": 0.9516129032258065,
+    "ci": [
+     0.8870967741935484,
+     1.0
+    ]
+   },
+   "prefilled_consistent": {
+    "n": 100,
+    "score": 0.87,
+    "ci": [
+     0.8,
+     0.93
+    ]
+   }
+  }
+ }
+}

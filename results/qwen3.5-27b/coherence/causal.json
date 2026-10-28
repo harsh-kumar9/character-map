@@ -1,7 +1,14 @@
 {
  "model": "qwen3.5-27b",
- "headline": "c0.0078125",
- "headline_rule": "random-direction spillover nearest 0.043 at layer 54",
+ "headline": "c0.03125",
+ "headline_rule": "largest grid dose not above half a class gap at the steering depth (0.55 with rounding; D-060 stage-3 ruling)",
+ "gap_fractions": {
+  "c0.00390625": 0.051821299838485095,
+  "c0.0078125": 0.10364259967697019,
+  "c0.015625": 0.20728519935394038,
+  "c0.03125": 0.41457039870788076,
+  "c0.0625": 0.8291407974157615
+ },
  "runs": {
   "c0.0078125": {
    "path": "/ada1/u/harsh/character-map/results/qwen3.5-27b/s5_hon/c0.0078125/causal_matrix.json",
@@ -2931,7 +2938,12 @@
       ]
      }
     }
-   }
+   },
+   "skip_term": "identity",
+   "pass_through": [
+    1.0,
+    1.0
+   ]
   },
   "c0.015625": {
    "path": "/ada1/u/harsh/character-map/results/qwen3.5-27b/s5_hon/c0.015625/causal_matrix.json",
@@ -5861,7 +5873,12 @@
       ]
      }
     }
-   }
+   },
+   "skip_term": "identity",
+   "pass_through": [
+    1.0,
+    1.0
+   ]
   },
   "c0.03125": {
    "path": "/ada1/u/harsh/character-map/results/qwen3.5-27b/s5_hon/c0.03125/causal_matrix.json",
@@ -8791,7 +8808,12 @@
       ]
      }
     }
-   }
+   },
+   "skip_term": "identity",
+   "pass_through": [
+    1.0,
+    1.0
+   ]
   },
   "c0.0625": {
    "path": "/ada1/u/harsh/character-map/results/qwen3.5-27b/s5_hon/c0.0625/causal_matrix.json",
@@ -11721,7 +11743,12 @@
       ]
      }
     }
-   }
+   },
+   "skip_term": "identity",
+   "pass_through": [
+    1.0,
+    1.0
+   ]
   }
  }
 }

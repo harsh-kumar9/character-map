@@ -14,7 +14,9 @@ causal            from the honesty-block S5a matrix (cm.s5_causal --block honest
                   effects in gap units; per source cell the mean effect on the other honesty cells over its own
                   effect; the 3 x 3 frame-block table; overall mean off-diagonal over mean diagonal; K1/K2 sources as
                   the floor; every dose of the D-052 grid, the headline at the dose whose random-direction spillover
-                  is nearest Gemma-3-4B's 1/128 run (D-059 1).
+                  is nearest Gemma-3-4B's 1/128 run (D-059 1); with --headline gap (D-060 stage-3 ruling) the largest
+                  grid dose not above half a class gap at the steering depth, and the matrices carry the pass-through
+                  skip term where cm.s5_causal matrix --skip pass wrote them.
 behavioral        one minus the gap rate on the gap instruments at baseline, from the unsteered S5b replies:
                   MASK known_facts (sincerity), are-you-sure E5 + C11 (non-sycophancy), the Batson coin flip
                   (honesty-humility), WDCT word-deed (the block); for MASK also against the subject's own elicited
@@ -337,7 +339,18 @@ def causal_from(R):
     return out
 
 
-def cmd_causal(matrix):
+GAP_MAX = 0.55   # the dose cap of the D-060 stage-3 ruling, half a class gap, with rounding (gemma-4's 1/64 is 0.51)
+
+
+def gap_fractions():
+    """{dose key: dose as a fraction of the median raw class gap at the steering depth}, from the D-060 stage-1 anatomy."""
+    p = RESULTS / "diag_prop" / "anatomy.json"
+    if not p.exists():
+        return {}
+    return {f"c{r['c']:g}": float(r["dose_over_gap_raw"]) for r in json.loads(p.read_text())["dose"]["grid"]}
+
+
+def cmd_causal(matrix, headline="spill"):
     OUT.mkdir(parents=True, exist_ok=True)
     runs = {}
     if matrix:
@@ -346,12 +359,21 @@ def cmd_causal(matrix):
         base = RESULTS / "s5_hon"
         for p in sorted(base.glob("c*/causal_matrix.json")) + ([base / "causal_matrix.json"] if (base / "causal_matrix.json").exists() else []):
             R = json.loads(p.read_text())
-            runs[f"c{R['dose_c']:g}"] = (str(p), causal_from(R))
+            runs[f"c{R['dose_c']:g}"] = (str(p), {**causal_from(R), "skip_term": R.get("skip_term", "identity"), "pass_through": R.get("pass_through", [1.0, 1.0])})
         if not runs:
             raise SystemExit(f"no honesty-block S5a matrix under {base}")
     L4 = str(LAYERS[-1])
-    head = min(runs, key=lambda k: abs(runs[k][1]["by_layer"][L4]["spillover"]["off_concept_share_absz_gt3"] - GEMMA3_SPILL))
-    out = {"model": cfg.MODEL, "headline": head, "headline_rule": f"random-direction spillover nearest {GEMMA3_SPILL} at layer {L4}", "runs": {}}
+    gf = gap_fractions()
+    if headline == "gap":   # D-060 stage-3 ruling: the largest grid dose not above half a class gap at the steering depth
+        cands = [k for k in runs if gf.get(k) is not None and gf[k] <= GAP_MAX]
+        if not cands:
+            raise SystemExit(f"no grid dose at or under {GAP_MAX} class gaps: {gf}")
+        head = max(cands, key=lambda k: gf[k])
+        rule = f"largest grid dose not above half a class gap at the steering depth ({GAP_MAX} with rounding; D-060 stage-3 ruling)"
+    else:
+        head = min(runs, key=lambda k: abs(runs[k][1]["by_layer"][L4]["spillover"]["off_concept_share_absz_gt3"] - GEMMA3_SPILL))
+        rule = f"random-direction spillover nearest {GEMMA3_SPILL} at layer {L4}"
+    out = {"model": cfg.MODEL, "headline": head, "headline_rule": rule, "gap_fractions": gf, "runs": {}}
     for k, (p, r) in runs.items():
         out["runs"][k] = {"path": p, **r}
         for L, o in r["by_layer"].items():
@@ -747,11 +769,12 @@ def main():
     ap.add_argument("--matrix", default=None, help="causal: a causal_matrix.json to read instead of results/<tag>/s5_hon/")
     ap.add_argument("--dose-c", default=None, help="report: the s5_hon dose key (c0.0078125 ...) instead of the headline")
     ap.add_argument("--tags", default="gemma-4-31b-it,qwen3.5-27b", help="compare: comma list of result tags ('' = Gemma-3-4B)")
+    ap.add_argument("--headline", default="spill", choices=["spill", "gap"], help="causal: headline dose by matched spillover (part 1) or by the class-gap cap (D-060)")
     args = ap.parse_args()
     if args.stage == "rep":
         cmd_rep(args.workers)
     elif args.stage == "causal":
-        cmd_causal(args.matrix)
+        cmd_causal(args.matrix, args.headline)
     elif args.stage == "belief-gen":
         cmd_belief_gen()
     elif args.stage == "belief-judge":

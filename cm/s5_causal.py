@@ -24,6 +24,9 @@ both signs, on the WildChat prompts (of 64) whose unsteered reply it rates at le
   --block honesty (D-059 1): every cell of the honesty block (22 cells plus K1 a b c d and K2 a c) is a source,
   targets are every S4 unit, outputs go to outputs/<tag>/s5_hon/ and results/<tag>/s5_hon/ (with --dose-c C nested
   as c<C>/); the calibration and residual norm are read from the base run (results/<tag>/s5/).
+  --skip pass (D-060): the skip term is multiplied by the product of the residual's per-layer multipliers between
+  the injection and the readout (gemma-4's layer_scalar; 1 elsewhere); the identity-term matrix is kept beside it as
+  causal_matrix_identity.json.
 """
 from __future__ import annotations
 
@@ -54,6 +57,8 @@ HON_SOURCES = [f"{c}|{s}|{f}" for c, s, fr in (("A9", "all", "abcd"), ("C2", "al
                for f in fr]
 BLOCK = None      # set by --block: "honesty" makes every HON_SOURCES cell a source and writes under s5_hon/ (D-059 1)
 CAL_RES = RES     # calibration.json and residual_norm_L*.json always come from the base run
+SKIP = "identity" # --skip pass (D-060): the skip term carries the residual's per-layer multipliers between injection and
+                  # readout (gemma-4's layer_scalar product, 0.087 to layer 39 and 0.007 to 51; 1 on models without them)
 
 
 def units():
@@ -355,12 +360,19 @@ def cmd_matrix(nshards):
     print(f"[s5] targets without a positive baseline gap: layer {L_OUT[0]} {int(np.isnan(gap[0]).sum())}, "
           f"layer {L_OUT[1]} {int(np.isnan(gap[1]).sum())}", flush=True)
 
+    pi = [1.0, 1.0]
+    if SKIP == "pass":
+        from .diag_prop import layer_scalars, pass_through
+        scal = layer_scalars()
+        pi = [pass_through(scal, L_IN, L) for L in L_OUT]
+        print(f"[s5] skip term with the pass-through multipliers {pi}", flush=True)
+
     def effect(k, vec):
         """(effect minus the skip-path prediction, raw shift) in units of the target's baseline gap."""
         d = P[k] - base
         out, raw = np.zeros((2, len(U))), np.zeros((2, len(U)))
         for li in range(2):
-            skip = dose * (tg[li] @ vec)
+            skip = pi[li] * dose * (tg[li] @ vec)
             for t, u in enumerate(U):
                 raw[li, t] = d[rows_of[u], li, t].mean() / gap[li, t]
                 out[li, t] = raw[li, t] - skip[t] / gap[li, t]
@@ -373,6 +385,7 @@ def cmd_matrix(nshards):
     rand = np.stack([eff[k] for k, cd in enumerate(conds) if cd[1] == "rand"])     # [16, 2, U]
     mu, sd = np.nanmean(rand, 0), np.nanstd(rand, 0) + 1e-9
     res = {"dose_c": c, "dose_norm": dose, "sources": S["sources"], "targets": U, "layers": list(L_OUT),
+           "skip_term": SKIP, "pass_through": pi,
            "target_gap": gap.round(4).tolist(), "random_sd": sd.round(4).tolist(), "kinds": {}}
     for kind, sg in [("dense", 1), ("dense", -1)] + ([("sae", 1)] if cfg.HAS_SAE else []):
         E = np.stack([eff[k] for k, cd in enumerate(conds) if cd[1] == kind and cd[3] == sg])  # [S, 2, U]
@@ -380,7 +393,10 @@ def cmd_matrix(nshards):
         Z = (E - mu) / sd
         res["kinds"][f"{kind}{'+' if sg > 0 else '-'}"] = {"E": E.round(4).tolist(), "Z": Z.round(2).tolist(), "E_raw": Er.round(4).tolist()}
     res_dir.mkdir(parents=True, exist_ok=True)
-    (res_dir / "causal_matrix.json").write_text(json.dumps(res))
+    out_path = res_dir / "causal_matrix.json"
+    if SKIP == "pass" and out_path.exists() and json.loads(out_path.read_text()).get("skip_term", "identity") == "identity":
+        out_path.rename(res_dir / "causal_matrix_identity.json")   # the part-1 matrix stays beside the corrected one
+    out_path.write_text(json.dumps(res))
     Ed = np.array(res["kinds"]["dense+"]["E"]); Zd = np.array(res["kinds"]["dense+"]["Z"])
     Em = np.array(res["kinds"]["dense-"]["E"]); Es = np.array(res["kinds"]["sae+"]["E"]) if cfg.HAS_SAE else None
     src = S["sources"]
@@ -404,9 +420,11 @@ def main():
     ap.add_argument("--nshards", type=int, default=1)
     ap.add_argument("--dose-c", type=float, default=None, help="fixed relative dose for run/matrix (D-052); outputs under s5_dose/")
     ap.add_argument("--block", default=None, choices=[None, "honesty"], help="honesty: every honesty cell a source, outputs under s5_hon/")
+    ap.add_argument("--skip", default="identity", choices=["identity", "pass"], help="matrix: skip term with the residual's per-layer multipliers (D-060)")
     args = ap.parse_args()
-    global DOSE_C, BLOCK, OUT, RES
+    global DOSE_C, BLOCK, OUT, RES, SKIP
     DOSE_C = args.dose_c
+    SKIP = args.skip
     if args.block:
         BLOCK = args.block
         OUT, RES = OUT.parent / "s5_hon", RES.parent / "s5_hon"
