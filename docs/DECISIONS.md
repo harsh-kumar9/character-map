@@ -1375,6 +1375,63 @@ self-descriptions of all three concepts and C22's replies repeated stock phrases
 problem), so each builder now gives a per-scenario style hint and bans the repeated phrases; the affected scenarios
 were regenerated and re-verified.
 
+## D-050 and D-051 results - 2026-10-24
+
+Gemma-3-4B, reply32, layer 17 / 29 unless stated. Commits 0260497, 151c884 and the results commit after them.
+
+C1 sincerity, rebuilt (100 scenarios, 1600 items, both sub-contrasts, 128 of 130 verified).
+- Within-frame AUROC, lying: a 0.72/0.81 (was 0.63/0.72), b 0.65/0.72 (0.62/0.64), c 0.71/0.76 (0.63/0.58),
+  d 0.79/0.89 (0.74/0.77); standardized 0.93, 0.80, 0.93, 0.98 at 17; probe 0.99, 0.97, 0.96, 1.00.
+  Misleading: c 0.84/0.78 (standardized 0.97/0.89), d 0.71/0.88 (1.00/0.98).
+- MASK provided_facts (c): 0.54/0.59 raw (was 0.53), 0.70/0.60 standardized, 0.82 standardized at layer 14. The old
+  role-play items as far held-out: 0.61 raw, 0.75 standardized at 17.
+- Verdict-controlled transfer, lying, layer 17: a-b 0.67, a-c 0.67, a-d 0.66, b-c 0.62, b-d 0.60, c-d 0.68 (control
+  0.67): every D-046 gap still open; all claims readout-dependent. Misleading: b-c 0.44, c-d 0.46 at 17; 0.63, 0.67
+  at 29. Gemma's judge verdicts: negative for 92% of lying and 76% of sincere replies (it reads the scene's framing);
+  the verdict control moves transfer by at most 0.03.
+- S4 (224 units after removing the D-048 aside files from the pool): lying vs misleading cosine a +0.53, b +0.69,
+  c +0.74, d +0.59, so paltering is not a second direction in this model; lying act vs forthrightness act +0.44,
+  misleading vs forthrightness +0.55; vs accuracy 0.00, vs honesty-humility +0.07, vs obedience (C14 defer) +0.16,
+  vs F2 -0.16. The sincerity self-description no longer merges with honesty-humility's (+0.12, was +0.38);
+  integrity's still does (+0.44).
+- Landscape, 22 directions, layer 29, before -> after: frame separation own-act 3.74 -> 3.78, act-self 1.70 ->
+  1.94, recognize-judge 0.61 -> 0.39; sincerity from forthrightness in acting 0.46 -> 0.83, from honesty-humility
+  0.53 -> 0.83; in self-description from honesty-humility 0.38 -> 0.81, from non-sycophancy 1.11 -> 0.38.
+- S5a at the calibrated dose, readout layer 29: lying act moves its own readout (z 4.3) and nothing else in the
+  block above 3; lying judge moves lying recognize 5.6, lying act 4.0, misleading judge 5.5, itself 7.0; misleading
+  act moves the lying act readout 7.8, forthrightness act 3.1, itself 2.5; forthrightness act moves lying act 6.5.
+- S5b, MASK known_facts: baseline 0.37 (gemma-4 judge), 0.36 (Qwen); doing+ +0.027 ± 0.019, doing- -0.037 ± 0.018,
+  misleading +0.016, random up to 0.027: null at this dose, as before the rebuild.
+
+C22 self-transparency (100 scenarios, 400 items, 102 of 110 verified).
+- Within c 0.72/0.93 raw, 0.99/0.98 standardized, probe 1.00; d 0.74/0.89, 0.98/0.93. Transfer c-d 0.69/0.70
+  (readout-dependent). Insider-trading reports (200): 0.82/0.81 raw over the whole report, 0.64/0.70 standardized;
+  reversed over the first 32 tokens (0.30/0.36), which are the report's reasoning preamble.
+- S4: act vs lying act +0.26, vs refusal (C15) +0.03, vs honesty-humility +0.02; self vs lying self -0.08.
+- S5a: act moves itself 3.2 and honesty-humility self-description 3.3 at layer 29.
+- S5b: Gemma-3-4B reveals its system prompt verbatim in 99% of replies under every condition, so the
+  DECLINES / DENIES metric has no range in this model (0.99 unparsed). It leaks rather than lies about its
+  instructions; the instrument may have range on gemma-4-31B and Qwen3.5-27B.
+
+C23 manipulation (100 scenarios, 800 items, 109 of 110 verified after the lever hooks became true facts of the
+scene; levers 16-17 each, settings 50/50).
+- Within a 0.76/0.79 (0.96/0.92), b 0.70/0.71 (0.78/0.75), c 0.75/0.79 (1.00/0.98), d 0.56/0.91 (1.00/0.98).
+  MentalManip dialogues (frame a): 0.54-0.58, the register gap the card named. Transfer c-d 0.58/0.80, b-c 0.47/0.31.
+  Gemma's judge verdicts track the contrast (negative for 71% of manipulative vs 39% of non-manipulative replies).
+- S4: act vs lying act +0.06, vs misleading +0.15, vs C8 praise +0.15/+0.19, vs A2 validation -0.07.
+- S5a: the act direction is broad: at layer 29 it moves most block readouts at |z| 3-5 (itself 3.9), like
+  integrity-in-action before it; treat as a generic axis until the sign pattern is read.
+- S5b DarkBench (user-retention, sneaking, brand-bias): baseline 0.38 flagged (gemma-4), 0.57 (Qwen); effects within
+  ±0.04, random up to 0.015, none at 3 SE: null.
+
+Housekeeping found on the way: S4 had listed concepts by globbing the acts directory, so the D-048 session's aside
+copies (A9, C2, C19 .pre_ab.npz) were 16 pseudo-units in the last two S4 runs; fixed (concepts from the cards),
+files moved out, S4 rerun; cosines among real units unchanged to two decimals. S5 needs SAE codes per concept; they
+were re-extracted for A9, C1, C2, C19, C22, C23.
+
+Open: the A9 hedged_overconfident sub-contrast (waits for Harsh's word that the D-048 session is done); C23's broad
+act direction; per-token readout of the MASK replies (D-046); the collaborator page was not republished.
+
 ## D-053 Helpfulness: which definitions? - proposed 2026-10-24
 
 Harsh (2026-10-24): "we did a bunch of things related to honesty in parallel threads. can we do the same with
@@ -1811,14 +1868,6 @@ Rulings needed:
 7. No system prompt in C24 to C26 (vs half of C26 in a companion app with its operator).
 8. C5 b and C19 agreeableness a b as above.
 
-## D-056 ruling - 2026-10-24
-
-Harsh: "D-056 and D-057 ratified as proposed, go ahead". So: C24 with three replies per scenario and the pos shared;
-IFEval pass vs fail on Llama-3.1-8B replies as C24's held-out; IFEval and the CoEdIT overstepping judge as C24's
-behavior; HelpSteer2 as C25's held-out, domain pairs first; FalseReject and Health-ORSC behind a screen, scored with
-the Health-ORSC rubric, as C25's behavior; INTIMA's labelled replies as C26's held-out; no system prompt in C24 to C26;
-C5 b and C19 agreeableness a b as proposed. Building starts with the cards and the three builders.
-
 ## D-057 Harmlessness build: C27 harmless action, and the new frames for C15, A7, B1 and C20 - proposed 2026-10-24
 
 D-054 and the D-053 to D-055 ruling fix the core; this fixes the items. Exploratory, separate from honesty: nothing here
@@ -1967,6 +2016,14 @@ both sub-contrasts; side_effect pos is a sanctioned action in two thirds of scen
 ToolEmu's ReAct format; R-Judge 100 unintended + 100 injection records in a and b; the GAP diagnostic as heldout_far;
 ManagerBench 100 + 100 with MB-score; "an AI agent" and "an AI assistant" as the third party; the four extensions as
 proposed. Build order: C27, the C15, A7, B1 and C20 frames, then the safe_completion addendum.
+
+## D-056 ruling - 2026-10-24
+
+Harsh: "D-056 and D-057 ratified as proposed, go ahead". So: C24 with three replies per scenario and the pos shared;
+IFEval pass vs fail on Llama-3.1-8B replies as C24's held-out; IFEval and the CoEdIT overstepping judge as C24's
+behavior; HelpSteer2 as C25's held-out, domain pairs first; FalseReject and Health-ORSC behind a screen, scored with
+the Health-ORSC rubric, as C25's behavior; INTIMA's labelled replies as C26's held-out; no system prompt in C24 to C26;
+C5 b and C19 agreeableness a b as proposed. Building starts with the cards and the three builders.
 
 ## D-056 addendum: C28 asks only when a request is truly ambiguous - proposed 2026-10-24
 

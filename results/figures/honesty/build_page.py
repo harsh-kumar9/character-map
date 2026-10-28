@@ -222,8 +222,12 @@ IS_DEFAULT = MODEL_NAME == "Gemma-3-4B-IT"
 HAVE_CAUSAL = bool(arrows) or bool(selfz); HAVE_BEH = bool(b1) and bool(b1q)
 # the Gemma-specific prose below cites particular arrows and conditions; use it only when the steering and behavior
 # stages have run for the units it names (the S5 rerun for the rebuilt C1 is pending, D-050)
-OK_CAUSAL = IS_DEFAULT and HAVE_CAUSAL and len(arrows) >= 2 and all(k in selfz for k in ("C2|all|c", "A9|all|c"))
-OK_BEH = IS_DEFAULT and HAVE_BEH and "doing+" in b1 and "doing+" in b1q
+# D-050: the Gemma-specific steering and behavior prose below was written for the role-play C1 and names arrows by
+# position; with the rebuilt C1 the arrows differ, so the page uses the text computed from the data until the
+# narrative is rewritten (set PROSE_CURRENT = True after that).
+PROSE_CURRENT = False
+OK_CAUSAL = PROSE_CURRENT and IS_DEFAULT and HAVE_CAUSAL and len(arrows) >= 2 and all(k in selfz for k in ("C2|all|c", "A9|all|c"))
+OK_BEH = PROSE_CURRENT and IS_DEFAULT and HAVE_BEH and "doing+" in b1 and "doing+" in b1q
 NAMES = {"A9": "self-knowledge", "C2": "accuracy", "C1": "sincerity", "C3": "forthrightness", "C8": "non-sycophancy", "C19": "honesty-humility"}
 def uname(u):
     c, sub, f = u.split("|"); return f"{NAMES.get(c, c)} ({FR[f]})"
@@ -231,9 +235,11 @@ def causal_generic():
     if not HAVE_CAUSAL:
         return "<p>The steering stage (S5a) has not run for this model yet.</p>"
     lines = [f"{uname(a)} \u2192 {uname(b)} (z {z:.1f})" for a, b, z in arrows]
+    cross = [f"{uname(a)} \u2192 {uname(b)} (z {z:.1f})" for a, b, z in arrows if a.split("|")[0] != b.split("|")[0]]
     selfs = ", ".join(f"{uname(u)} {z}" for u, z in selfz.items())
     return (f"<p>Adding a direction at layer {L_STEER} and reading every direction in the block at layer {LL}: "
             + (f"arrows with z at least 3: {'; '.join(lines)}." if lines else "no cross-unit effect reaches z 3.")
+            + (f" Arrows that cross a definition: {'; '.join(cross)}." if cross else " No arrow crosses a definition.")
             + f" Each source's effect on its own readout: {selfs}.</p>")
 def beh_generic():
     if not HAVE_BEH:

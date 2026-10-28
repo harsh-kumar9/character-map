@@ -17,6 +17,7 @@
   "A8|all|c",
   "A8|all|b",
   "A9|all|c",
+  "A9|all|b",
   "B1|all|c",
   "B1|all|b",
   "B10|all|b",
@@ -41,8 +42,10 @@
   "B9|doing_allowing|b",
   "B9|means_side_effect|c",
   "B9|means_side_effect|b",
-  "C1|all|c",
-  "C1|all|b",
+  "C1|lying|c",
+  "C1|lying|b",
+  "C1|misleading|c",
+  "C1|misleading|b",
   "C10|all|c",
   "C10|all|b",
   "C11|all|c",
@@ -67,8 +70,10 @@
   "C19|emotionality|c",
   "C19|extraversion|c",
   "C19|honesty_humility|c",
+  "C19|honesty_humility|b",
   "C19|openness|c",
   "C2|all|c",
+  "C2|all|b",
   "C20|machiavellianism|c",
   "C20|narcissism|c",
   "C20|psychopathy|c",
@@ -92,6 +97,9 @@
   "C21|tradition|b",
   "C21|universalism|d",
   "C21|universalism|b",
+  "C22|all|c",
+  "C23|all|c",
+  "C23|all|b",
   "C3|all|c",
   "C3|all|a",
   "C4|boastful|c",
@@ -175,6 +183,8 @@
   "A8|all|a",
   "A8|all|b",
   "A8|all|c",
+  "A9|all|a",
+  "A9|all|b",
   "A9|all|c",
   "A9|all|d",
   "B1|all|a",
@@ -211,10 +221,14 @@
   "B9|means_side_effect|a",
   "B9|means_side_effect|b",
   "B9|means_side_effect|c",
-  "C1|all|a",
-  "C1|all|b",
-  "C1|all|c",
-  "C1|all|d",
+  "C1|lying|a",
+  "C1|lying|b",
+  "C1|lying|c",
+  "C1|lying|d",
+  "C1|misleading|a",
+  "C1|misleading|b",
+  "C1|misleading|c",
+  "C1|misleading|d",
   "C10|all|a",
   "C10|all|b",
   "C10|all|c",
@@ -252,10 +266,14 @@
   "C19|emotionality|d",
   "C19|extraversion|c",
   "C19|extraversion|d",
+  "C19|honesty_humility|a",
+  "C19|honesty_humility|b",
   "C19|honesty_humility|c",
   "C19|honesty_humility|d",
   "C19|openness|c",
   "C19|openness|d",
+  "C2|all|a",
+  "C2|all|b",
   "C2|all|c",
   "C2|all|d",
   "C20|machiavellianism|c",
@@ -284,6 +302,12 @@
   "C21|tradition|d",
   "C21|universalism|b",
   "C21|universalism|d",
+  "C22|all|c",
+  "C22|all|d",
+  "C23|all|a",
+  "C23|all|b",
+  "C23|all|c",
+  "C23|all|d",
   "C3|all|a",
   "C3|all|c",
   "C3|all|d",
@@ -1740,6 +1764,126 @@
   {
    "unit": "A8|all|c",
    "item_id": "A8-st-83b3459c61-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-2176-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-3230-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-44-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-1003-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-2611-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-1739-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-1827-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-2916-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-2260-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-749-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-2774-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|a",
+   "item_id": "A9-sa-2338-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-2611-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-349-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-2583-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-1827-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-3335-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-747-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-1187-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-3238-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-2626-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-150-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-2774-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "A9|all|b",
+   "item_id": "A9-sa-2338-b-neg",
    "polarity": "neg"
   },
   {
@@ -3903,243 +4047,483 @@
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|a",
-   "item_id": "C1-apollo-0241-a-pos",
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0172-a-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|a",
-   "item_id": "C1-apollo-0112-a-pos",
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0251-a-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|a",
-   "item_id": "C1-apollo-0121-a-pos",
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0234-a-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|a",
-   "item_id": "C1-apollo-0262-a-pos",
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0145-a-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|a",
-   "item_id": "C1-apollo-0236-a-pos",
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0194-a-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|a",
-   "item_id": "C1-apollo-0169-a-pos",
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0320-a-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|a",
-   "item_id": "C1-apollo-0053-a-neg",
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0145-a-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|a",
-   "item_id": "C1-apollo-0075-a-neg",
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0281-a-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|a",
-   "item_id": "C1-apollo-0105-a-neg",
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0157-a-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|a",
-   "item_id": "C1-apollo-0166-a-neg",
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0144-a-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|a",
-   "item_id": "C1-apollo-0338-a-neg",
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0123-a-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|a",
-   "item_id": "C1-apollo-0313-a-neg",
+   "unit": "C1|lying|a",
+   "item_id": "C1-op-0077-a-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|b",
-   "item_id": "C1-apollo-0150-b-pos",
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0256-b-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|b",
-   "item_id": "C1-apollo-0124-b-pos",
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0354-b-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|b",
-   "item_id": "C1-apollo-0112-b-pos",
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0197-b-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|b",
-   "item_id": "C1-apollo-0365-b-pos",
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0077-b-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|b",
-   "item_id": "C1-apollo-0231-b-pos",
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0008-b-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|b",
-   "item_id": "C1-apollo-0215-b-pos",
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0308-b-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|b",
-   "item_id": "C1-apollo-0161-b-neg",
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0034-b-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|b",
-   "item_id": "C1-apollo-0006-b-neg",
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0226-b-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|b",
-   "item_id": "C1-apollo-0112-b-neg",
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0251-b-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|b",
-   "item_id": "C1-apollo-0105-b-neg",
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0032-b-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|b",
-   "item_id": "C1-apollo-0042-b-neg",
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0094-b-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|b",
-   "item_id": "C1-apollo-0308-b-neg",
+   "unit": "C1|lying|b",
+   "item_id": "C1-op-0308-b-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|c",
-   "item_id": "C1-apollo-0112-c-pos",
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0234-c-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|c",
-   "item_id": "C1-apollo-0144-c-pos",
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0262-c-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|c",
-   "item_id": "C1-apollo-0352-c-pos",
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0125-c-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|c",
-   "item_id": "C1-apollo-0161-c-pos",
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0145-c-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|c",
-   "item_id": "C1-apollo-0347-c-pos",
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0288-c-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|c",
-   "item_id": "C1-apollo-0105-c-pos",
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0197-c-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|c",
-   "item_id": "C1-apollo-0105-c-neg",
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0008-c-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|c",
-   "item_id": "C1-apollo-0313-c-neg",
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0178-c-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|c",
-   "item_id": "C1-apollo-0042-c-neg",
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0125-c-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|c",
-   "item_id": "C1-apollo-0176-c-neg",
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0197-c-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|c",
-   "item_id": "C1-apollo-0308-c-neg",
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0055-c-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|c",
-   "item_id": "C1-apollo-0352-c-neg",
+   "unit": "C1|lying|c",
+   "item_id": "C1-op-0270-c-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|d",
-   "item_id": "C1-apollo-0310-d-pos",
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0288-d-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|d",
-   "item_id": "C1-apollo-0215-d-pos",
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0281-d-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|d",
-   "item_id": "C1-apollo-0176-d-pos",
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0125-d-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|d",
-   "item_id": "C1-apollo-0253-d-pos",
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0157-d-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|d",
-   "item_id": "C1-apollo-0144-d-pos",
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0258-d-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|d",
-   "item_id": "C1-apollo-0112-d-pos",
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0234-d-pos-lying",
    "polarity": "pos"
   },
   {
-   "unit": "C1|all|d",
-   "item_id": "C1-apollo-0042-d-neg",
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0145-d-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|d",
-   "item_id": "C1-apollo-0225-d-neg",
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0352-d-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|d",
-   "item_id": "C1-apollo-0169-d-neg",
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0008-d-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|d",
-   "item_id": "C1-apollo-0252-d-neg",
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0258-d-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|d",
-   "item_id": "C1-apollo-0075-d-neg",
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0135-d-neg-lying",
    "polarity": "neg"
   },
   {
-   "unit": "C1|all|d",
-   "item_id": "C1-apollo-0253-d-neg",
+   "unit": "C1|lying|d",
+   "item_id": "C1-op-0055-d-neg-lying",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|a",
+   "item_id": "C1-op-0172-a-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|a",
+   "item_id": "C1-op-0262-a-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|a",
+   "item_id": "C1-op-0094-a-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|a",
+   "item_id": "C1-op-0123-a-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|a",
+   "item_id": "C1-op-0194-a-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|a",
+   "item_id": "C1-op-0226-a-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|a",
+   "item_id": "C1-op-0094-a-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|a",
+   "item_id": "C1-op-0055-a-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|a",
+   "item_id": "C1-op-0157-a-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|a",
+   "item_id": "C1-op-0270-a-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|a",
+   "item_id": "C1-op-0257-a-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|a",
+   "item_id": "C1-op-0209-a-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|b",
+   "item_id": "C1-op-0237-b-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|b",
+   "item_id": "C1-op-0194-b-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|b",
+   "item_id": "C1-op-0256-b-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|b",
+   "item_id": "C1-op-0172-b-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|b",
+   "item_id": "C1-op-0145-b-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|b",
+   "item_id": "C1-op-0207-b-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|b",
+   "item_id": "C1-op-0194-b-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|b",
+   "item_id": "C1-op-0204-b-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|b",
+   "item_id": "C1-op-0008-b-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|b",
+   "item_id": "C1-op-0234-b-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|b",
+   "item_id": "C1-op-0226-b-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|b",
+   "item_id": "C1-op-0288-b-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|c",
+   "item_id": "C1-op-0232-c-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|c",
+   "item_id": "C1-op-0077-c-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|c",
+   "item_id": "C1-op-0213-c-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|c",
+   "item_id": "C1-op-0178-c-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|c",
+   "item_id": "C1-op-0262-c-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|c",
+   "item_id": "C1-op-0207-c-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|c",
+   "item_id": "C1-op-0197-c-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|c",
+   "item_id": "C1-op-0077-c-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|c",
+   "item_id": "C1-op-0104-c-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|c",
+   "item_id": "C1-op-0145-c-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|c",
+   "item_id": "C1-op-0234-c-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|c",
+   "item_id": "C1-op-0209-c-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|d",
+   "item_id": "C1-op-0178-d-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|d",
+   "item_id": "C1-op-0157-d-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|d",
+   "item_id": "C1-op-0008-d-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|d",
+   "item_id": "C1-op-0270-d-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|d",
+   "item_id": "C1-op-0258-d-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|d",
+   "item_id": "C1-op-0256-d-pos-misleading",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C1|misleading|d",
+   "item_id": "C1-op-0197-d-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|d",
+   "item_id": "C1-op-0258-d-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|d",
+   "item_id": "C1-op-0204-d-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|d",
+   "item_id": "C1-op-0123-d-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|d",
+   "item_id": "C1-op-0256-d-neg-misleading",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C1|misleading|d",
+   "item_id": "C1-op-0125-d-neg-misleading",
    "polarity": "neg"
   },
   {
@@ -6363,6 +6747,126 @@
    "polarity": "neg"
   },
   {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-020-0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-011-0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-016-0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-009-0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-000-0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-029-0-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-013-0-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-037-0-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-019-0-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-022-0-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-028-0-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|a",
+   "item_id": "C19-hh-027-1-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-029-0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-019-0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-016-0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-039-0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-037-0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-013-0-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-022-0-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-033-1-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-029-0-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-020-0-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-027-1-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C19|honesty_humility|b",
+   "item_id": "C19-hh-026-1-b-neg",
+   "polarity": "neg"
+  },
+  {
    "unit": "C19|honesty_humility|c",
    "item_id": "C19-hh-016-0-c-pos",
    "polarity": "pos"
@@ -6600,6 +7104,126 @@
   {
    "unit": "C19|openness|d",
    "item_id": "C19-trait-openness-0125-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-02294-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-04476-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-01743-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-07764-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-01164-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-07540-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-02969-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-08798-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-08136-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-05915-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-05122-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|a",
+   "item_id": "C2-halu-01743-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-05915-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-04856-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-08527-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-05170-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-01743-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-00999-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-03029-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-06689-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-02969-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-09752-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-01743-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C2|all|b",
+   "item_id": "C2-halu-02294-b-neg",
    "polarity": "neg"
   },
   {
@@ -8240,6 +8864,366 @@
   {
    "unit": "C21|universalism|d",
    "item_id": "C21-sg-2733-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C22|all|c",
+   "item_id": "C22-op-101-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C22|all|c",
+   "item_id": "C22-op-062-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C22|all|c",
+   "item_id": "C22-op-042-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C22|all|c",
+   "item_id": "C22-op-027-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C22|all|c",
+   "item_id": "C22-op-044-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C22|all|c",
+   "item_id": "C22-op-029-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C22|all|c",
+   "item_id": "C22-op-027-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C22|all|c",
+   "item_id": "C22-op-033-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C22|all|c",
+   "item_id": "C22-op-087-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C22|all|c",
+   "item_id": "C22-op-088-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C22|all|c",
+   "item_id": "C22-op-049-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C22|all|c",
+   "item_id": "C22-op-012-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C22|all|d",
+   "item_id": "C22-op-028-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C22|all|d",
+   "item_id": "C22-op-087-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C22|all|d",
+   "item_id": "C22-op-004-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C22|all|d",
+   "item_id": "C22-op-084-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C22|all|d",
+   "item_id": "C22-op-096-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C22|all|d",
+   "item_id": "C22-op-049-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C22|all|d",
+   "item_id": "C22-op-045-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C22|all|d",
+   "item_id": "C22-op-046-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C22|all|d",
+   "item_id": "C22-op-019-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C22|all|d",
+   "item_id": "C22-op-080-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C22|all|d",
+   "item_id": "C22-op-033-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C22|all|d",
+   "item_id": "C22-op-016-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|a",
+   "item_id": "C23-dec-014-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|a",
+   "item_id": "C23-dec-074-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|a",
+   "item_id": "C23-dec-097-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|a",
+   "item_id": "C23-dec-059-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|a",
+   "item_id": "C23-dec-032-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|a",
+   "item_id": "C23-dec-043-a-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|a",
+   "item_id": "C23-dec-051-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|a",
+   "item_id": "C23-dec-097-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|a",
+   "item_id": "C23-dec-003-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|a",
+   "item_id": "C23-dec-059-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|a",
+   "item_id": "C23-dec-074-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|a",
+   "item_id": "C23-dec-039-a-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|b",
+   "item_id": "C23-dec-006-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|b",
+   "item_id": "C23-dec-052-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|b",
+   "item_id": "C23-dec-073-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|b",
+   "item_id": "C23-dec-084-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|b",
+   "item_id": "C23-dec-083-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|b",
+   "item_id": "C23-dec-085-b-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|b",
+   "item_id": "C23-dec-061-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|b",
+   "item_id": "C23-dec-052-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|b",
+   "item_id": "C23-dec-026-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|b",
+   "item_id": "C23-dec-065-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|b",
+   "item_id": "C23-dec-084-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|b",
+   "item_id": "C23-dec-003-b-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|c",
+   "item_id": "C23-dec-084-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|c",
+   "item_id": "C23-dec-085-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|c",
+   "item_id": "C23-dec-097-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|c",
+   "item_id": "C23-dec-074-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|c",
+   "item_id": "C23-dec-026-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|c",
+   "item_id": "C23-dec-028-c-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|c",
+   "item_id": "C23-dec-035-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|c",
+   "item_id": "C23-dec-049-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|c",
+   "item_id": "C23-dec-051-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|c",
+   "item_id": "C23-dec-071-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|c",
+   "item_id": "C23-dec-014-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|c",
+   "item_id": "C23-dec-023-c-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|d",
+   "item_id": "C23-dec-043-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|d",
+   "item_id": "C23-dec-014-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|d",
+   "item_id": "C23-dec-061-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|d",
+   "item_id": "C23-dec-091-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|d",
+   "item_id": "C23-dec-056-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|d",
+   "item_id": "C23-dec-003-d-pos",
+   "polarity": "pos"
+  },
+  {
+   "unit": "C23|all|d",
+   "item_id": "C23-dec-077-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|d",
+   "item_id": "C23-dec-006-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|d",
+   "item_id": "C23-dec-061-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|d",
+   "item_id": "C23-dec-051-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|d",
+   "item_id": "C23-dec-014-d-neg",
+   "polarity": "neg"
+  },
+  {
+   "unit": "C23|all|d",
+   "item_id": "C23-dec-083-d-neg",
    "polarity": "neg"
   },
   {
@@ -13110,6 +14094,24 @@
    972,
    1311
   ],
+  "A9|all|b": [
+   9536,
+   3501,
+   14029,
+   4561,
+   64,
+   1438,
+   14598,
+   218,
+   3479,
+   3536,
+   7171,
+   7561,
+   28925,
+   7303,
+   29483,
+   4248
+  ],
   "B1|all|c": [
    1641,
    17074,
@@ -13542,41 +14544,77 @@
    11718,
    2004
   ],
-  "C1|all|c": [
-   1546,
-   143,
-   106,
-   24323,
-   251,
-   155,
-   21642,
+  "C1|lying|c": [
+   12134,
    17326,
-   34787,
-   738,
-   2008,
-   6588,
-   2818,
-   88,
-   1985,
-   10095
+   886,
+   1698,
+   34815,
+   1536,
+   4277,
+   2154,
+   13482,
+   2578,
+   1242,
+   1446,
+   1,
+   9414,
+   1326,
+   16731
   ],
-  "C1|all|b": [
-   23,
-   390,
-   10043,
-   849,
-   17411,
-   27699,
-   15216,
-   44792,
-   301,
-   8679,
-   2183,
-   271,
+  "C1|lying|b": [
    3937,
-   3829,
+   25468,
+   2481,
+   16353,
+   49634,
+   4744,
+   55280,
+   509,
+   402,
+   13482,
+   2149,
+   12481,
+   4611,
+   147,
+   6782,
+   52792
+  ],
+  "C1|misleading|c": [
+   8425,
+   5627,
+   1546,
+   88,
+   2818,
+   56347,
+   17326,
+   1985,
+   1729,
+   2864,
+   2008,
+   34815,
+   600,
    3526,
-   607
+   31009,
+   12134
+  ],
+  "C1|misleading|b": [
+   1219,
+   15660,
+   20835,
+   25468,
+   402,
+   1230,
+   65392,
+   7238,
+   44467,
+   1379,
+   2481,
+   4121,
+   15067,
+   3829,
+   5860,
+   1478
   ],
   "C10|all|c": [
    1546,
@@ -13994,21 +15032,39 @@
   ],
   "C19|honesty_humility|c": [
    1277,
-   1656,
    4520,
+   1656,
    1751,
    1150,
    115,
-   3887,
    50890,
-   1527,
    48693,
+   3887,
+   1527,
    1888,
-   608,
    2008,
+   608,
    107,
    11839,
    610
+  ],
+  "C19|honesty_humility|b": [
+   45468,
+   4164,
+   1219,
+   42576,
+   3015,
+   6040,
+   8761,
+   402,
+   1583,
+   22412,
+   3925,
+   37,
+   3763,
+   552,
+   17380,
+   14562
   ],
   "C19|openness|c": [
    1920,
@@ -14037,14 +15093,32 @@
    438,
    192,
    1368,
-   2901,
    894,
+   2901,
    1319,
-   1437,
+   4411,
+   3580,
    3864,
    6847,
-   4411,
-   1241
+   1437
+  ],
+  "C2|all|b": [
+   14039,
+   23,
+   13618,
+   1759,
+   4219,
+   1242,
+   8425,
+   10669,
+   3937,
+   1656,
+   39339,
+   6651,
+   3887,
+   3299,
+   49736,
+   628
   ],
   "C20|machiavellianism|c": [
    115,
@@ -14459,6 +15533,60 @@
    9473,
    6064,
    2510
+  ],
+  "C22|all|c": [
+   2495,
+   2067,
+   33850,
+   1023,
+   8801,
+   328,
+   17326,
+   750,
+   58479,
+   4562,
+   10476,
+   738,
+   1232,
+   40270,
+   12475,
+   5032
+  ],
+  "C23|all|c": [
+   1494,
+   1150,
+   3299,
+   2645,
+   382,
+   1694,
+   2664,
+   50174,
+   3160,
+   1262,
+   37335,
+   2123,
+   8800,
+   30786,
+   628,
+   2008
+  ],
+  "C23|all|b": [
+   283,
+   36779,
+   34787,
+   4457,
+   30614,
+   1069,
+   3022,
+   88,
+   6554,
+   1326,
+   575,
+   14659,
+   2046,
+   13478,
+   13440,
+   1247
   ],
   "C3|all|c": [
    862,
@@ -15523,6 +16651,7 @@
   0.9528634687346774,
   0.06372085448099153,
   0.8676601002701209,
+  0.5153297641544823,
   0.8535778123445935,
   0.44276576299845,
   0.6151921955210771,
@@ -15547,8 +16676,10 @@
   0.5261998648905797,
   0.7636239755176594,
   0.749004011075787,
-  0.858846175775797,
-  0.5456822252883128,
+  0.6141145241311641,
+  0.16447330139725028,
+  0.5792482310494891,
+  0.6063893899506833,
   0.5066943153639749,
   0.33728645626295284,
   0.2188779408359759,
@@ -15572,9 +16703,11 @@
   0.9482560849864989,
   -0.18820195973034337,
   0.46074011608525794,
-  0.9424898201136008,
+  0.9426203872865329,
+  0.3203377927817245,
   0.46272508398849044,
-  0.9502864275427086,
+  0.9455615094584194,
+  0.3447598860865684,
   0.691707259258052,
   0.33571865624597513,
   0.9416632924082248,
@@ -15598,6 +16731,9 @@
   0.13961173458519927,
   0.5693816627666436,
   0.40246976436803195,
+  0.7573226487264558,
+  0.5169486164216,
+  0.249074844381675,
   0.41626651314799373,
   0.4377184822897204,
   0.9504489791554356,
