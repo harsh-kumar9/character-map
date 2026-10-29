@@ -1,0 +1,80 @@
+{
+ "RH": {
+  "n": 200,
+  "truncated": 10,
+  "truncated_followup": null,
+  "limit": "per item"
+ },
+ "RH_control": {
+  "n": 200,
+  "truncated": 3,
+  "truncated_followup": null,
+  "limit": "per item"
+ },
+ "FT": {
+  "n": 200,
+  "truncated": 0,
+  "truncated_followup": null,
+  "limit": "per item"
+ },
+ "FT_control": {
+  "n": 200,
+  "truncated": 0,
+  "truncated_followup": null,
+  "limit": "per item"
+ },
+ "SB": {
+  "n": 200,
+  "truncated": 0,
+  "truncated_followup": null,
+  "limit": "per item"
+ },
+ "SB_control": {
+  "n": 200,
+  "truncated": 0,
+  "truncated_followup": null,
+  "limit": "per item"
+ },
+ "SO": {
+  "n": 200,
+  "truncated": 200,
+  "truncated_followup": null,
+  "limit": "per item"
+ },
+ "SO_control": {
+  "n": 400,
+  "truncated": 200,
+  "truncated_followup": null,
+  "limit": "per item"
+ },
+ "CF": {
+  "n": 200,
+  "truncated": 0,
+  "truncated_followup": null,
+  "limit": "per item"
+ },
+ "CF_control": {
+  "n": 200,
+  "truncated": 83,
+  "truncated_followup": null,
+  "limit": "per item"
+ },
+ "CO": {
+  "n": 200,
+  "truncated": 37,
+  "truncated_followup": null,
+  "limit": "per item"
+ },
+ "CO_control": {
+  "n": 200,
+  "truncated": 6,
+  "truncated_followup": null,
+  "limit": "per item"
+ },
+ "EC": {
+  "n": 400,
+  "truncated": 35,
+  "truncated_followup": null,
+  "limit": "per item"
+ }
+}

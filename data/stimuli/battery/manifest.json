@@ -1,0 +1,181 @@
+{
+ "decision": "D-061",
+ "tasks": {
+  "RH": {
+   "n_items": 200,
+   "n_control": 200,
+   "factors": {
+    "one-off": 100,
+    "conflicting": 100
+   },
+   "sources": [
+    "google-research-datasets/mbpp sanitized (Austin et al. 2021)"
+   ],
+   "licenses": [
+    "cc-by-4.0"
+   ],
+   "sha256": {
+    "items": "99f36e9cd799aaa2e7a74f14ad0b8c64d6d621210db052351a1c7197bf3f0dd8",
+    "control": "313e58db899bc707650773ba7b5eb45a7a2af789a5509cc440d66c8ea99b1f75"
+   },
+   "median_chars": 389
+  },
+  "FT": {
+   "n_items": 200,
+   "n_control": 200,
+   "factors": {
+    "error": 100,
+    "no_call": 100
+   },
+   "sources": [
+    "ToolEmu cases and toolkits (Ruan et al. 2023)"
+   ],
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "sha256": {
+    "items": "fc0647aaeeae8a903c234f891b770d08b07415081e8867549790266667c54f80",
+    "control": "ec7c1261839082327ed8848ba8f71b1ea765098062b88a19861c15f1d2d3ea24"
+   },
+   "median_chars": 2241
+  },
+  "SB": {
+   "n_items": 200,
+   "n_control": 200,
+   "factors": {
+    "-": 200
+   },
+   "sources": [
+    "two-digit multiplications, built here"
+   ],
+   "licenses": [
+    "n/a"
+   ],
+   "sha256": {
+    "items": "ffef606d115fe5f3de9197629b692462540c92b3923a9905621cb3fb02b955f2",
+    "control": "2d4b0578a402fe9553df73de15be756c68258e18f9a018dde9700f6c0d19ff56"
+   },
+   "median_chars": 439
+  },
+  "SO": {
+   "n_items": 200,
+   "n_control": 400,
+   "factors": {
+    "-": 200
+   },
+   "sources": [
+    "cais/mmlu (Hendrycks et al. 2021)"
+   ],
+   "licenses": [
+    "MIT"
+   ],
+   "sha256": {
+    "items": "917de61c571d0eadcab380fb633ef2d1c1d13e3ecef8bcda2d40a107c0713722",
+    "control": "ba18607ed8b4cf72bdd805f6adb98abdec36e162e7f24d35ae9599e66f5f00fa"
+   },
+   "median_chars": 377
+  },
+  "CF": {
+   "n_items": 200,
+   "n_control": 200,
+   "factors": {
+    "fictitious_reference": 100,
+    "kuq_future_unknown": 32,
+    "kuq_unsolved_problem": 33,
+    "kuq_false_assumption": 35
+   },
+   "sources": [
+    "amayuelas/KUQ known-unknown questions (Amayuelas et al. 2023)",
+    "fictitious references, template-built here"
+   ],
+   "licenses": [
+    "n/a",
+    "none stated"
+   ],
+   "sha256": {
+    "items": "22aca5df79dd58ebf11e710e07446ed7f4bb34a428ed1323834eee7472922010",
+    "control": "e455ba192b050b58adcb7f80b6b14f3616aeea26d9c4e65116f8c0360ed78134"
+   },
+   "median_chars": 463
+  },
+  "CO": {
+   "n_items": 200,
+   "n_control": 200,
+   "factors": {
+    "wrong_answer": 100,
+    "special_casing": 100
+   },
+   "sources": [
+    "google-research-datasets/mbpp sanitized (Austin et al. 2021)",
+    "two-digit multiplications, built here"
+   ],
+   "licenses": [
+    "cc-by-4.0",
+    "n/a"
+   ],
+   "sha256": {
+    "items": "110e610ca0c420c8f0d90bbccc793260d1e35cd5599a48a8d83ee122f2a1d4b6",
+    "control": "286192e2c158b4f6a116749b2092b4006b48ed403191d0b8138abdf5a2f2c703"
+   },
+   "median_chars": 565
+  },
+  "EC": {
+   "n_items": 400,
+   "n_control": 0,
+   "factors": {
+    "-": 400
+   },
+   "sources": [
+    "microsoft/Test_Awareness_Steering triggers (real vs hypothetical)"
+   ],
+   "licenses": [
+    "MIT"
+   ],
+   "sha256": {
+    "items": "685d380b3983a0f472dbb79c874a5314bac8ee3ec8c7b1ce2194f6f27761c95f",
+    "control": ""
+   },
+   "median_chars": 298
+  },
+  "AR": {
+   "n_items": 200,
+   "n_control": 200,
+   "factors": {
+    "pressure": 50,
+    "incentive": 50,
+    "opportunity": 50,
+    "conflict": 50
+   },
+   "sources": [
+    "DecepEval tool-use pairs (arXiv:2610.07967), commit 3ca4ed0"
+   ],
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "sha256": {
+    "items": "ae919239d5acc48608f2cbbde68a5e08edf31698296b56768eeb92a22f127d55",
+    "control": "12f2d37ba09da4a95e2263742db1a6a392ef73c6901463d9859f54b8b48ee53e"
+   },
+   "median_chars": 956
+  },
+  "DC": {
+   "n_items": 200,
+   "n_control": 200,
+   "factors": {
+    "one-off": 100,
+    "conflicting": 100
+   },
+   "sources": [
+    "google-research-datasets/mbpp sanitized (Austin et al. 2021)"
+   ],
+   "licenses": [
+    "cc-by-4.0"
+   ],
+   "sha256": {
+    "items": "9ae2ee257b37437a8edb3f7c8856cb8539239a4110d5963c40386f429030b6ee",
+    "control": "4638cd6b17168527a30e179ca04c6c7e1173115fe6f5b7567c5ab77afad9bf0b"
+   },
+   "median_chars": 1028
+  }
+ }
+}
