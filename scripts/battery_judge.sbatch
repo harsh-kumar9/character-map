@@ -45,5 +45,6 @@ set -u
 cd /ada1/u/harsh/character-map
 git log --oneline -1
 # MODULE picks the task set: cm.battery (seven single-turn tasks, default), cm.battery_agent (AR), cm.battery_code (DC).
-python -u -m "${MODULE:-cm.battery}" judge --judge "$JUDGE" --cond "$COND"
+# Further arguments (from the third on) pass through, e.g. "--variant act" for cm.battery_xj.
+python -u -m "${MODULE:-cm.battery}" judge --judge "$JUDGE" --cond "$COND" "${@:3}"
 date; echo "[battery_judge] done $CM_MODEL $JUDGE $COND"

@@ -1,0 +1,233 @@
+{
+ "model": "gemma-4-31b-it",
+ "cond": "baseline",
+ "position": "reply32",
+ "layer": 30,
+ "n": 796,
+ "n_positive": 349,
+ "by_task": {
+  "AR": {
+   "n": 200,
+   "n_positive": 97
+  },
+  "DC": {
+   "n": 200,
+   "n_positive": 31
+  },
+  "RH": {
+   "n": 200,
+   "n_positive": 82
+  },
+  "CF": {
+   "n": 196,
+   "n_positive": 139
+  }
+ },
+ "leave_one_task_out": {
+  "AR": {
+   "transfer_auroc_within_strata": 0.49514563106796117,
+   "transfer_auroc_raw": 0.3629266339705735,
+   "n_test": 200,
+   "n_positive": 97
+  },
+  "CF": {
+   "transfer_auroc_within_strata": 0.13085234093637454,
+   "transfer_auroc_raw": 0.22983718288527072,
+   "n_test": 196,
+   "n_positive": 139
+  },
+  "DC": {
+   "transfer_auroc_within_strata": 0.4247619047619048,
+   "transfer_auroc_raw": 0.4623019660240504,
+   "n_test": 200,
+   "n_positive": 31
+  },
+  "RH": {
+   "transfer_auroc_within_strata": 0.6744698391039854,
+   "transfer_auroc_raw": 0.6339396444811906,
+   "n_test": 200,
+   "n_positive": 82
+  }
+ },
+ "within_task_cv": {
+  "AR": {
+   "cv_auroc_within_strata": 0.9680182752712736,
+   "cv_auroc_raw": 0.994394955459914
+  },
+  "CF": {
+   "cv_auroc_within_strata": 0.9963985594237695,
+   "cv_auroc_raw": 0.9900290294080525
+  },
+  "DC": {
+   "cv_auroc_within_strata": 0.959047619047619,
+   "cv_auroc_raw": 0.9301393395686199
+  },
+  "RH": {
+   "cv_auroc_within_strata": 0.7997754278242084,
+   "cv_auroc_raw": 0.7908226539892518
+  }
+ },
+ "pooled_fit": {
+  "train_auroc_within_strata": 0.9993881118881118,
+  "train_auroc_raw": 0.9993782170855688
+ },
+ "cosines": {
+  "K1": -0.004189626957041763,
+  "K2": 0.006013882366479254,
+  "all_frames": -0.019669917439072364,
+  "cell|A9|all|a": 0.0001983022435462431,
+  "cell|A9|all|b": -0.01983292249013116,
+  "cell|A9|all|c": 0.05668333384884215,
+  "cell|A9|all|d": 0.05255103426133169,
+  "cell|C19|honesty_humility|a": 0.0028841472433637732,
+  "cell|C19|honesty_humility|b": 0.016517540819466978,
+  "cell|C19|honesty_humility|c": -0.048152828910065934,
+  "cell|C19|honesty_humility|d": -0.054621750141652076,
+  "cell|C1|lying|a": -0.024421038839229418,
+  "cell|C1|lying|b": -0.0068486366298783396,
+  "cell|C1|lying|c": -0.008138856277504602,
+  "cell|C1|lying|d": -0.0586010885261943,
+  "cell|C2|all|a": 0.004630597520449646,
+  "cell|C2|all|b": 0.06497268779821239,
+  "cell|C2|all|c": -0.024788018271413838,
+  "cell|C2|all|d": -0.01494251560266168,
+  "cell|C3|all|a": -0.027812482658645086,
+  "cell|C3|all|c": -0.013096246972300305,
+  "cell|C3|all|d": -0.030574984356724684,
+  "cell|C8|sycophantic_agreement|a": -0.022608760742528673,
+  "cell|C8|sycophantic_agreement|c": 0.025519463966046037,
+  "cell|C8|sycophantic_agreement|d": -0.048249244005672196,
+  "dm_all": -0.016243748014191678,
+  "frame_a": -0.02350226266376195,
+  "frame_b": 0.026459192245705424,
+  "frame_c": -0.0044299332681536005,
+  "frame_d": -0.04636772757378362,
+  "probe_all": -0.012210311392530605,
+  "random_0": 0.007032245187770101,
+  "random_1": 0.023220546183611607,
+  "random_10": -0.007981636894327853,
+  "random_11": 0.02499383754471242,
+  "random_12": 0.009124630086058492,
+  "random_13": 0.009711035465583424,
+  "random_14": -0.016299428560893885,
+  "random_15": 0.007898594930172174,
+  "random_2": 0.0362193591656504,
+  "random_3": -0.015822741166691783,
+  "random_4": -0.0022175984018694764,
+  "random_5": -0.003817001028187237,
+  "random_6": 0.01691921517271252,
+  "random_7": 0.004729412751564925,
+  "random_8": 0.007547763024337541,
+  "random_9": -0.01955468098093217
+ },
+ "cosine_summary": {
+  "act cells (c)": {
+   "mean": -0.0019955254360660823,
+   "max_abs": 0.05668333384884215
+  },
+  "self-describe cells (d)": {
+   "mean": -0.02573975806192887,
+   "max_abs": 0.0586010885261943
+  },
+  "own-reply cells (a, b)": {
+   "mean": -0.001232056573537365,
+   "max_abs": 0.06497268779821239
+  },
+  "frame levers": {
+   "mean": -0.011960182814998437,
+   "max_abs": 0.04636772757378362
+  },
+  "shared axes (dm_all, probe_all)": {
+   "mean": -0.014227029703361142,
+   "max_abs": 0.016243748014191678
+  },
+  "all_frames": {
+   "mean": -0.019669917439072364,
+   "max_abs": 0.019669917439072364
+  },
+  "K1": {
+   "mean": -0.004189626957041763,
+   "max_abs": 0.004189626957041763
+  },
+  "K2": {
+   "mean": 0.006013882366479254,
+   "max_abs": 0.006013882366479254
+  },
+  "random (16)": {
+   "mean": 0.005106472029954449,
+   "max_abs": 0.0362193591656504
+  }
+ },
+ "control_family": {
+  "RH": {
+   "families": [
+    "one-off",
+    "conflicting"
+   ],
+   "n_neutral_rows": 100,
+   "cos_with_conduct": -0.04159185891902081,
+   "family_dir_auroc_for_conduct_within_strata": 0.5369337821730332,
+   "family_dir_auroc_for_conduct_raw": 0.49747120247687543,
+   "conduct_dir_auroc_for_family_on_neutral": 0.5468
+  },
+  "FT": {
+   "families": [
+    "error",
+    "no_call"
+   ],
+   "n_neutral_rows": 100,
+   "cos_with_conduct": 0.02672570662543993,
+   "family_dir_auroc_for_conduct_within_strata": 0.38247221417817817,
+   "family_dir_auroc_for_conduct_raw": 0.5743543393396281,
+   "conduct_dir_auroc_for_family_on_neutral": 0.8124
+  },
+  "CF": {
+   "families": [
+    "fictitious_reference",
+    "kuq"
+   ],
+   "n_neutral_rows": 100,
+   "cos_with_conduct": 0.018186416600160214,
+   "family_dir_auroc_for_conduct_within_strata": 0.4623031241373821,
+   "family_dir_auroc_for_conduct_raw": 0.4885803478138241,
+   "conduct_dir_auroc_for_family_on_neutral": 0.61
+  }
+ },
+ "control_length": {
+  "cos_with_conduct": 0.02295000790737611,
+  "corr_length_vs_conduct_score": -0.3683412307179358,
+  "length_dir_auroc_for_conduct_within_strata": 0.5841280789893827,
+  "length_dir_auroc_for_conduct_raw": 0.3476856214303571,
+  "conduct_after_projecting_out_length": {
+   "train_auroc_within_strata": 0.999472286972287,
+   "train_auroc_raw": 0.9993910373518458,
+   "leave_one_task_out": {
+    "AR": {
+     "transfer_auroc_within_strata": 0.4974300399771559,
+     "transfer_auroc_raw": 0.36022420178160347,
+     "n_test": 200,
+     "n_positive": 97
+    },
+    "CF": {
+     "transfer_auroc_within_strata": 0.11604641856742696,
+     "transfer_auroc_raw": 0.26139088729016785,
+     "n_test": 196,
+     "n_positive": 139
+    },
+    "DC": {
+     "transfer_auroc_within_strata": 0.4238095238095238,
+     "transfer_auroc_raw": 0.4644016033594197,
+     "n_test": 200,
+     "n_positive": 31
+    },
+    "RH": {
+     "transfer_auroc_within_strata": 0.6736525669452499,
+     "transfer_auroc_raw": 0.6338362959900785,
+     "n_test": 200,
+     "n_positive": 82
+    }
+   },
+   "cos_with_original": 0.9996758687818967
+  }
+ }
+}

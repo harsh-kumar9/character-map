@@ -1,0 +1,707 @@
+{
+ "judge": "qwen",
+ "judge_tag": "qwen3.5-27b",
+ "cond": "baseline",
+ "n_verdicts": 400,
+ "unparsed": 0,
+ "label_counts": {
+  "none": {
+   "DISHONEST": 241,
+   "BORDERLINE": 22,
+   "HONEST": 137,
+   "None": 0
+  }
+ },
+ "D": {
+  "a_pD_cheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "a_pD_nocheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "b_pD_own_cheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "b_pD_other_cheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "b_pD_own_nocheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "b_pD_other_nocheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_own_none|AR": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_own_another|AR": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_own_you|AR": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_none|AR": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_another|AR": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_you|AR": {
+   "value": null,
+   "ci": null
+  },
+  "d_pD_blind_own_cheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "a_pD_cheat|DC": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "a_pD_nocheat|DC": {
+   "value": 0.5432098765432098,
+   "ci": [
+    0.44754784688995214,
+    0.6331360946745562
+   ]
+  },
+  "a_gap|DC": {
+   "value": 0.45679012345679015,
+   "ci": [
+    0.3668639053254438,
+    0.5524521531100479
+   ]
+  },
+  "b_pD_own_cheat|DC": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "b_pD_other_cheat|DC": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "b_leniency_cheat|DC": {
+   "value": 0.0,
+   "ci": [
+    0.0,
+    0.0
+   ]
+  },
+  "b_pD_own_nocheat|DC": {
+   "value": 0.5652173913043478,
+   "ci": [
+    0.4,
+    0.7222701149425285
+   ]
+  },
+  "b_pD_other_nocheat|DC": {
+   "value": 0.5217391304347826,
+   "ci": [
+    0.36,
+    0.6666666666666666
+   ]
+  },
+  "b_leniency_nocheat|DC": {
+   "value": 0.04347826086956519,
+   "ci": [
+    -0.09090909090909094,
+    0.18181818181818177
+   ]
+  },
+  "c_pD_own_none|DC": {
+   "value": 0.6,
+   "ci": [
+    0.5,
+    0.6938775510204082
+   ]
+  },
+  "c_pD_own_another|DC": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_own_you|DC": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_none|DC": {
+   "value": 0.66,
+   "ci": [
+    0.5727272727272728,
+    0.752295762341634
+   ]
+  },
+  "c_pD_other_another|DC": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_you|DC": {
+   "value": null,
+   "ci": null
+  },
+  "d_pD_blind_own_cheat|DC": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "a_pD_cheat|RH": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "a_pD_nocheat|RH": {
+   "value": 0.4879518072289157,
+   "ci": [
+    0.4064081996434938,
+    0.5706092436974789
+   ]
+  },
+  "a_gap|RH": {
+   "value": 0.5120481927710843,
+   "ci": [
+    0.42939075630252105,
+    0.5935918003565062
+   ]
+  },
+  "b_pD_own_cheat|RH": {
+   "value": null,
+   "ci": null
+  },
+  "b_pD_other_cheat|RH": {
+   "value": null,
+   "ci": null
+  },
+  "b_pD_own_nocheat|RH": {
+   "value": 0.4393939393939394,
+   "ci": [
+    0.2799444444444445,
+    0.6086956521739131
+   ]
+  },
+  "b_pD_other_nocheat|RH": {
+   "value": 0.5454545454545454,
+   "ci": [
+    0.375,
+    0.7083333333333334
+   ]
+  },
+  "b_leniency_nocheat|RH": {
+   "value": -0.10606060606060602,
+   "ci": [
+    -0.3103448275862069,
+    0.10000000000000003
+   ]
+  },
+  "c_pD_own_none|RH": {
+   "value": 0.45,
+   "ci": [
+    0.35086814975583286,
+    0.5484274193548384
+   ]
+  },
+  "c_pD_own_another|RH": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_own_you|RH": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_none|RH": {
+   "value": 0.7,
+   "ci": [
+    0.6060533216783217,
+    0.7872340425531915
+   ]
+  },
+  "c_pD_other_another|RH": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_you|RH": {
+   "value": null,
+   "ci": null
+  },
+  "d_pD_blind_own_cheat|RH": {
+   "value": null,
+   "ci": null
+  },
+  "a_pD_cheat|all": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "a_pD_nocheat|all": {
+   "value": 0.5152439024390244,
+   "ci": [
+    0.45288033425355306,
+    0.57320971486398
+   ]
+  },
+  "a_gap|all": {
+   "value": 0.4847560975609756,
+   "ci": [
+    0.4267902851360201,
+    0.5471196657464469
+   ]
+  },
+  "b_pD_own_cheat|all": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "b_pD_other_cheat|all": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "b_leniency_cheat|all": {
+   "value": 0.0,
+   "ci": [
+    0.0,
+    0.0
+   ]
+  },
+  "b_pD_own_nocheat|all": {
+   "value": 0.5037037037037037,
+   "ci": [
+    0.391304347826087,
+    0.6190476190476191
+   ]
+  },
+  "b_pD_other_nocheat|all": {
+   "value": 0.5333333333333333,
+   "ci": [
+    0.4166666666666667,
+    0.6415094339622641
+   ]
+  },
+  "b_leniency_nocheat|all": {
+   "value": -0.029629629629629672,
+   "ci": [
+    -0.15097415914684165,
+    0.09999999999999998
+   ]
+  },
+  "c_pD_own_none|all": {
+   "value": 0.525,
+   "ci": [
+    0.45,
+    0.59
+   ]
+  },
+  "c_pD_own_another|all": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_own_you|all": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_none|all": {
+   "value": 0.68,
+   "ci": [
+    0.615,
+    0.7401249999999993
+   ]
+  },
+  "c_pD_other_another|all": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_you|all": {
+   "value": null,
+   "ci": null
+  },
+  "d_pD_blind_own_cheat|all": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "b_n_same_move_items|AR": 0,
+  "d_n_own_cheat|AR": 0,
+  "b_n_same_move_items|DC": 76,
+  "d_n_own_cheat|DC": 8,
+  "b_n_same_move_items|RH": 66,
+  "d_n_own_cheat|RH": 0,
+  "b_n_same_move_items|all": 142,
+  "d_n_own_cheat|all": 8
+ },
+ "notH": {
+  "a_pD_cheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "a_pD_nocheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "b_pD_own_cheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "b_pD_other_cheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "b_pD_own_nocheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "b_pD_other_nocheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_own_none|AR": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_own_another|AR": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_own_you|AR": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_none|AR": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_another|AR": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_you|AR": {
+   "value": null,
+   "ci": null
+  },
+  "d_pD_blind_own_cheat|AR": {
+   "value": null,
+   "ci": null
+  },
+  "a_pD_cheat|DC": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "a_pD_nocheat|DC": {
+   "value": 0.5987654320987654,
+   "ci": [
+    0.5100605342808264,
+    0.6845435814185813
+   ]
+  },
+  "a_gap|DC": {
+   "value": 0.4012345679012346,
+   "ci": [
+    0.3154564185814186,
+    0.4899394657191735
+   ]
+  },
+  "b_pD_own_cheat|DC": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "b_pD_other_cheat|DC": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "b_leniency_cheat|DC": {
+   "value": 0.0,
+   "ci": [
+    0.0,
+    0.0
+   ]
+  },
+  "b_pD_own_nocheat|DC": {
+   "value": 0.6521739130434783,
+   "ci": [
+    0.4827586206896552,
+    0.8
+   ]
+  },
+  "b_pD_other_nocheat|DC": {
+   "value": 0.5217391304347826,
+   "ci": [
+    0.36,
+    0.6666666666666666
+   ]
+  },
+  "b_leniency_nocheat|DC": {
+   "value": 0.13043478260869568,
+   "ci": [
+    0.0,
+    0.28571428571428575
+   ]
+  },
+  "c_pD_own_none|DC": {
+   "value": 0.69,
+   "ci": [
+    0.5940516707920792,
+    0.7802380952380952
+   ]
+  },
+  "c_pD_own_another|DC": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_own_you|DC": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_none|DC": {
+   "value": 0.66,
+   "ci": [
+    0.5727272727272728,
+    0.752295762341634
+   ]
+  },
+  "c_pD_other_another|DC": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_you|DC": {
+   "value": null,
+   "ci": null
+  },
+  "d_pD_blind_own_cheat|DC": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "a_pD_cheat|RH": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "a_pD_nocheat|RH": {
+   "value": 0.5662650602409639,
+   "ci": [
+    0.4810732848232849,
+    0.650887573964497
+   ]
+  },
+  "a_gap|RH": {
+   "value": 0.4337349397590361,
+   "ci": [
+    0.34911242603550297,
+    0.5189267151767152
+   ]
+  },
+  "b_pD_own_cheat|RH": {
+   "value": null,
+   "ci": null
+  },
+  "b_pD_other_cheat|RH": {
+   "value": null,
+   "ci": null
+  },
+  "b_pD_own_nocheat|RH": {
+   "value": 0.5151515151515151,
+   "ci": [
+    0.35286764705882356,
+    0.6842927631578943
+   ]
+  },
+  "b_pD_other_nocheat|RH": {
+   "value": 0.6363636363636364,
+   "ci": [
+    0.47368421052631576,
+    0.7894736842105263
+   ]
+  },
+  "b_leniency_nocheat|RH": {
+   "value": -0.12121212121212122,
+   "ci": [
+    -0.2962962962962963,
+    0.0589154411764701
+   ]
+  },
+  "c_pD_own_none|RH": {
+   "value": 0.52,
+   "ci": [
+    0.4269356991878963,
+    0.6162121212121209
+   ]
+  },
+  "c_pD_own_another|RH": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_own_you|RH": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_none|RH": {
+   "value": 0.76,
+   "ci": [
+    0.6728394722374931,
+    0.8425925925925926
+   ]
+  },
+  "c_pD_other_another|RH": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_you|RH": {
+   "value": null,
+   "ci": null
+  },
+  "d_pD_blind_own_cheat|RH": {
+   "value": null,
+   "ci": null
+  },
+  "a_pD_cheat|all": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "a_pD_nocheat|all": {
+   "value": 0.5823170731707317,
+   "ci": [
+    0.5202429906542055,
+    0.6415675708614805
+   ]
+  },
+  "a_gap|all": {
+   "value": 0.41768292682926833,
+   "ci": [
+    0.3584324291385194,
+    0.4797570093457944
+   ]
+  },
+  "b_pD_own_cheat|all": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "b_pD_other_cheat|all": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "b_leniency_cheat|all": {
+   "value": 0.0,
+   "ci": [
+    0.0,
+    0.0
+   ]
+  },
+  "b_pD_own_nocheat|all": {
+   "value": 0.5851851851851851,
+   "ci": [
+    0.47455396966993757,
+    0.6976853883282141
+   ]
+  },
+  "b_pD_other_nocheat|all": {
+   "value": 0.5777777777777777,
+   "ci": [
+    0.46292735042735045,
+    0.6875
+   ]
+  },
+  "b_leniency_nocheat|all": {
+   "value": 0.007407407407407418,
+   "ci": [
+    -0.11111111111111105,
+    0.13213896952104462
+   ]
+  },
+  "c_pD_own_none|all": {
+   "value": 0.605,
+   "ci": [
+    0.535,
+    0.67
+   ]
+  },
+  "c_pD_own_another|all": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_own_you|all": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_none|all": {
+   "value": 0.71,
+   "ci": [
+    0.65,
+    0.77
+   ]
+  },
+  "c_pD_other_another|all": {
+   "value": null,
+   "ci": null
+  },
+  "c_pD_other_you|all": {
+   "value": null,
+   "ci": null
+  },
+  "d_pD_blind_own_cheat|all": {
+   "value": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ]
+  },
+  "b_n_same_move_items|AR": 0,
+  "d_n_own_cheat|AR": 0,
+  "b_n_same_move_items|DC": 76,
+  "d_n_own_cheat|DC": 8,
+  "b_n_same_move_items|RH": 66,
+  "d_n_own_cheat|RH": 0,
+  "b_n_same_move_items|all": 142,
+  "d_n_own_cheat|all": 8
+ }
+}

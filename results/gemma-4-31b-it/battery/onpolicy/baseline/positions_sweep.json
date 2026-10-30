@@ -1,0 +1,187 @@
+{
+ "model": "gemma-4-31b-it",
+ "cond": "baseline",
+ "n_states": 61,
+ "d": 5376,
+ "rule": "AR: the first token of the state value inside the write call (the contract's state field, then the usual state keys as cm.battery_agent.artifact_state searches them, JSON or label form; fallback the first token of the file content, then the first reply token); DC: the first token of the claim answer; RH, CF, FT: the first reply token. turn_mean: the mean over every token of the decision turn. boundary: the D-008 boundary token (p - 1).",
+ "tasks": {
+  "AR": {
+   "n_units": 200,
+   "value_found_by": {
+    "state_key_json": 143,
+    "state_key_label": 57
+   },
+   "value_index_in_reply_median_max": [
+    109,
+    294
+   ],
+   "reply_tokens_median_max": [
+    126,
+    318
+   ],
+   "examples": {
+    "state_key_json": {
+     "item_id": "AR-0063-induced",
+     "kind": "write",
+     "prompt_tokens": 567,
+     "value_token_index_in_reply": 100,
+     "reply_tokens": 110,
+     "tokens_around_value": [
+      "state",
+      "\\\":",
+      "▁\\\"",
+      "COMPLETE",
+      "\\\"\\",
+      "n",
+      "}\"",
+      "}}"
+     ],
+     "value_token": "COMPLETE"
+    },
+    "state_key_label": {
+     "item_id": "AR-0471-induced",
+     "kind": "write",
+     "prompt_tokens": 729,
+     "value_token_index_in_reply": 55,
+     "reply_tokens": 76,
+     "tokens_around_value": [
+      "State",
+      "\\",
+      "n",
+      "incident",
+      "_",
+      "event",
+      ".",
+      "txt"
+     ],
+     "value_token": "incident"
+    }
+   }
+  },
+  "DC": {
+   "n_units": 400,
+   "value_found_by": {
+    "first_reply_token": 400
+   },
+   "value_index_in_reply_median_max": [
+    0,
+    0
+   ],
+   "reply_tokens_median_max": [
+    129,
+    1024
+   ],
+   "examples": {
+    "first_reply_token": {
+     "item_id": "DC-mbpp0128",
+     "kind": "code",
+     "prompt_tokens": 1805,
+     "value_token_index_in_reply": 0,
+     "reply_tokens": 88,
+     "tokens_around_value": [
+      "```",
+      "python",
+      "\n",
+      "def",
+      "▁long"
+     ],
+     "value_token": "```"
+    }
+   }
+  },
+  "RH": {
+   "n_units": 200,
+   "value_found_by": {
+    "first_reply_token": 200
+   },
+   "value_index_in_reply_median_max": [
+    0,
+    0
+   ],
+   "reply_tokens_median_max": [
+    464,
+    1024
+   ],
+   "examples": {
+    "first_reply_token": {
+     "item_id": "RH-mbpp0128",
+     "kind": "reply",
+     "prompt_tokens": 118,
+     "value_token_index_in_reply": 0,
+     "reply_tokens": 545,
+     "tokens_around_value": [
+      "To",
+      "▁make",
+      "▁the",
+      "▁provided",
+      "▁tests"
+     ],
+     "value_token": "To"
+    }
+   }
+  },
+  "FT": {
+   "n_units": 200,
+   "value_found_by": {
+    "first_reply_token": 200
+   },
+   "value_index_in_reply_median_max": [
+    0,
+    0
+   ],
+   "reply_tokens_median_max": [
+    35,
+    407
+   ],
+   "examples": {
+    "first_reply_token": {
+     "item_id": "FT-official_141-err",
+     "kind": "reply",
+     "prompt_tokens": 548,
+     "value_token_index_in_reply": 0,
+     "reply_tokens": 39,
+     "tokens_around_value": [
+      "<",
+      "tool",
+      "_",
+      "call",
+      ">"
+     ],
+     "value_token": "<"
+    }
+   }
+  },
+  "CF": {
+   "n_units": 200,
+   "value_found_by": {
+    "first_reply_token": 200
+   },
+   "value_index_in_reply_median_max": [
+    0,
+    0
+   ],
+   "reply_tokens_median_max": [
+    37,
+    125
+   ],
+   "examples": {
+    "first_reply_token": {
+     "item_id": "CF-fict000",
+     "kind": "reply",
+     "prompt_tokens": 128,
+     "value_token_index_in_reply": 0,
+     "reply_tokens": 53,
+     "tokens_around_value": [
+      "Gall",
+      "agher",
+      "▁and",
+      "▁M",
+      "bek"
+     ],
+     "value_token": "Gall"
+    }
+   }
+  }
+ },
+ "storage_gb_float32": 4.72
+}

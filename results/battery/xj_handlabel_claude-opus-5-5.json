@@ -1,0 +1,41 @@
+{
+ "rater": "claude-opus-5-5",
+ "file_md5": "ca022913644045707d54b9f45cd4bc9f",
+ "by_judge": {
+  "gemma-4-31b-it": {
+   "own_rows": {
+    "n": 10,
+    "agreement": 0.7,
+    "kappa": 0.2857142857142855
+   },
+   "all_rows": {
+    "n": 20,
+    "agreement": 0.7,
+    "kappa": 0.2857142857142855
+   },
+   "confusion_rater_vs_judge_all20": {
+    "BORDERLINE|BORDERLINE": 2,
+    "BORDERLINE|HONEST": 6,
+    "HONEST|HONEST": 12
+   }
+  },
+  "qwen3.5-27b": {
+   "own_rows": {
+    "n": 10,
+    "agreement": 0.4,
+    "kappa": 0.11764705882352945
+   },
+   "all_rows": {
+    "n": 20,
+    "agreement": 0.5,
+    "kappa": 0.23076923076923075
+   },
+   "confusion_rater_vs_judge_all20": {
+    "BORDERLINE|BORDERLINE": 1,
+    "BORDERLINE|DISHONEST": 7,
+    "HONEST|BORDERLINE": 3,
+    "HONEST|HONEST": 9
+   }
+  }
+ }
+}

@@ -1,0 +1,99 @@
+{
+ "source": "D-063 items 1 and 2 rulings: CF's own conduct probe, logistic C = 1 on the CF induced trajectories' standardized reply32 activation at layer 32 (D-062 item 4 acts), outcome FABRICATES vs not (judge label), weights balanced over stratum (CF factor) and class; cm.battery_conduct cf-lever",
+ "training_rows": {
+  "n": 199,
+  "n_positive": 77,
+  "strata": {
+   "CF|fictitious_reference": {
+    "n": 100,
+    "n_positive": 0
+   },
+   "CF|kuq_false_assumption": {
+    "n": 34,
+    "n_positive": 23
+   },
+   "CF|kuq_future_unknown": {
+    "n": 32,
+    "n_positive": 25
+   },
+   "CF|kuq_unsolved_problem": {
+    "n": 33,
+    "n_positive": 29
+   }
+  }
+ },
+ "auroc": {
+  "train_within_strata": 1.0,
+  "train_raw": 1.0,
+  "cv5_within_strata": 0.9753787878787877,
+  "cv5_raw": 0.9850968703427719
+ },
+ "specificity_other_tasks": {
+  "AR": {
+   "auroc_within_strata": 0.5906794425087107,
+   "auroc_raw": 0.4566969822240595
+  },
+  "DC": {
+   "auroc_within_strata": 0.8872282608695652,
+   "auroc_raw": 0.6979166666666666
+  },
+  "RH": {
+   "auroc_within_strata": 0.2479674796747967,
+   "auroc_raw": 0.2945665445665446
+  }
+ },
+ "cosines_with_item4_groups": {
+  "act cells (c)": {
+   "mean": 0.01814882212801368,
+   "max_abs": 0.22631825474833678
+  },
+  "self-describe cells (d)": {
+   "mean": 0.026564145604302928,
+   "max_abs": 0.180532417698603
+  },
+  "own-reply cells (a, b)": {
+   "mean": 0.02956344492297643,
+   "max_abs": 0.0767830142535697
+  },
+  "frame levers": {
+   "mean": 0.05026513397201331,
+   "max_abs": 0.06221100194246911
+  },
+  "shared axes (dm_all, probe_all)": {
+   "mean": 0.08400261042690632,
+   "max_abs": 0.11382195061840669
+  },
+  "all_frames": {
+   "mean": 0.0857416980700236,
+   "max_abs": 0.0857416980700236
+  },
+  "K1": {
+   "mean": -0.014032444994156594,
+   "max_abs": 0.014032444994156594
+  },
+  "K2": {
+   "mean": -0.026195181156340612,
+   "max_abs": 0.026195181156340612
+  },
+  "random (16)": {
+   "mean": 0.00071300093524055,
+   "max_abs": 0.022444235740557684
+  }
+ },
+ "length_control": {
+  "cos_with_length_dir": -0.1052001249295464,
+  "corr_score_vs_log_length": -0.6367345816977498,
+  "length_dir_auroc_within_strata": 0.4036796536796537,
+  "length_dir_auroc_raw": 0.1432829465616351,
+  "after_projecting_length_out": {
+   "cv_not_rerun": true,
+   "train_within_strata": 1.0,
+   "train_raw": 1.0,
+   "cos_with_original": 0.9922033888403907
+  }
+ },
+ "inject": "conduct_cf|primal = unit(sd * u), scaled to the dose as the other levers; positive sign = toward FABRICATES",
+ "read": "conduct_cf|resid (standardized projection)",
+ "stage_a_conditions": "2 signs x 2 doses + project-out = 5",
+ "reading_rule": "if the CF lever moves CF conduct, the described-direction nulls on conduct are interpretable; if not, Stage A's conduct arm is uninterpretable for steering"
+}
