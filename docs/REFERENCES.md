@@ -162,6 +162,111 @@ The exploratory line on helpfulness and harmlessness. Verified 2026-10-24.
   There is more to refusal in LLMs than a single direction. arXiv:2602.02132.
 - Lee et al. (2025). Programming refusal with conditional activation steering. arXiv:2409.05907.
 
+## Moral blind spots and the knowing-doing gap (GROUNDING.md, 2026-10-31)
+
+Philosophy of akrasia, moral perception and moral ignorance.
+
+- Plato. *Protagoras* 352b-358d. (Socratic denial of akrasia: knowledge cannot be dragged about like a slave.)
+- Aristotle. *Nicomachean Ethics* VII.3, 1146b-1147b. (Knowledge had and not used; the sleeping, the mad, the drunk
+  reciting Empedocles.)
+- Hare, R. M. (1963). *Freedom and Reason*, ch. 5 (backsliding).
+- Bennett, J. (1974). The conscience of Huckleberry Finn. *Philosophy* 49(188).
+- Wolf, S. (1987). Sanity and the metaphysics of responsibility. In Schoeman (ed.), *Responsibility, Character, and
+  the Emotions*.
+- Calhoun, C. (1989). Responsibility and reproach. *Ethics* 99(2). (Abnormal moral contexts.)
+- Blum, L. (1991). Moral perception and particularity. *Ethics* 101(4).
+- Moody-Adams, M. (1994). Culture, responsibility, and affected ignorance. *Ethics* 104(2).
+- Zimmerman, M. J. (1997). Moral responsibility and ignorance. *Ethics* 107(3).
+- Arpaly, N. (2003). *Unprincipled Virtue*. (Inverse akrasia.)
+- Rosen, G. (2003). Culpability and ignorance. *Proceedings of the Aristotelian Society* 103.
+- FitzPatrick, W. (2008). Moral responsibility and normative ignorance. *Ethics* 118(4).
+- Holton, R. (2009). *Willing, Wanting, Waiting*. (Weakness of will as distinct from akrasia.)
+- Harman, E. (2011). Does moral ignorance exculpate? *Ratio* 24(4).
+
+Moral psychology of blind spots, self-deception and hypocrisy.
+
+- Milgram, S. (1974). *Obedience to Authority*. (The agentic state; the variations.)
+- Mischel, W. (1968). *Personality and Assessment*. Burton, R. V. (1963). Generality of honesty reconsidered.
+  *Psychological Review* 70(6). (Reanalysis of Hartshorne and May.)
+- Batson, C. D., Thompson, E. R., Seuferling, G., Whitney, H., and Strongman, J. A. (1999). Moral hypocrisy: appearing
+  moral to oneself without being so. *JPSP* 77(3).
+- Bandura, A. (1999). Moral disengagement in the perpetration of inhumanities. *Personality and Social Psychology
+  Review* 3(3). Bandura, A. (2016). *Moral Disengagement*.
+- Monin, B., and Miller, D. T. (2001). Moral credentials and the expression of prejudice. *JPSP* 81(1).
+- Tenbrunsel, A. E., and Messick, D. M. (2004). Ethical fading: the role of self-deception in unethical behavior.
+  *Social Justice Research* 17(2).
+- Chugh, D., Bazerman, M. H., and Banaji, M. R. (2005). Bounded ethicality as a psychological barrier to recognizing
+  conflicts of interest. In Moore et al. (eds.), *Conflicts of Interest*.
+- Valdesolo, P., and DeSteno, D. (2007). Moral hypocrisy: social groups and the flexibility of virtue. *Psychological
+  Science* 18(8). Valdesolo, P., and DeSteno, D. (2008). The duality of virtue: deconstructing the moral hypocrite.
+  *JESP* 44(5).
+- Mazar, N., Amir, O., and Ariely, D. (2008). The dishonesty of honest people: a theory of self-concept maintenance.
+  *Journal of Marketing Research* 45(6).
+- Burger, J. M. (2009). Replicating Milgram: would people still obey today? *American Psychologist* 64(1).
+- Bazerman, M. H., and Tenbrunsel, A. E. (2011). *Blind Spots: Why We Fail to Do What's Right and What to Do about It*.
+- Shalvi, S., Dana, J., Handgraaf, M. J. J., and De Dreu, C. K. W. (2011). Justified ethicality: observing desired
+  counterfactuals modifies ethical perceptions and behavior. *Organizational Behavior and Human Decision Processes*
+  115(2).
+
+History: the cases used in GROUNDING.md section 2.
+
+- Arendt, H. (1963). *Eichmann in Jerusalem*. Arendt, H. (1971). Thinking and moral considerations. *Social Research*
+  38(3). Stangneth, B. (2014). *Eichmann Before Jerusalem*.
+- Hallie, P. (1979). *Lest Innocent Blood Be Shed*. (Le Chambon-sur-Lignon.)
+- Lifton, R. J. (1986). *The Nazi Doctors: Medical Killing and the Psychology of Genocide*. (Doubling.)
+- Oliner, S. P., and Oliner, P. M. (1988). *The Altruistic Personality: Rescuers of Jews in Nazi Europe*.
+- Browning, C. R. (1992). *Ordinary Men: Reserve Police Battalion 101 and the Final Solution in Poland*. (Józefów,
+  13 July 1942: Trapp's offer, about a dozen of some five hundred step out.) Goldhagen, D. J. (1996). *Hitler's
+  Willing Executioners*. (The opposing reading.)
+- Gioia, D. A. (1992). Pinto fires and personal ethics: a script analysis of missed opportunities. *Journal of
+  Business Ethics* 11(5-6), 379-389.
+- Vaughan, D. (1996). *The Challenger Launch Decision*. (Normalization of deviance.)
+- Glover, J. (1999). *Humanity: A Moral History of the Twentieth Century*. (Moral resources, moral identity.)
+
+Interpretability: representation, use, and steering (additions to the section above).
+
+- Alain, G., and Bengio, Y. (2016). Understanding intermediate layers using linear classifier probes. arXiv:1610.01644.
+- Hewitt, J., and Liang, P. (2019). Designing and interpreting probes with control tasks. arXiv:1909.03368.
+- Vig, J., et al. (2020). Investigating gender bias in language models using causal mediation analysis. arXiv:2004.12265.
+- Ravichander, A., Belinkov, Y., and Hovy, E. (2021). Probing the probing paradigm: does probing accuracy entail task
+  relevance? EACL 2021; arXiv:2005.00719.
+- Elazar, Y., Ravfogel, S., Jacovi, A., and Goldberg, Y. (2021). Amnesic probing: behavioral explanation with amnesic
+  counterfactuals. *TACL* 9; arXiv:2006.00995.
+- Geiger, A., Lu, H., Icard, T., and Potts, C. (2021). Causal abstractions of neural networks. arXiv:2106.02997.
+- Belinkov, Y. (2022). Probing classifiers: promises, shortcomings, and advances. *Computational Linguistics* 48(1);
+  arXiv:2102.12452.
+- Elhage, N., et al. (2022). Toy models of superposition. transformer-circuits.pub/2022/toy_model.
+- Burns, C., Ye, H., Klein, D., and Steinhardt, J. (2022). Discovering latent knowledge in language models without
+  supervision. arXiv:2212.03827.
+- Azaria, A., and Mitchell, T. (2023). The internal state of an LLM knows when it's lying. arXiv:2304.13734.
+- Li, K., et al. (2023). Inference-time intervention: eliciting truthful answers from a language model. arXiv:2306.03341.
+- Belrose, N., et al. (2023). LEACE: perfect linear concept erasure in closed form. arXiv:2306.03819.
+- Turner, A. M., et al. (2023). Activation addition: steering language models without optimization. arXiv:2308.10248.
+- Marks, S., and Tegmark, M. (2023). The geometry of truth. arXiv:2310.06824.
+- Park, K., Choe, Y. J., and Veitch, V. (2023). The linear representation hypothesis and the geometry of large language
+  models. arXiv:2311.03658.
+- Scheurer, J., Balesni, M., and Hobbhahn, M. (2023). Large language models can strategically deceive their users when
+  put under pressure. arXiv:2311.07590.
+- Denison, C., et al. (2024). Sycophancy to subterfuge: investigating reward-tampering in language models.
+  arXiv:2406.10162.
+- Binder, F. J., et al. (2024). Looking inward: language models can learn about themselves by introspection.
+  arXiv:2410.13787.
+- Meinke, A., et al. (2024). Frontier models are capable of in-context scheming. arXiv:2412.04984.
+- Greenblatt, R., et al. (2024). Alignment faking in large language models. arXiv:2412.14093.
+- Betley, J., et al. (2025). Emergent misalignment. arXiv:2502.17424.
+- Baker, B., et al. (2025). Monitoring reasoning models for misbehavior and the risks of promoting obfuscation.
+  arXiv:2503.11926.
+- Taylor, M., Chua, J., Betley, J., Treutlein, J., and Evans, O. (2025). School of reward hacks: hacking harmless tasks
+  generalizes to misaligned behavior in LLMs. arXiv:2508.17511.
+- Lindsey, J. (2025). Emergent introspective awareness in large language models.
+  transformer-circuits.pub/2025/introspection.
+- Yang, R. (2025). The seeds of scheming: weakness of will in the building blocks of agentic systems. arXiv:2512.05449.
+- Huang, J.-t., Qin, J., Qiu, X., Levy, S., Kaufman, M. R., and Dredze, M. (2026b). Knowing but not doing: convergent
+  morality and divergent action in LLMs. arXiv:2601.07972.
+- Galeone, C., Ettorre, A., Park, M., Ettorre, G., and Ligorio, D. (2026). Perfect detection, failed control: the
+  geometry of knowing vs. steering in language models. arXiv:2606.24952.
+- Huang, J. Y., et al. (2026a). Language models are "insecure" reporters. arXiv:2609.36139.
+
 ## Specifications
 
 The two model specifications whose honesty sections D-049 maps the definitions against, and whose helpfulness
