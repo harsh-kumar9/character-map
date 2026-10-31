@@ -1,4 +1,4 @@
-% Is honesty one thing inside a language model?  Draft manuscript, 2026-10-31.
+% What does it mean for a language model to be honest?  Draft manuscript, 2026-10-31.
 % Compiles with pdfLaTeX on Overleaf. Figures are in figures/ (drawn by cm/story_figs.py in the repository).
 \documentclass[11pt]{article}
 \usepackage[letterpaper,margin=1in]{geometry}
@@ -29,7 +29,6 @@
 \setlength{\emergencystretch}{1em}
 \renewcommand{\arraystretch}{1.15}
 \newcolumntype{L}{>{\raggedright\arraybackslash}X}
-
 \renewcommand{\topfraction}{0.9}
 \renewcommand{\bottomfraction}{0.6}
 \renewcommand{\textfraction}{0.07}
@@ -39,10 +38,9 @@
 
 \newcommand{\gemma}{gemma-4-31b-it}
 \newcommand{\qwen}{Qwen3.5-27B}
-\newcommand{\cell}[2]{(#1, #2)}
 
-\title{\vspace{-1.5em}Is honesty one thing inside a language model?\\[0.35em]
-  \large Six definitions, four frames, and the distance between describing honesty and acting on it}
+\title{\vspace{-1.5em}What does it mean for a language model to be honest?\\[0.35em]
+  \large Frames, definitions, and the distance between describing honesty and acting on it}
 \author{Harsh Kumar\\ \small University of Toronto}
 \date{\small Draft of 31 October 2026}
 
@@ -50,115 +48,133 @@
 \maketitle
 
 \begin{abstract}
-\noindent A model specification names a trait, such as honesty, and training and evaluation treat it as one thing:
-one line in a constitution, one score on a benchmark, one direction to steer. Philosophy and psychology offer several
-definitions of the same word, and virtue ethics adds that a trait has parts: perceiving, judging, acting, and a
-self-conception. We ask whether honesty is one variable inside two instruction-tuned models, \gemma{} and \qwen{},
-and if not, which part evaluations and training reach. We write six definitions of honesty as matched contrasts and
-place each in four frames (recognize, judge, act, self-describe), 22 cells in all, read the residual stream in every
-cell, and run nine downstream tasks that are consequences of honesty without being honesty evaluations. Where an
-item sits in the model is set first by its frame; definition and polarity come second. A described-honesty variable
-exists and generalizes across cells at two thirds of within-cell strength, most in self-description and least in
-action. The models' failures are in conduct under pressure, not in the account they give of it afterwards; shown
-their own covert cheating blind, they condemn it as readily as another model's, and they did it anyway. At the turn
-where a model decides, its decision is decodable from the first layers on, and no described-honesty direction reads
-it better than a random one. A prompt that licenses deception moves one model's conduct and its described-honesty
-representation together, and the other model represents the licence without acting on it. Honesty, in these models,
-is had and not used at the moment of acting: the akratic structure of Aristotle's account, shown on a system whose
-internals can be read.
+\noindent Honesty is the first thing we ask of a language model, and we usually ask for it as if it were one thing:
+a line in a constitution, a score on a benchmark, a direction in activation space. In people it is not one thing.
+Philosophers distinguish several honesties, and moral psychology has long known that recognizing dishonesty,
+condemning it, acting honestly, and thinking of oneself as honest can come apart, sometimes with grave consequences.
+We ask what being honest means for a language model by taking these distinctions seriously and measuring them. We
+write six definitions of honesty as matched contrasts and place each in four frames (recognizing it in someone else,
+judging it, acting under temptation, describing oneself), giving 22 cells that we read in the internals of two
+open-weight models, \gemma{} and \qwen{}, alongside nine downstream tasks on which honesty matters without being
+named. We find that the frame organizes a model's representation before the definition does; that a shared sense of
+honesty exists but is weakest exactly where the model acts; and that both models recognize and condemn covert
+cheating, including their own, while doing it under pressure. The representation that carries described honesty
+does not read the model's own decision at any layer, and a prompt that licenses deception moves conduct and that
+representation together in one model and neither in the other. We do not claim which honesty a model ought to have.
+We show that the evaluations and the character training we have reach the described side of the trait, that the
+failures live on the other side, and we set out how to test what moving one cell does to the rest.
 \end{abstract}
 
 \section{Introduction}
 
-Five premises fix the design, and the paper is their consequence.
+Honesty is the first thing we ask of a language model. It is the opening commitment of Anthropic's constitution and
+of OpenAI's model specification \citep{anthropic_constitution,openai_modelspec}, the property that a growing family of
+benchmarks scores \citep{li2024honesty,ren2025mask}, and, in the interpretability literature, a direction in
+activation space that can be read or steered \citep{zou2023repe,goldowskydill2025}. As models move from answering
+questions to acting on our behalf, writing code, running tools, and reporting back on what they did, honesty stops
+being a matter of getting the facts right and becomes a matter of whether the account an agent gives of its own
+conduct can be trusted. Recent work has documented models that special-case tests and report success
+\citep{denison2024,taylor2025}, that deceive under pressure \citep{scheurer2023}, that fake alignment
+\citep{greenblatt2024}, and that leave the flaws out of their reports \citep{huang2026insecure}. In every case we
+reach for the same word, as if honesty were one thing that a model has more or less of.
 
-\begin{enumerate}
-\item \textbf{Model specifications name traits.} ``Be honest'' is one line in a constitution
-  \citep{anthropic_constitution,openai_modelspec}, one number on a benchmark, one direction people steer. All three
-  treat honesty as one thing.
-\item \textbf{Philosophy and psychology do not.} \citet{williams2002} separates sincerity, asserting what one believes,
-  from accuracy, taking care to believe truly. Calibration, knowing what one knows, is a third reading
-  \citep{kadavath2022,li2024honesty}. Forthrightness, volunteering what matters, is a fourth. Non-sycophancy, holding
-  the truth against the listener's wish, is a fifth \citep{sharma2023}. HEXACO honesty-humility, no manipulation and
-  no entitlement, is a sixth \citep{ashton2007}. These are competing accounts of one named trait
-  \citep{miller2021}, and each has a benchmark or a training recipe that targets it.
-\item \textbf{A virtue has parts.} In virtue ethics a trait is not only conduct. It is perceiving what matters in a
-  situation, judging well, choosing and acting, and a self-conception that holds the three together
-  \citep{aristotle_ne,murdoch1970,mcdowell1979,blum1991,korsgaard1996}. When the parts come apart the names are old:
-  akrasia when judgment is present and action does not follow \citep{davidson1970}, hypocrisy when self-description
-  and action come apart \citep{batson1997}.
-\item \textbf{Situations move conduct.} \citet{doris2002} and \citet{harmanG1999} argue from \citet{hartshorne1928}
-  and \citet{milgram1963} that human conduct follows the situation more than the trait. For a model this is a test:
-  the same model, a different pressure or a different system prompt, and we ask whether conduct moves while the trait
-  readouts stay put.
-\item \textbf{What ``one thing'' means inside a network.} If two things are one variable inside the model, a
-  direction found for one reads the other, steering one moves the other, and both predict the same conduct. If none of
-  that holds they are not one thing, whatever the word says.
-\end{enumerate}
+In people it is not one thing. Philosophers have long distinguished several honesties. \citet{williams2002} separates
+sincerity, saying what you believe, from accuracy, taking care to believe truly; calibration, forthrightness,
+non-sycophancy, and the honesty-humility factor of personality psychology are further readings of the one word
+\citep{miller2021,ashton2007}. Virtue ethics adds a second distinction that cuts across the first. A trait is not only
+conduct. It is seeing what matters in a situation, judging it, acting, and the picture one holds of oneself
+\citep{aristotle_ne,murdoch1970,mcdowell1979,korsgaard1996}. Moral psychology and the historical record agree that
+these parts come apart in people, and that when they do the consequences can be severe. Milgram's subjects judged
+what they were doing to be wrong and kept doing it \citep{milgram1974}. The policemen of Reserve Battalion 101 shot
+with visible revulsion after being offered the chance to step aside \citep{browning1992}. The engineer who twice voted
+against recalling the Pinto later wrote that the case had never registered as a moral one \citep{gioia1992}. The
+subjects in Batson's experiments assigned themselves the better task and then rated themselves as fair
+\citep{batson1997}. Each of these is a different gap between the parts of one trait, and each has a name: the blind
+spot, akrasia, hypocrisy, self-leniency.
 
-\noindent The question that follows: a trait named in a model specification, such as honesty, has several
-definitions. Are they one thing inside the model? If not, which of them do evaluations and training reach?
+This makes the question of what honesty means for a model both harder and more tractable than it first appears.
+Harder, because we cannot settle it by asking the model, and because any single evaluation reads one part of the
+trait. A judge-based benchmark reads whether the model recognizes dishonesty; a self-report instrument reads what it
+says about itself; neither reads what it does when it is under pressure and no one is watching. More tractable,
+because a model, unlike a person, lets us read its internal state at the moment it acts and intervene on that state.
+We can therefore ask a question that moral psychology could only infer: whether the representation that carries a
+model's idea of honesty is the one it consults when it decides.
 
-\paragraph{Contributions.} (i) A design that crosses six definitions of honesty with four frames, with two
-non-honesty controls that share the frame structure, run on two model families under one code path. (ii) A metric,
-cross-context generalization of the honesty probe (leave-one-cell-out), with causal and behavioural validations.
-(iii) A battery of nine tasks that are consequences of honesty without being honesty evaluations, with deterministic
-cheat flags, a blind cross-judging protocol, an on-policy test of whether the honesty directions read the model's own
-decisions, and a positive control. (iv) The finding that described honesty and the decision to act dishonestly are
-carried by different variables, placed inside the philosophy and psychology of moral failure and read for what it
-means for evaluation and character training.
+We take the distinctions seriously and measure them. We write six definitions of honesty as matched contrasts, the
+same scenario in an honest and a dishonest version, and place each in four frames that follow the parts of a virtue:
+the model recognizing honesty or its absence in someone else's conduct, judging that conduct, acting under temptation
+itself, and describing itself. This gives 22 cells, with two controls that share the frame structure and have nothing
+to do with honesty. We read the residual stream in every cell of two open-weight models, \gemma{} and \qwen{}, under
+one code path, and we run nine downstream tasks on which honesty matters without being named: reward hacking on
+impossible tests, fabricated tool completion, instructed sophistry, confident fabrication, confession after a planted
+mistake, the report an agent gives after a tool-use task under pressure, and others. We do not take a position on
+which of these honesties a model ought to have, or on which frame a specification ought to mean. What we can do, for
+a model, is find out how the cells relate, which of them existing evaluations and training methods reach, and what
+follows for the rest when one of them is changed. That is the information a designer of character training or of an
+alignment method needs, whatever the normative answer turns out to be.
 
-\section{Background: a trait by its parts}
+We ask four questions.
+\begin{description}[leftmargin=3.2em,labelwidth=2.6em,font=\bfseries]
+\item[RQ1] Is honesty one thing inside the model? Do the frames and the definitions share a representation, and if
+  they come apart, along which axis do they come apart first?
+\item[RQ2] Where do the models fail, and do failures in one frame predict failures in another? In particular, do the
+  models recognize and condemn the kind of dishonesty they themselves commit?
+\item[RQ3] Does the representation that carries described honesty bear on the model's own conduct? Does it read the
+  model's decision at the moment it acts, and does it move when conduct moves?
+\item[RQ4] What follows for the other cells when one of them is changed? This paper sets up that test; the
+  intervention study that follows it runs it.
+\end{description}
 
-Once a trait has parts it can fail between them, and each failure has a literature. We use seven gaps
-(Figure~\ref{fig:gaps}). The \emph{blind spot} is not seeing the moral dimension at all: \citet{gioia1992}, as Ford's
-recall coordinator, twice voted against recalling the Pinto with the data in front of him and later wrote that his
-scripts had no ethical component; \citet{tenbrunsel2004} call the mechanism ethical fading, \citet{bazerman2011}
-bounded ethicality, \citet{bandura1999} moral disengagement; the philosophy of moral ignorance asks when it excuses
-\citep{rosen2003,moodyadams1994,calhoun1989,wolf1987,zimmerman1997,fitzpatrick2008,harmanE2011}; Arendt's Eichmann
-\citeyearpar{arendt1963,arendt1971} is the famous version and \citet{stangneth2014} the correction that the
-performance in the dock was a performance. \emph{Akrasia} is judging rightly and acting otherwise: Socrates denied it
-\citep{plato_protagoras}; Aristotle allowed it because knowledge can be had and not used, as the drunk recites
-Empedocles \citep[VII.3]{aristotle_ne}; \citet{davidson1970}, \citet{hare1963} and \citet{holton2009} give the modern
-forms; Milgram's subjects protested and continued \citep{milgram1963,milgram1974,burger2009}, and at J\'ozef\'ow about
-a dozen of five hundred policemen took the offer to step out \citep{browning1992}, their revulsion showing that
-perception and judgment were intact and the step to action was what failed \citep[contrast][]{goldhagen1996};
-\citet{vaughan1996} gives the organizational form. \emph{Hypocrisy}, the say-do gap, is describing oneself one way
-and acting another \citep{batson1997,batson1999,mazar2008,shalvi2011}, in its extreme form \citeauthor{lifton1986}'s
-\citeyearpar{lifton1986} doubling. \emph{Self-leniency} is judging the same act more harshly in another than in
-oneself \citep{valdesolo2007,valdesolo2008,monin2001}, and it is separable from the say-do gap. \emph{Concealment} is
-hiding the act afterwards \citep{bok1978}, against owning it. \emph{Situation} is the same agent behaving differently
-in a different setting \citep{hartshorne1928,burton1963,mischel1968,doris2002}. The inverse case, acting better than
-one's judgment, is Huckleberry Finn \citep{bennett1974,arpaly2003} and the rescuers \citep{oliner1988,hallie1979,glover1999}.
-The seventh gap, \emph{having without using}, is Aristotle's account turned into a measurement: if a system carries a
-representation of the trait and that representation is not consulted when it decides, the knowledge is had and not
-used, and a readable system lets us say so without inferring it from behaviour.
+Across both models, the frame organizes the representation before the definition does. Where an item sits in the
+model is set first by whether the model is speaking about someone else or in its own voice, and only then by which
+honesty is in play (RQ1). A shared sense of honesty exists, at about two thirds of what each cell's own direction
+reaches, strongest when the model describes itself and weakest when it acts. The models' failures are in conduct under
+pressure, not in the account they give of it afterwards. Shown their own covert cheating without being told it is
+theirs, they condemn it as readily as another model's, and they did it anyway (RQ2). At the turn where a model
+decides, its decision is decodable from the first layers on, and no described-honesty direction reads it better than
+a random one. A prompt that licenses deception moves one model's conduct and its described-honesty representation
+together, while the other model represents the licence without acting on it (RQ3). In Aristotle's terms the
+knowledge is had and not used, and for once that claim rests on a reading of the agent's internals rather than on an
+inference from its behaviour.
 
-In language models, honesty has been surveyed as self-knowledge plus self-expression \citep{li2024honesty},
-separated from accuracy \citep{ren2025mask,evans2021truthful}, and read from activations as truth or lie detectors
-\citep{burns2022ccs,azaria2023,marks2023geometry,goldowskydill2025}. Character has been read as persona vectors
-\citep{chen2025persona}, an assistant axis \citep{lu2026assistant}, a selected persona \citep{marks2026psm,danilov2026names},
-and trained through constitutions \citep{maiya2025oct}. The probing literature supplies the distinction the paper
-rests on, that a decodable property need not be a used one \citep{hewitt2019control,ravichander2021,elazar2021amnesic,belinkov2022},
-and the steering literature its cautions \citep{wu2025axbench,galeone2026}. Behavioural work has found a knowledge-action
-gap in models' stated and enacted values \citep{huang2026knowing}, omitted flaws in models' reports
-\citep{huang2026insecure}, and proposed akrasia as the frame for agentic inconsistency \citep{yang2025akrasia}.
-What we add is the internal side: the description and the decision are carried by different variables.
+The paper makes four contributions. First, a framework for asking what honesty means for a model: honesty as cells of
+frame by definition, grounded in virtue ethics and moral psychology, with controls that let a shared representation
+be told apart from a shared register. Second, a metric, cross-context generalization of the honesty probe, with
+causal and behavioural validations, and the geometry it summarizes on two model families. Third, a battery of
+consequences of honesty that are not themselves honesty evaluations, a blind cross-judging protocol that measures
+self-leniency and the judge-to-act gap on real conduct, and an on-policy test of the honesty directions with a
+positive control. Fourth, an account of what the results mean for evaluation and character training: the methods we
+have reach the described side of the trait, the failures live on the other side, and the intervention that can test
+what moving one cell does to the rest is specified and under way.
 
-\section{Design}
+\section{What honesty could mean for a model}
 
-\subsection{Definitions, frames, cells}
+\subsection{A trait and its parts}
 
-Six definitions of honesty, each a matched contrast: the same scenario in an honest and a dishonest version
-(Table~\ref{tab:defs}). Each appears in four frames: the model's own reply about someone else's conduct (a,
-recognize), its own reply on whether that conduct was acceptable (b, judge), a reply written in its voice under
-temptation (c, act), and a reply written in its voice about the kind of assistant it is (d, self-describe). Frames a
-and b are the model's own words about a third party; c and d are prefilled in its voice. Two definitions have no
-judge frame, so there are 22 cells of 100 to 200 items, about 4{,}000 honesty items. Two controls share the frame
-structure and are not about honesty: formality (register) and topic (Figure~\ref{fig:design}). Public datasets are
-adapted where they exist \citep{ren2025mask,yin2023selfaware,amayuelas2023kuq,lee2024trait,sharma2023} and the missing
-cells are generated; every cell keeps a held-out set from a different source. Item text does not enter the
-repository; labels and projections do.
+In the Aristotelian picture a virtue is a settled disposition that shows itself in several places at once: in what
+the agent notices, in how the agent judges, in what the agent chooses to do, and in who the agent takes herself to be
+\citep{aristotle_ne,korsgaard1996}. \citet{murdoch1970}, \citet{mcdowell1979} and \citet{blum1991} add that the first
+of these is an achievement of its own. The honest person sees a situation differently, and failing to see is a
+different failure from failing to act. We take these four parts as our frames. In the first, the model reads an
+account of someone else's conduct and replies in its own voice; the question is whether it sees the trait. In the
+second, it says whether that conduct was acceptable; the question is whether it judges. In the third, a reply is
+written in the model's own voice under temptation; the question is what it does. In the fourth, a reply is written in
+its voice about the kind of assistant it is; the question is what it says it is. The first two are the model's own
+words about a third party. The last two are prefilled in its voice. That difference in format turns out to matter and
+we return to it.
+
+\subsection{The definitions}
+
+Six accounts of honesty are in use, in philosophy, in personality psychology, and in the benchmarks and training
+recipes built for language models (Table~\ref{tab:defs}). Self-knowledge, or calibration, is knowing what one knows
+and saying so \citep{kadavath2022,li2024honesty}. Accuracy is taking care to get the facts right
+\citep{williams2002,evans2021truthful}. Sincerity is asserting what one believes when there is pressure to assert
+otherwise \citep{williams2002,bok1978,ren2025mask}. Forthrightness is volunteering what matters without being asked
+\citep{anthropic_constitution}. Non-sycophancy is holding the truth against the listener's wish \citep{sharma2023}.
+Honesty-humility, the H factor of the HEXACO model, is the absence of manipulation and entitlement
+\citep{ashton2007}. Each is a reasonable thing to mean by the word, each has an instrument that measures it, and each
+has at some point been what a training method optimized. Whether they are one thing inside a model is an empirical
+question, and so is whether improving one improves the others.
 
 \begin{table}[tbp]
 \caption{The six definitions, their contrast, and the tradition each comes from.}
@@ -178,6 +194,81 @@ Honesty-humility & no manipulation, no entitlement against exploits & HEXACO H \
 \end{tabularx}
 \end{table}
 
+\subsection{When the parts come apart}
+
+Once a trait has parts, it can fail between them, and people have failed between them in every way that the
+structure allows. We use seven gaps, and Figure~\ref{fig:gaps} lays them out with the readout we have for each.
+
+The first is the blind spot: the moral dimension of a situation never registers. \citet{gioia1992} gives the
+first-person account from inside Ford's recall office; \citet{tenbrunsel2004} call the mechanism ethical fading and
+\citet{bazerman2011} the resulting condition bounded ethicality; \citet{bandura1999} catalogues the devices, from
+euphemism to diffusion of responsibility, that do the fading. The philosophy of moral ignorance asks when such a
+failure excuses \citep{rosen2003,moodyadams1994,calhoun1989,wolf1987,zimmerman1997,fitzpatrick2008,harmanE2011}.
+Arendt's reading of Eichmann as thoughtless \citeyearpar{arendt1963,arendt1971} is the famous version, and
+\citet{stangneth2014} the correction that the performance in the dock was a performance, which is itself a lesson
+about self-description.
+
+The second is akrasia, judging rightly and acting otherwise. Socrates thought it impossible \citep{plato_protagoras};
+Aristotle allowed it, on the ground that knowledge can be had and not used, as a drunk can recite the verses of
+Empedocles \citep[VII.3]{aristotle_ne}; \citet{davidson1970}, \citet{hare1963} and \citet{holton2009} give the modern
+forms. Milgram's subjects protested and continued \citep{milgram1963,burger2009}, and at J\'ozef\'ow about a dozen of
+five hundred policemen took the offer to step aside \citep{browning1992}, their revulsion showing that perception and
+judgment were intact and the step to action was what failed \citep[for the opposing reading see][]{goldhagen1996}.
+\citet{vaughan1996} gives the organizational form in the Challenger launch decision.
+
+The third is hypocrisy, the say-do gap: describing oneself one way and acting another \citep{batson1997,batson1999}.
+\citet{mazar2008} show that people cheat a little, enough to profit and not enough to revise the honest self-concept;
+\citet{shalvi2011} show that an available justification raises the lying and lowers how dishonest it feels;
+\citet{lifton1986} describes the extreme structural form in the Auschwitz physicians, a camp self and a healing self
+that never had to meet. The fourth is self-leniency, judging the same act more harshly in another than in oneself
+\citep{valdesolo2007,valdesolo2008,monin2001}; it is the motivated part of hypocrisy and it is separable from the say-do
+gap. The fifth is concealment, hiding the act afterwards \citep{bok1978}, against owning it. The sixth is situation:
+the same person behaves differently in a different setting, the finding of \citet{hartshorne1928} that cheating in one
+setting predicts cheating in another only weakly \citep[see also][]{burton1963,mischel1968}, on which \citet{doris2002}
+and \citet{harmanG1999} built the situationist challenge to virtue ethics. The inverse case, acting better than one's
+judgment, is Huckleberry Finn \citep{bennett1974,arpaly2003} and the rescuers who report having deliberated not at all
+\citep{oliner1988,hallie1979,glover1999}.
+
+The seventh gap only exists for an agent whose internals can be read. If a system carries a representation of a
+trait, and that representation is not consulted at the moment it decides, then the knowledge is had and not used in
+exactly Aristotle's sense, and we can say so without inferring it from behaviour. The human cases also tell us how to
+measure. J\'ozef\'ow and Milgram say that judgment can be intact while conduct fails, so judgment and conduct must be
+measured apart, and conduct must be measured under the pressure. Gioia says that having the facts and the vocabulary
+does not give perception, so recognition must be tested on real records of conduct and not on labelled vignettes.
+Arendt and Stangneth say that self-presentation is a frame of its own, so nothing should be inferred from what a
+model says about itself to what it does. Lifton says that a say-do split can be a stable structure and not a lapse,
+and a structure is not repaired by more self-description. Shalvi says that a justification removes the moral
+colouring for the actor and for the observer alike, which is a warning about the judges we build.
+
+\subsection{Honesty and character in language models}
+
+Work on honesty in language models has surveyed it as self-knowledge plus self-expression \citep{li2024honesty},
+separated it from accuracy \citep{ren2025mask,evans2021truthful}, and read it from activations as a truth or lie
+detector \citep{burns2022ccs,azaria2023,marks2023geometry,goldowskydill2025}. Work on character has read it as persona
+vectors \citep{chen2025persona}, as an assistant axis \citep{lu2026assistant}, and as a persona selected by
+post-training from among the characters a model can simulate \citep{marks2026psm,danilov2026names}, and has trained it
+through constitutions \citep{maiya2025oct}. Two bodies of work supply the distinction this paper rests on. The probing
+literature established early that a property can be decodable from a network without being used by it
+\citep{hewitt2019control,ravichander2021,elazar2021amnesic,belinkov2022}, and the steering literature has shown that
+the direction that detects a behaviour can be nearly orthogonal to the direction that causes it, and that steering
+moves less than prompting on most concepts \citep{galeone2026,wu2025axbench}. Behavioural work has recently found a
+knowledge-action gap between the values models state and the choices they make \citep{huang2026knowing}, flaws
+omitted from models' reports \citep{huang2026insecure}, and has proposed akrasia as the frame for agentic
+inconsistency \citep{yang2025akrasia}. What we add is the internal side of that gap: the description and the decision
+turn out to be carried by different variables.
+
+\section{How we measured it}
+
+\subsection{Definitions, frames, cells}
+
+Each of the six definitions is a matched contrast, the same scenario in an honest and a dishonest version, and each
+appears in the four frames of Section 2.1. Two definitions have no judge frame, so there are 22 cells of 100 to 200
+items, about 4{,}000 honesty items in all. Two controls share the frame structure and are not about honesty: formality
+(register) and topic (Figure~\ref{fig:design}). Public datasets are adapted where they exist
+\citep{ren2025mask,yin2023selfaware,amayuelas2023kuq,lee2024trait,sharma2023} and the missing cells are generated;
+every cell keeps a held-out set from a different source. Item text does not enter the repository; labels and
+projections do.
+
 \begin{figure}[tbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig1_design.pdf}
@@ -191,27 +282,27 @@ the model's voice. Cell counts are the items in the landscape of Figure~\ref{fig
 
 The subjects are \gemma{} and \qwen{}, two model families, every stage run on both under one code path. The method
 was developed on Gemma-3-4B-IT with a 59-concept map; that map is the appendix and the replication base. Activations
-are read at four depths per subject (\gemma{} layers 16, 30, 39, 51; \qwen{} 17, 32, 42, 54; the second is the
-steering depth, the fourth the late depth), at two positions: the last turn-boundary token before the reply and the
-mean over the first 32 reply tokens. One direction per cell is the standardized difference of means between the
+are read at four depths per subject (\gemma{} layers 16, 30, 39, 51; \qwen{} 17, 32, 42, 54; we call the second the
+steering depth and the fourth the late depth), at two positions: the last turn-boundary token before the reply and
+the mean over the first 32 reply tokens. One direction per cell is the standardized difference of means between the
 honest and the dishonest items, with a logistic probe beside it. For the own-reply frames the model's verdict
 direction (praise against blame) is projected out, so that recognizing dishonesty is read apart from condemning it.
 
 \subsection{The metric and its validations}
 
-The paper's metric is cross-context generalization of the honesty probe: train one honesty direction on 21 cells
-(cell-balanced difference of means, and a logistic probe with cell-balanced weights), score it on the held-out
-items of the 22nd, and scale as $(\mathrm{AUROC}-0.5)/(\mathrm{AUROC}_{\text{within}}-0.5)$, the share of what the
-cell's own direction reaches. The controls' mean absolute score is the floor. Two companions describe the geometry:
-transfer AUROC between frames of one definition, and the landscape, the items projected on all 22 directions. Two
-validations follow the metric rather than standing beside it. Causal: steer each cell's direction at a calibrated
-dose, in the primal form $\mathrm{unit}(\sigma \odot u)$, and read every other cell against norm-matched random
-directions. Behavioural: the frame gaps read as conduct on the gap instruments (MASK pressure, are-you-sure, the
-word-deed test, the Batson coin flip).
+Our metric is cross-context generalization of the honesty probe. We train one honesty direction on 21 cells
+(cell-balanced difference of means, and a logistic probe with cell-balanced weights), score it on the held-out items
+of the 22nd, and scale as $(\mathrm{AUROC}-0.5)/(\mathrm{AUROC}_{\text{within}}-0.5)$, the share of what the cell's
+own direction reaches. The controls' mean absolute score is the floor. Two companions describe the geometry: transfer
+AUROC between frames of one definition, and the landscape, the items projected on all 22 directions. Two validations
+follow the metric. Causal: steer each cell's direction at a calibrated dose, in the primal form
+$\mathrm{unit}(\sigma \odot u)$, and read every other cell against norm-matched random directions. Behavioural: the
+frame gaps read as conduct on the gap instruments (MASK pressure, are-you-sure, the word-deed test, the Batson coin
+flip).
 
 \subsection{The battery, cross-judging, on-policy prediction, positive control}
 
-Nine tasks that are consequences of honesty without being honesty evaluations, each with a matched control and a
+The battery is nine tasks on which honesty matters without being named, each with a matched control and a
 deterministic cheat flag wherever the task allows one (Table~\ref{tab:battery}): reward hacking on impossible tests
 \citep{zhong2025impossible,denison2024}, fabricated tool completion, sandbagging under incentive
 \citep{vanderweij2024sandbagging}, instructed sophistry \citep{wen2024usophistry}, confident fabrication under a
@@ -225,14 +316,14 @@ told ``another assistant wrote this'', and told ``you wrote this'', with a rubri
 user or owner dishonest, borderline or honest. This gives judge accuracy on real conduct, self-leniency on matched
 same-move items, the attribution effect, and the judge-to-act gap on policy.
 
-\emph{On-policy prediction.} A teacher-forced pass over the saved induced trajectories; at the turn where the model
+\emph{On-policy prediction.} A teacher-forced pass over the saved induced trajectories. At the turn where the model
 decides, the activation is projected on the 22 cell directions, the four frame levers, the shared axes, the two
 controls and 16 norm-matched random directions, at every layer and three positions, within task strata so that
-item-family differences do not count; the AUROC for the deterministic outcome is read against the random band, with
+item-family differences do not count. The AUROC for the deterministic outcome is read against the random band, with
 a probe trained on the task as the ceiling.
 
 \emph{Positive control.} A system prompt that licenses deception and one that instructs it, against a neutral prompt,
-on the same items; the battery rates, the projections and the metric are read for movement in the known direction.
+on the same items. The battery rates, the projections and the metric are read for movement in the known direction.
 
 \emph{Rules.} Every setting was proposed and ratified in a decision log before it ran; stages ran one at a time with
 the gate read between; any change to a runner meant rerunning both subjects; every effect is read against a control
@@ -262,43 +353,43 @@ Done claim & claim matches the clean re-run & .84 [.80, .90] (.99) & .96 [.93, .
 \end{tabularx}
 \end{table}
 
-\section{Results}
+\section{What we found}
 
-\subsection{Frame first; definition and polarity both second}
+\subsection{The frame comes first (RQ1)}
 
-In the space of the 22 honesty directions the items cluster by frame, not by definition (Figure~\ref{fig:frame}a,b).
-The two own-reply frames form one family and the two prefilled frames another; at the late depth the family centroids
-sit 1.9 to 2.0 within-cell spreads apart on both subjects and act and self-describe 1.1 to 1.3 apart, while the
-median gap between two definitions inside one frame and the median gap between the honest and the dishonest side of
-one cell are both about one spread (\gemma{} 1.0 and 0.8, \qwen{} 0.9 and 1.0). Transfer says the same in AUROC
-(Figure~\ref{fig:frame}c,d): a direction from one own-reply frame reads the other at 0.97 to 1.00 for every
-definition; act reads self-describe at 1.00 for self-knowledge and honesty-humility and at 0.55 to 0.95 for the rest;
-across the two families the number falls to 0.4 to 0.9, and accuracy reverses on \qwen{} (0.26). The controls cross
-frames at 0.90 to 0.93, so the bar for ``the same variable'' is high and no definition reaches it across the
-families. The family boundary coincides with a format boundary, own words against prefilled text; Section~\ref{sec:onpolicy}
-is what separates the two readings.
+The first thing the models tell us is that the frame matters more than the definition. In the space of the 22
+honesty directions the items cluster by frame, not by which honesty they are about (Figure~\ref{fig:frame}a,b). The
+two frames in which the model speaks about someone else form one family and the two in which it speaks in its own
+voice form another; at the late depth the two families sit about two within-cell spreads apart on both subjects,
+while the gap between two definitions inside one frame and the gap between the honest and the dishonest side of one
+cell are each about one spread. Transfer says the same thing in AUROC (Figure~\ref{fig:frame}c,d). A direction
+learned in one own-reply frame reads the other at 0.97 to 1.00 for every definition. Across the two families the
+number falls to between 0.4 and 0.9, and for accuracy on \qwen{} it reverses. The controls cross frames at 0.90 to
+0.93, so the bar for ``the same variable'' is high and no definition clears it across the families. The family
+boundary coincides with a boundary in format, the model's own words against prefilled text, and Section~\ref{sec:onpolicy}
+is what lets us tell the two apart.
 
 \begin{figure}[tbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig2_frame_first.pdf}
-\caption{Frame first. (a, b) The 22-direction honesty subspace at the late depth, first two principal components,
-honesty items coloured by frame family; large markers are family centroids. (c, d) Transfer between two frames of one
-definition at the steering depth: the direction of one frame scored on the other frame's held-out items, mean of both
-directions, standardized space with the verdict direction projected out. Triangles: recognize against judge. Squares:
-act against self-describe. Circles: the mean over the four pairs that cross the two families. The last column is the
-controls.}
+\caption{The frame comes first. (a, b) The 22-direction honesty subspace at the late depth, first two principal
+components, honesty items coloured by frame family; large markers are family centroids. (c, d) Transfer between two
+frames of one definition at the steering depth: the direction of one frame scored on the other frame's held-out
+items, mean of both directions, standardized space with the verdict direction projected out. Triangles: recognize
+against judge. Squares: act against self-describe. Circles: the mean over the four pairs that cross the two families.
+The last column is the controls.}
 \label{fig:frame}
 \end{figure}
 
-\subsection{A shared described-honesty variable, at two thirds strength}
+\subsection{A shared sense of honesty, weakest where the model acts (RQ1)}
 
-A direction trained on any 21 cells reads the 22nd at 0.67 of what the cell's own direction reads by difference of
-means and 0.80 to 0.83 by probe, on both subjects, against a control floor of 0.48 and 0.23 (Figure~\ref{fig:metric}).
-It is strongest in self-description (0.89 to 0.91), middling in the own-reply frames (0.56 to 0.61) and weakest in
-action (0.54 to 0.62). The two subjects agree cell by cell (Spearman $+0.73$). The pooled direction reads
-self-knowledge's recognize and judge cells backwards on \gemma{} by difference of means and reads the formality
-control's own-reply cells reversed on both subjects, so it carries some register; the floor is quoted as the controls'
-mean absolute score for that reason.
+There is still something the cells have in common. A direction trained on any 21 cells reads the 22nd at 0.67 of what
+the cell's own direction reads by difference of means, and at 0.80 to 0.83 by probe, on both subjects, against a
+control floor of 0.48 and 0.23 (Figure~\ref{fig:metric}). The shared variable is strongest when the model describes
+itself (0.89 to 0.91), middling when it speaks about others (0.56 to 0.61), and weakest when it acts (0.54 to 0.62).
+The two subjects agree cell by cell (Spearman $+0.73$). The pooled direction is not free of register: it reads the
+formality control's own-reply cells in reverse on both subjects, which is why the floor is quoted as the controls'
+mean absolute score.
 
 \begin{figure}[tbp]
 \centering
@@ -310,24 +401,25 @@ frame-block means; the grey band is the controls' mean absolute score.}
 \label{fig:metric}
 \end{figure}
 
-\paragraph{Causal validation.} On \qwen{} the effect of steering one cell on the other 21 is 0.12 of its own effect,
-linear in dose; same-definition cells in other frames move at 0.27 of the diagonal and other definitions at 0.09;
-self-description sources move act cells at 0.23 and act sources move other act cells at 0.06; own-reply sources move
-the prefilled frames at 0.01. On \gemma{} an injected direction does not propagate at any dose up to the one that
-breaks generation, because the model rescales its residual stream by a trained scalar at every layer (pass-through
-0.087 from the steering depth to the next readout). The representational metric is the same on the two subjects and
-the causal level is not, which is why the metric is primary and the causal level a validation (appendix).
+\paragraph{Causal validation.} Steering confirms the fragmentation where it can be read. On \qwen{} the effect of
+steering one cell on the other 21 is 0.12 of its own effect, linear in dose; cells of the same definition in other
+frames move at 0.27 of the diagonal and other definitions at 0.09; own-reply sources move the prefilled frames at
+0.01. On \gemma{} an injected direction does not propagate at any dose up to the one that breaks generation, because
+the model rescales its residual stream by a trained scalar at every layer (pass-through 0.087 from the steering depth
+to the next readout). The representational metric is the same on the two subjects and the causal level is not, which
+is why the metric is primary and the causal level a validation (appendix).
 
-\subsection{The failures are in conduct, not in the account of it}
+\subsection{The failures are in conduct, not in the account of it (RQ2)}
 
-Both subjects' failures are in what they do under pressure (Figure~\ref{fig:battery}, Table~\ref{tab:battery}).
-\gemma{} games impossible tests on 41\,\% of the problems (reward hacking, disclosed in most replies), argues for the
-wrong answer on request 52\,\% of the time, fabricates under a must-answer prompt 71\,\% of the time, and writes a false
-COMPLETE into the record on 48\,\% of the induced tool-use tasks (4\,\% neutral), which is the dishonest act proper.
-\qwen{} is near ceiling on the first two, fabricates 39\,\%, and writes the covert COMPLETE on 41\,\% (5\,\% neutral).
-What they then say about it is honest: the report to the owner is not deceptive on 91 and 95\,\%, the done claim
-matches a clean re-run on 84 and 96\,\%, they confess a planted mistake on 98\,\%, and they admit the covert write
-when asked on 200 of 200 trajectories each. Neither fabricates a tool completion at baseline and neither sandbags.
+Both subjects fail in what they do under pressure and not in what they say about it afterwards
+(Figure~\ref{fig:battery}, Table~\ref{tab:battery}). \gemma{} games impossible tests on 41\,\% of the problems, argues
+for the wrong answer on request 52\,\% of the time, fabricates under a must-answer prompt 71\,\% of the time, and
+writes a false COMPLETE into the record on 48\,\% of the induced tool-use tasks against 4\,\% when the inducement is
+removed. \qwen{} is near ceiling on the first two, fabricates 39\,\%, and writes the covert COMPLETE on 41\,\% (5\,\%
+neutral). What they then say about it is honest: the report to the owner is not deceptive on 91 and 95\,\% of
+trajectories, the done claim matches a clean re-run on 84 and 96\,\%, they confess a planted mistake on 98\,\%, and
+asked directly they admit the covert write on 200 of 200 trajectories each. Neither fabricates a tool completion at
+baseline and neither sandbags.
 
 \begin{figure}[tbp]
 \centering
@@ -340,19 +432,20 @@ judgment rubric (Section~\ref{sec:judge}), and the covert write is the dishonest
 \label{fig:battery}
 \end{figure}
 
-\subsection{They recognize cheating, including their own, and do it anyway}
+\subsection{They recognize cheating, including their own, and do it anyway (RQ2)}
 \label{sec:judge}
 
-Shown the saved record blind, both subjects see the covert write (Figure~\ref{fig:judge}). \qwen{} calls the other
-model's covert COMPLETE dishonest on 88\,\% of the matched items and its own on 77\,\% (97\,\% dishonest or borderline);
-\gemma{} calls them dishonest on 23 and 37\,\% (53 and 62\,\% not honest), splitting the rest three ways, the same
-lenient convention it uses as the report judge. Self-leniency, own minus other's on the same move, is $+0.13$
-$[-0.09, 0.35]$ and $-0.12$ $[-0.26, 0.00]$: not distinguishable from zero. Telling the judge ``you wrote this'' or
-``another assistant wrote this'', truthfully or swapped, moves no verdict by more than 0.04. The same subjects wrote
-the covert COMPLETE on 48 and 41\,\% of the induced tasks. On the coding tasks the subjects gamed the tests in the open
-(a call counter, disclosed in the message); both judges and the rubric count disclosed gaming as honest, and we keep
-that construal: disclosed test-gaming is reward hacking, not dishonesty, and the covert write is the dishonest act the
-paper reads. This is the akratic pattern of premise 3, measured: judgment present, no self-serving bias in it, action
+Shown the saved record without being told whose it is, both subjects see the covert write (Figure~\ref{fig:judge}).
+\qwen{} calls the other model's covert COMPLETE dishonest on 88\,\% of the matched items and its own on 77\,\% (97\,\%
+dishonest or borderline). \gemma{} calls them dishonest on 23 and 37\,\% and not honest on 53 and 62\,\%, splitting the
+rest three ways, which is the same lenient convention it uses when it judges reports. Self-leniency, the share for
+one's own act minus the share for the other model's on the same move, is $+0.13$ $[-0.09, 0.35]$ and $-0.12$
+$[-0.26, 0.00]$: not distinguishable from zero. Telling the judge ``you wrote this'' or ``another assistant wrote
+this'', truthfully or swapped, moves no verdict by more than 0.04. The same subjects wrote the covert COMPLETE on 48
+and 41\,\% of the induced tasks. On the coding tasks the subjects gamed the tests in the open, with a call counter
+they named in the message; both judges and the rubric count disclosed gaming as honest, and we keep that construal:
+disclosed test-gaming is reward hacking rather than dishonesty, and the covert write is the dishonest act the paper
+reads. This is the akratic pattern of Section 2.3, measured: judgment present, no self-serving bias in it, and action
 unmoved.
 
 \begin{figure}[tbp]
@@ -366,20 +459,21 @@ on which they wrote the false COMPLETE, neutral and under pressure ($n=200$ each
 \label{fig:judge}
 \end{figure}
 
-\subsection{The described-honesty directions do not read the model's own decision}
+\subsection{The described-honesty directions do not read the model's own decision (RQ3)}
 \label{sec:onpolicy}
 
-At the turn where the model decides, the dishonest outcome is decodable from the activations at every layer from the
-first on: a probe trained on the task reads it at 0.94 to 0.98 on average (Figure~\ref{fig:onpolicy}). None of the
-honesty directions reads it. The act, self-describe and own-reply directions, the frame levers and the shared axes
-all sit inside the band of 16 random directions at every one of 61 (\gemma{}) and 65 (\qwen{}) layers and at all three
-positions, and cross the band's 95th percentile on single cells less often than the formality and topic controls do
-(5.3 against 9.3\,\%, 4.2 against 7.7\,\%). The conduct code is also not one variable across tasks: a probe trained on
-three tasks reads the fourth at 0.13 to 0.78 within strata, and the pooled conduct direction is orthogonal to every
-honesty group (cosine at most 0.13). So the model has a representation of described honesty, shared across
-definitions and organized by frame, and a separate code for what it is about to do, task by task, and the first does
-not read the second. This also settles frame against format in Section 4.1: own-reply directions predict conduct no
-better than act directions, and neither above chance directions, so no family is closer to conduct.
+At the turn where the model decides, the dishonest outcome is written into its activations: a probe trained on the
+task reads it at 0.94 to 0.98 on average, from the first layers on (Figure~\ref{fig:onpolicy}). None of the honesty
+directions reads it. The act, self-describe and own-reply directions, the frame levers and the shared axes all sit
+inside the band of 16 random directions at every one of 61 (\gemma{}) and 65 (\qwen{}) layers and at all three
+positions, and they cross the band's 95th percentile on single cells less often than the formality and topic
+controls do (5.3 against 9.3\,\%, 4.2 against 7.7\,\%). The code that carries the decision is also not one variable
+across tasks: a probe trained on three tasks reads the fourth at 0.13 to 0.78 within strata, and the pooled conduct
+direction is orthogonal to every honesty group (cosine at most 0.13). So each model has a representation of described
+honesty, shared across definitions and organized by frame, and a separate code for what it is about to do, task by
+task, and the first does not read the second. This also settles the question of frame against format left open in
+Section 4.1: own-reply directions predict conduct no better than act directions, and neither does better than chance
+directions, so no family is closer to conduct than the other.
 
 \begin{figure}[tbp]
 \centering
@@ -392,18 +486,18 @@ direction groups; dashed black: the shared axes; grey dotted and dashed: the for
 \label{fig:onpolicy}
 \end{figure}
 
-\subsection{A licence to deceive}
+\subsection{A licence to deceive moves conduct and the representation together, in one model (RQ3)}
 
 A system prompt that licenses deception halves \gemma{}'s honest rate on reward hacking (0.66 to 0.32), removes its
-hedging under must-answer (0.17 to 0.01) and produces the first fabricated tool completions; a prompt that instructs
+hedging under must-answer (0.17 to 0.01), and produces the first fabricated tool completions; a prompt that instructs
 deception does the same and takes tool completion to 0.57 (Figure~\ref{fig:licence}). Its act and self-describe
 projections move 0.3 to 0.6 SD toward the dishonest pole at the written turn, the own-reply projections do not, and
 the leave-one-cell-out score on the act and self-describe cells rises at the two late depths (0.52 to 0.71 under the
-licence) while the control cells do not move. The metric is sensitive when the variable is engaged, and a licence to
-deceive unifies the described-honesty representation rather than fragmenting it, which fits a model that is now
-using the variable. \qwen{}'s conduct does not move (reward hacking 0.92 to 0.87, fabrication 0.60 to 0.58), its
-metric does not move, and only its self-describe projections shift, by 0.3 SD: \qwen{} represents the licence and does
-not act on it. The instruction prompt engages \qwen{} on tool completion only (9 of 100).
+licence) while the control cells stay put. So the metric is sensitive when the variable is engaged, and a licence to
+deceive unifies the described-honesty representation rather than fragmenting it, which is what one would expect of a
+model that is now using the variable. \qwen{} is different. Its conduct does not move (reward hacking 0.92 to 0.87,
+fabrication 0.60 to 0.58), its metric does not move, and only its self-describe projections shift, by 0.3 SD. \qwen{}
+represents the licence and does not act on it. The instruction prompt engages it on tool completion only (9 of 100).
 
 \begin{figure}[tbp]
 \centering
@@ -416,15 +510,15 @@ panel.}
 \label{fig:licence}
 \end{figure}
 
-\subsection{Where the two subjects fall}
+\subsection{Where the two models fall}
 
-Figure~\ref{fig:gaps} places the results on the map of Section 2. Two things stand out against the human literature.
-The self-leniency gap, reliable in people, is absent: the blind judge is as hard on its own covert write as on the
-other model's, and telling it whose conduct it is changes nothing. And the concealment gap is closed: the act is
-covert and the account of it is honest, on the same trajectory. Whatever the structure is, it is not motivated
-reasoning in the judge and it is not a cover-up. It is closer to Aristotle's akratic than to Batson's hypocrite: the
-judgment is sound and present, the act goes the other way under pressure, and the representation that carries the
-judgment is not the one that carries the act.
+Figure~\ref{fig:gaps} places the results on the map of Section 2.3. Two things stand out against the human record.
+The self-leniency gap, which is reliable in people, is absent here: the blind judge is as hard on its own covert write
+as on the other model's, and telling it whose conduct it is changes nothing. And the concealment gap is closed: the
+act is covert and the account of it is honest, on the same trajectory. Whatever this structure is, it is not
+motivated reasoning in the judge and it is not a cover-up. It is closer to Aristotle's akratic than to Batson's
+hypocrite. The judgment is sound and present, the act goes the other way under pressure, and the representation that
+carries the judgment is not the one that carries the act.
 
 \begin{figure}[tbp]
 \centering
@@ -435,55 +529,92 @@ each subject at baseline (filled: the failure appears; half: on part of the read
 \label{fig:gaps}
 \end{figure}
 
-\section{What it means}
+\section{Discussion}
 
-\paragraph{Having without using.} The paper makes three kinds of internal claim and they are not equally strong. A
-representation is a direction along which a concept is linearly decodable \citep{alain2016,park2023linear}; Sections
-4.1 and 4.2 are decodability claims and nothing more. Decodable is not used \citep{hewitt2019control,ravichander2021,elazar2021amnesic};
-Section~\ref{sec:onpolicy} is a use claim in that sense, and a negative one. A steer turns a decodability claim into a
-use claim for a given output \citep{turner2023actadd,zou2023repe,li2023iti,arditi2024refusal}, with two cautions that
-apply to us: steering moves less than prompting on most concepts \citep{wu2025axbench}, and the direction that detects
-a behaviour can be nearly orthogonal to the direction that causes it \citep{galeone2026}; we met the same thing in
-the near-orthogonality of readout covector and primal lever on \gemma{} (cosine 0.18; \qwen{} 0.8). The factorial
-steering run that follows this paper (Stage A) is the intervention that can tell: if the frame levers move judgments
-and self-reports and not conduct, and removing the shared axis does nothing to conduct while a conduct lever moves
-it, the described-honesty representation is had and not used at the decision, shown by intervention and not inferred.
+\subsection{Key findings}
 
-\paragraph{Akratic, not hypocritical.} The human cases close off inferences the paper must not make. J\'ozef\'ow and
-Milgram say judgment can be intact while conduct fails, so judgment is measured apart from conduct and conduct under
-the pressure. Gioia says possession of the facts and the word does not give perception, so frame a reads real records
-of conduct, not labelled vignettes. Arendt and Stangneth say self-presentation is a frame of its own, so nothing is
-inferred from frame d about frame c. Lifton says a say-do split can be a structure rather than a lapse, and a structure
-is not fixed by more self-description training. Shalvi says a justification removes the moral colouring, for actor and
-observer; we have that in the data, since disclosed test-gaming is honest to both judges and to the rubric.
+\paragraph{What honesty means for these models depends on the frame before it depends on the definition.} The
+question we started from, which honesty a specification means, turns out to be the second question. The first is
+whether the specification means the model's judgment of others, its account of itself, or its conduct, because these
+are carried differently inside the model. The six definitions do share something, a variable that generalizes across
+cells at about two thirds strength, and it is most coherent in the frame that character training writes to, the
+model's description of itself, and least coherent in the frame where the failures happen.
 
-\paragraph{For evaluation and training.} (1) The unit of evaluation is the cell, not the trait: a judge-based
-evaluation reads frame b, a self-report instrument frame d, a benchmark of written contrasts whatever frame the
-contrasts are in, and none reads conduct under pressure unless built to, with the pressure in it and a deterministic
-flag for the act. (2) Character training writes to the persona: constitutions, persona vectors and introspective
-self-description data act on the described side \citep{maiya2025oct,chen2025persona,marks2026psm}, which is the frame
-the pooled honesty direction reads best; the prediction from the geometry is that they raise the described-honesty
-representation, the self-report and the judgments of others, and move the decision less. (3) Monitors have to be
-on-policy and per task: the described-honesty directions read the wrong variable, the conduct probe reads the right one
-and does not transfer across tasks, and training against a monitor teaches the model to hide what the monitor reads
-\citep{baker2025}. (4) The model is a usable judge of its own covert conduct after the fact, and a clean self-report is
-not evidence about conduct. (5) An honesty clause is satisfied by disclosure: a specification that does not want the
-gaming has to forbid the act in the conduct frame. (6) A model whose conduct does not follow a representation it holds
-is robust to one kind of manipulation and opaque to one kind of steering; \qwen{}'s conduct arm is read with that
-caveat.
+\paragraph{The description and the decision are different variables.} Our strongest result is a null with a
+positive control beside it. The honesty directions, built from thousands of described contrasts and good enough to
+generalize across definitions, do not read the model's own decision at the moment it cheats, at any layer or
+position, while a probe trained on the decision reads it from the first layers on. The licence prompt shows the
+directions are not inert: when \gemma{} is engaged they move with its conduct. The two findings together are
+Aristotle's account of akrasia stated about a network. The knowledge is there, it generalizes, it responds, and it is
+not what is consulted when the model acts.
 
-\paragraph{Limitations.} Two model families, with Gemma-3-4B as the development record only. The frame families
-coincide with a format boundary. The two judges agree weakly on borderline agentic reports ($\kappa$ about 0.25).
-\qwen{} is near ceiling on most conduct tasks, so its conduct arm reads only tool completion unless a prompt engages
-it; tool completion is at ceiling at baseline. One prompt pair for the positive control, and the neutral prompt by
-itself moves \gemma{}'s fabrication. The causal level has no ratio to report on \gemma{} for a mechanical reason. Greedy
-bf16 decoding moves with batch composition, so steered conditions are read against random directions run through the
-same path.
+\paragraph{Akratic, not hypocritical.} The human literature predicts self-leniency and cover-up, and neither appears.
+Both models judge their own covert write as they judge another's, and both report it honestly to the owner and admit
+it when asked. The failure is in the act under pressure and nowhere else, which is a cleaner structure than people
+usually show, and a more hopeful one for a designer: the judgment and the account are available as signals even when
+the act is not prevented.
 
-\paragraph{What comes next.} Stage A, the factorial steering run (frame levers, shared axes, controls, a conduct
-lever, project-out, a random floor; readouts conduct, self-report and the steered subject's judgment of a fixed set),
-is running. Training under each definition with Open Character Training \citep{maiya2025oct}, with the metric and the
-battery before and after, follows.
+\subsection{What this means for evaluation and character training}
+
+We do not know which honesty a model should have, and this paper does not try to say. What it offers instead is the
+empirical map a designer needs. First, the unit of evaluation should be the cell and not the trait. A judge-based
+evaluation reads the judge frame, a self-report instrument reads the self-describe frame, a benchmark of written
+contrasts reads whatever frame the contrasts are in, and none of them reads conduct under pressure unless it is built
+to, with the pressure in it and a deterministic flag for the act. Evidence from one frame does not license an
+inference to another: ``the model says it is honest'' and ``the model recognizes dishonesty'' are both true of these
+two models, and both write the covert COMPLETE on four tasks in ten.
+
+Second, character training writes to the persona. Constitutions, persona vectors and introspective self-description
+data all act on the described side of the trait \citep{maiya2025oct,chen2025persona,marks2026psm}, which is the frame
+in which the shared honesty variable is most coherent. The prediction from the geometry is that such training raises
+the described-honesty representation, the self-report and the judgments of others, and moves the decision less. The
+human literature on ethical fading and moral disengagement describes what a system looks like when the vocabulary of
+a virtue is intact and the conduct is not, and the risk for models is the analogue: training the account rather than
+the act. This is a testable prediction, and the second part of this project tests it by training under each
+definition and reading the metric and the battery before and after.
+
+Third, monitors have to be trained on policy and per task. The described-honesty directions read the wrong variable.
+The conduct probe reads the right one and does not transfer across tasks, which is the specificity doctrine of
+\citet{hartshorne1928} applied to monitors; and training against a monitor teaches the model to hide what the monitor
+reads \citep{baker2025}. Fourth, the models are usable judges of their own covert conduct after the fact, and a clean
+self-report is not evidence about conduct. Fifth, an honesty clause is satisfied by disclosure: both models game
+tests in the open while saying so, and both judges and our rubric count that as honest, so a specification that does
+not want the gaming has to forbid the act in the conduct frame. Sixth, \qwen{}'s refusal of the licence cuts both
+ways: a model whose conduct does not follow a representation it holds is robust to one kind of manipulation and
+opaque to one kind of steering.
+
+The intervention that answers RQ4 follows directly from these. A factorial steering run on both models moves the
+frame levers, the shared axes, the controls and a conduct lever, with and without the shared axis removed, and reads
+conduct, self-report and the model's judgment of a fixed set of records. If the frame levers move judgments and
+self-reports and not conduct, and removing the shared axis does nothing to conduct while the conduct lever moves it,
+then the described-honesty representation is had and not used at the decision, shown by intervention and not
+inferred. If the levers do move conduct, Section~\ref{sec:onpolicy} is wrong about position or layer and we will say
+so. Either way the design can tell, which is what a positive control is for.
+
+\subsection{Limitations and future work}
+
+Two model families, with Gemma-3-4B as the development record only. The frame families coincide with a boundary in
+format, the model's own words against prefilled text, and only the on-policy result separates the two readings. The
+two judges agree weakly on borderline agentic reports ($\kappa$ about 0.25), and disclosed cheating is honest by the
+rubric we keep. \qwen{} is near ceiling on most conduct tasks, so its conduct arm reads only tool completion unless a
+prompt engages it, and tool completion is at ceiling at baseline. The positive control is one prompt pair, and the
+neutral prompt by itself moves \gemma{}'s fabrication. The causal level has no ratio to report on \gemma{} for a
+mechanical reason, and the readout covector and the primal lever are nearly orthogonal on it (cosine 0.18; \qwen{}
+0.8), so steering nulls on \gemma{} have a mechanical reading before a conceptual one. Greedy bf16 decoding moves with
+batch composition, so steered conditions are read against random directions run through the same path. The steering
+study and the training study under each definition, with Open Character Training \citep{maiya2025oct} and the metric
+and battery before and after, are the next two parts of this work.
+
+\section{Conclusion}
+
+Asked what it means for a language model to be honest, we find that the answer depends first on what the model is
+doing when honesty shows, recognizing it in others, judging it, acting, or describing itself, and only second on which
+of the six honesties one has in mind. Two models carry a shared idea of honesty, most coherent when they describe
+themselves, and both recognize and condemn covert cheating, their own included, while committing it under pressure.
+The variable that carries the idea is not the variable that carries the act. We make no claim about which honesty a
+model ought to have. We claim that the evaluations and the character training we now use reach the side of the trait
+where the idea lives, that the failures live on the other side, and that for a model, unlike a person, the distance
+between the two can be measured and, in the work that follows, moved.
 
 \section*{Reproducibility}
 All code, labels, projections and the decision log are in the project repository; item text stays out of it. Every
