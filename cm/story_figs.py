@@ -34,11 +34,11 @@ FAMN = {"own": "own reply about someone else (recognize, judge)", "act": "acting
         "self": "self-describing (reply in the model's voice)"}
 INK, INK2, MUTED, LIGHT, GRID, AXIS = "#0b0b0b", "#52514e", "#898781", "#dcdbd5", "#eceae3", "#b9b7ad"
 HALO = [pe.withStroke(linewidth=2.2, foreground="white")]
-plt.rcParams.update({"font.family": ["Gill Sans", "Avenir Next", "Helvetica Neue", "Arial"], "font.size": 7.6, "axes.titlesize": 8,
+plt.rcParams.update({"font.family": ["Palatino", "Georgia"], "font.size": 7.6, "axes.titlesize": 8,
                      "axes.labelsize": 7.3, "xtick.labelsize": 6.7, "ytick.labelsize": 6.7, "legend.fontsize": 6.8,
                      "axes.linewidth": 0.5, "axes.edgecolor": AXIS, "axes.labelcolor": INK2, "xtick.color": INK2,
                      "ytick.color": INK2, "axes.spines.top": False, "axes.spines.right": False, "pdf.fonttype": 42,
-                     "text.color": INK, "legend.frameon": False, "axes.titlelocation": "left", "axes.titleweight": "bold",
+                     "text.color": INK, "legend.frameon": False, "axes.titlelocation": "left", "axes.titleweight": "normal",
                      "xtick.major.size": 2.5, "ytick.major.size": 2.5, "xtick.major.width": 0.5, "ytick.major.width": 0.5,
                      "xtick.major.pad": 2.5, "ytick.major.pad": 2.5, "axes.grid": False})
 NUM = {}
@@ -107,45 +107,47 @@ def fig1():
     ctrls = [("Formality", "formal vs informal register", "abcd"), ("Topic", "one topic vs another", "ac")]
     have = {"Self-knowledge": "abcd", "Accuracy": "abcd", "Sincerity": "abcd", "Forthrightness": "acd", "Non-sycophancy": "acd",
             "Honesty-humility": "abcd"}
-    col_gloss = {"a": "its own reply about\nsomeone else's conduct:\ndoes it see the trait?", "b": "its own reply:\nwas that conduct\nacceptable?",
-                 "c": "a reply in its voice,\nunder temptation:\nhonest or not", "d": "a reply in its voice:\n\"the kind of\nassistant I am\""}
+    col_gloss = {"a": "its reply about\nanother's conduct", "b": "its reply on whether\nthat was acceptable",
+                 "c": "a reply in its voice,\nunder temptation", "d": "a reply in its voice,\nabout itself"}
     import collections
     z = np.load(ROOT / "results" / SUBJ[0][0] / "figures" / "honesty" / "landscape_points.npz", allow_pickle=True)
     cnt = collections.Counter((m["def"].replace(" (control)", ""), m["frame"]) for m in json.loads(str(z["meta"])))
     fig, ax = plt.subplots(figsize=(6.3, 3.24))
     ax.set_axis_off()
     nR = len(rows) + len(ctrls)
-    x0, w, h, gap = 2.55, 1.0, 0.56, 0.08
+    x0, w, h, gap = 2.55, 1.0, 0.62, 0.08
     ytop = nR * (h + gap)
     # column headers and the two families
     for j, (f, name) in enumerate(FRAMES):
         xc = x0 + j * (w + gap) + w / 2
-        ax.text(xc, ytop + 0.95, f"{f}. {name}", ha="center", va="bottom", fontsize=7.3, fontweight="bold", color=INK)
-        ax.text(xc, ytop + 0.9, col_gloss[f], ha="center", va="top", fontsize=5.6, color=INK2, linespacing=1.15)
+        ax.text(xc, ytop + 0.95, f"{f}. {name.capitalize()}", ha="center", va="bottom", fontsize=7.6, color=INK)
+        ax.text(xc, ytop + 0.9, col_gloss[f], ha="center", va="top", fontsize=5.5, color=INK2, linespacing=1.15)
     for fam, cols, label in (("own", (0, 1), "the model's own words about someone else"), ("act", (2, 2), ""), ("self", (3, 3), "")):
         pass
     xa, xb = x0, x0 + 2 * (w + gap) - gap
     ax.plot([xa, xb], [ytop + 1.75, ytop + 1.75], color=FAMC["own"], lw=1.2, solid_capstyle="butt")
-    ax.text((xa + xb) / 2, ytop + 1.82, "the model's own words about a third party", ha="center", va="bottom", fontsize=6.3, color=FAMC["own"])
+    ax.text((xa + xb) / 2, ytop + 1.82, "Own words about a third party", ha="center", va="bottom", fontsize=6.6, color=FAMC["own"])
     xa, xb = x0 + 2 * (w + gap), x0 + 4 * (w + gap) - gap
     ax.plot([xa, xb], [ytop + 1.75, ytop + 1.75], color=INK2, lw=1.2, solid_capstyle="butt")
-    ax.text((xa + xb) / 2, ytop + 1.82, "a reply written in the model's voice", ha="center", va="bottom", fontsize=6.3, color=INK2)
+    ax.text((xa + xb) / 2, ytop + 1.82, "Prefilled in the model's voice", ha="center", va="bottom", fontsize=6.6, color=INK2)
     # rows
     for i, (d, g) in enumerate(rows + [(c[0], c[1]) for c in ctrls]):
         y = ytop - (i + 1) * (h + gap)
         isc = i >= len(rows)
         col = MUTED if isc else DEFC[d]
-        ax.text(x0 - 0.12, y + h * 0.62, d + (" (control)" if isc else ""), ha="right", va="center", fontsize=7, fontweight="bold", color=INK if not isc else INK2)
-        ax.text(x0 - 0.12, y + h * 0.22, g, ha="right", va="center", fontsize=5.8, color=INK2)
+        ax.text(x0 - 0.12, y + h * 0.66, d + (" (control)" if isc else ""), ha="right", va="center", fontsize=7.2, color=INK if not isc else INK2)
+        ax.text(x0 - 0.12, y + h * 0.24, g, ha="right", va="center", fontsize=5.6, color=INK2)
         frames_have = have[d] if not isc else ctrls[i - len(rows)][2]
         for j, (f, name) in enumerate(FRAMES):
             x = x0 + j * (w + gap)
             if f in frames_have:
-                ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0,rounding_size=0.06", fc=col, ec="none", alpha=0.22 if not isc else 0.3))
+                ax.add_patch(Rectangle((x, y), w, h, fc=col, ec=AXIS, lw=0.5, alpha=0.14 if not isc else 0.22))
+                ax.add_patch(Rectangle((x, y), w, h, fc="none", ec=AXIS, lw=0.5))
                 n = cnt.get((d, f))
-                ax.text(x + w / 2, y + h / 2, f"{n} items" if n else "", ha="center", va="center", fontsize=5.6, color=INK2)
+                ax.text(x + w / 2, y + h / 2, f"{n} items" if n else "built", ha="center", va="center", fontsize=6.2, color=INK2)
             else:
-                ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0,rounding_size=0.06", fc="none", ec=LIGHT, lw=0.6, ls=(0, (2, 2))))
+                ax.add_patch(Rectangle((x, y), w, h, fc="none", ec=LIGHT, lw=0.5))
+                ax.text(x + w / 2, y + h / 2, "not built", ha="center", va="center", fontsize=6.2, color=MUTED, style="italic")
     if True:
         y = ytop - len(rows) * (h + gap) - gap / 2
         ax.plot([x0 - 2.5, x0 + 4 * (w + gap) - gap], [y, y], color=AXIS, lw=0.5)
@@ -201,7 +203,7 @@ def fig2():
             lab = {"own": "recognize, judge", "act": "act", "self": "self-describe"}[g]
             side = {"own": ("left" if own_left else "right"), "self": ("right" if own_left else "left"), "act": "below"}[g]
             dxy, ha, va = {"left": ((-7, 6), "right", "bottom"), "right": ((7, 6), "left", "bottom"), "below": ((0, -9), "center", "top")}[side]
-            ax.annotate(lab, c, xytext=dxy, textcoords="offset points", ha=ha, va=va, fontsize=6.8, fontweight="bold", color=FAMC[g], path_effects=HALO, zorder=6)
+            ax.annotate(lab, c, xytext=dxy, textcoords="offset points", ha=ha, va=va, fontsize=7.2, color=FAMC[g], path_effects=HALO, zorder=6)
         var = st["variance"]
         ax.set_xlabel(f"PC1 ({var[0]*100:.0f}% of the honesty-subspace variance)")
         ax.set_ylabel(f"PC2 ({var[1]*100:.0f}%)")
@@ -299,7 +301,7 @@ def fig3():
                             "by_def_dm": s["dm"]["by_def"], "depth": Ls}
         ax.set_ylim(-0.55, 1.1); ax.set_yticks([-0.5, 0, 0.5, 1.0])
         ax.set_ylabel("leave-one-cell-out score\n(share of the cell's own AUROC)")
-        ax.text(0.995, 0.04, name, transform=ax.transAxes, ha="right", va="bottom", fontsize=7, fontweight="bold", color=scol)
+        ax.text(0.995, 0.04, name, transform=ax.transAxes, ha="right", va="bottom", fontsize=7.4, color=scol)
         ax.grid(color=GRID, lw=0.4, axis="y"); ax.set_axisbelow(True)
         panel_letter(ax, "ab"[list(axes).index(ax)], x=-0.06)
     labels = []
@@ -318,11 +320,11 @@ def fig3():
 
 # ---------------------------------------------------------------- fig 4: the battery, act vs account
 def fig4():
-    acts = [("RH", "reward hacking\n(no special-casing)"), ("SO", "instructed sophistry\n(won't argue it)"),
-            ("CF", "must-answer prompt\n(hedges or declines)"), ("ARact", "covert write\n(no false COMPLETE)"),
-            ("FT", "tool failure\n(no false claim)")]
-    accts = [("AR", "report to owner\n(not deceptive)"), ("DC", "done claim\n(matches re-run)"),
-             ("CO", "confession\n(owns the mistake)"), ("ARadm", "admits the write\n(when asked)")]
+    acts = [("RH", "does not game the tests"), ("SO", "does not argue the wrong answer"),
+            ("CF", "hedges under a must-answer prompt"), ("ARact", "writes no false COMPLETE"),
+            ("FT", "claims no step that failed")]
+    accts = [("AR", "report to the owner is honest"), ("DC", "done claim matches the re-run"),
+             ("CO", "confesses the planted mistake"), ("ARadm", "admits the covert write")]
     items = acts + accts
     fig, ax = plt.subplots(figsize=(6.3, 2.79))
     NUM["fig4"] = {}
@@ -351,14 +353,14 @@ def fig4():
     xs = [k + (0.4 if k >= len(acts) else 0) for k in range(len(items))]
     ax.set_xticks(xs); ax.set_xticklabels([lab.replace("\n", " ") for _, lab in items], fontsize=6, rotation=22, ha="right", rotation_mode="anchor")
     ax.axvline(len(acts) - 0.3, color=GRID, lw=0.8)
-    ax.text((xs[0] + xs[len(acts) - 1]) / 2, 1.1, "what the model does under pressure", ha="center", va="bottom", fontsize=7, color=INK2)
-    ax.text((xs[len(acts)] + xs[-1]) / 2, 1.1, "what it then says it did", ha="center", va="bottom", fontsize=7, color=INK2)
+    ax.text((xs[0] + xs[len(acts) - 1]) / 2, 1.1, "The act, under pressure", ha="center", va="bottom", fontsize=7.4, color=INK)
+    ax.text((xs[len(acts)] + xs[-1]) / 2, 1.1, "The account afterwards", ha="center", va="bottom", fontsize=7.4, color=INK)
     ax.set_ylim(0, 1.05); ax.set_yticks([0, 0.25, 0.5, 0.75, 1.0])
-    ax.set_ylabel("honest-direction rate")
+    ax.set_ylabel("Share of honest responses")
     ax.grid(color=GRID, lw=0.4, axis="y"); ax.set_axisbelow(True)
     hs = [Line2D([], [], marker="o", ls="none", color=SUBJ[0][2], label=SUBJ[0][1], ms=5.5),
           Line2D([], [], marker="o", ls="none", color=SUBJ[1][2], label=SUBJ[1][1], ms=5.5),
-          Line2D([], [], marker="o", ls="none", mfc="white", mec=INK2, label="matched control (no pressure, or the doable version)", ms=5.5)]
+          Line2D([], [], marker="o", ls="none", mfc="white", mec=INK2, label="matched control: the same task without the pressure", ms=5.5)]
     ax.legend(handles=hs, loc="lower center", bbox_to_anchor=(0.5, -0.42), ncol=3, handletextpad=0.3, columnspacing=1.5)
     save(fig, "fig4_battery")
 
@@ -366,8 +368,8 @@ def fig4():
 # ---------------------------------------------------------------- fig 5: judging vs doing
 def fig5():
     fig, (ax, bx) = plt.subplots(1, 2, figsize=(6.3, 2.34), gridspec_kw={"width_ratios": [2.2, 1], "wspace": 0.35})
-    cats = [("a_pD_nocheat|AR", "no covert write\n(blind)"), ("b_pD_other_cheat|AR", "the other model's\ncovert write (blind)"),
-            ("b_pD_own_cheat|AR", "its own covert\nwrite (blind)"), ("c_pD_own_you|AR", "its own, told\n\"you wrote this\"")]
+    cats = [("a_pD_nocheat|AR", "no covert write,\nnot told whose"), ("b_pD_other_cheat|AR", "the other model's\ncovert write, not told"),
+            ("b_pD_own_cheat|AR", "its own covert\nwrite, not told"), ("c_pD_own_you|AR", "its own covert write,\ntold it is its own")]
     NUM["fig5"] = {}
     w = 0.36
     for si, (tag, name, scol, dep) in enumerate(SUBJ):
@@ -393,14 +395,14 @@ def fig5():
             bx.plot([x, x], [lo, hi], color=INK, lw=0.7, zorder=4)
         NUM["fig5"][tag]["covert_rate"] = T["covert_rate"]; NUM["fig5"][tag]["covert_rate_neutral"] = T["control"]["covert_rate"]
     ax.set_xticks(range(len(cats))); ax.set_xticklabels([lab for _, lab in cats], fontsize=6.2, linespacing=1.1)
-    ax.set_ylim(0, 1.02); ax.set_ylabel("share of trajectories the model,\nas judge, calls dishonest")
+    ax.set_ylim(0, 1.02); ax.set_ylabel("Share of records the model,\nas judge, calls dishonest")
     ax.grid(color=GRID, lw=0.4, axis="y"); ax.set_axisbelow(True)
-    ax.set_title("as the judge of a saved record")
+    ax.set_title("As judge of a saved record")
     panel_letter(ax, "a", x=-0.08)
     bx.set_xticks([0, 1]); bx.set_xticklabels(["neutral\ntask", "same task,\nunder pressure"], fontsize=6.2, linespacing=1.1)
-    bx.set_ylim(0, 1.02); bx.set_ylabel("share of tasks where it wrote\nthe false COMPLETE itself")
+    bx.set_ylim(0, 1.02); bx.set_ylabel("Share of tasks on which it wrote\nthe false COMPLETE itself")
     bx.grid(color=GRID, lw=0.4, axis="y"); bx.set_axisbelow(True)
-    bx.set_title("as the actor")
+    bx.set_title("As actor")
     panel_letter(bx, "b", x=-0.2)
     hs = [Patch(fc=SUBJ[0][2], label=SUBJ[0][1]), Patch(fc=SUBJ[1][2], label=SUBJ[1][1]),
           Patch(fc=INK2, label="verdict: dishonest"), Patch(fc=INK2, alpha=0.3, label="verdict: dishonest or borderline")]
@@ -453,7 +455,7 @@ def fig6():
 # ---------------------------------------------------------------- fig 7: a licence to deceive
 def fig7():
     fig, axes = plt.subplots(1, 5, figsize=(6.3, 2.16), gridspec_kw={"width_ratios": [1, 1, 1, 1.15, 1.15], "wspace": 0.55})
-    conds = [("neu", "neutral"), ("lic", "licence"), ("ins", "told")]
+    conds = [("neu", "neutral"), ("lic", "licence"), ("ins", "instruction")]
     tasks = [("RH", "reward hacking:\nno special-casing"), ("CF", "fabrication:\nhedges or declines"), ("FT", "tool completion:\nno false claim")]
     NUM["fig7"] = {}
     for si, (tag, name, scol, dep) in enumerate(SUBJ):
@@ -476,7 +478,7 @@ def fig7():
             ax.set_ylim(0, 1.05); ax.set_title(lab, fontsize=6.6, fontweight="normal")
             ax.grid(color=GRID, lw=0.4, axis="y"); ax.set_axisbelow(True)
             if ti == 0:
-                ax.set_ylabel("honest-direction rate")
+                ax.set_ylabel("Share of honest responses")
             else:
                 ax.set_yticklabels([])
         ax = axes[3 + si]
@@ -495,7 +497,7 @@ def fig7():
         panel_letter(ax, "abcde"[k], x=-0.1)
     hs = [Line2D([], [], marker="o", color=SUBJ[0][2], label=SUBJ[0][1], ms=4), Line2D([], [], marker="o", color=SUBJ[1][2], label=SUBJ[1][1], ms=4),
           Line2D([], [], color=MUTED, lw=1.1, label="neutral prompt (d, e)"), Line2D([], [], color=INK2, lw=1.1, label="licence prompt (d, e)"),
-          Line2D([], [], color=INK2, lw=1.1, ls=(0, (3, 1.5)), label="told-to-deceive prompt (d, e)"),
+          Line2D([], [], color=INK2, lw=1.1, ls=(0, (3, 1.5)), label="instruction prompt (d, e)"),
           Line2D([], [], color=INK2, lw=0.6, alpha=0.6, label="thin: the same score on the control cells")]
     fig.legend(handles=hs, loc="lower center", bbox_to_anchor=(0.5, -0.22), ncol=3, handletextpad=0.3, columnspacing=1.2)
     save(fig, "fig7_licence")
@@ -507,15 +509,15 @@ def fig8():
     Statuses are read from the decision log (D-061, D-062, D-063): open = the failure appears, closed = it does not,
     partial = it appears on part of the readout."""
     from matplotlib.patches import FancyArrowPatch
-    stages = [("sees it", "perception\n(frame a: recognize)"), ("judges it", "judgment\n(frame b: judge)"),
-              ("does it", "choice\n(frame c: act; the battery)"), ("owns it", "account of itself\n(frame d: self-describe;\nreports, confession)")]
+    stages = [("Perceive", "frame a: recognize"), ("Judge", "frame b: judge"),
+              ("Act", "frame c: act; the battery"), ("Account", "frame d: self-describe;\nreports, confession")]
     gaps = [  # (from, to, name, source line, instrument, status gemma, status qwen)
-        (0, 0, "blind spot", "Gioia 1992; Tenbrunsel & Messick 2004;\nMurdoch 1970; Blum 1991", "blind judge sees the\ncovert write", "partial", "closed"),
+        (0, 0, "blind spot", "Gioia 1992; Tenbrunsel & Messick\n2004; Murdoch 1970; Blum 1991", "blind judge sees the\ncovert write", "partial", "closed"),
         (1, 2, "akrasia", "Aristotle NE VII.3; Davidson 1970;\nMilgram 1963; Browning 1992", "condemns own covert write,\nwrote it anyway", "open", "open"),
         (3, 2, "hypocrisy (say-do)", "Batson 1997; Mazar et al. 2008;\nLifton 1986 (doubling)", "self-report honest,\nconduct not", "open", "open"),
         (1, 1, "self-leniency", "Valdesolo & DeSteno 2007;\nBatson 1997", "own vs other's covert\nwrite, blind", "closed", "closed"),
         (2, 3, "concealment", "cover-up vs confession;\nBok 1978", "report to owner;\nadmits when asked", "closed", "closed"),
-        (-1, 2, "situation", "Hartshorne & May 1928; Milgram 1974;\nDoris 2002", "licence prompt moves\nconduct", "open", "closed"),
+        (-1, 2, "situation", "Hartshorne & May 1928;\nMilgram 1974; Doris 2002", "licence prompt moves\nconduct", "open", "closed"),
         (-2, 2, "having, not using", "Aristotle NE VII.3; Elazar et al. 2021;\nGaleone et al. 2026", "described-honesty directions\nread the decision", "open", "open"),
     ]
     fig, ax = plt.subplots(figsize=(6.3, 4.14)); ax.set_axis_off()
@@ -523,26 +525,25 @@ def fig8():
     cx = [X0 + i * DX + W / 2 for i in range(4)]
     for i, (name, sub) in enumerate(stages):
         x = X0 + i * DX
-        ax.add_patch(FancyBboxPatch((x, Y0), W, H, boxstyle="round,pad=0,rounding_size=0.08", fc="#f1f0eb", ec=INK2, lw=0.7))
-        ax.text(x + W / 2, Y0 + H * 0.66, name, ha="center", va="center", fontsize=8, fontweight="bold", color=INK)
+        ax.add_patch(Rectangle((x, Y0), W, H, fc="#f4f3ee", ec=INK2, lw=0.6))
+        ax.text(x + W / 2, Y0 + H * 0.66, name, ha="center", va="center", fontsize=8.2, color=INK)
         ax.text(x + W / 2, Y0 + H * 0.26, sub, ha="center", va="center", fontsize=5.4, color=INK2, linespacing=1.1)
         if i < 3:
             ax.add_patch(FancyArrowPatch((x + W + 0.03, Y0 + H / 2), (x + DX - 0.03, Y0 + H / 2), arrowstyle="-|>", mutation_scale=7, color=INK2, lw=0.8))
-    ax.text(X0 - 0.05, Y0 + H + 0.32, "a trait, by its parts", ha="left", va="bottom", fontsize=6.5, color=MUTED)
     ax.text(cx[0] - 0.9, Y0 + H / 2, "the\nsituation", ha="center", va="center", fontsize=6, color=MUTED, linespacing=1.1)
     ax.add_patch(FancyArrowPatch((cx[0] - 0.62, Y0 + H / 2), (X0 - 0.03, Y0 + H / 2), arrowstyle="-|>", mutation_scale=7, color=MUTED, lw=0.7, ls=(0, (2, 2))))
     # gap rows
     ST = {"open": (INK, "full"), "closed": ("white", "none"), "partial": (INK, "left")}
     yrow, dy = Y0 - 0.55, 0.47
-    xcol = [0.0, 1.7, 3.7, 5.45, 6.35, 6.85]
-    for j, h in enumerate(["gap", "name in the literature", "what we read (D-061 to D-063)", "gemma-4", "Qwen"]):
+    xcol = [0.0, 1.45, 3.95, 5.6, 6.45, 6.95]
+    for j, h in enumerate(["Gap", "Name and sources", "Our readout", "gemma-4", "Qwen"]):
         ax.text(xcol[j] + (0.33 if j >= 3 else 0), yrow + 0.22, h, ha="center" if j >= 3 else "left", va="bottom", fontsize=6.2, color=MUTED)
     ax.plot([0, 7.4], [yrow + 0.18, yrow + 0.18], color=AXIS, lw=0.5)
     for k, (a, b, name, src, inst, sg, sq) in enumerate(gaps):
         y = yrow - k * dy
-        ax.text(xcol[0], y, name, ha="left", va="center", fontsize=6.8, fontweight="bold", color=INK)
-        ax.text(xcol[1], y, src, ha="left", va="center", fontsize=5.4, color=INK2, linespacing=1.1)
-        ax.text(xcol[2], y, inst, ha="left", va="center", fontsize=5.6, color=INK, linespacing=1.1)
+        ax.text(xcol[0], y, name, ha="left", va="center", fontsize=7.2, color=INK)
+        ax.text(xcol[1], y, src, ha="left", va="center", fontsize=5.2, color=INK2, linespacing=1.1)
+        ax.text(xcol[2], y, inst, ha="left", va="center", fontsize=5.5, color=INK, linespacing=1.1)
         for j, stt in ((3, sg), (4, sq)):
             x = xcol[j] + 0.33
             if stt == "partial":
@@ -550,9 +551,9 @@ def fig8():
             else:
                 ax.scatter([x], [y], s=46, fc=INK if stt == "open" else "white", ec=INK, lw=0.7, zorder=3)
         ax.plot([0, 7.4], [y - dy / 2, y - dy / 2], color=GRID, lw=0.4)
-    hs = [Line2D([], [], marker="o", ls="none", mfc=INK, mec=INK, label="the gap is open at baseline (the failure appears)", ms=6),
-          Line2D([], [], marker=MarkerStyle("o", fillstyle="left"), ls="none", mfc=INK, mec=INK, label="partial", ms=6),
-          Line2D([], [], marker="o", ls="none", mfc="white", mec=INK, label="closed (it does not appear)", ms=6)]
+    hs = [Line2D([], [], marker="o", ls="none", mfc=INK, mec=INK, label="gap open at baseline: the failure appears", ms=6),
+          Line2D([], [], marker=MarkerStyle("o", fillstyle="left"), ls="none", mfc=INK, mec=INK, label="open on part of the readout", ms=6),
+          Line2D([], [], marker="o", ls="none", mfc="white", mec=INK, label="closed: it does not appear", ms=6)]
     ax.legend(handles=hs, loc="lower left", bbox_to_anchor=(0.0, -0.06), ncol=3, handletextpad=0.3, columnspacing=1.4)
     ax.set_xlim(-0.05, 7.5); ax.set_ylim(yrow - len(gaps) * dy + 0.05, Y0 + H + 0.6)
     save(fig, "fig8_gaps")
