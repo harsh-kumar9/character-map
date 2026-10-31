@@ -26,6 +26,8 @@ levers            at the steering depth, for part 3 (D-058 Stage A): the 22 cell
                   SD vector that maps a standardized direction back to the residual stream.
 
     python -m cm.coherence rep                      CPU, reads the acts    results/<tag>/coherence/representational.json, levers.npz
+    python -m cm.coherence rep --sd-floor-q none,0.1,0.25,0.5    the same under the standardization floor (D-064 amendment 1 d),
+                                                    one run per setting on the same loaded cells, each under coherence/robust_floor/<setting>/
     python -m cm.coherence causal [--matrix PATH]   CPU                    results/<tag>/coherence/causal.json
     python -m cm.coherence belief-gen               GPU, the subject       outputs/<tag>/coherence/mask_belief.jsonl
     python -m cm.coherence belief-judge             GPU, gemma-4-31B-it    outputs/<tag>/coherence/mask_belief_judged.jsonl
@@ -125,29 +127,58 @@ def balanced_weights(cell_of, y):
     return w
 
 
-def pool_dirs(cells, ids, l, probe=True):
+def floor_sd(sd, q=None):
+    """Standardization floor (D-064 amendment 1 ruling d). q = None returns sd itself, so every caller reproduces the
+    unfloored numbers; otherwise every dimension's sd is raised to at least the q-quantile of the sd vector,
+    sd_floored = max(sd, quantile(sd, q)), wherever a direction is built or read."""
+    if q is None:
+        return sd
+    return np.maximum(sd, np.quantile(sd, q))
+
+
+def qtag(q):
+    """Directory name of a floor setting: none, q0.1, q0.25, q0.5."""
+    return "none" if q is None else f"q{q:g}"
+
+
+def parse_qs(s):
+    """--sd-floor-q 'none,0.1,0.25,0.5' -> [None, 0.1, 0.25, 0.5]; None when the option is absent (today's run)."""
+    if s is None:
+        return None
+    return [None if t.strip().lower() in ("none", "") else float(t) for t in s.split(",")]
+
+
+def robust_dir(base, q):
+    """Where a floored (or floor-off, for the identity check) run writes: <base>/robust_floor/<setting>/."""
+    return base / "robust_floor" / qtag(q)
+
+
+def pool_dirs(cells, ids, l, probe=True, q=None):
     """Pooled standardized rows of the listed cells' train items at depth index l: SD, the cell-balanced diff of means,
-    the probe direction, and the per-cell unit directions."""
+    the probe direction, and the per-cell unit directions. q: the standardization floor quantile (floor_sd), None = off;
+    sd is the floored vector in use, sd_raw the pooled sd before the floor."""
     Xp = np.concatenate([cells[c]["Xtr"][:, l] for c in ids]).astype(np.float64)
     y = np.concatenate([cells[c]["ytr"] for c in ids])
     cell_of = np.concatenate([np.full(len(cells[c]["ytr"]), k) for k, c in enumerate(ids)])
-    sd = Xp.std(0) + 1e-6
+    sd_raw = Xp.std(0) + 1e-6
+    sd = floor_sd(sd_raw, q)
     Xs = Xp / sd
     per = {}
     for k, c in enumerate(ids):
         m = cell_of == k
         per[c] = Xs[m & (y == 1)].mean(0) - Xs[m & (y == 0)].mean(0)
     dm = np.mean([per[c] for c in ids], 0)
-    out = {"sd": sd, "dm": unit_vec(dm), "per_cell": {c: unit_vec(v) for c, v in per.items()}}
+    out = {"sd": sd, "sd_raw": sd_raw, "dm": unit_vec(dm), "per_cell": {c: unit_vec(v) for c, v in per.items()}}
     if probe:
         out["probe"] = probe_dir(Xs, y, balanced_weights(cell_of, y))
     return out
 
 
-def within_cell(cells, c, l):
-    """The cell's own train-to-test AUROC: standardized diff of means and the probe (S3's settings, same rows)."""
+def within_cell(cells, c, l, q=None):
+    """The cell's own train-to-test AUROC: standardized diff of means and the probe (S3's settings, same rows); q the
+    standardization floor quantile on the cell's own sd (None = off)."""
     Xtr, ytr, Xte, yte = cells[c]["Xtr"][:, l].astype(np.float64), cells[c]["ytr"], cells[c]["Xte"][:, l].astype(np.float64), cells[c]["yte"]
-    sd = Xtr.std(0) + 1e-6
+    sd = floor_sd(Xtr.std(0) + 1e-6, q)
     u = unit_vec(Xtr[ytr == 1].mean(0) / sd - Xtr[ytr == 0].mean(0) / sd)
     a_dm = auroc((Xte / sd) @ u, yte)
     w = balanced_weights(np.zeros(len(ytr), int), ytr)
@@ -162,17 +193,19 @@ def scaled(a_loco, a_within):
 
 
 def rep_depth(args):
-    """All leave-one-cell-out folds, within-cell numbers and the transfer matrix at one depth index."""
-    cells, l = args
+    """All leave-one-cell-out folds, within-cell numbers and the transfer matrix at one depth index; args = (cells, l)
+    or (cells, l, q) with q the standardization floor quantile (None = off, the same numbers as (cells, l))."""
+    cells, l = args[0], args[1]
+    q = args[2] if len(args) > 2 else None
     res = {"cells": {}, "pairwise": {}}
     # one common standardized space over the 22 honesty cells for the transfer matrix and the levers
-    common = pool_dirs(cells, HON, l, probe=(l == L_STEER_IDX))
+    common = pool_dirs(cells, HON, l, probe=(l == L_STEER_IDX), q=q)
     for h in ALL:
         pool = [c for c in HON if c != h]
-        P = pool_dirs(cells, pool, l)
+        P = pool_dirs(cells, pool, l, q=q)
         Xte = cells[h]["Xte"][:, l].astype(np.float64) / P["sd"]
         a_dm, a_pr = auroc(Xte @ P["dm"], cells[h]["yte"]), auroc(Xte @ P["probe"], cells[h]["yte"])
-        w_dm, w_pr = within_cell(cells, h, l)
+        w_dm, w_pr = within_cell(cells, h, l, q=q)
         res["cells"][h] = {"loco_dm": float(a_dm), "loco_probe": float(a_pr), "within_dm": float(w_dm), "within_probe": float(w_pr),
                            "scaled_dm": scaled(a_dm, w_dm), "scaled_probe": scaled(a_pr, w_pr)}
         print(f"[coherence] depth idx {l} {h:28} loco dm {a_dm:.2f} probe {a_pr:.2f} | within {w_dm:.2f} {w_pr:.2f}", flush=True)
@@ -190,24 +223,44 @@ def rep_depth(args):
     if l == L_STEER_IDX:
         res["levers"] = {"sd": common["sd"], "dm_all": common["dm"], "probe_all": common["probe"],
                          "cells": {c: common["per_cell"][c] for c in HON}}
+    sd_raw = common["sd_raw"]       # the pooled sd of the 22 honesty cells before the floor, for the robustness tables
+    floor = None if q is None else float(np.quantile(sd_raw, q))
+    res["sd"] = {"n_dims": int(sd_raw.size), "q": q, "floor": floor, "n_raised": 0 if floor is None else int((sd_raw < floor).sum()),
+                 "min": float(sd_raw.min()), "p05": float(np.quantile(sd_raw, 0.05)), "median": float(np.median(sd_raw)),
+                 "max": float(sd_raw.max()), "n_below_0.05": int((sd_raw < 0.05).sum())}
     return l, res
 
 
-def cmd_rep(workers):
-    OUT.mkdir(parents=True, exist_ok=True)
+def cmd_rep(workers, qs=None):
+    """qs None: today's run, results/<tag>/coherence/{representational.json, levers.npz, levers.json}. A list of floor
+    quantiles (None allowed in it): the same code once per setting on the same loaded cells, each written under
+    coherence/robust_floor/<none|q0.1|q0.25|q0.5>/; the baseline files are never written in that mode (D-064 am. 1 d)."""
     cells = gather()
     s3 = s3_numbers()
+    if qs is None:
+        rep_run(cells, s3, workers, None, OUT, robust=False)
+        return
+    for q in qs:
+        rep_run(cells, s3, workers, q, robust_dir(OUT, q), robust=True)
+
+
+def rep_run(cells, s3, workers, q, out_dir, robust):
+    out_dir.mkdir(parents=True, exist_ok=True)
     out = {"model": cfg.MODEL, "depths": LAYERS, "cells": [cell_info(c) for c in ALL], "by_depth": {}, "summary": {}}
+    if robust:
+        out["sd_floor_q"] = q
     levers = None
     with ProcessPoolExecutor(workers) as ex:
-        for l, res in ex.map(rep_depth, [(cells, l) for l in range(len(LIDX))]):
+        for l, res in ex.map(rep_depth, [(cells, l, q) for l in range(len(LIDX))]):
             L = LAYERS[l]
             for c, r in res["cells"].items():
                 r["s3_sdm"], r["s3_probe"] = s3.get((c, L), (None, None))
             out["by_depth"][str(L)] = {"cells": res["cells"], "pairwise": res["pairwise"]}
+            if robust:
+                out["by_depth"][str(L)]["sd"] = res["sd"]
             if "levers" in res:
                 levers = res["levers"]
-            print(f"[coherence] depth {L} done", flush=True)
+            print(f"[coherence] depth {L} done" + (f" (sd floor {qtag(q)})" if robust else ""), flush=True)
     for L in LAYERS:
         R = out["by_depth"][str(L)]["cells"]
         s = {}
@@ -225,13 +278,15 @@ def cmd_rep(workers):
         print(f"[coherence] layer {L}: scaled LOCO mean dm {s['dm']['mean_scaled']:.2f} (controls {s['dm']['mean_scaled_controls']}), "
               f"probe {s['probe']['mean_scaled']:.2f} (controls {s['probe']['mean_scaled_controls']}); by block dm "
               + " ".join(f"{b} {v:.2f}" for b, v in s["dm"]["by_block"].items()), flush=True)
-    (OUT / "representational.json").write_text(json.dumps(out, indent=1, default=float))
-    save_levers(levers)
+    (out_dir / "representational.json").write_text(json.dumps(out, indent=1, default=float))
+    save_levers(levers, out_dir)
 
 
-def save_levers(lv):
-    """results/<tag>/coherence/levers.npz: standardized-space unit directions at the steering depth and the SD vector.
-    To inject a standardized direction u into the residual stream use unit_vec(u / sd) (the *_resid arrays)."""
+def save_levers(lv, out=None):
+    """results/<tag>/coherence/levers.npz (or <out>/levers.npz): standardized-space unit directions at the steering depth
+    and the SD vector they were built with. To inject a standardized direction u into the residual stream use
+    unit_vec(u / sd) (the *_resid arrays)."""
+    out = OUT if out is None else out
     sd = lv["sd"]
     arrs = {"sd": sd, "dm_all": lv["dm_all"], "probe_all": lv["probe_all"]}
     for f in "abcd":
@@ -243,11 +298,11 @@ def save_levers(lv):
     for k in list(arrs):
         if k != "sd":
             arrs[f"{k}|resid"] = unit_vec(arrs[k] / sd)
-    np.savez(OUT / "levers.npz", **arrs)
+    np.savez(out / "levers.npz", **arrs)
     cos = {f"{a}-{b}": float(arrs[f"frame_{a}"] @ arrs[f"frame_{b}"]) for a in "abcd" for b in "abcd" if a < b}
     cos["dm_all-probe_all"] = float(arrs["dm_all"] @ arrs["probe_all"])
     cos.update({f"all_frames-{k}": float(arrs["all_frames"] @ arrs[k]) for k in ("dm_all", "probe_all")})
-    (OUT / "levers.json").write_text(json.dumps({"steering_layer": cfg.L_STEER, "hidden_index": cfg.L_STEER + 1, "keys": sorted(arrs),
+    (out / "levers.json").write_text(json.dumps({"steering_layer": cfg.L_STEER, "hidden_index": cfg.L_STEER + 1, "keys": sorted(arrs),
                                                   "cosines": cos}, indent=1))
     print("[coherence] levers at layer", cfg.L_STEER, "cosines", {k: round(v, 2) for k, v in cos.items()}, flush=True)
 
@@ -770,9 +825,11 @@ def main():
     ap.add_argument("--dose-c", default=None, help="report: the s5_hon dose key (c0.0078125 ...) instead of the headline")
     ap.add_argument("--tags", default="gemma-4-31b-it,qwen3.5-27b", help="compare: comma list of result tags ('' = Gemma-3-4B)")
     ap.add_argument("--headline", default="spill", choices=["spill", "gap"], help="causal: headline dose by matched spillover (part 1) or by the class-gap cap (D-060)")
+    ap.add_argument("--sd-floor-q", default=None, help="rep: comma list of standardization-floor quantiles ('none' allowed, e.g. none,0.1,0.25,0.5); "
+                    "given at all, every setting writes under coherence/robust_floor/<setting>/ and the baseline files are untouched")
     args = ap.parse_args()
     if args.stage == "rep":
-        cmd_rep(args.workers)
+        cmd_rep(args.workers, parse_qs(args.sd_floor_q))
     elif args.stage == "causal":
         cmd_causal(args.matrix, args.headline)
     elif args.stage == "belief-gen":

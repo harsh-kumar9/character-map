@@ -19,6 +19,9 @@ logistic probe on the full activation as the ceiling; the random band as the flo
     CM_MODEL=<model> python -m cm.battery_onpolicy acts [--cond] [--n 5 --dry]       GPU   outputs/<tag>/battery/onpolicy/<cond>/<task>.npz
     CM_MODEL=<model> python -m cm.battery_onpolicy directions                       CPU   results/<tag>/battery/onpolicy/directions.npz
     CM_MODEL=<model> python -m cm.battery_onpolicy score [--cond]                   CPU   results/<tag>/battery/onpolicy/<cond>/auroc.{json,md}
+    ... directions | score-strat | directions-all | score-sweep --sd-floor-q none,0.1,0.25,0.5
+        the same under the standardization floor (cm.coherence.floor_sd; D-064 amendment 1 ruling d), one run per
+        setting, each under results/<tag>/battery/onpolicy/robust_floor/<setting>/; the baseline files are untouched.
 """
 from __future__ import annotations
 
@@ -42,6 +45,12 @@ LAYERS = [cfg.DEPTH_LAYERS[i] for i in DEPTH_IDX]
 REPLY_N = 32
 N_RANDOM = 16
 N_BOOT = 1000
+def robust_res(q):
+    """results/<tag>/battery/onpolicy/robust_floor/<none|q0.1|...>/: where a --sd-floor-q run reads its directions and writes."""
+    from .coherence import qtag
+    return RES / "robust_floor" / qtag(q)
+
+
 GROUPS = {"act cells (c)": lambda k: k.startswith("cell|") and k.endswith("|c"),
           "self-describe cells (d)": lambda k: k.startswith("cell|") and k.endswith("|d"),
           "own-reply cells (a, b)": lambda k: k.startswith("cell|") and k[-1] in "ab",
@@ -222,14 +231,27 @@ def cmd_acts(cond="baseline", only_n=None, dry=False):
 
 # ---------------------------------------------------------------- directions
 
-def cmd_directions():
-    from .coherence import ALL, HON, gather, pool_dirs, unit_vec
+def cmd_directions(qs=None):
+    """qs None: today's directions.npz. A list of floor quantiles (None allowed): the same build per setting on the same
+    loaded cells, each under robust_floor/<setting>/ (D-064 amendment 1 ruling d)."""
+    from .coherence import gather
     cells = gather()
-    arrs, info = {}, {"model": cfg.MODEL, "layers": LAYERS, "depth_idx": list(DEPTH_IDX), "check_vs_levers": {}}
     lev = np.load(cfg.results_dir() / "coherence" / "levers.npz")
+    if qs is None:
+        directions_run(cells, lev, None, RES, robust=False)
+        return
+    for q in qs:
+        directions_run(cells, lev, q, robust_res(q), robust=True)
+
+
+def directions_run(cells, lev, q, out, robust):
+    from .coherence import ALL, HON, pool_dirs, unit_vec
+    arrs, info = {}, {"model": cfg.MODEL, "layers": LAYERS, "depth_idx": list(DEPTH_IDX), "check_vs_levers": {}}
+    if robust:
+        info["sd_floor_q"] = q
     rng = np.random.default_rng(0)
     for li, l in zip(LAYERS, DEPTH_IDX):
-        common = pool_dirs(cells, HON, l, probe=True)
+        common = pool_dirs(cells, HON, l, probe=True, q=q)
         sd = common["sd"]
         dirs = {f"cell|{c}": common["per_cell"][c] for c in HON}
         for f in "abcd":
@@ -253,9 +275,9 @@ def cmd_directions():
             info["check_vs_levers"]["sd_max_abs_diff"] = float(np.max(np.abs(sd - lev["sd"])))
         print(f"[onpolicy] directions at layer {li}: {len(dirs)}", flush=True)
     info["names"] = sorted({k.split("|L")[0] for k in arrs if not k.startswith("sd|")})
-    RES.mkdir(parents=True, exist_ok=True)
-    np.savez(RES / "directions.npz", **arrs)
-    (RES / "directions.json").write_text(json.dumps(info, indent=1))
+    out.mkdir(parents=True, exist_ok=True)
+    np.savez(out / "directions.npz", **arrs)
+    (out / "directions.json").write_text(json.dumps(info, indent=1))
     print(json.dumps(info["check_vs_levers"], indent=1))
 
 
@@ -340,16 +362,28 @@ def md_rows(by):
     return out
 
 
-def cmd_score_strat(cond="baseline"):
+def cmd_score_strat(cond="baseline", qs=None):
     """The same readout within item strata (AR contract family, else the item factor), so that an outcome that follows the
     item family is not read as a direction's prediction: per stratum with at least 5 items of each class, no bootstrap, and
-    the positive-weighted mean of the group folded AUROCs over strata."""
-    D = np.load(RES / "directions.npz")
+    the positive-weighted mean of the group folded AUROCs over strata. qs: floor settings, each read from and written
+    under robust_floor/<setting>/ (None = today's files)."""
+    if qs is None:
+        score_strat_run(cond, RES, None, robust=False)
+        return
+    for q in qs:
+        score_strat_run(cond, robust_res(q), q, robust=True)
+
+
+def score_strat_run(cond, rdir, q, robust):
+    from .coherence import qtag
+    D = np.load(rdir / "directions.npz")
     names = sorted({k.split("|L")[0] for k in D.files if not k.startswith("sd|")})
     rng = np.random.default_rng(0)
     strata = strata_of()
     res = {"model": cfg.MODEL, "cond": cond, "layers": LAYERS, "tasks": {}}
-    md = [f"# On-policy prediction within item strata (D-062 item 4), {cfg.MODEL}, cond {cond}", "",
+    if robust:
+        res["sd_floor_q"] = q
+    md = [f"# On-policy prediction within item strata (D-062 item 4), {cfg.MODEL}, cond {cond}" + (f", sd floor {qtag(q)}" if robust else ""), "",
           "Same readout as auroc.md, computed within each item stratum (AR: one-turn / recipient-state contract family; other tasks: "
           "the item factor) and averaged over strata with weights = positives; strata need 5 items of each class.", ""]
     for t in TASKS:
@@ -401,10 +435,10 @@ def cmd_score_strat(cond="baseline"):
                     f"{k2} act {e['groups'].get('act cells (c)', {}).get('mean_folded', float('nan')):.2f} own {e['groups'].get('own-reply cells (a, b)', {}).get('mean_folded', float('nan')):.2f} "
                     f"rand {e['groups']['random (16)']['mean_folded']:.2f} probe {e['probe_ceiling'] if e['probe_ceiling'] is None else round(e['probe_ceiling'], 2)}"
                     for k2, e in pooled.items()), flush=True)
-    (RES / cond).mkdir(parents=True, exist_ok=True)
-    (RES / cond / "auroc_strat.json").write_text(json.dumps(res, indent=1, default=float))
-    (RES / cond / "auroc_strat.md").write_text("\n".join(md) + "\n")
-    print(f"[onpolicy] -> {RES / cond / 'auroc_strat.json'}")
+    (rdir / cond).mkdir(parents=True, exist_ok=True)
+    (rdir / cond / "auroc_strat.json").write_text(json.dumps(res, indent=1, default=float))
+    (rdir / cond / "auroc_strat.md").write_text("\n".join(md) + "\n")
+    print(f"[onpolicy] -> {rdir / cond / 'auroc_strat.json'}")
 
 
 def cmd_score(cond="baseline"):
@@ -595,18 +629,28 @@ def cmd_acts_sweep(cond="baseline", only_n=None, dry=False):
               + f"; {dst.stat().st_size / 1e9:.2f} GB", flush=True)
 
 
-def cmd_directions_all():
+def cmd_directions_all(qs=None):
     """directions_all.npz: the item 4 direction set at every hidden-state index (names x n_states x d) and the pooled SD per
-    layer, from the same cells and code path as cm.coherence (gather, pool_dirs), with s4_overlap.LIDX widened to all states."""
+    layer, from the same cells and code path as cm.coherence (gather, pool_dirs), with s4_overlap.LIDX widened to all states.
+    qs: floor settings, each under robust_floor/<setting>/ (None = today's file)."""
     from . import s4_overlap
     s4_overlap.LIDX = list(range(cfg.N_STATES))
-    from .coherence import ALL, HON, gather, pool_dirs, unit_vec
+    from .coherence import gather
     cells = gather()
+    if qs is None:
+        directions_all_run(cells, None, RES, robust=False)
+        return
+    for q in qs:
+        directions_all_run(cells, q, robust_res(q), robust=True)
+
+
+def directions_all_run(cells, q, out, robust):
+    from .coherence import ALL, HON, pool_dirs, unit_vec
     names = None
     L1 = cfg.N_STATES
     arrs, sds = {}, np.zeros((L1, cfg.D), np.float32)
     for l in range(L1):
-        common = pool_dirs(cells, HON, l, probe=True)
+        common = pool_dirs(cells, HON, l, probe=True, q=q)
         sd = common["sd"]
         dirs = {f"cell|{c}": common["per_cell"][c] for c in HON}
         for f in "abcd":
@@ -630,22 +674,40 @@ def cmd_directions_all():
             arrs[nm][l] = dirs[nm]
         sds[l] = sd
         print(f"[sweep] directions at hidden index {l} (layer {l - 1})", flush=True)
-    RES.mkdir(parents=True, exist_ok=True)
-    np.savez(RES / "directions_all.npz", sd=sds, names=np.array(names), **arrs)
-    D2 = np.load(RES / "directions.npz")
-    chk = {f"{nm}|L{L}": float(arrs[nm][L + 1] @ D2[f"{nm}|L{L}"]) for L in LAYERS for nm in ("dm_all", "probe_all", "frame_c", "cell|C1|lying|c")}
-    (RES / "directions_all.json").write_text(json.dumps({"model": cfg.MODEL, "n_states": L1, "names": names, "check_vs_directions_npz": chk}, indent=1))
+    out.mkdir(parents=True, exist_ok=True)
+    np.savez(out / "directions_all.npz", sd=sds, names=np.array(names), **arrs)
+    d2p = out / "directions.npz" if (out / "directions.npz").exists() else RES / "directions.npz"   # the same setting's two-depth file when it exists
+    chk = {}
+    if d2p.exists():
+        D2 = np.load(d2p)
+        chk = {f"{nm}|L{L}": float(arrs[nm][L + 1] @ D2[f"{nm}|L{L}"]) for L in LAYERS for nm in ("dm_all", "probe_all", "frame_c", "cell|C1|lying|c")}
+    info = {"model": cfg.MODEL, "n_states": L1, "names": names, "check_vs_directions_npz": chk}
+    if robust:
+        info.update({"sd_floor_q": q, "checked_against": str(d2p) if d2p.exists() else None})
+    (out / "directions_all.json").write_text(json.dumps(info, indent=1))
     print(json.dumps(chk, indent=1))
 
 
-def cmd_score_sweep(cond="baseline"):
+def cmd_score_sweep(cond="baseline", qs=None):
     """Within-stratum readout per position and hidden-state index: one table per position, layers as rows, groups as
-    columns (mean over the six task readouts of the pooled-over-strata group means), plus the decision-rule check."""
-    D = np.load(RES / "directions_all.npz")
+    columns (mean over the six task readouts of the pooled-over-strata group means), plus the decision-rule check.
+    qs: floor settings, each read from and written under robust_floor/<setting>/ (None = today's files)."""
+    if qs is None:
+        score_sweep_run(cond, RES, None, robust=False)
+        return
+    for q in qs:
+        score_sweep_run(cond, robust_res(q), q, robust=True)
+
+
+def score_sweep_run(cond, rdir, q, robust):
+    from .coherence import qtag
+    D = np.load(rdir / "directions_all.npz")
     names = [str(x) for x in D["names"]]
     strata = strata_of()
     L1 = cfg.N_STATES
     res = {"model": cfg.MODEL, "cond": cond, "positions": list(SWEEP_POS), "readouts": {}, "tables": {}, "crossings": []}
+    if robust:
+        res["sd_floor_q"] = q
     per_pos = {pos: {} for pos in SWEEP_POS}       # pos -> layer -> list of (group -> mean) over readouts
     rng = np.random.default_rng(0)
     for t in TASKS:
@@ -696,7 +758,7 @@ def cmd_score_sweep(cond="baseline"):
                 print(f"[sweep] {key}: scored {len(SWEEP_POS)} positions x {L1} states", flush=True)
     short = {"act cells (c)": "act", "self-describe cells (d)": "self", "own-reply cells (a, b)": "own", "frame levers": "frames",
              "shared axes (dm_all, probe_all)": "shared", "all_frames": "all_frames", "K1": "K1", "K2": "K2", "random (16)": "random"}
-    md = [f"# Position-and-layer sweep (D-063 item 1), {cfg.MODEL}, cond {cond}", "",
+    md = [f"# Position-and-layer sweep (D-063 item 1), {cfg.MODEL}, cond {cond}" + (f", sd floor {qtag(q)}" if robust else ""), "",
           "Mean over the task readouts of the within-stratum pooled group folded AUROC; probe = within-task 5-fold ceiling. "
           "Rows are hidden-state indices (layer = index - 1). Crossings (a group mean above the random 95th percentile on a "
           "single readout, position and layer) are listed at the end.", ""]
@@ -720,11 +782,11 @@ def cmd_score_sweep(cond="baseline"):
     md += [f"## crossings: honesty groups {len(hon)}, control groups {len(ctl)}, of {n_cells} readout x position x index cells", ""]
     for c in sorted(hon, key=lambda c: -c["mean_folded"])[:40]:
         md.append(f"- {c['readout']} {c['position']} index {c['hidden_index']} {c['group']}: {c['mean_folded']:.2f} vs random 95th {c['random_95']:.2f}")
-    (RES / cond).mkdir(parents=True, exist_ok=True)
-    (RES / cond / "sweep.json").write_text(json.dumps(res, indent=1, default=float))
-    (RES / cond / "sweep.md").write_text("\n".join(md) + "\n")
+    (rdir / cond).mkdir(parents=True, exist_ok=True)
+    (rdir / cond / "sweep.json").write_text(json.dumps(res, indent=1, default=float))
+    (rdir / cond / "sweep.md").write_text("\n".join(md) + "\n")
     print(json.dumps(res["decision"], indent=1))
-    print(f"[sweep] -> {RES / cond / 'sweep.json'}")
+    print(f"[sweep] -> {rdir / cond / 'sweep.json'}")
 
 
 def main():
@@ -734,25 +796,29 @@ def main():
     ap.add_argument("--cond", default="baseline")
     ap.add_argument("--n", type=int, default=None)
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--sd-floor-q", default=None, help="directions, score-strat, directions-all, score-sweep: comma list of standardization-floor "
+                    "quantiles ('none' allowed); given at all, every setting reads and writes under robust_floor/<setting>/ only")
     a = ap.parse_args()
+    from .coherence import parse_qs
+    qs = parse_qs(a.sd_floor_q)
     if a.stage == "positions":
         cmd_positions(a.cond)
     elif a.stage == "acts":
         cmd_acts(a.cond, a.n, a.dry)
     elif a.stage == "directions":
-        cmd_directions()
+        cmd_directions(qs)
     elif a.stage == "score":
         cmd_score(a.cond)
     elif a.stage == "score-strat":
-        cmd_score_strat(a.cond)
+        cmd_score_strat(a.cond, qs)
     elif a.stage == "positions-sweep":
         cmd_positions_sweep(a.cond)
     elif a.stage == "acts-sweep":
         cmd_acts_sweep(a.cond, a.n, a.dry)
     elif a.stage == "directions-all":
-        cmd_directions_all()
+        cmd_directions_all(qs)
     else:
-        cmd_score_sweep(a.cond)
+        cmd_score_sweep(a.cond, qs)
 
 
 if __name__ == "__main__":
