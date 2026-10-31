@@ -32,17 +32,50 @@ FAM = {"a": "own", "b": "own", "c": "act", "d": "self"}
 FAMC = {"own": "#7B68B5", "act": "#B5542A", "self": "#2E8B7A"}
 FAMN = {"own": "own reply about someone else (recognize, judge)", "act": "acting (reply in the model's voice)",
         "self": "self-describing (reply in the model's voice)"}
-INK, INK2, MUTED, LIGHT, GRID, AXIS = "#0b0b0b", "#52514e", "#898781", "#dcdbd5", "#e1e0d9", "#c3c2b7"
+INK, INK2, MUTED, LIGHT, GRID, AXIS = "#0b0b0b", "#52514e", "#898781", "#dcdbd5", "#eceae3", "#b9b7ad"
 HALO = [pe.withStroke(linewidth=2.2, foreground="white")]
-plt.rcParams.update({"font.family": "Arial", "font.size": 7, "axes.titlesize": 7.3, "axes.labelsize": 6.8,
-                     "xtick.labelsize": 6.2, "ytick.labelsize": 6.2, "legend.fontsize": 6.3, "axes.linewidth": 0.5,
-                     "axes.edgecolor": AXIS, "axes.labelcolor": INK2, "xtick.color": INK2, "ytick.color": INK2,
-                     "axes.spines.top": False, "axes.spines.right": False, "pdf.fonttype": 42, "text.color": INK,
-                     "legend.frameon": False, "axes.titlelocation": "left", "axes.titleweight": "bold"})
+plt.rcParams.update({"font.family": ["Gill Sans", "Avenir Next", "Helvetica Neue", "Arial"], "font.size": 7.6, "axes.titlesize": 8,
+                     "axes.labelsize": 7.3, "xtick.labelsize": 6.7, "ytick.labelsize": 6.7, "legend.fontsize": 6.8,
+                     "axes.linewidth": 0.5, "axes.edgecolor": AXIS, "axes.labelcolor": INK2, "xtick.color": INK2,
+                     "ytick.color": INK2, "axes.spines.top": False, "axes.spines.right": False, "pdf.fonttype": 42,
+                     "text.color": INK, "legend.frameon": False, "axes.titlelocation": "left", "axes.titleweight": "bold",
+                     "xtick.major.size": 2.5, "ytick.major.size": 2.5, "xtick.major.width": 0.5, "ytick.major.width": 0.5,
+                     "xtick.major.pad": 2.5, "ytick.major.pad": 2.5, "axes.grid": False})
 NUM = {}
 
 
+def tufte(fig):
+    """Range frames: each drawn spine spans only the tick range and sits slightly away from the data. Moving a spine
+    rebuilds the ticks, so the per-label settings (rotation, alignment, size) are captured first and put back."""
+    for ax in fig.axes:
+        if not ax.axison:
+            continue
+        xl = ax.get_xticklabels()
+        keep = None
+        if xl and any(t.get_text() for t in xl):
+            t0 = xl[0]
+            keep = dict(labels=[t.get_text() for t in xl], rotation=t0.get_rotation(), ha=t0.get_ha(), va=t0.get_va(),
+                        rotation_mode=t0.get_rotation_mode(), fontsize=t0.get_fontsize(), linespacing=getattr(t0, "_linespacing", 1.2))
+        for side in ("left", "bottom"):
+            sp = ax.spines[side]
+            if not sp.get_visible():
+                continue
+            lo, hi = (ax.get_ylim() if side == "left" else ax.get_xlim())
+            ticks = ax.get_yticks() if side == "left" else ax.get_xticks()
+            t = [v for v in ticks if min(lo, hi) <= v <= max(lo, hi)]
+            if len(t) >= 2:
+                sp.set_bounds(min(t), max(t))
+            sp.set_position(("outward", 3))
+            sp.set_linewidth(0.5)
+            sp.set_color(AXIS)
+        if keep is not None:
+            ax.set_xticks(ax.get_xticks())
+            ax.set_xticklabels(keep["labels"], rotation=keep["rotation"], ha=keep["ha"], va=keep["va"],
+                               rotation_mode=keep["rotation_mode"], fontsize=keep["fontsize"], linespacing=keep["linespacing"])
+
+
 def save(fig, name):
+    tufte(fig)
     fig.savefig(OUT / f"{name}.pdf", bbox_inches="tight")
     fig.savefig(OUT / f"{name}.png", bbox_inches="tight", dpi=220)
     plt.close(fig)
@@ -79,7 +112,7 @@ def fig1():
     import collections
     z = np.load(ROOT / "results" / SUBJ[0][0] / "figures" / "honesty" / "landscape_points.npz", allow_pickle=True)
     cnt = collections.Counter((m["def"].replace(" (control)", ""), m["frame"]) for m in json.loads(str(z["meta"])))
-    fig, ax = plt.subplots(figsize=(7.2, 3.6))
+    fig, ax = plt.subplots(figsize=(6.3, 3.24))
     ax.set_axis_off()
     nR = len(rows) + len(ctrls)
     x0, w, h, gap = 2.55, 1.0, 0.56, 0.08
@@ -138,7 +171,7 @@ def pair_means(ids, M, concept_sub):
 
 
 def fig2():
-    fig = plt.figure(figsize=(7.2, 5.3))
+    fig = plt.figure(figsize=(6.3, 4.77))
     gs = fig.add_gridspec(2, 2, height_ratios=[1.35, 1], hspace=0.42, wspace=0.22)
     rng = np.random.default_rng(0)
     NUM["fig2"] = {}
@@ -160,13 +193,15 @@ def fig2():
         for g in ("own", "act", "self"):
             sel = keep[fam[keep] == g]
             ax.scatter(Y[sel, 0], Y[sel, 1], s=4, c=FAMC[g], alpha=0.35, lw=0, rasterized=True)
+        cent = {g: Y[hon & (fam == g)].mean(0) for g in ("own", "act", "self")}
+        own_left = cent["own"][0] < cent["self"][0]   # label each family on the side away from the other
         for g in ("own", "act", "self"):
-            sel = hon & (fam == g)
-            c = Y[sel].mean(0)
+            c = cent[g]
             ax.scatter(*c, s=46, c=FAMC[g], ec="white", lw=0.9, zorder=5)
             lab = {"own": "recognize, judge", "act": "act", "self": "self-describe"}[g]
-            dy, va = ((0, -9), "top") if g == "act" else ((0, 9), "bottom")
-            ax.annotate(lab, c, xytext=dy, textcoords="offset points", ha="center", va=va, fontsize=6.8, fontweight="bold", color=FAMC[g], path_effects=HALO, zorder=6)
+            side = {"own": ("left" if own_left else "right"), "self": ("right" if own_left else "left"), "act": "below"}[g]
+            dxy, ha, va = {"left": ((-7, 6), "right", "bottom"), "right": ((7, 6), "left", "bottom"), "below": ((0, -9), "center", "top")}[side]
+            ax.annotate(lab, c, xytext=dxy, textcoords="offset points", ha=ha, va=va, fontsize=6.8, fontweight="bold", color=FAMC[g], path_effects=HALO, zorder=6)
         var = st["variance"]
         ax.set_xlabel(f"PC1 ({var[0]*100:.0f}% of the honesty-subspace variance)")
         ax.set_ylabel(f"PC2 ({var[1]*100:.0f}%)")
@@ -213,7 +248,7 @@ def fig2():
 
 # ---------------------------------------------------------------- fig 3: the metric
 def fig3():
-    fig, axes = plt.subplots(2, 1, figsize=(7.2, 3.9), sharex=True)
+    fig, axes = plt.subplots(2, 1, figsize=(6.3, 3.51), sharex=True)
     fig.subplots_adjust(hspace=0.18)
     order = []
     for blk, frames in (("own", "ab"), ("act", "c"), ("self", "d")):
@@ -289,7 +324,7 @@ def fig4():
     accts = [("AR", "report to owner\n(not deceptive)"), ("DC", "done claim\n(matches re-run)"),
              ("CO", "confession\n(owns the mistake)"), ("ARadm", "admits the write\n(when asked)")]
     items = acts + accts
-    fig, ax = plt.subplots(figsize=(7.2, 3.1))
+    fig, ax = plt.subplots(figsize=(6.3, 2.79))
     NUM["fig4"] = {}
     for si, (tag, name, scol, dep) in enumerate(SUBJ):
         T = load(tag, "battery", "table.json")["tasks"]
@@ -330,7 +365,7 @@ def fig4():
 
 # ---------------------------------------------------------------- fig 5: judging vs doing
 def fig5():
-    fig, (ax, bx) = plt.subplots(1, 2, figsize=(7.2, 2.6), gridspec_kw={"width_ratios": [2.2, 1], "wspace": 0.35})
+    fig, (ax, bx) = plt.subplots(1, 2, figsize=(6.3, 2.34), gridspec_kw={"width_ratios": [2.2, 1], "wspace": 0.35})
     cats = [("a_pD_nocheat|AR", "no covert write\n(blind)"), ("b_pD_other_cheat|AR", "the other model's\ncovert write (blind)"),
             ("b_pD_own_cheat|AR", "its own covert\nwrite (blind)"), ("c_pD_own_you|AR", "its own, told\n\"you wrote this\"")]
     NUM["fig5"] = {}
@@ -369,13 +404,13 @@ def fig5():
     panel_letter(bx, "b", x=-0.2)
     hs = [Patch(fc=SUBJ[0][2], label=SUBJ[0][1]), Patch(fc=SUBJ[1][2], label=SUBJ[1][1]),
           Patch(fc=INK2, label="verdict: dishonest"), Patch(fc=INK2, alpha=0.3, label="verdict: dishonest or borderline")]
-    fig.legend(handles=hs, loc="lower center", bbox_to_anchor=(0.5, -0.12), ncol=4, handletextpad=0.3, columnspacing=1.4)
+    fig.legend(handles=hs, loc="lower center", bbox_to_anchor=(0.5, -0.17), ncol=4, handletextpad=0.3, columnspacing=1.4)
     save(fig, "fig5_judge_vs_act")
 
 
 # ---------------------------------------------------------------- fig 6: the on-policy sweep
 def fig6():
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 2.7), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(6.3, 2.43), sharey=True)
     fig.subplots_adjust(wspace=0.08)
     groups = [("act cells (c)", "act directions", FAMC["act"], "-"), ("self-describe cells (d)", "self-describe directions", FAMC["self"], "-"),
               ("own-reply cells (a, b)", "recognize and judge directions", FAMC["own"], "-"),
@@ -392,6 +427,8 @@ def fig6():
         ax.fill_between(xs, g("random (16)"), g("random_95"), color="#e6e5df", lw=0, zorder=1)
         ax.plot(xs, g("random (16)"), color=MUTED, lw=0.6, zorder=2)
         ax.plot(xs, g("probe"), color=INK, lw=1.5, zorder=5)
+        ax.annotate("probe trained on the task", (xs[len(xs) // 2], g("probe")[len(xs) // 2]), xytext=(0, 4), textcoords="offset points", ha="center", va="bottom", fontsize=6.3, color=INK)
+        ax.annotate("16 random directions", (xs[len(xs) // 3], g("random (16)")[len(xs) // 3]), xytext=(0, -6), textcoords="offset points", ha="center", va="top", fontsize=6.3, color=MUTED, path_effects=HALO)
         for key, lab, c, ls in groups:
             ax.plot(xs, g(key), color=c, lw=0.9, ls=ls, zorder=4 if "control" not in lab else 3)
         ax.axhline(0.5, color=AXIS, lw=0.5)
@@ -415,8 +452,8 @@ def fig6():
 
 # ---------------------------------------------------------------- fig 7: a licence to deceive
 def fig7():
-    fig, axes = plt.subplots(1, 5, figsize=(7.2, 2.4), gridspec_kw={"width_ratios": [1, 1, 1, 1.15, 1.15], "wspace": 0.55})
-    conds = [("neu", "neutral\nprompt"), ("lic", "licence to\ndeceive"), ("ins", "told to\ndeceive")]
+    fig, axes = plt.subplots(1, 5, figsize=(6.3, 2.16), gridspec_kw={"width_ratios": [1, 1, 1, 1.15, 1.15], "wspace": 0.55})
+    conds = [("neu", "neutral"), ("lic", "licence"), ("ins", "told")]
     tasks = [("RH", "reward hacking:\nno special-casing"), ("CF", "fabrication:\nhedges or declines"), ("FT", "tool completion:\nno false claim")]
     NUM["fig7"] = {}
     for si, (tag, name, scol, dep) in enumerate(SUBJ):
@@ -432,6 +469,9 @@ def fig7():
             for x, y, a, b in zip(xs, ys, lo, hi):
                 ax.plot([x, x], [a, b], color=scol, lw=0.8, zorder=3)
             ax.scatter(xs, ys, s=24, c=scol, ec="white", lw=0.5, zorder=4)
+            if ti == 0:
+                dy = -7 if si == 0 else 6
+                ax.annotate(name, (xs[0], ys[0]), xytext=(2, dy), textcoords="offset points", ha="left", va="top" if si == 0 else "bottom", fontsize=6.2, color=scol, path_effects=HALO)
             ax.set_xticks(range(3)); ax.set_xticklabels([c for _, c in conds], fontsize=5.8, linespacing=1.1)
             ax.set_ylim(0, 1.05); ax.set_title(lab, fontsize=6.6, fontweight="normal")
             ax.grid(color=GRID, lw=0.4, axis="y"); ax.set_axisbelow(True)
@@ -478,7 +518,7 @@ def fig8():
         (-1, 2, "situation", "Hartshorne & May 1928; Milgram 1974;\nDoris 2002", "licence prompt moves\nconduct", "open", "closed"),
         (-2, 2, "having, not using", "Aristotle NE VII.3; Elazar et al. 2021;\nGaleone et al. 2026", "described-honesty directions\nread the decision", "open", "open"),
     ]
-    fig, ax = plt.subplots(figsize=(7.2, 4.6)); ax.set_axis_off()
+    fig, ax = plt.subplots(figsize=(6.3, 4.14)); ax.set_axis_off()
     W, H, X0, Y0, DX = 1.35, 0.62, 0.62, 3.9, 1.72
     cx = [X0 + i * DX + W / 2 for i in range(4)]
     for i, (name, sub) in enumerate(stages):

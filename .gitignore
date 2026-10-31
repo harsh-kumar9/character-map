@@ -10,3 +10,7 @@ data/raw/
 *.safetensors
 *.parquet
 logs/
+
+# manuscript build outputs
+paper/main.pdf
+paper/*.zip
